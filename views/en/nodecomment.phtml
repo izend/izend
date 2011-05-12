@@ -1,0 +1,20 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if ($comments or $newcomment or $user_page): ?>
+<div id="comment">
+<h4>Comments</h4>
+<?php echo $comments; ?>
+<?php if ($newcomment): ?>
+<?php echo $newcomment; ?>
+<?php elseif ($user_page): ?>
+<p id="newcomment" class="info">To add a comment, <a href="<?php echo $user_page; ?>">click here</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>

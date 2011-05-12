@@ -1,0 +1,75 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form">
+<form action="" method="post">
+<input type="hidden" name="profile_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">Connection name:</p>
+<p class="input"><input type="text" name="profile_name" id="profile_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p class="label">Email address:</p>
+<p class="input"><input type="text" name="profile_mail" id="profile_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $mail; ?>" /></p>
+<p class="label">Language:&nbsp;<?php foreach ($system_languages as $lang): ?><input name="profile_locale" id="profile_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
+<p class="label">Access key:</p>
+<p class="input"><input type="text" name="profile_newpassword" id="profile_newpassword" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $newpassword; ?>" /></p>
+<p class="submit"><button type="submit" name="profile_change" id="profile_change">Modify</button></p>
+<p class="label">Your current password:</p>
+<p class="input"><input type="password" name="profile_password" id="profile_password" size="20" maxlength="20" title="Password" onkeypress="return submitonenter(event, 'profile_change')" value="<?php echo $password; ?>" /></p>
+</div>
+</form>
+<?php
+if ($errors):
+extract($errors);
+?>
+<div class="errors">
+<?php if ($bad_name): ?>
+<p>An identifier must contain between 2 and 20 letters.</p>
+<?php endif; ?>
+<?php if ($bad_mail): ?>
+<p>The email address is invalid.</p>
+<?php endif; ?>
+<?php if ($bad_locale): ?>
+<p>The language you have selected isn't supported.</p>
+<?php endif; ?>
+<?php if ($duplicate_name): ?>
+<p>This identifier is already taken.</p>
+<?php endif; ?>
+<?php if ($duplicate_mail): ?>
+<p>This email address is already being used.</p>
+<?php endif; ?>
+<?php if ($weak_password): ?>
+<p>Enter a password with a minimum of 6 letters and digits and with at least one letter and one digit.</p>
+<?php endif; ?>
+<?php if ($missing_password): ?>
+<p>You didn't enter your password.</p>
+<?php elseif ($wrong_password): ?>
+<p>The password is wrong.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>An internal error has occured.
+<?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($infos):
+extract($infos);
+?>
+<div class="infos">
+<?php if ($profile_changed): ?>
+<p>Your personal information has been modified.</p>
+<?php endif; ?>
+<?php if ($password_changed): ?>
+<p>Your new password has been registered.</p>
+<?php endif; ?>
+<?php if ($profile_changed or $password_changed): ?>
+<p>To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>

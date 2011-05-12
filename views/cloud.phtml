@@ -1,0 +1,26 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if($linklist): ?>
+<ul class="cloud">
+<?php if($index): ?>
+<li><a id="index" href="<?php echo $index; ?>" title="Index"><span>Index</span></a></li>
+<?php endif; ?>
+<?php
+$fontsizes = array('x-small', 'small', 'medium', 'large', 'x-large');
+foreach ($linklist as $link) {
+	extract($link);
+	$span=$fontsizes[rand(0, count($fontsizes)-1)];
+?>
+<li><a href="<?php echo $url; ?>"><span class="<?php echo $span; ?>"><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?></span></a></li>
+<?php
+}
+?>
+</ul>
+<?php endif; ?>

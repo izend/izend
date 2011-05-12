@@ -1,0 +1,38 @@
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+ 
+/* print.css */
+
+* {background-color:white !important;}
+
+body {line-height:1.5;font-family:inherit;color:#000;background:none;font-size:10pt;}
+.container {background:none;}
+hr {background:#ccc;color:#ccc;width:100%;height:2px;margin:2em 0;padding:0;border:none;}
+hr.space {background:#fff;color:#fff;}
+h1, h2, h3, h4, h5, h6 {font-family:inherit}
+code {font:.9em "Courier New", Courier, monospace;}
+a img {border:none;}
+p img.top {margin-top:0;}
+blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
+a {color:#fff;text-decoration:none;}
+
+h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid}
+blockquote, table, pre {page-break-inside:avoid}
+ul, ol, dl {page-break-before:avoid}
+img {page-break-inside:avoid; page-break-after:avoid; float:none}
+
+.pagebreak {page-break-before:avoid}
+
+.hidden {display:none;}
+.noprint {display:none;}
+
+.vignette, .readmore, .link, .menu, .menubar, .sidebar {display:none;}
+
+#footer, #searchbox, #newcomment {display:none;}
+
+#bookpagenumber {font-size:small;margin-top:1em;text-align:center;}
+

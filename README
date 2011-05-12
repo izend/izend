@@ -1,0 +1,31 @@
+
+ _ _____              _ 
+(_)__  /___ _ __   __| |
+| | / // _ \ '_ \ / _` |
+| |/ /|  __/ | | | (_| |
+|_/____\___|_| |_|\__,_|
+
+
+iZend is a PHP engine for developing well structured web applications 
+with a content manager. It's aimed at programmers who want full 
+control on the software they use with maximum adaptability and
+reusability. It's simple to understand, easy to extend, open to other
+components in PHP, Javascript or Flash. It's intended to become your
+own very quickly while still keeping all the benefits of using an
+open source software.
+
+iZend is built with a straightforward MVC architecture specially 
+designed for organizing publications in several languages and
+different media. It includes a content editor, a search engine and a
+set of presentation models. It can manage a community of users with
+specific privileges.
+
+iZend is normally hosted by a LAMP like web server but it can work
+without a database and take very little space on disk. Put online a
+teaser for a website in several languages with a contact page in just
+a few minutes!
+
+Start by reading INSTALL.
+
+Thank you for your interest in iZend!
+

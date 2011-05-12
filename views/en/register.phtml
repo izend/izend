@@ -1,0 +1,81 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form">
+<form action="" method="post">
+<input type="hidden" name="register_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<?php if ($account_created): ?>
+<?php if (!empty($name)): ?>
+<p class="right"><img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /></p>
+<?php endif; ?>
+<?php endif; ?>
+<p class="label">What connection name do you want?</p>
+<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $name; ?>" /></p>
+<p class="info">Choose a pseudo with between 2 and 20 letters.</p>
+<p class="label">What is your email address?</p>
+<p class="input"><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
+<p class="info">Your password will be sent at this address.</p>
+<p class="input"><input name="register_confirmed" id="register_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
+<?php if ($with_captcha): ?>
+<p class="input">
+<img src="<?php echo $base_path; ?>/captcha/register" alt="" title="Verification code" />
+&nbsp;:&nbsp;
+<input type="text" name="register_code" id="register_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'register_register')" value="" />
+</p>
+<?php endif; ?>
+<p class="submit"><button type="submit" name="register_register" id="register_register">Send</button></p>
+</div>
+</form>
+<?php
+if ($errors):
+extract($errors);
+?>
+<div class="error">
+<?php if ($missing_code): ?>
+<p>Enter the verification code displayed in the image.</p>
+<?php elseif ($bad_code): ?>
+<p>The verification code is incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_name): ?>
+<p>You haven't typed your identifier.</p>
+<?php elseif ($bad_name): ?>
+<p>An identifier must contain between 2 and 20 letters.</p>
+<?php endif; ?>
+<?php if ($missing_mail): ?>
+<p>Don't forget your email address.</p>
+<?php elseif ($bad_mail): ?>
+<p>The email address is invalid.</p>
+<?php endif; ?>
+<?php if ($missing_confirmation): ?>
+<p>Check the confirmation box.</p>
+<?php endif; ?>
+<?php if ($duplicated_name): ?>
+<p>This identifier is already taken.</p>
+<?php endif; ?>
+<?php if ($duplicated_mail): ?>
+<p>This email address is already being used.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>An internal error has occured.
+<?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($infos):
+extract($infos);
+?>
+<div class="infos">
+<?php if ($account_created): ?>
+<p>Your account has been created. Your password has been emailed to your address.<br />
+To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>

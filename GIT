@@ -1,0 +1,133 @@
+
+  ____ _ _
+ / ___(_) |_
+| |  _| | __|
+| |_| | | |_
+ \____|_|\__|
+
+
+Fork iZend from your account on github and make a local copy:
+
+    git clone --bare ssh://github.com/yourname/izend.git /git/izend.git
+    git clone ssh://githost/git/izend.git /var/www/izend
+
+Be prepared push it to github:
+
+    cd /var/www/izend
+    git remote add github git@github.com:yourname/izend.git
+
+Alternatively, simply mirror the iZend repository on your local system:
+
+    git clone --mirror http://github.com/izend/izend.git /git/izend.git
+
+Create a bare repository for your site:
+
+    git init --bare /git/sitename.net.git
+    cd /git/sitename.net.git
+    git config core.sharedrepository true
+    git config receive.denyNonFastforwards true
+
+Create the initial version of your site:
+
+    git init /var/www/mysite
+    cd /var/www/mysite
+    
+Declare your identity:
+
+    git config user.name yourname
+    git config user.email yourname@sitename.net
+    
+Pull out your version of iZend in a branch:
+
+    git remote add izend ssh://githost/git/izend.git
+    git fetch izend
+    git checkout -b izend izend/master
+
+Go to your branch:
+
+    git checkout master
+    
+Follow the instructions in INSTALL to complete the installation of
+your site.
+
+Commit this initial version:
+
+    git add --update
+    git commit -m"Initial configuration"
+    
+Push it to the repository of your site:
+
+    git remote add origin ssh://githost/git/sitename.net.git
+    git push origin master
+    git branch master --set-upstream origin/master
+
+Check your configuration:
+
+    cat .git/config
+
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+[alias]
+    user = yourname
+    email = yourname@sitename.net
+[remote "origin"]
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    url = ssh://githost/git/sitename.net.git
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+[remote "izend"]
+    url = ssh://githost/git/izend.git
+    fetch = +refs/heads/*:refs/remotes/izend/*
+    receivepack = /bin/false
+[branch "izend"]
+    remote = izend
+    merge = refs/heads/master
+
+To update your fork with a new version of iZend:
+
+	cd /www/var/izend
+
+Pull the new version in its own branch:
+
+    git checkout izend
+    git pull
+    git log --graph --oneline
+
+Return to the master branch:
+
+    git checkout master
+
+Check what is different:
+
+    git diff -M --stat izend
+
+Merge, resolve conflicts commit and push:
+
+    git merge --no-commit izend
+    git status
+	git commit -m"Merges with izend"
+
+To update the repository on github:
+
+	git push github
+	
+If you have simply cloned the izend repository:
+
+    cd /git/izend.git
+    git fetch --all
+	cd /var/www/izend
+	git pull
+
+To merge the new version with your site:
+
+	cd /www/sitename.net
+    git checkout izend
+    git pull
+    git checkout master
+    git merge izend
+
+

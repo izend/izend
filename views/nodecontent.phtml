@@ -1,0 +1,62 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php
+foreach ($contents as $c) {
+	switch($c['type']) {
+		case 'text':
+			$s = $c['text'];
+			echo $s, PHP_EOL;
+			break;
+		case 'file':
+			$file_content = $c['file'];
+			if ($file_content) {
+				echo $file_content, PHP_EOL;
+			}
+			break;
+		case 'download':
+			$file = $c['file'];
+			$download_url = $c['download_url'];
+			echo '<div class="download">', PHP_EOL, '<p class="link"><a href="', $download_url, '" rel="nofollow">', $file, '</a></p>', PHP_EOL,'</div>', PHP_EOL;
+			break;
+		case 'infile':
+			include $c['infile'];
+			break;
+		case 'media':
+			extract($c);	/* file image width height skin icons duration autostart repeat */
+			$id = uniqid('id');
+			echo '<p id="', $id, '"></p>', "\n";
+			echo '<script type="text/javascript">', "\n";
+			echo 'var so = new SWFObject("/longtail/player.swf","', $id, '","', $width, '","', $height, '","9","#FFFFFF");', "\n";
+			echo 'so.addParam("allowfullscreen","false");', "\n";
+			echo 'so.addParam("wmode","opaque");', "\n";
+			if ($image) {
+				echo 'so.addVariable("image","', $image, '");', "\n";
+			}
+			if ($file) {
+				echo 'so.addVariable("file","', $file, '");', "\n";
+			}
+			if ($duration) {
+				echo 'so.addVariable("duration","', $duration, '");', "\n";
+			}
+			if ($skin) {
+				echo 'so.addVariable("skin","', $skin, '");', "\n";
+			}
+			echo 'so.addVariable("icons","', $icons ? 'true' : 'false', '");', "\n";
+			echo 'so.addVariable("controlbar","bottom");', "\n";
+			echo 'so.addVariable("repeat","', $repeat ? 'always' : 'none', '");', "\n";
+			echo 'so.addVariable("autostart","', $autostart ? 'true' : 'false', '");', "\n";
+			echo 'so.write("', $id, '");', "\n";
+			echo '</script>', "\n";
+			break;
+		default:
+			break;
+	}
+}
+?>

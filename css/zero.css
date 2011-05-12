@@ -1,0 +1,41 @@
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+
+/* zero.css */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td
+{font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
+
+caption, th, td {text-align:left;font-weight:400;}
+
+blockquote:before, blockquote:after, q:before, q:after {content:"";}
+blockquote, q {quotes:"" "";}
+
+h1 {font-size:170%;}
+h2 {font-size:160%;line-height:130%;}
+h3 {font-size:140%;}
+h4 {font-size:110%;}
+h5 {font-size:110%;}
+h6 {font-size:100%;}
+
+ul, pre {margin-top:1em;}
+
+form {margin:0;}
+
+input, select {vertical-align:middle;}
+
+p, dl, multicol {margin:1em 0;}
+
+a img {border:0;vertical-align:middle;margin:0;}
+
+a:link, a:visited {text-decoration:none;}
+a:hover {text-decoration:underline;}

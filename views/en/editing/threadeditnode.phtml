@@ -1,0 +1,22 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3><?php echo $node_title; ?></h3>
+<p id="threadnodenav" class="menubar">
+<?php if ($prev_node_url): ?>
+<a href="<?php echo $prev_node_url; ?>" title="Previous"><?php echo $prev_node_label; ?></a>
+<?php endif; ?>
+<?php if ($next_node_url and $prev_node_url): ?>
+&nbsp;|&nbsp;
+<?php endif; ?>
+<?php if ($next_node_url): ?>
+<a href="<?php echo $next_node_url; ?>" title="Next"><?php echo $next_node_label; ?></a>
+<?php endif; ?>
+</p>
+<?php echo $node_editor; ?>

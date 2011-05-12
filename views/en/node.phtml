@@ -1,0 +1,23 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3><?php echo $node_title; ?></h3>
+<p class="info"><?php setlocale(LC_TIME, 'en_US.UTF-8'); echo strftime('%B %e, %Y %Hh%M', $node_modified); ?></p>
+<?php if ($node_abstract): ?>
+<h5>Abstract</h5>
+<p><?php echo $node_abstract; ?></p>
+<?php endif; ?>
+<?php if ($node_cloud): ?>
+<h6>Cloud</h6>
+<p class="smaller"><?php echo $node_cloud; ?></p>
+<?php endif; ?>
+<?php if ($node_contents): ?>
+<h4>Contents</h4>
+<?php echo $node_contents; ?>
+<?php endif; ?>

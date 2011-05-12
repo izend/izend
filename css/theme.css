@@ -1,0 +1,150 @@
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+ 
+/* theme.css */
+
+a:link, a:visited {color:#ec902d;}
+a:hover {color:#333333;text-decoration:none;}
+
+body {color:#333333;font-family:Verdana, sans-serif;font-size:100%;}
+
+h1,h2,h3 {color:#aec14e;}
+h4 {color:#aec14e;}
+h5 {color:#df6f6f;}
+h6 {color:#666666;}
+
+h4 a:link {color:#aec14e;}
+h4 a:hover {color:#ec902d;}
+
+h3 {line-height:32px;background:transparent url(../images/theme/heading.png) no-repeat;text-indent:32px;margin:0;}
+
+label, legend {color:#666666;}
+
+pre {background:#ffffe0;border-style:solid;border-color:#eaefb3;border-width:1px 0 4px 6px;padding:0.5em;overflow:auto;}
+
+ol.tree li.dirnode {color:#666666;}
+ol.tree li.filenode {color:#2c430d;}
+
+form.compact p {margin-top:0.75em; margin-bottom:0.5em;}
+
+textarea {resize:none;}
+
+.grippie {display:block;margin-left:5px;margin-top:2px;cursor:ns-resize;}
+
+.vignette {float:right;margin:0 0 0 1em;}
+
+.readmore {line-height:24px;background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;}
+
+.cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+.cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
+.cloud li a:hover {color:#333333;text-decoration:none;}
+.cloud li #index {float:left;display:inline;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;}
+.cloud li #index span {display:none;}
+
+.tag {color:#df6f6f;font-size:larger;}
+
+.menu, .menubar, .sidebar {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+.parameters dt {font-family:monospace;}
+
+.info {color:#666666;font-size:smaller;font-style:normal;}
+.error {color:#df6f6f;font-size:smaller;font-style:italic;}
+
+.input .monospace {font-size:medium;}
+.errors {color:#df6f6f;font-size:small;font-style:normal;}
+.infos {font-style:normal;}
+
+.noscript {display:inline;background-color:#ffffe0;color:#000000;font-size:smaller;font-style:normal;font-weight:bold;border:1px solid #aec14e;margin:1em 0;padding:0.5em;}
+
+.plain {font-size:small;}
+
+.formatted {font-size:80%;}
+
+.download p {line-height:24px;background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;}
+
+.odd {background-color:#ffffe0;}
+.even {background-color:#eaefb3;}
+
+.normal {color:#333333;}
+.dim {color:#666666;}
+
+div.alert {color:#333333;background-color:#ffcccc;padding:0.5em 1em 0.5em 1em;}
+div.warning {color:#333333;background-color:#ffffe0;padding:0.5em 1em 0.5em 1em;}
+div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
+
+.tagbar {margin-bottom:5px;}
+.tagbar span {margin-left:50px;}
+
+#sidebar {float:right;clear:right;width:25%;margin-left:1em;}
+
+#banner {height:45px;margin:10px 0 5px 0;clear:both;}
+#bannerline {height:2px;background:transparent url(../images/theme/bannerline.png) no-repeat;padding:0;margin:0;clear:both;}
+
+#logo {width:400px;float:left;}
+#logo h1 {padding:0;margin:0;}
+#logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+
+#bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;}
+#bannermenu #mail {width:24px;height:24px;float:right;margin-left:6px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
+#bannermenu #exit {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/cancel.png) no-repeat center center;}
+#bannermenu #enter {width:24px;height:24px;float:right;margin-right:6px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
+#bannermenu #account {width:24px;height:24px;float:right;margin-right:6px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
+#bannermenu #edit {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/edit.png) no-repeat center center;}
+#bannermenu #view {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/web.png) no-repeat center center;}
+#bannermenu #validate {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/check.png) no-repeat center center;}
+
+#languages {width:100px;float:left;margin-top:13px;margin-left:20px;}
+#fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
+#en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat center center;}
+
+#headline {float:right;font-weight:bold;color:#aec14e;}
+#headline ul {margin-bottom:0;}
+
+#threadlist {margin-top:1em;}
+
+#threadnodenav, #bookpagenav {font-size:smaller;margin-bottom:1em;}
+
+#homemenu {font-size:80%;}
+#homemenu > div {width:20%;margin:1em 0 1em 0;float:left;}
+#homemenu .cl {margin-right:5px;}
+#homemenu .cr {margin-left:5px;}
+#homemenu .cm {margin-left:5px;margin-right:5px;}
+#homemenu h3 {background:none;border-bottom:3px solid #c4da6b;margin:1.0em 0 0 0;padding-bottom:0.25em;text-align:right;}
+#homemenu ul {padding-top:0.5em;}
+
+#homeblog h4 {margin-bottom:0.25em;}
+#homeblog p {margin-top:0.25em;margin-bottom:0.5em;}
+#homeblog .date {color:#666666;font-size:smaller;}
+#homeblog .author {color:#666666;font-size:smaller;font-style:italic;}
+
+#comment {margin-top:2em;clear:left;}
+#comment h4 {line-height:24px;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;color:#666666;}
+#comment .date {color:#666666;font-size:smaller;}
+#comment .author {color:#666666;font-size:smaller;font-style:italic;}
+#comment pre {font-family:monospace;font-size:10pt;}
+#comment blockquote {font-size:smaller;margin-right:0;}
+
+#newcomment h6 {line-height:24px;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;}
+#newcomment_help {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
+
+.bbcodebar {margin-bottom:5px;}
+.bbcodebar span {font-size:x-small;margin-left:10px;}
+
+#searchlinks ul {margin-left:0;padding:0;}
+#searchlinks li {list-style:none;margin-bottom:1em;}
+#searchlinks a {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+#searchlinks li p {margin:0.5em 0 0.5em 0;font-size:smaller;font-style:italic;}
+#searchlinks li p+p {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;color:#666666;}
+
+#search {width:24px;height:24px;background:transparent url(../images/theme/icons/find.png) no-repeat;margin-left:3px;vertical-align:middle;border:none;text-indent:-1000em;cursor:pointer;}
+#searchtext {float:left;width:200px;padding:2px;border:2px solid #aec14e;margin-right:3px;}
+#searchinput {float:right;margin-bottom:1em;clear:both;}
+
+#storysummary {margin-top:2em;}
+#storysummary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;}
+#storysummary li {list-style:none;}
+#storysummary li a:link, #storysummary li a:visited {text-decoration:none;}

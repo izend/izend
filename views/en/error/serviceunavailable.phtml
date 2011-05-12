@@ -1,0 +1,13 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3>Service unavailable</h3>
+<p>The site is under maintenance<?php if (isset($closing_time) and $closing_time): ?> since <?php echo date('H\hi', $closing_time); ?><?php if (isset($opening_time) and $opening_time): ?>. Back to normal scheduled at <b><?php echo date('H\hi', $opening_time); ?></b><?php endif; ?><?php endif; ?>.
+Please accept our apologies for any inconvenience caused during renovations.
+Thank you for trying again later.</p>

@@ -1,0 +1,119 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+
+require_once 'readarg.php';
+require_once 'models/cloud.inc';
+
+function search($lang, $arglist=false) {
+	$cloud=$tag=false;
+
+	if (is_array($arglist)) {
+		if (isset($arglist[0])) {
+			$cloud=$arglist[0];
+		}
+		if (isset($arglist[1])) {	/* supports previous URL format */
+			$tag=$arglist[1];
+		}
+	}
+
+	if (!$cloud) {
+		return run('error/notfound', $lang);
+	}
+
+	$cloud_id = cloud_id($cloud);
+	if (!$cloud_id) {
+		return run('error/notfound', $lang);
+	}
+
+	$r = cloud_get($lang, $cloud_id);
+	if (!$r) {
+		return run('error/notfound', $lang);
+	}
+	extract($r); /* cloud_name cloud_title */
+
+	$r = thread_get($lang, $cloud_id);
+	if (!$r) {
+		return run('error/notfound', $lang);
+	}
+	extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_nocloud thread_nosearch thread_nocomment thread_nomorecomment */
+
+	$action='none';
+	if (isset($_POST['search'])) {
+		$action='search';
+	}
+
+	$searchtext=false;
+	switch($action) {
+		case 'none':
+			if ($tag) {
+				/* redirect old URL */
+				$new_page = url('search', $lang) . '/'. $cloud . '?' . 'q=' . urlencode($tag);
+				header('HTTP/1.1 301 Moved Permanently');
+				header("Location: $new_page");
+				return false;
+			}
+			$tag=isset($arglist['q']) ? $arglist['q'] : false;
+			$searchtext=$tag;
+			break;
+		case 'search':
+			if (isset($_POST['searchtext'])) {
+				$searchtext=readarg($_POST['searchtext']);
+				preg_match_all('/(\S+)/', $searchtext, $r);
+				$searchtext=implode(' ', array_slice(array_unique($r[0]), 0, 10));
+			}
+			$tag=$searchtext;
+			break;
+		default:
+			break;
+	}
+
+	$r = $tag ? cloud_search($lang, $cloud_id, $tag) : false;
+
+	if ($r) {
+		$search_input = !$thread_nosearch;
+		$search_text = $searchtext;
+		$search_url = url('search', $lang) . '/'. $cloud_name;
+		$search_cloud = $thread_nocloud ? false : build('cloud', $lang, $cloud_id, 60, true, true);
+		$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
+
+		$searchlist = build('searchlist', $lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $r);
+
+		$sidebar = $searchbox;
+		$content = view('search', $lang, compact('searchlist'));
+	}
+	else {
+		$searchbox=false;
+		if (!$thread_nosearch) {
+			$search_input = true;
+			$search_text = false;
+			$search_url = url('search', $lang) . '/'. $cloud_name;
+			$search_cloud = false;
+			$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
+		}
+
+		$cloud = build('cloud', $lang, $cloud_id, false, true, false);
+
+		$sidebar = $searchbox;
+		$content = $cloud;
+	}
+
+	head('title', $cloud_title);
+	head('description', false);
+	head('keywords', false);
+
+	$headline_text=$cloud_title;
+	$headline_url=url($cloud_action, $lang) . '/'. $cloud_name;
+	$headline = compact('headline_text', 'headline_url');
+	$banner = build('banner', $lang, compact('headline'));
+
+	$output = layout('standard', compact('banner', 'sidebar', 'content'));
+
+	return $output;
+}
+

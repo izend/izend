@@ -1,0 +1,194 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<form action="" method="post">
+<input name="clang" type="hidden" value="<?php echo $clang; ?>" />
+<p>
+<input name="content_create" type="submit" value="Ajouter" />
+un type
+<?php
+$selected=$new_content_type ? $new_content_type : 'text';
+?>
+<select name="content_new_type" size="1">
+<option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Texte</option>
+<option value="file" <?php echo $selected == 'file' ? 'selected="selected"' : ''; ?>>Fichier</option>
+<option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Téléchargement</option>
+<option value="infile" <?php echo $selected == 'infile' ? 'selected="selected"' : ''; ?>>Insert</option>
+<option value="media" <?php echo $selected == 'media' ? 'selected="selected"' : ''; ?>>Média</option>
+</select>
+#
+<input name="content_new_number" type="text" size="2" maxlength="2" value="<?php echo $new_content_number; ?>" title="Numéro"/>
+<?php if ($node_contents): ?>
+ou
+<input name="content_delete" type="submit" value="Supprimer" />
+le #
+<input name="content_old_number" type="text" size="2" maxlength="2" value="<?php echo $old_content_number; ?>" title="Numéro"/>
+<?php endif; ?>
+</p>
+<?php if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number or $missing_old_content_number or $bad_old_content_number or $missing_content_number or $bad_content_number): ?>
+<div class="alert">
+<?php if ($missing_new_content_type): ?>
+<p>Le nouveau contenu n'a pas de type.</p>
+<?php elseif ($bad_new_content_type): ?>
+<p>Le type du nouveau contenu n'est pas valide.</p>
+<?php endif; ?>
+<?php if ($bad_new_content_number): ?>
+<p>Le numéro du nouveau contenu n'est pas valide.</p>
+<?php endif; ?>
+<?php if ($missing_old_content_number): ?>
+<p>Vous n'avez pas saisi le numéro du contenu à supprimer.</p>
+<?php elseif ($bad_old_content_number): ?>
+<p>Le numéro du contenu à supprimer est invalide.</p>
+<?php endif; ?>
+<?php if ($missing_content_number): ?>
+<p>Un numéro de contenu est manquant.</p>
+<?php endif; ?>
+<?php if ($bad_content_number): ?>
+<p>Un numéro de contenu est invalide.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($node_contents): ?>
+<?php
+$i=1;
+foreach ($node_contents as $c) {
+	$content_text='';
+	$content_eval=false;
+	$content_file=$content_format=$content_lineno=false;
+	$content_start=$content_end=0;
+	$content_download=$content_path=false;
+	$content_infile=false;
+	$content_media_file=$content_media_image=false;
+	$content_media_width=$content_media_height=0;
+	$content_media_skin=false;
+	$content_media_icons=false;
+	$content_media_duration=0;
+	$content_media_autostart=$content_media_repeat=false;
+	extract($c);	/* content_id content_number content_type (content_text | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile |content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) content_pos */
+?>
+<p class="<?php echo ($i % 2) ? 'odd' : 'even'; ?>">
+<?php echo $i; ?>.
+<input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
+<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="2" value="<?php echo $content_pos; ?>"/>
+<?php switch ($content_type): ?>
+<?php case 'text': ?>
+<label>Texte :</label>
+<?php break; ?>
+<?php case 'file': ?>
+<label>Fichier :</label>
+<?php break; ?>
+<?php case 'download': ?>
+<label>Téléchargement :</label>
+<?php break; ?>
+<?php case 'infile': ?>
+<label>Insert :</label>
+<?php break; ?>
+<?php case 'media': ?>
+<label>Média :</label>
+<?php break; ?>
+<?php endswitch; ?>
+</p>
+<?php switch ($content_type): ?>
+<?php case 'text': ?>
+<div class="tagbar">
+<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="&lt;p&gt;" title="p" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;p&gt;','&lt;/p&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="&lt;b&gt;" title="b" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;b&gt;','&lt;/b&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="&lt;i&gt;" title="i" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;i&gt;','&lt;/i&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="&lt;u&gt;" title="u" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;u&gt;','&lt;/u&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="&lt;s&gt;" title="s" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;s&gt;','&lt;/s&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h5.png" alt="&lt;h5&gt;" title="h5" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h5&gt;','&lt;/h5&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h6.png" alt="&lt;h6&gt;" title="h6" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h6&gt;','&lt;/h6&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/shell.png" alt="&lt;pre&gt;&lt;code&gt;" title="pre code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;pre>&lt;code&gt;','&lt;/code>&lt;/pre&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="&lt;blockquote&gt;" title="blockquote" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;blockquote&gt;','&lt;/blockquote&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;s&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22', '\x22 alt=\x22\x22 /&gt;')"/>
+<span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
+</div>
+<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<?php break; ?>
+<?php case 'file': ?>
+<p>
+<input name="content_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_file; ?>" title="Fichier" />
+<input name="content_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_start; ?>" title="Début" />
+<input name="content_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_end ?>" title="Fin" />
+<input name="content_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo $content_format; ?>" title="Format" />
+<input name="content_lineno[<?php echo $i; ?>]" type="checkbox" <?php if ($content_lineno) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="Numérotation" title="Numérotation" />
+</p>
+<?php break; ?>
+<?php case 'download': ?>
+<p>
+<input name="content_download[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo $content_download; ?>" title="Nom" />
+<input name="content_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_path; ?>" title="Fichier" />
+</p>
+<?php break; ?>
+<?php case 'infile': ?>
+<p>
+<input name="content_infile[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_infile; ?>" title="Fichier" />
+</p>
+<?php break; ?>
+<?php case 'media': ?>
+<p>
+<input name="content_media_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_file; ?>" title="Fichier" />
+<input name="content_media_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_width; ?>" title="Largeur" />
+x
+<input name="content_media_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_height ?>" title="Hauteur" />
+<img src="<?php echo $base_path; ?>/images/theme/edit/time.png" alt="Durée : " />
+<input name="content_media_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_duration; ?>" title="Durée" />
+<input name="content_media_autostart[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_autostart) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/play.png" alt="Auto : " title="Auto" /><input name="content_media_repeat[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_repeat) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/repeat.png" alt="Boucle : " title="Boucle" />
+</p>
+<p>
+<input name="content_media_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_image; ?>" title="Image" />
+<input name="content_media_icons[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_icons) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/imgplay.png" alt="Icônes : " title="Icônes" />
+</p>
+<p>
+<input name="content_media_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_skin; ?>" title="Habillage" />
+</p>
+<?php break; ?>
+<?php endswitch; ?>
+<?php
+	$i++;
+}
+?>
+<p>
+<input id="content_modify" name="content_modify" type="submit" value="Modifier" />
+le contenu
+</p>
+<?php endif; ?>
+</form>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>

@@ -1,0 +1,87 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<form class="compact" action="" method="post">
+<input name="clang" type="hidden" value="<?php echo $clang; ?>" />
+<p>
+<?php if (in_array('fr', $supported_languages)): ?>
+<input name="fr" type="image" src="<?php echo $base_path; ?>/images/theme/flags/fr.png" alt="fr" title="Français"/>
+<?php endif; ?>
+<?php if (in_array('en', $supported_languages)): ?>
+<input name="en" type="image" src="<?php echo $base_path; ?>/images/theme/flags/en.png" alt="en" title="English"/>
+<?php endif; ?>
+</p>
+<p>
+<input id="node_title" name="node_title" type="text" size="40" maxlength="100" value="<?php echo $node_title; ?>" title="Titre" onkeypress="return submitonenter(event, 'node_edit')"/>
+&nbsp;
+<label>Lien :</label>
+<input id="node_name" name="node_name" type="text" size="40" maxlength="100" value="<?php echo $node_name; ?>" onkeypress="return focusonenter(event, 'node_title')"/>
+</p>
+<p><label>Extrait :</label></p>
+<p>
+<textarea name="node_abstract" cols="80" rows="3" class="" ><?php echo $node_abstract; ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+</p>
+<p><label>Nuage :</label></p>
+<p>
+<textarea name="node_cloud" cols="80" rows="2" ><?php echo $node_cloud; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+</p>
+<p>
+<input name="node_comment" type="checkbox" <?php if ($node_comment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />
+<input name="node_morecomment" type="checkbox" <?php if ($node_morecomment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" />
+</p>
+<p>
+<input id="node_edit" name="node_edit" type="submit" value="Éditer" />
+</p>
+<?php if ($missing_node_title or $missing_node_name or $bad_node_name): ?>
+<div class="alert">
+<?php if ($missing_node_title): ?>
+<p>Vous n'avez pas saisi le titre.</p>
+<?php endif; ?>
+<?php if ($missing_node_name): ?>
+<p>Spécifiez un nom pour le lien.</p>
+<?php elseif ($bad_node_name): ?>
+<p>Le nom du lien est invalide.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</form>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>
+<h4>Contenu</h4>
+<?php echo $content_editor; ?>

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form">
+<form action="" method="post">
+<input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">Quel est votre nom de connexion ?</p>
+<p class="input"><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo $login; ?>" /></p>
+<p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
+<p class="input"><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je veux recevoir un nouveau mot de passe</p>
+<?php if ($with_captcha): ?>
+<p class="input">
+<img src="<?php echo $base_path; ?>/captcha/remindme" alt="" title="Code de vérification" />
+&nbsp;:&nbsp;
+<input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'remindme_submit')" value="" />
+</p>
+<?php endif; ?>
+<p class="submit"><button type="submit" name="remindme_submit" id="remindme_submit">Envoyer</button></p>
+</div>
+</form>
+<?php
+if ($errors):
+extract($errors);
+?>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_login): ?>
+<p>Vous n'avez pas saisi votre identifiant.</p>
+<?php elseif ($bad_login): ?>
+<p>L'identifiant n'est pas valide.</p>
+<?php endif; ?>
+<?php if ($missing_confirmation): ?>
+<p>Cochez la case de confirmation.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.
+<?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php
+if ($infos):
+extract($infos);
+?>
+<div class="infos">
+<?php if ($email_sent): ?>
+<p>Un nouveau mot de passe vous a été envoyé par email.<br />
+Pour vous identifier, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>

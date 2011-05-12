@@ -1,0 +1,86 @@
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+ 
+/* screen.css */
+
+body {width:960px;margin:5px 0 0 50px;}
+
+body {font-family:sans-serif;font-size:medium;}
+
+h1, h2, h3, h4, h5, h6, label, caption, #rate-it legend {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+code {font-family:"Courier New", Courier, monospace;}
+pre code {font-size:10pt;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:bold;}
+
+h1,h2,h3,h4,h5,h6 {margin:1em 0 0.5em 0;}
+
+label, legend {font-size:80%;}
+
+table th, table td {padding:5px;margin:0;}
+
+form p {vertical-align:top;}
+
+input {margin-top:0;margin-bottom:0;vertical-align:middle;}
+
+img {vertical-align:middle;}
+
+.monospace {font-family:monospace;}
+.proportional {font-family:sans-serif;}
+
+.menu {margin:0;padding:0;}
+.menu li {list-style:none;}
+.menu a {text-decoration:none;}
+.menu a span {display:none;}
+
+.sidebar {padding:0;margin:0;}
+.menubar li {display:inline;}
+.sidebar li {display:block;}
+.column {float:left;}
+
+.hidden {display:none;}
+.invisible {visibility:hidden;}
+
+.left {float:left;margin:0 1em 0 0;}
+.right {float:right;margin:0 0 0 1em;}
+
+.x-large {font-size:x-large;}
+.large {font-size:large;}
+.medium {font-size:medium;}
+.small {font-size:small;}
+.x-small {font-size:x-small;}
+
+.smaller {font-size:smaller;}
+.larger {font-size:larger;}
+
+.emphasis {font-style:italic;}
+.superscript {vertical-align:super;} 
+
+.aleft {text-align:left;}
+.aright {text-align:right;}
+.acenter {text-align:center;}
+
+.cloud {padding:0;margin:0;text-align:center;}
+.cloud li {list-style:none;display:inline;}
+
+ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;background:url(../images/vline.png) repeat-y;}
+ol.tree ol {margin-left:12px;}
+ol.tree li {margin:0;padding:0 12px;line-height:20px;background:url(../images/tline.png) no-repeat;} 
+ol.tree li.lastnode {background:#ffffff url(../images/lline.png) no-repeat;} 
+ol.tree li.firstnode {background:#ffffff;}
+ol.tree li.dirnode {font-style:italic;} 
+ol.tree li.filenode {font-style:normal;}
+
+#banner {clear:both;}
+
+#content {margin:1em 0 1em 0;}
+#sidebar {margin:1em 0 1em 0;}
+
+#footer {font-size:small;margin:2em 0 1em 0;clear:both;}
+#footer p {margin: 0.5em 0 0.5em 0;}
+#footer p img {vertical-align:middle;}

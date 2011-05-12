@@ -1,0 +1,178 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<p>Votre site <b>iZend</b> est pratiquement fonctionnel.
+Lisez les instructions suivantes, remplissez le formulaire et appuyez sur Configurer pour lancer le configurateur.</p>
+<h6>Paramètres</h6>
+<p>Entrez le nom du site, l'adresse d'email du webmestre et sélectionnez les langues gérées par le site.
+Initialement, vous ne pourrez choisir que parmi les langues supportées par le noyau du logiciel.
+Une fois le site configuré, vous pourrez facilement ajouter des contenus dans plusieurs autres langues.
+Tous les paramètres du logiciel sont dans le dossier <i>includes</i>.
+Le configurateur récrit les fichiers <i>config.inc</i>, <i>db.inc</i> et <i>aliases.inc</i>.</p>
+<p>Pour plus de sécurité, vérifiez que l'accès aux fichiers de configuration est limité au serveur&nbsp;:</p>
+<pre><code>$ cd <?php echo ROOT_DIR; ?>; sudo chgrp -R www-data .; chmod -R g+w .
+$ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc</code></pre>
+<p>NOTE&nbsp;: Le nom du groupe d'exécution du serveur est défini par la directive Group, généralement dans le fichier <i>/etc/apache2/apache2.conf</i>.</p>
+<h6>Logo</h6>
+<p>Le configurateur génère un logo à partir du nom du site et l'enregistre dans le fichier <i>sitelogo.png</i> dans le dossier <i>logos</i>.
+Vous voudrez probablement le changer.</p>
+<h6>Base de données</h6>
+<p><b>iZend</b> peut fonctionner sans une base de données.
+Dans ce mode, vous pourrez toujours profiter de l'architecture du logiciel mais vous devrez rédiger les pages du site sans l'éditeur.
+Optez pour cette configuration pour mettre en ligne des sites avec des ressources limitées. Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
+<p>Pour exploiter tout le potentiel d'<b>iZend</b>, vous devez disposer d'un serveur de bases de données.
+Le configurateur peut créer une nouvelle base de données ou utiliser une base de données déjà existante.
+<b>IMPORTANT</b>&nbsp;: Si la base de données est partagée par plusieurs logiciels, demandez au configurateur d'ajouter un préfixe aux noms des tables.</p>
+<p>NOTE&nbsp;: Si vous développez le site en local avant de le mettre en ligne, utilisez les mêmes paramètres sur les deux serveurs.</p>
+<h5 id="configuration">Configuration</h5>
+<?php if ($bad_write_permission): ?>
+<div class="alert">
+<p>Le serveur n'est pas autorisé à modifier <?php if (count($bad_write_permission) > 1): ?>les fichiers suivants<?php else: ?>le fichier suivant<?php endif; ?> dans le dossier <i><?php echo ROOT_DIR; ?></i>&nbsp;:
+</p>
+<ul>
+<?php foreach ($bad_write_permission as $file): ?>
+<li><i><?php echo $file; ?></i></li>
+<?php endforeach; ?>
+</ul>
+</div>
+<p>Pour modifier les droits d'accès, essayez la commande suivante&nbsp;:</p>
+<pre><code>$ cd <?php echo ROOT_DIR; ?>; chmod a+w<?php foreach ($bad_write_permission as $fname) { echo ' ', $fname; }; ?></code></pre>
+<?php endif; ?>
+<?php $nerrors=count(array_keys($errors, true, true)); ?>
+<?php if ($nerrors > 0): ?>
+<div class="alert">
+<p>Le formulaire a <?php echo $nerrors; ?> erreur<?php if ($nerrors > 1): ?>s<?php endif; ?>.
+Vérifiez vos réponses et relancez la configuration.</p>
+</div>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<div class="alert">
+<p>La génération des fichiers de configuration a échoué.</p>
+</div>
+<?php endif; ?>
+<?php if ($file_error): ?>
+<div class="alert">
+<p>L'écriture des fichiers de configuration a échoué.</p>
+</div>
+<?php endif; ?>
+<form class="compact" action="#configuration" method="post">
+<input type="hidden" name="configure_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">Quel est le nom du site&nbsp;?</p>
+<p class="info">Spécifiez un nom de domaine sans le préfixer par www.</p>
+<p class="input">
+<input type="text" name="configure_sitename" size="30" maxlength="40" title="" value="<?php echo $sitename; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/web.png" alt="" />
+</p>
+<?php if ($missing_sitename): ?>
+<p class="error">Entrez un nom de domaine tel que izend.org.</p>
+<?php endif; ?>
+<p class="label">Quelle est l'adresse d'email du webmestre&nbsp;?</p>
+<p class="info">La page de contact envoient les messages à cette adresse.</p>
+<p class="input">
+<input type="text" name="configure_webmaster" size="50" maxlength="100" title="Email" value="<?php echo $webmaster; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/mail.png" alt="" />
+</p>
+<?php if ($missing_webmaster): ?>
+<p class="error">Spécifiez une adresse d'email valide.</p>
+<?php endif; ?>
+<p class="label">Dans quelles langues le contenu du site est-il rédigé&nbsp;?</p>
+<p class="info">Vous pourrez toujours ajouter d'autres langues plus tard.</p>
+<p class="input"><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <?php echo $slang; ?><?php endforeach; ?></p>
+<?php if ($missing_content_languages): ?>
+<p class="error">Choisissez au moins une langue pour le contenu du site.</p>
+<?php endif; ?>
+<p class="label">Quelle est la langue par défaut&nbsp;?</p>
+<p class="input"><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <?php echo $slang; ?><?php endforeach; ?></p>
+<?php if ($bad_default_language): ?>
+<p class="error">Vous n'avez pas mentionné cette langue dans la liste précédente.</p>
+<?php endif; ?>
+<h6>Base de données</h6>
+<?php if ($db_error): ?>
+<div class="alert">
+<p>La configuration de la base de données a échoué avec l'erreur&nbsp;:</p>
+<p><?php echo $db_error; ?></p>
+</div>
+<?php endif; ?>
+<p class="label">Avez-vous un serveur de bases de données&nbsp;?</p>
+<p class="info">Sans une base de données, les fonctionnalités seront plus limitées.</p>
+<p class="input"><input type="radio" name="configure_db_flag" value="yes" <?php if ($db_flag) echo 'checked="checked"'; ?> />&nbsp;oui <input type="radio" name="configure_db_flag" value="no" <?php if (!$db_flag) echo 'checked="checked"'; ?> />&nbsp;non</p>
+<p class="label">Quel est le nom de la base de données&nbsp;?</p>
+<p class="input"><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
+<?php if ($missing_db_name or $bad_db_name): ?>
+<p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
+<?php endif; ?>
+<p class="label">Quels sont le nom et le mot de passe de l'utilisateur de la base de données&nbsp;?</p>
+<p class="input">
+<input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<input type="text" name="configure_db_password"  size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+</p>
+<?php if ($missing_db_user and $missing_db_password): ?>
+<p class="error">Choisissez un identifiant pour l'utilisateur de la base de données et un mot de passe.</p>
+<?php else: ?>
+<?php if ($missing_db_user or $bad_db_user): ?>
+<p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
+<?php endif; ?>
+<?php if ($missing_db_password): ?>
+<p class="error">Entrez un mot de passe.</p>
+<?php elseif ($weak_db_password): ?>
+<p class="error">Entrez une combinaison de lettres et de chiffres d'au moins 6 caractères.</p>
+<?php endif; ?>
+<?php endif; ?>
+<p class="label">Utilisez-vous une base de données déjà existante&nbsp;?</p>
+<p class="input"><input type="radio" name="configure_db_reuse" value="yes" <?php if ($db_reuse) echo 'checked="checked"'; ?> />&nbsp;oui <input type="radio" name="configure_db_reuse" value="no" <?php if (!$db_reuse) echo 'checked="checked"'; ?> />&nbsp;non</p>
+<p class="label">Si non, quels sont le nom et le mot de passe de l'administrateur du serveur de bases de données&nbsp;?</p>
+<p class="info">Ces informations ne seront pas enregistrées.</p>
+<p class="input">
+<input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php echo $db_admin_password; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+</p>
+<?php if ($missing_db_admin_user and $missing_db_admin_password): ?>
+<p class="error">Entrez l'identifiant de l'administrateur du serveur de bases de données suivi de son mot de passe.</p>
+<?php else: ?>
+<?php if ($missing_db_admin_user): ?>
+<p class="error">Entrez l'identifiant de l'administrateur du serveur de bases de données.</p>
+<?php endif; ?>
+<?php if ($missing_db_admin_password): ?>
+<p class="error">Entrez le mot de passe de l'administrateur du serveur de bases de données.</p>
+<?php endif; ?>
+<?php endif; ?>
+<p class="label">Quel est le préfixe des tables&nbsp;?</p>
+<p class="info">Un préfixe est nécessaire si la base de données est partagée.</p>
+<p class="input"><input type="text" name="configure_db_prefix" size="10" maxlength="20" title="" value="<?php echo $db_prefix; ?>" /></p>
+<?php if ($bad_db_prefix): ?>
+<p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
+<?php endif; ?>
+<p class="label">Quels sont le nom et le mot de passe de l'administrateur du site&nbsp;?</p>
+<p class="input">
+<input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php echo $site_admin_password; ?>" />
+<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+</p>
+<?php if ($missing_site_admin_user and $missing_site_admin_password): ?>
+<p class="error">Choisissez un identifiant pour l'administrateur du site et un mot de passe.</p>
+<?php else: ?>
+<?php if ($missing_site_admin_user or $bad_site_admin_user): ?>
+<p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
+<?php endif; ?>
+<?php if ($missing_site_admin_password): ?>
+<p class="error">Entrez un mot de passe.</p>
+<?php elseif ($weak_site_admin_password): ?>
+<p class="error">Entrez une combinaison de lettres et de chiffres d'au moins 6 caractères.</p>
+<?php endif; ?>
+<?php endif; ?>
+<p class="input"><button type="submit" name="configure_configure" id="configure_configure" value="configure">Configurer</button></p>
+</div>
+</form>

@@ -1,0 +1,96 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form" id="mailme_form">
+<form action="" method="post">
+<input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">What is your email address?</p>
+<p class="input"><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
+<p class="info">Your email address is strictly confidential.</p>
+<p class="label">Type in the subject and the text of your message:</p>
+<p class="input"><input class="monospace" type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
+<p class="input"><textarea class="monospace" name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" /></p>
+<?php if ($with_captcha): ?>
+<p class="input">
+<img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" title="Verification code" />
+&nbsp;:&nbsp;
+<input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
+</p>
+<?php endif; ?>
+<p class="submit"><button type="submit" name="mailme_send" id="mailme_send">Send</button></p>
+</div>
+</form>
+<?php if ($errors):
+extract($errors);
+?>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Enter the verification code displayed in the image.</p>
+<?php elseif ($bad_code): ?>
+<p>The verification code is incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_mail): ?>
+<p>You haven't given your email address.</p>
+<?php elseif ($bad_mail): ?>
+<p>The email address is invalid.</p>
+<?php endif; ?>
+<?php if ($missing_message): ?>
+<p>The message is empty.</p>
+<?php endif; ?>
+<?php if ($missing_subject): ?>
+<p>Don't forget the subject.</p>
+<?php elseif ($bad_subject): ?>
+<p>The subject of the message is invalid.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>An internal error has occured.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($infos):
+extract($infos);
+?>
+<div class="infos">
+<?php if ($email_sent): ?>
+<p>Your message has been sent. To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>

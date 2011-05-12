@@ -1,0 +1,169 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<?php $scroll_to=false; ?>
+<form class="compact" action="" method="post">
+<input name="clang" type="hidden" value="<?php echo $clang; ?>" />
+<p>
+<?php if (in_array('fr', $supported_languages)): ?>
+<input name="fr" type="image" src="<?php echo $base_path; ?>/images/theme/flags/fr.png" alt="fr" title="Français"/>
+<?php endif; ?>
+<?php if (in_array('en', $supported_languages)): ?>
+<input name="en" type="image" src="<?php echo $base_path; ?>/images/theme/flags/en.png" alt="en" title="English"/>
+<?php endif; ?>
+</p>
+<p>
+<input name="thread_title" type="text" size="40" maxlength="100" value="<?php echo $thread_title; ?>" title="Title" onkeypress="return submitonenter(event, 'thread_edit')"/>
+&nbsp;
+<label>Link:</label>
+<input name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
+</p>
+<p><label>Abstract:</label></p>
+<p>
+<textarea name="thread_abstract" cols="80" rows="5"><?php echo $thread_abstract; ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+</p>
+<p><label>Cloud:</label></p>
+<p>
+<textarea name="thread_cloud" cols="80" rows="5"><?php echo $thread_cloud; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+</p>
+<p>
+<label>Type:</label>
+<select name="thread_type" size="1">
+<option value="thread" <?php echo $thread_type == 'thread' ? 'selected="selected"' : ''; ?>>Thread</option>
+<option value="story" <?php echo $thread_type == 'story' ? 'selected="selected"' : ''; ?>>Article</option>
+<option value="book" <?php echo $thread_type == 'book' ? 'selected="selected"' : ''; ?>>Manual</option>
+</select>
+</p>
+<p>
+<input name="thread_search" type="checkbox" <?php if ($thread_search) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/search.png" alt="" />
+<input name="thread_tag" type="checkbox" <?php if ($thread_tag) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" />
+<input name="thread_comment" type="checkbox" <?php if ($thread_comment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />
+<input name="thread_morecomment" type="checkbox" <?php if ($thread_morecomment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" />
+</p>
+<p>
+<input id="thread_edit" name="thread_edit" type="submit" value="Edit" />
+</p>
+<?php if ($missing_thread_title or $missing_thread_name or $bad_thread_name or $missing_thread_type or $bad_thread_type): ?>
+<div class="alert">
+<?php if ($missing_thread_title): ?>
+<p>You didn't input the title of the thread.</p>
+<?php endif; ?>
+<?php if ($missing_thread_name): ?>
+<p>Specify a name for the link to the thread.</p>
+<?php elseif ($bad_thread_name): ?>
+<p>The name of the link to the thread is invalid.</p>
+<?php endif; ?>
+<?php if ($missing_thread_type): ?>
+<p>Specify the type of the thread.</p>
+<?php elseif ($bad_thread_type): ?>
+<p>The type of the thread is invalid.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>
+<h4>Contents</h4>
+<p>
+<input id="node_create" name="node_create" type="submit" value="Add" />
+content
+<input id="new_node_title" name="new_node_title" type="text" size="50" maxlength="100" value="<?php echo $new_node_title; ?>" title="Title" onkeypress="return focusonenter(event, 'new_node_number')"/>
+#
+<input id="new_node_number" name="new_node_number" type="text" size="3" maxlength="3" value="<?php echo $new_node_number; ?>" title="Number" onkeypress="return submitonenter(event, 'node_create')"/>
+</p>
+<?php if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number): ?>
+<?php $scroll_to='#thread_edit'; ?>
+<div class="alert">
+<?php if ($missing_new_node_title): ?>
+<p>You didn't input the title of the new content.</p>
+<?php elseif ($bad_new_node_title): ?>
+<p>The title of the new content is invalid.</p>
+<?php endif; ?>
+<?php if ($bad_new_node_number): ?>
+<p>The new content number is not correct.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($thread_contents): ?>
+<fieldset>
+<legend>Summary</legend>
+<table cellpadding="2" cellspacing="0">
+<tbody>
+<?php
+$i=1;
+$maxlen=strlen(count($thread_contents))+1;
+foreach ($thread_contents as $c) {
+	extract($c);	/* pos, node_title, node_url */
+	$node_url .= '?' . 'clang=' . $clang;
+	echo <<<_MARK_
+<tr><td><input name="p[$i]" type="text" size="$maxlen" maxlength="3" value="$pos" /></td><td class="aright"><a href="$node_url">$node_number</a></td><td><a href="$node_url">$node_title</a></td></tr>\n
+_MARK_;
+	$i++;
+}
+?>
+</tbody>
+</table>
+</fieldset>
+<p>
+<input id="thread_reorder" name="thread_reorder" type="submit" value="Sort" />
+the list or
+<input id="node_delete" name="node_delete" type="submit" value="Delete" />
+content #
+<input id="old_node_number" name="old_node_number" type="text" size="3" maxlength="3" value="<?php echo $old_node_number; ?>" title="Number" onkeypress="return submitonenter(event, 'node_delete')"/>
+</p>
+<?php if ($missing_old_node_number or $bad_old_node_number): ?>
+<?php $scroll_to='#node_delete'; ?>
+<div class="alert">
+<?php if ($missing_old_node_number): ?>
+<p>You didn't specify the content number to delete.</p>
+<?php elseif ($bad_old_node_number): ?>
+<p>The content number to delete is not correct.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php endif; ?>
+</form>
+<?php if ($scroll_to): ?>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$(window).scrollTo('<?php echo $scroll_to; ?>');
+});
+//-->
+</script>
+<?php endif; ?>

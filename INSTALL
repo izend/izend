@@ -1,0 +1,53 @@
+
+ ___           _        _ _ 
+|_ _|_ __  ___| |_ __ _| | |
+ | || '_ \/ __| __/ _` | | |
+ | || | | \__ \ || (_| | | |
+|___|_| |_|___/\__\__,_|_|_|
+
+
+If your are familiar with Git, read the instructions in GIT to 
+automatically track changes from the iZend repository. Otherwise
+just copy the whole izend directory into a directory within your
+web server's document root and give it the name of your website:
+
+    mv izend /var/www/sitename.net
+
+Make sure the server is allowed to read all the files and write the 
+configuration files includes/config.inc, includes/db.inc and
+includes/aliases.inc, the directories log and avatars and the file
+sitemap.xml:
+
+    cd /var/www/sitename.net
+    sudo chgrp -R www-data .
+    find . -type d -print0 | xargs -0 chmod 775
+    find . -type f -print0 | xargs -0 chmod 664
+
+Protect the configuration files:
+
+    cd /var/www/sitename.net/includes
+    chmod 660 config.inc db.inc aliases.inc
+
+Add a file called after the name of your website in the directory
+/etc/apache2/sites-available with the following content:
+
+<VirtualHost *:80>
+    DocumentRoot /var/www/sitename.net
+    ServerName local.sitename.net
+</VirtualHost>
+
+Enable your website:
+
+    sudo a2ensite sitename.net
+
+Reload Apache:
+
+    sudo /etc/init.d/apache2 reload
+
+Add the following line in /etc/hosts:
+
+127.0.0.1    local.sitename.net
+
+Start your web navigator and enter local.sitename.net in the
+address bar to run the configurator.
+

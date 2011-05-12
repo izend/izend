@@ -1,0 +1,32 @@
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.jquery  {font-family:monospace; font-size:10pt;}
+.jquery .de1, .jquery .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.jquery .imp {font-weight: bold; color: red;}
+.jquery li, .jquery .li1 {font-weight: normal; vertical-align:top;}
+.jquery .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.jquery .kw1 {color: #000066; font-weight: bold;}
+.jquery .kw2 {color: #003366; font-weight: bold;}
+.jquery .kw3 {color: #000066;}
+.jquery .kw4 {color: #000066;}
+.jquery .kw5 {color: #000066;}
+.jquery .kw6 {color: #000066;}
+.jquery .kw7 {color: #000066;}
+.jquery .kw8 {color: #000066;}
+.jquery .kw9 {color: #000066;}
+.jquery .kw10 {color: #000066;}
+.jquery .kw11 {color: #000066;}
+.jquery .kw12 {color: #000066;}
+.jquery .co1 {color: #006600; font-style: italic;}
+.jquery .co2 {color: #009966; font-style: italic;}
+.jquery .coMULTI {color: #006600; font-style: italic;}
+.jquery .es0 {color: #000099; font-weight: bold;}
+.jquery .br0 {color: #009900;}
+.jquery .sy0 {color: #339933;}
+.jquery .sy1 {color: #000066;}
+.jquery .st0 {color: #3366CC;}
+.jquery .nu0 {color: #CC0000;}
+.jquery .me1 {color: #660066;}
+.jquery span.xtra { display:block; }

@@ -1,0 +1,16 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<ol>
+<?php foreach ($book_list as $book):
+extract($book);	/* book_title book_url */
+?>
+<li><a href="<?php echo $book_url; ?>"><span><?php echo htmlentities($book_title, ENT_COMPAT, 'UTF-8'); ?></span></a></li>
+<?php endforeach; ?>
+</ol>

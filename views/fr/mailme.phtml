@@ -1,0 +1,96 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form" id="mailme_form">
+<form action="" method="post">
+<input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">Quelle est votre adresse d'email&nbsp;?</p>
+<p class="input"><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
+<p class="info">Votre adresse d'email est strictement confidentielle.</p>
+<p class="label">Tapez le sujet et le texte de votre message&nbsp;:</p>
+<p class="input"><input class="monospace" type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Sujet" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
+<p class="input"><textarea class="monospace" name="mailme_message" id="mailme_message" cols="70" rows="8" title="Texte"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" /></p>
+<?php if ($with_captcha): ?>
+<p class="input">
+<img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" title="Code de vérification" />
+&nbsp;:&nbsp;
+<input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4"	title="4 lettres" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
+</p>
+<?php endif; ?>
+<p class="submit"><button type="submit" name="mailme_send" id="mailme_send">Envoyer</button></p>
+</div>
+</form>
+<?php if ($errors):
+extract($errors);
+?>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_mail): ?>
+<p>Vous n'avez pas donné votre adresse d'email.</p>
+<?php elseif ($bad_mail): ?>
+<p>L'adresse d'email est invalide.</p>
+<?php endif; ?>
+<?php if ($missing_message): ?>
+<p>Le message est vide.</p>
+<?php endif; ?>
+<?php if ($missing_subject): ?>
+<p>N'oubliez pas le sujet.</p>
+<?php elseif ($bad_subject): ?>
+<p>Le sujet du message est invalide.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($infos):
+extract($infos);
+?>
+<div class="infos">
+<?php if ($email_sent): ?>
+<p>Votre message a bien été envoyé. Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>

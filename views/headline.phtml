@@ -1,0 +1,18 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div id="headline">
+<ul class="menubar">
+<?php if ($headline_url): ?>
+<li><a href="<?php echo $headline_url; ?>"><?php echo htmlspecialchars($headline_text, ENT_NOQUOTES, 'UTF-8', false); ?></a></li>
+<?php else: ?>
+<li><?php echo htmlspecialchars($headline_text, ENT_NOQUOTES, 'UTF-8', false); ?></li>
+<?php endif; ?>
+</ul>
+</div>

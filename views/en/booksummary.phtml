@@ -1,0 +1,23 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3><?php echo $book_title; ?></h3>
+<?php if ($book_abstract): ?>
+<p><?php echo $book_abstract; ?></p>
+<?php endif; ?>
+<ol>
+<?php
+foreach ($book_contents as $c) {
+	list( , $page_title, $page_url) = $c;
+	echo <<<_MARK_
+<li><a href="$page_url">$page_title</a></li>\n
+_MARK_;
+}
+?>
+</ol>

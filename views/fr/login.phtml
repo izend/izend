@@ -1,0 +1,55 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="form">
+<form action="" method="post">
+<input type="hidden" name="login_token" value="<?php echo $token; ?>" />
+<div class="fields">
+<p class="label">Quel est votre nom de connexion ?</p>
+<p class="input"><input type="text" name="login_login" id="login_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo $login; ?>" /></p>
+<p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
+<p class="label">Et votre clé d'accès ?</p>
+<p class="input"><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'login_code')" /></p>
+<?php if ($password_page): ?>
+<p class="info link">Si vous avez oublié votre mot de passe, <a href="<?php echo $password_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+<?php if ($with_captcha): ?>
+<p class="input">
+<img src="<?php echo $base_path; ?>/captcha/login" alt="" title="Code de vérification" />
+&nbsp;:&nbsp;
+<input type="text" name="login_code" id="login_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'login_enter')" value="" />
+</p>
+<?php endif; ?>
+<p class="submit"><button type="submit" name="login_enter" id="login_enter">Entrer</button></p>
+<?php if ($newuser_page): ?>
+<p class="info link">Pour créer votre compte personnel, <a href="<?php echo $newuser_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+</div>
+</form>
+<?php if ($errors):
+extract($errors);
+?>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_login or $missing_password): ?>
+<p>Entrez votre identifiant et votre mot de passe.</p>
+<?php elseif ($bad_login): ?>
+<p>L'identifiant est invalide.</p>
+<?php elseif ($bad_password): ?>
+<p>Le mot de passe est invalide.</p>
+<?php elseif ($access_denied): ?>
+<p>Accès refusé.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>

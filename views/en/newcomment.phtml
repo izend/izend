@@ -1,0 +1,111 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php require_once 'dateen.php'; ?>
+<?php require_once 'bbcode.php'; ?>
+<?php $message_maxlength = 2000; ?>
+<div id="newcomment">
+<h6>Your comment:</h6>
+<p><img src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="date"><?php echo longdate_en($comment_created); ?> at <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author"> by <?php echo $comment_name; ?></span></p>
+<?php if (!empty($message)): ?>
+<?php echo bbcode($message); ?>
+<?php endif; ?>
+<form action="#newcomment" method="post">
+<input type="hidden" name="newcomment_token" value="<?php echo $token; ?>" />
+<div class="bbcodebar">
+<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="[p]" title="p" onclick="tagmessage('[p]','[/p]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="[b]" title="b" onclick="tagmessage('[b]','[/b]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="[i]" title="i" onclick="tagmessage('[i]','[/i]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="[u]" title="u" onclick="tagmessage('[u]','[/u]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="[s]" title="s" onclick="tagmessage('[s]','[/s]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="[quote]" title="quote" onclick="tagmessage('[quote]','[/quote]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/pre.png" alt="[pre]" title="pre" onclick="tagmessage('[pre]','[/pre]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/br.png" alt="[br]" title="br" onclick="tagmessage('','[br]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="[code]" title="code" onclick="tagmessage('[code]','[/code]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/url.png" alt="[url]" title="url" onclick="tagmessage('[url]','[/url]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/email.png" alt="[email]" title="email" onclick="tagmessage('[email]','[/email]')"/>
+<span id="newcomment_limiter"><?php echo $message_maxlength; ?></span>
+</div>
+<textarea id="newcomment_message" name="newcomment_message" cols="80" rows="10" title="Text" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<p id="newcomment_help">
+Enter a maximum of <b><?php echo $message_maxlength; ?></b> characters. Improve the presentation of your text with the following formatting tags:<br />
+[<b>p</b>]paragraph[/p], [<b>b</b>]<b>bold</b>[/b], [<b>i</b>]<i>italics</i>[/i], [<b>u</b>]<u>underline</u>[/u], [<b>s</b>]<s>strike</s>[/s],
+[<b>quote</b>]citation[/quote], [<b>pre</b>]as is[/pre], [<b>br</b>]line break,<br />
+[<b>url</b>]http://www.izend.org[/url], [<b>url</b>=http://www.izend.org]site[/url],
+[<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email],<br />
+[<b>code</b>=language]source code in c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
+</p>
+<p>
+<?php if ($message): ?>
+<button type="submit" name="newcomment_edit" id="newcomment_edit">Edit</button>
+the text or
+<button type="submit" name="newcomment_validate" id="newcomment_validate">Validate</button>
+<?php else: ?>
+<button type="submit" name="newcomment_comment" id="newcomment_submit">Comment</button>
+<?php endif; ?>
+</p>
+</form>
+<?php
+if ($errors):
+extract($errors);
+?>
+<div class="error">
+<?php if ($missing_message): ?>
+<p>The message is empty.</p>
+<?php elseif ($message_too_long): ?>
+<p>Your message is too long.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>An internal error has occured.
+<?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+<!--
+function tagmessage(open, close)
+{
+	addtag('newcomment_message', open, close);
+	inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>);
+}
+
+inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>);
+//-->
+</script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+//-->
+</script>

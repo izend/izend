@@ -1,0 +1,30 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3><?php echo $thread_title; ?></h3>
+<p class="info"><?php setlocale(LC_TIME, 'en_US.UTF-8'); echo strftime('%B %e, %Y %Hh%M', $thread_modified); ?></p>
+<?php if ($thread_abstract): ?>
+<h5>Abstract</h5>
+<p><?php echo $thread_abstract; ?></p>
+<?php endif; ?>
+<?php if ($thread_cloud): ?>
+<h6>Cloud</h6>
+<p class="smaller"><?php echo $thread_cloud; ?></p>
+<?php endif; ?>
+<h4>Contents</h4>
+<ol>
+<?php
+foreach ($thread_contents as $c) {
+	extract($c);	/* node_title node_url */
+	echo <<<_MARK_
+<li><a href="$node_url">$node_title</a></li>\n
+_MARK_;
+}
+?>
+</ol>
