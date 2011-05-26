@@ -11,13 +11,8 @@
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
 <div class="fields">
-<?php if ($account_created): ?>
-<?php if (!empty($name)): ?>
-<p class="right"><img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /></p>
-<?php endif; ?>
-<?php endif; ?>
 <p class="label">Quel nom de connexion voulez-vous ?</p>
-<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifiant" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /></p>
+<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifiant" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choisissez un pseudo de 2 à 20 lettres.</p>
 <p class="label">Quelle est votre adresse d'email ?</p>
 <p class="input"><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
@@ -25,7 +20,7 @@
 <p class="label"><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> onkeypress="return focusonenter(event, 'register_code')"/>&nbsp;Je souhaite créer un compte</p>
 <?php if ($with_captcha): ?>
 <p class="input">
-<img src="<?php echo $base_path; ?>/captcha/register" alt="" title="Code de v&eacute;rification" />
+<img src="<?php echo $base_path; ?>/captcha/register" alt="" title="Code de vérification" />
 &nbsp;:&nbsp;
 <input type="text" name="register_code" id="register_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'register_register')" value="" />
 </p>

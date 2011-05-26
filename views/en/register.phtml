@@ -11,13 +11,8 @@
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
 <div class="fields">
-<?php if ($account_created): ?>
-<?php if (!empty($name)): ?>
-<p class="right"><img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /></p>
-<?php endif; ?>
-<?php endif; ?>
 <p class="label">What connection name do you want?</p>
-<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $name; ?>" /></p>
+<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <p class="label">What is your email address?</p>
 <p class="input"><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
