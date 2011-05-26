@@ -48,6 +48,16 @@ Add the following line in /etc/hosts:
 
 127.0.0.1    local.sitename.net
 
+If you have a DB, add an alias for its host online:
+
+127.0.0.1    local.sitename.net dbhostname
+
+Use the same DB name, user and password for your development
+site and the production site.
+
 Start your web navigator and enter local.sitename.net in the
 address bar to run the configurator.
+
+In case of a problem, check the DB connector in includes/db.inc
+and the other parameters in includes/config.inc.
 

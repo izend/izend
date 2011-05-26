@@ -11,7 +11,7 @@ Fork iZend from your account on github and make a local copy:
     git clone --bare ssh://github.com/yourname/izend.git /git/izend.git
     git clone ssh://githost/git/izend.git /var/www/izend
 
-Be prepared push it to github:
+Be prepared to push it to github:
 
     cd /var/www/izend
     git remote add github git@github.com:yourname/izend.git
@@ -52,7 +52,8 @@ your site.
 
 Commit this initial version:
 
-    git add --update
+    git status
+    git add --all
     git commit -m"Initial configuration"
     
 Push it to the repository of your site:
@@ -73,18 +74,18 @@ Check your configuration:
 [alias]
     user = yourname
     email = yourname@sitename.net
-[remote "origin"]
-    fetch = +refs/heads/*:refs/remotes/origin/*
-    url = ssh://githost/git/sitename.net.git
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
 [remote "izend"]
     url = ssh://githost/git/izend.git
     fetch = +refs/heads/*:refs/remotes/izend/*
     receivepack = /bin/false
 [branch "izend"]
     remote = izend
+    merge = refs/heads/master
+[remote "origin"]
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    url = ssh://githost/git/sitename.net.git
+[branch "master"]
+    remote = origin
     merge = refs/heads/master
 
 To update your fork with a new version of iZend:
@@ -129,5 +130,4 @@ To merge the new version with your site:
     git pull
     git checkout master
     git merge izend
-
 
