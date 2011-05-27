@@ -28,6 +28,17 @@ Protect the configuration files:
     cd /var/www/sitename.net/includes
     chmod 660 config.inc db.inc aliases.inc
 
+Check that the module rewrite is activated by Apache. Look for the
+following line in httpd.conf:
+
+LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+
+Create a link to the file /etc/apache2/mods_available/rewrite.load
+in the directory /etc/apache2/mods_enabled:
+
+    cd /etc/apache2/mods-enabled
+    sudo ln -s ../mods-available/rewrite.load .
+
 Add a file called after the name of your website in the directory
 /etc/apache2/sites-available with the following content:
 
@@ -35,10 +46,15 @@ Add a file called after the name of your website in the directory
     DocumentRoot /var/www/sitename.net
     ServerName local.sitename.net
 </VirtualHost>
+<Directory /var/www/sitename.net>
+    AllowOverride All
+</Directory>
 
-Enable your website:
+Create a link to the file /etc/apache2/sites-available/sitename.net
+in the directory /etc/apache2/sites-enabled:
 
-    sudo a2ensite sitename.net
+    cd /etc/apache2/sites-enabled
+    sudo ln -s ../sites-available/sitename.net .
 
 Reload Apache:
 
@@ -58,6 +74,9 @@ site and the production site.
 Start your web navigator and enter local.sitename.net in the
 address bar to run the configurator.
 
-In case of a problem, check the DB connector in includes/db.inc
-and the other parameters in includes/config.inc.
+In case of a problem, make sure the rewrite module is activated and
+that the directives in the file .htaccess at the root of your site
+are properly interpreted. If the connection with the DB fails,
+verify the DB connector in includes/db.inc. Check the other
+parameters in includes/config.inc.
 
