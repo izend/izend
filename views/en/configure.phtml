@@ -109,6 +109,11 @@ Check your answers and rerun the configuration.</p>
 <?php if ($missing_db_name or $bad_db_name): ?>
 <p class="error">Enter between 2 and 30 characters (letter, digit or underscore) starting with a letter.</p>
 <?php endif; ?>
+<p class="label">What is the name of the database host?</p>
+<p class="input"><input type="text" name="configure_db_host" size="30" maxlength="40" title="" value="<?php echo $db_host; ?>" /></p>
+<?php if ($missing_db_host or $bad_db_host): ?>
+<p class="error">Enter a server name or an IP address.</p>
+<?php endif; ?>
 <p class="label">What are the name and the password of the user of the database?</p>
 <p class="input">
 <input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
