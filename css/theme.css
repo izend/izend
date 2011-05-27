@@ -49,6 +49,10 @@ textarea {resize:none;}
 
 .menu, .menubar, .sidebar {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
+.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;}
+.summary li {list-style:none;}
+.summary li a:link, .summary li a:visited {text-decoration:none;}
+
 .parameters dt {font-family:monospace;}
 
 .info {color:#666666;font-size:smaller;font-style:normal;}
