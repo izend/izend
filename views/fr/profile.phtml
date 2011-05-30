@@ -12,7 +12,7 @@
 <input type="hidden" name="profile_token" value="<?php echo $token; ?>" />
 <div class="fields">
 <p class="label">Nom de connexion&nbsp;:</p>
-<p class="input"><input type="text" name="profile_name" id="profile_name" size="20" maxlength="20" title="Identifiant" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p class="input"><input type="text" name="profile_name" id="profile_name" size="20" maxlength="20" title="Identifiant" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="label">Adresse d'email&nbsp;:</p>
 <p class="input"><input type="text" name="profile_mail" id="profile_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $mail; ?>" /></p>
 <p class="label">Langue&nbsp;:&nbsp;<?php foreach ($system_languages as $lang): ?> <input name="profile_locale" id="profile_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>

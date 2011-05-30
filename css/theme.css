@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
  
@@ -105,8 +105,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
 #en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat center center;}
 
-#headline {float:right;font-weight:bold;color:#aec14e;}
-#headline ul {margin-bottom:0;}
+#headline {float:right;margin-top:13px;font-weight:bold;color:#aec14e;}
 
 #threadlist {margin-top:1em;}
 
@@ -126,13 +125,14 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #homeblog .author {color:#666666;font-size:smaller;font-style:italic;}
 
 #comment {margin-top:2em;clear:left;}
-#comment h4 {line-height:24px;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;color:#666666;}
+#comment h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;line-height:24px;}
 #comment .date {color:#666666;font-size:smaller;}
 #comment .author {color:#666666;font-size:smaller;font-style:italic;}
 #comment pre {font-family:monospace;font-size:10pt;}
 #comment blockquote {font-size:smaller;margin-right:0;}
 
-#newcomment h6 {line-height:24px;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;}
+#newcomment {margin-top:1em;clear:left;}
+#newcomment h6 {background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
 #newcomment_help {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
 
 .bbcodebar {margin-bottom:5px;}
@@ -142,7 +142,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #searchlinks li {list-style:none;margin-bottom:1em;}
 #searchlinks a {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:smaller;font-style:italic;}
-#searchlinks li p+p {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;color:#666666;}
+#searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
 #search {width:24px;height:24px;background:transparent url(../images/theme/icons/find.png) no-repeat;margin-left:3px;vertical-align:middle;border:none;text-indent:-1000em;cursor:pointer;}
 #searchtext {float:left;width:200px;padding:2px;border:2px solid #aec14e;margin-right:3px;}

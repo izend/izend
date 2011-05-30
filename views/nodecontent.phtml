@@ -17,7 +17,7 @@ foreach ($contents as $c) {
 		case 'file':
 			$file_content = $c['file'];
 			if ($file_content) {
-				echo $file_content, PHP_EOL;
+				echo '<div class="file">', PHP_EOL, $file_content, PHP_EOL,'</div>', PHP_EOL;
 			}
 			break;
 		case 'download':
@@ -31,6 +31,7 @@ foreach ($contents as $c) {
 		case 'media':
 			extract($c);	/* file image width height skin icons duration autostart repeat */
 			$id = uniqid('id');
+			echo '<div class="media">', PHP_EOL;
 			echo '<p id="', $id, '"></p>', "\n";
 			echo '<script type="text/javascript">', "\n";
 			echo 'var so = new SWFObject("/longtail/player.swf","', $id, '","', $width, '","', $height, '","9","#FFFFFF");', "\n";
@@ -54,6 +55,7 @@ foreach ($contents as $c) {
 			echo 'so.addVariable("autostart","', $autostart ? 'true' : 'false', '");', "\n";
 			echo 'so.write("', $id, '");', "\n";
 			echo '</script>', "\n";
+			echo '</div>', PHP_EOL;
 			break;
 		default:
 			break;

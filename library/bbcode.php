@@ -50,8 +50,8 @@ function bbcode_highlite($s, $language='text') {
 		return false;
 	}
 
-	head('stylesheet', $language, 'screen');
+	head('stylesheet', 'geshi/' . $language, 'screen');
 
-	return $output;
+	return '<div class="geshi"' . $output . '</div>';
 }
 

@@ -16,7 +16,7 @@ foreach ($comments as $c) {
 	extract($c);	/* comment_id, comment_text, comment_name, comment_mail, comment_created */
 ?>
 <div class="comment">
-<p><img class="noprint" src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="date">Le <?php echo longdate_fr($comment_created); ?> à <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author">par <?php echo $comment_name; ?></span></p>
+<p><img class="avatar noprint" src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="date">Le <?php echo longdate_fr($comment_created); ?> à <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author">par <?php echo $comment_name; ?></span></p>
 <div>
 <?php echo bbcode($comment_text); ?>
 </div>
