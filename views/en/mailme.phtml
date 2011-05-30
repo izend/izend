@@ -16,7 +16,7 @@
 <p class="info">Your email address is strictly confidential.</p>
 <p class="label">Type in the subject and the text of your message:</p>
 <p class="input"><input class="monospace" type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
-<p class="input"><textarea class="monospace" name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" /></p>
+<p class="input"><textarea class="monospace" name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_captcha): ?>
 <p class="input">
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" title="Verification code" />

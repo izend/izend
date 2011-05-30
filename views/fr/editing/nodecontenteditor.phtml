@@ -103,6 +103,7 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="&lt;i&gt;" title="i" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;i&gt;','&lt;/i&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="&lt;u&gt;" title="u" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;u&gt;','&lt;/u&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="&lt;s&gt;" title="s" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;s&gt;','&lt;/s&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h4.png" alt="&lt;h4&gt;" title="h4" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h4&gt;','&lt;/h4&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/h5.png" alt="&lt;h5&gt;" title="h5" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h5&gt;','&lt;/h5&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/h6.png" alt="&lt;h6&gt;" title="h6" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h6&gt;','&lt;/h6&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
@@ -111,7 +112,7 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;s&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22', '\x22 alt=\x22\x22 /&gt;')"/>
 <span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
-<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 <?php break; ?>
 <?php case 'file': ?>
 <p>
