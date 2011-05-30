@@ -319,7 +319,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$content = view('editing/threadeditsummary', $lang, compact('clang', 'thread_type', 'thread_name', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'errors'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content'));
 
 	return $output;
 }

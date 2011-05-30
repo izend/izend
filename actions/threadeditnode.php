@@ -73,7 +73,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 
 	$content = view('editing/threadeditnode', $lang, compact('node_editor', 'node_title', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content'));
 
 	return $output;
 }

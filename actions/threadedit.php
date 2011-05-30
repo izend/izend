@@ -27,6 +27,7 @@ function threadedit($lang, $arglist=false) {
 		}
 	}
 
+
 	$clang=false;
 	foreach ($supported_languages as $slang) {
 		if (isset($_POST[$slang . '_x'])) {

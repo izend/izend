@@ -241,7 +241,7 @@ function threadeditall($lang, $clang, $type=false) {
 
 	$content = view('editing/threadeditall', $lang, compact('clang', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content'));
 
 	return $output;
 }

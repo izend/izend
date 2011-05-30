@@ -67,7 +67,7 @@ function editnode($lang, $arglist=false) {
 
 	$content = view('editing/editnode', $lang, compact('node_editor'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content'));
 
 	return $output;
 }
