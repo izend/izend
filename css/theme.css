@@ -124,8 +124,8 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #homeblog .date {color:#666666;font-size:smaller;}
 #homeblog .author {color:#666666;font-size:smaller;font-style:italic;}
 
-#comment {margin-top:2em;clear:left;}
-#comment h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;line-height:24px;}
+#comments {margin-top:2em;clear:left;}
+#comments h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;line-height:24px;}
 #comment .date {color:#666666;font-size:smaller;}
 #comment .author {color:#666666;font-size:smaller;font-style:italic;}
 #comment pre {font-family:monospace;font-size:10pt;}

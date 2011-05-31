@@ -9,7 +9,6 @@
 ?>
 <?php require_once 'dateen.php'; ?>
 <?php require_once 'bbcode.php'; ?>
-<div id="comments">
 <?php
 $i=1;
 foreach ($comments as $c) {
@@ -17,12 +16,9 @@ foreach ($comments as $c) {
 ?>
 <div class="comment">
 <p><img class="avatar noprint" src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="date"><?php echo longdate_en($comment_created); ?> at <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author"> by <?php echo $comment_name; ?></span></p>
-<div>
-<?php echo bbcode($comment_text); ?>
-</div>
+<div><?php echo bbcode($comment_text); ?></div>
 </div>
 <?php
 	$i++;
 }
 ?>
-</div>

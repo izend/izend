@@ -90,7 +90,7 @@ Check your configuration:
 
 To update your fork with a new version of iZend:
 
-	cd /www/var/izend
+    cd /www/var/izend
 
 Pull the new version in its own branch:
 
@@ -110,22 +110,22 @@ Merge, resolve conflicts commit and push:
 
     git merge --no-commit izend
     git status
-	git commit -m"Merges with izend"
+    git commit -m"Merges with izend"
 
 To update the repository on github:
 
-	git push github
-	
+    git push github
+
 If you have simply cloned the izend repository:
 
     cd /git/izend.git
     git fetch --all
-	cd /var/www/izend
-	git pull
+    cd /var/www/izend
+    git pull
 
 To merge the new version with your site:
 
-	cd /www/sitename.net
+    cd /www/sitename.net
     git checkout izend
     git pull
     git checkout master

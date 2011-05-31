@@ -8,13 +8,13 @@
  */
 ?>
 <?php if ($comments or $newcomment or $user_page): ?>
-<div id="comment">
+<div id="comments">
 <h4>Commentaires</h4>
 <?php echo $comments; ?>
 <?php if ($newcomment): ?>
 <?php echo $newcomment; ?>
 <?php elseif ($user_page): ?>
-<p class="info">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
+<p class="info noprint">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>

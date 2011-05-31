@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,7 @@ function bbcode($s) {
 			'#\[code\](.+?)\[/code\]#ise'			=> "bbcode_highlite('\\1')",
 	);
 
-	$s = preg_replace('#\[code([^\]]*?)\](.*)\[/code\]#ise', "'[code\\1]'.bbcode_protect('\\2').'[/code]'", $s);
+	$s = preg_replace('#\[code([^\]]*?)\](.*?)\[/code\]#ise', "'[code\\1]'.bbcode_protect('\\2').'[/code]'", $s);
 
 	$s = htmlspecialchars($s, ENT_COMPAT, 'UTF-8');
 
@@ -35,8 +35,12 @@ function bbcode_protect($s) {
 	return base64_encode(preg_replace('#\\\"#', '"', $s));
 }
 
-function bbcode_highlite($s, $language='text') {
+function bbcode_highlite($s, $language=false) {
 	$s = trim(base64_decode($s));
+
+	if (!$language) {
+		return '<code>' . $s . '</code>';
+	}
 
 	$geshi = new GeSHi($s, $language);
 	$geshi->enable_classes(true);
@@ -52,6 +56,6 @@ function bbcode_highlite($s, $language='text') {
 
 	head('stylesheet', 'geshi/' . $language, 'screen');
 
-	return '<div class="geshi"' . $output . '</div>';
+	return '<div class="geshi">' . $output . '</div>';
 }
 
