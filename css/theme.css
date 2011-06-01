@@ -10,7 +10,7 @@
 a:link, a:visited {color:#ec902d;}
 a:hover {color:#333333;text-decoration:none;}
 
-body {color:#333333;font-family:Verdana, sans-serif;font-size:100%;}
+body {color:#333333;font-family:Verdana, sans-serif;font-size:100%;width:960px;margin:5px 0 0 50px;}
 
 h1,h2,h3 {color:#aec14e;}
 h4 {color:#aec14e;}
