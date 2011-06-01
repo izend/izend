@@ -31,22 +31,26 @@ Create the initial version of your site:
 
     git init /var/www/mysite
     cd /var/www/mysite
-    
+
 Declare your identity:
 
     git config user.name yourname
     git config user.email yourname@sitename.net
-    
+
 Pull out your version of iZend in a branch:
 
     git remote add izend ssh://githost/git/izend.git
     git fetch izend
     git checkout -b izend izend/master
 
+Eventually, prevent an accidental push:
+
+    git config remote.izend.receivepack /bin/false
+
 Go to your branch:
 
     git checkout master
-    
+
 Follow the instructions in INSTALL to complete the installation of
 your site.
 
@@ -55,7 +59,7 @@ Commit this initial version:
     git status
     git add --all
     git commit -m"Initial configuration"
-    
+
 Push it to the repository of your site:
 
     git remote add origin ssh://githost/git/sitename.net.git

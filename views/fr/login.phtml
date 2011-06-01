@@ -17,7 +17,7 @@
 <p class="label">Et votre clé d'accès ?</p>
 <p class="input"><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'login_code')" /></p>
 <?php if ($password_page): ?>
-<p class="info link">Si vous avez oublié votre mot de passe, <a href="<?php echo $password_page; ?>">cliquez ici</a>.</p>
+<p class="info link">Si vous avez oublié votre mot de passe, <a href="<?php echo $password_page; ?>" rel="nofollow">cliquez ici</a>.</p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
 <p class="input">
@@ -28,7 +28,7 @@
 <?php endif; ?>
 <p class="submit"><button type="submit" name="login_enter" id="login_enter">Entrer</button></p>
 <?php if ($newuser_page): ?>
-<p class="info link">Pour créer votre compte personnel, <a href="<?php echo $newuser_page; ?>">cliquez ici</a>.</p>
+<p class="info link">Pour créer votre compte personnel, <a href="<?php echo $newuser_page; ?>" rel="nofollow">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
 </form>

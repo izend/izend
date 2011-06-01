@@ -10,24 +10,24 @@
 <div id="bannermenu">
 <ul class="menu menubar">
 <?php if (isset($contact) and $contact): ?>
-<li><a id="mail" href="<?php echo $contact_page; ?>" title="Nous contacter"><span>Contact</span></a></li>
+<li><a id="mail" href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter"><span>Contact</span></a></li>
 <?php endif; ?>
 <?php if (isset($logout) and $logout): ?>
-<li><a id="exit" href="<?php echo $nobody_page; ?>" title="Déconnexion"><span>Déconnexion</span></a></li>
+<li><a id="exit" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Déconnexion"><span>Déconnexion</span></a></li>
 <?php endif; ?>
 <?php if (isset($login) and $login): ?>
-<li><a id="enter" href="<?php echo $user_page; ?>" title="Votre compte"><span>Compte</span></a></li>
+<li><a id="enter" href="<?php echo $user_page; ?>" rel="nofollow" title="Votre compte"><span>Compte</span></a></li>
 <?php endif; ?>
 <?php if (isset($account) and $account): ?>
-<li><a id="account" href="<?php echo $account_page; ?>" title="Votre compte"><span>Compte</span></a></li>
+<li><a id="account" href="<?php echo $account_page; ?>" rel="nofollow" title="Votre compte"><span>Compte</span></a></li>
 <?php endif; ?>
 <?php if (isset($validate) and $validate): ?>
-<li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" title="Valider"><span>Valider</span></a></li>
+<li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Valider"><span>Valider</span></a></li>
 <?php endif; ?>
 <?php if (isset($edit) and $edit): ?>
-<li><a id="edit" href="<?php echo $edit_page; ?>" title="Éditer"><span>Éditer</span></a></li>
+<li><a id="edit" href="<?php echo $edit_page; ?>" title="Éditer" rel="nofollow"><span>Éditer</span></a></li>
 <?php elseif (isset($view) and $view): ?>
-<li><a id="view" href="<?php echo $view_page; ?>" title="Voir"><span>Afficher</span></a></li>
+<li><a id="view" href="<?php echo $view_page; ?>" title="Voir" rel="nofollow"><span>Afficher</span></a></li>
 <?php endif; ?>
 </ul>
 </div>
