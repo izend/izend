@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -35,7 +35,7 @@ function cloud_create($cloud_id) {
 
 				// add all the tags in the node
 				foreach ($tags as $w) {
-					cloud_add_node_tag($lang, $cloud_id, $node_id, $w);
+					cloud_add_node_tag($lang, $node_id, $w);
 				}
 			}
 		}
