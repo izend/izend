@@ -3,11 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
+require_once 'wmatch.php';
+
 require_once 'models/cloud.inc';
 
 function search($lang, $arglist=false) {
@@ -48,18 +50,14 @@ function search($lang, $arglist=false) {
 		$action='search';
 	}
 
-	$searchtext=false;
+	$searchtext=$tag=$taglist=false;
+	$rsearch=false;
 	switch($action) {
 		case 'none':
-			if ($tag) {
-				/* redirect old URL */
-				$new_page = url('search', $lang) . '/'. $cloud . '?' . 'q=' . urlencode($tag);
-				header('HTTP/1.1 301 Moved Permanently');
-				header("Location: $new_page");
-				return false;
-			}
 			$tag=isset($arglist['q']) ? $arglist['q'] : false;
-			$searchtext=$tag;
+			if ($tag) {
+				$taglist=array($tag);
+			}
 			break;
 		case 'search':
 			if (isset($_POST['searchtext'])) {
@@ -67,22 +65,28 @@ function search($lang, $arglist=false) {
 				preg_match_all('/(\S+)/', $searchtext, $r);
 				$searchtext=implode(' ', array_slice(array_unique($r[0]), 0, 10));
 			}
-			$tag=$searchtext;
+			if ($searchtext) {
+				global $search_distance, $search_closest;
+
+				$taglist=cloud_match($lang, $cloud_id, $searchtext, $search_distance, $search_closest);
+			}
 			break;
 		default:
 			break;
 	}
 
-	$r = $tag ? cloud_search($lang, $cloud_id, $tag) : false;
+	if ($taglist) {
+		$rsearch=cloud_search($lang, $cloud_id, $taglist);
+	}
 
-	if ($r) {
+	if ($rsearch) {
 		$search_input = !$thread_nosearch;
 		$search_text = $searchtext;
 		$search_url = url('search', $lang) . '/'. $cloud_name;
 		$search_cloud = $thread_nocloud ? false : build('cloud', $lang, $cloud_id, 60, true, true);
 		$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
 
-		$searchlist = build('searchlist', $lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $r);
+		$searchlist = build('searchlist', $lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $rsearch, $taglist);
 
 		$sidebar = $searchbox;
 		$content = view('search', $lang, compact('searchlist'));

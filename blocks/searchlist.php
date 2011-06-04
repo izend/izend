@@ -3,27 +3,22 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
-require_once 'inarrayi.php';
-
-function searchlist($lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $taglist) {
-	preg_match_all('/(\S+)/', $searchtext, $r);
-	$wordlist = $r[0];
-
+function searchlist($lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $rsearch, $taglist) {
 	$linklist=array();
 	$cloud_url = url($cloud_action, $lang) . '/'. $cloud_name;
-	foreach ($taglist as $tag) {
-		extract($tag);	/* page_id, name, title, abstract, cloud, pertinence */
+	foreach ($rsearch as $r) {
+		extract($r);	/* page_id, name, title, abstract, cloud, pertinence */
 		$link_title=$title;
 		$link_description=strip_tags($abstract);
 		$link_cloud=array();
 		preg_match_all('/(\S+)/', $cloud, $r);
-		foreach ($r[0] as $word) {
-			$w=htmlentities($word, ENT_COMPAT, 'UTF-8');
-			$link_cloud[]=in_arrayi($word, $wordlist) ? "<span class=\"tag\">$w</span>" : $w;
+		foreach ($r[0] as $tag) {
+			$w=htmlentities($tag, ENT_COMPAT, 'UTF-8');
+			$link_cloud[]=in_array($tag, $taglist) ? "<span class=\"tag\">$w</span>" : $w;
 		}
 		$link_cloud=implode(' ', $link_cloud);
 		$link_url=$cloud_url . '/' . $name;

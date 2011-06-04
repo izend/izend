@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -45,6 +45,11 @@ $supported_languages=array('en', 'fr');	// 'en', 'fr'
 global $supported_threads;
 
 $supported_threads=array('thread', 'story', 'book');	// 'thread', 'story', 'book'
+
+global $search_distance, $search_closest;
+
+$search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
+$search_closest=true;	// true - best matches, false - all matches
 
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
