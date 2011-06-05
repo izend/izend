@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -97,8 +97,6 @@ function cloud_search($lang, $cloud_id, $taglist) {
 		return false;
 	}
 
-	$taglist = array_slice($taglist, 0, 10);	// limit to 10 different tags
-
 	$sqllang=db_sql_arg($lang, false);
 
 	$namelist=array();
@@ -124,7 +122,7 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	preg_match_all('/(\S+)/', $s, $r);
 	$wordlist = array_unique($r[0]);
 	$nwords=count($wordlist);
-	if ( $nwords == 0) {
+	if ($nwords == 0) {
 		return false;
 	}
 
@@ -147,11 +145,14 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 		$alltags[]=$row['tag_name'];
 	}
 
-	$wordlist = array_slice($wordlist, 0, 10);	// limit to 10 different tags
-
 	$taglist=array();
 	foreach ($wordlist as $w) {
-		$r=wmatch($w, $alltags, $dlimit, $closest);
+		if (preg_match('/(^.+)#(\d)+(\*)?$/', $w, $r)) {
+			$r=wmatch($r[1], $alltags, $r[2], !isset($r[3]));
+		}
+		else {
+			$r=wmatch($w, $alltags, $dlimit, $closest);
+		}
 		if ($r) {
 			$taglist=array_merge($taglist, $r);
 		}

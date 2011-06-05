@@ -11,11 +11,11 @@ with a content manager. It's aimed at programmers who want full
 control on the software they use with maximum adaptability and
 reusability. It's simple to understand, easy to extend, open to other
 components in PHP, Javascript or Flash. It's intended to become your
-own very quickly while still keeping all the benefits of using an
-open source software.
+own very quickly while keeping all the benefits of a software
+program developed and shared by an open source community.
 
 iZend is built with a straightforward MVC architecture specially 
-designed for organizing publications in several languages and
+designed for organizing publications in several languages and for
 different media. It includes a content editor, a search engine and a
 set of presentation models. It can manage a community of users with
 specific privileges.

@@ -95,7 +95,7 @@ function search($lang, $arglist=false) {
 		$searchbox=false;
 		if (!$thread_nosearch) {
 			$search_input = true;
-			$search_text = false;
+			$search_text = $searchtext;
 			$search_url = url('search', $lang) . '/'. $cloud_name;
 			$search_cloud = false;
 			$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));

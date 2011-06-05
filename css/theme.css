@@ -90,7 +90,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 #logo {width:400px;float:left;}
 #logo h1 {padding:0;margin:0;}
-#logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+#logo h1 a {float:left;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;}
 #bannermenu #mail {width:24px;height:24px;float:right;margin-left:6px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
@@ -145,8 +145,8 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
 #search {width:24px;height:24px;background:transparent url(../images/theme/icons/find.png) no-repeat;margin-left:3px;vertical-align:middle;border:none;text-indent:-1000em;cursor:pointer;}
-#searchtext {float:left;width:200px;padding:2px;border:2px solid #aec14e;margin-right:3px;}
-#searchinput {float:right;margin-bottom:1em;clear:both;}
+#searchtext {float:left;width:200px;padding:2px;border:2px solid #aec14e;margin-right:2px;}
+#searchinput {margin-bottom:1em;}
 
 #storysummary {margin-top:2em;}
 #storysummary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;}
