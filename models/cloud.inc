@@ -84,7 +84,7 @@ function cloud_list_tags($lang, $cloud_id) {
 	$tabtagindex=db_prefix_table('tag_index');
 	$tabthreadnode=db_prefix_table('thread_node');
 
-	$sql = "SELECT t.tag_id, ti.node_id, t.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti JOIN $tabthreadnode tn ON tn.thread_id=$cloud_id AND tn.node_id=ti.node_id JOIN $tabtag t ON t.tag_id=ti.tag_id AND t.locale=$sqllang GROUP BY ti.tag_id ORDER BY tag_count DESC, tag_name";
+	$sql = "SELECT t.tag_id, ti.node_id, t.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti JOIN $tabthreadnode tn ON tn.thread_id=$cloud_id AND tn.node_id=ti.node_id JOIN $tabtag t ON t.tag_id=ti.tag_id AND t.locale=$sqllang GROUP BY ti.tag_id ORDER BY tag_count DESC, tag_name COLLATE utf8_general_ci";
 
 	$r = db_query($sql);
 
@@ -168,7 +168,7 @@ function cloud_list_node_tags($lang, $node_id) {
 	$tabtag=db_prefix_table('tag');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$sql = "SELECT t.tag_id, t.name AS tag_name FROM $tabtagindex ti JOIN $tabtag t ON t.tag_id=ti.tag_id AND t.locale=$sqllang WHERE ti.node_id=$node_id ORDER BY tag_name";
+	$sql = "SELECT t.tag_id, t.name AS tag_name FROM $tabtagindex ti JOIN $tabtag t ON t.tag_id=ti.tag_id AND t.locale=$sqllang WHERE ti.node_id=$node_id ORDER BY tag_name COLLATE utf8_general_ci";
 
 	$r = db_query($sql);
 

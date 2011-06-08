@@ -623,7 +623,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}tag` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`tag_id`,`locale`),
   UNIQUE KEY `locale` (`locale`,`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
