@@ -3,26 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'geshi.php';
 
 function read_file($file, $startline=0, $endline=0) {
-	static $cached_lines;
-	static $cached_file;
-
-	$lines = false;
-
-	if ($file == $cached_file) {
-		$lines = $cached_lines;
-	}
-	else {
-		$lines = @file($file);
-		$cached_lines = $lines;
-		$cached_file = $file;
-	}
+	$lines = @file($file);
 
 	if ($lines === false) {
 		return false;
@@ -38,7 +26,6 @@ function read_file($file, $startline=0, $endline=0) {
 		else {
 			$lines = array_slice($lines, $offset);
 		}
-
 	}
 
 	$s=implode('', $lines);
