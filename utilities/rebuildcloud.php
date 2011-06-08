@@ -15,7 +15,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . ROOT_DIR . DIRECTORY_SEPA
 require_once 'dump.php';
 
 @include 'db.inc';
-$db_debug = true;
+$db_debug = false;
 
 $br = (php_sapi_name() == 'cli') ? '' : '</br>';
 

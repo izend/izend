@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function banner($lang, $components=false) {
 	$logo = view('logo', $lang, compact('home_page'));
 
 	$menu=$contact=$login=$logout=$account=$edit=$view=$validate=false;
-	$languages=$headline=false;
+	$languages=$headline=$searchbox=false;
 	$contact_page=$account_page=$nobody_page=$edit_page=$view_page=$validate_page=false;
 
 	$is_identified = user_is_identified();
@@ -59,6 +59,11 @@ function banner($lang, $components=false) {
 						$headline = view('headline', false, $param);
 					}
 					break;
+				case 'search':
+					if ($param) {
+						$search = view('searchinput', $lang, $param);
+					}
+					break;
 				case 'edit':
 					if ($param) {
 						if ($is_writer) {
@@ -91,7 +96,7 @@ function banner($lang, $components=false) {
 
 	$menu = view('bannermenu', $lang, compact('account', 'account_page', 'contact', 'contact_page', 'edit', 'edit_page', 'view', 'view_page', 'validate', 'validate_page', 'logout', 'nobody_page', 'login', 'user_page'));
 
-	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline'));
+	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search'));
 
 	return $output;
 }

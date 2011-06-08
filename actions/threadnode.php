@@ -35,6 +35,13 @@ function threadnode($lang, $thread, $node) {
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
+	$headline_text=$thread_title;
+	$headline_url=url('thread', $lang) . '/' . $thread_name;
+	$headline = compact('headline_text', 'headline_url');
+	$title = view('headline', false, $headline);
+
+	$sidebar = view('sidebar', false, compact('title'));
+
 	$prev_node_label=$prev_node_url=false;
 	$r=thread_node_prev($lang, $thread_id, $node_id, false);
 	if ($r) {
@@ -56,16 +63,13 @@ function threadnode($lang, $thread, $node) {
 	head('keywords', $node_cloud);
 	head('robots', 'noindex, nofollow');
 
-	$headline_text=$thread_title;
-	$headline_url=url('thread', $lang) . '/' . $thread_name;
-	$headline = compact('headline_text', 'headline_url');
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '/'. $node_id . '?' . 'clang=' . $lang : false;
 	$validate=url('thread', $lang) . '/'. $thread_name . '/'. $node_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
 	$content = view('threadnode', $lang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

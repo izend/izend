@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6, label, caption, #rate-it legend {font-family:"Helvetica 
 code {font-family:"Courier New", Courier, monospace;}
 pre code {font-size:10pt;}
 
-h1,h2,h3,h4,h5,h6 {font-weight:bold;}
+h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
 
 label, legend {font-size:80%;}
 

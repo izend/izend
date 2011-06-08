@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -16,6 +16,11 @@
 <div id="editor">
 <?php echo $banner; ?>
 <div id="bannerline"></div>
+<?php if (isset($sidebar) and !empty($sidebar)): ?>
+<div id="sidebar">
+<?php echo $sidebar; ?>
+</div>
+<?php endif; ?>
 <div id="content">
 <?php echo $content; ?>
 </div>

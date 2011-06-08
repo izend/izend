@@ -81,6 +81,24 @@ function story($lang, $arglist=false) {
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
+	$page_comment=false;
+	if (!($thread_nocomment or $node_nocomment)) {
+		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
+		$page_comment = build('nodecomment', $lang, $page_id, $page_url, ($thread_nomorecomment or $node_nomorecomment));
+	}
+
+	$search=false;
+	if (!$story_nosearch) {
+		$search_text='';
+		$search_url= url('search', $lang) . '/'. $story_name;
+		$search=view('searchinput', $lang, compact('search_url', 'search_text'));
+	}
+
+	$cloud=false;
+	if (!$story_nocloud) {
+		$cloud = build('cloud', $lang, $story_id, 50, true, true);
+	}
+
 	$summary=array();
 	$r = thread_get_contents($lang, $story_id);
 	if ($r) {
@@ -92,37 +110,23 @@ function story($lang, $arglist=false) {
 		}
 	}
 
-	$search_input=$search_url=false;
-	if (!$story_nosearch) {
-		$search_input=true;
-		$search_url= url('search', $lang) . '/'. $story_name;
-	}
+	$headline_text=$story_title;
+	$headline_url=false;
+	$headline=compact('headline_text', 'headline_url');
+	$title = view('headline', false, $headline);
 
-	$search_cloud=false;
-	if (!$story_nocloud) {
-		$search_cloud = build('cloud', $lang, $story_id, 60, true, true);
-	}
-
-	$page_comment=false;
-	if (!($thread_nocomment or $node_nocomment)) {
-		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_url, ($thread_nomorecomment or $node_nomorecomment));
-	}
+	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title', 'summary'));
 
 	head('title', $story_title);
 	head('description', empty($node_abstract) ? $story_abstract : $node_abstract);
 	head('keywords', $node_cloud);
 
-	$headline_text=$story_title;
-	$headline_url=false;
-	$headline = compact('headline_text', 'headline_url');
+	$search=!$story_nosearch ? compact('search_url', 'search_text') : false;
 	$edit=user_has_role('writer') ? url('storyedit', $_SESSION['user']['locale']) . '/'. $story_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('story', $lang) . '/' . $story_name . '/' . $page_name;
-	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
+	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$sidebar = view('storysidebar', $lang, compact('search_input', 'search_url', 'search_cloud', 'summary'));
-
-	$content = view('storycontent', $lang, compact('page_title', 'page_contents', 'page_comment', 'page_number'));
+	$content = view('storycontent', false, compact('page_title', 'page_contents', 'page_comment', 'page_number'));
 
 	$output = layout('standard', compact('banner', 'sidebar', 'content'));
 

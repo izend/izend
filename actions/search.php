@@ -19,9 +19,6 @@ function search($lang, $arglist=false) {
 		if (isset($arglist[0])) {
 			$cloud=$arglist[0];
 		}
-		if (isset($arglist[1])) {	/* supports previous URL format */
-			$tag=$arglist[1];
-		}
 	}
 
 	if (!$cloud) {
@@ -79,44 +76,41 @@ function search($lang, $arglist=false) {
 		$rsearch=cloud_search($lang, $cloud_id, $taglist);
 	}
 
+	$search=false;
+	if (!$thread_nosearch) {
+		$search_text=$searchtext;
+		$search_url=url('search', $lang) . '/'. $cloud_name;
+		$search=view('searchinput', $lang, compact('search_url', 'search_text'));
+	}
+
+	$cloud=false;
+	if (!$thread_nocloud and $rsearch) {
+		$cloud = build('cloud', $lang, $cloud_id,  60, true, true);
+	}
+
+	$headline_text=$cloud_title;
+	$headline_url=url($cloud_action, $lang) . '/'. $cloud_name;
+	$headline = compact('headline_text', 'headline_url');
+	$title = view('headline', false, $headline);
+
+	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
+
 	if ($rsearch) {
-		$search_input = !$thread_nosearch;
-		$search_text = $searchtext;
-		$search_url = url('search', $lang) . '/'. $cloud_name;
-		$search_cloud = $thread_nocloud ? false : build('cloud', $lang, $cloud_id, 60, true, true);
-		$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
-
 		$searchlist = build('searchlist', $lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $rsearch, $taglist);
-
-		$sidebar = $searchbox;
 		$content = view('search', $lang, compact('searchlist'));
 	}
 	else {
-		$searchbox=false;
-		if (!$thread_nosearch) {
-			$search_input = true;
-			$search_text = $searchtext;
-			$search_url = url('search', $lang) . '/'. $cloud_name;
-			$search_cloud = false;
-			$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
-		}
-
-		$cloud = build('cloud', $lang, $cloud_id, false, true, false);
-
-		$sidebar = $searchbox;
-		$content = $cloud;
+		$content = build('cloud', $lang, $cloud_id, false, true, false);
 	}
 
 	head('title', $cloud_title);
 	head('description', false);
 	head('keywords', false);
 
-	$headline_text=$cloud_title;
-	$headline_url=url($cloud_action, $lang) . '/'. $cloud_name;
-	$headline = compact('headline_text', 'headline_url');
-	$banner = build('banner', $lang, compact('headline'));
+	$search=!$thread_nosearch ? compact('search_url', 'search_text') : false;
+	$banner = build('banner', $lang, compact('headline', 'search'));
 
-	$output = layout('standard', compact('banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

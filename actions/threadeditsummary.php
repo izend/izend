@@ -315,11 +315,14 @@ function threadeditsummary($lang, $clang, $thread) {
 	$validate=url($thread_type, $clang) . '/'. $thread_id;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 
+	$title = view('headline', false, $headline);
+	$sidebar = view('sidebar', false, compact('title'));
+
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_title', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
 	$content = view('editing/threadeditsummary', $lang, compact('clang', 'thread_type', 'thread_name', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'errors'));
 
-	$output = layout('editing', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

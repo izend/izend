@@ -71,9 +71,12 @@ function threadeditnode($lang, $clang, $thread, $node) {
 		$next_node_url=url('threadedit', $lang) . '/'. $thread_id . '/'. $next_node_id . '?' . 'clang=' . $clang;
 	}
 
+	$title = view('headline', false, $headline);
+	$sidebar = view('sidebar', false, compact('title'));
+
 	$content = view('editing/threadeditnode', $lang, compact('node_editor', 'node_title', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
-	$output = layout('editing', compact('banner', 'content'));
+	$output = layout('editing', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

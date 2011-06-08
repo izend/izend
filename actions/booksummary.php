@@ -43,29 +43,33 @@ function booksummary($lang, $book) {
 		}
 	}
 
-	$searchbox=false;
-	if (!($book_nosearch and $book_nocloud)) {
-		$search_input=$search_cloud=false;
-		if (!$book_nosearch) {
-			$search_input = true;
-			$search_text = '';
-			$search_url = url('search', $lang) . '/'. $book_name;
-		}
-		if (!$book_nocloud) {
-			$search_cloud = build('cloud', $lang, $book_id, 60, true, true);
-		}
-		$searchbox = view('searchbox', $lang, compact('search_input', 'search_text', 'search_url', 'search_cloud'));
+	$search=false;
+	if (!$book_nosearch) {
+		$search_text='';
+		$search_url= url('search', $lang) . '/'. $book_name;
+		$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 	}
+
+	$cloud=false;
+	if (!$book_nocloud) {
+		$cloud = build('cloud', $lang, $book_id, 50, true, true);
+	}
+
+	$headline_text=	translate('bookall:title', $lang);
+	$headline_url=url('book', $lang);
+	$headline = compact('headline_text', 'headline_url');
+	$title = view('headline', false, $headline);
+
+	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
 
 	head('title', $book_title);
 	head('description', $book_abstract);
 	head('keywords', $book_cloud);
 
+	$search=!$book_nosearch ? compact('search_url', 'search_text') : false;
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '/'. $book_id . '?' . 'clang=' . $lang : false;
 	$validate=url('book', $lang) . '/'. $book_name;
-	$banner = build('banner', $lang, compact('edit', 'validate'));
-
-	$sidebar = $searchbox;
+	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
 	$content = view('booksummary', $lang, compact('book_title', 'book_abstract', 'book_contents'));
 

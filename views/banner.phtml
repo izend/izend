@@ -3,21 +3,26 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <div id="banner">
-<?php
-echo $logo;
-if (isset($menu)) {
-	echo $menu;
-}
-if (isset($languages)) {
-	echo $languages;
-}
-if (isset($headline)) {
-	echo $headline;
-}
-?>
+<?php echo $logo; ?>
+<?php if (isset($menu)): ?>
+<?php echo $menu; ?>
+<?php endif; ?>
+<?php if (isset($languages)): ?>
+<?php echo $languages; ?>
+<?php endif; ?>
+<?php if (false): ?>
+<?php if (isset($search)): ?>
+<?php echo $search; ?>
+<?php endif; ?>
+<?php endif; ?>
+<?php if (true): ?>
+<?php if (isset($headline)): ?>
+<?php echo $headline; ?>
+<?php endif; ?>
+<?php endif; ?>
 </div>

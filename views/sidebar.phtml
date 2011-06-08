@@ -1,0 +1,30 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if (true): ?>
+<?php if (isset($search) and !empty($search)): ?>
+<?php echo $search; ?>
+<?php endif; ?>
+<?php endif; ?>
+<?php if (false): ?>
+<?php if (isset($title) and !empty($title)): ?>
+<?php echo $title; ?>
+<?php endif; ?>
+<?php endif; ?>
+<?php if (isset($summary) and !empty($summary)): ?>
+<ol id="summary">
+<?php foreach ($summary as $p): ?>
+<?php list($title, $url)=$p; ?>
+<li><a href="<?php echo $url; ?>"><?php echo htmlspecialchars($title, ENT_NOQUOTES, 'UTF-8', false); ?></a></li>
+<?php endforeach; ?>
+</ol>
+<?php endif; ?>
+<?php if (isset($cloud) and !empty($cloud)): ?>
+<?php echo $cloud; ?>
+<?php endif; ?>

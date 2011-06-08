@@ -9,15 +9,15 @@
 
 require_once 'models/thread.inc';
 
-function threadlist($lang) {
-	$r = thread_list($lang, false);
+function threadlist($lang, $type=false) {
+	$r = thread_list($lang, $type);
 
 	if (!$r) {
 		return false;
 	}
 
 	$thread_list = array();
-	$url = url('thread', $lang);
+	$url = url($type ? $type : 'thread', $lang);
 	foreach ($r as $thread) {
 		extract($thread);	/* thread_id thread_name thread_title thread_abstract thread_number */
 		$thread_url = $url . '/' . $thread_name;

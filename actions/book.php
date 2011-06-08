@@ -20,7 +20,9 @@ function book($lang, $arglist=false) {
 	}
 
 	if (!$book) {
-		return run('error/notfound', $lang);
+		require_once 'actions/bookall.php';
+
+		return bookall($lang);
 	}
 
 	if (!$page) {

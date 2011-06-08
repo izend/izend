@@ -33,20 +33,24 @@ function threadsummary($lang, $thread) {
 		}
 	}
 
+	$headline_text=	translate('threadall:title', $lang);
+	$headline_url=url('thread', $lang);
+	$headline = compact('headline_text', 'headline_url');
+	$title = view('headline', false, $headline);
+
+	$sidebar = view('sidebar', false, compact('title'));
+
 	head('title', $thread_title);
 	head('description', $thread_abstract);
 	head('keywords', $thread_cloud);
 
-	$headline_text=	translate('threadall:title', $lang);
-	$headline_url=url('thread', $lang);
-	$headline = compact('headline_text', 'headline_url');
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $lang : false;
 	$validate=url('thread', $lang) . '/'. $thread_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
 	$content = view('threadsummary', $lang, compact('thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

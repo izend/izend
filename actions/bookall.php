@@ -15,7 +15,7 @@ function bookall($lang) {
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '?' . 'clang=' . $lang : false;
 	$banner = build('banner', $lang, compact('edit'));
 
-	$booklist = build('booklist', $lang);
+	$booklist = build('threadlist', $lang, 'book');
 
 	$content = view('bookall', $lang, compact('booklist'));
 
