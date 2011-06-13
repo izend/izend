@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -18,7 +18,7 @@ foreach ($linklist as $link) {
 	extract($link);
 	$span=$fontsizes[rand(0, count($fontsizes)-1)];
 ?>
-<li><a href="<?php echo $url; ?>"><span class="<?php echo $span; ?>"><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?></span></a></li>
+<li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>"><span class="<?php echo $span; ?>"><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?></span></a></li>
 <?php
 }
 ?>

@@ -3,25 +3,25 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <div id="searchlinks">
 <?php if ($linklist): ?>
-<ul>
-<?php
-foreach ($linklist as $link) {
-	extract($link);	/*  */
-?>
+<?php foreach ($linklist as $id => $data): ?>
+<?php extract($data); /* thread_title thread_url content */ ?>
+<h3><a href="<?php echo $thread_url; ?>"><?php echo $thread_title; ?></a></h3>
+<ol>
+<?php foreach ($content as $link): ?>
+<?php extract($link); /* link_title link_url link_description link_cloud */ ?>
 <li>
 <a href="<?php echo $link_url; ?>"><span><?php echo $link_title; ?></span></a>
-<p><?php echo $link_description; ?></p>
+<p><?php echo htmlspecialchars($link_description, ENT_COMPAT, 'UTF-8'); ?></p>
 <p><?php echo $link_cloud; ?></p>
 </li>
-<?php
-}
-?>
-</ul>
+<?php endforeach; ?>
+</ol>
+<?php endforeach; ?>
 <?php endif; ?>
 </div>

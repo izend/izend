@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -24,6 +24,7 @@ $strings = array(
 		'http_unauthorized:title'			=> 'Non autorisé',
 		'install:title'			=> 'Installation',
 		'home:title'			=> 'Accueil',
+		'search:title'			=> 'Recherche',
 		'user:title'			=> 'Identification',
 		'contact:title'			=> 'Contact',
 		'account:title'			=> 'Compte',
@@ -49,6 +50,7 @@ $strings = array(
 		'http_unauthorized:title'			=> 'Unauthorized',
 		'install:title'			=> 'Installation',
 		'home:title'			=> 'Home',
+		'search:title'			=> 'Search',
 		'contact:title'			=> 'Contact',
 		'user:title'			=> 'Identification',
 		'account:title'			=> 'Account',

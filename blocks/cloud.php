@@ -3,44 +3,43 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'models/cloud.inc';
 
-require_once 'strflat.php';
+function cloud($lang, $cloud, $size=false, $byname=false, $bycount=false, $index=true) {
+	$cloud_id=$cloud_name=false;
+	if ($cloud) {
+		$cloud_id = cloud_id($cloud);
+		if (!$cloud_id) {
+			return false;
+		}
 
-function cloud($lang, $cloud, $size=false, $sort=false, $index=true) {
-	$cloud_id = cloud_id($cloud);
-	if (!$cloud_id) {
-		return false;
+		$r = cloud_get($lang, $cloud_id);
+		if (!$r) {
+			return false;
+		}
+		extract($r); /* cloud_name */
 	}
-
-	$r = cloud_get($lang, $cloud_id);
-	if (!$r) {
-		return false;
-	}
-	extract($r); /* cloud_name cloud_title */
 
 	$linklist=false;
-	$r = cloud_list_tags($lang, $cloud_id, $size);
+
+	$r = cloud_list_tags($lang, $cloud_id, $byname, $bycount);
 
 	if ($r) {
 		if ($size > 0 && $size < count($r)) {
-			shuffle($r);
-			$r = array_slice($r, 0, $size);
-		}
-		if ($sort) {
-			usort($r, create_function('$a1, $a2', 'return strnatcasecmp(strflat($a1[\'tag_name\']), strflat($a2[\'tag_name\']));'));
+			$r = array_intersect_key($r, array_flip(array_rand($r, $size)));
 		}
 		$linklist = array();
-		$cloud_url = url('search', $lang) . '/'. $cloud_name;
+		$cloud_url = $cloud_name ? url('search', $lang) . '/'. $cloud_name : url('search', $lang);
 		foreach ($r as $tag) {
 			extract($tag);	/* tag_id tag_name tag_count */
 			$name=$tag_name;
+			$count=$tag_count;
 			$url=$cloud_url . '?' . 'q=' . urlencode($tag_name);
-			$linklist[] = compact('name', 'url');
+			$linklist[] = compact('name', 'count', 'url');
 		}
 		if ($index) {
 			$index=$cloud_url;

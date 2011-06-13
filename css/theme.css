@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
  
@@ -17,7 +17,7 @@ h4 {color:#aec14e;}
 h5 {color:#df6f6f;}
 h6 {color:#666666;}
 
-h3 {line-height:24px;background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;margin:0;}
+h3 {line-height:24px;background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;margin:0 0 0.5em 0;}
 
 label, legend {color:#666666;}
 
@@ -45,10 +45,6 @@ textarea {resize:none;}
 .tag {color:#df6f6f;font-size:larger;}
 
 .menu, .menubar, .sidebar {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-
-.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;}
-.summary li {list-style:none;}
-.summary li a:link, .summary li a:visited {text-decoration:none;}
 
 .parameters dt {font-family:monospace;}
 
@@ -91,7 +87,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 #logo {width:400px;float:left;}
 #logo h1 {padding:0;margin:0;}
-#logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+#logo h1 a {float:left;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;}
 #bannermenu #mail {width:24px;height:24px;float:right;margin-left:6px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
@@ -129,7 +125,9 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .bbcodebar {margin-bottom:5px;}
 .bbcodebar span {font-size:x-small;margin-left:10px;}
 
-#searchlinks ul {margin-left:0;padding:0;}
+#searchlinks h3 a:link {color:#aec14e;}
+#searchlinks h3 a:hover {color:#ec902d;}
+#searchlinks ol {margin-left:0;padding:0;}
 #searchlinks li {list-style:none;margin-bottom:1em;}
 #searchlinks a {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:smaller;font-style:italic;}
@@ -138,6 +136,10 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;}
 #summary li {list-style:none;}
 #summary li a:link, #summary li a:visited {text-decoration:none;}
+
+.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;}
+.summary li {list-style:none;}
+.summary li a:link, .summary li a:visited {text-decoration:none;}
 
 #homemenu {font-size:80%;}
 #homemenu > div {width:20%;margin:1em 0 1em 0;float:left;}

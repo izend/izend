@@ -3,26 +3,32 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
-function searchlist($lang, $searchtext, $cloud_id, $cloud_name, $cloud_action, $rsearch, $taglist) {
+function searchlist($lang, $rsearch, $taglist) {
 	$linklist=array();
-	$cloud_url = url($cloud_action, $lang) . '/'. $cloud_name;
 	foreach ($rsearch as $r) {
-		extract($r);	/* page_id, name, title, abstract, cloud, pertinence */
-		$link_title=$title;
-		$link_description=strip_tags($abstract);
+		extract($r);	/* thread_id, thread_name, thread_title, thread_type, node_name, node_title, node_abstract, node_cloud, pertinence */
+		$link_title=$node_title;
+		$link_description=$node_abstract;
 		$link_cloud=array();
-		preg_match_all('/(\S+)/', $cloud, $r);
+		preg_match_all('/(\S+)/', $node_cloud, $r);
 		foreach ($r[0] as $tag) {
-			$w=htmlentities($tag, ENT_COMPAT, 'UTF-8');
+			$w=htmlspecialchars($tag, ENT_COMPAT, 'UTF-8');
 			$link_cloud[]=in_array($tag, $taglist) ? "<span class=\"tag\">$w</span>" : $w;
 		}
 		$link_cloud=implode(' ', $link_cloud);
-		$link_url=$cloud_url . '/' . $name;
-		$linklist[]=compact('link_title', 'link_url', 'link_description', 'link_cloud');
+		$thread_url=url($thread_type, $lang) . '/'. $thread_name;
+		$link_url=$thread_url . '/' . $node_name;
+		if (!isset($linklist[$thread_id])) {
+			$content=array(compact('link_title', 'link_url', 'link_description', 'link_cloud'));
+			$linklist[$thread_id]=compact('thread_title', 'thread_url', 'content');
+		}
+		else {
+			$linklist[$thread_id]['content'][]=compact('link_title', 'link_url', 'link_description', 'link_cloud');
+		}
 	}
 
 	$output = view('searchlist', false, compact('linklist'));
