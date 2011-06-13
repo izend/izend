@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -20,11 +20,9 @@ function wmatch($word, $wl, $dlimit=0, $closest=true) {
 	    	continue;
 	    }
 
-		if ($d == 0 && $closest) {
-			return array($w);
-		}
+	    /* DON'T return immediately if $d is 0 to be case and accent insensitive */
 
-		if ($d <= $dlimit) {
+	    if ($d <= $dlimit) {
 			if ($closest && $d < $dlimit) {
 				$ret=array($w);
 				$dlimit=$d;
