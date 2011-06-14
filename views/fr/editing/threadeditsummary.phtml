@@ -20,18 +20,18 @@
 <?php endif; ?>
 </p>
 <p>
-<input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo $thread_title; ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
 <label>URL :</label>
 <input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
 <p><label>Extrait :</label></p>
 <p>
-<textarea id="thread_abstract" name="thread_abstract" cols="80" rows="5"><?php echo $thread_abstract; ?></textarea>
+<textarea id="thread_abstract" name="thread_abstract" cols="80" rows="5"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p><label>Nuage :</label></p>
 <p>
-<textarea name="thread_cloud" cols="80" rows="5"><?php echo $thread_cloud; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<textarea name="thread_cloud" cols="80" rows="5"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
 </p>
 <p>
 <label>Type :</label>
@@ -102,9 +102,9 @@ $(document).ready(function() {
 <p>
 <input id="node_create" name="node_create" type="submit" value="Ajouter" />
 le contenu
-<input id="new_node_title" name="new_node_title" type="text" size="50" maxlength="100" value="<?php echo $new_node_title; ?>" title="Titre" onkeypress="return focusonenter(event, 'new_node_number')"/>
+<input id="new_node_title" name="new_node_title" type="text" size="50" maxlength="100" value="<?php echo htmlspecialchars($new_node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_node_number')"/>
 #
-<input id="new_node_number" name="new_node_number" type="text" size="3" maxlength="3" value="<?php echo $new_node_number; ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_create')"/>
+<input id="new_node_number" name="new_node_number" type="text" size="3" maxlength="3" value="<?php echo htmlspecialchars($new_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_create')"/>
 </p>
 <?php if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number): ?>
 <?php $scroll_to='#thread_edit'; ?>
@@ -129,6 +129,7 @@ $i=1;
 $maxlen=strlen(count($thread_contents))+1;
 foreach ($thread_contents as $c) {
 	extract($c);	/* pos, node_id, node_title, node_number, node_url */
+	$node_title = htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8');
 	$node_url .= '?' . 'clang=' . $clang;
 	echo <<<_MARK_
 <tr><td><input name="p[$i]" type="text" size="$maxlen" maxlength="3" value="$pos" /></td><td class="aright"><a href="$node_url">$node_number</a></td><td><a href="$node_url">$node_title</a></td></tr>\n
@@ -144,7 +145,7 @@ _MARK_;
 la liste ou
 <input id="node_delete" name="node_delete" type="submit" value="Supprimer" />
 le contenu #
-<input id="old_node_number" name="old_node_number" type="text" size="3" maxlength="3" value="<?php echo $old_node_number; ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_delete')"/>
+<input id="old_node_number" name="old_node_number" type="text" size="3" maxlength="3" value="<?php echo htmlspecialchars($old_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_delete')"/>
 </p>
 <?php if ($missing_old_node_number or $bad_old_node_number): ?>
 <?php $scroll_to='#node_delete'; ?>

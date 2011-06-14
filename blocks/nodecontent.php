@@ -46,7 +46,7 @@ function nodecontent($lang, $node_id) {
 				case 'download':
 					$file=$c['content_download'];
 					if ($file) {
-						$download_url = url('download', $lang) . '/' . $node_id . '/' . $file;
+						$download_url = url('download', $lang) . '/' . $node_id . '/' . urlencode($file);
 						$contents[] = compact('type', 'file', 'download_url');
 					}
 					break;

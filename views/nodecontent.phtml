@@ -21,7 +21,7 @@ foreach ($contents as $c) {
 			}
 			break;
 		case 'download':
-			$file = $c['file'];
+			$file = htmlspecialchars($c['file'], ENT_COMPAT, 'UTF-8');
 			$download_url = $c['download_url'];
 			echo '<div class="download">', PHP_EOL, '<p class="link"><a href="', $download_url, '" rel="nofollow">', $file, '</a></p>', PHP_EOL,'</div>', PHP_EOL;
 			break;

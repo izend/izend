@@ -39,7 +39,9 @@ function booksummary($lang, $book) {
 		$book_url = url('book', $lang) . '/'. $book_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
-			$book_contents[] = array($node_name, $node_title, $book_url  . '/' . $node_name);
+			$page_title = $node_title;
+			$page_url = $book_url  . '/' . $node_name;
+			$book_contents[] = compact('page_title', 'page_url');
 		}
 	}
 

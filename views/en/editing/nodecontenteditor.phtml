@@ -24,12 +24,12 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <option value="media" <?php echo $selected == 'media' ? 'selected="selected"' : ''; ?>>Media</option>
 </select>
 #
-<input name="content_new_number" type="text" size="2" maxlength="2" value="<?php echo $new_content_number; ?>" title="Number"/>
+<input name="content_new_number" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php if ($node_contents): ?>
 or
 <input name="content_delete" type="submit" value="Delete" />
 #
-<input name="content_old_number" type="text" size="2" maxlength="2" value="<?php echo $old_content_number; ?>" title="Number"/>
+<input name="content_old_number" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php endif; ?>
 </p>
 <?php if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number or $missing_old_content_number or $bad_old_content_number or $missing_content_number or $bad_content_number): ?>
@@ -76,7 +76,7 @@ foreach ($node_contents as $c) {
 <p class="<?php echo ($i % 2) ? 'odd' : 'even'; ?>">
 <?php echo $i; ?>.
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
-<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="2" value="<?php echo $content_pos; ?>"/>
+<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?>"/>
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
 <label>Text:</label>
@@ -116,40 +116,40 @@ foreach ($node_contents as $c) {
 <?php break; ?>
 <?php case 'file': ?>
 <p>
-<input name="content_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_file; ?>" />
-<input name="content_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_start; ?>" />
-<input name="content_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_end ?>" />
-<input name="content_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo $content_format; ?>" />
+<input name="content_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_file, ENT_COMPAT, 'UTF-8'); ?>" title="File" />
+<input name="content_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_start, ENT_COMPAT, 'UTF-8'); ?>" title="Start" />
+<input name="content_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_end, ENT_COMPAT, 'UTF-8'); ?>" title="End" />
+<input name="content_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" />
 <input name="content_lineno[<?php echo $i; ?>]" type="checkbox" <?php if ($content_lineno) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="Number" title="Number" />
 </p>
 <?php break; ?>
 <?php case 'download': ?>
 <p>
-<input name="content_download[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo $content_download; ?>" title="Name" />
-<input name="content_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_path; ?>" title="File" />
+<input name="content_download[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo htmlspecialchars($content_download, ENT_COMPAT, 'UTF-8'); ?>" title="Name" />
+<input name="content_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_path, ENT_COMPAT, 'UTF-8'); ?>" title="File" />
 </p>
 <?php break; ?>
 <?php case 'infile': ?>
 <p>
-<input name="content_infile[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_infile; ?>" title="File" />
+<input name="content_infile[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_infile, ENT_COMPAT, 'UTF-8'); ?>" title="File" />
 </p>
 <?php break; ?>
 <?php case 'media': ?>
 <p>
-<input name="content_media_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_file; ?>" title="File" />
-<input name="content_media_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_width; ?>" title="Width" />
+<input name="content_media_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_media_file, ENT_COMPAT, 'UTF-8'); ?>" title="File" />
+<input name="content_media_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_media_width, ENT_COMPAT, 'UTF-8'); ?>" title="Width" />
 x
-<input name="content_media_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_height ?>" title="Height" />
+<input name="content_media_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_media_height, ENT_COMPAT, 'UTF-8'); ?>" title="Height" />
 <img src="<?php echo $base_path; ?>/images/theme/edit/time.png" alt="Duration: " />
-<input name="content_media_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo $content_media_duration; ?>" title="Duration" />
+<input name="content_media_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_media_duration, ENT_COMPAT, 'UTF-8'); ?>" title="Duration" />
 <input name="content_media_autostart[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_autostart) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/play.png" alt="Auto: " title="Auto" /><input name="content_media_repeat[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_repeat) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/repeat.png" alt="Loop: " title="Loop" />
 </p>
 <p>
-<input name="content_media_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_image; ?>" title="Picture" />
+<input name="content_media_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_media_image, ENT_COMPAT, 'UTF-8'); ?>" title="Picture" />
 <input name="content_media_icons[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_icons) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/imgplay.png" alt="Icons: " title="Icons" />
 </p>
 <p>
-<input name="content_media_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo $content_media_skin; ?>" title="Skin" />
+<input name="content_media_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_media_skin, ENT_COMPAT, 'UTF-8'); ?>" title="Skin" />
 </p>
 <?php break; ?>
 <?php endswitch; ?>

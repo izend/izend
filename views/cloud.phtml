@@ -15,7 +15,7 @@
 <?php
 $fontsizes = array('x-small', 'small', 'medium', 'large', 'x-large');
 foreach ($linklist as $link) {
-	extract($link);
+	extract($link);	/* name, count, url */
 	$span=$fontsizes[rand(0, count($fontsizes)-1)];
 ?>
 <li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>"><span class="<?php echo $span; ?>"><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?></span></a></li>
