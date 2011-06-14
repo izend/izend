@@ -95,7 +95,9 @@ function banner($lang, $components=false) {
 		}
 	}
 
-	$menu = view('bannermenu', $lang, compact('account', 'account_page', 'contact', 'contact_page', 'edit', 'edit_page', 'view', 'view_page', 'validate', 'validate_page', 'logout', 'nobody_page', 'login', 'user_page'));
+	if ($contact or $login or $logout or $account or $edit or $view or $validate) {
+		$menu = view('bannermenu', $lang, compact('account', 'account_page', 'contact', 'contact_page', 'edit', 'edit_page', 'view', 'view_page', 'validate', 'validate_page', 'logout', 'nobody_page', 'login', 'user_page'));
+	}
 
 	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search'));
 
