@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -28,6 +28,8 @@ $aliases = array(
 		'download'		=> 'download',
 		'page'			=> 'page',
 		'editpage'		=> 'edit',
+		'folder'		=> 'folder',
+		'folderedit'	=> 'edit/folder',
 		'story'			=> 'article',
 		'storyedit'		=> 'edit/article',
 		'book'			=> 'manual',
@@ -51,6 +53,8 @@ $aliases = array(
 		'download'		=> 'telechargement',
 		'page'			=> 'page',
 		'editpage'		=> 'edition',
+		'folder'		=> 'dossier',
+		'folderedit'	=> 'edit/dossier',
 		'story'			=> 'article',
 		'storyedit'		=> 'edition/article',
 		'book'			=> 'manuel',

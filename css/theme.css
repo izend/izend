@@ -87,7 +87,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 #logo {width:400px;float:left;}
 #logo h1 {padding:0;margin:0;}
-#logo h1 a {float:left;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+#logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;}
 #bannermenu #mail {width:24px;height:24px;float:right;margin-left:6px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}

@@ -63,8 +63,8 @@ function threadnode($lang, $thread, $node) {
 	head('keywords', $node_cloud);
 	head('robots', 'noindex, nofollow');
 
-	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '/'. $node_id . '?' . 'clang=' . $lang : false;
-	$validate=url('thread', $lang) . '/'. $thread_name . '/'. $node_name;
+	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/' . $thread_id . '/' . $node_id . '?' . 'clang=' . $lang : false;
+	$validate=url('thread', $lang) . '/'. $thread_id . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
 	$content = view('threadnode', $lang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 <?php
@@ -52,7 +52,7 @@ $supported_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $
 
 global $supported_threads;
 
-$supported_threads=array('thread', 'story', 'book');	// 'thread', 'story', 'book'
+$supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
 
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
@@ -66,8 +66,9 @@ global $root_node;
 
 $root_node = <?php echo $root_node ? $root_node : 'false'; ?>;	// home page node, e.g. 1 or false
 
-global $home_action, $default_action;
+global $home_action, $default_action, $default_folder;
 
 $home_action = <?php echo "'$home_action'"; ?>;		// 'home' or 'homepage'
 $default_action = <?php echo $default_action ? "'$default_action'" : 'false'; ?>;	// 'page' or 'anypage' or false
+$default_folder = 1;
 

@@ -13,7 +13,7 @@ global $sitename, $webmaster, $mailer, $blackmaillist, $blacknamelist;
 
 $sitename = 'izend.org';
 $webmaster = 'izend@izend.org';
-$mailer = 'iZend';
+$mailer = 'izend';
 $blackmaillist = array('izend@izend.org', 'webmaster@izend.org', 'keymaster@izend.org', 'izend@izend.org', 'webmaster@izend.org', 'keymaster@izend.org');
 $blacknamelist = array('izend', 'izend', 'webmaster', 'keymaster');
 
@@ -44,7 +44,7 @@ $supported_languages=array('en', 'fr');	// 'en', 'fr'
 
 global $supported_threads;
 
-$supported_threads=array('thread', 'story', 'book');	// 'thread', 'story', 'book'
+$supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
 
 global $search_distance, $search_closest;
 
@@ -63,8 +63,9 @@ global $root_node;
 
 $root_node = false;	// home page node, e.g. 1 or false
 
-global $home_action, $default_action;
+global $home_action, $default_action, $default_folder;
 
 $home_action = 'install';		// 'home' or 'install'
 $default_action = 'install';	// 'page' or 'install' or false
+$default_folder = 1;
 

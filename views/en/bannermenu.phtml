@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -21,13 +21,13 @@
 <?php if (isset($account) and $account): ?>
 <li><a id="account" href="<?php echo $account_page; ?>" rel="nofollow" title="Your account"><span>Account</span></a></li>
 <?php endif; ?>
-<?php if (isset($validate) and $validate): ?>
-<li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
-<?php endif; ?>
 <?php if (isset($edit) and $edit): ?>
 <li><a id="edit" href="<?php echo $edit_page; ?>" title="Edit" rel="nofollow"><span>Edit</span></a></li>
 <?php elseif (isset($view) and $view): ?>
 <li><a id="view" href="<?php echo $view_page; ?>" title="View" rel="nofollow"><span>View</span></a></li>
+<?php endif; ?>
+<?php if (isset($validate) and $validate): ?>
+<li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
 <?php endif; ?>
 </ul>
 </div>

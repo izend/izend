@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -42,6 +42,15 @@ global $supported_languages;
 
 $supported_languages=array('en', 'fr');	// 'en', 'fr'
 
+global $supported_threads;
+
+$supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
+
+global $search_distance, $search_closest;
+
+$search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
+$search_closest=true;	// true - best matches, false - all matches
+
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
 
@@ -54,8 +63,9 @@ global $root_node;
 
 $root_node = false;	// home page node, e.g. 1 or false
 
-global $home_action, $default_action;
+global $home_action, $default_action, $default_folder;
 
 $home_action = 'install';		// 'home' or 'install'
 $default_action = 'install';	// 'page' or 'install' or false
+$default_folder = 1;
 

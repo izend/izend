@@ -42,7 +42,8 @@ function node($lang, $arglist=false) {
 	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('editnode', $_SESSION['user']['locale']) . '/'. $node_id . '?' . 'clang=' . $lang : false;
-	$banner = build('banner', $lang, compact('edit'));
+	$validate=url('node', $lang) . '/' . $node_id;
+	$banner = build('banner', $lang, compact('edit', 'validate'));
 
 	$node_url = 0 . '/'. $node_id;
 	$node_contents = build('nodecontent', $lang, $node_id);

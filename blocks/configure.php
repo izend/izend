@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -91,7 +91,7 @@ function configure($lang) {
 			$content_languages=array($lang);
 			$default_language=$lang;
 			$db_flag=true;
-			$db_reuse=true;
+			$db_reuse=false;
 			$db_name='izend';
 			$db_user='izend';
 			$db_password=newpassword(8);
@@ -306,7 +306,7 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'download', 'page', 'editpage', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
+				$features=array('captcha', 'avatar', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
@@ -567,7 +567,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL DEFAULT '1',
-  `thread_type` enum('thread','story','book') NOT NULL DEFAULT 'thread',
+  `thread_type` enum('thread','folder','story','book') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `nosearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -783,7 +783,7 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`) VALUES
-('1', '1', 'thread', NOW(), NOW(), '0', '0', '0', '0');
+('1', '1', 'folder', NOW(), NOW(), '0', '0', '0', '0');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -791,8 +791,8 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread_locale` (`thread_id`, `locale`, `name`, `title`) VALUES
-('1', 'fr', 'dossier', 'Dossier'),
-('1', 'en', 'folder', 'Folder');
+('1', 'fr', 'contenu', 'Contenu'),
+('1', 'en', 'content', 'Content');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

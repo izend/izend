@@ -1,0 +1,16 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3><?php echo $folder_title; ?></h3>
+<ol>
+<?php foreach ($folder_contents as $c):?>
+<?php extract($c);	/* page_title page_url */ ?>
+<li><a href="<?php echo $page_url; ?>"><?php echo $page_title; ?></a></li>
+<?php endforeach; ?>
+</ol>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -16,8 +16,9 @@ function banner($lang, $components=false) {
 	$home_page=url($home_action, $lang);
 	$logo = view('logo', $lang, compact('home_page'));
 
-	$menu=$contact=$login=$logout=$account=$edit=$view=$validate=false;
-	$languages=$headline=$searchbox=false;
+	$menu=$languages=$headline=$search=false;
+
+	$contact=$login=$logout=$account=$edit=$view=$validate=false;
 	$contact_page=$account_page=$nobody_page=$edit_page=$view_page=$validate_page=false;
 
 	$is_identified = user_is_identified();

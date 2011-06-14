@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
  
@@ -32,7 +32,4 @@ img {page-break-inside:avoid; page-break-after:avoid; float:none}
 
 .vignette, .readmore, .link, .menu, .menubar, .sidebar {display:none;}
 
-#footer, #searchbox, #newcomment {display:none;}
-
-#bookpagenumber {font-size:small;margin-top:1em;text-align:center;}
-
+#banner, #footer, #sidebar, #newcomment {display:none;}
