@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -109,7 +109,8 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/shell.png" alt="&lt;pre&gt;&lt;code&gt;" title="pre code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;pre>&lt;code&gt;','&lt;/code>&lt;/pre&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="&lt;blockquote&gt;" title="blockquote" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;blockquote&gt;','&lt;/blockquote&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;s&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22', '\x22 alt=\x22\x22 /&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22', '\x22 alt=\x22\x22 /&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_<?php echo $i; ?>')"/>
 <span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
 <textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
@@ -142,11 +143,11 @@ x
 <input name="content_media_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_media_height, ENT_COMPAT, 'UTF-8'); ?>" title="Hauteur" />
 <img src="<?php echo $base_path; ?>/images/theme/edit/time.png" alt="Durée : " />
 <input name="content_media_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_media_duration, ENT_COMPAT, 'UTF-8'); ?>" title="Durée" />
-<input name="content_media_autostart[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_autostart) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/play.png" alt="Auto : " title="Auto" /><input name="content_media_repeat[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_repeat) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/repeat.png" alt="Boucle : " title="Boucle" />
+<input name="content_media_autostart[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_autostart) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/play.png" alt="auto" title="Auto" /><input name="content_media_repeat[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_repeat) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/repeat.png" alt="boucle" title="Boucle" />
 </p>
 <p>
 <input name="content_media_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_media_image, ENT_COMPAT, 'UTF-8'); ?>" title="Image" />
-<input name="content_media_icons[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_icons) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/imgplay.png" alt="Icônes : " title="Icônes" />
+<input name="content_media_icons[<?php echo $i; ?>]" type="checkbox" <?php if ($content_media_icons) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/imgplay.png" alt="icônes" title="Contrôles" />
 </p>
 <p>
 <input name="content_media_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_media_skin, ENT_COMPAT, 'UTF-8'); ?>" title="Habillage" />

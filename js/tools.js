@@ -1,6 +1,6 @@
 function returnonenter(e) {
 	var keycode;
-	
+
 	if (window.event)
 		keycode = window.event.keyCode;
 	else if (e)
@@ -13,7 +13,7 @@ function returnonenter(e) {
 
 function submitonenter(e, id) {
 	var keycode;
-	
+
 	if (window.event)
 		keycode = window.event.keyCode;
 	else if (e)
@@ -84,9 +84,8 @@ function addtag(id, open, close) {
 			e.focus();
 			sel = document.selection.createRange();
 			sel.text = open + sel.text + close;
-			e.focus();
 		}
-	
+
 		// Mozilla
 		else if (e.selectionStart || e.selectionStart == '0') {
 			var startPos = e.selectionStart;
@@ -95,13 +94,44 @@ function addtag(id, open, close) {
 			e.value = e.value.substring(0, startPos) + open + e.value.substring(startPos, endPos) + close + e.value.substring(endPos, e.value.length);
 			e.selectionStart = e.selectionEnd = endPos + open.length + close.length;
 			e.scrollTop = scrollTop;
-			e.focus();
 		}
-	
+
 		else {
-			e.value += open + close;
-			e.focus();
+			e.value = open + e.value + close;
 		}
+
+		e.focus();
 	}
+}
+
+function entquote(id) {
+	var e=document.getElementById(id);
+	if (e) {
+		// IE
+		if (document.selection && document.selection.createRange) {
+			e.focus();
+			sel = document.selection.createRange();
+			sel.text = entreplace(sel.text);
+		}
+
+		// Mozilla
+		else if (e.selectionStart || e.selectionStart == '0') {
+			var startPos = e.selectionStart;
+			var endPos = e.selectionEnd;
+			var scrollTop = e.scrollTop;
+			e.value = e.value.substring(0, startPos) + entreplace(e.value.substring(startPos, endPos)) + e.value.substring(endPos, e.value.length);
+			e.scrollTop = scrollTop;
+		}
+
+		else {
+			e.value = entreplace(e.value);
+		}
+
+		e.focus();
+	}
+}
+
+function entreplace(s) {
+	return s.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/"/gm, '&quot;');
 }
 
