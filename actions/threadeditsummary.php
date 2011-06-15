@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -69,7 +69,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				$thread_type=readarg($_POST['thread_type']);
 			}
 			if (isset($_POST['thread_title'])) {
-				$thread_title=strip_tags(readarg($_POST['thread_title']));
+				$thread_title=readarg($_POST['thread_title']);
 			}
 			if (isset($_POST['thread_name'])) {
 				$thread_name=strtofname(readarg($_POST['thread_name']));
@@ -78,10 +78,10 @@ function threadeditsummary($lang, $clang, $thread) {
 				$thread_name = strtofname($thread_title);
 			}
 			if (isset($_POST['thread_abstract'])) {
-				$thread_abstract=strip_tags(readarg($_POST['thread_abstract']), '<b><i>');
+				$thread_abstract=readarg($_POST['thread_abstract']);
 			}
 			if (isset($_POST['thread_cloud'])) {
-				$thread_cloud=readarg($_POST['thread_cloud']);
+				$thread_cloud=readarg($_POST['thread_cloud'], true, false);	// trim but DON'T strip!
 				preg_match_all('/(\S+)/', $thread_cloud, $r);
 				$thread_cloud=implode(' ', array_unique($r[0]));
 			}
@@ -102,7 +102,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				$thread_nomorecomment=!$thread_morecomment;
 			}
 			if (isset($_POST['new_node_title'])) {
-				$new_node_title=strip_tags(readarg($_POST['new_node_title']));
+				$new_node_title=readarg($_POST['new_node_title']);
 				$new_node_name = strtofname($new_node_title);
 			}
 			if (isset($_POST['new_node_number'])) {
@@ -112,7 +112,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				$old_node_number=readarg($_POST['old_node_number']);
 			}
 			if (isset($_POST['p'])) {
-				$p=$_POST['p'];
+				$p=$_POST['p'];	// DON'T readarg!
 			}
 			break;
 		default:

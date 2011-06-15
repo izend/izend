@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,7 @@ function nodeeditor($lang, $clang, $node_id) {
 			break;
 		case 'edit':
 			if (isset($_POST['node_title'])) {
-				$node_title=strip_tags(readarg($_POST['node_title']));
+				$node_title=readarg($_POST['node_title']);
 			}
 			if (isset($_POST['node_name'])) {
 				$node_name=strtofname(readarg($_POST['node_name']));
@@ -43,10 +43,10 @@ function nodeeditor($lang, $clang, $node_id) {
 				$node_name = strtofname($node_title);
 			}
 			if (isset($_POST['node_abstract'])) {
-				$node_abstract=strip_tags(readarg($_POST['node_abstract']));
+				$node_abstract=readarg($_POST['node_abstract']);
 			}
 			if (isset($_POST['node_cloud'])) {
-				$node_cloud=readarg($_POST['node_cloud']);
+				$node_cloud=readarg($_POST['node_cloud'], true, false);	// trim but DON'T strip!
 				preg_match_all('/(\S+)/', $node_cloud, $r);
 				$node_cloud=implode(' ', array_unique($r[0]));
 			}

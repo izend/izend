@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -28,16 +28,16 @@ function mailme($lang) {
 	switch($action) {
 		case 'send':
 			if (isset($_POST['mailme_mail'])) {
-				$mail=strtolower(strflat(strip_tags(readarg($_POST['mailme_mail'], true))));
+				$mail=strtolower(strflat(readarg($_POST['mailme_mail'])));
 			}
 			if (isset($_POST['mailme_subject'])) {
-				$subject=strip_tags(readarg($_POST['mailme_subject'], true));
+				$subject=readarg($_POST['mailme_subject']);
 			}
 			if (isset($_POST['mailme_message'])) {
-				$message=strip_tags(readarg($_POST['mailme_message'], true));
+				$message=readarg($_POST['mailme_message']);
 			}
 			if (isset($_POST['mailme_code'])) {
-				$code=readarg($_POST['mailme_code'], true);
+				$code=readarg($_POST['mailme_code']);
 			}
 			if (isset($_POST['mailme_token'])) {
 				$token=readarg($_POST['mailme_token']);

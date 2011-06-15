@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -41,19 +41,19 @@ function profile($lang) {
 	switch($action) {
 		case 'change':
 			if (isset($_POST['profile_name'])) {
-				$name=strtolower(strflat(readarg($_POST['profile_name'], true)));
+				$name=strtolower(strflat(readarg($_POST['profile_name'])));
 			}
 			if (isset($_POST['profile_mail'])) {
-				$mail=strtolower(strflat(readarg($_POST['profile_mail'], true)));
+				$mail=strtolower(strflat(readarg($_POST['profile_mail'])));
 			}
 			if (isset($_POST['profile_locale'])) {
-				$locale=readarg($_POST['profile_locale'], true);
+				$locale=readarg($_POST['profile_locale']);
 			}
 			if (isset($_POST['profile_newpassword'])) {
-				$newpassword=readarg($_POST['profile_newpassword'], true);
+				$newpassword=readarg($_POST['profile_newpassword']);
 			}
 			if (isset($_POST['profile_password'])) {
-				$password=readarg($_POST['profile_password'], true);
+				$password=readarg($_POST['profile_password']);
 			}
 			break;
 		default:

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -112,12 +112,10 @@ function configure($lang) {
 				$default_language=readarg($_POST['configure_default_language']);
 			}
 			if (isset($_POST['configure_db_flag'])) {
-				$s=readarg($_POST['configure_db_flag']);
-				$db_flag=($s == 'yes');
+				$db_flag=readarg($_POST['configure_db_flag']) == 'yes' ? true : false;
 			}
 			if (isset($_POST['configure_db_reuse'])) {
-				$s=readarg($_POST['configure_db_reuse']);
-				$db_reuse=($s == 'yes');
+				$db_reuse=readarg($_POST['configure_db_reuse']) == 'yes' ? true : false;
 			}
 			if (isset($_POST['configure_db_admin_user'])) {
 				$db_admin_user=readarg($_POST['configure_db_admin_user']);

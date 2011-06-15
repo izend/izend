@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -30,13 +30,13 @@ function remindme($lang, $login=false) {
 	switch($action) {
 		case 'remindme':
 			if (isset($_POST['remindme_login'])) {
-				$login=strtolower(strflat(readarg($_POST['remindme_login'], true)));
+				$login=strtolower(strflat(readarg($_POST['remindme_login'])));
 			}
 			if (isset($_POST['remindme_confirmed'])) {
-				$confirmed=$_POST['remindme_confirmed'] ? true : false;
+				$confirmed=readarg($_POST['remindme_confirmed']) == 'on' ? true : false;
 			}
 			if (isset($_POST['remindme_code'])) {
-				$code=readarg($_POST['remindme_code'], true);
+				$code=readarg($_POST['remindme_code']);
 			}
 			if (isset($_POST['remindme_token'])) {
 				$token=readarg($_POST['remindme_token']);

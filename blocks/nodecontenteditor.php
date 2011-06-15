@@ -59,10 +59,10 @@ function nodecontenteditor($lang, $clang, $node_id) {
 				$old_content_number=readarg($_POST['content_old_number']);
 			}
 			if (isset($_POST['content_id'])) {
-				$id=$_POST['content_id'];
+				$id=$_POST['content_id'];	// DON'T readarg!
 			}
 			if (isset($_POST['content_p'])) {
-				$p=$_POST['content_p'];
+				$p=$_POST['content_p'];		// DON'T readarg!
 			}
 
 			if ($id and $p and is_array($id) and is_array($p) and count($id) == count($p)) {
@@ -80,9 +80,10 @@ function nodecontenteditor($lang, $clang, $node_id) {
 					foreach ($fields as $fieldname) {
 						if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
 							foreach ($_POST[$fieldname] as $i => $value) {
-								$v=readarg($value);
+								$v=readarg($value, true, false);	// trim but DON'T strip!
 								switch ($fieldname) {
 									case 'content_text':
+										/* DON'T strip_tag! */
 										break;
 									case 'content_file':
 									case 'content_format':

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -25,13 +25,13 @@ function login($lang) {
 	switch($action) {
 		case 'enter':
 			if (isset($_POST['login_login'])) {
-				$login=strtolower(strflat(readarg($_POST['login_login'], true)));
+				$login=strtolower(strflat(readarg($_POST['login_login'])));
 			}
 			if (isset($_POST['login_password'])) {
-				$password=readarg($_POST['login_password'], true);
+				$password=readarg($_POST['login_password']);
 			}
 			if (isset($_POST['login_code'])) {
-				$code=readarg($_POST['login_code'], true);
+				$code=readarg($_POST['login_code']);
 			}
 			if (isset($_POST['login_token'])) {
 				$token=readarg($_POST['login_token']);

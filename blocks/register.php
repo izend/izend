@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -26,16 +26,16 @@ function register($lang) {
 	switch($action) {
 		case 'register':
 			if (isset($_POST['register_name'])) {
-				$name=strtolower(strflat(readarg($_POST['register_name'], true)));
+				$name=strtolower(strflat(readarg($_POST['register_name'])));
 			}
 			if (isset($_POST['register_mail'])) {
-				$mail=strtolower(strflat(readarg($_POST['register_mail'], true)));
+				$mail=strtolower(strflat(readarg($_POST['register_mail'])));
 			}
 			if (isset($_POST['register_confirmed'])) {
-				$confirmed=$_POST['register_confirmed'] ? true : false;
+				$confirmed=readarg($_POST['register_confirmed']) == 'on' ? true : false;
 			}
 			if (isset($_POST['register_code'])) {
-				$code=readarg($_POST['register_code'], true);
+				$code=readarg($_POST['register_code']);
 			}
 			if (isset($_POST['register_token'])) {
 				$token=readarg($_POST['register_token']);

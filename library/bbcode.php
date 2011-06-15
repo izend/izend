@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -39,7 +39,7 @@ function bbcode_highlite($s, $language=false) {
 	$s = trim(base64_decode($s));
 
 	if (!$language) {
-		return '<code>' . $s . '</code>';
+		return '<code>' . htmlspecialchars($s, ENT_COMPAT, 'UTF-8') . '</code>';
 	}
 
 	$geshi = new GeSHi($s, $language);

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -63,7 +63,7 @@ function search($lang, $arglist=false) {
 			break;
 		case 'search':
 			if (isset($_POST['searchtext'])) {
-				$searchtext=readarg($_POST['searchtext']);
+				$searchtext=readarg($_POST['searchtext'], true, false);	// trim but DON'T strip!
 				preg_match_all('/(\S+)/', $searchtext, $r);
 				$searchtext=implode(' ', array_slice(array_unique($r[0]), 0, 10));
 			}

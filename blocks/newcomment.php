@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -48,7 +48,7 @@ function newcomment($lang, $node_id) {
 		case 'validate':
 		case 'edit':
 			if (isset($_POST['newcomment_message'])) {
-				$message=trim(readarg($_POST['newcomment_message'], true));
+				$message=readarg($_POST['newcomment_message'], true, false);	// trim but DON'T strip!
 			}
 			break;
 		default:

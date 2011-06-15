@@ -7,12 +7,6 @@
  * @link       http://www.izend.org
  */
 
-require_once 'readarg.php';
-require_once 'strflat.php';
-
-require_once 'validateusername.php';
-require_once 'validatemail.php';
-
 require_once 'models/node.inc';
 
 function comments($lang, $node_id) {

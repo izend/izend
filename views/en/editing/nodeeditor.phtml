@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -25,12 +25,13 @@
 </p>
 <p><label>Abstract:</label></p>
 <p>
-<textarea name="node_abstract" cols="80" rows="3" class="" ><?php echo $node_abstract; ?></textarea>
+<textarea name="node_abstract" cols="80" rows="3"><?php echo htmlspecialchars($node_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p><label>Cloud:</label></p>
 <p>
-<textarea name="node_cloud" cols="80" rows="2" ><?php echo $node_cloud; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<textarea name="node_cloud" cols="80" rows="2" ><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p>
 <input name="node_comment" name="node_comment" type="checkbox" <?php if ($node_comment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />

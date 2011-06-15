@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -51,7 +51,7 @@ function threadeditall($lang, $clang, $type=false) {
 		case 'delete':
 		case 'reorder':
 			if (isset($_POST['new_thread_title'])) {
-				$new_thread_title=strip_tags(readarg($_POST['new_thread_title']));
+				$new_thread_title=readarg($_POST['new_thread_title']);
 			}
 			if (empty($new_thread_name) and !empty($new_thread_title)) {
 				$new_thread_name = strtofname($new_thread_title);
@@ -66,7 +66,7 @@ function threadeditall($lang, $clang, $type=false) {
 				$old_thread_number=readarg($_POST['old_thread_number']);
 			}
 			if (isset($_POST['p'])) {
-				$p=$_POST['p'];
+				$p=$_POST['p'];	// DON'T readarg!
 			}
 		default:
 			break;
