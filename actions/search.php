@@ -93,14 +93,14 @@ function search($lang, $arglist=false) {
 				$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 			}
 			if (!$thread_nocloud) {
-				$cloud = build('cloud', $lang, $cloud_id, 60, true, true);
+				$cloud = build('cloud', $lang, $cloud_id, false, 60, true, true);
 			}
 		}
 		else {
 			$search_text=$searchtext;
 			$search_url=url('search', $lang);
 			$search=view('searchinput', $lang, compact('search_url', 'search_text'));
-			$cloud = build('cloud', $lang, false, 60, true, true);
+			$cloud = build('cloud', $lang, false, false, 60, true, true);
 		}
 		$headline_text=$search_title;
 		$headline_url=false;
@@ -129,7 +129,7 @@ function search($lang, $arglist=false) {
 		$headline = compact('headline_text', 'headline_url');
 		$title = view('headline', false, $headline);
 
-		$content = build('cloud', $lang, $cloud_id, false, true, false, false);
+		$content = build('cloud', $lang, $cloud_id, false, false, true, false, false);
 	}
 
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -77,7 +77,8 @@ function cloud_get($lang, $cloud_id) {
 	return $r ? $r[0] : false;
 }
 
-function cloud_list_tags($lang, $cloud_id, $byname=false, $bycount=false) {
+function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=false) {
+	// list the tags in a thread or in all the threads which are optionally related to a node count and/or by name
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabtag=db_prefix_table('tag');
@@ -87,6 +88,12 @@ function cloud_list_tags($lang, $cloud_id, $byname=false, $bycount=false) {
 	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id";
 	if ($cloud_id) {
 		$join .= " AND tn.thread_id=$cloud_id";
+	}
+
+	$in=$having='';
+	if ($node_id) {
+		$in="WHERE ti.tag_id IN (SELECT ti.tag_id FROM $tabtagindex ti JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang WHERE ti.node_id=$node_id)";
+		$having='HAVING tag_count > 1';
 	}
 
 	$order='';
@@ -103,7 +110,7 @@ function cloud_list_tags($lang, $cloud_id, $byname=false, $bycount=false) {
 		}
 	}
 
-	$sql = "SELECT tg.tag_id, ti.node_id, tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang GROUP BY ti.tag_id $order";
+	$sql = "SELECT tg.tag_id, ti.node_id, tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang $in GROUP BY ti.tag_id $having $order";
 
 	$r = db_query($sql);
 
@@ -111,6 +118,7 @@ function cloud_list_tags($lang, $cloud_id, $byname=false, $bycount=false) {
 }
 
 function cloud_search($lang, $cloud_id, $taglist) {
+	// return the nodes which are associated to a list of tags in a thread or in all the threads
 	$ntags = count($taglist);
 	if ($ntags == 0) {
 		return false;
@@ -146,6 +154,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 }
 
 function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
+	// return the all tags which match a word in a thread or in all the threads
 	preg_match_all('/(\S+)/', $s, $r);
 	$wordlist = array_unique($r[0]);
 	$nwords=count($wordlist);

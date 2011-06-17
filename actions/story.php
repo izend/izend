@@ -96,7 +96,7 @@ function story($lang, $arglist=false) {
 
 	$cloud=false;
 	if (!$story_nocloud) {
-		$cloud = build('cloud', $lang, $story_id, 50, true, true);
+		$cloud = build('cloud', $lang, $story_id, false, 50, true, true);
 	}
 
 	$summary=array();

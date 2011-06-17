@@ -54,7 +54,7 @@ function booksummary($lang, $book) {
 
 	$cloud=false;
 	if (!$book_nocloud) {
-		$cloud = build('cloud', $lang, $book_id, 50, true, true);
+		$cloud = build('cloud', $lang, $book_id, false, 50, true, true);
 	}
 
 	$headline_text=	translate('bookall:title', $lang);
