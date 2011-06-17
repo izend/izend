@@ -109,7 +109,8 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/shell.png" alt="&lt;pre&gt;&lt;code&gt;" title="pre code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;pre>&lt;code&gt;','&lt;/code>&lt;/pre&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="&lt;blockquote&gt;" title="blockquote" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;blockquote&gt;','&lt;/blockquote&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22', '\x22 alt=\x22\x22 /&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22','\x22 alt=\x22\x22 /&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/url.png" alt="&lt;a&gt;" title="a" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;a href=\x22','\x22&gt;&lt;/a&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_<?php echo $i; ?>')"/>
 <span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
