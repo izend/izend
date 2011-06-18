@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -21,11 +21,11 @@ function sendget($url, $args) {
 	return sendhttp('GET', $url, $args);
 }
 
-function sendpost($url, $args, $files=false) {
-	return sendhttp('POST', $url, $args, $files);
+function sendpost($url, $args, $files=false, $base64=false ) {
+	return sendhttp('POST', $url, $args, $files, $base64);
 }
 
-function sendhttp($method, $url, $args, $files=false) {
+function sendhttp($method, $url, $args, $files=false, $base64=false) {
 	$purl = parse_url($url);
 	if ($purl === false)
 	{
@@ -47,7 +47,7 @@ function sendhttp($method, $url, $args, $files=false) {
 	$portnum = isset($purl['portnum']) ? $purl['portnum'] : $scheme == 'https' ? 443 : 80;
 	$path = isset($purl['path']) ? $purl['path'] : '';
 
-	$user_agent = 'Frasq';
+	$user_agent = 'iZend';
 
 	$header_string = $content_string = '';
 
@@ -73,8 +73,14 @@ function sendhttp($method, $url, $args, $files=false) {
 					$content_string .= '--' . $boundary . "\r\n";
 					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . "\r\n";
 					$content_string .= 'Content-Type: ' . $v['type'] . "\r\n";
-					$content_string .= 'Content-Transfer-Encoding: base64' . "\r\n\r\n";
-					$content_string .= chunk_split(base64_encode($data)) . "\r\n";
+					if ($base64) {
+						$content_string .= 'Content-Transfer-Encoding: base64' . "\r\n\r\n";
+						$content_string .= chunk_split(base64_encode($data)) . "\r\n";
+					}
+					else {
+						$content_string .= 'Content-Transfer-Encoding: binary' . "\r\n\r\n";
+						$content_string .= $data . "\r\n";
+					}
 				}
 				$content_string .= '--' . $boundary . '--'. "\r\n";
 			}
@@ -119,9 +125,8 @@ function sendhttp($method, $url, $args, $files=false) {
 
 	$response = '';
 	while (!feof($socket)) {
-		$response .= fread($socket, 1024);
+		$response .= fread($socket, 8192);
 	}
-
 	fclose($socket);
 
 	list($response_headers, $response_body) = explode("\r\n\r\n", $response, 2);
