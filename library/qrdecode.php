@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -23,6 +23,10 @@ function qrdecode($file) {
 		return false;
 	}
 
-	return $response[2];
+	if (preg_match('#<html>.*</html>#', $response[2])) {
+		return false;
+	}
+
+	return strip_tags($response[2]);
 }
 
