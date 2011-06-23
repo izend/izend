@@ -10,10 +10,15 @@
 <?php require_once 'datefr.php'; ?>
 <?php require_once 'bbcode.php'; ?>
 <?php $message_maxlength = 2000; ?>
+<?php extract($errors); ?>
 <div id="newcomment">
 <h6>Votre commentaire&nbsp;:</h6>
 <p><img src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>"/> <span class="date">Le <?php echo longdate_fr($comment_created); ?> à <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author"> par <?php echo $comment_name; ?></span></p>
-<?php if (!empty($message)): ?>
+<?php if ($message_too_long): ?>
+<div class="error">
+<p>Votre message est trop long.</p>
+</div>
+<?php elseif (!empty($message)): ?>
 <?php echo bbcode($message); ?>
 <?php endif; ?>
 <form action="#newcomment" method="post">
@@ -39,7 +44,7 @@ Entrez un maximum de <b><?php echo $message_maxlength; ?></b> caractères. Amél
 [<b>quote</b>]citation[/quote], [<b>pre</b>]tel quel[/pre], [<b>br</b>]à la ligne,<br />
 [<b>url</b>]http://www.izend.org[/url], [<b>url</b>=http://www.izend.org]site[/url],
 [<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email],<br />
-[<b>code</b>=langage]code source en c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
+[<b>code</b>]commande[/code], [<b>code</b>=langage]code source en c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
 </p>
 <p>
 <?php if ($message): ?>
@@ -51,20 +56,10 @@ le texte ou le
 <?php endif; ?>
 </p>
 </form>
-<?php
-if ($errors):
-extract($errors);
-?>
-<div class="error">
-<?php if ($missing_message): ?>
-<p>Le message est vide.</p>
-<?php elseif ($message_too_long): ?>
-<p>Votre message est trop long.</p>
-<?php endif; ?>
 <?php if ($internal_error): ?>
+<div class="error">
 <p>Une erreur interne s'est produite.
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
-<?php endif; ?>
 </div>
 <?php endif; ?>
 </div>
