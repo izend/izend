@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -156,6 +156,17 @@ function remindme($lang, $login=false) {
 			break;
 	}
 
+	$focus=false;
+	if ($missing_code or $bad_code) {
+		$focus='#remindme_code';
+	}
+	else if ($missing_login or $bad_login) {
+		$focus='#remindme_login';
+	}
+	else if ($missing_confirmation) {
+		$focus='#remindme_confirmed';
+	}
+
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
@@ -168,7 +179,7 @@ function remindme($lang, $login=false) {
 	$errors = compact('missing_login', 'bad_login', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_sent', 'user_page');
 
-	$output = view('remindme', $lang, compact('token', 'with_captcha', 'login', 'confirmed', 'errors', 'infos'));
+	$output = view('remindme', $lang, compact('token', 'with_captcha', 'login', 'confirmed', 'errors', 'infos', 'focus'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -133,12 +133,26 @@ function mailme($lang) {
 			break;
 	}
 
+	$focus=false;
+	if ($missing_code or $bad_code) {
+		$focus='#mailme_code';
+	}
+	else if ($missing_mail or $bad_mail) {
+		$focus='#mailme_mail';
+	}
+	else if ($missing_subject or $bad_subject) {
+		$focus='#mailme_subject';
+	}
+	else if ($missing_message) {
+		$focus='#mailme_message';
+	}
+
 	$_SESSION['mailme_token'] = $token = token_id();
 
 	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'internal_error');
 	$infos = compact('email_sent', 'home_page');
 
-	$output = view('mailme', $lang, compact('token', 'with_captcha', 'mail', 'subject', 'message', 'infos', 'errors', 'infos'));
+	$output = view('mailme', $lang, compact('token', 'with_captcha', 'mail', 'subject', 'message', 'infos', 'errors', 'infos', 'focus'));
 
 	return $output;
 }

@@ -8,7 +8,6 @@
  */
 
 require_once 'userhasrole.php';
-
 require_once 'models/node.inc';
 
 function editnode($lang, $arglist=false) {

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -74,3 +74,11 @@ Pour vous identifier, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
 </div>
 <?php endif; ?>
 </div>
+<?php if (isset($focus) and $focus): ?>
+<script type="text/javascript">
+<!--
+$(function() {$('<?php echo $focus; ?>').focus();});
+//-->
+</script>
+<?php endif; ?>
+

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -174,6 +174,20 @@ function register($lang) {
 			break;
 	}
 
+	$focus=false;
+	if ($missing_code or $bad_code) {
+		$focus='#register_code';
+	}
+	else if ($missing_name or $bad_name or $duplicated_name) {
+		$focus='#register_name';
+	}
+	else if ($missing_mail or $bad_mail or $duplicated_mail) {
+		$focus='#register_mail';
+	}
+	else if ($missing_confirmation) {
+		$focus='#register_confirmed';
+	}
+
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
@@ -186,7 +200,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos', 'focus'));
 
 	return $output;
 }

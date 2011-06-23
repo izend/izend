@@ -3,18 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'strflat.php';
-
 require_once 'validateusername.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
 require_once 'validatepassword.php';
-
 require_once 'tokenid.php';
 
 function profile($lang) {
@@ -207,14 +205,31 @@ function profile($lang) {
 			break;
 	}
 
+	$focus=false;
+	if ($bad_name or $duplicate_name) {
+		$focus='#profile_name';
+	}
+	else if ($bad_mail or $duplicate_mail) {
+		$focus='#profile_mail';
+	}
+	else if ($weak_password) {
+		$focus='#profile_newpassword';
+	}
+	else if ($weak_password) {
+		$focus='#profile_newpassword';
+	}
+	else if ($missing_password or $wrong_password) {
+		$focus='#profile_password';
+	}
+
 	if (!$token) {
 		$_SESSION['profile_token'] = $token = token_id();
 	}
 
-	$errors = compact('missing_name', 'bad_name', 'bad_mail', 'bad_locale', 'duplicate_name', 'duplicate_mail', 'weak_password', 'missing_password', 'wrong_password', 'internal_error', 'contact_page');
+	$errors = compact('bad_name', 'bad_mail', 'bad_locale', 'duplicate_name', 'duplicate_mail', 'weak_password', 'missing_password', 'wrong_password', 'internal_error', 'contact_page');
 	$infos = compact('profile_changed', 'password_changed', 'home_page');
 
-	$output = view('profile', $lang, compact('token', 'name', 'mail', 'locale', 'newpassword', 'password', 'errors', 'infos'));
+	$output = view('profile', $lang, compact('token', 'name', 'mail', 'locale', 'newpassword', 'password', 'errors', 'infos', 'focus'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -120,14 +120,25 @@ function login($lang) {
 			break;
 	}
 
-	$_SESSION['login_token'] = $token = token_id();
-
-	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'bad_password', 'access_denied');
+	$focus=false;
+	if ($missing_code or $bad_code) {
+		$focus='#login_code';
+	}
+	else if ($missing_login or $bad_login or $access_denied) {
+		$focus='#login_login';
+	}
+	else if ($missing_password or $bad_password) {
+		$focus='#login_password';
+	}
 
 	$password_page=url('password', $lang);
 	$newuser_page=url('newuser', $lang);
 
-	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors'));
+	$_SESSION['login_token'] = $token = token_id();
+
+	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'bad_password', 'access_denied');
+
+	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors', 'focus'));
 
 	return $output;
 }

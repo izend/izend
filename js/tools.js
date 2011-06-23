@@ -51,13 +51,6 @@ function focusonenter(e, id) {
 		return true;
 }
 
-function focuson(id) {
-	var e=document.getElementById(id);
-	if (e)
-		e.focus();
-	return true;
-}
-
 function inputlimit(inputid, labelid, maxlength) {
 	var input = document.getElementById(inputid);
 	if (input == null)

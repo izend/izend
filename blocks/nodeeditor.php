@@ -7,10 +7,9 @@
  * @link       http://www.izend.org
  */
 
-require_once 'models/node.inc';
-
 require_once 'readarg.php';
 require_once 'strtofname.php';
+require_once 'models/node.inc';
 
 function nodeeditor($lang, $clang, $node_id) {
 	$action='init';

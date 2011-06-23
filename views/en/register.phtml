@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -12,7 +12,7 @@
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
 <div class="fields">
 <p class="label">What connection name do you want?</p>
-<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <p class="label">What is your email address?</p>
 <p class="input"><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
@@ -74,3 +74,11 @@ To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
 </div>
 <?php endif; ?>
 </div>
+<?php if (isset($focus) and $focus): ?>
+<script type="text/javascript">
+<!--
+$(function() {$('<?php echo $focus; ?>').focus();});
+//-->
+</script>
+<?php endif; ?>
+

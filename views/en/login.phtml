@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -53,3 +53,11 @@ extract($errors);
 </div>
 <?php endif; ?>
 </div>
+<?php if (isset($focus) and $focus): ?>
+<script type="text/javascript">
+<!--
+$(function() {$('<?php echo $focus; ?>').focus();});
+//-->
+</script>
+<?php endif; ?>
+
