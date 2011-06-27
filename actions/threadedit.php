@@ -44,6 +44,9 @@ function threadedit($lang, $arglist=false) {
 		else {
 			$clang=$lang;
 		}
+		if (!in_array($clang, $supported_languages)) {
+			return run('error/notfound', $lang);
+		}
 	}
 
 	if (!$thread) {

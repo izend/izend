@@ -3,13 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function readarg($s, $trim=true, $strip=true) {
 	if (is_array($s)) {
-		return array_map('readarg', $s, array_fill(0, count($s), $trim), array_fill(0, count($s), $strip));
+		$r=array();
+		foreach ($s as $ss) {
+			$r[]=readarg($ss, $trim, $strip);
+		}
+		return $r;
 	}
 
 	if (get_magic_quotes_gpc()) {

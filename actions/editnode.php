@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -50,6 +50,9 @@ function editnode($lang, $arglist=false) {
 		}
 		else {
 			$clang=$lang;
+		}
+		if (!in_array($clang, $supported_languages)) {
+			return run('error/notfound', $lang);
 		}
 	}
 
