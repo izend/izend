@@ -30,6 +30,9 @@ img {page-break-inside:avoid; page-break-after:avoid; float:none}
 .hidden {display:none;}
 .noprint {display:none;}
 
-.vignette, .readmore, .link, .menu, .menubar, .sidebar {display:none;}
+.menu, .menubar, .sidebar, .link, .readmore, .summary, .vignette {display:none;}
 
 #banner, #footer, #sidebar, #newcomment {display:none;}
+
+div.file {font-family:monospace;font-size:.9em;}
+div.download {display:none;}

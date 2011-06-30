@@ -3,13 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <div id="comments">
+<?php if (empty($comments)): ?>
+<h4 class="noprint">Commentaires</h4>
+<?php else: ?>
 <h4>Commentaires</h4>
+<?php endif; ?>
 <?php echo $comments; ?>
 <?php if ($newcomment): ?>
 <?php echo $newcomment; ?>
