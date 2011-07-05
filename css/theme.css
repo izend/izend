@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
  
@@ -66,6 +66,9 @@ textarea {resize:none;}
 .odd {background-color:#ffffe0;}
 .even {background-color:#eaefb3;}
 
+.hilite {background-color:#ffffe0;}
+.faded {opacity:0.4;}
+
 .normal {color:#333333;}
 .dim {color:#666666;}
 
@@ -80,7 +83,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 #search {float:right;width:24px;height:22px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 #searchtext {width:160px;padding:2px;margin:0;border:none;}
-#searchinput {float:right;width:196px;margin:0 0 1em 0;border:2px solid #aec14e;padding:0;}
+#searchinput {float:right;width:196px;margin:0 0 1em 0;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
 
 #banner {height:45px;margin:10px 0 5px 0;clear:both;}
 #bannerline {height:2px;background:transparent url(../images/theme/bannerline.png) no-repeat;padding:0;margin:0;clear:both;}
@@ -138,7 +141,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #summary li {list-style:none;}
 #summary li a:link, #summary li a:visited {text-decoration:none;}
 
-.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;}
+.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}
 .summary li a:link, .summary li a:visited {text-decoration:none;}
 
