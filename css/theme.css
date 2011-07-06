@@ -79,11 +79,13 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .tagbar {margin-bottom:5px;}
 .tagbar span {margin-left:50px;}
 
-#headline {margin:0 0 1em 0;text-align:right;}
+.hidy {height:16px;margin:2px 4px 5px 0;background:transparent url(../images/theme/icons/down.png) top right no-repeat;}
 
-#search {float:right;width:24px;height:22px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+#headline {margin:0 0 0.5em 0;text-align:right;}
+
+#search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 #searchtext {width:160px;padding:2px;margin:0;border:none;}
-#searchinput {float:right;width:196px;margin:0 0 1em 0;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
+#searchinput {border:2px solid #aec14e;padding:0;background-color:#ffffff;}
 
 #banner {height:45px;margin:10px 0 5px 0;clear:both;}
 #bannerline {height:2px;background:transparent url(../images/theme/bannerline.png) no-repeat;padding:0;margin:0;clear:both;}
@@ -137,7 +139,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:smaller;font-style:italic;}
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
-#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;}
+#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:1em 0 0.5em 0;}
 #summary li {list-style:none;}
 #summary li a:link, #summary li a:visited {text-decoration:none;}
 

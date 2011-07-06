@@ -163,8 +163,6 @@ function run($action, $lang=false, $arglist=false) {
 	head('description', translate('description', $lang));
 	head('keywords', translate('keywords', $lang));
 	head('favicon', 'favicon');
-	head('javascript', 'tools');
-	head('javascript', 'jquery');
 
 	$file = ACTIONS_DIR.DIRECTORY_SEPARATOR.$action.'.php';
 	if (!is_file($file)) {

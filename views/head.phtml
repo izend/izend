@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -43,6 +43,8 @@
 <?php if (isset($favicon)): ?>
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
+<script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
+<script type="text/javascript" src="<?php echo $base_path; ?>/js/jquery.js"></script>
 <?php if (isset($javascripts)): ?>
 <?php foreach ($javascripts as $js) : ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/<?php echo $js['name']; ?>.js"></script>
