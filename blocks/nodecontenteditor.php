@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -35,7 +35,6 @@ function nodecontenteditor($lang, $clang, $node_id) {
 		case 'init':
 		case 'reset':
 			$r = node_get_contents($clang, $node_id);
-
 			if ($r) {
 				$pos=1;
 				$node_contents = array();
@@ -67,12 +66,12 @@ function nodecontenteditor($lang, $clang, $node_id) {
 
 			if ($id and $p and is_array($id) and is_array($p) and count($id) == count($p)) {
 				$fieldgroups = array(
-								'text'		=> array('content_text', 'content_eval'),
-								'file'		=> array('content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
-								'download'	=> array('content_download', 'content_path'),
-								'infile'	=> array('content_infile'),
-								'media'		=> array('content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat'),
-				);
+								'text'		=> array('content_ignored', 'content_text', 'content_eval'),
+								'file'		=> array('content_ignored', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
+								'download'	=> array('content_ignored', 'content_download', 'content_path'),
+								'infile'	=> array('content_ignored', 'content_infile'),
+								'media'		=> array('content_ignored', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat'),
+								);
 
 				$node_contents=array();
 
@@ -95,6 +94,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 									case 'content_media_skin':
 										$v=strip_tags($v);
 										break;
+									case 'content_ignored':
 									case 'content_eval':
 									case 'content_lineno':
 									case 'content_media_icons':
@@ -216,6 +216,8 @@ function nodecontenteditor($lang, $clang, $node_id) {
 				break;
 			}
 
+			$fields=array('content_id', 'content_type', 'content_ignored', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat', 'content_thread', 'content_node', 'content_pos');
+
 			$content_id = $nc['content_id'];
 			$content_pos = $nc['content_number'];
 			$content_type = $new_content_type;
@@ -234,6 +236,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			$content_media_autostart=$content_media_repeat=false;
 
 			$content_thread=$content_node=false;
+			$content_ignored=false;
 
 			if ($node_contents) {
 				foreach ($node_contents as &$c) {
@@ -241,11 +244,11 @@ function nodecontenteditor($lang, $clang, $node_id) {
 						$c['content_pos']++;
 					}
 				}
-				array_splice($node_contents, $content_pos-1, 0, array(compact('content_id', 'content_type', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat', 'content_thread', 'content_node', 'content_pos')));
+				array_splice($node_contents, $content_pos-1, 0, array(compact($fields)));
 			}
 			else {
 				$content_pos=1;
-				$node_contents=array($content_pos => compact('content_id', 'content_type', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat', 'content_thread', 'content_node', 'content_pos'));
+				$node_contents=array($content_pos => compact($fields));
 			}
 
 			if ($new_content_number) {

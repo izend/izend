@@ -16,7 +16,9 @@ function nodecontent($lang, $node_id) {
 	if ($r) {
 		require_once 'prettyfile.php';
 
-		foreach ($r as $c) {	/* content_id content_number content_type (content_text content_eval | content_file content_start content_end content_format | content_download content_path | content_infile | content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) */
+		foreach ($r as $c) {	/* content_id content_number content_ignored content_type (content_text content_eval | content_file content_start content_end content_format | content_download content_path | content_infile | content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) */
+			if ($c['content_ignored'])
+				continue;
 			$type=$c['content_type'];
 			switch($type) {
 				case 'text':

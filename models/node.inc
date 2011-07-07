@@ -127,7 +127,7 @@ function node_get_contents($lang, $node_id) {
 	$tabcontentinfile=db_prefix_table('content_infile');
 	$tabcontentmedia=db_prefix_table('content_media');
 
-	$sql="SELECT nc.content_id AS content_id, nc.content_type AS content_type, nc.number AS content_number, ct.text AS content_text, ct.eval AS content_eval, cf.path AS content_file, cf.start AS content_start, cf.end AS content_end, cf.format AS content_format, cf.lineno AS content_lineno, cd.name AS content_download, cd.path AS content_path, cin.path AS content_infile, cm.file AS content_media_file, cm.image AS content_media_image, cm.width AS content_media_width, cm.height AS content_media_height, cm.icons AS content_media_icons, cm.skin AS content_media_skin, cm.duration AS content_media_duration, cm.autostart AS content_media_autostart, cm.repeat AS content_media_repeat FROM $tabnodecontent nc LEFT JOIN $tabcontenttext ct ON nc.content_type='text' AND ct.content_id=nc.content_id AND ct.locale=$sqllang LEFT JOIN $tabcontentfile cf ON nc.content_type='file' AND cf.content_id=nc.content_id AND cf.locale=$sqllang LEFT JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang LEFT JOIN $tabcontentinfile cin ON nc.content_type='infile' AND cin.content_id=nc.content_id AND cin.locale=$sqllang LEFT JOIN $tabcontentmedia cm ON nc.content_type='media' AND cm.content_id=nc.content_id AND cm.locale=$sqllang WHERE nc.node_id=$node_id ORDER BY nc.number";
+	$sql="SELECT nc.content_id AS content_id, nc.content_type AS content_type, nc.number AS content_number, nc.ignored AS content_ignored, ct.text AS content_text, ct.eval AS content_eval, cf.path AS content_file, cf.start AS content_start, cf.end AS content_end, cf.format AS content_format, cf.lineno AS content_lineno, cd.name AS content_download, cd.path AS content_path, cin.path AS content_infile, cm.file AS content_media_file, cm.image AS content_media_image, cm.width AS content_media_width, cm.height AS content_media_height, cm.icons AS content_media_icons, cm.skin AS content_media_skin, cm.duration AS content_media_duration, cm.autostart AS content_media_autostart, cm.repeat AS content_media_repeat FROM $tabnodecontent nc LEFT JOIN $tabcontenttext ct ON nc.content_type='text' AND ct.content_id=nc.content_id AND ct.locale=$sqllang LEFT JOIN $tabcontentfile cf ON nc.content_type='file' AND cf.content_id=nc.content_id AND cf.locale=$sqllang LEFT JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang LEFT JOIN $tabcontentinfile cin ON nc.content_type='infile' AND cin.content_id=nc.content_id AND cin.locale=$sqllang LEFT JOIN $tabcontentmedia cm ON nc.content_type='media' AND cm.content_id=nc.content_id AND cm.locale=$sqllang WHERE nc.node_id=$node_id ORDER BY nc.number";
 
 	$r = db_query($sql);
 
@@ -157,6 +157,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	$tabcontentmedia=db_prefix_table('content_media');
 
 	foreach ($node_contents as $c) {
+		$content_ignored=false;
 		$content_text='';
 		$content_eval=false;
 		$content_download=$content_path=false;
@@ -171,10 +172,11 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$content_media_duration=0;
 		$content_media_autostart=$content_media_repeat=false;
 
-		extract($c);	/* content_id content_number content_type (content_text content_eval | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile | content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) */
+		extract($c);	/* content_id content_number content_type (content_text content_eval | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile | content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) ignored */
 		$sqltype=db_sql_arg($content_type, false);
+		$sqlignored=$content_ignored ? 1 : 0;
 
-		$sql="UPDATE $tabnodecontent SET number=$number WHERE node_id=$node_id AND content_id=$content_id AND content_type=$sqltype";
+		$sql="UPDATE $tabnodecontent SET number=$number, ignored=$sqlignored WHERE node_id=$node_id AND content_id=$content_id AND content_type=$sqltype";
 		$r = db_update($sql);
 
 		if (!$r) {

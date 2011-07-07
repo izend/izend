@@ -19,11 +19,15 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Thu Jul 7 22:37:15 2011 +0200
+
+ALTER TABLE `izend_node_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0'
+
 Date:   Wed Jun 8 17:28:42 2011 +0200
 
     Makes tag cloud case sensitive with COLLATE utf8_bin
 
-ALTER TABLE `newsite_tag` CHANGE `name` `name` VARCHAR(100)
+ALTER TABLE `izend_tag` CHANGE `name` `name` VARCHAR(100)
 CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 
 Date:   Tue Jun 14 02:10:54 2011 +0200
@@ -121,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `izend_node_content` (
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('text','file','download','infile','media') CHARACTER SET ascii NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
+  `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

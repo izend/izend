@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -53,35 +53,5 @@
 </div>
 <?php endif; ?>
 </form>
-<script type="text/javascript">
-<!--
-$(document).ready(function() {
-	$('.grippie').each(function() {
-		var grippie = $(this);
-		var textarea = grippie.prev().prev();
-		var offset;
-
-		grippie.mousedown(startDrag);
-
-	    function startDrag(e) {
-	      offset = textarea.height() - e.pageY;
-	      textarea.css('opacity', 0.25);
-	      $(document).mousemove(performDrag).mouseup(endDrag);
-	      return false;
-	    }
-
-	    function performDrag(e) {
-	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
-	      return false;
-	    }
-
-	    function endDrag(e) {
-	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
-	      textarea.css('opacity', 1);
-	    }
-	});
-});
-//-->
-</script>
 <h4>Contents</h4>
 <?php echo $content_editor; ?>

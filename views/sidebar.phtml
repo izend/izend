@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -26,16 +26,14 @@
 </ol>
 <?php endif; ?>
 <?php if (isset($cloud) and !empty($cloud)): ?>
+<?php head('javascript', 'jquery.cookie'); ?>
 <div id="cloudiness" class="hidy"></div>
 <?php echo $cloud; ?>
-<?php head("javascript", "jquery.cookie"); ?>
 <script type="text/javascript">
 <!--
-$(document).ready(function () {
-	if ($.cookie('nocloud') == '1') {
+if ($.cookie('nocloud') == '1') {
 		$('.cloud').hide();
-	}
-});
+}
 $('#cloudiness').click(function() {
 	$('.cloud').toggle();
 	$.cookie('nocloud', $('.cloud').is(':hidden') ? '1' : '0', { path: '/' });
