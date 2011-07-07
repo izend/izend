@@ -8,11 +8,12 @@
 
 iZend is a PHP engine for developing well structured web applications 
 with a content manager. It's aimed at programmers who want full 
-control on the software they use with maximum adaptability and
-reusability. It's simple to understand, easy to extend, open to other
-components in PHP, Javascript or Flash. It's intended to become your
-own very quickly while keeping all the benefits of a software
-program developed and shared by an open source community.
+control on the software program they use with maximum adaptability
+and reusability. It's simple to understand, easy to extend, open to
+other components in PHP, Javascript or Flash. The goal is to let it
+become your own very quickly while still keeping all the benefits of
+using a software program which is constantly enriched by an open
+source community.
 
 iZend is built with a straightforward MVC architecture specially 
 designed for organizing publications in several languages and for
@@ -25,7 +26,8 @@ without a database and take very little space on disk. Put online a
 teaser for a website in several languages with a contact page in just
 a few minutes!
 
-Start by reading INSTALL.
+Download the source code from Github.
+Read the instructions in INSTALL.
 
 Thank you for your interest in iZend!
 

@@ -29,8 +29,8 @@ Create a bare repository for your site:
 
 Create the initial version of your site:
 
-    git init /var/www/mysite
-    cd /var/www/mysite
+    git init /var/www/sitename.net
+    cd /var/www/sitename.net
 
 Declare your identity:
 
@@ -114,7 +114,7 @@ Merge, resolve conflicts commit and push:
 
     git merge --no-commit izend
     git status
-    git commit -m"Merges with izend"
+    git commit -m"Merges with izend/master"
 
 To update the repository on github:
 
