@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
  
@@ -35,6 +35,13 @@ textarea {resize:none;}
 .vignette {float:right;margin:0 0 0 1em;}
 
 .readmore {line-height:24px;background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;}
+
+.date {float:left;width:60px;height:60px;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;color:#333333;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:3px 10px 0 0;position:relative;}
+.date span {width:100%;text-align:center;margin:auto;padding:0;position:absolute;}
+.date .day {font-family:"Times New Roman", Times, serif;font-size:28px;font-weight:bold;top:24px;}
+.date .month {font-size:8px;text-transform:uppercase;top:0px;}
+.date .year {color:#999999;font-size:9px;top:42px;}
+.date .comma {display:none;}
 
 .cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 .cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
@@ -119,7 +126,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 #comments {margin-top:2em;clear:left;}
 #comments h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;line-height:24px;}
-#comments .date {color:#666666;font-size:smaller;}
+#comments .longdate {color:#666666;font-size:smaller;}
 #comments .author {color:#666666;font-size:smaller;font-style:italic;}
 #comment pre {font-family:monospace;font-size:10pt;}
 #comment blockquote {font-size:smaller;margin-right:0;}
@@ -160,5 +167,4 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #homeblog h4 a:hover {color:#ec902d;}
 #homeblog h4 {margin-bottom:0.25em;}
 #homeblog p {margin-top:0.25em;margin-bottom:0.5em;}
-#homeblog .date {color:#666666;font-size:smaller;}
-#homeblog .author {color:#666666;font-size:smaller;font-style:italic;}
+#homeblog .author {color:#999999;font-size:smaller;font-style:italic;}

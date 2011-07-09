@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -13,7 +13,7 @@
 <?php extract($errors); ?>
 <div id="newcomment">
 <h6>Your comment:</h6>
-<p><img src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="date"><?php echo longdate_en($comment_created); ?> at <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author"> by <?php echo $comment_name; ?></span></p>
+<p><img src="/avatars/<?php echo $comment_name; ?>.png" alt="" title="<?php echo $comment_name; ?>" /> <span class="longdate"><?php echo longdate_en($comment_created); ?> at <?php echo strftime("%H:%M:%S", $comment_created); ?></span> <span class="author"> by <?php echo $comment_name; ?></span></p>
 <?php if ($message_too_long): ?>
 <div class="error">
 <p>Your message is too long.</p>
