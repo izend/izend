@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -37,6 +37,8 @@ form {margin:0;}
 input, select {vertical-align:middle;}
 
 p, dl, multicol {margin:1em 0;}
+
+p {line-height:1.2em;}
 
 a img {border:0;vertical-align:middle;margin:0;}
 
