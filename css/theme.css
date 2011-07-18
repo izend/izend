@@ -36,11 +36,11 @@ textarea {resize:none;}
 
 .readmore {line-height:24px;background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;}
 
-.date {float:left;width:60px;height:60px;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;color:#333333;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin:3px 10px 0 0;position:relative;}
-.date span {width:100%;text-align:center;margin:auto;padding:0;position:absolute;}
-.date .day {font-family:"Times New Roman", Times, serif;font-size:28px;font-weight:bold;top:24px;}
-.date .month {font-size:8px;text-transform:uppercase;top:0px;}
-.date .year {color:#999999;font-size:9px;top:42px;}
+.date {float:left;width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;position:relative;}
+.date span {width:100%;text-align:center;margin:0;padding:0;position:absolute;}
+.date .day {color:#333333;font-family:"Times New Roman", Times, serif;font-size:24px;font-weight:bold;top:0.8em;}
+.date .month {color:#333333;font-size:8px;text-transform:uppercase;top:0.5em;}
+.date .year {color:#999999;font-size:9px;top:5em;}
 .date .comma {display:none;}
 
 .cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
@@ -163,8 +163,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #homemenu h3 {background:none;border-bottom:3px solid #c4da6b;margin:1.0em 0 0 0;padding-bottom:0.25em;text-align:right;}
 #homemenu ul {padding-top:0.5em;}
 
-#homeblog h4 a:link {color:#aec14e;}
+#homeblog h4 a:link, #homeblog h4 a:visited {color:#aec14e;}
 #homeblog h4 a:hover {color:#ec902d;}
-#homeblog h4 {margin-bottom:0.25em;}
-#homeblog p {margin-top:0.25em;margin-bottom:0.5em;}
+#homeblog p {margin-top:0.5em;margin-bottom:0.5em;}
 #homeblog .author {color:#999999;font-size:smaller;font-style:italic;}
