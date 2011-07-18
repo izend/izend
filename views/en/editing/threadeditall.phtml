@@ -24,7 +24,7 @@
 thread
 <input id="new_thread_title" name="new_thread_title" type="text" size="50" maxlength="100" value="<?php echo htmlspecialchars($new_thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" title="Titre" onkeypress="return focusonenter(event, 'new_thread_number')"/>
 #
-<input id="new_thread_number" name="new_thread_number" type="text" size="3" maxlength="3" value="<?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_create')"/>
+<input id="new_thread_number" name="new_thread_number" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_create')"/>
 type
 <?php
 $selected=$new_thread_type ? $new_thread_type : 'thread';
@@ -69,7 +69,7 @@ foreach ($thread_list as $b) {
 	$thread_title = htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8');
 	$thread_url .= '?' . 'clang=' . $clang;
 	echo <<<_MARK_
-<tr><td><input name="p[$i]" type="text" size="$maxlen" maxlength="3" value="$pos" /></td><td class="aright"><a href="$thread_url">$thread_number</a></td><td><a href="$thread_url">$thread_title</a></td></tr>\n
+<tr><td><input name="p[$i]" type="text" size="2" maxlength="$maxlen" value="$pos" /></td><td class="aright"><a href="$thread_url">$thread_number</a></td><td><a href="$thread_url">$thread_title</a></td></tr>\n
 _MARK_;
 	$i++;
 }
@@ -82,7 +82,7 @@ _MARK_;
 the list or
 <input id="thread_delete" name="thread_delete" type="submit" value="Delete" />
 the thread #
-<input id="old_thread_number" name="old_thread_number" type="text" size="3" maxlength="3" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_delete')"/>
+<input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_delete')"/>
 <?php if ($confirm_delete_thread): ?>
 Really?&nbsp;<button id="thread_confirmdelete" name="thread_confirmdelete" type="submit">Confirm</button>
 <?php endif; ?>

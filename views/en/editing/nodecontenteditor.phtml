@@ -24,12 +24,12 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <option value="media" <?php echo $selected == 'media' ? 'selected="selected"' : ''; ?>>Media</option>
 </select>
 #
-<input name="content_new_number" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
+<input name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php if ($node_contents): ?>
 or
 <input name="content_delete" type="submit" value="Delete" />
 #
-<input name="content_old_number" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
+<input name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php endif; ?>
 </p>
 <?php if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number or $missing_old_content_number or $bad_old_content_number or $missing_content_number or $bad_content_number): ?>
@@ -77,7 +77,7 @@ foreach ($node_contents as $c) {
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
 <?php echo $i; ?>.
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
-<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="2" value="<?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?>"/>
+<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?>"/>
 <input name="content_ignored[<?php echo $i; ?>]" type="checkbox" <?php if ($content_ignored) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignore" title="Ignored" />
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
