@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -58,19 +58,22 @@ function nodecontenteditor($lang, $clang, $node_id) {
 				$old_content_number=readarg($_POST['content_old_number']);
 			}
 			if (isset($_POST['content_id'])) {
-				$id=$_POST['content_id'];	// DON'T readarg!
+				$id=$_POST['content_id'];				// DON'T readarg!
 			}
 			if (isset($_POST['content_p'])) {
-				$p=$_POST['content_p'];		// DON'T readarg!
+				$p=$_POST['content_p'];					// DON'T readarg!
+			}
+			if (isset($_POST['content_ignored'])) {
+				$ignored=$_POST['content_ignored'];		// DON'T readarg!
 			}
 
 			if ($id and $p and is_array($id) and is_array($p) and count($id) == count($p)) {
 				$fieldgroups = array(
-								'text'		=> array('content_ignored', 'content_text', 'content_eval'),
-								'file'		=> array('content_ignored', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
-								'download'	=> array('content_ignored', 'content_download', 'content_path'),
-								'infile'	=> array('content_ignored', 'content_infile'),
-								'media'		=> array('content_ignored', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat'),
+								'text'		=> array('content_text', 'content_eval'),
+								'file'		=> array('content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
+								'download'	=> array('content_download', 'content_path'),
+								'infile'	=> array('content_infile'),
+								'media'		=> array('content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat'),
 								);
 
 				$node_contents=array();
@@ -79,10 +82,10 @@ function nodecontenteditor($lang, $clang, $node_id) {
 					foreach ($fields as $fieldname) {
 						if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
 							foreach ($_POST[$fieldname] as $i => $value) {
-								$v=readarg($value, true, false);	// trim but DON'T strip!
+								$v=readarg($value, true, false);	// trim but DON'T strip_tags!
 								switch ($fieldname) {
 									case 'content_text':
-										/* DON'T strip_tag! */
+										/* DON'T strip_tags! */
 										break;
 									case 'content_file':
 									case 'content_format':
@@ -94,7 +97,6 @@ function nodecontenteditor($lang, $clang, $node_id) {
 									case 'content_media_skin':
 										$v=strip_tags($v);
 										break;
-									case 'content_ignored':
 									case 'content_eval':
 									case 'content_lineno':
 									case 'content_media_icons':
@@ -104,7 +106,8 @@ function nodecontenteditor($lang, $clang, $node_id) {
 										break;
 								}
 								if (!isset($node_contents[$i])) {
-									$node_contents[$i] = array('content_id' => $id[$i], 'content_pos' => $p[$i], 'content_type' => $type, $fieldname => $v);
+									$content_ignored = isset($ignored[$i]) && $ignored[$i] == 'on';
+									$node_contents[$i] = array('content_id' => $id[$i], 'content_pos' => $p[$i], 'content_ignored' => $content_ignored, 'content_type' => $type, $fieldname => $v);
 								}
 								else {
 									$node_contents[$i][$fieldname] = $v;
