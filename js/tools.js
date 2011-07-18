@@ -85,7 +85,8 @@ function addtag(id, open, close) {
 			var endPos = e.selectionEnd;
 			var scrollTop = e.scrollTop;
 			e.value = e.value.substring(0, startPos) + open + e.value.substring(startPos, endPos) + close + e.value.substring(endPos, e.value.length);
-			e.selectionStart = e.selectionEnd = endPos + open.length + close.length;
+			e.selectionStart = startPos;
+			e.selectionEnd = endPos + open.length + close.length;
 			e.scrollTop = scrollTop;
 		}
 
