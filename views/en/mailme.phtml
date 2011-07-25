@@ -65,7 +65,6 @@ extract($infos);
 <?php endif; ?>
 </div>
 <script type="text/javascript">
-<!--
 $(document).ready(function() {
 	$('.grippie').each(function() {
 		var grippie = $(this);
@@ -92,13 +91,9 @@ $(document).ready(function() {
 	    }
 	});
 });
-//-->
 </script>
 <?php if (isset($focus) and $focus): ?>
 <script type="text/javascript">
-<!--
 $(function() {$('<?php echo $focus; ?>').focus();});
-//-->
 </script>
 <?php endif; ?>
-

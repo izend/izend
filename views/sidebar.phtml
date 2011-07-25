@@ -30,7 +30,6 @@
 <div id="cloudiness" class="hidy"></div>
 <?php echo $cloud; ?>
 <script type="text/javascript">
-<!--
 if ($.cookie('nocloud') == '1') {
 		$('.cloud').hide();
 }
@@ -38,6 +37,5 @@ $('#cloudiness').click(function() {
 	$('.cloud').toggle();
 	$.cookie('nocloud', $('.cloud').is(':hidden') ? '1' : '0', { path: '/' });
 });
-//-->
 </script>
 <?php endif; ?>
