@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -13,6 +13,7 @@ $aliases = array(
 		'captcha'		=> 'captcha',
 		'avatar'		=> 'avatar',
 		'logo'			=> 'logo',
+		'rssfeed'		=> 'rss',
 	),
 	'en' => array(
 		'install'		=> 'install',

@@ -304,7 +304,7 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
+				$features=array('captcha', 'avatar', 'rss', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
@@ -554,6 +554,7 @@ CREATE TABLE `${db_prefix}node_content` (
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('text','file','download','infile','media') CHARACTER SET ascii NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
+  `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -20,8 +20,12 @@ function home($lang) {
 	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified */
 
 	head('title', translate('home:title', $lang));
-	head('description', $node_abstract);
-	head('keywords', $node_cloud);
+	if ($node_abstract) {
+		head('description', $node_abstract);
+	}
+	if ($node_cloud) {
+		head('keywords', $node_cloud);
+	}
 
 	$languages='home';
 	$contact=$account=true;
