@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -67,5 +67,5 @@ global $home_action, $default_action, $default_folder;
 
 $home_action = 'install';		// 'home' or 'install'
 $default_action = 'install';	// 'page' or 'install' or false
-$default_folder = 1;
+$default_folder = 1;			// can be an array
 

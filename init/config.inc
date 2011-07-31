@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 <?php
@@ -70,5 +70,5 @@ global $home_action, $default_action, $default_folder;
 
 $home_action = <?php echo "'$home_action'"; ?>;		// 'home' or 'homepage'
 $default_action = <?php echo $default_action ? "'$default_action'" : 'false'; ?>;	// 'page' or 'anypage' or false
-$default_folder = 1;
+$default_folder = 1;			// can be an array
 
