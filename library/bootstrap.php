@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -59,7 +59,7 @@ function bootstrap() {
 
 		$base_url = $base_root .= '://'. $_SERVER['HTTP_HOST'];
 
-		if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '/')) {
+		if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/')) {
 			$base_path = '/' . $dir;
 			$base_url .= $base_path;
 		}
