@@ -135,3 +135,19 @@ To merge the new version with your site:
     git checkout master
     git merge izend
 
+To init a new development tree of your project and track changes
+directly from GitHub in a separate branch:
+
+    cd /var/www
+    git clone ssh://githost/git/sitename.net.git
+    cd /var/www/sitename.net
+    git remote add izend https://github.com/izend/izend
+    git fetch izend
+    git checkout -b izend izend/master
+    git log --graph --oneline
+    git checkout master
+    git merge --no-commit izend
+    git status
+    git ci -m"Merges izend/master"
+
+
