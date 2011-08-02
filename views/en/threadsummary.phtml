@@ -7,8 +7,9 @@
  * @link       http://www.izend.org
  */
 ?>
+<?php require_once 'dateen.php'; ?>
 <h3><?php echo $thread_title; ?></h3>
-<p class="info"><?php setlocale(LC_TIME, 'en_US.UTF-8'); echo strftime('%B %e, %Y %Hh%M', $thread_modified); ?></p>
+<p class="info"><?php echo longdatetime_en($thread_modified); ?></p>
 <?php if ($thread_abstract): ?>
 <h5>Abstract</h5>
 <p><?php echo $thread_abstract; ?></p>

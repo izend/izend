@@ -7,6 +7,7 @@
  * @link       http://www.izend.org
  */
 ?>
+<?php require_once 'dateen.php'; ?>
 <h3><?php echo $node_title; ?></h3>
 <p id="threadnodenav" class="menubar">
 <?php if ($prev_node_url): ?>
@@ -19,7 +20,7 @@
 <a href="<?php echo $next_node_url; ?>" title="Next"><?php echo htmlspecialchars($next_node_label, ENT_COMPAT, 'UTF-8'); ?></a>
 <?php endif; ?>
 </p>
-<p class="info"><?php setlocale(LC_TIME, 'en_US.UTF-8'); echo strftime('%B %e, %Y %Hh%M', $node_modified); ?></p>
+<p class="info"><?php echo longdatetime_en($node_modified); ?></p>
 <?php if ($node_abstract): ?>
 <h5>Abstract</h5>
 <p><?php echo $node_abstract; ?></p>

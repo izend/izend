@@ -7,8 +7,9 @@
  * @link       http://www.izend.org
  */
 ?>
+<?php require_once 'dateen.php'; ?>
 <h3><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></h3>
-<p class="info"><?php setlocale(LC_TIME, 'en_US.UTF-8'); echo strftime('%B %e, %Y %Hh%M', $node_modified); ?></p>
+<p class="info"><?php echo longdatetime_en($node_modified); ?></p>
 <?php if ($node_abstract): ?>
 <h5>Abstract</h5>
 <p><?php echo htmlspecialchars($node_abstract, ENT_COMPAT, 'UTF-8'); ?></p>

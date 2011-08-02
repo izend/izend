@@ -3,57 +3,66 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function longmonth_en($unixtime) {
 	static $longmonthname=array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-	$thismonth = idate('m', $unixtime);
+	$month = idate('m', $unixtime);
 
-	return $longmonthname[$thismonth-1];
+	return $longmonthname[$month-1];
 }
 
 function shortmonth_en($unixtime) {
 	static $shortmonthname=array('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug;', 'sep', 'oct', 'nov', 'dec');
 
-	$thismonth = idate('m', $unixtime);
+	$month = idate('m', $unixtime);
 
-	return $shortmonthname[$thismonth-1];
+	return $shortmonthname[$month-1];
 }
 
 function longday_en($unixtime) {
 	static $longdayname=array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 
-	$thisweekday = idate('w', $unixtime);
+	$weekday = idate('w', $unixtime);
 
-	return $longdayname[$thisweekday];
+	return $longdayname[$weekday];
 }
 
 function shortday_en($unixtime) {
 	static $shortdayname=array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 
-	$thisweekday = idate('w', $unixtime);
+	$weekday = idate('w', $unixtime);
 
-	return $shortdayname[$thisweekday];
+	return $shortdayname[$weekday];
 }
 
 function longdate_en($unixtime) {
-	$thisday = idate('d', $unixtime);
-	$thisyear = idate('Y', $unixtime);
+	$day = date('j', $unixtime);
+	$year = date('Y', $unixtime);
 
 	$month = longmonth_en($unixtime);
 
-	return "$month $thisday, $thisyear";
+	return "$month $day, $year";
 }
 
 function shortdate_en($unixtime) {
-	$thisday = idate('d', $unixtime);
-	$thisyear = idate('Y', $unixtime);
+	$day = date('j', $unixtime);
+	$year = date('Y', $unixtime);
 
 	$month = shortmonth_en($unixtime);
 
-	return "$thisday-$month-$thisyear";
+	return "$day-$month-$year";
+}
+
+function longdatetime_en($unixtime) {
+	$date = longdate_en($unixtime);
+
+	$hour = date('H', $unixtime);
+	$minute = date('i', $unixtime);
+
+	return "$date ${hour}h{$minute}";
 }
 

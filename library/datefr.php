@@ -3,57 +3,66 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function longmonth_fr($unixtime) {
-	static $longmonthname=array('janvier', 'f&eacute;vrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'ao&ucirc;t', 'septembre', 'octobre', 'novembre', 'd&eacute;cembre');
+	static $longmonthname=array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
 
-	$thismonth = idate('m', $unixtime);
+	$month = idate('m', $unixtime);
 
-	return $longmonthname[$thismonth-1];
+	return $longmonthname[$month-1];
 }
 
 function shortmonth_fr($unixtime) {
-	static $shortmonthname=array('jan', 'f&eacute;v', 'mar', 'avri', 'mai', 'juin', 'juil', 'ao&ucirc;', 'sep', 'oct', 'nov', 'd&eacute;c');
+	static $shortmonthname=array('jan', 'fév', 'mar', 'avri', 'mai', 'jun', 'jul', 'aoû', 'sep', 'oct', 'nov', 'déc');
 
-	$thismonth = idate('m', $unixtime);
+	$month = idate('m', $unixtime);
 
-	return $shortmonthname[$thismonth-1];
+	return $shortmonthname[$month-1];
 }
 
 function longday_fr($unixtime) {
 	static $longdayname=array('dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi');
 
-	$thisweekday = idate('w', $unixtime);
+	$weekday = idate('w', $unixtime);
 
-	return $longdayname[$thisweekday];
+	return $longdayname[$weekday];
 }
 
 function shortday_fr($unixtime) {
 	static $shortdayname=array('dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam');
 
-	$thisweekday = idate('w', $unixtime);
+	$weekday = idate('w', $unixtime);
 
-	return $shortdayname[$thisweekday];
+	return $shortdayname[$weekday];
 }
 
 function longdate_fr($unixtime) {
-	$thisday = idate('d', $unixtime);
-	$thisyear = idate('Y', $unixtime);
+	$day = date('j', $unixtime);
+	$year = date('Y', $unixtime);
 
 	$month = longmonth_fr($unixtime);
 
-	return "$thisday $month $thisyear";
+	return "$day $month $year";
 }
 
 function shortdate_fr($unixtime) {
-	$thisday = idate('d', $unixtime);
-	$thisyear = idate('Y', $unixtime);
+	$day = date('j', $unixtime);
+	$year = date('Y', $unixtime);
 
 	$month = shortmonth_fr($unixtime);
 
-	return "$thisday-$month-$thisyear";
+	return "$day-$month-$year";
+}
+
+function longdatetime_fr($unixtime) {
+	$date = longdate_fr($unixtime);
+
+	$hour = date('H', $unixtime);
+	$minute = date('i', $unixtime);
+
+	return "$date ${hour}h{$minute}";
 }
 
