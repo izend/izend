@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -771,8 +771,8 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `eval`, `text`) VALUES
-(1, 'fr', '1', '<?php global \$base_path; ?>\r\n<p><i><?php setlocale(LC_TIME, ''fr_FR.UTF-8''); echo strftime(''%e %B %Y''); ?></i></p>\r\n<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="<?php echo \$base_path;?>/fr/documentation">documentation</a>.</p>'),
-(1, 'en', '1', '<?php global \$base_path; ?>\r\n<p><i><?php setlocale(LC_TIME, ''en_US.UTF-8''); echo strftime(''%B %e, %Y''); ?></i></p>\r\n<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="<?php echo \$base_path;?>/en/documentation">documentation</a>.</p>'),
+(1, 'fr', '0', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>'),
+(1, 'en', '0', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>'),
 (2, 'fr', '0', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>'),
 (2, 'en', '0', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>');
 _SEP_;
