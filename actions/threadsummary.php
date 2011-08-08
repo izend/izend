@@ -28,7 +28,7 @@ function threadsummary($lang, $thread) {
 		$thread_url = url('thread', $lang) . '/'. $thread_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
-			$node_url = $thread_url  . '/' . $node_name;
+			$node_url = $thread_url . '/' . $node_name;
 			$thread_contents[] = compact('node_title' , 'node_url');
 		}
 	}

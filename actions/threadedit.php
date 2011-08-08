@@ -55,15 +55,14 @@ function threadedit($lang, $arglist=false) {
 		return threadeditall($lang, $clang);
 	}
 
-	if ($node) {
-		require_once 'actions/threadeditnode.php';
+	if (!$node) {
+		require_once 'actions/threadeditsummary.php';
 
-		return threadeditnode($lang, $clang, $thread, $node);
-
+		return threadeditsummary($lang, $clang, $thread);
 	}
 
-	require_once 'actions/threadeditsummary.php';
+	require_once 'actions/threadeditnode.php';
 
-	return threadeditsummary($lang, $clang, $thread);
+	return threadeditnode($lang, $clang, $thread, $node);
 }
 
