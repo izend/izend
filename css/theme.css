@@ -89,6 +89,9 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 .hidy {height:16px;margin:2px 4px 5px 0;background:transparent url(../images/theme/icons/down.png) top right no-repeat;}
 
+input#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/fr.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/en.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+
 #headline {margin:0 0 0.5em 0;text-align:right;}
 
 #search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
@@ -112,8 +115,8 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 #bannermenu #validate {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/check.png) no-repeat center center;}
 
 #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
-#fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
-#en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat center center;}
+#languages #fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
+#languages #en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat center center;}
 
 #banner #headline {float:right;margin-top:13px;margin-bottom:0;}
 #banner #searchinput {float:right;margin-top:11px;margin-bottom:0;}

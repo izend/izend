@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -29,7 +29,7 @@ function threadedit($lang, $arglist=false) {
 
 	$clang=false;
 	foreach ($supported_languages as $slang) {
-		if (isset($_POST[$slang . '_x'])) {
+		if (isset($_POST[$slang])) {
 			$clang=$slang;
 			break;
 		}

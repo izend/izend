@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -12,12 +12,9 @@
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<?php if (in_array('fr', $supported_languages)): ?>
-<input name="fr" type="image" src="<?php echo $base_path; ?>/images/theme/flags/fr.png" alt="fr" title="Français"/>
-<?php endif; ?>
-<?php if (in_array('en', $supported_languages)): ?>
-<input name="en" type="image" src="<?php echo $base_path; ?>/images/theme/flags/en.png" alt="en" title="English"/>
-<?php endif; ?>
+<?php foreach ($supported_languages as $lng): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="<?php echo $lng; ?>"/>
+<?php endforeach; ?>
 </p>
 <p>
 <input id="thread_create" name="thread_create" type="submit" value="Ajouter" />

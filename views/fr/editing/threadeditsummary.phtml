@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -12,21 +12,18 @@
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<?php if (in_array('fr', $supported_languages)): ?>
-<input name="fr" type="image" src="<?php echo $base_path; ?>/images/theme/flags/fr.png" alt="fr" title="Français"/>
-<?php endif; ?>
-<?php if (in_array('en', $supported_languages)): ?>
-<input name="en" type="image" src="<?php echo $base_path; ?>/images/theme/flags/en.png" alt="en" title="English"/>
-<?php endif; ?>
+<?php foreach ($supported_languages as $lng): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="<?php echo $lng; ?>"/>
+<?php endforeach; ?>
 </p>
 <p>
-<input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
 <label>URL :</label>
-<input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
 <p><label>Extrait :</label></p>
 <p>
-<textarea id="thread_abstract" name="thread_abstract" cols="80" rows="5"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea name="thread_abstract" cols="80" rows="5"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p><label>Nuage :</label></p>

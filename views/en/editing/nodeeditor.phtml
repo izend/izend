@@ -11,12 +11,7 @@
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<?php if (in_array('fr', $supported_languages)): ?>
-<input name="fr" type="image" src="<?php echo $base_path; ?>/images/theme/flags/fr.png" alt="fr" title="Français"/>
-<?php endif; ?>
-<?php if (in_array('en', $supported_languages)): ?>
-<input name="en" type="image" src="<?php echo $base_path; ?>/images/theme/flags/en.png" alt="en" title="English"/>
-<?php endif; ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="<?php echo $lng; ?>"/>
 </p>
 <p>
 <input id="node_title" name="node_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'node_edit')"/>

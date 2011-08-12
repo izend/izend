@@ -29,7 +29,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	}
 
 	$thread_name=$thread_title=$thread_abstract=$thread_cloud=false;
-	$r = thread_get($clang, $thread_id);
+	$r = thread_get($clang, $thread_id, false);
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
