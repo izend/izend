@@ -112,7 +112,7 @@ function search($lang, $arglist=false) {
 	else {
 		if ($cloud_id) {
 			$headline_text=$cloud_title;
-			$headline_url=url($cloud_action, $lang, $cloud_name );
+			$headline_url=false;
 			if (!$thread_nosearch) {
 				$search_text=$searchtext;
 				$search_url=url('search', $lang, $cloud_name);

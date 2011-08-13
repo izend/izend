@@ -11,7 +11,7 @@
 <?php if ($linklist): ?>
 <?php foreach ($linklist as $id => $data): ?>
 <?php extract($data); /* thread_title thread_url content */ ?>
-<h3><a href="<?php echo $thread_url; ?>"><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></a></h3>
+<h3><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></h3>
 <ol>
 <?php foreach ($content as $link): ?>
 <?php extract($link); /* link_title link_url link_description link_cloud */ ?>
