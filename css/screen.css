@@ -54,6 +54,7 @@ img {vertical-align:middle;}
 .smaller {font-size:smaller;}
 .larger {font-size:larger;}
 
+.selected {font-weight:bold;}
 .emphasis {font-style:italic;}
 .superscript {vertical-align:super;} 
 
