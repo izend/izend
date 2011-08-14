@@ -308,7 +308,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	head('javascript', 'jquery.scrollTo');
 
-	$headline_text=	translate('threadall:title', $clang);
+	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
 	$view=url($thread_type, $clang) . '/'. $thread_id;

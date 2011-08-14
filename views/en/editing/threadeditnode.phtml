@@ -8,6 +8,7 @@
  */
 ?>
 <h3><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></h3>
+<?php if ($next_node_url or $prev_node_url): ?>
 <p id="threadnodenav" class="menubar">
 <?php if ($prev_node_url): ?>
 <a href="<?php echo $prev_node_url; ?>" title="Previous"><?php echo htmlspecialchars($prev_node_label, ENT_COMPAT, 'UTF-8'); ?></a>
@@ -19,4 +20,5 @@
 <a href="<?php echo $next_node_url; ?>" title="Next"><?php echo htmlspecialchars($next_node_label, ENT_COMPAT, 'UTF-8'); ?></a>
 <?php endif; ?>
 </p>
+<?php endif; ?>
 <?php echo $node_editor; ?>

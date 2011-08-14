@@ -39,7 +39,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 
 	$node_title=false;
 	$r = thread_get_node($clang, $thread_id, $node_id, false);
-	$node_title = $r ? $r['node_title'] : $node_id;
+	$node_title = ($r and $r['node_title']) ? $r['node_title'] : $node_id;
 
 	head('title', $thread_title);
 	head('description', false);
@@ -48,7 +48,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 
 	head('javascript', 'jquery.scrollTo');
 
-	$headline_text=$thread_title;
+	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
 	$view=url($thread_type, $clang) . '/'. $thread_id . '/'. $node_id;

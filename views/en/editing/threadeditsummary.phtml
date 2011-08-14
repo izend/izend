@@ -3,17 +3,24 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <?php $scroll_to=false; ?>
+<h3><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></h3>
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
 <?php foreach ($supported_languages as $lng): ?>
-<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="<?php echo $lng; ?>"/>
+<?php if ($lng == 'fr'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="Français" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
+<?php elseif ($lng == 'en'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="English" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
+<?php elseif ($lng == 'ar'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="عربي" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
+<?php endif; ?>
 <?php endforeach; ?>
 </p>
 <p>
