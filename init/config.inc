@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 <?php
@@ -53,6 +53,11 @@ $supported_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $
 global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
+
+global $search_distance, $search_closest;
+
+$search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
+$search_closest=true;	// true - best matches, false - all matches
 
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
