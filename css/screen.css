@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
  
@@ -30,6 +30,7 @@ img {vertical-align:middle;}
 .proportional {font-family:sans-serif;}
 
 .menu {margin:0;padding:0;}
+.menu ul {margin-top:0;}
 .menu li {list-style:none;}
 .menu a {text-decoration:none;}
 .menu a span {display:none;}
@@ -38,6 +39,12 @@ img {vertical-align:middle;}
 .menubar li {display:inline;}
 .sidebar li {display:block;}
 .column {float:left;}
+
+.popup > li {float:left;width:10em;background:#ffffff;}
+.popup li a {display:block;}
+.popup ul {background:#ffffff;position:absolute;display:none;z-index:1000;}
+.popup ul li a {width:10em;}
+.popup li:hover ul {display:block;}
 
 .hidden {display:none;}
 .invisible {visibility:hidden;}
