@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2011 izend.org
- * @version		1
+ * @version		2
  * @link		http://www.izend.org
  */
 
@@ -32,17 +32,20 @@ function url($action, $lang=false, $arg=false) {
 }
 
 function alias($action, $lang=false, $arg=false) {
-	$path = detour($action, $lang);
+	$path = $action ? detour($action, $lang) : '';
 
-	if ($path) {
-		if ($arg) {
-			$path .= '/'.(is_array($arg) ? implode('/', $arg) : $arg);
-		}
-
-		return $lang ? $lang.'/'.$path : $path;
+	if ($path === false) {
+		return false;
 	}
 
-	return false;
+	if ($arg) {
+		if ($action) {
+			$path .= '/';
+		}
+		$path .= is_array($arg) ? implode('/', $arg) : $arg;
+	}
+
+	return $lang ? $lang.'/'.$path : $path;
 }
 
 function detour($action, $lang=false) {
