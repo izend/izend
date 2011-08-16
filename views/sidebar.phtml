@@ -18,7 +18,7 @@
 <?php endif; ?>
 <?php endif; ?>
 <?php if (isset($summary) and !empty($summary)): ?>
-<ol id="summary">
+<ol id="summary" class="menu">
 <?php foreach ($summary as $p): ?>
 <?php list($title, $url)=$p; ?>
 <li><a href="<?php echo $url; ?>"><?php echo htmlspecialchars($title, ENT_NOQUOTES, 'UTF-8', false); ?></a></li>

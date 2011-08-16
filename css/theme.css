@@ -150,9 +150,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:smaller;font-style:italic;}
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
-#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:1em 0 0.5em 0;}
-#summary li {list-style:none;}
-#summary li a:link, #summary li a:visited {text-decoration:none;}
+#summary {font-size:smaller;text-align:right;margin:1em 0 0.5em 0;}
 
 .summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}
