@@ -35,9 +35,15 @@ $selected=$new_thread_type ? $new_thread_type : 'thread';
 ?>
 <select name="new_thread_type" size="1">
 <option value="thread" <?php echo $selected == 'thread' ? 'selected="selected"' : ''; ?>>Fil</option>
+<?php foreach ($supported_threads as $thd): ?>
+<?php if ($thd == 'folder'): ?>
 <option value="folder" <?php echo $selected == 'folder' ? 'selected="selected"' : ''; ?>>Dossier</option>
+<?php elseif ($thd == 'story'): ?>
 <option value="story" <?php echo $selected == 'story' ? 'selected="selected"' : ''; ?>>Article</option>
+<?php elseif ($thd == 'book'): ?>
 <option value="book" <?php echo $selected == 'book' ? 'selected="selected"' : ''; ?>>Manuel</option>
+<?php endif; ?>
+<?php endforeach; ?>
 </select>
 </p>
 <?php if ($missing_new_thread_title or $missing_new_thread_name or $missing_new_thread_type or $bad_new_thread_type or $bad_new_thread_number): ?>
