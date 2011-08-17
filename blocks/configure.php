@@ -486,7 +486,7 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_media` (
+CREATE TABLE `${db_prefix}content_longtail` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `file` varchar(200) DEFAULT NULL,
@@ -552,7 +552,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `content_type` enum('text','file','download','infile','media') CHARACTER SET ascii NOT NULL DEFAULT 'text',
+  `content_type` enum('text','file','download','infile','longtail') CHARACTER SET ascii NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)

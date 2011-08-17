@@ -73,7 +73,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 								'file'		=> array('content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
 								'download'	=> array('content_download', 'content_path'),
 								'infile'	=> array('content_infile'),
-								'media'		=> array('content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat'),
+								'longtail'	=> array('content_longtail_file', 'content_longtail_image', 'content_longtail_width', 'content_longtail_height', 'content_longtail_skin', 'content_longtail_icons', 'content_longtail_duration', 'content_longtail_autostart', 'content_longtail_repeat'),
 								);
 
 				$node_contents=array();
@@ -92,16 +92,16 @@ function nodecontenteditor($lang, $clang, $node_id) {
 									case 'content_path':
 									case 'content_download':
 									case 'content_infile':
-									case 'content_media_file':
-									case 'content_media_image':
-									case 'content_media_skin':
+									case 'content_longtail_file':
+									case 'content_longtail_image':
+									case 'content_longtail_skin':
 										$v=strip_tags($v);
 										break;
 									case 'content_eval':
 									case 'content_lineno':
-									case 'content_media_icons':
-									case 'content_media_autostart':
-									case 'content_media_repeat':
+									case 'content_longtail_icons':
+									case 'content_longtail_autostart':
+									case 'content_longtail_repeat':
 										$v=$v=='on' ? true : false;
 										break;
 								}
@@ -141,7 +141,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			if (empty($new_content_type)) {
 				$missing_new_content_type = true;
 			}
-			else if (!in_array($new_content_type, array('text', 'file', 'download', 'infile', 'media'))) {
+			else if (!in_array($new_content_type, array('text', 'file', 'download', 'infile', 'longtail'))) {
 				$bad_new_content_type = true;
 			}
 			if (empty($new_content_number)) {
@@ -219,7 +219,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 				break;
 			}
 
-			$fields=array('content_id', 'content_type', 'content_ignored', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_media_file', 'content_media_image', 'content_media_width', 'content_media_height', 'content_media_skin', 'content_media_icons', 'content_media_duration', 'content_media_autostart', 'content_media_repeat', 'content_thread', 'content_node', 'content_pos');
+			$fields=array('content_id', 'content_type', 'content_ignored', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_longtail_file', 'content_longtail_image', 'content_longtail_width', 'content_longtail_height', 'content_longtail_skin', 'content_longtail_icons', 'content_longtail_duration', 'content_longtail_autostart', 'content_longtail_repeat', 'content_thread', 'content_node', 'content_pos');
 
 			$content_id = $nc['content_id'];
 			$content_pos = $nc['content_number'];
@@ -231,12 +231,12 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			$content_start=$content_end=0;
 			$content_lineno=false;
 			$content_infile=false;
-			$content_media_file=$content_media_image=false;
-			$content_media_width=$content_media_height=0;
-			$content_media_skin=false;
-			$content_media_icons=false;
-			$content_media_duration=0;
-			$content_media_autostart=$content_media_repeat=false;
+			$content_longtail_file=$content_longtail_image=false;
+			$content_longtail_width=$content_longtail_height=0;
+			$content_longtail_skin=false;
+			$content_longtail_icons=false;
+			$content_longtail_duration=0;
+			$content_longtail_autostart=$content_longtail_repeat=false;
 
 			$content_thread=$content_node=false;
 			$content_ignored=false;

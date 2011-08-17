@@ -108,9 +108,9 @@ function node_delete($node_id) {
 	$tabcontentfile=db_prefix_table('content_file');
 	$tabcontentdownload=db_prefix_table('content_download');
 	$tabcontentinfile=db_prefix_table('content_infile');
-	$tabcontentmedia=db_prefix_table('content_media');
+	$tabcontentlongtail=db_prefix_table('content_longtail');
 
-	$sql="DELETE n, nloc, nc, ct, cf, cd, cin, cm FROM $tabnode n LEFT JOIN $tabnodelocale nloc ON nloc.node_id=n.node_id LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id LEFT JOIN $tabcontentfile cf ON cf.content_id=nc.content_id LEFT JOIN $tabcontentdownload cd ON cd.content_id=nc.content_id LEFT JOIN $tabcontentinfile cin ON cin.content_id=nc.content_id LEFT JOIN $tabcontentmedia cm ON cm.content_id=nc.content_id WHERE n.node_id=$node_id";
+	$sql="DELETE n, nloc, nc, ct, cf, cd, cin, clt FROM $tabnode n LEFT JOIN $tabnodelocale nloc ON nloc.node_id=n.node_id LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id LEFT JOIN $tabcontentfile cf ON cf.content_id=nc.content_id LEFT JOIN $tabcontentdownload cd ON cd.content_id=nc.content_id LEFT JOIN $tabcontentinfile cin ON cin.content_id=nc.content_id LEFT JOIN $tabcontentlongtail cm ON clt.content_id=nc.content_id WHERE n.node_id=$node_id";
 
 	$r = db_delete($sql);
 
@@ -125,9 +125,9 @@ function node_get_contents($lang, $node_id) {
 	$tabcontentfile=db_prefix_table('content_file');
 	$tabcontentdownload=db_prefix_table('content_download');
 	$tabcontentinfile=db_prefix_table('content_infile');
-	$tabcontentmedia=db_prefix_table('content_media');
+	$tabcontentlongtail=db_prefix_table('content_longtail');
 
-	$sql="SELECT nc.content_id AS content_id, nc.content_type AS content_type, nc.number AS content_number, nc.ignored AS content_ignored, ct.text AS content_text, ct.eval AS content_eval, cf.path AS content_file, cf.start AS content_start, cf.end AS content_end, cf.format AS content_format, cf.lineno AS content_lineno, cd.name AS content_download, cd.path AS content_path, cin.path AS content_infile, cm.file AS content_media_file, cm.image AS content_media_image, cm.width AS content_media_width, cm.height AS content_media_height, cm.icons AS content_media_icons, cm.skin AS content_media_skin, cm.duration AS content_media_duration, cm.autostart AS content_media_autostart, cm.repeat AS content_media_repeat FROM $tabnodecontent nc LEFT JOIN $tabcontenttext ct ON nc.content_type='text' AND ct.content_id=nc.content_id AND ct.locale=$sqllang LEFT JOIN $tabcontentfile cf ON nc.content_type='file' AND cf.content_id=nc.content_id AND cf.locale=$sqllang LEFT JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang LEFT JOIN $tabcontentinfile cin ON nc.content_type='infile' AND cin.content_id=nc.content_id AND cin.locale=$sqllang LEFT JOIN $tabcontentmedia cm ON nc.content_type='media' AND cm.content_id=nc.content_id AND cm.locale=$sqllang WHERE nc.node_id=$node_id ORDER BY nc.number";
+	$sql="SELECT nc.content_id AS content_id, nc.content_type AS content_type, nc.number AS content_number, nc.ignored AS content_ignored, ct.text AS content_text, ct.eval AS content_eval, cf.path AS content_file, cf.start AS content_start, cf.end AS content_end, cf.format AS content_format, cf.lineno AS content_lineno, cd.name AS content_download, cd.path AS content_path, cin.path AS content_infile, clt.file AS content_longtail_file, clt.image AS content_longtail_image, clt.width AS content_longtail_width, clt.height AS content_longtail_height, clt.icons AS content_longtail_icons, clt.skin AS content_longtail_skin, clt.duration AS content_longtail_duration, clt.autostart AS content_longtail_autostart, clt.repeat AS content_longtail_repeat FROM $tabnodecontent nc LEFT JOIN $tabcontenttext ct ON nc.content_type='text' AND ct.content_id=nc.content_id AND ct.locale=$sqllang LEFT JOIN $tabcontentfile cf ON nc.content_type='file' AND cf.content_id=nc.content_id AND cf.locale=$sqllang LEFT JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang LEFT JOIN $tabcontentinfile cin ON nc.content_type='infile' AND cin.content_id=nc.content_id AND cin.locale=$sqllang LEFT JOIN $tabcontentlongtail clt ON nc.content_type='longtail' AND clt.content_id=nc.content_id AND clt.locale=$sqllang WHERE nc.node_id=$node_id ORDER BY nc.number";
 
 	$r = db_query($sql);
 
@@ -154,7 +154,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	$tabcontentfile=db_prefix_table('content_file');
 	$tabcontentdownload=db_prefix_table('content_download');
 	$tabcontentinfile=db_prefix_table('content_infile');
-	$tabcontentmedia=db_prefix_table('content_media');
+	$tabcontentlongtail=db_prefix_table('content_longtail');
 
 	foreach ($node_contents as $c) {
 		$content_ignored=false;
@@ -165,14 +165,14 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$content_start=$content_end=0;
 		$content_lineno=false;
 		$content_infile=false;
-		$content_media_file=$content_media_image=false;
-		$content_media_width=$content_media_height=0;
-		$content_media_skin=false;
-		$content_media_icons=false;
-		$content_media_duration=0;
-		$content_media_autostart=$content_media_repeat=false;
+		$content_longtail_file=$content_longtail_image=false;
+		$content_longtail_width=$content_longtail_height=0;
+		$content_longtail_skin=false;
+		$content_longtail_icons=false;
+		$content_longtail_duration=0;
+		$content_longtail_autostart=$content_longtail_repeat=false;
 
-		extract($c);	/* content_id content_number content_type (content_text content_eval | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile | content_media_file content_media_image content_media_width content_media_height content_media_skin content_media_icons content_media_duration content_media_autostart content_media_repeat) ignored */
+		extract($c);	/* content_id content_number content_type (content_text content_eval | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile | content_longtail_file content_longtail_image content_longtail_width content_longtail_height content_longtail_skin content_longtail_icons content_longtail_duration content_longtail_autostart content_longtail_repeat) ignored */
 		$sqltype=db_sql_arg($content_type, false);
 		$sqlignored=$content_ignored ? 1 : 0;
 
@@ -206,18 +206,18 @@ function node_set_contents($lang, $node_id, $node_contents) {
 				$sqlpath=db_sql_arg($content_infile, true, true);
 				$sql="INSERT $tabcontentinfile SET content_id=$content_id, locale=$sqllang, path=$sqlpath ON DUPLICATE KEY UPDATE path=VALUES(path)";
 				break;
-			case 'media':
-				$sqlfile=db_sql_arg($content_media_file, true, true);
-				$sqlimage=db_sql_arg($content_media_image, true, true);
-				$sqlwidth=$content_media_width > 0 ? $content_media_width : 0;
-				$sqlheight=$content_media_height > 0 ? $content_media_height : 0;
-				$sqlskin=db_sql_arg($content_media_skin, true, true);
-				$sqlicons=$content_media_image ? ($content_media_icons ? 1 : 0) : 0;
-				$sqlduration=$content_media_duration > 0 ? $content_media_duration : 0;
-				$sqlautostart=$content_media_autostart ? 1 : 0;
-				$sqlrepeat=$content_media_repeat ? 1 : 0;
+			case 'longtail':
+				$sqlfile=db_sql_arg($content_longtail_file, true, true);
+				$sqlimage=db_sql_arg($content_longtail_image, true, true);
+				$sqlwidth=$content_longtail_width > 0 ? $content_longtail_width : 0;
+				$sqlheight=$content_longtail_height > 0 ? $content_longtail_height : 0;
+				$sqlskin=db_sql_arg($content_longtail_skin, true, true);
+				$sqlicons=$content_longtail_image ? ($content_longtail_icons ? 1 : 0) : 0;
+				$sqlduration=$content_longtail_duration > 0 ? $content_longtail_duration : 0;
+				$sqlautostart=$content_longtail_autostart ? 1 : 0;
+				$sqlrepeat=$content_longtail_repeat ? 1 : 0;
 
-				$sql="INSERT $tabcontentmedia (content_id, locale, file, image, width, height, skin, icons, duration, autostart, `repeat`) VALUES ($content_id, $sqllang, $sqlfile, $sqlimage, $sqlwidth, $sqlheight, $sqlskin, $sqlicons, $sqlduration, $sqlautostart, $sqlrepeat) ON DUPLICATE KEY UPDATE file=VALUES(file), image=VALUES(image), width=VALUES(width), height=VALUES(height), skin=VALUES(skin), icons=VALUES(icons), duration=VALUES(duration), autostart=VALUES(autostart), `repeat`=VALUES(`repeat`)";
+				$sql="INSERT $tabcontentlongtail (content_id, locale, file, image, width, height, skin, icons, duration, autostart, `repeat`) VALUES ($content_id, $sqllang, $sqlfile, $sqlimage, $sqlwidth, $sqlheight, $sqlskin, $sqlicons, $sqlduration, $sqlautostart, $sqlrepeat) ON DUPLICATE KEY UPDATE file=VALUES(file), image=VALUES(image), width=VALUES(width), height=VALUES(height), skin=VALUES(skin), icons=VALUES(icons), duration=VALUES(duration), autostart=VALUES(autostart), `repeat`=VALUES(`repeat`)";
 				break;
 		}
 
@@ -257,7 +257,7 @@ function node_create_content($lang, $node_id, $content_type, $content_number=0) 
 		case 'file':
 		case 'download':
 		case 'infile':
-		case 'media':
+		case 'longtail':
 			$tabcontenttype=db_prefix_table("content_$content_type");
 			break;
 		default:
@@ -297,7 +297,7 @@ function node_delete_content($node_id, $content_id, $content_type) {
 		case 'file':
 		case 'download':
 		case 'infile':
-		case 'media':
+		case 'longtail':
 			$tabnodecontent=db_prefix_table('node_content');
 			$tabcontenttype=db_prefix_table("content_$content_type");
 

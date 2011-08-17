@@ -28,33 +28,34 @@ foreach ($contents as $c) {
 		case 'infile':
 			include $c['infile'];
 			break;
-		case 'media':
+		case 'longtail':
 			extract($c);	/* file image width height skin icons duration autostart repeat */
 			$id = uniqid('id');
-			echo '<div class="media">', PHP_EOL;
-			echo '<p id="', $id, '"></p>', "\n";
-			echo '<script type="text/javascript">', "\n";
-			echo 'var so = new SWFObject("/longtail/player.swf","', $id, '","', $width, '","', $height, '","9","#FFFFFF");', "\n";
-			echo 'so.addParam("allowfullscreen","false");', "\n";
-			echo 'so.addParam("wmode","opaque");', "\n";
+			echo '<div class="longtail">', PHP_EOL;
+			echo '<p id="', $id, '"></p>', PHP_EOL;
+			echo '<script type="text/javascript">', PHP_EOL;
+			echo 'var so = new SWFObject("/longtail/player.swf","', $id, '","', $width, '","', $height, '","9","#FFFFFF");', PHP_EOL;
+			echo 'so.addParam("allowfullscreen", "false");', PHP_EOL;
+			echo 'so.addParam("wmode", "opaque");', PHP_EOL;
+			echo 'so.addVariable("usefullscreen", "false")', PHP_EOL;
 			if ($image) {
-				echo 'so.addVariable("image","', $image, '");', "\n";
+				echo 'so.addVariable("image", "', $image, '");', PHP_EOL;
 			}
 			if ($file) {
-				echo 'so.addVariable("file","', $file, '");', "\n";
+				echo 'so.addVariable("file", "', $file, '");', PHP_EOL;
 			}
 			if ($duration) {
-				echo 'so.addVariable("duration","', $duration, '");', "\n";
+				echo 'so.addVariable("duration", "', $duration, '");', PHP_EOL;
 			}
 			if ($skin) {
-				echo 'so.addVariable("skin","', $skin, '");', "\n";
+				echo 'so.addVariable("skin", "', $skin, '");', PHP_EOL;
 			}
-			echo 'so.addVariable("icons","', $icons ? 'true' : 'false', '");', "\n";
-			echo 'so.addVariable("controlbar","bottom");', "\n";
-			echo 'so.addVariable("repeat","', $repeat ? 'always' : 'none', '");', "\n";
-			echo 'so.addVariable("autostart","', $autostart ? 'true' : 'false', '");', "\n";
-			echo 'so.write("', $id, '");', "\n";
-			echo '</script>', "\n";
+			echo 'so.addVariable("icons", "', $icons ? 'true' : 'false', '");', PHP_EOL;
+			echo 'so.addVariable("controlbar", "bottom");', PHP_EOL;
+			echo 'so.addVariable("repeat", "', $repeat ? 'always' : 'none', '");', PHP_EOL;
+			echo 'so.addVariable("autostart", "', $autostart ? 'true' : 'false', '");', PHP_EOL;
+			echo 'so.write("', $id, '");', PHP_EOL;
+			echo '</script>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			break;
 		default:
