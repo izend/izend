@@ -233,7 +233,7 @@ function threadeditall($lang, $clang, $type=false) {
 
 	head('javascript', 'jquery.scrollTo');
 
-	$view=url($type ? $type : 'thread', $clang);
+	$view=url('thread', $clang);
 	$validate=url($type ? $type : 'thread', $clang);
 	$banner = build('banner', $lang, compact('view', 'validate'));
 

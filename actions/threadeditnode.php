@@ -51,7 +51,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url($thread_type, $clang) . '/'. $thread_id . '/'. $node_id;
+	$view=url('thread', $clang) . '/'. $thread_id . '/'. $node_id;
 	$validate=url($thread_type, $clang) . '/'. $thread_name . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 

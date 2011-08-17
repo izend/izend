@@ -311,7 +311,7 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url($thread_type, $clang) . '/'. $thread_id;
+	$view=url('thread', $clang) . '/'. $thread_id;
 	$validate=url($thread_type, $clang) . '/'. $thread_id;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 
