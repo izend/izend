@@ -19,22 +19,25 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
-Date:	Wed Aug 17
+Date:	Wed Aug 17 2011
 
 RENAME TABLE `izend_content_media` TO `izend_content_longtail`
 
-ALTER TABLE `node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'longtail' )
+ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'media', 'longtail' )
 CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT 'text'
 
-UPDATE `node_content` SET `content_type`='longtail' WHERE `content_type`='media'
+UPDATE `izend_node_content` SET `content_type`='longtail' WHERE `content_type`='media'
+
+ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'longtail' )
+CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT 'text'
 ----
 
-Date:	Thu Jul 7
+Date:	Thu Jul 7 2011
 
 ALTER TABLE `izend_node_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0'
 ----
 
-Date:   Wed Jun 8
+Date:   Wed Jun 8 2011
 
     Makes tag cloud case sensitive with COLLATE utf8_bin
 
@@ -42,7 +45,7 @@ ALTER TABLE `izend_tag` CHANGE `name` `name` VARCHAR(100)
 CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ----
 
-Date:   Tue Jun 14
+Date:   Tue Jun 14 2011
 
     Adds thread type 'folder'
 
