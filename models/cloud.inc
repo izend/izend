@@ -204,10 +204,10 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	return $taglist;
 }
 
-function cloud_suggest($lang, $cloud_id, $s) {
+function cloud_suggest($lang, $cloud_id, $term) {
 	// return the tags which contain a string in a thread or in all the threads
 	$sqllang=db_sql_arg($lang, false);
-	$sqls=db_sql_arg("%$s%", false);
+	$sqlterm=db_sql_arg("%$term%", false);
 
 	$tabtag=db_prefix_table('tag');
 
@@ -218,7 +218,7 @@ function cloud_suggest($lang, $cloud_id, $s) {
 		$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.thread_id=$cloud_id";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqls";
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm ORDER BY tag_name";
 
 	$r = db_query($sql);
 
