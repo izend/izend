@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -91,7 +91,8 @@ function story($lang, $arglist=false) {
 	if (!$story_nosearch) {
 		$search_text='';
 		$search_url= url('search', $lang) . '/'. $story_name;
-		$search=view('searchinput', $lang, compact('search_url', 'search_text'));
+		$suggest_url= url('suggest', $lang) . '/'. $story_name;
+		$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
 	}
 
 	$cloud=false;
@@ -121,7 +122,7 @@ function story($lang, $arglist=false) {
 	head('description', empty($node_abstract) ? $story_abstract : $node_abstract);
 	head('keywords', $node_cloud);
 
-	$search=!$story_nosearch ? compact('search_url', 'search_text') : false;
+	$search=!$story_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('storyedit', $_SESSION['user']['locale']) . '/'. $story_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('story', $lang) . '/' . $story_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));

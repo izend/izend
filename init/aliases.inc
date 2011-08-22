@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -26,6 +26,7 @@ $aliases = array(
 		'password'		=> 'password',
 		'newuser'		=> 'new-user',
 		'search'		=> 'search',
+		'suggest'		=> 'suggest',
 		'download'		=> 'download',
 		'page'			=> 'page',
 		'editpage'		=> 'edit',
@@ -51,6 +52,7 @@ $aliases = array(
 		'password'		=> 'mot-de-passe',
 		'newuser'		=> 'nouvel-utilisateur',
 		'search'		=> 'recherche',
+		'suggest'		=> 'suggestion',
 		'download'		=> 'telechargement',
 		'page'			=> 'page',
 		'editpage'		=> 'edition',

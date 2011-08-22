@@ -3,13 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
-require_once 'wmatch.php';
-
 require_once 'models/cloud.inc';
 
 function search($lang, $arglist=false) {
@@ -21,7 +19,7 @@ function search($lang, $arglist=false) {
 		}
 	}
 
-	$cloud_id=false;
+	$cloud_id=$cloud_name=false;
 
 	if ($cloud) {
 		$cloud_id = cloud_id($cloud);
@@ -83,23 +81,21 @@ function search($lang, $arglist=false) {
 
 	$search_title=translate('search:title', $lang);
 
+	$search_url=false;
+
 	$search=$cloud=false;
 
 	if ($rsearch) {
 		if ($cloud_id) {
 			if (!$thread_nosearch) {
-				$search_text=$searchtext;
 				$search_url=url('search', $lang, $cloud_name);
-				$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 			}
 			if (!$thread_nocloud) {
 				$cloud = build('cloud', $lang, $cloud_id, false, 60, true, true);
 			}
 		}
 		else {
-			$search_text=$searchtext;
 			$search_url=url('search', $lang);
-			$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 			$cloud = build('cloud', $lang, false, false, 60, true, true);
 		}
 		$headline_text=$search_title;
@@ -114,17 +110,13 @@ function search($lang, $arglist=false) {
 			$headline_text=$cloud_title;
 			$headline_url=false;
 			if (!$thread_nosearch) {
-				$search_text=$searchtext;
 				$search_url=url('search', $lang, $cloud_name);
-				$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 			}
 		}
 		else {
 			$headline_text=$search_title;
 			$headline_url=false;
-			$search_text=$searchtext;
 			$search_url=url('search', $lang);
-			$search=view('searchinput', $lang, compact('search_url', 'search_text'));
 		}
 		$headline = compact('headline_text', 'headline_url');
 		$title = view('headline', false, $headline);
@@ -132,10 +124,16 @@ function search($lang, $arglist=false) {
 		$content = build('cloud', $lang, $cloud_id, false, false, true, false, false);
 	}
 
+	if ($search_url) {
+		$search_text=$searchtext;
+		$suggest_url=url('suggest', $lang, $cloud_name);
+		$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
+	}
+
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
 
 	if ($search) {
-		$search=compact('search_url', 'search_text');
+		$search=compact('search_url', 'search_text', 'suggest_url', 'suggest_url');
 	}
 	$banner = build('banner', $lang, compact('headline', 'search'));
 

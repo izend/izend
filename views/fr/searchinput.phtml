@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -11,3 +11,10 @@
 <input id="searchtext" name="searchtext" type="text" value="<?php echo htmlspecialchars($search_text, ENT_COMPAT, 'UTF-8'); ?>" />
 <button id="search" name="search" type="submit" title="Chercher">Chercher</button>
 </form>
+<?php if (isset($suggest_url) and !empty($suggest_url)): ?>
+<?php head('javascript', 'jquery-ui'); ?>
+<?php head('stylesheet', 'jquery-ui'); ?>
+<script type="text/javascript">
+$('input#searchtext').autocomplete({appendTo: '#searchinput', minLength: 3, source: '<?php echo $suggest_url; ?>'});
+</script>
+<?php endif; ?>

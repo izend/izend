@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -76,7 +76,8 @@ function bookpage($lang, $book, $page) {
 	if (!$book_nosearch) {
 		$search_text='';
 		$search_url= url('search', $lang) . '/'. $book_name;
-		$search=view('searchinput', $lang, compact('search_url', 'search_text'));
+		$suggest_url= url('suggest', $lang) . '/'. $book_name;
+		$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
 	}
 
 	$cloud=false;
@@ -95,7 +96,7 @@ function bookpage($lang, $book, $page) {
 	head('description', empty($node_abstract) ? $book_abstract : $node_abstract);
 	head('keywords', $node_cloud);
 
-	$search=!$book_nosearch ? compact('search_url', 'search_text') : false;
+	$search=!$book_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '/'. $book_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('book', $lang) . '/'. $book_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));

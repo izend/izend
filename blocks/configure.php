@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -304,7 +304,7 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'rss', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
+				$features=array('captcha', 'avatar', 'rss', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {

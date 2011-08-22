@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -154,7 +154,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 }
 
 function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
-	// return the all tags which match a word in a thread or in all the threads
+	// return the tags which match a word in a thread or in all the threads
 	preg_match_all('/(\S+)/', $s, $r);
 	$wordlist = array_unique($r[0]);
 	$nwords=count($wordlist);
@@ -165,22 +165,23 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabtag=db_prefix_table('tag');
-	$tabtagindex=db_prefix_table('tag_index');
-	$tabthreadnode=db_prefix_table('thread_node');
-	$tabnodelocale=db_prefix_table('node_locale');
 
-	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id";
+	$join = '';
 	if ($cloud_id) {
-		$join .= " AND tn.thread_id=$cloud_id";
+		$tabtagindex=db_prefix_table('tag_index');
+		$tabthreadnode=db_prefix_table('thread_node');
+		$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.thread_id=$cloud_id";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join WHERE tg.locale=$sqllang";
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang";
 
 	$r = db_query($sql);
 
 	if (!$r) {
 		return false;
 	}
+
+	require_once 'wmatch.php';
 
 	$alltags=array();
 	foreach ($r as $row) {
@@ -201,6 +202,27 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	}
 
 	return $taglist;
+}
+
+function cloud_suggest($lang, $cloud_id, $s) {
+	// return the tags which contain a string in a thread or in all the threads
+	$sqllang=db_sql_arg($lang, false);
+	$sqls=db_sql_arg("%$s%", false);
+
+	$tabtag=db_prefix_table('tag');
+
+	$join = '';
+	if ($cloud_id) {
+		$tabtagindex=db_prefix_table('tag_index');
+		$tabthreadnode=db_prefix_table('thread_node');
+		$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.thread_id=$cloud_id";
+	}
+
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqls";
+
+	$r = db_query($sql);
+
+	return $r;
 }
 
 function cloud_list_node_tags($lang, $node_id) {
