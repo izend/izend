@@ -13,7 +13,7 @@
 </form>
 <?php if (isset($suggest_url) and !empty($suggest_url)): ?>
 <?php head('javascript', 'jquery-ui'); ?>
-<?php head('stylesheet', 'jquery-ui'); ?>
+<?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script type="text/javascript">
 $('input#searchtext').autocomplete({appendTo: '#searchinput', minLength: 3, source: '<?php echo $suggest_url; ?>'});
 </script>

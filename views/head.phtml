@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -29,19 +29,20 @@
 <?php else: ?>
 <meta name="robots" content="index, follow" />
 <?php endif; ?>
+<?php if (isset($favicon)): ?>
+<link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
+<?php endif; ?>
 <?php if (true): ?>
 <link href="<?php echo $base_path; ?>/css/zero.css" rel="stylesheet" type="text/css" media="screen" />
 <?php endif; ?>
 <link href="<?php echo $base_path; ?>/css/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="<?php echo $base_path; ?>/css/<?echo $lang; ?>.css" rel="stylesheet" type="text/css" media="screen" />
 <?php if (isset($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
 <link href="<?php echo $base_path; ?>/css/<?php echo $css['name']; ?>.css" rel="stylesheet" type="text/css" media="<?php echo $css['media']; ?>" />
 <?php endforeach; ?>
-<?php endif; ?>
-<?php if (isset($favicon)): ?>
-<link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/jquery.js"></script>
