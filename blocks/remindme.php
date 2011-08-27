@@ -17,7 +17,7 @@ require_once 'tokenid.php';
 
 function remindme($lang, $login=false) {
 	$action='init';
-	if (isset($_POST['remindme_submit'])) {
+	if (isset($_POST['remindme_send'])) {
 		$action='remindme';
 	}
 

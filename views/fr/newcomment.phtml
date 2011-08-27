@@ -35,9 +35,11 @@
 <img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="[code]" title="code" onclick="tagmessage('[code]','[/code]')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/url.png" alt="[url]" title="url" onclick="tagmessage('[url]','[/url]')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/email.png" alt="[email]" title="email" onclick="tagmessage('[email]','[/email]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="aide" onclick="togglehelp()" />
 <span id="newcomment_limiter"><?php echo $message_maxlength; ?></span>
 </div>
-<textarea id="newcomment_message" name="newcomment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
+<textarea id="newcomment_message" name="newcomment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 <p id="newcomment_help">
 Entrez un maximum de <b><?php echo $message_maxlength; ?></b> caractères. Améliorez la présentation de votre texte avec les balises de formatage suivantes&nbsp;:<br />
 [<b>p</b>]paragraphe[/p], [<b>b</b>]<b>gras</b>[/b], [<b>i</b>]<i>italique</i>[/i], [<b>u</b>]<u>souligné</u>[/u], [<b>s</b>]<s>barré</s>[/s],
@@ -52,7 +54,7 @@ Entrez un maximum de <b><?php echo $message_maxlength; ?></b> caractères. Amél
 le texte ou le
 <button type="submit" name="newcomment_validate" id="newcomment_validate">Valider</button>
 <?php else: ?>
-<button type="submit" name="newcomment_comment" id="newcomment_submit">Commenter</button>
+<button type="submit" name="newcomment_comment" id="newcomment_comment">Commenter</button>
 <?php endif; ?>
 </p>
 </form>
@@ -71,6 +73,17 @@ function tagmessage(open, close)
 }
 
 inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>);
+</script>
+<?php head('javascript', 'jquery.cookie'); ?>
+<script type="text/javascript">
+function togglehelp()
+{
+	$('#newcomment_help').toggle();
+	$.cookie('nonewcommenthelp', $('#newcomment_help').is(':hidden') ? '1' : '0', { path: '/' });
+}
+if ($.cookie('nonewcommenthelp') == '1') {
+	$('#newcomment_help').hide();
+}
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
