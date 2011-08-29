@@ -58,7 +58,7 @@ textarea {resize:none;}
 .info {color:#666666;font-size:smaller;font-style:normal;}
 .error {color:#df6f6f;font-size:smaller;font-style:italic;}
 
-.input .monospace {font-size:medium;}
+.input .monospace {font-size:10pt;}
 .errors {color:#df6f6f;font-size:small;font-style:normal;}
 .infos {font-style:normal;}
 
@@ -105,14 +105,14 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #logo h1 {padding:0;margin:0;}
 #logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
-#bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;}
-#bannermenu #mail {width:24px;height:24px;float:right;margin-left:6px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
-#bannermenu #exit {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/cancel.png) no-repeat center center;}
-#bannermenu #enter {width:24px;height:24px;float:right;margin-right:6px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
-#bannermenu #account {width:24px;height:24px;float:right;margin-right:6px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
-#bannermenu #edit {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/edit.png) no-repeat center center;}
-#bannermenu #view {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/web.png) no-repeat center center;}
-#bannermenu #validate {width:24px;height:24px;float:left;margin-right:6px;background:transparent url(../images/theme/icons/check.png) no-repeat center center;}
+#bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;position:relative;}
+#bannermenu #mail {width:24px;height:24px;position:absolute;left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
+#bannermenu #exit {width:24px;height:24px;position:absolute;left:0px;background:transparent url(../images/theme/icons/cancel.png) no-repeat center center;}
+#bannermenu #enter {width:24px;height:24px;position:absolute;left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
+#bannermenu #account {width:24px;height:24px;position:absolute;left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
+#bannermenu #edit {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/edit.png) no-repeat center center;}
+#bannermenu #view {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/web.png) no-repeat center center;}
+#bannermenu #validate {width:24px;height:24px;position:absolute;left:60px;background:transparent url(../images/theme/icons/check.png) no-repeat center center;}
 
 #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
 #languages #fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
