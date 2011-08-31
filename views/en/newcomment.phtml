@@ -35,7 +35,7 @@
 <img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="[code]" title="code" onclick="tagmessage('[code]','[/code]')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/url.png" alt="[url]" title="url" onclick="tagmessage('[url]','[/url]')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/email.png" alt="[email]" title="email" onclick="tagmessage('[email]','[/email]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="aide" onclick="togglehelp()" />
+<img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="?" onclick="togglehelp()" />
 <span id="newcomment_limiter"><?php echo $message_maxlength; ?></span>
 </div>
 <textarea id="newcomment_message" name="newcomment_message" cols="80" rows="10" title="Text" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
