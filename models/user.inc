@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -70,7 +70,7 @@ function user_get($user_id) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, mail AS user_mail, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(access) AS user_access, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, mail AS user_mail, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -97,7 +97,7 @@ function user_set($user_id, $name, $mail, $locale) {
 	$sqlmail=db_sql_arg($mail, true);
 	$sqllocale=db_sql_arg($locale);
 
-	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, locale=$sqllocale WHERE user_id=$user_id LIMIT 1";
+	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_update($sql);
 
@@ -179,7 +179,7 @@ function user_login($login, $password) {
 		return false;
 	}
 
-	extract($r);	/* user_name user_password user_newpassword user_mail user_created user_access user_locale user_active user_banned */
+	extract($r);	/* user_name user_password user_newpassword user_mail user_created user_modified user_accessed user_locale user_active user_banned */
 
 	if (!$user_active or $user_banned) {
 		return false;
@@ -200,7 +200,8 @@ function user_login($login, $password) {
 	$user['mail'] = $user_mail;
 	$user['locale'] = $user_locale;
 	$user['created'] = (int)$user_created;
-	$user['access'] = $now;
+	$user['modified'] = (int)$user_modified;
+	$user['accessed'] = $now;
 
 	$r = user_get_role($user_id);
 
@@ -209,18 +210,15 @@ function user_login($login, $password) {
 	$tabuser=db_prefix_table('user');
 
 	if ($user_newpassword) {
-		if ($password == $user_newpassword) {
-			// use the new one
-			$sql="UPDATE $tabuser SET access=FROM_UNIXTIME($now), password='$user_newpassword', newpassword=NULL WHERE user_id=$user_id LIMIT 1";
+		if ($password == $user_newpassword) {	// use the new one
+			$sql="UPDATE $tabuser SET accessed=FROM_UNIXTIME($now), password='$user_newpassword', newpassword=NULL, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 		}
-		else {
-			// keep the old one
-			$sql="UPDATE $tabuser SET access=FROM_UNIXTIME($now), newpassword=NULL WHERE user_id=$user_id LIMIT 1";
+		else {									// keep the old one
+			$sql="UPDATE $tabuser SET accessed=FROM_UNIXTIME($now), newpassword=NULL WHERE user_id=$user_id LIMIT 1";
 		}
 	}
-	else {
-		// just keep track
-		$sql="UPDATE $tabuser SET access=FROM_UNIXTIME($now) WHERE user_id=$user_id LIMIT 1";
+	else {										// just keep track
+		$sql="UPDATE $tabuser SET accessed=FROM_UNIXTIME($now) WHERE user_id=$user_id LIMIT 1";
 	}
 
 	db_update($sql);

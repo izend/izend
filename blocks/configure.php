@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -650,7 +650,8 @@ CREATE TABLE `${db_prefix}user` (
   `newpassword` varchar(32) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `access` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `accessed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `banned` tinyint(1) NOT NULL DEFAULT '0',

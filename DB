@@ -19,6 +19,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Wed Aug 31 2011
+
+ALTER TABLE `izend_user` CHANGE `access` `accessed` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
+ALTER TABLE `izend_user` ADD `modified` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `created` 
+----
+
 Date:	Wed Aug 17 2011
 
 RENAME TABLE `izend_content_media` TO `izend_content_longtail`
