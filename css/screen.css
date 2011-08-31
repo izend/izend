@@ -46,6 +46,11 @@ img {vertical-align:middle;}
 .popup ul li a {width:10em;}
 .popup li:hover ul {display:block;}
 
+div.row {width:100%;overflow:hidden;}
+div.row div {float:left;margin-left:1em;margin-right:1em;}
+div.row div:first-child {margin-left:0;margin-right:1em;}
+div.row div:last-child {margin-left:1em;margin-right:0;}
+
 .hidden {display:none;}
 .invisible {visibility:hidden;}
 
