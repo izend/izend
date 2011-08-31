@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2011 izend.org
- * @version		2
+ * @version		3
  * @link		http://www.izend.org
  */
 
@@ -232,3 +232,15 @@ function render($file, $vars=false) {
 	return ob_get_clean();
 }
 
+function redirect($action, $lang=false, $arg=false) {
+	global $base_url;
+
+	$url=$base_url . url($action, $lang, $arg);
+
+	ob_clean();
+
+	header('HTTP/1.1 302 Found');
+	header("Location: $url");
+
+	exit;
+}
