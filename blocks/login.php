@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -118,17 +118,6 @@ function login($lang) {
 
 		default:
 			break;
-	}
-
-	$focus=false;
-	if ($missing_code or $bad_code) {
-		$focus='#login_code';
-	}
-	else if ($missing_login or $bad_login or $access_denied) {
-		$focus='#login_login';
-	}
-	else if ($missing_password or $bad_password) {
-		$focus='#login_password';
 	}
 
 	$password_page=url('password', $lang);

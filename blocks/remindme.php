@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -154,17 +154,6 @@ function remindme($lang, $login=false) {
 			break;
 		default:
 			break;
-	}
-
-	$focus=false;
-	if ($missing_code or $bad_code) {
-		$focus='#remindme_code';
-	}
-	else if ($missing_login or $bad_login) {
-		$focus='#remindme_login';
-	}
-	else if ($missing_confirmation) {
-		$focus='#remindme_confirmed';
 	}
 
 	if ($internal_error) {

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -203,23 +203,6 @@ function profile($lang) {
 			break;
 		default:
 			break;
-	}
-
-	$focus=false;
-	if ($bad_name or $duplicate_name) {
-		$focus='#profile_name';
-	}
-	else if ($bad_mail or $duplicate_mail) {
-		$focus='#profile_mail';
-	}
-	else if ($weak_password) {
-		$focus='#profile_newpassword';
-	}
-	else if ($weak_password) {
-		$focus='#profile_newpassword';
-	}
-	else if ($missing_password or $wrong_password) {
-		$focus='#profile_password';
 	}
 
 	if (!$token) {

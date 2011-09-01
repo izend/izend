@@ -3,30 +3,27 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
-<div class="form">
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
-<div class="fields">
-<p class="label">What connection name do you want?</p>
-<p class="input"><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p>What connection name do you want?</p>
+<p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
-<p class="label">What is your email address?</p>
-<p class="input"><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
+<p>What is your email address?</p>
+<p><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Your password will be sent at this address.</p>
-<p class="input"><input name="register_confirmed" id="register_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
+<p><input name="register_confirmed" id="register_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
 <?php if ($with_captcha): ?>
-<p class="input">
+<p>
 <img src="<?php echo $base_path; ?>/captcha/register" alt="" title="Verification code" />
 &nbsp;:&nbsp;
 <input type="text" name="register_code" id="register_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'register_register')" value="" />
 </p>
 <?php endif; ?>
-<p class="submit"><button type="submit" name="register_register" id="register_register">Send</button></p>
-</div>
+<p><button type="submit" name="register_register" id="register_register">Send</button></p>
 </form>
 <?php
 if ($errors):
@@ -73,7 +70,28 @@ To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>
-</div>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#register_code';
+}
+else if ($missing_name or $bad_name or $duplicated_name) {
+	$focus='#register_name';
+}
+else if ($missing_mail or $bad_mail or $duplicated_mail) {
+	$focus='#register_mail';
+}
+else if ($missing_confirmation) {
+	$focus='#register_confirmed';
+}
+
+if ($internal_error) {
+	$contact_page=url('contact', $lang);
+}
+else if ($account_created) {
+	$user_page=url('user', $lang);
+}
+?>
 <?php if (isset($focus) and $focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});

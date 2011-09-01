@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
  
@@ -11,6 +11,7 @@ a:link, a:visited {color:#ec902d;}
 a:hover {color:#333333;text-decoration:none;}
 
 body {color:#333333;font-family:Verdana, sans-serif;font-size:100%;width:960px;margin:5px 0 0 50px;}
+input {font-family:Verdana, sans-serif;font-size:10pt;}
 
 h1,h2,h3 {color:#aec14e;}
 h4 {color:#aec14e;}
@@ -58,7 +59,6 @@ textarea {resize:none;}
 .info {color:#666666;font-size:smaller;font-style:normal;}
 .error {color:#df6f6f;font-size:smaller;font-style:italic;}
 
-.input .monospace {font-size:10pt;}
 .errors {color:#df6f6f;font-size:small;font-style:normal;}
 .infos {font-style:normal;}
 
@@ -151,6 +151,8 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
 #summary {font-size:smaller;text-align:right;margin:1em 0 0.5em 0;}
+
+#mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
 
 .summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}

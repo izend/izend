@@ -3,29 +3,26 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
-<div class="form" id="mailme_form">
 <form action="" method="post">
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
-<div class="fields">
-<p class="label">What is your email address?</p>
-<p class="input"><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
+<p>What is your email address?</p>
+<p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
-<p class="label">Type in the subject and the text of your message:</p>
-<p class="input"><input class="monospace" type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
-<p class="input"><textarea class="monospace" name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
+<p>Type in the subject and the text of your message:</p>
+<p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
+<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_captcha): ?>
-<p class="input">
+<p>
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" title="Verification code" />
 &nbsp;:&nbsp;
 <input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
 </p>
 <?php endif; ?>
-<p class="submit"><button type="submit" name="mailme_send" id="mailme_send">Send</button></p>
-</div>
+<p><button type="submit" name="mailme_send" id="mailme_send">Send</button></p>
 </form>
 <?php if ($errors):
 extract($errors);
@@ -63,7 +60,6 @@ extract($infos);
 <?php endif; ?>
 </div>
 <?php endif; ?>
-</div>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.grippie').each(function() {
@@ -92,6 +88,21 @@ $(document).ready(function() {
 	});
 });
 </script>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#mailme_code';
+}
+else if ($missing_mail or $bad_mail) {
+	$focus='#mailme_mail';
+}
+else if ($missing_subject or $bad_subject) {
+	$focus='#mailme_subject';
+}
+else if ($missing_message) {
+	$focus='#mailme_message';
+}
+?>
 <?php if (isset($focus) and $focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});

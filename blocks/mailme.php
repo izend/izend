@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -131,20 +131,6 @@ function mailme($lang) {
 			break;
 		default:
 			break;
-	}
-
-	$focus=false;
-	if ($missing_code or $bad_code) {
-		$focus='#mailme_code';
-	}
-	else if ($missing_mail or $bad_mail) {
-		$focus='#mailme_mail';
-	}
-	else if ($missing_subject or $bad_subject) {
-		$focus='#mailme_subject';
-	}
-	else if ($missing_message) {
-		$focus='#mailme_message';
 	}
 
 	$_SESSION['mailme_token'] = $token = token_id();

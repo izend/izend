@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -64,33 +64,32 @@ Check your answers and rerun the configuration.</p>
 <?php endif; ?>
 <form class="compact" action="#configuration" method="post">
 <input type="hidden" name="configure_token" value="<?php echo $token; ?>" />
-<div class="fields">
-<p class="label">What is the name of the site?</p>
+<p>What is the name of the site?</p>
 <p class="info">Specify a domain name without the www prefix.</p>
-<p class="input">
+<p>
 <input type="text" name="configure_sitename" size="30" maxlength="40" title="" value="<?php echo $sitename; ?>" />
 <img src="<?php echo $base_path; ?>/images/theme/icons/web.png" alt="" />
 </p>
 <?php if ($missing_sitename): ?>
 <p class="error">Enter a domain name such as izend.org.</p>
 <?php endif; ?>
-<p class="label">What is the email address of the webmaster?</p>
+<p>What is the email address of the webmaster?</p>
 <p class="info">The contact page will send messages to this address.</p>
-<p class="input">
+<p>
 <input type="text" name="configure_webmaster" size="50" maxlength="100" title="Email" value="<?php echo $webmaster; ?>" />
 <img src="<?php echo $base_path; ?>/images/theme/icons/mail.png" alt="" />
 </p>
 <?php if ($missing_webmaster): ?>
 <p class="error">Specify a valid email address.</p>
 <?php endif; ?>
-<p class="label">In what languages is the content of the site written?</p>
+<p>In what languages is the content of the site written?</p>
 <p class="info">You will alway be able to add more languages later.</p>
-<p class="input"><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <?php echo $slang; ?><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <?php echo $slang; ?><?php endforeach; ?></p>
 <?php if ($missing_content_languages): ?>
 <p class="error">Choose at least one language for the content of the site.</p>
 <?php endif; ?>
-<p class="label">What is the default language?</p>
-<p class="input"><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <?php echo $slang; ?><?php endforeach; ?></p>
+<p>What is the default language?</p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <?php echo $slang; ?><?php endforeach; ?></p>
 <?php if ($bad_default_language): ?>
 <p class="error">You haven't mentionned this language in the previous list.</p>
 <?php endif; ?>
@@ -101,21 +100,21 @@ Check your answers and rerun the configuration.</p>
 <p><?php echo $db_error; ?></p>
 </div>
 <?php endif; ?>
-<p class="label">Do you have a database server?</p>
+<p>Do you have a database server?</p>
 <p class="info">Without a database, the functionalities will be more limited.</p>
-<p class="input"><input type="radio" name="configure_db_flag" value="yes" <?php if ($db_flag) echo 'checked="checked"'; ?> />&nbsp;yes <input name="configure_db_flag" type="radio" value="no" <?php if (!$db_flag) echo 'checked="checked"'; ?> />&nbsp;no</p>
-<p class="label">What is the name of the database?</p>
-<p class="input"><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
+<p><input type="radio" name="configure_db_flag" value="yes" <?php if ($db_flag) echo 'checked="checked"'; ?> />&nbsp;yes <input name="configure_db_flag" type="radio" value="no" <?php if (!$db_flag) echo 'checked="checked"'; ?> />&nbsp;no</p>
+<p>What is the name of the database?</p>
+<p><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
 <?php if ($missing_db_name or $bad_db_name): ?>
 <p class="error">Enter between 2 and 30 characters (letter, digit or underscore) starting with a letter.</p>
 <?php endif; ?>
-<p class="label">What is the name of the database host?</p>
-<p class="input"><input type="text" name="configure_db_host" size="30" maxlength="40" title="" value="<?php echo $db_host; ?>" /></p>
+<p>What is the name of the database host?</p>
+<p><input type="text" name="configure_db_host" size="30" maxlength="40" title="" value="<?php echo $db_host; ?>" /></p>
 <?php if ($missing_db_host or $bad_db_host): ?>
 <p class="error">Enter a server name or an IP address.</p>
 <?php endif; ?>
-<p class="label">What are the name and the password of the user of the database?</p>
-<p class="input">
+<p>What are the name and the password of the user of the database?</p>
+<p>
 <input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
 <img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
 <input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" />
@@ -133,11 +132,11 @@ Check your answers and rerun the configuration.</p>
 <p class="error">Enter a combination of letters and digits of at least 6 characters.</p>
 <?php endif; ?>
 <?php endif; ?>
-<p class="label">Do you use an existing database?</p>
-<p class="input"><input type="radio" name="configure_db_reuse" value="yes" <?php if ($db_reuse) echo 'checked="checked"'; ?> />&nbsp;yes <input type="radio" name="configure_db_reuse" value="no" <?php if (!$db_reuse) echo 'checked="checked"'; ?> />&nbsp;no</p>
-<p class="label">If no, what are the name and the password of the administrator of the database server?</p>
+<p>Do you use an existing database?</p>
+<p><input type="radio" name="configure_db_reuse" value="yes" <?php if ($db_reuse) echo 'checked="checked"'; ?> />&nbsp;yes <input type="radio" name="configure_db_reuse" value="no" <?php if (!$db_reuse) echo 'checked="checked"'; ?> />&nbsp;no</p>
+<p>If no, what are the name and the password of the administrator of the database server?</p>
 <p class="info">This information will not be registered.</p>
-<p class="input">
+<p>
 <input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
 <img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
 <input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php echo $db_admin_password; ?>" />
@@ -153,14 +152,14 @@ Check your answers and rerun the configuration.</p>
 <p class="error">Enter the password of the administrator of the database server.</p>
 <?php endif; ?>
 <?php endif; ?>
-<p class="label">What is the prefix of the tables?</p>
+<p>What is the prefix of the tables?</p>
 <p class="info">A prefix is necessary if the database is shared.</p>
-<p class="input"><input type="text" name="configure_db_prefix" size="10" maxlength="20" title="" value="<?php echo $db_prefix; ?>" /></p>
+<p><input type="text" name="configure_db_prefix" size="10" maxlength="20" title="" value="<?php echo $db_prefix; ?>" /></p>
 <?php if ($bad_db_prefix): ?>
 <p class="error">Enter between 2 and 30 characters (letter, digit or underscore) starting with a letter.</p>
 <?php endif; ?>
-<p class="label">What are the name and the password of the administrator of the site?</p>
-<p class="input">
+<p>What are the name and the password of the administrator of the site?</p>
+<p>
 <input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
 <img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
 <input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php echo $site_admin_password; ?>" />
@@ -178,6 +177,5 @@ Check your answers and rerun the configuration.</p>
 <p class="error">Enter a combination of letters and digits of at least 6 characters.</p>
 <?php endif; ?>
 <?php endif; ?>
-<p class="input"><button type="submit" name="configure_configure" id="configure_configure" value="configure">Configure</button></p>
-</div>
+<p><button type="submit" name="configure_configure" id="configure_configure" value="configure">Configure</button></p>
 </form>

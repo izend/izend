@@ -3,27 +3,24 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
-<div class="form">
 <form action="" method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
-<div class="fields">
-<p class="label">What is your connection name?</p>
-<p class="input"><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifier" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo $login; ?>" /></p>
+<p>What is your connection name?</p>
+<p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifier" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo $login; ?>" /></p>
 <p class="info">You may also enter your email address.</p>
-<p class="input"><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I want to receive a new password</p>
+<p><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I want to receive a new password</p>
 <?php if ($with_captcha): ?>
-<p class="input">
+<p>
 <img src="<?php echo $base_path; ?>/captcha/remindme" alt="" title="Verification code" />
 &nbsp;:&nbsp;
 <input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
 </p>
 <?php endif; ?>
-<p class="submit"><button type="submit" name="remindme_send" id="remindme_send">Send</button></p>
-</div>
+<p><button type="submit" name="remindme_send" id="remindme_send">Send</button></p>
 </form>
 <?php
 if ($errors):
@@ -60,7 +57,18 @@ To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>
-</div>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#remindme_code';
+}
+else if ($missing_login or $bad_login) {
+	$focus='#remindme_login';
+}
+else if ($missing_confirmation) {
+	$focus='#remindme_confirmed';
+}
+?>
 <?php if (isset($focus) and $focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});
