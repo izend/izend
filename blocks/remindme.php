@@ -168,7 +168,7 @@ function remindme($lang, $login=false) {
 	$errors = compact('missing_login', 'bad_login', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_sent', 'user_page');
 
-	$output = view('remindme', $lang, compact('token', 'with_captcha', 'login', 'confirmed', 'errors', 'infos', 'focus'));
+	$output = view('remindme', $lang, compact('token', 'with_captcha', 'login', 'confirmed', 'errors', 'infos'));
 
 	return $output;
 }

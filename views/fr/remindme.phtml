@@ -69,7 +69,7 @@ else if ($missing_confirmation) {
 	$focus='#remindme_confirmed';
 }
 ?>
-<?php if (isset($focus) and $focus): ?>
+<?php if ($focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>

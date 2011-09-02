@@ -212,7 +212,7 @@ function profile($lang) {
 	$errors = compact('bad_name', 'bad_mail', 'bad_locale', 'duplicate_name', 'duplicate_mail', 'weak_password', 'missing_password', 'wrong_password', 'internal_error', 'contact_page');
 	$infos = compact('profile_changed', 'password_changed', 'home_page');
 
-	$output = view('profile', $lang, compact('token', 'name', 'mail', 'locale', 'newpassword', 'password', 'errors', 'infos', 'focus'));
+	$output = view('profile', $lang, compact('token', 'name', 'mail', 'locale', 'newpassword', 'password', 'errors', 'infos'));
 
 	return $output;
 }

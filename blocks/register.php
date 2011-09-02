@@ -135,7 +135,6 @@ function register($lang) {
 			$r = user_create($name, $password, $mail);
 
 			if (!$r) {
-				$contact_page=url('contact', $lang);
 				$internal_error=true;
 				break;
 			}
@@ -151,7 +150,6 @@ function register($lang) {
 			$subject = translate('email:new_user_subject', $lang);
 			$msg = translate('email:new_user_text', $lang) . "\n\n" . translate('email:salutations', $lang);
 			if (!emailcrypto($msg, $password, $to, $subject, $webmaster)) {
-				$contact_page=url('contact', $lang);
 				$internal_error=true;
 				break;
 			}
@@ -174,12 +172,19 @@ function register($lang) {
 			break;
 	}
 
+	if ($internal_error) {
+		$contact_page=url('contact', $lang);
+	}
+	else if ($account_created) {
+		$user_page=url('user', $lang);
+	}
+
 	$_SESSION['register_token'] = $token = token_id();
 
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos', 'focus'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

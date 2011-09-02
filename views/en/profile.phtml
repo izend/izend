@@ -18,7 +18,7 @@
 <p><input type="password" name="profile_newpassword" id="profile_newpassword" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'profile_password')" value="<?php echo $newpassword; ?>" /></p>
 <p>Enter your current password:</p>
 <p><input type="password" name="profile_password" id="profile_password" size="20" maxlength="20" title="Password" onkeypress="return submitonenter(event, 'profile_change')" value="" /></p>
-<p class="submit"><button type="submit" name="profile_change" id="profile_change">Modify</button></p>
+<p><button type="submit" name="profile_change" id="profile_change">Modify</button></p>
 </form>
 <?php
 if ($errors):
@@ -87,7 +87,7 @@ else if ($missing_password or $wrong_password) {
 	$focus='#profile_password';
 }
 ?>
-<?php if (isset($focus) and $focus): ?>
+<?php if ($focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>

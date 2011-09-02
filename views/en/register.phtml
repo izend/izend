@@ -84,15 +84,8 @@ else if ($missing_mail or $bad_mail or $duplicated_mail) {
 else if ($missing_confirmation) {
 	$focus='#register_confirmed';
 }
-
-if ($internal_error) {
-	$contact_page=url('contact', $lang);
-}
-else if ($account_created) {
-	$user_page=url('user', $lang);
-}
 ?>
-<?php if (isset($focus) and $focus): ?>
+<?php if ($focus): ?>
 <script type="text/javascript">
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>

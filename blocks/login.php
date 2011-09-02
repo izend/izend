@@ -127,7 +127,7 @@ function login($lang) {
 
 	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'bad_password', 'access_denied');
 
-	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors', 'focus'));
+	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors'));
 
 	return $output;
 }

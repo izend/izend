@@ -138,7 +138,7 @@ function mailme($lang) {
 	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'internal_error');
 	$infos = compact('email_sent', 'home_page');
 
-	$output = view('mailme', $lang, compact('token', 'with_captcha', 'mail', 'subject', 'message', 'errors', 'infos', 'focus'));
+	$output = view('mailme', $lang, compact('token', 'with_captcha', 'mail', 'subject', 'message', 'errors', 'infos'));
 
 	return $output;
 }
