@@ -49,7 +49,6 @@ function login($lang) {
 	$missing_login=false;
 	$bad_login=false;
 	$missing_password=false;
-	$bad_password=false;
 	$access_denied=false;
 
 	$with_captcha=true;
@@ -82,9 +81,6 @@ function login($lang) {
 			if (!$password) {
 				$missing_password=true;
 			}
-			else if (!validate_password($password)) {
-				$bad_password = true;
-			}
 			break;
 		default:
 			break;
@@ -92,7 +88,7 @@ function login($lang) {
 
 	switch($action) {
 		case 'enter':
-			if ($bad_token or $missing_code or $bad_code or $missing_login or $bad_login or $missing_password or $bad_password) {
+			if ($bad_token or $missing_code or $bad_code or $missing_login or $bad_login or $missing_password) {
 				break;
 			}
 
@@ -125,7 +121,7 @@ function login($lang) {
 
 	$_SESSION['login_token'] = $token = token_id();
 
-	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'bad_password', 'access_denied');
+	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied');
 
 	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors'));
 

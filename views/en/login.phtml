@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -42,8 +42,6 @@ extract($errors);
 <p>Enter your identifier and your password.</p>
 <?php elseif ($bad_login): ?>
 <p>The identifier is invalid.</p>
-<?php elseif ($bad_password): ?>
-<p>The password is invalid.</p>
 <?php elseif ($access_denied): ?>
 <p>Access denied.</p>
 <?php endif; ?>
@@ -57,7 +55,7 @@ if ($missing_code or $bad_code) {
 else if ($missing_login or $bad_login or $access_denied) {
 	$focus='#login_login';
 }
-else if ($missing_password or $bad_password) {
+else if ($missing_password) {
 	$focus='#login_password';
 }
 ?>
