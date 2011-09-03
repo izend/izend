@@ -9,7 +9,7 @@
 ?>
 <?php require_once 'datefr.php'; ?>
 <?php require_once 'bbcode.php'; ?>
-<?php $message_maxlength = 1000; ?>
+<?php $message_maxlength = 2000; ?>
 <?php extract($errors); ?>
 <div id="newcomment">
 <h6>Votre commentaire&nbsp;:</h6>
@@ -38,15 +38,15 @@
 <img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="?" onclick="togglehelp()" />
 <span id="newcomment_limiter"><?php echo $message_maxlength; ?></span>
 </div>
-<textarea id="newcomment_message" name="newcomment_message" cols="50" rows="5" title="Texte" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea id="newcomment_message" name="newcomment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('newcomment_message', 'newcomment_limiter', <?php echo $message_maxlength; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 <p id="newcomment_help">
-Entrez un maximum de <b><?php echo $message_maxlength; ?></b> caractères.
-<br />Améliorez la présentation de votre texte avec les balises de formatage suivantes&nbsp;:<br />
+Entrez un maximum de <b><?php echo $message_maxlength; ?></b> caractères. Améliorez la présentation de votre texte avec les balises de formatage suivantes&nbsp;:<br />
 [<b>p</b>]paragraphe[/p], [<b>b</b>]<b>gras</b>[/b], [<b>i</b>]<i>italique</i>[/i], [<b>u</b>]<u>souligné</u>[/u], [<b>s</b>]<s>barré</s>[/s],
 [<b>quote</b>]citation[/quote], [<b>pre</b>]tel quel[/pre], [<b>br</b>]à la ligne,<br />
 [<b>url</b>]http://www.izend.org[/url], [<b>url</b>=http://www.izend.org]site[/url],
-[<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email]
+[<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email],<br />
+[<b>code</b>]commande[/code], [<b>code</b>=langage]code source en c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
 </p>
 <p>
 <?php if ($message): ?>
