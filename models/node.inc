@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -367,7 +367,7 @@ function node_get_comments($node_id, $locale) {
 	$tabcomment=db_prefix_table('comment');
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT c.comment_id, c.text AS comment_text, u.name AS comment_name, u.mail AS comment_mail, UNIX_TIMESTAMP(c.created) AS comment_created FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
+	$sql="SELECT c.comment_id, c.text AS comment_text, u.name AS comment_name, u.mail AS comment_mail, UNIX_TIMESTAMP(c.created) AS comment_created FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale and c.published=1 ORDER BY comment_created";
 
 	$r = db_query($sql);
 
