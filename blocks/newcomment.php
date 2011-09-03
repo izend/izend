@@ -3,26 +3,18 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'strflat.php';
-
-require_once 'validateusername.php';
-require_once 'validatemail.php';
-
 require_once 'tokenid.php';
-
+require_once 'userprofile.php';
 require_once 'models/node.inc';
 
 function newcomment($lang, $node_id) {
-	if (!user_is_identified()) {
-		return false;
-	}
-
-	$comment_name = $_SESSION['user']['name'];
+	$comment_name = user_profile('name');
 	$comment_created = time();
 
 	$token=false;
