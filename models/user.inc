@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -226,27 +226,38 @@ function user_login($login, $password) {
 	return $user;
 }
 
-function user_check_name($name) {
+function user_check_name($name, $user_id=false) {
 	$sqlname=db_sql_arg($name, true);
 
+	$where = "name=$sqlname";
+	if ($user_id) {
+		$where .= "AND user_id != $user_id";
+	}
+
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT user_id FROM $tabuser WHERE name=$sqlname LIMIT 1";
+	$sql="SELECT user_id FROM $tabuser WHERE $where LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? false : true;
 }
 
-function user_check_mail($mail) {
+function user_check_mail($mail, $user_id=false) {
 	$sqlmail=db_sql_arg($mail, true);
 
+	$where = "mail=$sqlmail";
+	if ($user_id) {
+		$where .= "AND user_id != $user_id";
+	}
+
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT user_id FROM $tabuser WHERE mail=$sqlmail LIMIT 1";
+	$sql="SELECT user_id FROM $tabuser WHERE $where LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? false : true;
 }
+
 
