@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
  
@@ -20,11 +20,12 @@ label, legend {font-size:80%;}
 
 table th, table td {padding:5px;margin:0;}
 
-form p {vertical-align:top;}
-
 input {margin-top:0;margin-bottom:0;vertical-align:middle;}
 
 img {vertical-align:middle;}
+
+ol {list-style-image:decimal;}
+ul {list-style-type:disc;}
 
 .monospace {font-family:monospace;}
 .proportional {font-family:sans-serif;}
