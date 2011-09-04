@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2011 izend.org
- * @version		3
+ * @version		4
  * @link		http://www.izend.org
  */
 
@@ -237,6 +237,10 @@ function redirect($action, $lang=false, $arg=false) {
 
 	$url=$base_url . url($action, $lang, $arg);
 
+	reload($url);
+}
+
+function reload($url) {
 	if (ob_get_level()) {
 		ob_clean();
 	}
