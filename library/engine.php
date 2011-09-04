@@ -237,7 +237,9 @@ function redirect($action, $lang=false, $arg=false) {
 
 	$url=$base_url . url($action, $lang, $arg);
 
-	ob_clean();
+	if (ob_get_level()) {
+		ob_clean();
+	}
 
 	header('HTTP/1.1 302 Found');
 	header("Location: $url");
