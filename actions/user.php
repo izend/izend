@@ -3,17 +3,19 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function user($lang, $arglist=false) {
 	$login = build('login', $lang);
 
-	if (true === $login) {
-		$next_page=isset($arglist['page']) ? $arglist['page'] : url('home', $lang);
-		header("Location: $next_page");
-		return false;
+	if ($login === true) {
+		global $base_url;
+
+		$next_page = (is_array($arglist) and isset($arglist['page'])) ? $arglist['page'] : url('home', $lang);
+
+		return reload($base_url . $next_page);
 	}
 
 	$banner = build('banner', $lang);
