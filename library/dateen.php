@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -55,6 +55,15 @@ function shortdate_en($unixtime) {
 	$month = shortmonth_en($unixtime);
 
 	return "$day-$month-$year";
+}
+
+function shortdatetime_en($unixtime) {
+	$date = shortdate_en($unixtime);
+
+	$hour = date('H', $unixtime);
+	$minute = date('i', $unixtime);
+
+	return "$date ${hour}h{$minute}";
 }
 
 function longdatetime_en($unixtime) {

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -37,6 +37,15 @@ function shortday_de($unixtime) {
 	$weekday = idate('w', $unixtime);
 
 	return $shortdayname[$weekday];
+}
+
+function shortdatetime_de($unixtime) {
+	$date = shortdate_de($unixtime);
+
+	$hour = date('H', $unixtime);
+	$minute = date('i', $unixtime);
+
+	return "$date ${hour}h{$minute}";
 }
 
 function longdate_de($unixtime) {
