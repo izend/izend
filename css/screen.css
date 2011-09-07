@@ -86,7 +86,7 @@ ol.tree li.firstnode {background:#ffffff;}
 ol.tree li.dirnode {font-style:italic;} 
 ol.tree li.filenode {font-style:normal;}
 
-#banner {clear:both;}
+#banner {width:100%;overflow:hidden;}
 
 #content {margin:1em 0 1em 0;}
 #sidebar {margin:1em 0 1em 0;}
