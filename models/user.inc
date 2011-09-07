@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -38,7 +38,7 @@ function user_id($user) {
 	return $r ? $r[0]['user_id'] : false;
 }
 
-function user_create($name, $password, $mail, $locale='fr') {
+function user_create($name, $password, $mail, $locale='en') {
 	$sqlname=db_sql_arg($name, true);
 	$sqlmail=db_sql_arg($mail, true);
 	$sqllocale=db_sql_arg($locale);
@@ -62,6 +62,34 @@ function user_create($name, $password, $mail, $locale='fr') {
 	return $user_id;
 }
 
+function user_delete($user_id) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$tabuser=db_prefix_table('user');
+
+	$sql="SELECT name FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+
+	$r = db_query($sql);
+
+	if (!$r) {
+		return false;
+	}
+	extract($r[0]);	/* name */
+
+	if ($name) {
+		user_delete_avatar($name);
+	}
+
+	$tabuserrole=db_prefix_table('user_role');
+
+	$sql="DELETE u, ur FROM $tabuser u LEFT JOIN $tabuserrole ur ON ur.user_id=u.user_id WHERE u.user_id=$user_id";
+
+	$r = db_delete($sql);
+
+	return $r;
+}
 
 function user_get($user_id) {
 	if (!is_numeric($user_id)) {
@@ -111,6 +139,23 @@ function user_set($user_id, $name, $mail, $locale) {
 	}
 
 	return true;
+}
+
+function user_set_status($user_id, $active, $banned) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$sqlactive=$active ? 1 : 0;
+	$sqlbanned=$banned ? 1 : 0;
+
+	$tabuser=db_prefix_table('user');
+
+	$sql="UPDATE $tabuser SET active=$sqlactive, banned=$sqlbanned WHERE user_id=$user_id LIMIT 1";
+
+	$r = db_update($sql);
+
+	return $r;
 }
 
 function user_set_newpassword($user_id, $password) {
@@ -260,4 +305,60 @@ function user_check_mail($mail, $user_id=false) {
 	return $r ? false : true;
 }
 
+function user_search($s, $pagesize=false, $page=1) {
+	preg_match_all('/(\S+)/', $s, $r);
+	$termlist = array_unique($r[0]);
+
+	$sqltermlist=array();
+	foreach ($termlist as $term) {
+		if (preg_match('/\w{3}/', $term)) {
+			$sqltermlist[]=db_sql_arg("%$term%", false);
+		}
+	}
+
+	$where='';
+	if ($sqltermlist) {
+		$fields=array('name', 'mail');
+
+		$orlist=array();
+		foreach ($sqltermlist as $sqlterm) {
+			foreach ($fields as $f) {
+				$orlist[]=$f . ' LIKE ' . $sqlterm;
+			}
+		}
+		$where='WHERE ' . implode(' OR ', $orlist);
+	}
+
+	$tabuser=db_prefix_table('user');
+
+	$count=$limit=false;
+	if ($pagesize) {
+		$sql="SELECT COUNT(*) AS count FROM $tabuser $where";
+
+		$r = db_query($sql);
+		if (!$r) {
+			return false;
+		}
+		$count=$r[0]['count'];
+
+		$limit=($page - 1) * $pagesize . ', ' . $pagesize;
+	}
+
+	$sql="SELECT user_id, name AS user_name, mail AS user_mail, active AS user_active, banned AS user_banned, UNIX_TIMESTAMP(accessed) AS user_accessed FROM $tabuser $where ORDER by user_id";
+
+	if ($limit) {
+		$sql .= " LIMIT $limit";
+	}
+
+	$r = db_query($sql);
+	if (!$r) {
+		return false;
+	}
+
+	if (!$count) {
+		$count=count($r);
+	}
+
+	return array($count, $r);
+}
 

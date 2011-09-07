@@ -1,0 +1,54 @@
+<?php
+
+/**
+ *
+ * @copyright  2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<form action="" method="post">
+<p>
+<input id="usersearch_what" name="usersearch_what" type="text" size="30" maxlength="100" title="" value="<?php echo htmlspecialchars($what, ENT_COMPAT, 'UTF-8'); ?>" onkeypress="return submitonenter(event, 'usersearch_search')" />
+<button id="usersearch_search" name="usersearch_search" type="submit">Search</button>
+</p>
+</form>
+<?php if ($count): $i=1; ?>
+<p class="userresult">
+<span class="userpagenumber"><?php $s=$count > 1 ? 's' : ''; echo $count; ?></span> user<?php echo $s; ?>
+<?php if ($count > $pagesize): ?>
+&nbsp;-&nbsp;
+<?php
+require_once 'pagerange.php';
+
+$npages=ceil($count / $pagesize);
+$pagenums=page_range($page, $npages, 2);
+?>
+<?php foreach ($pagenums as $p): ?>
+<?php if ($p==$page): ?>
+<span class="userpagenumber"><?php echo $p; ?></span>
+<?php else: ?>
+<a href="?q=<?php echo urlencode($what); ?>&p=<?php echo $p; ?>"><?php echo $p; ?></a>
+<?php endif; ?>
+<?php endforeach; ?>
+</p>
+<?php endif; ?>
+<table border="0" cellpadding="4" cellspacing="0" rules="none">
+<?php foreach ($result as $r): extract($r);?>
+<tbody>
+<tr>
+<td class="username"><?php if ($edit): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_name; ?><?php if ($edit): ?></a><?php endif; ?></td>
+<td><img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /></td>
+<td class="usermail"><?php if ($user_mail): ?><?php echo $user_mail; ?><?php else: ?>&nbsp;<?php endif; ?></td>
+<td class="useraccessed"><?php if ($user_accessed): ?><?php echo date('m/d/Y H:i', $user_accessed); ?><?php else: ?>&nbsp;<?php endif; ?></td>
+<td class="userlocked"><?php if (!$user_active or $user_banned): ?><img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" /><?php else: ?>&nbsp;<?php endif; ?></td>
+</tr>
+<?php $i++; ?>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php else: ?>
+<?php if (!empty($what)): ?>
+<p class="userresult"><span class="userpagenumber">0</span> user</p>
+<?php endif; ?>
+<?php endif; ?>

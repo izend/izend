@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -28,17 +28,23 @@ function home($lang) {
 	}
 
 	$languages='home';
-	$contact=$account=true;
+	$contact=$account=$admin=true;
 	$edit=user_has_role('writer') ? url('editpage', $_SESSION['user']['locale']) . '/'. $root_node . '?' . 'clang=' . $lang : false;
 	$validate=url('home', $lang);
-	$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'edit', 'validate'));
+	$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
+
+	$search_text='';
+	$search_url=url('search', $lang);
+	$suggest_url=url('suggest', $lang);
+	$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
+	$sidebar = view('sidebar', false, compact('search'));
 
 	$contact_page=url('contact', $lang);
 	$footer = view('footer', $lang, compact('contact_page'));
 
 	$content = build('nodecontent', $lang, $root_node);
 
-	$output = layout('standard', compact('footer', 'banner', 'content'));
+	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

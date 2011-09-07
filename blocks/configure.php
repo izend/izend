@@ -304,7 +304,7 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'rss', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
+				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
@@ -751,11 +751,11 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node_locale` (`node_id`, `locale`, `name`, `title`) VALUES
-(1, 'fr', 'page-d-accueil', 'Page d''accueil'),
-(1, 'en', 'home-page', 'Home page'),
-(2, 'en', 'documentation', 'Documentation'),
-(2, 'fr', 'documentation', 'Documentation');
+INSERT INTO `${db_prefix}node_locale` (`node_id`, `locale`, `name`, `title`, `abstract`, `cloud`) VALUES
+(1, 'fr', 'bienvenue', 'Bienvenue', NULL, NULL),
+(1, 'en', 'welcome', 'Welcome', NULL, NULL),
+(2, 'fr', 'documentation', 'Documentation', 'Manuel de l''utilisateur.', 'documentation'),
+(2, 'en', 'documentation', 'Documentation', 'User''s manual.', 'documentation');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -764,18 +764,39 @@ _SEP_;
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
 (1, 1, 'text', 1),
-(2, 2, 'text', 1);
+(1, 2, 'text', 2),
+(2, 3, 'text', 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `eval`, `text`) VALUES
-(1, 'fr', '0', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>'),
-(1, 'en', '0', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>'),
-(2, 'fr', '0', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>'),
-(2, 'en', '0', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>');
+INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `text`, `eval`) VALUES
+(1, 'fr', '<p id="social">\r\n<a href="#"><img src="/images/theme/social/facebook.png" alt="Facebook" /></a>\r\n<a href="#"><img src="/images/theme/social/twitter.png" alt="Twitter"/></a>\r\n<a href="/fr/rss" target="_blank"><img src="/images/theme/social/rss.png" alt="RSS" /></a>\r\n</p>\r\n<script type="text/javascript">\r\n$(''#social img'').hover(function() { $(this).animate({''opacity'' : ''0.5''}, 200); }, function() { $(this).animate({''opacity'' : ''1.0''}, 200); } );\r\n</script>', 0),
+(1, 'en', '<p id="social">\r\n<a href="#"><img src="/images/theme/social/facebook.png" alt="Facebook" /></a>\r\n<a href="#"><img src="/images/theme/social/twitter.png" alt="Twitter"/></a>\r\n<a href="/en/rss" target="_blank"><img src="/images/theme/social/rss.png" alt="RSS" /></a>\r\n</p>\r\n<script type="text/javascript">\r\n$(''#social img'').hover(function() { $(this).animate({''opacity'' : ''0.5''}, 200); }, function() { $(this).animate({''opacity'' : ''1.0''}, 200); } );\r\n</script>', 0),
+(2, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>', 0),
+(2, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>', 0),
+(3, 'fr', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>', 0),
+(3, 'en', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>', 0);
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+INSERT INTO `${db_prefix}tag` (`tag_id`, `locale`, `name`) VALUES
+(1, 'fr', 'documentation'),
+(2, 'en', 'documentation');
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+INSERT INTO `${db_prefix}tag_index` (`tag_id`, `node_id`) VALUES
+(1, 2),
+(2, 2);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

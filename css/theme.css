@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
  
@@ -57,7 +57,7 @@ textarea {resize:none;}
 .parameters dt {font-family:monospace;}
 
 .info {color:#666666;font-size:smaller;font-style:normal;}
-.error {color:#df6f6f;font-size:smaller;font-style:italic;}
+.error {color:#df6f6f;font-size:smaller;font-style:normal;}
 
 .errors {color:#df6f6f;font-size:small;font-style:normal;}
 .infos {font-style:normal;}
@@ -105,7 +105,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #logo h1 {padding:0;margin:0;}
 #logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
-#bannermenu {width:160px;float:left;margin-top:13px;margin-left:40px;position:relative;}
+#bannermenu {width:220px;float:left;margin-top:13px;margin-left:40px;position:relative;}
 #bannermenu #mail {width:24px;height:24px;position:absolute;left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat center center;}
 #bannermenu #exit {width:24px;height:24px;position:absolute;left:0px;background:transparent url(../images/theme/icons/cancel.png) no-repeat center center;}
 #bannermenu #enter {width:24px;height:24px;position:absolute;left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat center center;}
@@ -113,6 +113,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #bannermenu #edit {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/edit.png) no-repeat center center;}
 #bannermenu #view {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/web.png) no-repeat center center;}
 #bannermenu #validate {width:24px;height:24px;position:absolute;left:60px;background:transparent url(../images/theme/icons/check.png) no-repeat center center;}
+#bannermenu #admin {width:24px;height:24px;position:absolute;left:180px;background:transparent url(../images/theme/icons/work.png) no-repeat center center;}
 
 #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
 #languages #fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat center center;}
@@ -125,7 +126,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 #threadlist {margin-top:1em;}
 
-#threadnodenav, #bookpagenav {font-size:smaller;margin-bottom:1em;}
+#threadnodenav, #bookpagenav {font-size:small;margin-bottom:1em;}
 
 #comments {margin-top:2em;clear:left;}
 #comments h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;line-height:24px;}
@@ -153,6 +154,14 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #summary {font-size:smaller;text-align:right;margin:1em 0 0.5em 0;}
 
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
+
+.userresult {color:#aec14e;font-weight:bold;}
+.userpagenumber {font-size:larger;}
+.username {font-weight:bold;}
+.usermail {font-style:italic;}
+
+#useredit_status {display:inline-block;background-color:#ffffe0;}
+#useredit_accessed {font-size:small;}
 
 .summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:smaller;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}

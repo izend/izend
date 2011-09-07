@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -28,6 +28,9 @@
 <?php endif; ?>
 <?php if ($validate): ?>
 <li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
+<?php endif; ?>
+<?php if ($admin): ?>
+<li><a id="admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage"><span>Manage</span></a></li>
 <?php endif; ?>
 </ul>
 </div>

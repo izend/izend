@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -18,10 +18,11 @@ function banner($lang, $components=false) {
 
 	$menu=$languages=$headline=$search=false;
 
-	$contact=$login=$logout=$account=$edit=$view=$validate=false;
-	$contact_page=$account_page=$nobody_page=$edit_page=$view_page=$validate_page=false;
+	$contact=$login=$logout=$account=$edit=$view=$validate=$admin=false;
+	$contact_page=$account_page=$nobody_page=$edit_page=$view_page=$validate_page=$admin_page=false;
 
 	$is_identified = user_is_identified();
+	$is_admin = user_has_role('administrator');
 	$is_writer = user_has_role('writer');
 
 	if ($is_identified) {
@@ -89,14 +90,22 @@ function banner($lang, $components=false) {
 						}
 					}
 					break;
+				case 'admin':
+					if ($param) {
+						if ($is_admin) {
+							$admin_page=url('admin', $lang);
+							$admin = $admin_page !== false;
+						}
+					}
+					break;
 				default:
 					break;
 			}
 		}
 	}
 
-	if ($contact or $login or $logout or $account or $edit or $view or $validate) {
-		$menu = view('bannermenu', $lang, compact('account', 'account_page', 'contact', 'contact_page', 'edit', 'edit_page', 'view', 'view_page', 'validate', 'validate_page', 'logout', 'nobody_page', 'login', 'user_page'));
+	if ($contact or $login or $logout or $account or $edit or $view or $validate or $admin) {
+		$menu = view('bannermenu', $lang, compact('account', 'account_page', 'contact', 'contact_page', 'edit', 'edit_page', 'view', 'view_page', 'validate', 'validate_page', 'logout', 'nobody_page', 'login', 'user_page', 'admin', 'admin_page'));
 	}
 
 	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search'));

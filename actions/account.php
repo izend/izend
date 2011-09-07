@@ -3,11 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'userisidentified.php';
+require_once 'userprofile.php';
 
 function account($lang) {
 	if (!user_is_identified()) {
@@ -21,9 +22,10 @@ function account($lang) {
 
 	$banner = build('banner', $lang);
 
-	$profile = build('profile', $lang);
+	$user_id = user_profile('id');
+	$useredit = build('useredit', $lang, $user_id, false);
 
-	$content = view('account', $lang, compact('profile'));
+	$content = view('account', $lang, compact('useredit'));
 
 	$output = layout('standard', compact('banner', 'content'));
 
