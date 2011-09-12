@@ -110,7 +110,7 @@ function node_delete($node_id) {
 	$tabcontentinfile=db_prefix_table('content_infile');
 	$tabcontentlongtail=db_prefix_table('content_longtail');
 
-	$sql="DELETE n, nloc, nc, ct, cf, cd, cin, clt FROM $tabnode n LEFT JOIN $tabnodelocale nloc ON nloc.node_id=n.node_id LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id LEFT JOIN $tabcontentfile cf ON cf.content_id=nc.content_id LEFT JOIN $tabcontentdownload cd ON cd.content_id=nc.content_id LEFT JOIN $tabcontentinfile cin ON cin.content_id=nc.content_id LEFT JOIN $tabcontentlongtail cm ON clt.content_id=nc.content_id WHERE n.node_id=$node_id";
+	$sql="DELETE n, nloc, nc, ct, cf, cd, cin, clt FROM $tabnode n LEFT JOIN $tabnodelocale nloc ON nloc.node_id=n.node_id LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id LEFT JOIN $tabcontentfile cf ON cf.content_id=nc.content_id LEFT JOIN $tabcontentdownload cd ON cd.content_id=nc.content_id LEFT JOIN $tabcontentinfile cin ON cin.content_id=nc.content_id LEFT JOIN $tabcontentlongtail clt ON clt.content_id=nc.content_id WHERE n.node_id=$node_id";
 
 	$r = db_delete($sql);
 
