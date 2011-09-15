@@ -278,7 +278,7 @@ function user_check_name($name, $user_id=false) {
 
 	$where = "name=$sqlname";
 	if ($user_id) {
-		$where .= "AND user_id != $user_id";
+		$where .= " AND user_id != $user_id";
 	}
 
 	$tabuser=db_prefix_table('user');
@@ -295,7 +295,7 @@ function user_check_mail($mail, $user_id=false) {
 
 	$where = "mail=$sqlmail";
 	if ($user_id) {
-		$where .= "AND user_id != $user_id";
+		$where .= " AND user_id != $user_id";
 	}
 
 	$tabuser=db_prefix_table('user');

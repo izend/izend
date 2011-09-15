@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,7 @@ require_once 'validatemail.php';
 require_once 'isusernameallowed.php';
 require_once 'ismailallowed.php';
 require_once 'tokenid.php';
+require_once 'models/user.inc';
 
 function register($lang) {
 	$action='init';
@@ -53,12 +54,11 @@ function register($lang) {
 
 	$missing_name=false;
 	$bad_name=false;
+	$duplicated_name=false;
 	$missing_mail=false;
 	$bad_mail=false;
-	$missing_confirmation=false;
-
-	$duplicated_name=false;
 	$duplicated_mail=false;
+	$missing_confirmation=false;
 
 	$account_created=false;
 	$user_page=false;
@@ -92,11 +92,17 @@ function register($lang) {
 			else if (!validate_user_name($name) or !is_user_name_allowed($name)) {
 				$bad_name=true;
 			}
+			else if (!user_check_name($name)) {
+				$duplicated_name=true;
+			}
 			if (!$mail) {
 				$missing_mail=true;
 			}
 			else if (!validate_mail($mail) or !is_mail_allowed($mail)) {
 				$bad_mail=true;
+			}
+			else if (!user_check_mail($mail)) {
+				$duplicated_mail=true;
 			}
 			if (!$confirmed) {
 				$missing_confirmation=true;
@@ -109,29 +115,13 @@ function register($lang) {
 
 	switch($action) {
 		case 'register':
-			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $missing_mail or $bad_mail or $missing_confirmation) {
+			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $missing_confirmation) {
 				break;
 			}
 
 			require_once 'newpassword.php';
 
 			$password=newpassword();
-
-			require_once 'models/user.inc';
-
-			$r = user_check_name($name);
-
-			if (!$r) {
-				$duplicated_name=true;
-				break;
-			}
-
-			$r = user_check_mail($mail);
-
-			if (!$r) {
-				$duplicated_mail=true;
-				break;
-			}
 
 			$r = user_create($name, $password, $mail, $locale);
 

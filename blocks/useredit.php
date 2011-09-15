@@ -89,13 +89,12 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	$missing_name=false;
 	$bad_name=false;
+	$duplicated_name=false;
 	$missing_mail=false;
 	$bad_mail=false;
+	$duplicated_mail=false;
 	$missing_locale=false;
 	$bad_locale=false;
-
-	$duplicated_name=false;
-	$duplicated_mail=false;
 
 	$account_modified=false;
 
