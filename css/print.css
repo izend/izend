@@ -35,4 +35,4 @@ img {page-break-inside:avoid; page-break-after:avoid; float:none}
 #banner, #footer, #sidebar, #newcomment {display:none;}
 
 div.file {font-family:monospace;font-size:.9em;}
-div.download {display:none;}
+div.download, div.longtail {display:none;}
