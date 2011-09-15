@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -22,6 +22,7 @@ function register($lang) {
 	}
 
 	$name=$mail=$confirmed=$code=$token=false;
+	$locale=$lang;
 
 	switch($action) {
 		case 'register':
@@ -132,7 +133,7 @@ function register($lang) {
 				break;
 			}
 
-			$r = user_create($name, $password, $mail);
+			$r = user_create($name, $password, $mail, $locale);
 
 			if (!$r) {
 				$internal_error=true;
