@@ -3,9 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
+
+require_once 'strflat.php';
 
 define('AVATAR_SIZE', 24);
 define('AVATARS_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'avatars');
@@ -311,8 +313,9 @@ function user_search($s, $pagesize=false, $page=1) {
 
 	$sqltermlist=array();
 	foreach ($termlist as $term) {
-		if (preg_match('/\w{3}/', $term)) {
-			$sqltermlist[]=db_sql_arg("%$term%", false);
+		$s=strflat($term);
+		if (preg_match('/\w{3}/', $s)) {
+			$sqltermlist[]=db_sql_arg("%$s%", false);
 		}
 	}
 
