@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <?php $scroll_to=false; ?>
-<h3><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
