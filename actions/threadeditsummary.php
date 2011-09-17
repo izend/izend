@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -119,7 +119,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 	}
 
-	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_name node_title node_cloud node_number ... */
+	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_number node_ignored node_name node_title node_cloud ... */
 
 	if (count($p) != count($r)) {
 		$p = false;

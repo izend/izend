@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -248,10 +248,15 @@ function thread_get_contents($lang, $thread_id, $strict=true) {
 
 	$join = $strict ? 'JOIN' : 'LEFT JOIN';
 
+	$where="WHERE tn.thread_id=$thread_id";
+	if ($strict) {
+		$where .= ' AND tn.ignored=0';
+	}
+
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.node_id, tn.number AS node_number, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id ORDER BY tn.number";
+	$sql="SELECT tn.node_id, tn.number AS node_number, tn.ignored AS node_ignored, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang $where ORDER BY tn.number";
 
 	$r = db_query($sql);
 
@@ -261,12 +266,18 @@ function thread_get_contents($lang, $thread_id, $strict=true) {
 function thread_node_next($lang, $thread_id, $node_id, $strict=true) {
 	$sqllang=db_sql_arg($lang, false);
 
+	$tabthreadnode=db_prefix_table('thread_node');
+
 	$join = $strict ? 'JOIN' : 'LEFT JOIN';
 
-	$tabthreadnode=db_prefix_table('thread_node');
+	$where = "WHERE tn.thread_id=$thread_id AND tn.number > (SELECT number FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id)";
+	if ($strict) {
+		$where .= ' AND tn.ignored=0';
+	}
+
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.node_id AS next_node_id, nl.name AS next_node_name, nl.title AS next_node_title, tn.number AS next_node_number FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.number > (SELECT number FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id) ORDER BY tn.number ASC LIMIT 1";
+	$sql="SELECT tn.node_id AS next_node_id, nl.name AS next_node_name, nl.title AS next_node_title, tn.number AS next_node_number FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang $where ORDER BY tn.number ASC LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -276,12 +287,18 @@ function thread_node_next($lang, $thread_id, $node_id, $strict=true) {
 function thread_node_prev($lang, $thread_id, $node_id, $strict=true) {
 	$sqllang=db_sql_arg($lang, false);
 
+	$tabthreadnode=db_prefix_table('thread_node');
+
 	$join = $strict ? 'JOIN' : 'LEFT JOIN';
 
-	$tabthreadnode=db_prefix_table('thread_node');
+	$where = "WHERE tn.thread_id=$thread_id AND tn.number < (SELECT number FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id)";
+	if ($strict) {
+		$where .= ' AND tn.ignored=0';
+	}
+
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.node_id AS prev_node_id, nl.name AS prev_node_name, nl.title AS prev_node_title, tn.number AS prev_node_number FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.number < (SELECT number FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id) ORDER BY tn.number DESC LIMIT 1";
+	$sql="SELECT tn.node_id AS prev_node_id, nl.name AS prev_node_name, nl.title AS prev_node_title, tn.number AS prev_node_number FROM $tabthreadnode tn $join $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang $where ORDER BY tn.number DESC LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -370,7 +387,7 @@ function thread_get_node($lang, $thread_id, $node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.number AS node_number, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
+	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -393,6 +410,18 @@ function thread_set_node_number($thread_id, $node_id, $number) {
 	$tabthreadnode=db_prefix_table('thread_node');
 
 	$sql="UPDATE $tabthreadnode SET number=$number WHERE thread_id=$thread_id AND node_id=$node_id LIMIT 1";
+
+	$r = db_update($sql);
+
+	return $r;
+}
+
+function thread_set_node_ignored($thread_id, $node_id, $ignored) {
+	$sqlignored=$ignored ? 1 : 0;
+
+	$tabthreadnode=db_prefix_table('thread_node');
+
+	$sql="UPDATE $tabthreadnode SET ignored=$sqlignored WHERE thread_id=$thread_id AND node_id=$node_id LIMIT 1";
 
 	$r = db_update($sql);
 

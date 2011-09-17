@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -600,6 +600,7 @@ CREATE TABLE `${db_prefix}thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   `number` int(4) unsigned NOT NULL,
+  `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`thread_id`,`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;

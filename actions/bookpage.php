@@ -42,7 +42,11 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment */
+
+	if ($node_ignored) {
+		return run('error/notfound', $lang);
+	}
 
 	$page_name=$node_name;
 	$page_title=$node_title;

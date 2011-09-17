@@ -19,6 +19,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Thu Sep 19 2011
+
+ALTER TABLE `izend_thread_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0'
+----
+
 Date:	Wed Aug 31 2011
 
 ALTER TABLE `izend_user` CHANGE `access` `accessed` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -221,6 +226,7 @@ CREATE TABLE IF NOT EXISTS `izend_thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   `number` int(4) unsigned NOT NULL,
+  `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`thread_id`,`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

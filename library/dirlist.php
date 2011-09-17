@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -23,7 +23,7 @@ function dirlistaux($dir, &$files) {
 		if ($file == '.' || $file == '..') {
 			continue;
 		}
-		$filepath = $dir == '.' ? $file : $dir . '/' . $file;
+		$filepath = $dir == '.' ? $file : $dir . DIRECTORY_SEPARATOR . $file;
 		if (is_link($filepath))
 			continue;
 		if (is_file($filepath))

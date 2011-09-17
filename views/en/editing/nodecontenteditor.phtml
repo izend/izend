@@ -75,10 +75,9 @@ foreach ($node_contents as $c) {
 	extract($c);	/* content_id content_number content_ignored content_type (content_text | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile |content_longtail_file content_longtail_image content_longtail_width content_longtail_height content_longtail_skin content_longtail_icons content_longtail_duration content_longtail_autostart content_longtail_repeat) content_pos */
 ?>
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
-<?php echo $i; ?>.
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
 <input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?>"/>
-<input name="content_ignored[<?php echo $i; ?>]" type="checkbox" <?php if ($content_ignored) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignore" title="Ignored" />
+<input name="content_ignored[<?php echo $i; ?>]" type="checkbox" <?php if ($content_ignored) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignored" title="Ignored" />
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
 <label>Text:</label>
