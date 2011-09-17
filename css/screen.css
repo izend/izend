@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
  
@@ -36,8 +36,14 @@ ul {list-style-type:disc;}
 .menu a {text-decoration:none;}
 .menu a span {display:none;}
 
-.sidebar {padding:0;margin:0;}
 .menubar li {display:inline;}
+
+.pagebar {display:inline-block;margin:0;padding:0.5em 0 0.5em 0;}
+.pagebar li {display:inline;list-style:none;padding:0.5em;}
+.pagebar li:first-child {padding-left:0;}
+.pagebar li:last-child {padding-right:0;}
+
+.sidebar {padding:0;margin:0;}
 .sidebar li {display:block;}
 .column {float:left;}
 
