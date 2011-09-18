@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -85,7 +85,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	$tabtagindex=db_prefix_table('tag_index');
 	$tabthreadnode=db_prefix_table('thread_node');
 
-	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id";
+	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
 		$join .= " AND tn.thread_id=$cloud_id";
 	}
@@ -134,7 +134,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id";
+	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
 		$join .= " AND tn.thread_id=$cloud_id";
 	}
@@ -165,12 +165,12 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabtag=db_prefix_table('tag');
+	$tabthreadnode=db_prefix_table('thread_node');
+	$tabtagindex=db_prefix_table('tag_index');
 
-	$join = '';
+	$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$tabtagindex=db_prefix_table('tag_index');
-		$tabthreadnode=db_prefix_table('thread_node');
-		$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.thread_id=$cloud_id";
+		$join .= " AND tn.thread_id=$cloud_id";
 	}
 
 	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang";
@@ -210,12 +210,12 @@ function cloud_suggest($lang, $cloud_id, $term) {
 	$sqlterm=db_sql_arg("%$term%", false);
 
 	$tabtag=db_prefix_table('tag');
+	$tabthreadnode=db_prefix_table('thread_node');
+	$tabtagindex=db_prefix_table('tag_index');
 
-	$join = '';
+	$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$tabtagindex=db_prefix_table('tag_index');
-		$tabthreadnode=db_prefix_table('thread_node');
-		$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.thread_id=$cloud_id";
+		$join .= " AND tn.thread_id=$cloud_id";
 	}
 
 	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm ORDER BY tag_name";
