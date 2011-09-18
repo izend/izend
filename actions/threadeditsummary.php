@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -37,6 +37,12 @@ function threadeditsummary($lang, $clang, $thread) {
 	else if (isset($_POST['node_delete'])) {
 		$action='delete';
 	}
+	else if (isset($_POST['node_hide'])) {
+		$action='hide';
+	}
+	else if (isset($_POST['node_show'])) {
+		$action='show';
+	}
 
 	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=$thread_search=$thread_tag=$thread_comment=$thread_morecomment=false;
 	$thread_nosearch=$thread_nocloud=$thread_nocomment=$thread_nomorecomment=true;
@@ -63,6 +69,8 @@ function threadeditsummary($lang, $clang, $thread) {
 		case 'edit':
 		case 'create':
 		case 'delete':
+		case 'hide':
+		case 'show':
 		case 'reorder':
 			if (isset($_POST['thread_type'])) {
 				$thread_type=readarg($_POST['thread_type']);
@@ -190,6 +198,8 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 
 		case 'delete':
+		case 'hide':
+		case 'show':
 			if (empty($old_node_number)) {
 				$missing_old_node_number = true;
 			}
@@ -276,6 +286,44 @@ function threadeditsummary($lang, $clang, $thread) {
 					$c['pos']--;
 				}
 			}
+
+			$old_node_number = false;
+
+			break;
+
+		case 'hide':
+			if ($missing_old_node_number or $bad_old_node_number) {
+				break;
+			}
+
+			$node_id = $thread_contents[$old_node_number]['node_id'];
+
+			$r = thread_set_node_ignored($thread_id, $node_id, true);
+
+			if (!$r) {
+				break;
+			}
+
+			$thread_contents[$old_node_number]['node_ignored'] = true;
+
+			$old_node_number = false;
+
+			break;
+
+		case 'show':
+			if ($missing_old_node_number or $bad_old_node_number) {
+				break;
+			}
+
+			$node_id = $thread_contents[$old_node_number]['node_id'];
+
+			$r = thread_set_node_ignored($thread_id, $node_id, false);
+
+			if (!$r) {
+				break;
+			}
+
+			$thread_contents[$old_node_number]['node_ignored'] = false;
 
 			$old_node_number = false;
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -24,9 +24,9 @@
 <?php endforeach; ?>
 </p>
 <p>
-<input name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
 <label>URL :</label>
-<input name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
 <p><label>Extrait :</label></p>
 <p>
@@ -61,23 +61,6 @@
 <p>
 <input id="thread_edit" name="thread_edit" type="submit" value="Éditer" />
 </p>
-<?php if ($missing_thread_title or $missing_thread_name or $bad_thread_name or $missing_thread_type or $bad_thread_type): ?>
-<div class="alert">
-<?php if ($missing_thread_title): ?>
-<p>Vous n'avez pas saisi le titre du fil.</p>
-<?php endif; ?>
-<?php if ($missing_thread_name): ?>
-<p>Spécifiez un nom pour le lien sur le fil.</p>
-<?php elseif ($bad_thread_name): ?>
-<p>Le nom du lien sur le fil est invalide.</p>
-<?php endif; ?>
-<?php if ($missing_thread_type): ?>
-<p>Spécifiez le type du fil.</p>
-<?php elseif ($bad_thread_type): ?>
-<p>Le type de fil est invalide.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.grippie').each(function() {
@@ -114,19 +97,6 @@ le contenu
 #
 <input id="new_node_number" name="new_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_create')"/>
 </p>
-<?php if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number): ?>
-<?php $scroll_to='#thread_edit'; ?>
-<div class="alert">
-<?php if ($missing_new_node_title): ?>
-<p>Vous n'avez pas saisi le titre du nouveau contenu.</p>
-<?php elseif ($bad_new_node_title): ?>
-<p>Le titre du nouveau contenu est invalide.</p>
-<?php endif; ?>
-<?php if ($bad_new_node_number): ?>
-<p>Le numéro du nouveau contenu n'est pas correct.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php if ($thread_contents): ?>
 <fieldset>
 <legend>Sommaire</legend>
@@ -142,7 +112,7 @@ foreach ($thread_contents as $c) {
 ?>
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo $pos; ?>" /></td>
-<td class="aright"><a href="<?php echo $node_url; ?>"><?php echo $node_number; ?></a></td>
+<td class="aright"><a href="<?php echo $node_url; ?>"><?php echo $node_id; ?></a></td>
 <td><a href="<?php echo $node_url; ?>"><?php echo $node_title; ?></a></td>
 <?php if ($node_ignored): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignoré" title="Ignoré" /></td><?php endif; ?>
 </tr>
@@ -156,26 +126,36 @@ foreach ($thread_contents as $c) {
 <p>
 <input id="thread_reorder" name="thread_reorder" type="submit" value="Trier" />
 la liste ou
+<input id="node_hide" name="node_hide" type="submit" value="Cacher" />
+ou
+<input id="node_show" name="node_show" type="submit" value="Montrer" />
+ou
 <input id="node_delete" name="node_delete" type="submit" value="Supprimer" />
 le contenu #
 <input id="old_node_number" name="old_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_delete')"/>
 </p>
-<?php if ($missing_old_node_number or $bad_old_node_number): ?>
-<?php $scroll_to='#node_delete'; ?>
-<div class="alert">
-<?php if ($missing_old_node_number): ?>
-<p>Vous n'avez pas saisi le numéro du contenu à supprimer.</p>
-<?php elseif ($bad_old_node_number): ?>
-<p>Le numéro du contenu à supprimer est incorrect.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php endif; ?>
 </form>
-<?php if ($scroll_to): ?>
+<?php
+$focus=false;
+if ($missing_thread_title) {
+	 $focus='#thread_title';
+}
+else if ($missing_thread_name or $bad_thread_name) {
+	 $focus='#thread_name';
+}
+else if ($missing_new_node_title or $bad_new_node_title) {
+	$focus='#new_node_title';
+}
+else if ($bad_new_node_number) {
+	$focus='#new_node_number';
+}
+else if ($missing_old_node_number or $bad_old_node_number) {
+	$focus='#old_node_number';
+}
+?>
+<?php if ($focus): ?>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(window).scrollTo('<?php echo $scroll_to; ?>');
-});
+$(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

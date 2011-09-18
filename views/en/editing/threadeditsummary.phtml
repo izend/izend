@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -24,9 +24,9 @@
 <?php endforeach; ?>
 </p>
 <p>
-<input name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'thread_edit')"/>
 <label>URL:</label>
-<input name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
+<input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
 <p><label>Abstract:</label></p>
 <p>
@@ -61,23 +61,6 @@
 <p>
 <input id="thread_edit" name="thread_edit" type="submit" value="Edit" />
 </p>
-<?php if ($missing_thread_title or $missing_thread_name or $bad_thread_name or $missing_thread_type or $bad_thread_type): ?>
-<div class="alert">
-<?php if ($missing_thread_title): ?>
-<p>You didn't input the title of the thread.</p>
-<?php endif; ?>
-<?php if ($missing_thread_name): ?>
-<p>Specify a name for the link to the thread.</p>
-<?php elseif ($bad_thread_name): ?>
-<p>The name of the link to the thread is invalid.</p>
-<?php endif; ?>
-<?php if ($missing_thread_type): ?>
-<p>Specify the type of the thread.</p>
-<?php elseif ($bad_thread_type): ?>
-<p>The type of the thread is invalid.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.grippie').each(function() {
@@ -114,19 +97,6 @@ content
 #
 <input id="new_node_number" name="new_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'node_create')"/>
 </p>
-<?php if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number): ?>
-<?php $scroll_to='#thread_edit'; ?>
-<div class="alert">
-<?php if ($missing_new_node_title): ?>
-<p>You didn't input the title of the new content.</p>
-<?php elseif ($bad_new_node_title): ?>
-<p>The title of the new content is invalid.</p>
-<?php endif; ?>
-<?php if ($bad_new_node_number): ?>
-<p>The new content number is not correct.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php if ($thread_contents): ?>
 <fieldset>
 <legend>Summary</legend>
@@ -156,26 +126,36 @@ foreach ($thread_contents as $c) {
 <p>
 <input id="thread_reorder" name="thread_reorder" type="submit" value="Sort" />
 the list or
+<input id="node_hide" name="node_hide" type="submit" value="Hide" />
+or
+<input id="node_show" name="node_show" type="submit" value="Show" />
+or
 <input id="node_delete" name="node_delete" type="submit" value="Delete" />
 content #
 <input id="old_node_number" name="old_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'node_delete')"/>
 </p>
-<?php if ($missing_old_node_number or $bad_old_node_number): ?>
-<?php $scroll_to='#node_delete'; ?>
-<div class="alert">
-<?php if ($missing_old_node_number): ?>
-<p>You didn't specify the content number to delete.</p>
-<?php elseif ($bad_old_node_number): ?>
-<p>The content number to delete is not correct.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php endif; ?>
 </form>
-<?php if ($scroll_to): ?>
+<?php
+$focus=false;
+if ($missing_thread_title) {
+	 $focus='#thread_title';
+}
+else if ($missing_thread_name or $bad_thread_name) {
+	 $focus='#thread_name';
+}
+else if ($missing_new_node_title or $bad_new_node_title) {
+	$focus='#new_node_title';
+}
+else if ($bad_new_node_number) {
+	$focus='#new_node_number';
+}
+else if ($missing_old_node_number or $bad_old_node_number) {
+	$focus='#old_node_number';
+}
+?>
+<?php if ($focus): ?>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(window).scrollTo('<?php echo $scroll_to; ?>');
-});
+$(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
