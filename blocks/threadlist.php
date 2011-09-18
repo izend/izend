@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'models/thread.inc';
 
-function threadlist($lang, $type=false) {
+function threadlist($lang, $type=false, $slang=false ) {
 	$r = thread_list($lang, $type);
 
 	if (!$r) {
@@ -21,6 +21,9 @@ function threadlist($lang, $type=false) {
 	foreach ($r as $thread) {
 		extract($thread);	/* thread_id thread_name thread_title thread_abstract thread_number */
 		$thread_url = $url . '/' . $thread_name;
+		if ($slang) {
+			 $thread_url .= '?' . 'slang=' . $slang;
+		}
 		$thread_list[] = compact('thread_title', 'thread_url');
 	}
 

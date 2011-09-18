@@ -3,15 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
-
-require_once 'models/thread.inc';
 
 require_once 'userhasrole.php';
 require_once 'readarg.php';
 require_once 'strtofname.php';
+require_once 'models/thread.inc';
 
 function threadeditall($lang, $clang, $type=false) {
 	global $supported_threads;
@@ -233,7 +232,7 @@ function threadeditall($lang, $clang, $type=false) {
 
 	head('javascript', 'jquery.scrollTo');
 
-	$view=url('thread', $clang);
+	$view=url('thread', $clang) . '?' . 'slang=' . $lang;
 	$validate=url($type ? $type : 'thread', $clang);
 	$banner = build('banner', $lang, compact('view', 'validate'));
 

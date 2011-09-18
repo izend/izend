@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,19 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function threadnode($lang, $thread, $node) {
+	global $system_languages;
+
+	$slang=false;
+	if (isset($_GET['slang'])) {
+		$slang = $_GET['slang'];
+	}
+	else {
+		$slang=$lang;
+	}
+	if (!in_array($slang, $system_languages)) {
+		return run('error/notfound', $lang);
+	}
+
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
 		return run('error/notfound', $lang);
@@ -36,7 +49,7 @@ function threadnode($lang, $thread, $node) {
 	$node_contents = build('nodecontent', $lang, $node_id);
 
 	$headline_text=$thread_title;
-	$headline_url=url('thread', $lang) . '/' . $thread_name;
+	$headline_url=url('thread', $lang) . '/' . $thread_name . '?' . 'slang=' . $slang;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
 
@@ -47,7 +60,7 @@ function threadnode($lang, $thread, $node) {
 	if ($r) {
 		extract($r);
 		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_number;
-		$prev_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $prev_node_name;
+		$prev_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $prev_node_name . '?' . 'slang=' . $slang;
 	}
 
 	$next_node_label=$next_node_url=false;
@@ -55,7 +68,7 @@ function threadnode($lang, $thread, $node) {
 	if ($r) {
 		extract($r);
 		$next_node_label = $next_node_title ? $next_node_title : $next_node_number;
-		$next_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $next_node_name;
+		$next_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $next_node_name . '?' . 'slang=' . $slang;
 	}
 
 	head('title', $thread_title);
@@ -67,7 +80,7 @@ function threadnode($lang, $thread, $node) {
 	$validate=url('thread', $lang) . '/'. $thread_id . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
-	$content = view('threadnode', $lang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $slang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

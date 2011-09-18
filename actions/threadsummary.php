@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,19 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function threadsummary($lang, $thread) {
+	global $system_languages;
+
+	$slang=false;
+	if (isset($_GET['slang'])) {
+		$slang = $_GET['slang'];
+	}
+	else {
+		$slang=$lang;
+	}
+	if (!in_array($slang, $system_languages)) {
+		return run('error/notfound', $lang);
+	}
+
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
 		return run('error/notfound', $lang);
@@ -28,13 +41,13 @@ function threadsummary($lang, $thread) {
 		$thread_url = url('thread', $lang) . '/'. $thread_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
-			$node_url = $thread_url . '/' . $node_name;
+			$node_url = $thread_url . '/' . $node_name . '?' . 'slang=' . $slang;
 			$thread_contents[] = compact('node_title' , 'node_url');
 		}
 	}
 
-	$headline_text=	translate('threadall:title', $lang);
-	$headline_url=url('thread', $lang);
+	$headline_text=	translate('threadall:title', $slang);
+	$headline_url=url('thread', $lang) . '?' . 'slang=' . $slang;;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
 
@@ -48,7 +61,7 @@ function threadsummary($lang, $thread) {
 	$validate=url('thread', $lang) . '/'. $thread_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
-	$content = view('threadsummary', $lang, compact('thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
+	$content = view('threadsummary', $slang, compact('thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

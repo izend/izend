@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -63,7 +63,7 @@ function editnode($lang, $arglist=false) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	$view=url('node', $clang) . '/'. $node_id;
+	$view=url('node', $clang) . '/'. $node_id . '?' . 'slang=' . $lang;
 	$validate=url('node', $clang) . '/'. $node_id;
 	$banner = build('banner', $lang, compact('view', 'validate'));
 

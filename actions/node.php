@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -12,6 +12,17 @@ require_once 'models/node.inc';
 
 function node($lang, $arglist=false) {
 	global $system_languages;
+
+	$slang=false;
+	if (isset($_GET['slang'])) {
+		$slang = $_GET['slang'];
+	}
+	else {
+		$slang=$lang;
+	}
+	if (!in_array($slang, $system_languages)) {
+		return run('error/notfound', $lang);
+	}
 
 	$node=false;
 
@@ -48,7 +59,7 @@ function node($lang, $arglist=false) {
 	$node_url = 0 . '/'. $node_id;
 	$node_contents = build('nodecontent', $lang, $node_id);
 
-	$content = view('node', $lang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_contents', 'node_created', 'node_modified'));
+	$content = view('node', $slang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_contents', 'node_created', 'node_modified'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

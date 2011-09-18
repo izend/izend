@@ -3,15 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
-
-require_once 'models/thread.inc';
 
 require_once 'userhasrole.php';
 require_once 'readarg.php';
 require_once 'strtofname.php';
+require_once 'models/thread.inc';
 
 function threadeditsummary($lang, $clang, $thread) {
 	global $supported_threads;
@@ -311,7 +310,7 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url('thread', $clang) . '/'. $thread_id;
+	$view=url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang;
 	$validate=url($thread_type, $clang) . '/'. $thread_id;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 

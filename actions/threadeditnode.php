@@ -3,15 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
-
-require_once 'models/thread.inc';
 
 require_once 'userhasrole.php';
 require_once 'readarg.php';
 require_once 'strtofname.php';
+require_once 'models/thread.inc';
 
 function threadeditnode($lang, $clang, $thread, $node) {
 	if (!user_has_role('writer')) {
@@ -51,7 +50,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url('thread', $clang) . '/'. $thread_id . '/'. $node_id;
+	$view=url('thread', $clang) . '/'. $thread_id . '/'. $node_id . '?' . 'slang=' . $lang;
 	$validate=url($thread_type, $clang) . '/'. $thread_name . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 
