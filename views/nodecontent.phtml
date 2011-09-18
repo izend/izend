@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -31,8 +31,7 @@ foreach ($contents as $c) {
 		case 'longtail':
 			extract($c);	/* file image width height skin icons duration autostart repeat */
 			$id = uniqid('id');
-			echo '<div class="longtail">', PHP_EOL;
-			echo '<p id="', $id, '"></p>', PHP_EOL;
+			echo '<div id="', $id, '" class="longtail"></div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
 			echo 'var so = new SWFObject("/longtail/player.swf","', $id, '","', $width, '","', $height, '","9","#FFFFFF");', PHP_EOL;
 			echo 'so.addParam("allowfullscreen", "false");', PHP_EOL;
@@ -56,7 +55,6 @@ foreach ($contents as $c) {
 			echo 'so.addVariable("autostart", "', $autostart ? 'true' : 'false', '");', PHP_EOL;
 			echo 'so.write("', $id, '");', PHP_EOL;
 			echo '</script>', PHP_EOL;
-			echo '</div>', PHP_EOL;
 			break;
 		default:
 			break;

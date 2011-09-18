@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
  
@@ -83,6 +83,8 @@ div.row div:last-child {margin-left:1em;margin-right:0;}
 
 .cloud {padding:0;margin:0;text-align:center;}
 .cloud li {list-style:none;display:inline;}
+
+.longtail {margin-top:1em;}
 
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;background:url(../images/vline.png) repeat-y;}
 ol.tree ol {margin-left:12px;}
