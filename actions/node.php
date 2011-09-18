@@ -13,6 +13,10 @@ require_once 'models/node.inc';
 function node($lang, $arglist=false) {
 	global $system_languages;
 
+	if (!user_has_role('writer')) {
+		return run('error/unauthorized', $lang);
+	}
+
 	$slang=false;
 	if (isset($_GET['slang'])) {
 		$slang = $_GET['slang'];
