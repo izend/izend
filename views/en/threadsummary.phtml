@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -22,8 +22,8 @@
 <?php if ($thread_contents): ?>
 <ol>
 <?php foreach ($thread_contents as $c): ?>
-<?php extract($c);	/* node_title node_url */ ?>
-<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></a></li>
+<?php extract($c);	/* node_title node_url node_ignored */ ?>
+<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></a><?php if ($node_ignored): ?> <img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignored" title="Ignored" /><?php endif; ?></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>
