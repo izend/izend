@@ -105,7 +105,7 @@ function threadeditall($lang, $clang, $type=false) {
 				$missing_new_thread_title = true;
 			}
 			if (empty($new_thread_name)) {
-				$missing_new_node_name = true;
+				$missing_new_thread_name = true;
 			}
 			else if (!preg_match('#^[\w-]{3,}$#', $new_thread_name)) {
 				$bad_new_thread_name = true;
@@ -229,8 +229,6 @@ function threadeditall($lang, $clang, $type=false) {
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
-
-	head('javascript', 'jquery.scrollTo');
 
 	$view=url('thread', $clang) . '?' . 'slang=' . $lang;
 	$validate=url($type ? $type : 'thread', $clang);

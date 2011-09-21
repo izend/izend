@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -133,6 +133,9 @@ ou
 <input id="node_delete" name="node_delete" type="submit" value="Supprimer" />
 le contenu #
 <input id="old_node_number" name="old_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_delete')"/>
+<?php if ($confirm_delete_node): ?>
+<input id="node_confirmdelete" name="node_confirmdelete" type="submit" value="Confirmer" />
+<?php endif; ?>
 </p>
 <?php endif; ?>
 </form>
@@ -151,6 +154,9 @@ else if ($bad_new_node_number) {
 	$focus='#new_node_number';
 }
 else if ($missing_old_node_number or $bad_old_node_number) {
+	$focus='#old_node_number';
+}
+else if ($confirm_delete_node) {
 	$focus='#old_node_number';
 }
 ?>

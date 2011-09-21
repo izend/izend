@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -46,26 +46,6 @@ $selected=$new_thread_type ? $new_thread_type : 'thread';
 <?php endforeach; ?>
 </select>
 </p>
-<?php if ($missing_new_thread_title or $missing_new_thread_name or $missing_new_thread_type or $bad_new_thread_type or $bad_new_thread_number): ?>
-<div class="alert">
-<?php if ($missing_new_thread_title): ?>
-<p>Vous n'avez pas saisi le titre du nouveau fil.</p>
-<?php endif; ?>
-<?php if ($missing_new_thread_name): ?>
-<p>Spécifiez un nom pour le lien sur le nouveau fil.</p>
-<?php elseif ($bad_new_thread_name): ?>
-<p>Le nom du lien sur le nouveau fil est invalide.</p>
-<?php endif; ?>
-<?php if ($missing_new_thread_type): ?>
-<p>Spécifiez le type du fil.</p>
-<?php elseif ($bad_new_thread_type): ?>
-<p>Le type de fil est invalide.</p>
-<?php endif; ?>
-<?php if ($bad_new_thread_number): ?>
-<p>Le numéro du nouveau fil n'est pas correct.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php if ($thread_list): ?>
 <fieldset>
 <legend>Catalogue</legend>
@@ -94,25 +74,28 @@ la liste ou
 le fil #
 <input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_delete')"/>
 <?php if ($confirm_delete_thread): ?>
-Vraiment&nbsp;?&nbsp;<button id="thread_confirmdelete" name="thread_confirmdelete" type="submit">Confirmer</button>
+<input id="thread_confirmdelete" name="thread_confirmdelete" type="submit" value="Confirmer" />
 <?php endif; ?>
 </p>
-<?php if ($missing_old_thread_number or $bad_old_thread_number): ?>
-<?php $scroll_to='#thread_delete'; ?>
-<div class="alert">
-<?php if ($missing_old_thread_number): ?>
-<p>Vous n'avez pas saisi le numéro du fil à supprimer.</p>
-<?php elseif ($bad_old_thread_number): ?>
-<p>Le numéro du fil à supprimer est incorrect.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php endif; ?>
 </form>
-<?php if ($scroll_to): ?>
+<?php
+$focus=false;
+if ($missing_new_thread_title or $missing_new_thread_name or $bad_new_thread_name) {
+	 $focus='#new_thread_title';
+}
+else if ($bad_new_thread_number) {
+	$focus='#new_thread_number';
+}
+else if ($missing_old_thread_number or $bad_old_thread_number) {
+	$focus='#old_thread_number';
+}
+else if ($confirm_delete_thread) {
+	$focus='#old_thread_number';
+}
+?>
+<?php if ($focus): ?>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(window).scrollTo('<?php echo $scroll_to; ?>');
-});
+$(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

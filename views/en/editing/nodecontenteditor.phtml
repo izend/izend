@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -11,12 +11,12 @@
 <form action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<input name="content_create" type="submit" value="Add" />
+<input id="content_create" name="content_create" type="submit" value="Add" />
 a type
 <?php
 $selected=$new_content_type ? $new_content_type : 'text';
 ?>
-<select name="content_new_type" size="1">
+<select id="content_new_type" name="content_new_type" size="1">
 <option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Text</option>
 <option value="file" <?php echo $selected == 'file' ? 'selected="selected"' : ''; ?>>File</option>
 <option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Download</option>
@@ -24,37 +24,14 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <option value="longtail" <?php echo $selected == 'longtail' ? 'selected="selected"' : ''; ?>>LongTail</option>
 </select>
 #
-<input name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
+<input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php if ($node_contents): ?>
 or
-<input name="content_delete" type="submit" value="Delete" />
+<input id="content_delete" name="content_delete" type="submit" value="Delete" />
 #
-<input name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
+<input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php endif; ?>
 </p>
-<?php if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number or $missing_old_content_number or $bad_old_content_number or $missing_content_number or $bad_content_number): ?>
-<div class="alert">
-<?php if ($missing_new_content_type): ?>
-<p>The new content has no type.</p>
-<?php elseif ($bad_new_content_type): ?>
-<p>The type of the new content is not valid.</p>
-<?php endif; ?>
-<?php if ($bad_new_content_number): ?>
-<p>The new content number is not valid.</p>
-<?php endif; ?>
-<?php if ($missing_old_content_number): ?>
-<p>You didn't specify the number of the content to delete.</p>
-<?php elseif ($bad_old_content_number): ?>
-<p>The number of the content to delete is not valid.</p>
-<?php endif; ?>
-<?php if ($missing_content_number): ?>
-<p>A content number is missing.</p>
-<?php endif; ?>
-<?php if ($bad_content_number): ?>
-<p>A content number is not valid.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php if ($node_contents): ?>
 <?php
 $i=1;
@@ -167,6 +144,20 @@ contents
 </p>
 <?php endif; ?>
 </form>
+<?php
+$focus=false;
+if ($bad_new_content_number) {
+	 $focus='#content_new_number';
+}
+else if ($missing_old_content_number or $bad_old_content_number) {
+	 $focus='#content_old_number';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.grippie').each(function() {

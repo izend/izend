@@ -45,8 +45,6 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	head('javascript', 'jquery.scrollTo');
-
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');

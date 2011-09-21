@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -11,12 +11,12 @@
 <form action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<input name="content_create" type="submit" value="Ajouter" />
+<input id="content_create" name="content_create" type="submit" value="Ajouter" />
 un type
 <?php
 $selected=$new_content_type ? $new_content_type : 'text';
 ?>
-<select name="content_new_type" size="1">
+<select id="content_new_type" name="content_new_type" size="1">
 <option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Texte</option>
 <option value="file" <?php echo $selected == 'file' ? 'selected="selected"' : ''; ?>>Fichier</option>
 <option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Téléchargement</option>
@@ -24,37 +24,14 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <option value="longtail" <?php echo $selected == 'longtail' ? 'selected="selected"' : ''; ?>>LongTail</option>
 </select>
 #
-<input name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
+<input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
 <?php if ($node_contents): ?>
 ou
-<input name="content_delete" type="submit" value="Supprimer" />
+<input id="content_delete" name="content_delete" type="submit" value="Supprimer" />
 le #
-<input name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
+<input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
 <?php endif; ?>
 </p>
-<?php if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number or $missing_old_content_number or $bad_old_content_number or $missing_content_number or $bad_content_number): ?>
-<div class="alert">
-<?php if ($missing_new_content_type): ?>
-<p>Le nouveau contenu n'a pas de type.</p>
-<?php elseif ($bad_new_content_type): ?>
-<p>Le type du nouveau contenu n'est pas valide.</p>
-<?php endif; ?>
-<?php if ($bad_new_content_number): ?>
-<p>Le numéro du nouveau contenu n'est pas valide.</p>
-<?php endif; ?>
-<?php if ($missing_old_content_number): ?>
-<p>Vous n'avez pas saisi le numéro du contenu à supprimer.</p>
-<?php elseif ($bad_old_content_number): ?>
-<p>Le numéro du contenu à supprimer est invalide.</p>
-<?php endif; ?>
-<?php if ($missing_content_number): ?>
-<p>Un numéro de contenu est manquant.</p>
-<?php endif; ?>
-<?php if ($bad_content_number): ?>
-<p>Un numéro de contenu est invalide.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 <?php if ($node_contents): ?>
 <?php
 $i=1;
@@ -115,7 +92,8 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_<?php echo $i; ?>')"/>
 <span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
-<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
+<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 <?php break; ?>
 <?php case 'file': ?>
 <p>
@@ -166,6 +144,20 @@ le contenu
 </p>
 <?php endif; ?>
 </form>
+<?php
+$focus=false;
+if ($bad_new_content_number) {
+	 $focus='#content_new_number';
+}
+else if ($missing_old_content_number or $bad_old_content_number) {
+	 $focus='#content_old_number';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('.grippie').each(function() {

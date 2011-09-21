@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -18,6 +18,8 @@ function threadeditsummary($lang, $clang, $thread) {
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
 	}
+
+	$confirmed=false;
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
@@ -36,6 +38,10 @@ function threadeditsummary($lang, $clang, $thread) {
 	}
 	else if (isset($_POST['node_delete'])) {
 		$action='delete';
+	}
+	else if (isset($_POST['node_confirmdelete'])) {
+		$action='delete';
+		$confirmed=true;
 	}
 	else if (isset($_POST['node_hide'])) {
 		$action='hide';
@@ -215,6 +221,8 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 	}
 
+	$confirm_delete_node=false;
+
 	switch($action) {
 		case 'edit':
 			if ($missing_thread_name or $bad_thread_name or $missing_thread_title or $missing_thread_type or $bad_thread_type) {
@@ -264,6 +272,11 @@ function threadeditsummary($lang, $clang, $thread) {
 
 		case 'delete':
 			if ($missing_old_node_number or $bad_old_node_number) {
+				break;
+			}
+
+			if (!$confirmed) {
+				$confirm_delete_node=true;
 				break;
 			}
 
@@ -353,8 +366,6 @@ function threadeditsummary($lang, $clang, $thread) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	head('javascript', 'jquery.scrollTo');
-
 	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
@@ -367,7 +378,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_title', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
-	$content = view('editing/threadeditsummary', $lang, compact('clang', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'errors'));
+	$content = view('editing/threadeditsummary', $lang, compact('clang', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
 	$output = layout('editing', compact('banner', 'content', 'sidebar'));
 
