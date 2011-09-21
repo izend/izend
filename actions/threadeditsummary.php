@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -217,6 +217,9 @@ function threadeditsummary($lang, $clang, $thread) {
 			}
 			break;
 
+		case 'reorder':
+			break;
+
 		default:
 			break;
 	}
@@ -343,18 +346,27 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 
 		case 'reorder':
-			array_multisort(range(1, count($p)), SORT_NUMERIC, $p);
-			array_multisort($p, SORT_NUMERIC, $thread_contents);
+			if (!$p) {
+				break;
+			}
+
+			$neworder=range(1, count($p));
+			array_multisort($p, SORT_NUMERIC, $neworder);
 
 			$number=1;
-			foreach ($thread_contents as &$c) {
+			$nc=array();
+			foreach ($neworder as $i) {
+				$c = &$thread_contents[$i];
 				if ($c['node_number'] != $number) {
-					if (thread_set_node_number($thread_id, $c['node_id'], $number)) {
-						$c['node_number']=$number;
-					}
+					thread_set_node_number($thread_id, $c['node_id'], $number);
+					$c['node_number'] = $number;
 				}
-				$number++;
+				$c['pos']=$number;
+
+				$nc[$number++] = $c;
 			}
+			$thread_contents = $nc;
+
 			break;
 
 		default:

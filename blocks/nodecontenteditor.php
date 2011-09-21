@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -133,9 +133,6 @@ function nodecontenteditor($lang, $clang, $node_id) {
 	$missing_old_content_number=false;
 	$bad_old_content_number=false;
 
-	$missing_content_number=false;
-	$bad_content_number=false;
-
 	switch($action) {
 		case 'create':
 			if (empty($new_content_type)) {
@@ -171,19 +168,6 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			break;
 
 		case 'modify':
-			foreach ($node_contents as $c) {
-				extract($c);
-
-				if (empty($content_pos)) {
-					$missing_content_number = true;
-				}
-				else if (!is_numeric($content_pos)) {
-					$bad_content_number = true;
-				}
-				else if ($content_pos < 1 or $content_pos > count($node_contents)) {
-					$bad_content_number = true;
-				}
-			}
 			break;
 
 		default:
@@ -192,14 +176,22 @@ function nodecontenteditor($lang, $clang, $node_id) {
 
 	switch($action) {
 		case 'modify':
-			if ($missing_content_number or $bad_content_number) {
+			if (!$p) {
 				break;
 			}
 
-			if ($p) {
-				array_multisort(range(1, count($p)), SORT_NUMERIC, $p);
-				array_multisort($p, SORT_NUMERIC, $node_contents);
+			$neworder=range(1, count($p));
+			array_multisort($p, SORT_NUMERIC, $neworder);
+
+			$number=1;
+			$nc=array();
+			foreach ($neworder as $i) {
+				$c = &$node_contents[$i];
+				$c['content_pos']=$number;
+
+				$nc[$number++] = $c;
 			}
+			$node_contents = $nc;
 
 			$r = node_set_contents($clang, $node_id, $node_contents);
 
@@ -292,7 +284,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			break;
 	}
 
-	$errors = compact('missing_new_content_type', 'bad_new_content_type', 'bad_new_content_number', 'missing_old_content_number', 'bad_old_content_number', 'missing_content_number', 'bad_content_number');
+	$errors = compact('missing_new_content_type', 'bad_new_content_type', 'bad_new_content_number', 'missing_old_content_number', 'bad_old_content_number');
 
 	$output = view('editing/nodecontenteditor', $lang, compact('clang', 'new_content_type', 'new_content_number', 'old_content_number', 'node_contents', 'errors'));
 
