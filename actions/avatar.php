@@ -28,7 +28,7 @@ function avatar($lang, $arglist=false) {
 		}
 	}
 
-	if (!$name or !$size or !is_numeric($size) or $size < 16 or $size > 128) {
+	if (!$name or !$size or !is_numeric($size) or $size < 16 or $size > 200) {
 		return run('error/badrequest', $lang);
 	}
 
