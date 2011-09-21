@@ -10,13 +10,15 @@
 <h3><?php echo $page_title; ?></h3>
 <p id="bookpagenav" class="menubar">
 <?php if ($prev_page_url): ?>
-<a href="<?php echo $prev_page_url; ?>" title="Previous page"><?php echo htmlspecialchars($prev_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
+<a href="<?php echo $prev_page_url; ?>"><img src="/images/theme/icons/left.png" alt=""/></a>
+<a href="<?php echo $prev_page_url; ?>"><?php echo htmlspecialchars($prev_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
 <?php endif; ?>
 <?php if ($next_page_url and $prev_page_url): ?>
 &nbsp;|&nbsp;
 <?php endif; ?>
 <?php if ($next_page_url): ?>
-<a href="<?php echo $next_page_url; ?>" title="Next page"><?php echo htmlspecialchars($next_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
+<a href="<?php echo $next_page_url; ?>"><?php echo htmlspecialchars($next_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
+<a href="<?php echo $next_page_url; ?>"><img src="/images/theme/icons/right.png" alt=""/></a>
 <?php endif; ?>
 </p>
 <?php if ($page_contents): ?>
