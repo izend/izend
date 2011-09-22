@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -52,4 +52,4 @@
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/<?php echo $js['name']; ?>.js"></script>
 <?php endforeach; ?>
 <?php endif; ?>
-<title><?php if (isset($title)) { echo htmlspecialchars($title, ENT_NOQUOTES, 'UTF-8', false); } ?></title>
+<title><?php echo htmlspecialchars(isset($title) && !empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>
