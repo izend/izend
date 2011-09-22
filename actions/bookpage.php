@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -50,7 +50,25 @@ function bookpage($lang, $book, $page) {
 
 	$page_name=$node_name;
 	$page_title=$node_title;
+	$page_abstract=$node_abstract;
+	$page_cloud=$node_cloud;
 	$page_number=$node_number;
+
+	if (!$book_title) {
+		head('title', $book_title );
+	}
+	if ($page_abstract) {
+		head('description', $page_abstract);
+	}
+	else if ($book_abstract) {
+		head('description', $book_abstract);
+	}
+	if ($page_cloud) {
+		head('keywords', $page_cloud);
+	}
+	else if ($book_cloud) {
+		head('keywords', $book_cloud);
+	}
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
@@ -76,6 +94,8 @@ function bookpage($lang, $book, $page) {
 		$next_page_url=url('book', $lang) . '/'. $book_name . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
+	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label'));
+
 	$search=false;
 	if (!$book_nosearch) {
 		$search_text='';
@@ -89,23 +109,17 @@ function bookpage($lang, $book, $page) {
 		$cloud = build('cloud', $lang, $book_id, false, 50, true, true);
 	}
 
-	$headline_text=$book_title;
+	$headline_text=$book_title ? $book_title : $book_id;
 	$headline_url=url('book', $lang) . '/'. $book_name;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
 
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
 
-	head('title', $book_title);
-	head('description', empty($node_abstract) ? $book_abstract : $node_abstract);
-	head('keywords', $node_cloud);
-
 	$search=!$book_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '/'. $book_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('book', $lang) . '/'. $book_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
-
-	$content = view('bookpage', $lang, compact('page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

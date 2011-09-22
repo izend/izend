@@ -3,9 +3,18 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<h3>Fils</h3>
+<h3><?php echo htmlspecialchars($site_title ? $site_title : $sitename, ENT_COMPAT, 'UTF-8'); ?></h3>
+<?php if ($site_abstract): ?>
+<h5>Extrait</h5>
+<p><?php echo htmlspecialchars($site_abstract, ENT_COMPAT, 'UTF-8'); ?></p>
+<?php endif; ?>
+<?php if ($site_cloud): ?>
+<h6>Nuage</h6>
+<p class="small"><?php echo $site_cloud; ?></p>
+<?php endif; ?>
+<h4>Contenu</h4>
 <?php echo $threadlist; ?>

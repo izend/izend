@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -538,7 +538,7 @@ CREATE TABLE `${db_prefix}node_locale` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `title` varchar(100) NULL default NULL,
   `abstract` text,
   `cloud` text,
   PRIMARY KEY (`node_id`,`locale`)
@@ -585,7 +585,7 @@ CREATE TABLE `${db_prefix}thread_locale` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
   `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `title` varchar(100) NULL default NULL,
   `abstract` text,
   `cloud` text,
   PRIMARY KEY (`thread_id`,`locale`)

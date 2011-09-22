@@ -3,14 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
+<?php if (!empty($thread_list)): ?>
 <ol>
 <?php foreach ($thread_list as $thread):
 extract($thread);	/* thread_id thread_name thread_title thread_url */
 ?>
-<li><a href="<?php echo $thread_url; ?>"><span><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></span></a></li>
+<li><a href="<?php echo $thread_url; ?>"><span><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></span></a></li>
 <?php endforeach; ?>
 </ol>
+<?php endif; ?>

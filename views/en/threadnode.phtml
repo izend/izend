@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'dateen.php'; ?>
-<h3><?php echo $node_title; ?></h3>
+<h3><?php echo $node_title ? $node_title : $node_id; ?></h3>
 <p id="threadnodenav" class="menubar">
 <?php if ($prev_node_url): ?>
 <a href="<?php echo $prev_node_url; ?>"><img src="/images/theme/icons/left.png" alt=""/></a>
@@ -29,7 +29,7 @@
 <?php endif; ?>
 <?php if ($node_cloud): ?>
 <h6>Cloud</h6>
-<p class="smaller"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
+<p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
 <?php if ($node_contents): ?>
 <h4>Content</h4>

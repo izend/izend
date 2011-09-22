@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,7 @@ function threadlist($lang, $type=false, $slang=false ) {
 		if ($slang) {
 			 $thread_url .= '?' . 'slang=' . $slang;
 		}
-		$thread_list[] = compact('thread_title', 'thread_url');
+		$thread_list[] = compact('thread_id', 'thread_title', 'thread_url');
 	}
 
 	$output = view('threadlist', false, compact('thread_list'));

@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
-<h3><?php echo $book_title; ?></h3>
+<h3><?php echo htmlspecialchars($book_title ? $book_title : $book_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($book_abstract): ?>
 <p><?php echo htmlspecialchars($book_abstract, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
@@ -15,7 +15,7 @@
 <ol>
 <?php foreach ($book_contents as $c): ?>
 <?php extract($c);	/* page_title page_url */ ?>
-<li><a href="<?php echo $page_url; ?>"><?php echo htmlspecialchars($page_title, ENT_COMPAT, 'UTF-8'); ?></a></li>
+<li><a href="<?php echo $page_url; ?>"><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></a></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>

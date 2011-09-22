@@ -46,7 +46,7 @@ function threadsummary($lang, $thread) {
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number node_ignored */
 			$node_url = $thread_url . '/' . $node_name . '?' . 'slang=' . $slang;
-			$thread_contents[] = compact('node_title' , 'node_url', 'node_ignored');
+			$thread_contents[] = compact('node_id', 'node_title' , 'node_url', 'node_ignored');
 		}
 	}
 
@@ -57,15 +57,16 @@ function threadsummary($lang, $thread) {
 
 	$sidebar = view('sidebar', false, compact('title'));
 
-	head('title', $thread_title);
+	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', $thread_abstract);
 	head('keywords', $thread_cloud);
+	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $lang : false;
 	$validate=url('thread', $lang) . '/'. $thread_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
-	$content = view('threadsummary', $slang, compact('thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
+	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

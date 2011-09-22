@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -32,7 +32,7 @@ function story($lang, $arglist=false) {
 	}
 
 	$page_id = thread_node_id($story_id, $page);
-	if (!$page_id and $page) {
+	if (!$page_id) {
 		return run('error/notfound', $lang);
 	}
 
@@ -53,22 +53,6 @@ function story($lang, $arglist=false) {
 	$story_nocloud = $thread_nocloud;
 	$story_nosearch = $thread_nosearch;
 
-	if (!$page_id) {
-		head('title', $story_title);
-		head('description', $story_abstract);
-		head('keywords', $story_cloud);
-
-		$edit=user_has_role('writer') ? url('storyedit', $_SESSION['user']['locale']) . '/'. $story_id . '?' . 'clang=' . $lang : false;
-		$validate=url('story', $lang) . '/' . $story_name;
-		$banner = build('banner', $lang, compact('edit', 'validate'));
-
-		$content = false;
-
-		$output = layout('standard', compact('banner', 'content'));
-
-		return $output;
-	}
-
 	$r = thread_get_node($lang, $story_id, $page_id);
 	if (!$r) {
 		return run('error/notfound', $lang);
@@ -81,7 +65,25 @@ function story($lang, $arglist=false) {
 
 	$page_name=$node_name;
 	$page_title=$node_title;
+	$page_abstract=$node_abstract;
+	$page_cloud=$node_cloud;
 	$page_number=$node_number;
+
+	if ($story_title) {
+		head('title', $story_title);
+	}
+	if ($page_abstract) {
+		head('description', $page_abstract);
+	}
+	else if ($story_abstract) {
+		head('description', $story_abstract);
+	}
+	if ($page_cloud) {
+		head('keywords', $page_cloud);
+	}
+	else if ($story_cloud) {
+		head('keywords', $story_cloud);
+	}
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
@@ -90,6 +92,8 @@ function story($lang, $arglist=false) {
 		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, ($thread_nomorecomment or $node_nomorecomment));
 	}
+
+	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number'));
 
 	$search=false;
 	if (!$story_nosearch) {
@@ -110,28 +114,27 @@ function story($lang, $arglist=false) {
 		$story_url = url('story', $lang) . '/'. $story_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
-			$node_url=$story_url . '/' . $node_name;
-			$summary[] = array($node_title, $node_url);
+			$page_id = $node_id;
+			$page_title = $node_title;
+			$page_url=$story_url . '/' . $node_name;
+			$summary[] = compact('page_id', 'page_title', 'page_url');
 		}
 	}
 
-	$headline_text=$story_title;
-	$headline_url=false;
-	$headline=compact('headline_text', 'headline_url');
-	$title = view('headline', false, $headline);
+	$title=false;
+	if ($story_title) {
+		$headline_text=$story_title;
+		$headline_url=false;
+		$headline=compact('headline_text', 'headline_url');
+		$title = view('headline', false, $headline);
+	}
 
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title', 'summary'));
-
-	head('title', $story_title);
-	head('description', empty($node_abstract) ? $story_abstract : $node_abstract);
-	head('keywords', $node_cloud);
 
 	$search=!$story_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('storyedit', $_SESSION['user']['locale']) . '/'. $story_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('story', $lang) . '/' . $story_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
-
-	$content = view('storycontent', false, compact('page_title', 'page_contents', 'page_comment', 'page_number'));
 
 	$output = layout('standard', compact('banner', 'sidebar', 'content'));
 

@@ -3,13 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<?php $scroll_to=false; ?>
-<h3>Threads</h3>
+<h3><?php echo htmlspecialchars($site_title ? $site_title : $sitename, ENT_COMPAT, 'UTF-8'); ?></h3>
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
@@ -59,7 +58,7 @@ foreach ($thread_list as $b) {
 	$thread_title = htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8');
 	$thread_url .= '?' . 'clang=' . $clang;
 	echo <<<_MARK_
-<tr><td><input name="p[$i]" type="text" size="2" maxlength="$maxlen" value="$pos" /></td><td class="aright"><a href="$thread_url">$thread_number</a></td><td><a href="$thread_url">$thread_title</a></td></tr>\n
+<tr><td><input name="p[$i]" type="text" size="2" maxlength="$maxlen" value="$pos" /></td><td class="aright"><a href="$thread_url">$thread_id</a></td><td><a href="$thread_url">$thread_title</a></td></tr>\n
 _MARK_;
 	$i++;
 }

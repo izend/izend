@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -13,8 +13,8 @@ $strings = array(
 	array(
 	),
 	'en' => array(
-		'description'			=> '',
-		'keywords'				=> '',
+		'description'			=> 'Practical manuals on C, Java, PHP, programming web sites and mobiles. Learn how to write your own CMS.',
+		'keywords'				=> 'iZend C C++ Java Standard Mobile J2SE J2ME PHP HTML CSS LAMP CMS MVC Javascript jQuery language programming tutorial manual course school practical example toolkit software bus communication process TCP UDP IP Flash Longtail video audio codec',
 		'http_bad_request:title'			=> 'Bad Request',
 		'http_forbidden:title'				=> 'Forbidden',
 		'http_internal_error:title'			=> 'Internal Error',
@@ -30,7 +30,7 @@ $strings = array(
 		'account:title'			=> 'Account',
 		'newuser:title'			=> 'Registration',
 		'password:title'		=> 'Password',
-		'threadall:title'		=> 'Threads',
+		'threadall:title'		=> 'Catalog',
 		'bookall:title'			=> 'Manuals',
 		'admin:title'			=> 'Gestion',
 		'email:salutations'		=> 'See you soon.',
@@ -40,8 +40,8 @@ $strings = array(
 		'email:new_user_text'			=> "Welcome!\n\nYour password is in the attached cryptogram.",
 	),
 	'fr' => array(
-		'description'			=> '',
-		'keywords'				=> '',
+		'description'			=> 'Manuels pratiques sur le C, Java, le PHP, la programmation des sites et des mobiles. Apprenez à écrire votre propre CMS.',
+		'keywords'				=> 'iZend C C++ Java Standard Mobile J2SE J2ME PHP HTML CSS LAMP CMS MVC Javascript jQuery langage programmation tutoriel didacticiel manuel cours école pratique exemple toolkit bus logiciel communication processus TCP UDP IP Flash Longtail vidéo audio codec',
 		'http_bad_request:title'			=> 'Mauvaise requête',
 		'http_forbidden:title'				=> 'Interdit',
 		'http_internal_error:title'			=> 'Erreur interne',
@@ -57,7 +57,7 @@ $strings = array(
 		'account:title'			=> 'Compte',
 		'newuser:title'			=> 'Inscription',
 		'password:title'		=> 'Mot de passe',
-		'threadall:title'		=> 'Fils',
+		'threadall:title'		=> 'Catalogue',
 		'bookall:title'			=> 'Manuels',
 		'admin:title'			=> 'Management',
 		'email:salutations'		=> 'À bientôt.',

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -33,17 +33,30 @@ function booksummary($lang, $book) {
 	$book_nocloud = $thread_nocloud;
 	$book_nosearch = $thread_nosearch;
 
+	if ($book_title) {
+		head('title', $book_title);
+	}
+	if ($book_abstract) {
+		head('description', $book_abstract);
+	}
+	if ($book_cloud) {
+		head('keywords', $book_cloud);
+	}
+
 	$book_contents = array();
 	$r = thread_get_contents($lang, $book_id);
 	if ($r) {
 		$book_url = url('book', $lang) . '/'. $book_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
+			$page_id = $node_id;
 			$page_title = $node_title;
 			$page_url = $book_url  . '/' . $node_name;
-			$book_contents[] = compact('page_title', 'page_url');
+			$book_contents[] = compact('page_id', 'page_title', 'page_url');
 		}
 	}
+
+	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents'));
 
 	$search=false;
 	if (!$book_nosearch) {
@@ -65,16 +78,10 @@ function booksummary($lang, $book) {
 
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
 
-	head('title', $book_title);
-	head('description', $book_abstract);
-	head('keywords', $book_cloud);
-
 	$search=!$book_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '/'. $book_id . '?' . 'clang=' . $lang : false;
 	$validate=url('book', $lang) . '/'. $book_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
-
-	$content = view('booksummary', $lang, compact('book_title', 'book_abstract', 'book_contents'));
 
 	$output = layout('standard', compact('banner', 'sidebar', 'content'));
 

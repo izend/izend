@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,7 @@ function node_id($node) {
 function node_create($lang, $node_name, $node_title) {
 	$sqllang=db_sql_arg($lang, false);
 	$sqlname=db_sql_arg($node_name, true);
-	$sqltitle=db_sql_arg($node_title, true);
+	$sqltitle=db_sql_arg($node_title, true, true);
 
 	$tabnode=db_prefix_table('node');
 
@@ -87,7 +87,7 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$sqllang=db_sql_arg($lang, false);
 	$sqlname=db_sql_arg($node_name, true);
-	$sqltitle=db_sql_arg($node_title, true);
+	$sqltitle=db_sql_arg($node_title, true, true);
 	$sqlabstract=db_sql_arg($node_abstract, true, true);
 	$sqlcloud=db_sql_arg($node_cloud, true, true);
 

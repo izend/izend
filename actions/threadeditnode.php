@@ -40,7 +40,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$r = thread_get_node($clang, $thread_id, $node_id, false);
 	$node_title = ($r and $r['node_title']) ? $r['node_title'] : $node_id;
 
-	head('title', $thread_title);
+	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -150,7 +150,6 @@ function threadeditsummary($lang, $clang, $thread) {
 		}
 	}
 
-	$missing_thread_title=false;
 	$missing_thread_name=false;
 	$bad_thread_name=false;
 	$missing_thread_type=false;
@@ -165,9 +164,6 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	switch($action) {
 		case 'edit':
-			if (empty($thread_title)) {
-				$missing_thread_title = true;
-			}
 			if (empty($thread_name)) {
 				$missing_thread_name = true;
 			}
@@ -228,7 +224,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	switch($action) {
 		case 'edit':
-			if ($missing_thread_name or $bad_thread_name or $missing_thread_title or $missing_thread_type or $bad_thread_type) {
+			if ($missing_thread_name or $bad_thread_name or $missing_thread_type or $bad_thread_type) {
 				break;
 			}
 
@@ -373,7 +369,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 	}
 
-	head('title', $thread_title);
+	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
@@ -388,7 +384,7 @@ function threadeditsummary($lang, $clang, $thread) {
 	$title = view('headline', false, $headline);
 	$sidebar = view('sidebar', false, compact('title'));
 
-	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_title', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
+	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
 	$content = view('editing/threadeditsummary', $lang, compact('clang', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 

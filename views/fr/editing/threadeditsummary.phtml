@@ -3,12 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<?php $scroll_to=false; ?>
 <h3><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
@@ -141,10 +140,7 @@ le contenu #
 </form>
 <?php
 $focus=false;
-if ($missing_thread_title) {
-	 $focus='#thread_title';
-}
-else if ($missing_thread_name or $bad_thread_name) {
+if ($missing_thread_name or $bad_thread_name) {
 	 $focus='#thread_name';
 }
 else if ($missing_new_node_title or $bad_new_node_title) {

@@ -19,7 +19,13 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
-Date:	Thu Sep 19 2011
+Date:	Thu Wed 22 2011
+
+ALTER TABLE `izend_thread_locale` CHANGE `title` `title` VARCHAR( 100 ) NULL default NULL
+ALTER TABLE `izend_node_locale` CHANGE `title` `title` VARCHAR( 100 ) NULL default NULL
+----
+
+Date:	Mon Sep 19 2011
 
 ALTER TABLE `izend_thread_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0'
 ----
@@ -160,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `izend_node_locale` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT 'en',
   `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `title` varchar(100) NULL default NULL,
   `abstract` text,
   `cloud` text,
   PRIMARY KEY (`node_id`,`locale`)
@@ -216,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `izend_thread_locale` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
   `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `title` varchar(100) NULL default NULL,
   `abstract` text,
   `cloud` text,
   PRIMARY KEY (`thread_id`,`locale`)

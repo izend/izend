@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -103,7 +103,7 @@ function thread_create($lang, $thread_name, $thread_title, $thread_type='thread'
 
 	$sqllang=db_sql_arg($lang, false);
 	$sqlname=db_sql_arg($thread_name, true);
-	$sqltitle=db_sql_arg($thread_title, true);
+	$sqltitle=db_sql_arg($thread_title, true, true);
 	$sqltype=db_sql_arg($thread_type, false);
 
 	$tabthread=db_prefix_table('thread');
@@ -220,7 +220,7 @@ function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type
 
 	$sqllang=db_sql_arg($lang, false);
 	$sqlname=db_sql_arg($thread_name, true);
-	$sqltitle=db_sql_arg($thread_title, true);
+	$sqltitle=db_sql_arg($thread_title, true, true);
 	$sqlabstract=db_sql_arg($thread_abstract, true, true);
 	$sqlcloud=db_sql_arg($thread_cloud, true, true);
 

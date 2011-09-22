@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'datefr.php'; ?>
-<h3><?php echo $thread_title; ?></h3>
+<h3><?php echo $thread_title ? $thread_title : $thread_id; ?></h3>
 <p class="info"><?php echo longdatetime_fr($thread_modified); ?></p>
 <?php if ($thread_abstract): ?>
 <h5>Extrait</h5>
@@ -16,14 +16,14 @@
 <?php endif; ?>
 <?php if ($thread_cloud): ?>
 <h6>Nuage</h6>
-<p class="smaller"><?php echo $thread_cloud; ?></p>
+<p class="small"><?php echo $thread_cloud; ?></p>
 <?php endif; ?>
 <h4>Contenu</h4>
 <?php if ($thread_contents): ?>
 <ol>
 <?php foreach ($thread_contents as $c): ?>
 <?php extract($c);	/* node_title node_url node_ignored */ ?>
-<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></a><?php if ($node_ignored): ?> <img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignoré" title="Ignoré" /><?php endif; ?></li>
+<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></a><?php if ($node_ignored): ?> <img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignoré" title="Ignoré" /><?php endif; ?></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -65,8 +65,6 @@ function nodeeditor($lang, $clang, $node_id) {
 	$missing_node_name=false;
 	$bad_node_name=false;
 
-	$missing_node_title=false;
-
 	switch($action) {
 		case 'edit':
 			if (empty($node_name)) {
@@ -75,9 +73,6 @@ function nodeeditor($lang, $clang, $node_id) {
 			else if (!preg_match('#^[\w-]{3,}$#', $node_name)) {
 				$bad_node_name = true;
 			}
-			if (empty($node_title)) {
-				$missing_node_title = true;
-			}
 			break;
 		default:
 			break;
@@ -85,7 +80,7 @@ function nodeeditor($lang, $clang, $node_id) {
 
 	switch($action) {
 		case 'edit':
-			if ($missing_node_name or $bad_node_name or $missing_node_title) {
+			if ($missing_node_name or $bad_node_name) {
 				break;
 			}
 
@@ -103,7 +98,7 @@ function nodeeditor($lang, $clang, $node_id) {
 
 	$content_editor = build('nodecontenteditor', $lang, $clang, $node_id);
 
-	$errors = compact('missing_node_name', 'bad_node_name', 'missing_node_title');
+	$errors = compact('missing_node_name', 'bad_node_name');
 
 	$output = view('editing/nodeeditor', $lang, compact('clang', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'content_editor', 'errors'));
 

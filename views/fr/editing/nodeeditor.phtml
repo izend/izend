@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -37,18 +37,17 @@
 <p>
 <input id="node_edit" name="node_edit" type="submit" value="Éditer" />
 </p>
-<?php if ($missing_node_title or $missing_node_name or $bad_node_name): ?>
-<div class="alert">
-<?php if ($missing_node_title): ?>
-<p>Vous n'avez pas saisi le titre.</p>
-<?php endif; ?>
-<?php if ($missing_node_name): ?>
-<p>Spécifiez un nom pour le lien.</p>
-<?php elseif ($bad_node_name): ?>
-<p>Le nom du lien est invalide.</p>
-<?php endif; ?>
-</div>
-<?php endif; ?>
 </form>
+<?php
+$focus=false;
+if ($missing_node_name or $bad_node_name) {
+	 $focus='#node_name';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
 <h4>Contenu</h4>
 <?php echo $content_editor; ?>

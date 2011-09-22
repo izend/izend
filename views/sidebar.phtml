@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -19,9 +19,9 @@
 <?php endif; ?>
 <?php if (isset($summary) and !empty($summary)): ?>
 <ol id="summary" class="menu">
-<?php foreach ($summary as $p): ?>
-<?php list($title, $url)=$p; ?>
-<li><a href="<?php echo $url; ?>"><?php echo htmlspecialchars($title, ENT_NOQUOTES, 'UTF-8', false); ?></a></li>
+<?php foreach ($summary as $s): ?>
+<?php extract($s);	/* page_id page_title page_url */ ?>
+<li><a href="<?php echo $page_url; ?>"><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_NOQUOTES, 'UTF-8', false); ?></a></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>

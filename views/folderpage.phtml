@@ -3,16 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($page_title): ?>
 <h3><?php echo htmlspecialchars($page_title, ENT_COMPAT, 'UTF-8'); ?></h3>
-<?php
-if ($page_contents) {
-	echo $page_contents;
-}
-if ($page_comment) {
-	echo $page_comment;
-}
-?>
+<?php endif; ?>
+<?php if ($page_contents): echo $page_contents; ?><?php endif; ?>
+<?php if ($page_comment): echo $page_comment; ?><?php endif; ?>

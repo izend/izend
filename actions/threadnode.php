@@ -16,7 +16,7 @@ function threadnode($lang, $thread, $node) {
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
 	}
-	
+
 	$slang=false;
 	if (isset($_GET['slang'])) {
 		$slang = $_GET['slang'];
@@ -52,7 +52,7 @@ function threadnode($lang, $thread, $node) {
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
-	$headline_text=$thread_title;
+	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('thread', $lang) . '/' . $thread_name . '?' . 'slang=' . $slang;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
@@ -75,7 +75,7 @@ function threadnode($lang, $thread, $node) {
 		$next_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $next_node_name . '?' . 'slang=' . $slang;
 	}
 
-	head('title', $thread_title);
+	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', $node_abstract);
 	head('keywords', $node_cloud);
 	head('robots', 'noindex, nofollow');
@@ -84,7 +84,7 @@ function threadnode($lang, $thread, $node) {
 	$validate=url('thread', $lang) . '/'. $thread_id . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
-	$content = view('threadnode', $slang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 
