@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -56,7 +56,7 @@ function thread_node_id($thread_id, $node) {
 	if (!$node) {
 		$tabthreadnode=db_prefix_table('thread_node');
 
-		$sql="SELECT tn.node_id AS node_id FROM $tabthreadnode tn WHERE tn.thread_id=$thread_id ORDER BY tn.number LIMIT 1";
+		$sql="SELECT tn.node_id AS node_id FROM $tabthreadnode tn WHERE tn.thread_id=$thread_id AND tn.ignored=0 ORDER BY tn.number LIMIT 1";
 	}
 	else if (is_numeric($node)) {
 		$tabthreadnode=db_prefix_table('thread_node');
