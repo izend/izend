@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ function user_id($user) {
 
 function user_create($name, $password, $mail, $locale='en') {
 	$sqlname=db_sql_arg($name, true);
-	$sqlmail=db_sql_arg($mail, true);
+	$sqlmail=db_sql_arg($mail, true, true);
 	$sqllocale=db_sql_arg($locale);
 
 	$sqlpassword=$password ? '\'' . md5($password) . '\'' : NULL;
@@ -100,14 +100,14 @@ function user_get($user_id) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, mail AS user_mail, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, mail AS user_mail, website AS user_website, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function user_set($user_id, $name, $mail, $locale) {
+function user_set($user_id, $name, $mail, $website, $locale) {
 	if (!is_numeric($user_id)) {
 		return false;
 	}
@@ -124,10 +124,11 @@ function user_set($user_id, $name, $mail, $locale) {
 	extract($r[0]);	/* oldname */
 
 	$sqlname=db_sql_arg($name, true);
-	$sqlmail=db_sql_arg($mail, true);
+	$sqlmail=db_sql_arg($mail, true, true);
+	$sqlwebsite=db_sql_arg($website, true, true);
 	$sqllocale=db_sql_arg($locale);
 
-	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id LIMIT 1";
+	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, website=$sqlwebsite, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_update($sql);
 
@@ -226,7 +227,7 @@ function user_login($login, $password) {
 		return false;
 	}
 
-	extract($r);	/* user_name user_password user_newpassword user_mail user_created user_modified user_accessed user_locale user_active user_banned */
+	extract($r);	/* user_name user_password user_newpassword user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
 
 	if (!$user_active or $user_banned) {
 		return false;
@@ -245,6 +246,7 @@ function user_login($login, $password) {
 	$user['name'] = $user_name;
 	$user['password'] = $user_password;
 	$user['mail'] = $user_mail;
+	$user['website'] = $user_website;
 	$user['locale'] = $user_locale;
 	$user['created'] = (int)$user_created;
 	$user['modified'] = (int)$user_modified;
@@ -347,7 +349,7 @@ function user_search($s, $pagesize=false, $page=1) {
 		$limit=($page - 1) * $pagesize . ', ' . $pagesize;
 	}
 
-	$sql="SELECT user_id, name AS user_name, mail AS user_mail, active AS user_active, banned AS user_banned, UNIX_TIMESTAMP(accessed) AS user_accessed FROM $tabuser $where ORDER by user_id";
+	$sql="SELECT user_id, name AS user_name, mail AS user_mail, website AS user_website, active AS user_active, banned AS user_banned, UNIX_TIMESTAMP(accessed) AS user_accessed FROM $tabuser $where ORDER by user_id";
 
 	if ($limit) {
 		$sql .= " LIMIT $limit";

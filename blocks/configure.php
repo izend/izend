@@ -650,6 +650,7 @@ CREATE TABLE `${db_prefix}user` (
   `password` varchar(32) NOT NULL,
   `newpassword` varchar(32) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `accessed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

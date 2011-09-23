@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,7 @@ require_once 'userprofile.php';
 require_once 'validateusername.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
+require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function useredit($lang, $user_id, $administrator=false) {
@@ -40,6 +41,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	}
 
 	$user_name=$user_mail=$user_locale=false;
+	$user_website=false;
 
 	$user_active=$user_banned=false;
 	$user_accessed=false;
@@ -62,6 +64,9 @@ function useredit($lang, $user_id, $administrator=false) {
 			}
 			if (isset($_POST['useredit_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['useredit_mail'])));
+			}
+			if (isset($_POST['useredit_website'])) {
+				$user_website=strtolower(strflat(readarg($_POST['useredit_website'])));
 			}
 			if (isset($_POST['useredit_locale'])) {
 				$user_locale=readarg($_POST['useredit_locale']);
@@ -93,6 +98,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$missing_mail=false;
 	$bad_mail=false;
 	$duplicated_mail=false;
+	$bad_website=false;
 	$missing_locale=false;
 	$bad_locale=false;
 
@@ -127,6 +133,13 @@ function useredit($lang, $user_id, $administrator=false) {
 				$duplicated_mail=true;
 			}
 
+			if ($user_website and !validate_website($user_website)) {
+				$bad_website=true;
+			}
+			else {
+				$user_website=normalize_website($user_website);
+			}
+
 			if (!$user_locale) {
 				$missing_locale=true;
 			}
@@ -144,11 +157,11 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	switch($action) {
 		case 'modify':
-			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $missing_locale or $bad_locale) {
+			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_locale or $bad_locale) {
 				break;
 			}
 
-			$r = user_set($user_id, $user_name, $user_mail, $user_locale);
+			$r = user_set($user_id, $user_name, $user_mail, $user_website, $user_locale);
 
 			if (!$r) {
 				$internal_error=true;
@@ -157,6 +170,7 @@ function useredit($lang, $user_id, $administrator=false) {
 
 			$_SESSION['user']['name'] = $user_name;
 			$_SESSION['user']['mail'] = $user_mail;
+			$_SESSION['user']['website'] = $user_website;
 			$_SESSION['user']['locale'] = $user_locale;
 
 			if ($with_status) {
@@ -195,10 +209,10 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	$_SESSION['useredit_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'missing_locale', 'bad_locale', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'internal_error', 'contact_page');
 	$infos = compact('account_modified');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'user_name', 'user_mail', 'user_locale', 'user_banned', 'user_active', 'user_accessed', 'with_status', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'user_name', 'user_mail', 'user_website', 'user_locale', 'user_banned', 'user_active', 'user_accessed', 'with_status', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

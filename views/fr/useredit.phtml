@@ -15,7 +15,9 @@
 <p>Nom de connexion&nbsp;:</p>
 <p><input type="text" name="useredit_name" id="useredit_name" size="20" maxlength="20" title="2 à 20 lettres" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /><?php endif; ?></p>
 <p>Adresse d'email&nbsp;:</p>
-<p><input type="text" name="useredit_mail" id="useredit_mail" size="50" maxlength="100" title="nom@domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="useredit_mail" id="useredit_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p>Site web&nbsp;:</p>
+<p><input type="text" name="useredit_website" id="useredit_website" size="40" maxlength="100" title="www.domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p><?php foreach ($system_languages as $lang): ?> <input name="useredit_locale" id="useredit_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $user_locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
 <?php if ($with_status): ?>
 <fieldset id="useredit_status">
@@ -59,6 +61,9 @@ le compte
 <p class="error">L'adresse d'email est invalide.</p>
 <?php elseif ($duplicated_mail): ?>
 <p class="error">Cette adresse d'email est déjà utilisée.</p>
+<?php endif; ?>
+<?php if ($bad_website): ?>
+<p class="error">L'URL du site web est invalide.</p>
 <?php endif; ?>
 <?php if ($internal_error): ?>
 <p class="error">Une erreur interne s'est produite.

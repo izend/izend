@@ -19,6 +19,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Fri Wed 23 2011
+
+ALTER TABLE `izend_user` ADD `website` VARCHAR( 100 ) NULL DEFAULT NULL AFTER `mail` 
+----
+
 Date:	Thu Wed 22 2011
 
 ALTER TABLE `izend_thread_locale` CHANGE `title` `title` VARCHAR( 100 ) NULL default NULL
@@ -251,6 +256,7 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
   `password` varchar(32) NOT NULL,
   `newpassword` varchar(32) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `accessed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

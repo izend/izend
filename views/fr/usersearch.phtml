@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -33,7 +33,7 @@ $pagenums=page_range($page, $npages, 2);
 <?php endforeach; ?>
 </p>
 <?php endif; ?>
-<table border="0" cellpadding="4" cellspacing="0" rules="none">
+<table id="userlist" border="0" cellpadding="4" cellspacing="0" rules="none">
 <?php foreach ($result as $r): extract($r);?>
 <tbody>
 <tr>
@@ -42,6 +42,7 @@ $pagenums=page_range($page, $npages, 2);
 <td class="usermail"><?php if ($user_mail): ?><?php echo $user_mail; ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="useraccessed"><?php if ($user_accessed): ?><?php echo date('d.m.Y H:i', $user_accessed); ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="userlocked"><?php if (!$user_active or $user_banned): ?><img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" /><?php else: ?>&nbsp;<?php endif; ?></td>
+<td class="userwebsite"><?php if ($user_website): ?><a href="http://<?php echo $user_website; ?>"><?php echo $user_website; ?></a><?php else: ?>&nbsp;<?php endif; ?></td>
 </tr>
 <?php $i++; ?>
 <?php endforeach; ?>
