@@ -40,6 +40,7 @@ $pagenums=page_range($page, $npages, 2);
 <td class="username"><?php if ($edit): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_name; ?><?php if ($edit): ?></a><?php endif; ?></td>
 <td><img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /></td>
 <td class="usermail"><?php if ($user_mail): ?><?php echo $user_mail; ?><?php else: ?>&nbsp;<?php endif; ?></td>
+<td class="userlogged"><?php if ($user_logged): ?><?php echo $user_logged; ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="useraccessed"><?php if ($user_accessed): ?><?php echo date('m/d/Y H:i', $user_accessed); ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="userlocked"><?php if (!$user_active or $user_banned): ?><img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" /><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="userwebsite"><?php if ($user_website): ?><a href="http://<?php echo $user_website; ?>"><?php echo $user_website; ?></a><?php else: ?>&nbsp;<?php endif; ?></td>
