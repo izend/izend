@@ -384,9 +384,11 @@ function threadeditsummary($lang, $clang, $thread) {
 	$title = view('headline', false, $headline);
 	$sidebar = view('sidebar', false, compact('title'));
 
+	$inlanguages=view('inlanguages', false, compact('clang'));
+
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
-	$content = view('editing/threadeditsummary', $lang, compact('clang', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
+	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
 	$output = layout('editing', compact('banner', 'content', 'sidebar'));
 

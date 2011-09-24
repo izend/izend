@@ -1,0 +1,19 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php global $supported_languages; ?>
+<?php foreach ($supported_languages as $lng): ?>
+<?php if ($lng == 'fr'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="Français"<?php if ($lng == $clang): ?> class="selected"<?php endif; ?> />
+<?php elseif ($lng == 'en'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="English"<?php if ($lng == $clang): ?> class="selected"<?php endif; ?> />
+<?php elseif ($lng == 'ar'): ?>
+<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="عربي"<?php if ($lng == $clang): ?> class="selected"<?php endif; ?> />
+<?php endif; ?>
+<?php endforeach; ?>

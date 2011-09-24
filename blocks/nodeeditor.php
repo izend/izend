@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -98,9 +98,11 @@ function nodeeditor($lang, $clang, $node_id) {
 
 	$content_editor = build('nodecontenteditor', $lang, $clang, $node_id);
 
+	$inlanguages=view('inlanguages', false, compact('clang'));
+
 	$errors = compact('missing_node_name', 'bad_node_name');
 
-	$output = view('editing/nodeeditor', $lang, compact('clang', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'content_editor', 'errors'));
+	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'content_editor', 'errors'));
 
 	return $output;
 }

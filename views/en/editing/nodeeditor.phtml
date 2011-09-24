@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -11,9 +11,7 @@
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<?php foreach ($supported_languages as $lng): ?>
-<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="<?php echo $lng; ?>"/>
-<?php endforeach; ?>
+<?php echo $inlanguages; ?>
 </p>
 <p>
 <input id="node_title" name="node_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'node_edit')"/>

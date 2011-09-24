@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -225,20 +225,22 @@ function threadeditall($lang, $clang, $type=false) {
 			break;
 	}
 
-	$site_title=translate('title', $lang);
-
 	head('title', translate('threadall:title', $lang));
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
+	$site_title=translate('title', $lang);
+
 	$view=url('thread', $clang) . '?' . 'slang=' . $lang;
 	$validate=url($type ? $type : 'thread', $clang);
 	$banner = build('banner', $lang, compact('view', 'validate'));
 
+	$inlanguages=view('inlanguages', false, compact('clang'));
+
 	$errors = compact('missing_new_thread_title', 'bad_new_thread_title', 'missing_new_thread_name', 'missing_new_thread_type', 'bad_new_thread_name', 'bad_new_thread_type', 'bad_new_thread_number', 'missing_old_thread_number', 'bad_old_thread_number');
 
-	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'supported_threads', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
+	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'inlanguages', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
 
 	$output = layout('editing', compact('banner', 'content'));
 

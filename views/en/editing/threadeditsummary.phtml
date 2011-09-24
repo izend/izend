@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -12,15 +12,7 @@
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<?php foreach ($supported_languages as $lng): ?>
-<?php if ($lng == 'fr'): ?>
-<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="Français" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
-<?php elseif ($lng == 'en'): ?>
-<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="English" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
-<?php elseif ($lng == 'ar'): ?>
-<input name="<?php echo $lng; ?>" id="<?php echo $lng; ?>" type="submit" value="عربي" class="<?php if ($lng == $clang): ?>selected<?php endif; ?>"/>
-<?php endif; ?>
-<?php endforeach; ?>
+<?php echo $inlanguages; ?>
 </p>
 <p>
 <input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'thread_edit')"/>
