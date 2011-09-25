@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -14,14 +14,6 @@ require_once 'userprofile.php';
 require_once 'models/node.inc';
 
 function newcomment($lang, $node_id) {
-	$comment_name = user_profile('name');
-	$comment_created = time();
-
-	$token=false;
-	if (isset($_POST['newcomment_token'])) {
-		$token=readarg($_POST['newcomment_token']);
-	}
-
 	$action='init';
 	if (isset($_POST['newcomment_comment'])) {
 		$action='comment';
@@ -33,7 +25,7 @@ function newcomment($lang, $node_id) {
 		$action='edit';
 	}
 
-	$message=false;
+	$message=$token=false;
 
 	switch($action) {
 		case 'comment':
@@ -41,6 +33,9 @@ function newcomment($lang, $node_id) {
 		case 'edit':
 			if (isset($_POST['newcomment_message'])) {
 				$message=readarg($_POST['newcomment_message'], true, false);	// trim but DON'T strip!
+			}
+			if (isset($_POST['newcomment_token'])) {
+				$token=readarg($_POST['newcomment_token']);
 			}
 			break;
 		default:
@@ -57,6 +52,10 @@ function newcomment($lang, $node_id) {
 		case 'comment':
 		case 'validate':
 		case 'edit':
+			if (!isset($_SESSION['newcomment_token']) or $token != $_SESSION['newcomment_token']) {
+				$bad_token=true;
+			}
+
 			if (!$message) {
 				$missing_message=true;
 				break;
@@ -73,11 +72,7 @@ function newcomment($lang, $node_id) {
 
 	switch($action) {
 		case 'validate':
-			if ($missing_message or $message_too_long) {
-				break;
-			}
-
-			if (isset($_SESSION['newcomment_token']) and $_SESSION['newcomment_token'] != $token) {
+			if ($bad_token or $missing_message or $message_too_long) {
 				break;
 			}
 
@@ -107,20 +102,20 @@ function newcomment($lang, $node_id) {
 			emailme($subject, $msg);
 
 			$message=false;
-			$token=false;
 
 			break;
 		default:
 			break;
 	}
 
-	if (!$token) {
-		$_SESSION['newcomment_token'] = $token = token_id();
-	}
+	$comment_name = user_profile('name');
+	$comment_created = time();
 
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
+
+	$_SESSION['newcomment_token'] = $token = token_id();
 
 	$errors = compact('missing_message', 'message_too_long', 'internal_error', 'contact_page');
 
