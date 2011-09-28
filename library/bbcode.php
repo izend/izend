@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -13,8 +13,12 @@ function bbcode($s) {
 	static $bbcode = array(
 			'#\[br\]#is'							=> '<br />',
 //			'#\[(h[1-6])\](.+?)\[/\1\]#is'			=> '<\1>\2</\1>',
-			'#\[(b|i|u|s)\](.+?)\[/\1\]#is'			=> '<\1>\2</\1>',
-			'#\[(p|pre)\](.+?)\[/\1\]#is'			=> '<\1>\2</\1>',
+			'#\[b\](.+?)\[/b\]#is'					=> '<b>\1</b>',
+			'#\[i\](.+?)\[/i\]#is'					=> '<i>\1</i>',
+			'#\[u\](.+?)\[/u\]#is'					=> '<u>\1</u>',
+			'#\[s\](.+?)\[/s\]#is'					=> '<s>\1</s>',
+			'#\[p\](.+?)\[/p\]#is'					=> '<p>\1</p>',
+			'#\[pre\](.+?)\[/pre\]#is'				=> '<pre>\1</pre>',
 			'#\[quote\](.+?)\[/quote\]#is'			=> '<blockquote>\1</blockquote>',
 			'#\[(url)\=(.+?)\](.*?)\[/\1\]#ise'		=> "filter_var('\\2', FILTER_VALIDATE_URL) ? '<a href=\"\\2\" target=\"_blank\">\\3</a>' : '\\0'",
 			'#\[(url)](.*?)\[/\1\]#ise'				=> "filter_var('\\2', FILTER_VALIDATE_URL) ? '<a href=\"\\2\" target=\"_blank\">\\2</a>' : '\\0'",
