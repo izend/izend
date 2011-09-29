@@ -11,7 +11,9 @@
 <?php if ($linklist): ?>
 <?php foreach ($linklist as $id => $data): ?>
 <?php extract($data); /* thread_title thread_url content */ ?>
+<?php if ($thread_title): ?>
 <h3><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></h3>
+<?php endif; ?>
 <ol>
 <?php foreach ($content as $link): ?>
 <?php extract($link); /* link_title link_url link_description link_cloud */ ?>

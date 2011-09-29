@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
  
@@ -68,7 +68,7 @@ textarea {resize:none;}
 
 .formatted {font-size:80%;}
 
-.download p {line-height:24px;background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;}
+div.download {line-height:24px;background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;margin:1em 0;}
 
 .odd {background-color:#ffffe0;}
 .even {background-color:#eaefb3;}

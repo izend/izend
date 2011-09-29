@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@ foreach ($contents as $c) {
 		case 'download':
 			$file = htmlspecialchars($c['file'], ENT_COMPAT, 'UTF-8');
 			$download_url = $c['download_url'];
-			echo '<div class="download">', PHP_EOL, '<p class="link"><a href="', $download_url, '" rel="nofollow">', $file, '</a></p>', PHP_EOL,'</div>', PHP_EOL;
+			echo '<div class="download">', PHP_EOL, '<a href="', $download_url, '" rel="nofollow">', $file, '</a>', PHP_EOL, '</div>', PHP_EOL;
 			break;
 		case 'infile':
 			include $c['infile'];
