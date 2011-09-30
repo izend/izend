@@ -1,0 +1,79 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<div class="bbcodebar">
+<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="[p]" title="p" onclick="tagcomment('[p]','[/p]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="[b]" title="b" onclick="tagcomment('[b]','[/b]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="[i]" title="i" onclick="tagcomment('[i]','[/i]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="[u]" title="u" onclick="tagcomment('[u]','[/u]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="[s]" title="s" onclick="tagcomment('[s]','[/s]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="[quote]" title="quote" onclick="tagcomment('[quote]','[/quote]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/pre.png" alt="[pre]" title="pre" onclick="tagcomment('[pre]','[/pre]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/br.png" alt="[br]" title="br" onclick="tagcomment('','[br]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="[code]" title="code" onclick="tagcomment('[code]','[/code]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/url.png" alt="[url]" title="url" onclick="tagcomment('[url]','[/url]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/email.png" alt="[email]" title="email" onclick="tagcomment('[email]','[/email]')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="?" onclick="togglehelp()" />
+<span id="comment_limiter"><?php echo $message_maxlen; ?></span>
+</div>
+<textarea id="comment_message" name="comment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
+<p id="comment_help" class="bbcodehelp">
+Enter a maximum of <b><?php echo $message_maxlen; ?></b> characters. Improve the presentation of your text with the following formatting tags:<br />
+[<b>p</b>]paragraph[/p], [<b>b</b>]<b>bold</b>[/b], [<b>i</b>]<i>italics</i>[/i], [<b>u</b>]<u>underline</u>[/u], [<b>s</b>]<s>strike</s>[/s],
+[<b>quote</b>]citation[/quote], [<b>pre</b>]as is[/pre], [<b>br</b>]line break,<br />
+[<b>url</b>]http://www.izend.org[/url], [<b>url</b>=http://www.izend.org]site[/url],
+[<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email],<br />
+[<b>code</b>]command[/code], [<b>code</b>=language]source code in c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
+</p>
+<script type="text/javascript">
+function tagcomment(open, close) {
+	addtag('comment_message', open, close);
+	inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>);
+}
+inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>);
+</script>
+<?php head('javascript', 'jquery.cookie'); ?>
+<script type="text/javascript">
+function togglehelp() {
+	$('#comment_help').toggle();
+	$.cookie('nocommenthelp', $('#comment_help').is(':hidden') ? '1' : '0', { path: '/' });
+}
+if ($.cookie('nocommenthelp') == '1') {
+	$('#comment_help').hide();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.grippie').each(function() {
+		var grippie = $(this);
+		var textarea = grippie.prev().prev();
+		var offset;
+
+		grippie.mousedown(startDrag);
+
+	    function startDrag(e) {
+	      offset = textarea.height() - e.pageY;
+	      textarea.css('opacity', 0.25);
+	      $(document).mousemove(performDrag).mouseup(endDrag);
+	      return false;
+	    }
+
+	    function performDrag(e) {
+	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
+	      return false;
+	    }
+
+	    function endDrag(e) {
+	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
+	      textarea.css('opacity', 1);
+	    }
+	});
+});
+</script>

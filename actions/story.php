@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -89,8 +89,10 @@ function story($lang, $arglist=false) {
 
 	$page_comment=false;
 	if (!($thread_nocomment or $node_nocomment)) {
+		$moderate=user_has_role('moderator');
+		$nomore=($thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_url, ($thread_nomorecomment or $node_nomorecomment));
+		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number'));

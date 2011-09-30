@@ -7,6 +7,8 @@
  * @link       http://www.izend.org
  */
 
+require_once 'userhasrole.php';
+
 function folder($lang, $arglist=false) {
 	$folder=$page=false;
 

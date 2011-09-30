@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -335,12 +335,10 @@ function node_get_content_download_path($lang, $node_id, $name) {
 	return $r ? $r[0]['path'] : false;
 }
 
-function node_add_comment($node_id, $user_id, $text, $locale) {
+function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
 	$sqltext=db_sql_arg($text, true);
 	$sqllocale=db_sql_arg($locale);
-
-	$ipaddress=client_ip_address();
-	$sqlipaddress=db_sql_arg($ipaddress);
+	$sqlipaddress=db_sql_arg($ip_address);
 
 	$tabcomment=db_prefix_table('comment');
 
@@ -357,7 +355,42 @@ function node_add_comment($node_id, $user_id, $text, $locale) {
 	return $comment_id;
 }
 
-function node_get_comments($node_id, $locale) {
+function node_delete_comment($node_id, $comment_id) {
+	$tabcomment=db_prefix_table('comment');
+
+	$sql="DELETE FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id";
+
+	$r = db_delete($sql);
+
+	return $r;
+}
+
+function node_set_comment($node_id, $comment_id, $text, $locale) {
+	$sqltext=db_sql_arg($text, true);
+	$sqllocale=db_sql_arg($locale);
+
+	$tabcomment=db_prefix_table('comment');
+
+	$sql="UPDATE $tabcomment SET text=$sqltext WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+
+	$r = db_update($sql);
+
+	return $r;
+}
+
+function node_get_comment($node_id, $comment_id, $locale) {
+	$sqllocale=db_sql_arg($locale);
+
+	$tabcomment=db_prefix_table('comment');
+
+	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, user_id AS comment_user_id, ip_address AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0] : false;
+}
+
+function node_get_all_comments($node_id, $locale) {
 	if (!is_numeric($node_id)) {
 		return false;
 	}
@@ -367,7 +400,7 @@ function node_get_comments($node_id, $locale) {
 	$tabcomment=db_prefix_table('comment');
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT c.comment_id, c.text AS comment_text, u.name AS comment_name, u.mail AS comment_mail, UNIX_TIMESTAMP(c.created) AS comment_created FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale and c.published=1 ORDER BY comment_created";
+	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, UNIX_TIMESTAMP(c.created) AS comment_created FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
 
 	$r = db_query($sql);
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -68,8 +68,13 @@ function folderpage($lang, $folder, $page) {
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
-	$page_url = '/' . $lang . '/' . $page_name;
-	$page_comment = ($thread_nocomment or $node_nocomment) ? false : build('nodecomment', $lang, $page_id, $page_url, ($thread_nomorecomment or $node_nomorecomment));
+	$page_comment = false;
+	if (!($thread_nocomment or $node_nocomment)) {
+		$moderate=user_has_role('moderator');
+		$nomore=($thread_nomorecomment or $node_nomorecomment) ? true : false;
+		$page_url = url('folder', $lang) . '/' . $folder_name. '/' . $page_name;
+		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
+	}
 
 	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment'));
 

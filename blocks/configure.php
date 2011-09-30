@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -435,7 +435,6 @@ CREATE TABLE `${db_prefix}comment` (
   `user_id` int(10) NOT NULL DEFAULT '0',
   `ip_address` varchar(15) NOT NULL,
   `text` text NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
@@ -738,7 +737,9 @@ _SEP_;
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(1, 3),
+(1, 4);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

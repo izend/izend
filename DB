@@ -19,6 +19,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Mon Sep 26 2011
+
+ALTER TABLE `comment` DROP `published`;
+INSERT INTO `izend_user_role` (`user_id`, `role_id`) VALUES ('1', '3'), ('1', '4');
+----
+
 Date:	Fri Wed 23 2011
 
 ALTER TABLE `izend_user` ADD `website` VARCHAR( 100 ) NULL DEFAULT NULL AFTER `mail`;
@@ -99,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `izend_comment` (
   `user_id` int(10) NOT NULL DEFAULT '0',
   `ip_address` varchar(15) NOT NULL,
   `text` text NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

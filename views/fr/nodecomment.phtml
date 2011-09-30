@@ -3,22 +3,88 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
+<?php require_once 'datefr.php'; ?>
+<?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
+<?php extract($errors); ?>
 <div id="comments">
-<?php if (empty($comments)): ?>
-<h4 class="noprint">Commentaires</h4>
-<?php else: ?>
-<h4>Commentaires</h4>
+<h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Commentaires</h4>
+<?php if ($moderated or $newcomment): ?>
+<form action="#pagemark" method="post">
+<input type="hidden" name="comment_token" value="<?php echo $token; ?>" />
 <?php endif; ?>
-<?php echo $comments; ?>
+<?php if ($comments): ?>
+<?php if ($id): ?>
+<input name="comment_id" type="hidden" value="<?php echo $id; ?>" />
+<?php endif; ?>
+<?php
+$i=1;
+foreach ($comments as $c) {
+	extract($c);	/* comment_id, comment_text, comment_user_name, comment_mail, comment_created */
+?>
+<?php if ($id and $comment_id == $id): ?>
+<div id="pagemark"></div>
+<div id="oldcomment" class="noprint">
+<?php endif; ?>
+<p><span class="longdate">Le <?php echo longdate_fr($comment_created); ?> à <?php echo date('H:i', $comment_created); ?></span>
+<?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Éditer" /><?php endif; ?>
+<?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php echo $comment_user_name; ?></span>&nbsp;<img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?>" /></span><?php endif; ?></p>
+<?php if ($id and $comment_id == $id): ?>
+<?php if (!($missing_message or $message_too_long)): ?>
+<?php
+if (!$message) {
+	$message=$comment_text;
+}
+?>
+<?php echo bbcode($message), PHP_EOL; ?>
+<?php endif; ?>
+<?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
+<p>
+<input class="submit_modify" name="comment_modify" type="submit" value="Modifier" />
+le commentaire ou le
+<input class="submit_delete" name="comment_delete" type="submit" value="Supprimer" />
+ou
+<input class="submit_cancel" name="comment_cancel" type="submit" value="Annuler" />
+</p>
+</div>
+<?php else: ?>
+<?php echo bbcode($comment_text), PHP_EOL; ?>
+<?php endif; ?>
+<?php
+	$i++;
+}
+?>
+<?php endif; ?>
 <?php if ($newcomment): ?>
-<?php echo $newcomment; ?>
-<?php elseif ($user_page): ?>
-<p class="info noprint">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>" rel="nofollow">cliquez ici</a>.</p>
+<div id="pagemark"></div>
+<div id="newcomment" class="noprint">
+<h6>Votre commentaire&nbsp;:</h6>
+<?php if (!($missing_message or $message_too_long)): ?>
+<?php echo bbcode($message), PHP_EOL; ?>
+<?php endif; ?>
+<?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
+<p>
+<?php if ($message): ?>
+<input class="submit_edit" name="comment_edit" type="submit" value="Éditer" />
+le texte ou le
+<input class="submit_validate" name="comment_validate" type="submit" value="Valider" />
+ou
+<input class="submit_cancel" name="comment_cancel" type="submit" value="Annuler" />
+<?php else: ?>
+<input class="submit_comment" name="comment_comment" type="submit" value="Commenter" />
+<?php endif; ?>
+</p>
+</div>
+<?php endif; ?>
+<?php if ($moderated or $newcomment): ?>
+</form>
+<?php endif; ?>
+<?php if ($user_page): ?>
+<p class="info noprint">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>?page=<?php echo $node_url; ?>#pagemark" rel="nofollow">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>
