@@ -192,6 +192,8 @@ function nodecomment($lang, $node_id, $node_url, $nomore, $moderate) {
 				break;
 			}
 
+			$id=$message=false;
+
 			break;
 
 		case 'delete':

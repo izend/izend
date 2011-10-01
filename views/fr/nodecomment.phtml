@@ -11,6 +11,9 @@
 <?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <?php extract($errors); ?>
+<?php if ($moderated and !$id): ?>
+<div id="pagemark"></div>
+<?php endif; ?>
 <div id="comments">
 <h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Commentaires</h4>
 <?php if ($moderated or $newcomment): ?>
@@ -47,8 +50,6 @@ if (!$message) {
 <input class="submit_modify" name="comment_modify" type="submit" value="Modifier" />
 le commentaire ou le
 <input class="submit_delete" name="comment_delete" type="submit" value="Supprimer" />
-ou
-<input class="submit_cancel" name="comment_cancel" type="submit" value="Annuler" />
 </p>
 </div>
 <?php else: ?>
@@ -72,8 +73,6 @@ ou
 <input class="submit_edit" name="comment_edit" type="submit" value="Éditer" />
 le texte ou le
 <input class="submit_validate" name="comment_validate" type="submit" value="Valider" />
-ou
-<input class="submit_cancel" name="comment_cancel" type="submit" value="Annuler" />
 <?php else: ?>
 <input class="submit_comment" name="comment_comment" type="submit" value="Commenter" />
 <?php endif; ?>

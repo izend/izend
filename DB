@@ -21,7 +21,7 @@ UPDATES
 
 Date:	Mon Sep 26 2011
 
-ALTER TABLE `comment` DROP `published`;
+ALTER TABLE `izend_comment` DROP `published`;
 INSERT INTO `izend_user_role` (`user_id`, `role_id`) VALUES ('1', '3'), ('1', '4');
 ----
 

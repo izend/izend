@@ -131,7 +131,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 #comments {margin-top:2em;clear:left;}
 #comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;}
-#comments .signature {float:right;}
+#comments .signature {float:right;margin-top:-2px;}
 #comments .longdate {color:#666666;font-size:small;}
 #comments .author {color:#666666;font-size:small;font-style:italic;}
 #comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/moderate.png) no-repeat;vertical-align:bottom;text-indent:-1000em;cursor:pointer;}
