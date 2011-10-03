@@ -3,16 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
-<p>Quel nom de connexion voulez-vous ?</p>
+<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Quel nom de connexion voulez-vous&nbsp;?</p>
 <p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifiant" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choisissez un pseudo de 2 à 20 lettres.</p>
-<p>Quelle est votre adresse d'email ?</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Votre mot de passe sera envoyé à cette adresse.</p>
 <p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> onkeypress="return focusonenter(event, 'register_code')"/>&nbsp;Je souhaite créer un compte</p>
@@ -25,10 +26,6 @@
 <?php endif; ?>
 <p><button type="submit" name="register_register" id="register_register">Envoyer</button></p>
 </form>
-<?php
-if ($errors):
-extract($errors);
-?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Entrez le code de vérification affiché dans l'image.</p>
@@ -59,10 +56,7 @@ extract($errors);
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
-<?php if ($infos):
-extract($infos);
-?>
+<?php if ($infos): extract($infos); ?>
 <div class="infos">
 <?php if ($account_created): ?>
 <p>Votre compte a bien été créé. Le mot de passe a été envoyé par email à votre adresse.<br />
@@ -90,4 +84,3 @@ else if ($missing_confirmation) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
-

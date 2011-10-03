@@ -3,13 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
-<p>Quel est votre nom de connexion ?</p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>">Quel est votre nom de connexion&nbsp;?</p>
 <p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo $login; ?>" /></p>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
 <p><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je veux recevoir un nouveau mot de passe</p>
@@ -22,10 +23,6 @@
 <?php endif; ?>
 <p><button type="submit" name="remindme_send" id="remindme_send">Envoyer</button></p>
 </form>
-<?php
-if ($errors):
-extract($errors);
-?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Entrez le code de vérification affiché dans l'image.</p>
@@ -45,11 +42,7 @@ extract($errors);
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
-<?php
-if ($infos):
-extract($infos);
-?>
+<?php if ($infos): extract($infos); ?>
 <div class="infos">
 <?php if ($email_sent): ?>
 <p>Un nouveau mot de passe vous a été envoyé par email.<br />
@@ -74,4 +67,3 @@ else if ($missing_confirmation) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
-

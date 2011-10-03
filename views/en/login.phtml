@@ -3,16 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
-<p>What is your connection name?</p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>">What is your connection name?</p>
 <p><input type="text" name="login_login" id="login_login" size="40" maxlength="100" title="Identifier" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo $login; ?>" /></p>
 <p class="info">You may also enter your email address.</p>
-<p>And your access key?</p>
+<p class="inlabel<?php if ($missing_password or $access_denied): ?> inerror<?php endif; ?>">And your access key?</p>
 <p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'login_code')" /></p>
 <?php if ($password_page): ?>
 <p class="info link">If you have forgotten your password, <a href="<?php echo $password_page; ?>" rel="nofollow">click here</a>.</p>
@@ -29,9 +30,6 @@
 <p class="info link">To create your personal account, <a href="<?php echo $newuser_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
 </form>
-<?php if ($errors):
-extract($errors);
-?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Enter the verification code displayed in the image.</p>
@@ -46,16 +44,15 @@ extract($errors);
 <p>Access denied.</p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {
 	$focus='#login_code';
 }
-else if ($missing_login or $bad_login or $access_denied) {
+else if ($missing_login or $bad_login) {
 	$focus='#login_login';
 }
-else if ($missing_password) {
+else if ($missing_password or $access_denied) {
 	$focus='#login_password';
 }
 ?>
@@ -64,4 +61,3 @@ else if ($missing_password) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
-

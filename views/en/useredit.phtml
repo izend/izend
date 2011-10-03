@@ -3,20 +3,21 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="useredit_token" value="<?php echo $token; ?>" />
 <?php if ($user_accessed): ?>
 <input type="hidden" name="useredit_accessed" value="<?php echo $user_accessed; ?>" />
 <?php endif; ?>
-<p>Connection name:</p>
+<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Connection name:</p>
 <p><input id="useredit_name" type="text" name="useredit_name" size="20" maxlength="20" title="2 to 20 letters" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /><?php endif; ?></p>
-<p>Email address:</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Email address:</p>
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
-<p>Website:</p>
+<p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p><?php foreach ($system_languages as $lang): ?> <input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $user_locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
 <?php if ($with_status): ?>
@@ -47,7 +48,6 @@ the account
 <?php endif; ?>
 </p>
 </form>
-<?php extract($errors); ?>
 <?php if ($missing_name): ?>
 <p class="error">An identifier is required.</p>
 <?php elseif ($bad_name): ?>
@@ -69,9 +69,10 @@ the account
 <p class="error">An internal error has occurred.
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
 <?php endif; ?>
-<?php extract($infos); ?>
+<?php if ($infos): extract($infos); ?>
 <?php if ($account_modified): ?>
 <p>The account information has been modified.</p>
+<?php endif; ?>
 <?php endif; ?>
 <?php
 $focus=false;

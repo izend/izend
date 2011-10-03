@@ -3,16 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
-<p>What is your email address?</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
 <p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
-<p>Type in the subject and the text of your message:</p>
+<p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Type in the subject and the text of your message:</p>
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
 <p><textarea name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_captcha): ?>
@@ -24,9 +25,6 @@
 <?php endif; ?>
 <p><button type="submit" name="mailme_send" id="mailme_send">Send</button></p>
 </form>
-<?php if ($errors):
-extract($errors);
-?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Enter the verification code displayed in the image.</p>
@@ -50,10 +48,7 @@ extract($errors);
 <p>An internal error has occurred.</p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
-<?php if ($infos):
-extract($infos);
-?>
+<?php if ($infos): extract($infos); ?>
 <div class="infos">
 <?php if ($email_sent): ?>
 <p>Your message has been sent. To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.</p>

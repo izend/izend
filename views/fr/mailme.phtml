@@ -3,16 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
+<?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
-<p>Quelle est votre adresse d'email&nbsp;?</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
 <p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Votre adresse d'email est strictement confidentielle.</p>
-<p>Tapez le sujet et le texte de votre message&nbsp;:</p>
+<p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Tapez le sujet et le texte de votre message&nbsp;:</p>
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Sujet" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
 <p><textarea name="mailme_message" id="mailme_message" cols="70" rows="8" title="Texte"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_captcha): ?>
@@ -24,9 +25,6 @@
 <?php endif; ?>
 <p><button type="submit" name="mailme_send" id="mailme_send">Envoyer</button></p>
 </form>
-<?php if ($errors):
-extract($errors);
-?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Entrez le code de vérification affiché dans l'image.</p>
@@ -50,10 +48,7 @@ extract($errors);
 <p>Une erreur interne s'est produite.</p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
-<?php if ($infos):
-extract($infos);
-?>
+<?php if ($infos): extract($infos); ?>
 <div class="infos">
 <?php if ($email_sent): ?>
 <p>Votre message a bien été envoyé. Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez ici</a>.</p>
