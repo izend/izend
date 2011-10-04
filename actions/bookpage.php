@@ -54,7 +54,7 @@ function bookpage($lang, $book, $page) {
 	$page_cloud=$node_cloud;
 	$page_number=$node_number;
 
-	if (!$book_title) {
+	if ($book_title) {
 		head('title', $book_title );
 	}
 	if ($page_abstract) {
