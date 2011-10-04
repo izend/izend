@@ -18,7 +18,7 @@ h4 {color:#aec14e;}
 h5 {color:#df6f6f;}
 h6 {color:#666666;}
 
-h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;margin:0 0 0.5em 0;}
+h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;line-height:24px;margin:0 0 0.5em 0;}
 
 label, legend {color:#666666;}
 
@@ -35,7 +35,7 @@ textarea {resize:none;}
 
 .vignette {float:right;margin:0 0 0 1em;}
 
-.readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;}
+.readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
 
 .date {float:left;width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;position:relative;}
 .date span {width:100%;text-align:center;margin:0;padding:0;position:absolute;}
@@ -50,7 +50,7 @@ textarea {resize:none;}
 .cloud li #index {float:left;display:inline;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;}
 .cloud li #index span {display:none;}
 
-.tag {color:#df6f6f;font-size:larger;}
+.tag {color:#df6f6f;font-size:large;}
 
 .menu, .menubar, .sidebar {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 
@@ -71,7 +71,7 @@ textarea {resize:none;}
 
 .formatted {font-size:80%;}
 
-div.download {background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;margin:1em 0;}
+div.download {background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;line-height:24px;margin:1em 0;}
 
 .odd {background-color:#ffffe0;}
 .even {background-color:#eaefb3;}
@@ -90,7 +90,7 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .tagbar {margin-bottom:5px;}
 .tagbar span {margin-left:50px;}
 
-.hidy {height:16px;margin:2px 8px 5px 0;background:transparent url(../images/theme/icons/down.png) top right no-repeat;}
+.hidy {height:16px;background:transparent url(../images/theme/icons/down.png) top right no-repeat;margin:2px 8px 5px 0;}
 
 input#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/fr.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/en.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
@@ -133,7 +133,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #threadnodenav img, #bookpagenav img {vertical-align:text-bottom;}
 
 #comments {margin-top:2em;}
-#comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat top left;text-indent:30px;}
+#comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}
 #comments .signature {float:right;margin-top:-2px;}
 #comments .longdate {color:#666666;font-size:small;}
 #comments .author {color:#666666;font-size:small;font-style:italic;}
@@ -141,7 +141,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #comments pre {font-family:monospace;font-size:10pt;}
 #comments blockquote {font-size:small;margin-right:0;}
 
-#newcomment > h6 {background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;}
+#newcomment > h6 {color:#666666;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
 
 .bbcodebar {margin-bottom:5px;}
 .bbcodebar span {font-size:x-small;margin-left:10px;}
@@ -161,7 +161,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
 
 .userresult {color:#aec14e;font-weight:bold;}
-.userpagenumber {font-size:larger;}
+.userpagenumber {font-size:large;}
 .username {font-weight:bold;}
 .usermail {font-style:italic;}
 
