@@ -3,11 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    5
  * @link       http://www.izend.org
  */
 
 global $base_url, $base_path, $base_root;
+
+global $request_path, $request_query;
 
 global $sitename, $webmaster, $mailer, $blackmaillist, $blacknamelist;
 
@@ -24,6 +26,10 @@ $logoascii='';
 global $signature;
 
 $signature='izend.org - http://www.izend.org';
+
+global $facebookid;
+
+$facebookid = false;
 
 global $log_dir;
 

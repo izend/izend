@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2011 izend.org
- * @version		4
+ * @version		5
  * @link		http://www.izend.org
  */
 
@@ -92,6 +92,7 @@ function route($query, $lang=false) {
 
 function dispatch($languages) {
 	global $base_path;
+	global $request_path, $request_query;
 	global $closing_time, $opening_time;
 	global $track_visitor, $track_visitor_agent;
 
@@ -108,6 +109,9 @@ function dispatch($languages) {
 	if (empty($path)) {
 		$path = false;
 	}
+
+	$request_path=$path;
+	$request_query=$query;
 
 	/* site language */
 	$p = $path ? explode('/', $path) : false;
@@ -222,7 +226,9 @@ function layout($layout, $vars=false) {
 
 function render($file, $vars=false) {
 	global $base_path, $base_url, $base_root;
-	global $sitename, $webmaster, $supported_languages, $system_languages;
+	global $request_path, $request_query;
+	global $sitename, $webmaster, $facebookid;
+	global $supported_languages, $system_languages;
 
 	if ($vars) {
 		extract($vars);

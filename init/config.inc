@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 <?php
@@ -16,6 +16,8 @@ if (!$webmaster) {
 ?>
 
 global $base_url, $base_path, $base_root;
+
+global $request_path, $request_query;
 
 global $sitename, $webmaster, $mailer, $blackmaillist, $blacknamelist;
 
@@ -32,6 +34,10 @@ $logoascii='';
 global $signature;
 
 $signature='<?php echo $sitename; ?> - http://www.<?php echo $sitename; ?>';
+
+global $facebookid;
+
+$facebookid = false;
 
 global $log_dir;
 
