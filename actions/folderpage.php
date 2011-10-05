@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -76,7 +76,11 @@ function folderpage($lang, $folder, $page) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
-	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment'));
+	$ilike=view('ilike', $lang);
+	$tweetit=view('tweetit', $lang);
+	$plusone=view('plusone', $lang);
+
+	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'ilike', 'tweetit', 'plusone'));
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '/'. $page_id . '?' . 'clang=' . $lang : false;
 	$validate='/' . $lang . '/'. $page_name;

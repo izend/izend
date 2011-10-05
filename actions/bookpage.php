@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -54,7 +54,13 @@ function bookpage($lang, $book, $page) {
 	$page_cloud=$node_cloud;
 	$page_number=$node_number;
 
-	if ($book_title) {
+	if ($book_title and $page_title) {
+		head('title', $book_title . ' - ' . $page_title );
+	}
+	else if ($page_title) {
+		head('title', $page_title );
+	}
+	else if ($book_title) {
 		head('title', $book_title );
 	}
 	if ($page_abstract) {
@@ -96,7 +102,11 @@ function bookpage($lang, $book, $page) {
 		$next_page_url=url('book', $lang) . '/'. $book_name . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
-	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label'));
+	$ilike=view('ilike', $lang);
+	$tweetit=view('tweetit', $lang);
+	$plusone=view('plusone', $lang);
+
+	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'ilike', 'tweetit', 'plusone'));
 
 	$search=false;
 	if (!$book_nosearch) {

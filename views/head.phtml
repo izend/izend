@@ -32,7 +32,7 @@
 <?php endif; ?>
 <meta property="og:title" content="<?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <meta property="og:type" content="blog" />
-<meta property="og:url" content="<?php echo $base_url; ?>/<?php echo urlencode($request_path); ?>" />
+<meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
 <meta property="og:image" content="<?php echo $base_url; ?>/logos/siteqr.png" />
 <?php if (isset($description) and $description): ?>
 <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />

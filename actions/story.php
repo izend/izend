@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -95,7 +95,11 @@ function story($lang, $arglist=false) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
-	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number'));
+	$ilike=view('ilike', $lang);
+	$tweetit=view('tweetit', $lang);
+	$plusone=view('plusone', $lang);
+
+	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'ilike', 'tweetit', 'plusone'));
 
 	$search=false;
 	if (!$story_nosearch) {

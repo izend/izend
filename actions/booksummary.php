@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -56,7 +56,11 @@ function booksummary($lang, $book) {
 		}
 	}
 
-	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents'));
+	$ilike=view('ilike', $lang);
+	$tweetit=view('tweetit', $lang);
+	$plusone=view('plusone', $lang);
+
+	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents', 'ilike', 'tweetit', 'plusone'));
 
 	$search=false;
 	if (!$book_nosearch) {

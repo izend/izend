@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
  
@@ -30,7 +30,7 @@ img {page-break-inside:avoid; page-break-after:avoid; float:none}
 .hidden {display:none;}
 .noprint {display:none;}
 
-.menu, .menubar, .sidebar, .link, .readmore, .summary, .vignette {display:none;}
+.menu, .menubar, .sidebar, .link, .readmore, .summary, .vignette, .social {display:none;}
 
 #banner, #footer, #sidebar {display:none;}
 
