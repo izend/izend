@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -15,22 +15,33 @@
 <?php if (false): ?>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <?php endif; ?>
-<?php if (isset($description) and !empty($description)): ?>
+<?php if (isset($description) and $description): ?>
 <meta name="description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
-<?php if (isset($keywords) and !empty($keywords)): ?>
+<?php if (isset($keywords) and $keywords): ?>
 <meta name="keywords" content="<?php echo htmlspecialchars($keywords, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta name="generator" content="iZend" />
-<?php if (isset($author) and !empty($author)): ?>
+<?php if (isset($author) and $author): ?>
 <meta name="author" content="<?php echo htmlspecialchars($author, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
-<?php if (isset($robots) and !empty($robots)): ?>
+<?php if (isset($robots) and $robots): ?>
 <meta name="robots" content="<?php echo $robots; ?>" />
 <?php else: ?>
 <meta name="robots" content="index, follow" />
 <?php endif; ?>
-<?php if (isset($favicon)): ?>
+<meta property="og:title" content="<?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta property="og:type" content="blog" />
+<meta property="og:url" content="<?php echo $base_url; ?>/<?php echo urlencode($request_path); ?>" />
+<meta property="og:image" content="<?php echo $base_url; ?>/logos/siteqr.png" />
+<?php if (isset($description) and $description): ?>
+<meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<?php endif; ?>
+<meta property="og:site_name" content="<?php echo $sitename; ?>" />
+<?php if (isset($facebookid) and $facebookid): ?>
+<meta property="fb:admins" content="<?php echo $facebookid; ?>" />
+<?php endif; ?>
+<?php if (isset($favicon) and $favicon): ?>
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (true): ?>
@@ -52,4 +63,4 @@
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/<?php echo $js['name']; ?>.js"></script>
 <?php endforeach; ?>
 <?php endif; ?>
-<title><?php echo htmlspecialchars(isset($title) && !empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>
+<title><?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>
