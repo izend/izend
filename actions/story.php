@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -90,16 +90,18 @@ function story($lang, $arglist=false) {
 	$page_comment=false;
 	if (!($thread_nocomment or $node_nocomment)) {
 		$moderate=user_has_role('moderator');
-		$nomore=($thread_nomorecomment or $node_nomorecomment) ? true : false;
+		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
-	$ilike=view('ilike', $lang);
-	$tweetit=view('tweetit', $lang);
-	$plusone=view('plusone', $lang);
+	$besocial=false;
+	if ($page_contents or $page_comment) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
 
-	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'ilike', 'tweetit', 'plusone'));
+	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial'));
 
 	$search=false;
 	if (!$story_nosearch) {

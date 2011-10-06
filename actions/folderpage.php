@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -71,16 +71,18 @@ function folderpage($lang, $folder, $page) {
 	$page_comment = false;
 	if (!($thread_nocomment or $node_nocomment)) {
 		$moderate=user_has_role('moderator');
-		$nomore=($thread_nomorecomment or $node_nomorecomment) ? true : false;
+		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('folder', $lang) . '/' . $folder_name. '/' . $page_name;
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
-	$ilike=view('ilike', $lang);
-	$tweetit=view('tweetit', $lang);
-	$plusone=view('plusone', $lang);
+	$besocial=false;
+	if ($page_contents or $page_comment) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
 
-	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'ilike', 'tweetit', 'plusone'));
+	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial'));
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '/'. $page_id . '?' . 'clang=' . $lang : false;
 	$validate='/' . $lang . '/'. $page_name;

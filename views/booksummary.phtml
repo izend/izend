@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -19,24 +19,8 @@
 <li><a href="<?php echo $page_url; ?>"><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></a></li>
 <?php endforeach; ?>
 </ol>
-<?php if ($ilike or $tweetit or $plusone): ?>
-<div class="social">
-<?php if ($plusone): ?>
-<div id="plusone">
-<?php echo $plusone; ?>
-</div>
 <?php endif; ?>
-<?php if ($tweetit): ?>
-<div id="tweetit">
-<?php echo $tweetit; ?>
-</div>
-<?php endif; ?>
-<?php if ($ilike): ?>
-<div id="ilike">
-<?php echo $ilike; ?>
-</div>
-<?php endif; ?>
-</div>
-<?php endif; ?>
+<?php if ($besocial): ?>
+<?php echo $besocial; ?>
 <?php endif; ?>
 </div>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -81,7 +81,7 @@ function bookpage($lang, $book, $page) {
 	$page_comment=false;
 	if (!($thread_nocomment or $node_nocomment)) {
 		$moderate=user_has_role('moderator');
-		$nomore=($thread_nomorecomment or $node_nomorecomment) ? true : false;
+		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('book', $lang) . '/'. $book_name . '/' . $page_name;
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
@@ -102,11 +102,13 @@ function bookpage($lang, $book, $page) {
 		$next_page_url=url('book', $lang) . '/'. $book_name . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
-	$ilike=view('ilike', $lang);
-	$tweetit=view('tweetit', $lang);
-	$plusone=view('plusone', $lang);
+	$besocial=false;
+	if ($page_contents or $page_comment) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
 
-	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'ilike', 'tweetit', 'plusone'));
+	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'besocial'));
 
 	$search=false;
 	if (!$book_nosearch) {

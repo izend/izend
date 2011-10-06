@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -24,27 +24,11 @@
 </p>
 <?php if ($page_contents): ?>
 <?php echo $page_contents; ?>
-<?php if ($ilike or $tweetit or $plusone): ?>
-<div class="social">
-<?php if ($plusone): ?>
-<div id="plusone">
-<?php echo $plusone; ?>
-</div>
 <?php endif; ?>
-<?php if ($tweetit): ?>
-<div id="tweetit">
-<?php echo $tweetit; ?>
-</div>
-<?php endif; ?>
-<?php if ($ilike): ?>
-<div id="ilike">
-<?php echo $ilike; ?>
-</div>
-<?php endif; ?>
-</div>
+<?php if ($besocial): ?>
+<?php echo $besocial; ?>
 <?php endif; ?>
 <?php if ($page_comment): ?>
 <?php echo $page_comment; ?>
-<?php endif; ?>
 <?php endif; ?>
 </div>
