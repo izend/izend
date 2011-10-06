@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -310,7 +310,7 @@ function configure($lang) {
 			else {
 				$db_inc = build_db_inc(false, false, false, false, false);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, false, 'homepage', 'anypage', $languages);
-				$features=array('captcha', 'avatar', 'homepage', 'contact');
+				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 
@@ -372,6 +372,24 @@ function build_aliases_inc($features, $languages) {
 function build_sitemap_xml($sitename, $languages) {
 	$date=date('Y-n-j');
 	return render(INIT_DIR . DIRECTORY_SEPARATOR . SITEMAP_XML, compact('sitename', 'languages', 'date'));
+}
+
+function recover_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_user) {
+	$db_conn=@mysql_connect($db_host, $db_admin_user, $db_admin_password);
+	if (!$db_conn) {
+		return false;
+	}
+
+	$sql="DELETE FROM mysql.`user` WHERE `user`.`Host` = '$db_host' AND `user`.`User` = '$db_user'";
+	@mysql_query($sql, $db_conn);
+
+	$sql="DELETE FROM mysql.`db` WHERE `db`.`Host` = '$db_host' AND `db`.`Db` = '$db_name' AND `db`.`User` = '$db_user'";
+	@mysql_query($sql, $db_conn);
+
+	$sql="DROP DATABASE `$db_name`";
+	@mysql_query($sql, $db_conn);
+
+	return true;
 }
 
 function create_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_user, $db_password) {

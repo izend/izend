@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -27,6 +27,16 @@ function home($lang) {
 		head('keywords', $node_cloud);
 	}
 
+	$page_contents = build('nodecontent', $lang, $root_node);
+
+	$besocial=false;
+	if ($page_contents or $page_comment) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
+
+	$content = view('home', false, compact('page_contents', 'besocial'));
+
 	$languages='home';
 	$contact=$account=$admin=true;
 	$edit=user_has_role('writer') ? url('editpage', $_SESSION['user']['locale']) . '/'. $root_node . '?' . 'clang=' . $lang : false;
@@ -41,8 +51,6 @@ function home($lang) {
 
 	$contact_page=url('contact', $lang);
 	$footer = view('footer', $lang, compact('contact_page'));
-
-	$content = build('nodecontent', $lang, $root_node);
 
 	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar'));
 

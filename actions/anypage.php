@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -20,15 +20,23 @@ function anypage($lang, $arglist=false) {
 		return run('error/notfound', $lang);
 	}
 
-	$content = build('content', $lang, $page);
-	if ($content === false) {
+	$page_contents = build('content', $lang, $page);
+	if ($page_contents === false) {
 		return run('error/notfound', $lang);
 	}
 
-	$contact=false;
-	$banner = build('banner', $lang, compact('contact'));
+	$besocial=false;
+	if ($page_contents) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
+
+	$content = view('anypage', false, compact('page_contents', 'besocial'));
 
 	head('title', $sitename);
+
+	$contact=false;
+	$banner = build('banner', $lang, compact('contact'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

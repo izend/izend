@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -26,11 +26,13 @@ Vous voudrez probablement le changer.</p>
 <h6>Base de données</h6>
 <p><b>iZend</b> peut fonctionner sans une base de données.
 Dans ce mode, vous pourrez toujours profiter de l'architecture du logiciel mais vous devrez rédiger les pages du site sans l'éditeur.
-Optez pour cette configuration pour mettre en ligne des sites avec des ressources limitées. Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
+Optez pour cette configuration pour mettre en ligne un site avec des ressources limitées.
+Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
 <p>Pour exploiter tout le potentiel d'<b>iZend</b>, vous devez disposer d'un serveur de bases de données.
 Le configurateur peut créer une nouvelle base de données ou utiliser une base de données déjà existante.
-<b>IMPORTANT</b>&nbsp;: Si la base de données est partagée par plusieurs logiciels, demandez au configurateur d'ajouter un préfixe aux noms des tables.</p>
-<p>NOTE&nbsp;: Si vous développez le site en local avant de le mettre en ligne, utilisez les mêmes paramètres sur les deux serveurs.</p>
+<b>IMPORTANT</b>&nbsp;: Si la base de données est partagée par plusieurs logiciels, demandez au configurateur d'ajouter un préfixe aux noms des tables.
+Dans tous les cas, utilisez un préfixe est plus prudent.</p>
+<p>NOTE&nbsp;: Si vous développez le site en local avant de le mettre en ligne, ce qui est recommandé, utilisez les mêmes paramètres sur les deux serveurs.</p>
 <h5 id="configuration">Configuration</h5>
 <?php if ($bad_write_permission): ?>
 <div class="alert">
@@ -98,6 +100,10 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <div class="alert">
 <p>La configuration de la base de données a échoué avec l'erreur&nbsp;:</p>
 <p><?php echo $db_error; ?></p>
+<?php if ($db_flag): ?>
+<p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
+et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.</p>
+<?php endif; ?>
 </div>
 <?php endif; ?>
 <p>Avez-vous un serveur de bases de données&nbsp;?</p>

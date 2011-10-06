@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -26,11 +26,13 @@ You will probably want to change it.</p>
 <h6>Database</h6>
 <p><b>iZend</b> can function without a database.
 In this mode, you will still be able to benefit from the architecture of the software, but you will have to write the pages of the site without the editor.
-Choose this configuration to put on-line sites with limited resources. Note that <b>iZend</b> can occupy very little space on disk.</p>
-<p>To exploit the full potential of <b>iZend</b>, you need to have a database server.
+Choose this configuration to put on-line a site with limited resources.
+Note that <b>iZend</b> can occupy very little space on disk.</p>
+<p>To exploit the full potential of <b>iZend</b>, you need a database server.
 The configurator can create a new database or use an already existing database.
-<b>IMPORTANT</b>: If the database is shared with other programs, ask the configurator to add a prefix to the table names.</p>
-<p>NOTE: If you develop the site locally before it is put on-line, use the same parameters on both servers.</p>
+<b>IMPORTANT</b>: If the database is shared with other programs, ask the configurator to add a prefix to the table names.
+In any case, using a prefix is safer.</p>
+<p>NOTE: If you develop the site locally before it is put on-line, which is recommended, use the same parameters on both servers.</p>
 <h5 id="configuration">Configuration</h5>
 <?php if ($bad_write_permission): ?>
 <div class="alert">
@@ -98,6 +100,10 @@ Check your answers and rerun the configuration.</p>
 <div class="alert">
 <p>The configuration of the database has failed with the error:</p>
 <p><?php echo $db_error; ?></p>
+<?php if ($db_flag): ?>
+<p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
+and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.</p>
+<?php endif; ?>
 </div>
 <?php endif; ?>
 <p>Do you have a database server?</p>

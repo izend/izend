@@ -3,12 +3,24 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function homepage($lang) {
 	global $sitename;
+
+	$page_contents = build('content', $lang, 'homepage');
+
+	$besocial=false;
+	if ($page_contents) {
+		$ilike=$tweetit=$plusone=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	}
+
+	$content = view('anypage', false, compact('page_contents', 'besocial'));
+
+	head('title', $sitename);
 
 	$languages='homepage';
 	$contact=true;
@@ -16,10 +28,6 @@ function homepage($lang) {
 
 	$contact_page=url('contact', $lang);
 	$footer = build('content', $lang, 'footer', compact('contact_page'));
-
-	$content = build('content', $lang, 'homepage');
-
-	head('title', $sitename);
 
 	$output = layout('standard', compact('banner', 'content', 'footer'));
 

@@ -3,9 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
+<p id="social">
+<a href="http://www.facebook.com/pages/" target="_blank"><img src="/images/theme/social/facebook.png" alt="Facebook" /></a>
+<a href="http://www.twitter.com/#!/" target="_blank"><img src="/images/theme/social/twitter.png" alt="Twitter"/></a>
+<a href="/en/rss" target="_blank"><img src="/images/theme/social/rss.png" alt="RSS" /></a>
+</p>
+<script type="text/javascript">
+$('#social img').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );
+</script>
 <p>Your <b>iZend</b> site is now operational.</p>
 <p class="readmore">Read the <a href="<?php echo $base_path; ?>/en/documentation">documentation</a>.</p>
