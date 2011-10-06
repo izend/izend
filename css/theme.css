@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
  
@@ -132,10 +132,11 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #threadnodenav, #bookpagenav {font-size:small;margin-bottom:1em;}
 #threadnodenav img, #bookpagenav img {vertical-align:text-bottom;}
 
-.social {padding:0.5em 0 0 0;}
-#booksummary #tweetit, #booksummary #plusone, #bookpage #tweetit, #bookpage #plusone {float:right;}
-#folderpage #tweetit, #folderpage #plusone {float:right;}
-#story #tweetit, #story #plusone {float:right;}
+.social {width:100%;height:40px;padding:0;margin:1em 0 1em 0;position:relative;}
+.social > div {position:absolute;top:0;}
+.social #ilike {left:0;}
+.social #tweetit {left:200px;}
+.social #plusone {left:350px;}
 
 #comments {margin-top:1em;}
 #comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}

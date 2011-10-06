@@ -64,7 +64,7 @@ le commentaire ou le
 <div id="pagemark"></div>
 <div id="newcomment" class="noprint">
 <h6>Votre commentaire&nbsp;:</h6>
-<?php if (!($missing_message or $message_too_long)): ?>
+<?php if ($message and !$message_too_long): ?>
 <?php echo bbcode($message), PHP_EOL; ?>
 <?php endif; ?>
 <?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
