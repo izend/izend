@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -122,10 +122,10 @@ function story($lang, $arglist=false) {
 		$story_url = url('story', $lang) . '/'. $story_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number */
-			$page_id = $node_id;
-			$page_title = $node_title;
-			$page_url=$story_url . '/' . $node_name;
-			$summary[] = compact('page_id', 'page_title', 'page_url');
+			$summary_page_id = $node_id;
+			$summary_page_title = $node_title;
+			$summary_page_url=$story_url . '/' . $node_name;
+			$summary[] = compact('summary_page_id', 'summary_page_title', 'summary_page_url');
 		}
 	}
 
