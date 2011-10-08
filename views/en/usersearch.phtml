@@ -34,8 +34,8 @@ $pagenums=page_range($page, $npages, 2);
 </p>
 <?php endif; ?>
 <table border="0" cellpadding="4" cellspacing="0" rules="none">
-<?php foreach ($result as $r): extract($r);?>
 <tbody>
+<?php foreach ($result as $r): extract($r);?>
 <tr>
 <td class="username"><?php if ($edit): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_name; ?><?php if ($edit): ?></a><?php endif; ?></td>
 <td><img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /></td>

@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <div id="bookpage">
 <h3><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></h3>
-<p id="bookpagenav" class="menubar">
+<p id="bookpagenav" class="menu">
 <?php if ($prev_page_url): ?>
 <a href="<?php echo $prev_page_url; ?>"><img src="/images/theme/icons/left.png" alt=""/></a>
 <a href="<?php echo $prev_page_url; ?>"><?php echo htmlspecialchars($prev_page_label, ENT_COMPAT, 'UTF-8'); ?></a>

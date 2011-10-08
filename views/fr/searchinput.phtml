@@ -9,7 +9,7 @@
 ?>
 <form id="searchinput" action="<?php echo $search_url; ?>" method="post">
 <input id="searchtext" name="searchtext" type="text" value="<?php echo htmlspecialchars($search_text, ENT_COMPAT, 'UTF-8'); ?>" />
-<button id="search" name="search" type="submit" title="Chercher">Chercher</button>
+<input id="search" name="search" type="submit" value="Chercher" title="Chercher" />
 </form>
 <?php if (isset($suggest_url) and !empty($suggest_url)): ?>
 <?php head('javascript', 'jquery-ui'); ?>

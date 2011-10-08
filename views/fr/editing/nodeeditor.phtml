@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -29,8 +29,11 @@
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p>
-<input name="node_comment" type="checkbox" <?php if ($node_comment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />
-<input name="node_morecomment" type="checkbox" <?php if ($node_morecomment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" />
+<input name="node_comment" type="checkbox"<?php if ($node_comment): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />
+<input name="node_morecomment" type="checkbox"<?php if ($node_morecomment): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" />
+<input name="node_ilike" type="checkbox"<?php if ($node_ilike): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" />
+<input name="node_tweet" type="checkbox"<?php if ($node_tweet): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" />
+<input name="node_plusone" type="checkbox"<?php if ($node_plusone): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" />
 </p>
 <p>
 <input id="node_edit" name="node_edit" type="submit" value="Éditer" />

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function home($lang) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified */
+	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
 
 	head('title', translate('home:title', $lang));
 	if ($node_abstract) {
@@ -31,7 +31,9 @@ function home($lang) {
 
 	$besocial=false;
 	if ($page_contents or $page_comment) {
-		$ilike=$tweetit=$plusone=true;
+		$ilike=$node_ilike;
+		$tweetit=$node_tweet;
+		$plusone=$node_plusone;
 		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 

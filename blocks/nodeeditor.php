@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function nodeeditor($lang, $clang, $node_id) {
 		$action='edit';
 	}
 
-	$node_name=$node_title=$node_abstract=$node_cloud=$node_comment=$node_morecomment=false;
+	$node_name=$node_title=$node_abstract=$node_cloud=$node_comment=$node_morecomment=$node_ilike=$node_tweet=$node_plusone=false;
 	$node_nocomment=$node_nomorecomment=true;
 
 	switch($action) {
@@ -57,6 +57,15 @@ function nodeeditor($lang, $clang, $node_id) {
 				$node_morecomment=readarg($_POST['node_morecomment']) == 'on' ? true : false;
 				$node_nomorecomment=!$node_morecomment;
 			}
+			if (isset($_POST['node_ilike'])) {
+				$node_ilike=readarg($_POST['node_ilike'] == 'on' ? true : false);
+			}
+			if (isset($_POST['node_tweet'])) {
+				$node_tweet=readarg($_POST['node_tweet'] == 'on' ? true : false);
+			}
+			if (isset($_POST['node_plusone'])) {
+				$node_plusone=readarg($_POST['node_plusone'] == 'on' ? true : false);
+			}
 			break;
 		default:
 			break;
@@ -84,7 +93,7 @@ function nodeeditor($lang, $clang, $node_id) {
 				break;
 			}
 
-			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment);
+			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_ilike, $node_tweet, $node_plusone);
 
 			if (!$r) {
 				break;
@@ -102,7 +111,7 @@ function nodeeditor($lang, $clang, $node_id) {
 
 	$errors = compact('missing_node_name', 'bad_node_name');
 
-	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'content_editor', 'errors'));
+	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'content_editor', 'errors'));
 
 	return $output;
 }

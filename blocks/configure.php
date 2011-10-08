@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -543,6 +543,9 @@ CREATE TABLE `${db_prefix}node` (
   `modified` datetime NOT NULL,
   `nocomment` tinyint(1) NOT NULL DEFAULT '0',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
+  `ilike` tinyint(1) NOT NULL DEFAULT '1',
+  `tweet` tinyint(1) NOT NULL DEFAULT '1',
+  `plusone` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
@@ -764,9 +767,9 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`) VALUES
-('1', '1', NOW(), NOW(), '1', '1'),
-('2', '1', NOW(), NOW(), '1', '1');
+INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`) VALUES
+('1', '1', NOW(), NOW(), '1', '1', '0', '0', '0'),
+('2', '1', NOW(), NOW(), '1', '1', '0', '0', '0');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

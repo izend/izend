@@ -11,9 +11,6 @@
 <?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <?php extract($errors); ?>
-<?php if ($moderated and !$id): ?>
-<div id="pagemark"></div>
-<?php endif; ?>
 <div id="comments">
 <h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Comments</h4>
 <?php if ($moderated or $newcomment): ?>

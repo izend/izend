@@ -10,7 +10,7 @@ When this file changes after a merge of the lastest version of iZend,
 execute all the SQL orders associated to all the commits which are 
 newer than the previous update.
 
-NOTE: Change the database table prefix if it's not 'izend_'.
+IMPORTANT: Change the database table prefix if it's not 'izend_'.
 
 Follow the instructions in README about rebuildcloud in utilities if 
 you have to rebuild the search engine data.
@@ -19,25 +19,41 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Fri Oct 7 2011
+
+	Adds fields ilike/tweet/plusone to table node
+
+ALTER TABLE `izend_node` ADD `ilike` BOOL NOT NULL DEFAULT '1', ADD `tweet` BOOL NOT NULL DEFAULT '1', ADD `plusone` BOOL NOT NULL DEFAULT '1';
+----
+
 Date:	Mon Sep 26 2011
+
+	Can edit comments
 
 ALTER TABLE `izend_comment` DROP `published`;
 INSERT INTO `izend_user_role` (`user_id`, `role_id`) VALUES ('1', '3'), ('1', '4');
 ----
 
-Date:	Fri Wed 23 2011
+Date:	Fri Sep 23 2011
+
+	Counts how many times a user has logged in
+	Adds field website to user table
 
 ALTER TABLE `izend_user` ADD `website` VARCHAR( 100 ) NULL DEFAULT NULL AFTER `mail`;
 ALTER TABLE `izend_user` ADD `logged` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `accessed`;
 ----
 
-Date:	Thu Wed 22 2011
+Date:	Thu Sep 22 2011
+
+	Supports an empty thread/node title
 
 ALTER TABLE `izend_thread_locale` CHANGE `title` `title` VARCHAR( 100 ) NULL default NULL;
 ALTER TABLE `izend_node_locale` CHANGE `title` `title` VARCHAR( 100 ) NULL default NULL;
 ----
 
 Date:	Mon Sep 19 2011
+
+	Can ignore a node in a thread
 
 ALTER TABLE `izend_thread_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0';
 ----
@@ -66,6 +82,8 @@ CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT 'text';
 ----
 
 Date:	Thu Jul 7 2011
+
+	Adds flag ignored to node_content
 
 ALTER TABLE `izend_node_content` ADD `ignored` BOOLEAN NOT NULL DEFAULT '0';
 ----

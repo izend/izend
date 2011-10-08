@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -34,11 +34,14 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	}
 	extract($r); /* thread_name thread_title thread_abstract thread_cloud */
 
-	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id);
-
 	$node_title=false;
 	$r = thread_get_node($clang, $thread_id, $node_id, false);
-	$node_title = ($r and $r['node_title']) ? $r['node_title'] : $node_id;
+	if (!$r) {
+		return run('error/notfound', $lang);
+	}
+	extract($r); /* node_title */
+
+	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id);
 
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', false);
@@ -71,7 +74,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$title = view('headline', false, $headline);
 	$sidebar = view('sidebar', false, compact('title'));
 
-	$content = view('editing/threadeditnode', $lang, compact('node_editor', 'node_title', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('editing/threadeditnode', $lang, compact('node_editor', 'node_id', 'node_title', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('editing', compact('banner', 'content', 'sidebar'));
 

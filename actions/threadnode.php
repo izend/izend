@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -48,7 +48,10 @@ function threadnode($lang, $thread, $node) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+
+	$node_comment=!$node_nocomment;
+	$node_morecomment=!$node_nomorecomment;
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
@@ -84,7 +87,7 @@ function threadnode($lang, $thread, $node) {
 	$validate=url('thread', $lang) . '/'. $thread_id . '/'. $node_id;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
 
-	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

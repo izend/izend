@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'dateen.php'; ?>
-<h3><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <p class="info"><?php echo longdatetime_en($node_modified); ?></p>
 <?php if ($node_abstract): ?>
 <h5>Abstract</h5>
@@ -16,7 +16,20 @@
 <?php endif; ?>
 <?php if ($node_cloud): ?>
 <h6>Cloud</h6>
-<p class="smaller"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
+<p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
+<?php endif; ?>
+<?php if ($node_comment or $node_morecomment or $node_ilike or $node_tweet or $node_plusone): ?>
+<table border="0" cellpadding="4" cellspacing="0" rules="none">
+<tbody>
+<tr>
+<?php if ($node_comment): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /></td><?php endif; ?>
+<?php if ($node_morecomment): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /></td><?php endif; ?>
+<?php if ($node_ilike): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /></td><?php endif; ?>
+<?php if ($node_tweet): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /></td><?php endif; ?>
+<?php if ($node_plusone): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /></td><?php endif; ?>
+</tr>
+</tbody>
+</table>
 <?php endif; ?>
 <?php if ($node_contents): ?>
 <h4>Contents</h4>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,10 @@ function node($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+
+	$node_comment=!$node_nocomment;
+	$node_morecomment=!$node_nomorecomment;
 
 	head('title', $node_id);
 	head('description', $node_abstract);
@@ -60,10 +63,9 @@ function node($lang, $arglist=false) {
 	$validate=url('node', $lang) . '/' . $node_id;
 	$banner = build('banner', $lang, compact('edit', 'validate'));
 
-	$node_url = 0 . '/'. $node_id;
 	$node_contents = build('nodecontent', $lang, $node_id);
 
-	$content = view('node', $slang, compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_contents', 'node_created', 'node_modified'));
+	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_contents'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

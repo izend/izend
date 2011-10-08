@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<h3><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id , ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($next_node_url or $prev_node_url): ?>
-<p id="threadnodenav" class="menubar">
+<p id="threadnodenav" class="menu">
 <?php if ($prev_node_url): ?>
 <a href="<?php echo $prev_node_url; ?>"><img src="/images/theme/icons/left.png" alt=""/></a>
 <a href="<?php echo $prev_node_url; ?>"><?php echo htmlspecialchars($prev_node_label, ENT_COMPAT, 'UTF-8'); ?></a>
