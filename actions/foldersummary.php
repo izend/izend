@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -20,7 +20,11 @@ function foldersummary($lang, $folder) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* thread_name thread_title thread_abstract thread_cloud */
+	extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud */
+
+	if ($thread_type != 'folder') {
+		return run('error/notfound', $lang);
+	}
 
 	$folder_name = $thread_name;
 	$folder_title = $thread_title;
