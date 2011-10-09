@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -63,19 +63,19 @@ function threadnode($lang, $thread, $node) {
 	$sidebar = view('sidebar', false, compact('title'));
 
 	$prev_node_label=$prev_node_url=false;
-	$r=thread_node_prev($lang, $thread_id, $node_id, false);
+	$r=thread_node_prev($lang, $thread_id, $node_id);
 	if ($r) {
 		extract($r);
-		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_number;
-		$prev_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $prev_node_name . '?' . 'slang=' . $slang;
+		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_id;
+		$prev_node_url=url('thread', $lang) . '/'. $thread_id . '/'. $prev_node_id . '?' . 'slang=' . $slang;
 	}
 
 	$next_node_label=$next_node_url=false;
-	$r=thread_node_next($lang, $thread_id, $node_id, false);
+	$r=thread_node_next($lang, $thread_id, $node_id);
 	if ($r) {
 		extract($r);
-		$next_node_label = $next_node_title ? $next_node_title : $next_node_number;
-		$next_node_url=url('thread', $lang) . '/'. $thread_name . '/'. $next_node_name . '?' . 'slang=' . $slang;
+		$next_node_label = $next_node_title ? $next_node_title : $next_node_id;
+		$next_node_url=url('thread', $lang) . '/'. $thread_id . '/'. $next_node_id . '?' . 'slang=' . $slang;
 	}
 
 	head('title', $thread_title ? $thread_title : $thread_id);

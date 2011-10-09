@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -40,12 +40,12 @@ function threadsummary($lang, $thread) {
 	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_nocloud thread_nosearch thread_created thread_modified */
 
 	$thread_contents = array();
-	$r = thread_get_contents($lang, $thread_id, false);
+	$r = thread_get_contents($lang, $thread_id);
 	if ($r) {
 		$thread_url = url('thread', $lang) . '/'. $thread_name;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number node_ignored */
-			$node_url = $thread_url . '/' . $node_name . '?' . 'slang=' . $slang;
+			$node_url = $thread_url . '/' . ($node_name ? $node_name : $node_id) . '?' . 'slang=' . $slang;
 			$thread_contents[] = compact('node_id', 'node_title' , 'node_url', 'node_ignored');
 		}
 	}

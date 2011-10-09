@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -34,14 +34,13 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	}
 	extract($r); /* thread_name thread_title thread_abstract thread_cloud */
 
-	$node_title=false;
-	$r = thread_get_node($clang, $thread_id, $node_id, false);
-	if (!$r) {
-		return run('error/notfound', $lang);
-	}
-	extract($r); /* node_title */
-
 	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id);
+
+	$node_name=$node_title=false;
+	$r = thread_get_node($clang, $thread_id, $node_id, false);
+	if ($r) {
+		extract($r); /* node_name node_title */
+	}
 
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', false);
@@ -51,15 +50,15 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url('thread', $clang) . '/'. $thread_id . '/'. $node_id . '?' . 'slang=' . $lang;
-	$validate=url($thread_type, $clang) . '/'. $thread_name . '/'. $node_id;
+	$view=$node_name ? url('thread', $clang) . '/'. $thread_id . '/'. $node_id . '?' . 'slang=' . $lang : false;
+	$validate=$node_name ? url($thread_type, $clang) . '/'. $thread_name . '/'. $node_id : false;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 
 	$prev_node_label=$prev_node_url=false;
 	$r=thread_node_prev($clang, $thread_id, $node_id, false);
 	if ($r) {
 		extract($r);
-		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_number;
+		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_id;
 		$prev_node_url=url('threadedit', $lang) . '/'. $thread_id . '/'. $prev_node_id . '?' . 'clang=' . $clang;
 	}
 
@@ -67,7 +66,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$r=thread_node_next($clang, $thread_id, $node_id, false);
 	if ($r) {
 		extract($r);
-		$next_node_label = $next_node_title ? $next_node_title : $next_node_number;
+		$next_node_label = $next_node_title ? $next_node_title : $next_node_id;
 		$next_node_url=url('threadedit', $lang) . '/'. $thread_id . '/'. $next_node_id . '?' . 'clang=' . $clang;
 	}
 
