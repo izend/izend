@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -52,7 +52,7 @@ function threadeditall($lang, $clang, $type=false) {
 			if (isset($_POST['new_thread_title'])) {
 				$new_thread_title=readarg($_POST['new_thread_title']);
 			}
-			if (empty($new_thread_name) and !empty($new_thread_title)) {
+			if (!$new_thread_name and !$new_thread_title) {
 				$new_thread_name = strtofname($new_thread_title);
 			}
 			if (isset($_POST['new_thread_number'])) {
@@ -101,16 +101,16 @@ function threadeditall($lang, $clang, $type=false) {
 
 	switch($action) {
 		case 'create':
-			if (empty($new_thread_title)) {
+			if (!$new_thread_title) {
 				$missing_new_thread_title = true;
 			}
-			if (empty($new_thread_name)) {
+			if (!$new_thread_name) {
 				$missing_new_thread_name = true;
 			}
 			else if (!preg_match('#^[\w-]{3,}$#', $new_thread_name)) {
 				$bad_new_thread_name = true;
 			}
-			if (empty($new_thread_number)) {
+			if (!$new_thread_number) {
 				$bad_new_thread_number = false;
 			}
 			else if (!is_numeric($new_thread_number)) {
@@ -119,7 +119,7 @@ function threadeditall($lang, $clang, $type=false) {
 			else if ($new_thread_number < 1) {
 				$bad_new_thread_number = true;
 			}
-			if (empty($new_thread_type)) {
+			if (!$new_thread_type) {
 				$missing_new_thread_type = true;
 			}
 			else if (!in_array($new_thread_type, $supported_threads)) {
@@ -128,7 +128,7 @@ function threadeditall($lang, $clang, $type=false) {
 			break;
 
 		case 'delete':
-			if (empty($old_thread_number)) {
+			if (!$old_thread_number) {
 				$missing_old_thread_number = true;
 			}
 			else if (!is_numeric($old_thread_number)) {
@@ -162,17 +162,20 @@ function threadeditall($lang, $clang, $type=false) {
 			$pos = $thread_number;
 
 			if ($thread_list) {
-				foreach ($thread_list as &$b) {
-					if ($b['pos'] >= $pos) {
-						$b['pos']++;
+				foreach ($thread_list as &$tr) {
+					if ($tr['thread_number'] >= $pos) {
+						$tr['thread_number']++;
+					}
+					if ($tr['pos'] >= $pos) {
+						$tr['pos']++;
 					}
 				}
-				array_splice($thread_list, $pos, 0, array(compact('thread_title', 'thread_number', 'thread_url', 'pos')));
+				array_splice($thread_list, $pos-1, 0, array(compact('thread_id', 'thread_title', 'thread_number', 'thread_url', 'pos')));
 				array_multisort(range(1, count($thread_list)), $thread_list);
 			}
 			else {
 				$pos=1;
-				$thread_list=array($pos => compact('thread_title', 'thread_number', 'thread_url', 'pos'));
+				$thread_list=array($pos => compact('thread_id', 'thread_title', 'thread_number', 'thread_url', 'pos'));
 			}
 
 			break;
@@ -208,17 +211,27 @@ function threadeditall($lang, $clang, $type=false) {
 			break;
 
 		case 'reorder':
-			array_multisort(range(1, count($p)), SORT_NUMERIC, $p);
-			array_multisort($p, SORT_NUMERIC, $thread_list);
-			$number=1;
-			foreach ($thread_list as &$b) {
-				if ($b['thread_number'] != $number) {
-					if (thread_set_number($b['thread_id'], $number)) {
-						$b['thread_number']=$number;
-					}
-				}
-				$number++;
+			if (!$p) {
+				break;
 			}
+
+			$neworder=range(1, count($p));
+			array_multisort($p, SORT_NUMERIC, $neworder);
+
+			$number=1;
+			$nl=array();
+			foreach ($neworder as $i) {
+				$tr = &$thread_list[$i];
+				if ($tr['thread_number'] != $number) {
+					thread_set_number($tr['thread_id'], $number);
+					$tr['thread_number'] = $number;
+				}
+				$tr['pos']=$number;
+
+				$nl[$number++] = $tr;
+			}
+			$thread_list = $nl;
+
 			break;
 
 		default:
@@ -240,7 +253,7 @@ function threadeditall($lang, $clang, $type=false) {
 
 	$errors = compact('missing_new_thread_title', 'bad_new_thread_title', 'missing_new_thread_name', 'missing_new_thread_type', 'bad_new_thread_name', 'bad_new_thread_type', 'bad_new_thread_number', 'missing_old_thread_number', 'bad_old_thread_number');
 
-	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'inlanguages', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
+	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'inlanguages', 'supported_threads', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
 
 	$output = layout('editing', compact('banner', 'content'));
 

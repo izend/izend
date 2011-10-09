@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -97,14 +97,13 @@ content
 $i=1;
 $maxlen=strlen(count($thread_contents))+1;
 foreach ($thread_contents as $c) {
-	extract($c);	/* pos, node_title, node_url, node_number, node_ignored */
-	$node_title = htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8');
+	extract($c);	/* pos, node_id node_title, node_url, node_number, node_ignored */
 	$node_url .= '?' . 'clang=' . $clang;
 ?>
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo $pos; ?>" /></td>
 <td class="aright"><a href="<?php echo $node_url; ?>"><?php echo $node_id; ?></a></td>
-<td><a href="<?php echo $node_url; ?>"><?php echo $node_title; ?></a></td>
+<td><a href="<?php echo $node_url; ?>"><?php echo $node_title ? htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8') : $node_id; ?></a></td>
 <?php if ($node_ignored): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignored" title="Ignored" /></td><?php endif; ?>
 </tr>
 <?php

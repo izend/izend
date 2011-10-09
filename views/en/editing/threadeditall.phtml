@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -42,13 +42,15 @@ type
 <tbody>
 <?php
 $i=1;
-foreach ($thread_list as $b) {
-	extract($b);	/* pos, thread_id, thread_title, thread_number, thread_url */
-	$thread_title = htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8');
+foreach ($thread_list as $tr) {
+	extract($tr);	/* pos, thread_id, thread_title, thread_number, thread_url */
 	$thread_url .= '?' . 'clang=' . $clang;
-	echo <<<_MARK_
-<tr><td><input name="p[$i]" type="text" size="2" maxlength="3" value="$pos" /></td><td class="aright"><a href="$thread_url">$thread_id</a></td><td><a href="$thread_url">$thread_title</a></td></tr>\n
-_MARK_;
+?>
+<tr>
+<td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php echo $pos; ?>" /></td>
+<td><a href="<?php echo $thread_url; ?>"><?php echo $thread_title ? htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8') : $thread_id; ?></a></td>
+</tr>
+<?php
 	$i++;
 }
 ?>

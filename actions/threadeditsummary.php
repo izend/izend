@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -87,7 +87,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			if (isset($_POST['thread_name'])) {
 				$thread_name=strtofname(readarg($_POST['thread_name']));
 			}
-			if (empty($thread_name) and !empty($thread_title)) {
+			if (!$thread_name and $thread_title) {
 				$thread_name = strtofname($thread_title);
 			}
 			if (isset($_POST['thread_abstract'])) {
@@ -164,13 +164,13 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	switch($action) {
 		case 'edit':
-			if (empty($thread_name)) {
+			if (!$thread_name) {
 				$missing_thread_name = true;
 			}
 			else if (!preg_match('#^[\w-]{3,}$#', $thread_name)) {
 				$bad_thread_name = true;
 			}
-			if (empty($thread_type)) {
+			if (!$thread_type) {
 				$missing_thread_type = true;
 			}
 			else if (!in_array($thread_type, $supported_threads)) {
@@ -179,16 +179,16 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 
 		case 'create':
-			if (empty($new_node_title)) {
+			if (!$new_node_title) {
 				$missing_new_node_title = true;
 			}
-			else if (empty($new_node_name)) {
+			else if (!$new_node_name) {
 				$bad_new_node_title = true;
 			}
 			else if (!preg_match('#^[\w-]{3,}$#', $new_node_name)) {
 				$bad_new_node_title = true;
 			}
-			if (empty($new_node_number)) {
+			if (!$new_node_number) {
 				$new_node_number = false;
 			}
 			else if (!is_numeric($new_node_number)) {
@@ -202,7 +202,7 @@ function threadeditsummary($lang, $clang, $thread) {
 		case 'delete':
 		case 'hide':
 		case 'show':
-			if (empty($old_node_number)) {
+			if (!$old_node_number) {
 				$missing_old_node_number = true;
 			}
 			else if (!is_numeric($old_node_number)) {
@@ -260,11 +260,11 @@ function threadeditsummary($lang, $clang, $thread) {
 						$c['pos']++;
 					}
 				}
-				array_splice($thread_contents, $pos-1, 0, array(compact('node_title', 'node_number', 'node_url', 'pos')));
+				array_splice($thread_contents, $pos-1, 0, array(compact('node_id', 'node_title', 'node_number', 'node_url', 'pos')));
 			}
 			else {
 				$pos=1;
-				$thread_contents=array($pos => compact('node_title', 'node_number', 'node_url', 'pos'));
+				$thread_contents=array($pos => compact('node_id', 'node_title', 'node_number', 'node_url', 'pos'));
 			}
 
 			break;
@@ -377,8 +377,8 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang;
-	$validate=url($thread_type, $clang) . '/'. $thread_id;
+	$view=$thread_name ? url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang : false;
+	$validate=$thread_name ? url($thread_type, $clang) . '/'. $thread_id : false;
 	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
 
 	$title = view('headline', false, $headline);
