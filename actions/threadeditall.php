@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -36,7 +36,7 @@ function threadeditall($lang, $clang, $type=false) {
 		$action='reorder';
 	}
 
-	$new_thread_title=$new_thread_type=$new_thread_number=false;
+	$new_thread_name=$new_thread_title=$new_thread_type=$new_thread_number=false;
 	$old_thread_number=false;
 
 	$thread_list=false;
@@ -52,7 +52,7 @@ function threadeditall($lang, $clang, $type=false) {
 			if (isset($_POST['new_thread_title'])) {
 				$new_thread_title=readarg($_POST['new_thread_title']);
 			}
-			if (!$new_thread_name and !$new_thread_title) {
+			if ($new_thread_title) {
 				$new_thread_name = strtofname($new_thread_title);
 			}
 			if (isset($_POST['new_thread_number'])) {
@@ -116,7 +116,7 @@ function threadeditall($lang, $clang, $type=false) {
 			else if (!is_numeric($new_thread_number)) {
 				$bad_new_thread_number = true;
 			}
-			else if ($new_thread_number < 1) {
+			else if ($new_thread_number < 1 or $new_thread_number > count($thread_list) + 1) {
 				$bad_new_thread_number = true;
 			}
 			if (!$new_thread_type) {

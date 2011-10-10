@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -194,7 +194,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			else if (!is_numeric($new_node_number)) {
 				$bad_new_node_number = true;
 			}
-			else if ($new_node_number < 1) {
+			else if ($new_node_number < 1 or $new_node_number > count($thread_contents) + 1) {
 				$bad_new_node_number = true;
 			}
 			break;
@@ -246,7 +246,8 @@ function threadeditsummary($lang, $clang, $thread) {
 				break;
 			}
 
-			extract($np);	/* node_id node_number */
+			extract($np);	/* node_id node_number node_ignored */
+			$node_ignored = false;
 			$node_title = $new_node_title;
 			$node_url = url('threadedit', $lang) . '/'. $thread_id . '/' . $node_id;
 			$pos = $node_number;
@@ -260,11 +261,11 @@ function threadeditsummary($lang, $clang, $thread) {
 						$c['pos']++;
 					}
 				}
-				array_splice($thread_contents, $pos-1, 0, array(compact('node_id', 'node_title', 'node_number', 'node_url', 'pos')));
+				array_splice($thread_contents, $pos-1, 0, array(compact('node_id', 'node_title', 'node_number', 'node_ignored', 'node_url', 'pos')));
 			}
 			else {
 				$pos=1;
-				$thread_contents=array($pos => compact('node_id', 'node_title', 'node_number', 'node_url', 'pos'));
+				$thread_contents=array($pos => compact('node_id', 'node_title', 'node_number', 'node_ignored', 'node_url', 'pos'));
 			}
 
 			break;
