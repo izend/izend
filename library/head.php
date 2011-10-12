@@ -3,12 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function head($type=false) {
-	static $head = array();
+	static $head = array(
+		'javascripts' => array(
+			array('name' => 'jquery'),
+		),
+	);
 
 	if (!$type) {
 		return $head;
