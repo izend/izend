@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -19,7 +19,9 @@
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php if (count($system_languages) > 1): ?>
 <p><?php foreach ($system_languages as $lang): ?> <input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $user_locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
+<?php endif; ?>
 <?php if ($with_status): ?>
 <fieldset id="useredit_status">
 <legend>Status</legend>
@@ -81,6 +83,9 @@ if ($missing_name or $bad_name or $duplicated_name) {
 }
 else if ($missing_mail or $bad_mail or $duplicated_mail) {
 	$focus='#useredit_mail';
+}
+else if ($bad_website) {
+	$focus='#useredit_website';
 }
 ?>
 <?php if ($focus): ?>
