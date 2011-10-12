@@ -19,6 +19,10 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video
 {font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
 
+html, body, div,
+table, caption, tbody, tfoot, thead, tr, th, td
+{border:0 none;margin:0;padding:0;}
+
 caption, th, td {text-align:left;font-weight:400;}
 
 blockquote:before, blockquote:after, q:before, q:after {content:"";}

@@ -87,8 +87,8 @@ div.column {float:left;}
 .cloud {padding:0;margin:0;text-align:center;}
 .cloud li {list-style:none;display:inline;}
 
-div.download {margin:1em 0;}
-div.longtail {margin:1em 0;}
+div.download {margin:1em 0 1em 0;}
+div.longtail {margin:1em 0 1em 0;}
 
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;background:url(../images/vline.png) repeat-y;}
 ol.tree ol {margin-left:12px;}

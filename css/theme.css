@@ -83,6 +83,8 @@ div.download {background:transparent url(../images/theme/icons/download.png) no-
 .normal {color:#333333;}
 .dim {color:#666666;}
 
+.reverse {color:#ffffff;background-color:#000000;}
+
 div.alert {color:#333333;background-color:#ffcccc;padding:0.5em 1em 0.5em 1em;}
 div.warning {color:#333333;background-color:#ffffe0;padding:0.5em 1em 0.5em 1em;}
 div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
