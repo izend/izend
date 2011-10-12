@@ -3,12 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function languages($lang, $action, $arg=false) {
 	global $supported_languages;
+
+	if (count($supported_languages) < 2) {
+		return false;
+	}
 
 	$fr_page=($lang != 'fr' && in_array('fr', $supported_languages)) ? url($action, 'fr', $arg) : false;
 	$en_page=($lang != 'en' && in_array('en', $supported_languages)) ? url($action, 'en', $arg) : false;
