@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -30,19 +30,6 @@
 <p>Enter the verification code displayed in the image.</p>
 <?php elseif ($bad_code): ?>
 <p>The verification code is incorrect.</p>
-<?php endif; ?>
-<?php if ($missing_mail): ?>
-<p>You haven't given your email address.</p>
-<?php elseif ($bad_mail): ?>
-<p>The email address is invalid.</p>
-<?php endif; ?>
-<?php if ($missing_message): ?>
-<p>The message is empty.</p>
-<?php endif; ?>
-<?php if ($missing_subject): ?>
-<p>Don't forget the subject.</p>
-<?php elseif ($bad_subject): ?>
-<p>The subject of the message is invalid.</p>
 <?php endif; ?>
 <?php if ($internal_error): ?>
 <p>An internal error has occurred.</p>
