@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -23,7 +23,7 @@ function searchlist($lang, $rsearch, $taglist) {
 			$link_cloud[]=in_array($tag, $taglist) ? "<span class=\"tag\">$w</span>" : $w;
 		}
 		$link_cloud=implode(' ', $link_cloud);
-		if ((is_array($default_folder) and in_array($thread_id, $default_folder)) or $thread_id == $default_folder) {
+		if ($thread_type == 'folder' and ((is_array($default_folder) and in_array($thread_id, $default_folder)) or $thread_id == $default_folder)) {
 			$thread_url=$base_path . '/' . $lang;
 		}
 		else {
