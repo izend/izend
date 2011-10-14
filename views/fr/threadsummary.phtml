@@ -3,11 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'datefr.php'; ?>
+<div id="threadsummary">
 <h3><?php echo $thread_title ? $thread_title : $thread_id; ?></h3>
 <p class="info"><?php echo longdatetime_fr($thread_modified); ?></p>
 <?php if ($thread_abstract): ?>
@@ -27,3 +28,4 @@
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>
+</div>

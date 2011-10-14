@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -68,7 +68,7 @@ function threadsummary($lang, $thread) {
 
 	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
 
-	$output = layout('standard', compact('banner', 'content', 'sidebar'));
+	$output = layout('viewing', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }

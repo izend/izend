@@ -3,10 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
+<div id="threadall">
 <h3><?php echo htmlspecialchars($site_title ? $site_title : $sitename, ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($site_abstract): ?>
 <h5>Extrait</h5>
@@ -18,3 +19,4 @@
 <?php endif; ?>
 <h4>Contenu</h4>
 <?php echo $threadlist; ?>
+</div>

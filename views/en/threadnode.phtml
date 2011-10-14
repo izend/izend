@@ -3,11 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'dateen.php'; ?>
+<div id="threadnode">
 <h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <p id="threadnodenav" class="menu">
 <?php if ($prev_node_url): ?>
@@ -48,3 +49,4 @@
 <h4>Content</h4>
 <?php echo $node_contents; ?>
 <?php endif; ?>
+</div>
