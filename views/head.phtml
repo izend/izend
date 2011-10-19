@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -15,17 +15,17 @@
 <?php if (false): ?>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <?php endif; ?>
-<?php if (isset($description) and $description): ?>
+<?php if (!empty($description)): ?>
 <meta name="description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
-<?php if (isset($keywords) and $keywords): ?>
+<?php if (!empty($keywords)): ?>
 <meta name="keywords" content="<?php echo htmlspecialchars($keywords, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta name="generator" content="iZend" />
-<?php if (isset($author) and $author): ?>
+<?php if (!empty($author)): ?>
 <meta name="author" content="<?php echo htmlspecialchars($author, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
-<?php if (isset($robots) and $robots): ?>
+<?php if (!empty($robots)): ?>
 <meta name="robots" content="<?php echo $robots; ?>" />
 <?php else: ?>
 <meta name="robots" content="index, follow" />
@@ -34,14 +34,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
 <meta property="og:image" content="<?php echo $base_url; ?>/logos/siteqr.png" />
-<?php if (isset($description) and $description): ?>
+<?php if (!empty($description)): ?>
 <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta property="og:site_name" content="<?php echo $sitename; ?>" />
-<?php if (isset($facebookid) and $facebookid): ?>
+<?php if (!empty($facebookid)): ?>
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
-<?php if (isset($favicon) and $favicon): ?>
+<?php if (!empty($favicon)): ?>
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (true): ?>
@@ -51,15 +51,41 @@
 <link href="<?php echo $base_path; ?>/css/theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <link href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" rel="stylesheet" type="text/css" media="screen" />
-<?php if (isset($stylesheets)): ?>
+<?php if (!empty($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
-<link href="<?php echo $base_path; ?>/css/<?php echo $css['name']; ?>.css" rel="stylesheet" type="text/css" media="<?php echo $css['media']; ?>" />
+<?php
+$name=$css['name'];
+$media=isset($css['media']) ? $css['media'] : '';
+if (substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
+	$url=$name;
+}
+else if (substr_compare($name, '.css', -4, 4) == 0) {
+	$url=$base_path . '/css/' . $name;
+}
+else {
+	$url=$base_path . '/css/' . $name . '.css';
+}
+?>
+<link href="<?php echo $url; ?>" rel="stylesheet" type="text/css" media="<?php echo $media; ?>" />
+<?php endforeach; ?>
+<?php endif; ?>
+<?php if (!empty($javascripts)): ?>
+<?php foreach ($javascripts as $js) : ?>
+<?php
+$name=$js['name'];
+$param=isset($js['param']) ? $js['param'] : '';
+if (substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
+	$url=$name;
+}
+else if (substr_compare($name, '.js', -3, 3) == 0) {
+	$url=$base_path . '/js/' . $name;
+}
+else {
+	$url=$base_path . '/js/' . $name . '.js';
+}
+?>
+<script type="text/javascript" src="<?php echo $url; ?>"><?php echo $param; ?></script>
 <?php endforeach; ?>
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
-<?php if (isset($javascripts)): ?>
-<?php foreach ($javascripts as $js) : ?>
-<script type="text/javascript" src="<?php echo $base_path; ?>/js/<?php echo $js['name']; ?>.js"></script>
-<?php endforeach; ?>
-<?php endif; ?>
 <title><?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>

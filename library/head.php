@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -60,8 +60,9 @@ function head($type=false) {
 			break;
 		case 'javascript':
 			$name=$args[0];
+			$param=isset($args[1]) ? $args[1] : false;
 			if (!isset($head['javascripts'])) {
-				$head['javascripts'] = array(compact('name'));
+				$head['javascripts'] = array(param ? compact('name', 'param') : compact('name'));
 			}
 			else {
 				foreach ($head['javascripts'] as $js) {
@@ -69,7 +70,7 @@ function head($type=false) {
 						break 2;
 					}
 				}
-				$head['javascripts'][]=compact('name');
+				$head['javascripts'][]=$param ? compact('name', 'param') : compact('name');
 			}
 			break;
 		default:
