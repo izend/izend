@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -33,8 +33,8 @@
 <meta property="og:title" content="<?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
-<meta property="og:image" content="<?php echo $base_url; ?>/logos/siteqr.png" />
-<?php if (!empty($description)): ?>
+<meta property="og:image" content="<?php echo $base_url; ?>/logos/sitelogo.png" />
+<?php if (isset($description) and $description): ?>
 <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta property="og:site_name" content="<?php echo $sitename; ?>" />
@@ -56,10 +56,10 @@
 <?php
 $name=$css['name'];
 $media=isset($css['media']) ? $css['media'] : '';
-if (substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
+if (substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
 	$url=$name;
 }
-else if (substr_compare($name, '.css', -4, 4) == 0) {
+else if (substr_compare('.css', $name, -4, 4) == 0) {
 	$url=$base_path . '/css/' . $name;
 }
 else {
@@ -74,10 +74,10 @@ else {
 <?php
 $name=$js['name'];
 $param=isset($js['param']) ? $js['param'] : '';
-if (substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
+if (substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
 	$url=$name;
 }
-else if (substr_compare($name, '.js', -3, 3) == 0) {
+else if (substr_compare('.js', $name, -3, 3) == 0) {
 	$url=$base_path . '/js/' . $name;
 }
 else {
