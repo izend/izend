@@ -7,9 +7,11 @@
  * @link       http://www.izend.org
  */
 ?>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'fr'}</script>
+<?php head('javascript', 'https://apis.google.com/js/plusone.js', "{lang: 'fr'}"); ?>
+<?php $id = uniqid('id'); ?>
+<div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
-document.write('<div class="g-plusone" data-size="medium"></div>');
+$('#<?php echo $id; ?>').replaceWith('<div class="g-plusone" data-size="medium"></div>');
 //]]>
 </script>

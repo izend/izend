@@ -3,13 +3,15 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<?php head('javascript', 'http://platform.twitter.com/widgets.js'); ?>
+<?php $id = uniqid('id'); ?>
+<div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
-document.write('<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal"></a>');
+$('#<?php echo $id; ?>').replaceWith('<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal"></a>');
 //]]>
 </script>
