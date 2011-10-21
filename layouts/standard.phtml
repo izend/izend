@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -16,7 +16,7 @@
 <div id="viewer">
 <?php echo $banner; ?>
 <div id="bannerline"></div>
-<?php if (isset($sidebar) and !empty($sidebar)): ?>
+<?php if (!empty($sidebar)): ?>
 <div id="sidebar">
 <?php echo $sidebar; ?>
 </div>
@@ -24,7 +24,7 @@
 <div id="content">
 <?php echo $content; ?>
 </div>
-<?php if (isset($footer) and !empty($footer)): ?>
+<?php if (!empty($footer)): ?>
 <?php echo $footer; ?>
 <?php endif; ?>
 </div>
