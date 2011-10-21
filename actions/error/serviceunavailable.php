@@ -13,7 +13,7 @@ function serviceunavailable($lang, $arglist) {
 	head('title', translate('http_service_unavailable:title', $lang));
 	head('robots', 'noindex, nofollow');
 
-	$contact=true;
+	$contact=false;
 	$banner = build('banner', $lang, compact('contact'));
 
 	$content = view('error/serviceunavailable', $lang, compact('closing_time', 'opening_time'));
