@@ -3,10 +3,26 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <div id="footer">
-<p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?> <span class="hidden">par <a href="http://www.izend.org">iZend</a></span><?php if ($contact_page): ?> &bull; <a href="<?php echo $contact_page; ?>">Contact</a><?php endif; ?></p>
+<p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?> <span class="hidden">par <a href="http://www.izend.org">iZend</a></span>
+<?php if (!empty($contact_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+&bull;
+<?php endif; ?>
+<?php if (!empty($contact_page)): ?>
+<a class="btn_mail" href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter">Contact</a>
+<?php endif; ?>
+<?php if (!empty($user_page)): ?>
+<a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Votre compte">Compte</a>
+<?php endif; ?>
+<?php if (!empty($nobody_page)): ?>
+<a class="btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Déconnexion">Déconnexion</a>
+<?php endif; ?>
+<?php if (!empty($admin_page)): ?>
+<a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Gérer">Gérer</a>
+<?php endif; ?>
+</p>
 </div>
