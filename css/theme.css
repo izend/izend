@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
  
@@ -51,8 +51,7 @@ textarea {resize:none;}
 
 .cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
 .cloud li a:hover {color:#333333;text-decoration:none;}
-.cloud li #index {float:left;display:inline;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;}
-.cloud li #index span {display:none;}
+.cloud li .btn_index {float:left;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
 
 .tag {color:#df6f6f;font-size:large;}
 
