@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -42,6 +42,7 @@
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
 <?php if (!empty($favicon)): ?>
+<link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (true): ?>
