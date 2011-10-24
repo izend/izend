@@ -3,26 +3,26 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($ilike or $tweetit or $plusone): ?>
-<div class="social">
+<ul class="besocial">
 <?php if ($ilike): ?>
-<div class="ilike">
+<li class="ilike">
 <?php echo $ilike; ?>
-</div>
+</li>
 <?php endif; ?>
 <?php if ($tweetit): ?>
-<div class="tweetit">
+<li class="tweetit">
 <?php echo $tweetit; ?>
-</div>
+</li>
 <?php endif; ?>
 <?php if ($plusone): ?>
-<div class="plusone">
+<li class="plusone">
 <?php echo $plusone; ?>
-</div>
+</li>
 <?php endif; ?>
-</div>
+</ul>
 <?php endif; ?>
