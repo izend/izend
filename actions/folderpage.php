@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -26,10 +26,6 @@ function folderpage($lang, $folder, $page) {
 		return run('error/notfound', $lang);
 	}
 	extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud */
-
-	if ($thread_type != 'folder') {
-		return run('error/notfound', $lang);
-	}
 
 	$folder_name = $thread_name;
 	$folder_title = $thread_title;

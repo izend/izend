@@ -46,6 +46,6 @@ function page($lang, $arglist=false) {
 
 	require_once 'actions/folderpage.php';
 
-	return folderpage($lang, $folder, $page);
+	return folderpage($lang, $folder_id, $page_id);
 }
 
