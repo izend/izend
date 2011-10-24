@@ -67,8 +67,8 @@ function booksummary($lang, $book) {
 	$search=false;
 	if (!$book_nosearch) {
 		$search_text='';
-		$search_url= url('search', $lang) . '/'. $book_name;
-		$suggest_url= url('suggest', $lang) . '/'. $book_name;
+		$search_url= url('search', $lang, $book_name);
+		$suggest_url= url('suggest', $lang, $book_name);
 		$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
 	}
 

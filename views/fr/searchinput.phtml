@@ -3,18 +3,20 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
+<?php if (!empty($search_url)): ?>
 <form id="searchinput" action="<?php echo $search_url; ?>" method="post">
 <input id="searchtext" name="searchtext" type="text" value="<?php echo htmlspecialchars($search_text, ENT_COMPAT, 'UTF-8'); ?>" />
 <input id="search" name="search" type="submit" value="Chercher" title="Chercher" />
 </form>
-<?php if (isset($suggest_url) and !empty($suggest_url)): ?>
+<?php if (!empty($suggest_url)): ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script type="text/javascript">
 $('input#searchtext').autocomplete({appendTo: '#searchinput', minLength: 3, source: '<?php echo $suggest_url; ?>'});
 </script>
+<?php endif; ?>
 <?php endif; ?>

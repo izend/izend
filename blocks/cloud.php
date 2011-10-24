@@ -3,13 +3,18 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
 require_once 'models/cloud.inc';
 
 function cloud($lang, $cloud_id, $node_id, $size=false, $byname=false, $bycount=false, $index=true) {
+	$search_url = url('search', $lang);
+	if (!$search_url) {
+		return false;
+	}
+
 	$cloud_name=false;
 	if ($cloud_id) {
 		$r = cloud_get($lang, $cloud_id);
@@ -28,7 +33,7 @@ function cloud($lang, $cloud_id, $node_id, $size=false, $byname=false, $bycount=
 			$r = array_intersect_key($r, array_flip(array_rand($r, $size)));
 		}
 		$linklist = array();
-		$cloud_url = $cloud_name ? url('search', $lang) . '/'. $cloud_name : url('search', $lang);
+		$cloud_url = $cloud_name ? $search_url . '/'. $cloud_name : $search_url;
 		foreach ($r as $tag) {
 			extract($tag);	/* tag_id tag_name tag_count */
 			$name=$tag_name;

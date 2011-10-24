@@ -108,8 +108,8 @@ function story($lang, $arglist=false) {
 	$search=false;
 	if (!$story_nosearch) {
 		$search_text='';
-		$search_url= url('search', $lang) . '/'. $story_name;
-		$suggest_url= url('suggest', $lang) . '/'. $story_name;
+		$search_url= url('search', $lang, $story_name);
+		$suggest_url= url('suggest', $lang, $story_name);
 		$search=view('searchinput', $lang, compact('search_url', 'search_text', 'suggest_url'));
 	}
 
