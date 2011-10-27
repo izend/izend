@@ -3,14 +3,22 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <div id="fb-root"></div>
 <script type="text/javascript">
 //<![CDATA[
+<?php switch ($mode): ?>
+<?php case 'bar': ?>
+$('#fb-root').after('<div class="fb-like" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
+<?php break; ?>
+<?php case 'inline': ?>
+<?php default: ?>
 $('#fb-root').after('<div class="fb-like" data-send="true" data-layout="button_count" data-width="225" data-show-faces="false" data-font="arial"></div>');
+<?php break; ?>
+<?php endswitch; ?>
 //]]>
 </script>
 <script type="text/javascript">

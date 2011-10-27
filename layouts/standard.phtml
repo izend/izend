@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -13,15 +13,18 @@
 <?php echo $head; ?>
 </head>
 <body>
-<div id="standard">
+<div id="viewer">
 <?php echo $banner; ?>
 <div id="bannerline"></div>
+<div id="content">
+<?php if (!empty($sharebar)): ?>
+<?php echo $sharebar; ?>
+<?php endif; ?>
 <?php if (!empty($sidebar)): ?>
 <div id="sidebar">
 <?php echo $sidebar; ?>
 </div>
 <?php endif; ?>
-<div id="content">
 <?php echo $content; ?>
 </div>
 <?php if (!empty($footer)): ?>

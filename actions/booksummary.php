@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -56,10 +56,16 @@ function booksummary($lang, $book) {
 		}
 	}
 
-	$besocial=false;
+	$besocial=$sharebar=false;
 	if ($book_contents) {
-		$ilike=$tweetit=$plusone=true;
+		$ilike=false;
+		$tweetit=false;
+		$plusone=false;
 		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+		$ilike=true;
+		$tweetit=true;
+		$plusone=true;
+		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents', 'besocial'));
@@ -89,7 +95,7 @@ function booksummary($lang, $book) {
 	$validate=url('book', $lang) . '/'. $book_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$output = layout('standard', compact('banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('sharebar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }

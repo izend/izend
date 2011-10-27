@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -102,12 +102,16 @@ function bookpage($lang, $book, $page) {
 		$next_page_url=url('book', $lang) . '/'. $book_name . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
-	$besocial=false;
+	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
+		$ilike=false;
+		$tweetit=false;
+		$plusone=false;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
 		$plusone=$node_plusone;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'besocial'));
@@ -137,7 +141,7 @@ function bookpage($lang, $book, $page) {
 	$validate=url('book', $lang) . '/'. $book_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$output = layout('standard', compact('banner', 'content', 'sidebar'));
+	$output = layout('standard', compact('sharebar', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

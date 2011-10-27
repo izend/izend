@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -12,6 +12,14 @@
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
-$('#<?php echo $id; ?>').replaceWith('<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal"></a>');
+<?php switch ($mode): ?>
+<?php case 'bar': ?>
+$('#<?php echo $id; ?>').replaceWith('<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-lang="fr" data-via="izendorg"></a>');
+<?php break; ?>
+<?php case 'inline': ?>
+<?php default: ?>
+$('#<?php echo $id; ?>').replaceWith('<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-lang="fr"></a>');
+<?php break; ?>
+<?php endswitch; ?>
 //]]>
 </script>

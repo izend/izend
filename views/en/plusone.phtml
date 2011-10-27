@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -12,6 +12,14 @@
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
+<?php switch ($mode): ?>
+<?php case 'bar': ?>
+$('#<?php echo $id; ?>').replaceWith('<div class="g-plusone" data-size="tall" data-annotation="bubble"></div>');
+<?php break; ?>
+<?php case 'inline': ?>
+<?php default: ?>
 $('#<?php echo $id; ?>').replaceWith('<div class="g-plusone" data-size="medium"></div>');
+<?php break; ?>
+<?php endswitch; ?>
 //]]>
 </script>

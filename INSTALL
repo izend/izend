@@ -6,17 +6,43 @@
 |___|_| |_|___/\__\__,_|_|_|
 
 
-If your are familiar with Git, read the instructions in GIT to 
-automatically track changes from the iZend repository. Otherwise
-just copy the whole izend directory into a directory within your
-web server's document root and give it the name of your website:
+iZend relies on Git to distribute new releases. With Git, 
+even if you change the original code, which you are 
+encouraged to do, tracking changes from the iZend 
+repository will be amazingly simple and robust.
 
-    mv izend /var/www/sitename.net
+Install Git:
 
-Make sure the server is allowed to read all the files and write the 
-configuration files includes/config.inc, includes/db.inc and
-includes/aliases.inc, the directories log and avatars and the file
-sitemap.xml:
+    sudo apt-get install git-core
+
+Create the initial version of your site:
+
+    git init /var/www/sitename.net
+    cd /var/www/sitename.net
+
+Declare your identity:
+
+    git config user.name yourname
+    git config user.email yourname@sitename.net
+
+Pull out your version of iZend in a branch:
+
+    git remote add izend https://github.com/izend/izend
+    git fetch izend
+    git checkout -b izend izend/master
+
+Eventually, prevent an accidental push:
+
+    git config remote.izend.receivepack /bin/false
+
+Go to your branch:
+
+    git checkout master
+
+Make sure the server is allowed to read all the files and 
+write the configuration files includes/config.inc, 
+includes/db.inc and includes/aliases.inc, the directories 
+log and avatars and the file sitemap.xml:
 
     cd /var/www/sitename.net
     sudo chgrp -R www-data .
@@ -28,19 +54,22 @@ Protect the configuration files:
     cd /var/www/sitename.net/includes
     chmod 660 config.inc db.inc aliases.inc
 
-Check that the module rewrite is activated by Apache. Look for the
-following line in httpd.conf:
+Check that the module rewrite is activated by Apache. Look 
+for the following line in httpd.conf:
 
-LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+LoadModule rewrite_module 
+/usr/lib/apache2/modules/mod_rewrite.so
 
-Create a link to the file /etc/apache2/mods_available/rewrite.load
-in the directory /etc/apache2/mods_enabled:
+Create a link to the file 
+/etc/apache2/mods_available/rewrite.load in the directory 
+/etc/apache2/mods_enabled:
 
     cd /etc/apache2/mods-enabled
     sudo ln -s ../mods-available/rewrite.load .
 
-Add a file called after the name of your website in the directory
-/etc/apache2/sites-available with the following content:
+Add a file called after the name of your website in the 
+directory /etc/apache2/sites-available with the following 
+content:
 
 <VirtualHost *:80>
     DocumentRoot /var/www/sitename.net
@@ -50,8 +79,9 @@ Add a file called after the name of your website in the directory
     AllowOverride All
 </Directory>
 
-Create a link to the file /etc/apache2/sites-available/sitename.net
-in the directory /etc/apache2/sites-enabled:
+Create a link to the file 
+/etc/apache2/sites-available/sitename.net in the directory 
+/etc/apache2/sites-enabled:
 
     cd /etc/apache2/sites-enabled
     sudo ln -s ../sites-available/sitename.net .
@@ -74,9 +104,58 @@ site and the production site.
 Start your web navigator and enter local.sitename.net in the
 address bar to run the configurator.
 
-In case of a problem, make sure the rewrite module is activated and
-that the directives in the file .htaccess at the root of your site
-are properly interpreted. If the connection with the DB fails,
+In case of a problem, make sure the rewrite module is 
+activated and
+that the directives in the file .htaccess at the root of 
+your site
+are properly interpreted. If the connection with the DB 
+fails,
 verify the DB connector in includes/db.inc. Check the other
 parameters in includes/config.inc.
+
+Commit this initial version:
+
+    git status
+    git add --all
+    git commit -m"Initial configuration"
+    
+Create a bare repository for your site:
+
+    git init --bare /git/sitename.net.git
+    cd /git/sitename.net.git
+    git config core.sharedrepository true
+    git config receive.denyNonFastforwards true
+
+Push the initial version of your site to its repository:
+
+    git remote add origin ssh://githost/git/sitename.net.git
+    git push origin master
+    git branch master --set-upstream origin/master
+    
+Check your configuration:
+
+    cat .git/config
+
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+    user = yourname
+    email = yourname@sitename.net
+[remote "izend"]
+	url = https://github.com/izend/izend
+	fetch = +refs/heads/*:refs/remotes/izend/*
+	receivepack = /bin/false
+[branch "izend"]
+	remote = izend
+	merge = refs/heads/master
+[branch "master"]
+	remote = izend
+	merge = refs/heads/master
+[remote "origin"]
+	url = ssh://githost/git/sitename.net
+	fetch = +refs/heads/*:refs/remotes/origin/*
+
 

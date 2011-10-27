@@ -3,16 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    1
  * @link       http://www.izend.org
  */
 
-function besocial($lang, $components=false) {
+function sharebar($lang, $components=false) {
 	$ilike=$tweetit=$plusone=false;
 
 	extract($components);
 
-	$mode='inline';
+	$mode='bar';
 
 	if ($ilike) {
 		$ilike=view('ilike', $lang, compact('mode'));
@@ -24,7 +24,7 @@ function besocial($lang, $components=false) {
 		$plusone=view('plusone', $lang, compact('mode'));
 	}
 
-	$output = view('besocial', false, compact('ilike', 'tweetit', 'plusone'));
+	$output = view('sharebar', false, compact('ilike', 'tweetit', 'plusone'));
 
 	return $output;
 }

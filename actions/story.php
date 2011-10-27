@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -95,12 +95,16 @@ function story($lang, $arglist=false) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
 	}
 
-	$besocial=false;
+	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
+		$ilike=false;
+		$tweetit=false;
+		$plusone=false;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
 		$plusone=$node_plusone;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial'));
@@ -146,7 +150,7 @@ function story($lang, $arglist=false) {
 	$validate=url('story', $lang) . '/' . $story_name . '/' . $page_name;
 	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$output = layout('standard', compact('banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('sharebar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }
