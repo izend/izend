@@ -10,7 +10,7 @@
 function sharebar($lang, $components=false) {
 	$ilike=$tweetit=$plusone=false;
 
-	extract($components);
+	extract($components);	/* ilike, tweetit, plusone */
 
 	$mode='bar';
 

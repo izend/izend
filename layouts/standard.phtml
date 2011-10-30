@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -17,6 +17,9 @@
 <?php echo $banner; ?>
 <div id="bannerline"></div>
 <div id="content">
+<?php if (!empty($toolbar)): ?>
+<?php echo $toolbar; ?>
+<?php endif; ?>
 <?php if (!empty($sharebar)): ?>
 <?php echo $sharebar; ?>
 <?php endif; ?>

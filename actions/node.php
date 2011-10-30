@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function node($lang, $arglist=false) {
-	global $system_languages;
+	global $system_languages, $with_toolbar;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -61,13 +61,15 @@ function node($lang, $arglist=false) {
 
 	$edit=user_has_role('writer') ? url('editnode', $_SESSION['user']['locale']) . '/'. $node_id . '?' . 'clang=' . $lang : false;
 	$validate=url('node', $lang) . '/' . $node_id;
-	$banner = build('banner', $lang, compact('edit', 'validate'));
+
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
 	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_contents'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('toolbar', 'banner', 'content'));
 
 	return $output;
 }

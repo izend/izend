@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,8 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function foldersummary($lang, $folder) {
+	global $with_toolbar;
+
 	$folder_id = thread_id($folder);
 	if (!$folder_id) {
 		return run('error/notfound', $lang);
@@ -60,9 +62,11 @@ function foldersummary($lang, $folder) {
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '?' . 'clang=' . $lang : false;
 	$validate=url('folder', $lang) . '/'. $folder_name;
-	$banner = build('banner', $lang, compact('edit', 'validate'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+
+	$output = layout('standard', compact('toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -51,6 +51,10 @@ $supported_languages=array('en', 'fr');	// 'en', 'fr'
 global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
+
+global $with_toolbar;
+
+$with_toolbar=true;
 
 global $search_distance, $search_closest;
 

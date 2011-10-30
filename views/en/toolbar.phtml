@@ -1,0 +1,27 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if ($nobody_page or $edit_page or $view_page or $admin_page): ?>
+<ul id="toolbar" class="menu sidebar">
+<?php if ($nobody_page): ?>
+<li><a id="exit" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect"><span>Disconnect</span></a></li>
+<?php endif; ?>
+<?php if ($edit_page): ?>
+<li><a id="edit" href="<?php echo $edit_page; ?>" title="Edit" rel="nofollow"><span>Edit</span></a></li>
+<?php elseif ($view_page): ?>
+<li><a id="view" href="<?php echo $view_page; ?>" title="View" rel="nofollow"><span>View</span></a></li>
+<?php endif; ?>
+<?php if ($validate_page): ?>
+<li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
+<?php endif; ?>
+<?php if ($admin_page): ?>
+<li><a id="admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage"><span>Manage</span></a></li>
+<?php endif; ?>
+</ul>
+<?php endif; ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'strtofname.php';
 require_once 'models/thread.inc';
 
 function threadeditsummary($lang, $clang, $thread) {
-	global $supported_threads;
+	global $supported_threads, $with_toolbar;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -249,6 +249,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			extract($np);	/* node_id node_number node_ignored */
 			$node_ignored = false;
 			$node_title = $new_node_title;
+			$node_ignored = false;
 			$node_url = url('threadedit', $lang) . '/'. $thread_id . '/' . $node_id;
 			$pos = $node_number;
 
@@ -380,7 +381,9 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline = compact('headline_text', 'headline_url');
 	$view=$thread_name ? url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang : false;
 	$validate=$thread_name ? url($thread_type, $clang) . '/'. $thread_id : false;
-	$banner = build('banner', $lang, compact('headline', 'view', 'validate'));
+
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view', 'validate'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
 
 	$title = view('headline', false, $headline);
 	$sidebar = view('sidebar', false, compact('title'));
@@ -391,7 +394,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
-	$output = layout('editing', compact('banner', 'content', 'sidebar'));
+	$output = layout('editing', compact('toolbar', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function editnode($lang, $arglist=false) {
-	global $supported_languages;
+	global $supported_languages, $with_toolbar;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -65,11 +65,13 @@ function editnode($lang, $arglist=false) {
 
 	$view=url('node', $clang) . '/'. $node_id . '?' . 'slang=' . $lang;
 	$validate=url('node', $clang) . '/'. $node_id;
-	$banner = build('banner', $lang, compact('view', 'validate'));
+
+	$banner = build('banner', $lang, $with_toolbar ? false : compact('view', 'validate'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
 
 	$content = view('editing/editnode', $lang, compact('node_editor'));
 
-	$output = layout('editing', compact('banner', 'content'));
+	$output = layout('editing', compact('toolbar', 'banner', 'content'));
 
 	return $output;
 }

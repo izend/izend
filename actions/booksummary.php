@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,8 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function booksummary($lang, $book) {
+	global $with_toolbar;
+
 	$book_id = thread_id($book);
 	if (!$book_id) {
 		return run('error/notfound', $lang);
@@ -93,9 +95,11 @@ function booksummary($lang, $book) {
 	$search=!$book_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('bookedit', $_SESSION['user']['locale']) . '/'. $book_id . '?' . 'clang=' . $lang : false;
 	$validate=url('book', $lang) . '/'. $book_name;
-	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$output = layout('standard', compact('sharebar', 'banner', 'sidebar', 'content'));
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+
+	$output = layout('standard', compact('sharebar', 'toolbar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }

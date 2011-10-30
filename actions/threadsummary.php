@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function threadsummary($lang, $thread) {
-	global $system_languages;
+	global $system_languages, $with_toolbar;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -64,11 +64,13 @@ function threadsummary($lang, $thread) {
 
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $lang : false;
 	$validate=url('thread', $lang) . '/'. $thread_name;
-	$banner = build('banner', $lang, compact('headline', 'edit', 'validate'));
+
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
 	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_created', 'thread_modified', 'thread_contents'));
 
-	$output = layout('viewing', compact('banner', 'content', 'sidebar'));
+	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

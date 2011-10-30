@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,8 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function story($lang, $arglist=false) {
+	global $with_toolbar;
+
 	$story=$page=false;
 
 	if (is_array($arglist)) {
@@ -148,9 +150,11 @@ function story($lang, $arglist=false) {
 	$search=!$story_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('storyedit', $_SESSION['user']['locale']) . '/'. $story_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('story', $lang) . '/' . $story_name . '/' . $page_name;
-	$banner = build('banner', $lang, compact('headline', 'edit', 'validate', 'search'));
 
-	$output = layout('standard', compact('sharebar', 'banner', 'sidebar', 'content'));
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+
+	$output = layout('standard', compact('sharebar', 'toolbar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }

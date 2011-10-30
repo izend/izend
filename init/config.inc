@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 <?php
@@ -59,6 +59,10 @@ $supported_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $
 global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'folder', 'story', 'book'
+
+global $with_toolbar;
+
+$with_toolbar=false;
 
 global $search_distance, $search_closest;
 
