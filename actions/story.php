@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function story($lang, $arglist=false) {
-	global $with_toolbar;
+	global $request_path, $with_toolbar;
 
 	$story=$page=false;
 
@@ -70,6 +70,10 @@ function story($lang, $arglist=false) {
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
 	$page_number=$node_number;
+
+	if (!$page) {
+		$request_path .= '/' . $page_name;
+	}
 
 	if ($story_title) {
 		head('title', $story_title);
