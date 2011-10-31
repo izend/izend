@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -11,17 +11,17 @@
 <rss version="2.0">
 <channel>
 	<title><![CDATA[<?php echo $sitename; ?>]]></title>
-	<link><?php echo $base_url; ?></link>
+	<link><?php echo $base_url; ?>/<?php echo $lang; ?></link>
 	<description><![CDATA[<?php echo $description; ?>]]></description>
 	<language><?php echo $lang; ?></language>
-	<pubDate><?php echo date('r'); ?></pubDate>
-	<lastBuildDate><?php echo date('r'); ?></lastBuildDate>
+	<pubDate><?php echo date('r', mktime(13, 10, 0, 5, 13, 2010)); ?></pubDate>
+	<lastBuildDate><?php echo date('r', mktime(23, 30, 0, 7, 28, 2011)); ?></lastBuildDate>
 	<copyright><?php echo $sitename; ?></copyright>
 	<image>
 		<title><?php echo $sitename; ?></title>
-		<link><?php echo $base_url; ?></link>
+		<link><?php echo $base_url; ?>/<?php echo $lang; ?></link>
 		<url><?php echo $base_url; ?>/logos/sitelogo.png</url>
-		<width>400</width>
+		<width>300</width>
 	</image>
 <?php foreach ($itemlist as $item): ?>
 <?php extract($item) ?>

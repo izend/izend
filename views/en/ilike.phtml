@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -12,11 +12,11 @@
 //<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-$('#fb-root').after('<div class="fb-like" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
+$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
-$('#fb-root').after('<div class="fb-like" data-send="true" data-layout="button_count" data-width="225" data-show-faces="false" data-font="arial"></div>');
+$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="button_count" data-width="225" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>
