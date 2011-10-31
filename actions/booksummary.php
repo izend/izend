@@ -66,6 +66,10 @@ function booksummary($lang, $book) {
 		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=true;
 		$tweetit=true;
+		if ($tweetit) {
+			$tweet_text=$book_title;
+			$tweetit=$tweet_text ? compact('tweet_text') : true;
+		}
 		$plusone=true;
 		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}

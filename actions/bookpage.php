@@ -112,6 +112,10 @@ function bookpage($lang, $book, $page) {
 		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		if ($tweetit) {
+			$tweet_text=($book_title && $page_title) ? "$book_title - $page_title" : ($page_title ? $page_title : $book_title);
+			$tweetit=$tweet_text ? compact('tweet_text') : true;
+		}
 		$plusone=$node_plusone;
 		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
