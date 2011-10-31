@@ -10,7 +10,7 @@
 function besocial($lang, $components=false) {
 	$ilike=$tweetit=$plusone=false;
 
-	extract($components);
+	extract($components);	/* ilike, tweetit, plusone */
 
 	$mode='inline';
 
@@ -18,7 +18,11 @@ function besocial($lang, $components=false) {
 		$ilike=view('ilike', $lang, compact('mode'));
 	}
 	if ($tweetit) {
-		$tweetit=view('tweetit', $lang, compact('mode'));
+		$tweet_text=false;
+		if (is_array($tweetit)) {
+			extract($tweetit);	/* tweet_text */
+		}
+		$tweetit=view('tweetit', $lang, compact('mode', 'tweet_text'));
 	}
 	if ($plusone) {
 		$plusone=view('plusone', $lang, compact('mode'));

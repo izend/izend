@@ -54,7 +54,7 @@ $supported_threads=array('thread', 'folder', 'story', 'book');	// 'thread', 'fol
 
 global $with_toolbar;
 
-$with_toolbar=true;
+$with_toolbar=false;
 
 global $search_distance, $search_closest;
 
