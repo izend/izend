@@ -9,11 +9,6 @@
 ?>
 <?php if ($ilike or $tweetit or $plusone): ?>
 <ul class="menu besocial">
-<?php if ($ilike): ?>
-<li class="ilike">
-<?php echo $ilike; ?>
-</li>
-<?php endif; ?>
 <?php if ($tweetit): ?>
 <li class="tweetit">
 <?php echo $tweetit; ?>
@@ -22,6 +17,11 @@
 <?php if ($plusone): ?>
 <li class="plusone">
 <?php echo $plusone; ?>
+</li>
+<?php endif; ?>
+<?php if ($ilike): ?>
+<li class="ilike">
+<?php echo $ilike; ?>
 </li>
 <?php endif; ?>
 </ul>
