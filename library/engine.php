@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2011 izend.org
- * @version		6
+ * @version		7
  * @link		http://www.izend.org
  */
 
@@ -120,12 +120,11 @@ function dispatch($languages) {
 	$path = isset($url['path']) ? trim(urldecode($url['path']), '/') : false;
 	$query = isset($url['query']) ? $url['query'] : false;
 
+	$request_query=$query;
+
 	if (empty($path)) {
 		$path = false;
 	}
-
-	$request_path=$path;
-	$request_query=$query;
 
 	/* site language */
 	$p = $path ? explode('/', $path) : false;
@@ -144,6 +143,8 @@ function dispatch($languages) {
 			$lang = $languages[0];
 		}
 	}
+
+	$request_path=$path ? $lang . '/' . $path : $lang;
 
 	$action=$args=$params=false;
 	if ($closing_time and $closing_time <= time()) {
