@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -30,19 +30,20 @@
 <?php else: ?>
 <meta name="robots" content="index, follow" />
 <?php endif; ?>
-<meta property="og:title" content="<?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta property="og:title" content="<?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
 <meta property="og:image" content="<?php echo $base_url; ?>/logos/sitelogo.png" />
-<?php if (isset($description) and $description): ?>
+<?php if (!empty($description)): ?>
 <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta property="og:site_name" content="<?php echo $sitename; ?>" />
 <?php if (!empty($facebookid)): ?>
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
-<?php if (!empty($favicon)): ?>
+<link rel="canonical" href="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>" />
 <link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
+<?php if (!empty($favicon)): ?>
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (true): ?>
@@ -89,4 +90,4 @@ else {
 <?php endforeach; ?>
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
-<title><?php echo htmlspecialchars((isset($title) and $title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>
+<title><?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>

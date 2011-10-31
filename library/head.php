@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -30,6 +30,9 @@ function head($type=false) {
 			break;
 		case 'description':
 			$head['description'] = $args[0];
+			break;
+		case 'canonical':
+			$head['canonical'] = $args[0];
 			break;
 		case 'favicon':
 			$head['favicon'] = $args[0];
