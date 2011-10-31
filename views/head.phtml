@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
-<?php if (isset($lang)): ?>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" lang="<?echo $lang; ?>" />
+<?php if ($lang): ?>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" lang="<?php echo $lang; ?>" />
 <?php else: ?>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <?php endif; ?>
@@ -41,8 +41,16 @@
 <?php if (!empty($facebookid)): ?>
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
-<link rel="canonical" href="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>" />
+<?php if (!empty($canonical)): ?>
+<link rel="canonical" href="<?php echo $canonical; ?>" />
+<?php else: ?>
+<link rel="canonical" href="<?php echo $base_url;?>/<?php echo $request_path; ?>" />
+<?php endif; ?>
+<?php if ($lang): ?>
+<link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
+<?php else: ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
+<?php endif; ?>
 <?php if (!empty($favicon)): ?>
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
@@ -52,7 +60,9 @@
 <link href="<?php echo $base_path; ?>/css/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/theme.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<?php if ($lang): ?>
 <link href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" rel="stylesheet" type="text/css" media="screen" />
+<?php endif; ?>
 <?php if (!empty($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
 <?php
