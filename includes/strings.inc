@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -23,7 +23,7 @@ $strings = array(
 		'http_service_unavailable:title'	=> 'Service unavailable',
 		'http_unauthorized:title'			=> 'Unauthorized',
 		'install:title'			=> 'Installation',
-		'home:title'			=> 'Home',
+		'home:title'			=> $sitename,
 		'search:title'			=> 'Search',
 		'contact:title'			=> 'Contact',
 		'user:title'			=> 'Identification',
@@ -50,7 +50,7 @@ $strings = array(
 		'http_service_unavailable:title'	=> 'Service indisponible',
 		'http_unauthorized:title'			=> 'Non autorisé',
 		'install:title'			=> 'Installation',
-		'home:title'			=> 'Accueil',
+		'home:title'			=> $sitename,
 		'search:title'			=> 'Recherche',
 		'user:title'			=> 'Identification',
 		'contact:title'			=> 'Contact',
