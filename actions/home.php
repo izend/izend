@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function home($lang) {
-	global $root_node;
+	global $root_node, $request_path;
 
 	$r = node_get($lang, $root_node);
 	if (!$r) {
@@ -23,9 +23,17 @@ function home($lang) {
 	if ($node_abstract) {
 		head('description', $node_abstract);
 	}
+	else {
+		head('description', translate('home:description', $lang));
+	}
 	if ($node_cloud) {
 		head('keywords', $node_cloud);
 	}
+	else {
+		head('keywords', translate('home:keywords', $lang));
+	}
+
+	$request_path=$lang;
 
 	$page_contents = build('nodecontent', $lang, $root_node);
 
