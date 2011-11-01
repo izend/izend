@@ -9,11 +9,12 @@
 ?>
 <div id="footer">
 <p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?> <span class="hidden">par <a href="http://www.izend.org">iZend</a></span>
-<?php if (!empty($contact_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
-&bull;
-<?php endif; ?>
 <?php if (!empty($contact_page)): ?>
-<a class="btn_mail" href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter">Contact</a>
+&bull;
+<a href="<?php echo $contact_page; ?>" rel="nofollow">Contact</a>
+<?php endif; ?>
+<?php if (!empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+&bull;
 <?php endif; ?>
 <?php if (!empty($user_page)): ?>
 <a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Votre compte">Compte</a>
