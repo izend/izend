@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function home($lang) {
-	global $root_node, $request_path;
+	global $root_node, $request_path, $with_toolbar;
 
 	$r = node_get($lang, $root_node);
 	if (!$r) {
@@ -37,12 +37,20 @@ function home($lang) {
 
 	$page_contents = build('nodecontent', $lang, $root_node);
 
-	$besocial=false;
+	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		if ($tweetit) {
+			$tweet_text=$node_abstract ? $node_abstract : translate('home:description', $lang);
+			$tweetit=$tweet_text ? compact('tweet_text') : true;
+		}
 		$plusone=$node_plusone;
 		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+		$ilike=false;
+		$tweetit=false;
+		$plusone=false;
+		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('home', false, compact('page_contents', 'besocial'));
@@ -53,6 +61,15 @@ function home($lang) {
 	$validate=url('home', $lang);
 	$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
 
+	if ($with_toolbar) {
+		$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin'));
+		$toolbar = build('toolbar', $lang, compact('edit', 'validate'));
+	}
+	else {
+		$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
+		$toolbar = false;
+	}
+
 	$search_text='';
 	$search_url=url('search', $lang);
 	$suggest_url=url('suggest', $lang);
@@ -62,7 +79,7 @@ function home($lang) {
 	$contact_page=url('contact', $lang);
 	$footer = view('footer', $lang, compact('contact_page'));
 
-	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar'));
+	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar', 'sharebar', 'toolbar'));
 
 	return $output;
 }
