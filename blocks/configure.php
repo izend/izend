@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -86,16 +86,16 @@ function configure($lang) {
 
 	switch($action) {
 		case 'init':
-			$sitename='izend.org';
-			$webmaster='webmaster@izend.org';
+			$sitename='izendnew.org';
+			$webmaster='webmaster@izendnew.org';
 			$content_languages=array($lang);
 			$default_language=$lang;
 			$db_flag=true;
 			$db_reuse=false;
-			$db_name='izend';
-			$db_user='izend';
+			$db_name='izendnew';
+			$db_user='izendnew';
 			$db_password=newpassword(8);
-			$db_prefix='izend_';
+			$db_prefix='izendnew_';
 			break;
 
 		case 'configure':
@@ -768,7 +768,7 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`) VALUES
-('1', '1', NOW(), NOW(), '1', '1', '0', '0', '0'),
+('1', '1', NOW(), NOW(), '1', '1', '1', '1', '1'),
 ('2', '1', NOW(), NOW(), '1', '1', '0', '0', '0');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
@@ -788,9 +788,9 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
-(1, 1, 'text', 1),
-(1, 2, 'text', 2),
-(2, 3, 'text', 1);
+(1, 1, 'infile', 1),
+(1, 1, 'text', 2),
+(2, 2, 'text', 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -798,12 +798,19 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `text`, `eval`) VALUES
-(1, 'fr', '<p id="social">\r\n<a href="#"><img src="/images/theme/social/facebook.png" alt="Facebook" /></a>\r\n<a href="#"><img src="/images/theme/social/twitter.png" alt="Twitter"/></a>\r\n<a href="/fr/rss" target="_blank"><img src="/images/theme/social/rss.png" alt="RSS" /></a>\r\n</p>\r\n<script type="text/javascript">\r\n$(''#social img'').hover(function() { $(this).animate({''opacity'' : ''0.5''}, 200); }, function() { $(this).animate({''opacity'' : ''1.0''}, 200); } );\r\n</script>', 0),
-(1, 'en', '<p id="social">\r\n<a href="#"><img src="/images/theme/social/facebook.png" alt="Facebook" /></a>\r\n<a href="#"><img src="/images/theme/social/twitter.png" alt="Twitter"/></a>\r\n<a href="/en/rss" target="_blank"><img src="/images/theme/social/rss.png" alt="RSS" /></a>\r\n</p>\r\n<script type="text/javascript">\r\n$(''#social img'').hover(function() { $(this).animate({''opacity'' : ''0.5''}, 200); }, function() { $(this).animate({''opacity'' : ''1.0''}, 200); } );\r\n</script>', 0),
-(2, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>', 0),
-(2, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>', 0),
-(3, 'fr', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>', 0),
-(3, 'en', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>', 0);
+(1, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>', 0),
+(1, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>', 0),
+(2, 'fr', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>', 0),
+(2, 'en', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>', 0);
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+INSERT INTO `${db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
+(1, 'en', 'views/fr/social.phtml'),
+(1, 'fr', 'views/en/social.phtml');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
