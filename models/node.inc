@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -107,17 +107,46 @@ function node_delete($node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 	$tabnodecontent=db_prefix_table('node_content');
-	$tabcontenttext=db_prefix_table('content_text');
-	$tabcontentfile=db_prefix_table('content_file');
-	$tabcontentdownload=db_prefix_table('content_download');
-	$tabcontentinfile=db_prefix_table('content_infile');
-	$tabcontentlongtail=db_prefix_table('content_longtail');
 
-	$sql="DELETE n, nloc, nc, ct, cf, cd, cin, clt FROM $tabnode n LEFT JOIN $tabnodelocale nloc ON nloc.node_id=n.node_id LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id LEFT JOIN $tabcontentfile cf ON cf.content_id=nc.content_id LEFT JOIN $tabcontentdownload cd ON cd.content_id=nc.content_id LEFT JOIN $tabcontentinfile cin ON cin.content_id=nc.content_id LEFT JOIN $tabcontentlongtail clt ON clt.content_id=nc.content_id WHERE n.node_id=$node_id";
+	$tabcomment=db_prefix_table('comment');
 
+	$sql="DELETE FROM $tabnode WHERE node_id=$node_id";
 	$r = db_delete($sql);
+	if (!$r) {
+		return false;
+	}
 
-	return $r;
+	$sql="DELETE FROM $tabnodelocale WHERE node_id=$node_id";
+	db_delete($sql);
+
+	$sql="SELECT content_id, content_type FROM $tabnodecontent WHERE node_id=$node_id";
+	$r = db_query($sql);
+
+	if ($r) {
+		$cdata=array();
+		foreach ($r as $c) {
+			extract($c);
+			if (!isset($cdata[$content_type])) {
+				$cdata[$content_type]=array();
+			}
+			$cdata[$content_type][]=$content_id;
+		}
+
+		foreach ($cdata as $ctype => $id) {
+			$tabcontent=db_prefix_table('content_' . $ctype);
+			$in=implode(',', $id);
+			$sql="DELETE FROM $tabcontent WHERE content_id IN ($in)";
+			db_delete($sql);
+		}
+
+		$sql="DELETE FROM $tabnodecontent WHERE node_id=$node_id";
+		db_delete($sql);
+	}
+
+	$sql="DELETE FROM $tabcomment WHERE node_id=$node_id";
+	db_delete($sql);
+
+	return true;
 }
 
 function node_get_contents($lang, $node_id) {
