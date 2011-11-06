@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -19,6 +19,15 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo $thread_cloud; ?></p>
 <?php endif; ?>
+<fieldset id="thread_options">
+<legend>Options</legend>
+<div class="hbar">
+<?php if ($thread_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
+<?php if ($thread_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
+<?php if ($thread_search): ?><img src="<?php echo $base_path; ?>/images/theme/edit/search.png" alt="" /><?php endif; ?>
+<?php if ($thread_tag): ?><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" /><?php endif; ?>
+</div>
+</fieldset>
 <h4>Contenu</h4>
 <?php if ($thread_contents): ?>
 <ol>

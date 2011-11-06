@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -43,12 +43,13 @@
 <?php endforeach; ?>
 </select>
 </p>
-<p>
+<fieldset id="thread_options">
+<legend>Options</legend>
 <input name="thread_search" type="checkbox" <?php if ($thread_search) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/search.png" alt="" />
 <input name="thread_tag" type="checkbox" <?php if ($thread_tag) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" />
 <input name="thread_comment" type="checkbox" <?php if ($thread_comment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" />
 <input name="thread_morecomment" type="checkbox" <?php if ($thread_morecomment) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" />
-</p>
+</fieldset>
 <p>
 <input id="thread_edit" name="thread_edit" type="submit" value="Edit" />
 </p>

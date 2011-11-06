@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -33,22 +33,21 @@
 <p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
 <?php if ($node_comment or $node_morecomment or $node_ilike or $node_tweet or $node_plusone): ?>
-<table border="0" cellpadding="4" cellspacing="0" rules="none">
-<tbody>
-<tr>
-<?php if ($node_comment): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /></td><?php endif; ?>
-<?php if ($node_morecomment): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /></td><?php endif; ?>
-<?php if ($node_ilike): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /></td><?php endif; ?>
-<?php if ($node_tweet): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /></td><?php endif; ?>
-<?php if ($node_plusone): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /></td><?php endif; ?>
-</tr>
-</tbody>
-</table>
+<fieldset id="node_options">
+<legend>Options</legend>
+<div class="hbar">
+<?php if ($node_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
+<?php if ($node_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
+<?php if ($node_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
+<?php if ($node_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
+<?php if ($node_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>
+</div>
+</fieldset>
 <?php endif; ?>
 <?php if ($node_contents): ?>
 <h4>Content</h4>
 <div id="threadnodecontent">
 <?php echo $node_contents; ?>
-<?php endif; ?>
 </div>
+<?php endif; ?>
 </div>
