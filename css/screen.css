@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
  
@@ -15,6 +15,8 @@ code {font-family:"Courier New", Courier, monospace;}
 pre code {font-size:10pt;}
 
 h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
+
+fieldset {display:inline-block;}
 
 label, legend {font-size:80%;}
 
@@ -41,8 +43,8 @@ ul {list-style-type:disc;}
 
 .pagebar {display:inline-block;margin:0;padding:0.5em 0 0.5em 0;}
 .pagebar li {display:inline;list-style:none;padding:0.5em;}
-.pagebar li:first-child {padding-left:0;}
-.pagebar li:last-child {padding-right:0;}
+.pagebar li:first-child {padding-left:0 !important;}
+.pagebar li:last-child {padding-right:0 !important;}
 
 .sidebar {padding:0;margin:0;}
 .sidebar li {display:block;}
@@ -66,13 +68,24 @@ div.labeled > span {float:left;width:10em;margin-right:1em;text-align:right;}
 
 div.gallery {overflow:auto;overflow-x:scroll;white-space:nowrap;}
 div.gallery img {border-color:#ffffff;border-style:solid;border-width:0 3px 0 3px;}
-div.gallery img:first-child {border-left-width:0;}
-div.gallery img:last-child {border-right-width:0;}
+div.gallery img:first-child {border-left-width:0 !important;}
+div.gallery img:last-child {border-right-width:0 !important;}
 
-img.shadow {-moz-box-shadow:3px 3px 5px #aaaaaa;-webkit-box-shadow:3px 3px 5px #aaaaaa;box-shadow:3px 3px 5px #aaaaaa;}
+.shadow {-moz-box-shadow:3px 3px 5px #aaaaaa;-webkit-box-shadow:3px 3px 5px #aaaaaa;box-shadow:3px 3px 5px #aaaaaa;margin-right:3px !important;margin-bottom:5px !important;}
+
+div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
+div.hbar > *:first-child {margin-left:0;}
+div.hbar > *:last-child {margin-right:0}
+
+div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
+div.vbar > *:first-child {margin-top:0;}
+div.vbar > *:last-child {margin-bottom:0;}
 
 .hidden {display:none;}
 .invisible {visibility:hidden;}
+
+.top {margin-top:0 !important;}
+.bottom {margin-bottom:0 !important;}
 
 .left {float:left;margin:0 1em 0 0;}
 .right {float:right;margin:0 0 0 1em;}
