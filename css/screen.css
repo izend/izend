@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
  
@@ -80,6 +80,9 @@ div.hbar > *:last-child {margin-right:0}
 div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
+
+.block {display:block !important;};
+.inline {display:inline !important;};
 
 .hidden {display:none;}
 .invisible {visibility:hidden;}

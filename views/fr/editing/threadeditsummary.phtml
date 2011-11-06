@@ -26,7 +26,8 @@
 </p>
 <p><label>Nuage :</label></p>
 <p>
-<textarea name="thread_cloud" cols="80" rows="5"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" />
+<textarea name="thread_cloud" cols="80" rows="5"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 </p>
 <p>
 <label>Type :</label>
@@ -90,7 +91,7 @@ le contenu
 <input id="new_node_number" name="new_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_create')"/>
 </p>
 <?php if ($thread_contents): ?>
-<fieldset>
+<fieldset class="block">
 <legend>Sommaire</legend>
 <table cellpadding="2" cellspacing="0">
 <tbody>
