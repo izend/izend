@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
  
@@ -19,6 +19,13 @@ a img {border:none;}
 p img.top {margin-top:0;}
 blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
 a {color:#fff;text-decoration:none;}
+
+h1 {font-size:170%;}
+h2 {font-size:160%;line-height:130%;}
+h3 {font-size:140%;}
+h4 {font-size:110%;}
+h5 {font-size:110%;}
+h6 {font-size:100%;}
 
 h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid}
 blockquote, table, pre {page-break-inside:avoid}
