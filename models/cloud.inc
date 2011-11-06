@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -329,12 +329,22 @@ function cloud_untag_node($node_id) {
 	$tabtag=db_prefix_table('tag');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$sql="DELETE t FROM $tabtag t WHERE t.tag_id IN (SELECT t1.tag_id FROM $tabtagindex t1 JOIN $tabtagindex t2 ON t2.tag_id=t1.tag_id WHERE t1.node_id=$node_id GROUP BY t1.tag_id HAVING COUNT(t1.tag_id) = 1)";
+	$sql="SELECT t1.tag_id FROM $tabtagindex t1 JOIN $tabtagindex t2 ON t2.tag_id=t1.tag_id WHERE t1.node_id=$node_id GROUP BY t1.tag_id HAVING COUNT(t1.tag_id) = 1";
+	$r = db_query($sql);
 
-	$r = db_delete($sql);
+	if ($r) {
+		$id=array();
+		foreach ($r as $t) {
+			$id[]=$t['tag_id'];
+		}
+		$in=implode(',', $id);
+		$sql="DELETE FROM $tabtag WHERE tag_id IN ($in)";
+		dump($sql);
+		$r = db_delete($sql);
 
-	if (!$r) {
-		return false;
+		if (!$r) {
+			return false;
+		}
 	}
 
 	// dissociate the tags of the node
