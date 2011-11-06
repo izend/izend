@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function home($lang) {
-	global $root_node, $request_path, $with_toolbar;
+	global $root_node, $request_path, $with_toolbar, $sitename;
 
 	$r = node_get($lang, $root_node);
 	if (!$r) {
@@ -24,13 +24,13 @@ function home($lang) {
 		head('description', $node_abstract);
 	}
 	else {
-		head('description', translate('home:description', $lang));
+		head('description', translate('description', $lang));
 	}
 	if ($node_cloud) {
 		head('keywords', $node_cloud);
 	}
 	else {
-		head('keywords', translate('home:keywords', $lang));
+		head('keywords', translate('keywords', $lang));
 	}
 
 	$request_path=$lang;
@@ -42,7 +42,7 @@ function home($lang) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
 		if ($tweetit) {
-			$tweet_text=$node_abstract ? $node_abstract : translate('home:description', $lang);
+			$tweet_text=$sitename;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
 		$plusone=$node_plusone;
