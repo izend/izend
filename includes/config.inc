@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -27,8 +27,9 @@ global $signature;
 
 $signature='izend.org - http://www.izend.org';
 
-global $facebookid;
+global $socializing, $facebookid;
 
+$socializing='inline';	// false, 'bar', 'inline'
 $facebookid = false;
 
 global $log_dir;

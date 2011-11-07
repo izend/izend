@@ -7,11 +7,12 @@
  * @link       http://www.izend.org
  */
 
+require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function folderpage($lang, $folder, $page) {
-	global $with_toolbar;
+	global $with_toolbar, $socialize;
 
 	$folder_id = thread_id($folder);
 	if (!$folder_id) {
@@ -80,18 +81,14 @@ function folderpage($lang, $folder, $page) {
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
-		$ilike=false;
-		$tweetit=false;
-		$plusone=false;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		$plusone=$node_plusone;
 		if ($tweetit) {
 			$tweet_text=$page_title ? $page_title : $folder_title;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		$plusone=$node_plusone;
-		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial'));

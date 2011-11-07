@@ -7,6 +7,7 @@
  * @link       http://www.izend.org
  */
 
+require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
@@ -103,18 +104,14 @@ function story($lang, $arglist=false) {
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
-		$ilike=false;
-		$tweetit=false;
-		$plusone=false;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		$plusone=$node_plusone;
 		if ($tweetit) {
 			$tweet_text=($story_title && $page_title) ? "$story_title - $page_title" : ($page_title ? $page_title : $story_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		$plusone=$node_plusone;
-		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial'));

@@ -19,6 +19,7 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo $thread_cloud; ?></p>
 <?php endif; ?>
+<?php if ($thread_comment or $thread_morecomment or $thread_search or $thread_tag): ?>
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -28,6 +29,7 @@
 <?php if ($thread_tag): ?><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" /><?php endif; ?>
 </div>
 </fieldset>
+<?php endif; ?>
 <h4>Contenu</h4>
 <?php if ($thread_contents): ?>
 <ol>

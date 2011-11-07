@@ -3,10 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
+require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
@@ -41,16 +42,12 @@ function home($lang) {
 	if ($page_contents or $page_comment) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		$plusone=$node_plusone;
 		if ($tweetit) {
 			$tweet_text=$sitename;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		$plusone=$node_plusone;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
-		$ilike=false;
-		$tweetit=false;
-		$plusone=false;
-		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('home', false, compact('page_contents', 'besocial'));
@@ -59,16 +56,9 @@ function home($lang) {
 	$contact=$account=$admin=true;
 	$edit=user_has_role('writer') ? url('editpage', $_SESSION['user']['locale']) . '/'. $root_node . '?' . 'clang=' . $lang : false;
 	$validate=url('home', $lang);
-	$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
 
-	if ($with_toolbar) {
-		$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin'));
-		$toolbar = build('toolbar', $lang, compact('edit', 'validate'));
-	}
-	else {
-		$banner = build('banner', $lang, compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
-		$toolbar = false;
-	}
+	$banner = build('banner', $lang, $with_toolbar ? compact('languages', 'contact', 'account', 'admin') : compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
+	$toolbar = build('toolbar', $lang, $with_toolbar ? compact('edit', 'validate') : false);
 
 	$search_text='';
 	$search_url=url('search', $lang);

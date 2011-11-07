@@ -7,6 +7,7 @@
  * @link       http://www.izend.org
  */
 
+require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
@@ -106,18 +107,14 @@ function bookpage($lang, $book, $page) {
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
-		$ilike=false;
-		$tweetit=false;
-		$plusone=false;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
+		$plusone=$node_plusone;
 		if ($tweetit) {
 			$tweet_text=($book_title && $page_title) ? "$book_title - $page_title" : ($page_title ? $page_title : $book_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		$plusone=$node_plusone;
-		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'besocial'));

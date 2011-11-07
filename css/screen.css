@@ -81,8 +81,8 @@ div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
-.block {display:block !important;};
-.inline {display:inline !important;};
+.block {display:block !important;}
+.inline {display:inline !important;}
 
 .hidden {display:none;}
 .invisible {visibility:hidden;}

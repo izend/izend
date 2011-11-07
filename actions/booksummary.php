@@ -3,10 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
+require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
@@ -60,18 +61,14 @@ function booksummary($lang, $book) {
 
 	$besocial=$sharebar=false;
 	if ($book_contents) {
-		$ilike=false;
-		$tweetit=false;
-		$plusone=false;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
 		$ilike=true;
 		$tweetit=true;
+		$plusone=true;
 		if ($tweetit) {
 			$tweet_text=$book_title;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		$plusone=true;
-		$sharebar=build('sharebar', $lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 	}
 
 	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents', 'besocial'));
