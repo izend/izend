@@ -3,20 +3,26 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
+
+require_once 'socialize.php';
 
 function homepage($lang) {
 	global $sitename;
 
 	$page_contents = build('content', $lang, 'homepage');
 
-	$besocial=false;
-	if ($page_contents) {
-		$ilike=$tweetit=$plusone=true;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+	$besocial=$sharebar=false;
+	$ilike=true;
+	$tweetit=true;
+	$plusone=true;
+	if ($tweetit) {
+		$tweet_text=$sitename;
+		$tweetit=$tweet_text ? compact('tweet_text') : true;
 	}
+	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
 
@@ -29,7 +35,7 @@ function homepage($lang) {
 	$contact_page=url('contact', $lang);
 	$footer = build('content', $lang, 'footer', compact('contact_page'));
 
-	$output = layout('standard', compact('banner', 'content', 'footer'));
+	$output = layout('standard', compact('footer', 'banner', 'content', 'sharebar'));
 
 	return $output;
 }

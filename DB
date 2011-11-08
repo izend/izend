@@ -19,6 +19,13 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Tue Nov 8 2011
+
+	Adds fields ilike/tweet/plusone to table thread
+
+ALTER TABLE `izend_thread` ADD `ilike` BOOLEAN NOT NULL DEFAULT '1', ADD `tweet` BOOLEAN NOT NULL DEFAULT '1', ADD `plusone` BOOLEAN NOT NULL DEFAULT '1';
+---
+
 Date:	Fri Oct 7 2011
 
 	Adds fields ilike/tweet/plusone to table node

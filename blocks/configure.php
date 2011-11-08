@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -593,7 +593,10 @@ CREATE TABLE `${db_prefix}thread` (
   `nocloud` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`thread_id`)
+  `ilike` tinyint(1) NOT NULL DEFAULT '1',
+  `tweet` tinyint(1) NOT NULL DEFAULT '1',
+  `plusone` tinyint(1) NOT NULL DEFAULT '1',
+   PRIMARY KEY (`thread_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
@@ -835,8 +838,8 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`) VALUES
-('1', '1', 'folder', NOW(), NOW(), '0', '0', '0', '0');
+INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`) VALUES
+('1', '1', 'folder', NOW(), NOW(), '0', '0', '0', '0', '1', '1', '1');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

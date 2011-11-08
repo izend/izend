@@ -156,8 +156,9 @@ else if ($missing_old_content_number or $bad_old_content_number) {
 }
 ?>
 <?php if ($focus): ?>
+<?php head('javascript', 'jquery.scrollTo', 'screen'); ?>
 <script type="text/javascript">
-$(function() {$('<?php echo $focus; ?>').focus();});
+$(function() {$('<?php echo $focus; ?>').focus(); $.scrollTo('<?php echo $focus; ?>', {offset: -200}); });
 </script>
 <?php endif; ?>
 <script type="text/javascript">

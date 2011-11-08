@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -81,9 +81,9 @@ function folderpage($lang, $folder, $page) {
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
-		$ilike=$node_ilike;
-		$tweetit=$node_tweet;
-		$plusone=$node_plusone;
+		$ilike=$thread_ilike && $node_ilike;
+		$tweetit=$thread_tweet && $node_tweet;
+		$plusone=$thread_plusone && $node_plusone;
 		if ($tweetit) {
 			$tweet_text=$page_title ? $page_title : $folder_title;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;

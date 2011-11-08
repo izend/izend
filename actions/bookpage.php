@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -107,9 +107,9 @@ function bookpage($lang, $book, $page) {
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
-		$ilike=$node_ilike;
-		$tweetit=$node_tweet;
-		$plusone=$node_plusone;
+		$ilike=$thread_ilike && $node_ilike;
+		$tweetit=$thread_tweet && $node_tweet;
+		$plusone=$thread_plusone && $node_plusone;
 		if ($tweetit) {
 			$tweet_text=($book_title && $page_title) ? "$book_title - $page_title" : ($page_title ? $page_title : $book_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;

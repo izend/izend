@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -23,10 +23,13 @@
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
-<?php if ($thread_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
-<?php if ($thread_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
 <?php if ($thread_search): ?><img src="<?php echo $base_path; ?>/images/theme/edit/search.png" alt="" /><?php endif; ?>
 <?php if ($thread_tag): ?><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" /><?php endif; ?>
+<?php if ($thread_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
+<?php if ($thread_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
+<?php if ($thread_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
+<?php if ($thread_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
+<?php if ($thread_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>
 </div>
 </fieldset>
 <?php endif; ?>

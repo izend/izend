@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -61,9 +61,9 @@ function booksummary($lang, $book) {
 
 	$besocial=$sharebar=false;
 	if ($book_contents) {
-		$ilike=true;
-		$tweetit=true;
-		$plusone=true;
+		$ilike=$thread_ilike;
+		$tweetit=$thread_tweet;
+		$plusone=$thread_plusone;
 		if ($tweetit) {
 			$tweet_text=$book_title;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -58,7 +58,7 @@ foreach ($thread_list as $tr) {
 </fieldset>
 <p>
 <input id="threadlist_reorder" name="threadlist_reorder" type="submit" value="Trier" />
-ou
+le contenu ou
 <input id="thread_delete" name="thread_delete" type="submit" value="Supprimer" />
 le fil #
 <input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_delete')"/>
@@ -84,7 +84,8 @@ else if ($confirm_delete_thread) {
 }
 ?>
 <?php if ($focus): ?>
+<?php head('javascript', 'jquery.scrollTo', 'screen'); ?>
 <script type="text/javascript">
-$(function() {$('<?php echo $focus; ?>').focus();});
+$(function() {$('<?php echo $focus; ?>').focus(); $.scrollTo('<?php echo $focus; ?>', {offset: -200}); });
 </script>
 <?php endif; ?>
