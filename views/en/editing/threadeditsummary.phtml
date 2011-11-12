@@ -33,12 +33,12 @@
 <label>Type:</label>
 <select name="thread_type" size="1">
 <option value="thread" <?php echo $thread_type == 'thread' ? 'selected="selected"' : ''; ?>>Thread</option>
-<?php foreach ($supported_threads as $thd): ?>
-<?php if ($thd == 'folder'): ?>
+<?php foreach ($supported_threads as $type): ?>
+<?php if ($type == 'folder'): ?>
 <option value="folder" <?php echo $thread_type == 'folder' ? 'selected="selected"' : ''; ?>>Folder</option>
-<?php elseif ($thd == 'story'): ?>
+<?php elseif ($type == 'story'): ?>
 <option value="story" <?php echo $thread_type == 'story' ? 'selected="selected"' : ''; ?>>Article</option>
-<?php elseif ($thd == 'book'): ?>
+<?php elseif ($type == 'book'): ?>
 <option value="book" <?php echo $thread_type == 'book' ? 'selected="selected"' : ''; ?>>Manual</option>
 <?php endif; ?>
 <?php endforeach; ?>

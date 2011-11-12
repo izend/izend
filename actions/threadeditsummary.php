@@ -258,7 +258,6 @@ function threadeditsummary($lang, $clang, $thread) {
 			extract($np);	/* node_id node_number node_ignored */
 			$node_ignored = false;
 			$node_title = $new_node_title;
-			$node_ignored = false;
 			$node_url = url('threadedit', $lang) . '/'. $thread_id . '/' . $node_id;
 			$pos = $node_number;
 

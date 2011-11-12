@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
-require_once 'models/node.inc';
 require_once 'filemimetype.php';
+require_once 'models/node.inc';
 
 function download($lang, $arglist=false) {
 	$node_id=$download_name=false;
@@ -30,11 +30,21 @@ function download($lang, $arglist=false) {
 		return run('error/badrequest', $lang);
 	}
 
-	$path = node_get_content_download_path($lang, $node_id, $download_name);
+	$sqllang=db_sql_arg($lang, false);
+	$sqlname=db_sql_arg($download_name, true);
 
-	if (!$path) {
+	$tabnodecontent=db_prefix_table('node_content');
+	$tabcontentdownload=db_prefix_table('content_download');
+
+	$sql="SELECT cd.path FROM $tabnodecontent nc JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang WHERE nc.node_id=$node_id AND cd.name=$sqlname LIMIT 1";
+
+	$r = db_query($sql);
+
+	if (!$r) {
 		return run('error/notfound', $lang);
 	}
+
+	$path = $r[0]['path'];
 
 	$filepath=ROOT_DIR . DIRECTORY_SEPARATOR . $path;
 	if (!file_exists($filepath)) {

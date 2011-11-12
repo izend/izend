@@ -7,12 +7,12 @@
  * @link       http://www.izend.org
  */
 
+require_once 'readarg.php';
 require_once 'models/node.inc';
 
-require_once 'readarg.php';
-require_once 'strtofname.php';
-
 function nodecontenteditor($lang, $clang, $node_id) {
+	global $contents_model, $supported_contents;
+
 	$action='init';
 	if (isset($_POST['content_modify'])) {
 		$action='modify';
@@ -68,43 +68,14 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			}
 
 			if ($id and $p and is_array($id) and is_array($p) and count($id) == count($p)) {
-				$fieldgroups = array(
-								'text'		=> array('content_text', 'content_eval'),
-								'file'		=> array('content_file', 'content_start', 'content_end', 'content_format', 'content_lineno'),
-								'download'	=> array('content_download', 'content_path'),
-								'infile'	=> array('content_infile'),
-								'longtail'	=> array('content_longtail_file', 'content_longtail_image', 'content_longtail_width', 'content_longtail_height', 'content_longtail_skin', 'content_longtail_icons', 'content_longtail_duration', 'content_longtail_autostart', 'content_longtail_repeat'),
-								);
-
 				$node_contents=array();
 
-				foreach ($fieldgroups as $type => $fields) {
-					foreach ($fields as $fieldname) {
+				foreach ($contents_model as $type => $fields) {
+					foreach ($fields as $fname => $props) {
+						$fieldname="content_${type}_$fname";
 						if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
 							foreach ($_POST[$fieldname] as $i => $value) {
 								$v=readarg($value, true, false);	// trim but DON'T strip_tags!
-								switch ($fieldname) {
-									case 'content_text':
-										/* DON'T strip_tags! */
-										break;
-									case 'content_file':
-									case 'content_format':
-									case 'content_path':
-									case 'content_download':
-									case 'content_infile':
-									case 'content_longtail_file':
-									case 'content_longtail_image':
-									case 'content_longtail_skin':
-										$v=strip_tags($v);
-										break;
-									case 'content_eval':
-									case 'content_lineno':
-									case 'content_longtail_icons':
-									case 'content_longtail_autostart':
-									case 'content_longtail_repeat':
-										$v=$v=='on' ? true : false;
-										break;
-								}
 								if (!isset($node_contents[$i])) {
 									$content_ignored = isset($ignored[$i]) && $ignored[$i] == 'on';
 									$node_contents[$i] = array('content_id' => $id[$i], 'content_pos' => $p[$i], 'content_ignored' => $content_ignored, 'content_type' => $type, $fieldname => $v);
@@ -138,7 +109,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			if (empty($new_content_type)) {
 				$missing_new_content_type = true;
 			}
-			else if (!in_array($new_content_type, array('text', 'file', 'download', 'infile', 'longtail'))) {
+			else if (!in_array($new_content_type, $supported_contents)) {
 				$bad_new_content_type = true;
 			}
 			if (empty($new_content_number)) {
@@ -211,27 +182,17 @@ function nodecontenteditor($lang, $clang, $node_id) {
 				break;
 			}
 
-			$fields=array('content_id', 'content_type', 'content_ignored', 'content_text', 'content_eval', 'content_file', 'content_start', 'content_end', 'content_format', 'content_lineno', 'content_download', 'content_path', 'content_infile', 'content_longtail_file', 'content_longtail_image', 'content_longtail_width', 'content_longtail_height', 'content_longtail_skin', 'content_longtail_icons', 'content_longtail_duration', 'content_longtail_autostart', 'content_longtail_repeat', 'content_thread', 'content_node', 'content_pos');
-
 			$content_id = $nc['content_id'];
 			$content_pos = $nc['content_number'];
 			$content_type = $new_content_type;
-			$content_text=false;
-			$content_eval=false;
-			$content_download=$content_path=false;
-			$content_file=$content_format=false;
-			$content_start=$content_end=0;
-			$content_lineno=false;
-			$content_infile=false;
-			$content_longtail_file=$content_longtail_image=false;
-			$content_longtail_width=$content_longtail_height=0;
-			$content_longtail_skin=false;
-			$content_longtail_icons=false;
-			$content_longtail_duration=0;
-			$content_longtail_autostart=$content_longtail_repeat=false;
-
-			$content_thread=$content_node=false;
 			$content_ignored=false;
+
+			$fields=compact('content_pos', 'content_id', 'content_type', 'content_ignored');
+
+			foreach ($contents_model[$content_type] as $fname => $props) {
+				$fieldname = "content_${content_type}_$fname";
+				$fields[$fieldname]=isset($props['default']) ? $props['default'] : false;
+			}
 
 			if ($node_contents) {
 				foreach ($node_contents as &$c) {
@@ -239,11 +200,11 @@ function nodecontenteditor($lang, $clang, $node_id) {
 						$c['content_pos']++;
 					}
 				}
-				array_splice($node_contents, $content_pos-1, 0, array(compact($fields)));
+				array_splice($node_contents, $content_pos-1, 0, array($fields));
 			}
 			else {
 				$content_pos=1;
-				$node_contents=array($content_pos => compact($fields));
+				$node_contents=array($content_pos => $fields);
 			}
 
 			if ($new_content_number) {
@@ -286,7 +247,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 
 	$errors = compact('missing_new_content_type', 'bad_new_content_type', 'bad_new_content_number', 'missing_old_content_number', 'bad_old_content_number');
 
-	$output = view('editing/nodecontenteditor', $lang, compact('clang', 'new_content_type', 'new_content_number', 'old_content_number', 'node_contents', 'errors'));
+	$output = view('editing/nodecontenteditor', $lang, compact('clang', 'supported_contents', 'new_content_type', 'new_content_number', 'old_content_number', 'node_contents', 'errors'));
 
 	return $output;
 }

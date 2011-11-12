@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -18,10 +18,17 @@ $selected=$new_content_type ? $new_content_type : 'text';
 ?>
 <select id="content_new_type" name="content_new_type" size="1">
 <option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Texte</option>
+<?php foreach ($supported_contents as $type): ?>
+<?php if ($type == 'infile'): ?>
 <option value="infile" <?php echo $selected == 'infile' ? 'selected="selected"' : ''; ?>>Insertion</option>
+<?php elseif ($type == 'download'): ?>
 <option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Téléchargement</option>
+<?php elseif ($type == 'file'): ?>
 <option value="file" <?php echo $selected == 'file' ? 'selected="selected"' : ''; ?>>Fichier</option>
+<?php elseif ($type == 'longtail'): ?>
 <option value="longtail" <?php echo $selected == 'longtail' ? 'selected="selected"' : ''; ?>>LongTail</option>
+<?php endif; ?>
+<?php endforeach; ?>
 </select>
 #
 <input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
@@ -36,20 +43,7 @@ le #
 <?php
 $i=1;
 foreach ($node_contents as $c) {
-	$content_ignored=false;
-	$content_text='';
-	$content_eval=false;
-	$content_file=$content_format=$content_lineno=false;
-	$content_start=$content_end=0;
-	$content_download=$content_path=false;
-	$content_infile=false;
-	$content_longtail_file=$content_longtail_image=false;
-	$content_longtail_width=$content_longtail_height=0;
-	$content_longtail_skin=false;
-	$content_longtail_icons=false;
-	$content_longtail_duration=0;
-	$content_longtail_autostart=$content_longtail_repeat=false;
-	extract($c);	/* content_id content_number content_ignored content_type (content_text | content_file content_start content_end content_format content_lineno | content_download content_path | content_infile |content_longtail_file content_longtail_image content_longtail_width content_longtail_height content_longtail_skin content_longtail_icons content_longtail_duration content_longtail_autostart content_longtail_repeat) content_pos */
+	extract($c);	/* content_id content_number content_ignored content_type ... */
 ?>
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
@@ -59,14 +53,14 @@ foreach ($node_contents as $c) {
 <?php case 'text': ?>
 <label>Texte :</label>
 <?php break; ?>
-<?php case 'file': ?>
-<label>Fichier :</label>
+<?php case 'infile': ?>
+<label>Insertion :</label>
 <?php break; ?>
 <?php case 'download': ?>
 <label>Téléchargement :</label>
 <?php break; ?>
-<?php case 'infile': ?>
-<label>Insertion :</label>
+<?php case 'file': ?>
+<label>Fichier :</label>
 <?php break; ?>
 <?php case 'longtail': ?>
 <label>LongTail :</label>
@@ -76,45 +70,45 @@ foreach ($node_contents as $c) {
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
 <div class="tagbar">
-<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="&lt;p&gt;" title="p" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;p&gt;','&lt;/p&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="&lt;b&gt;" title="b" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;b&gt;','&lt;/b&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="&lt;i&gt;" title="i" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;i&gt;','&lt;/i&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="&lt;u&gt;" title="u" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;u&gt;','&lt;/u&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="&lt;s&gt;" title="s" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;s&gt;','&lt;/s&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/h4.png" alt="&lt;h4&gt;" title="h4" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h4&gt;','&lt;/h4&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/h5.png" alt="&lt;h5&gt;" title="h5" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h5&gt;','&lt;/h5&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/h6.png" alt="&lt;h6&gt;" title="h6" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;h6&gt;','&lt;/h6&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="&lt;ol&gt;" title="ol" onclick="addtag('content_text_<?php echo $i; ?>', '','\n&lt;ol&gt;\n&lt;li&gt;&lt;/li&gt;\n&lt;/ol&gt;\n')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/ul.png" alt="&lt;ul&gt;" title="ul" onclick="addtag('content_text_<?php echo $i; ?>', '','\n&lt;ul&gt;\n&lt;li&gt;&lt;/li&gt;\n&lt;/ul&gt;\n')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/shell.png" alt="&lt;pre&gt;&lt;code&gt;" title="pre code" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;pre>&lt;code&gt;','&lt;/code>&lt;/pre&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="&lt;blockquote&gt;" title="blockquote" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;blockquote&gt;','&lt;/blockquote&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;img src=\x22','\x22 alt=\x22\x22 title=\x22\x22 /&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/world.png" alt="&lt;a&gt;" title="a" onclick="addtag('content_text_<?php echo $i; ?>', '&lt;a href=\x22#\x22&gt;','&lt;/a&gt;')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_<?php echo $i; ?>')"/>
-<span><input name="content_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
+<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="&lt;p&gt;" title="p" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;p&gt;','&lt;/p&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="&lt;b&gt;" title="b" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;b&gt;','&lt;/b&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="&lt;i&gt;" title="i" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;i&gt;','&lt;/i&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="&lt;u&gt;" title="u" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;u&gt;','&lt;/u&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="&lt;s&gt;" title="s" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;s&gt;','&lt;/s&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h4.png" alt="&lt;h4&gt;" title="h4" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;h4&gt;','&lt;/h4&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h5.png" alt="&lt;h5&gt;" title="h5" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;h5&gt;','&lt;/h5&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/h6.png" alt="&lt;h6&gt;" title="h6" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;h6&gt;','&lt;/h6&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="&lt;ol&gt;" title="ol" onclick="addtag('content_text_text_<?php echo $i; ?>', '','\n&lt;ol&gt;\n&lt;li&gt;&lt;/li&gt;\n&lt;/ol&gt;\n')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/ul.png" alt="&lt;ul&gt;" title="ul" onclick="addtag('content_text_text_<?php echo $i; ?>', '','\n&lt;ul&gt;\n&lt;li&gt;&lt;/li&gt;\n&lt;/ul&gt;\n')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/fixed.png" alt="&lt;code&gt;" title="code" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;code&gt;','&lt;/code&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/shell.png" alt="&lt;pre&gt;&lt;code&gt;" title="pre code" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;pre>&lt;code&gt;','&lt;/code>&lt;/pre&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="&lt;blockquote&gt;" title="blockquote" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;blockquote&gt;','&lt;/blockquote&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;img src=\x22','\x22 alt=\x22\x22 title=\x22\x22 /&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/world.png" alt="&lt;a&gt;" title="a" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;a href=\x22#\x22&gt;','&lt;/a&gt;')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_text_<?php echo $i; ?>')"/>
+<span><input name="content_text_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_text_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
-<textarea id="content_text_<?php echo $i; ?>" name="content_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
 <?php break; ?>
-<?php case 'file': ?>
+<?php case 'infile': ?>
 <p>
-<input name="content_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_file, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
-<input name="content_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_start, ENT_COMPAT, 'UTF-8'); ?>" title="Début" />
-<input name="content_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_end, ENT_COMPAT, 'UTF-8'); ?>" title="Fin" />
-<input name="content_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" />
-<input name="content_lineno[<?php echo $i; ?>]" type="checkbox" <?php if ($content_lineno) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="numéroter" title="Numéroter" />
+<input name="content_infile_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_infile_path, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
 </p>
 <?php break; ?>
 <?php case 'download': ?>
 <p>
-<input name="content_download[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo htmlspecialchars($content_download, ENT_COMPAT, 'UTF-8'); ?>" title="Nom" />
-<input name="content_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_path, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
+<input name="content_download_name[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo htmlspecialchars($content_download_name, ENT_COMPAT, 'UTF-8'); ?>" title="Nom" />
+<input name="content_download_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_download_path, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
 </p>
 <?php break; ?>
-<?php case 'infile': ?>
+<?php case 'file': ?>
 <p>
-<input name="content_infile[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_infile, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
+<input name="content_file_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_file_path, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
+<input name="content_file_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_start, ENT_COMPAT, 'UTF-8'); ?>" title="Début" />
+<input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?>" title="Fin" />
+<input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" />
+<input name="content_file_lineno[<?php echo $i; ?>]" type="checkbox" <?php if ($content_file_lineno) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/ol.png" alt="numéroter" title="Numéroter" />
 </p>
 <?php break; ?>
 <?php case 'longtail': ?>
