@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -13,13 +13,13 @@ require_once 'validatemail.php';
 require_once 'ismailinjected.php';
 require_once 'tokenid.php';
 
-function mailme($lang) {
+function mailme($lang, $to=false, $with_appointment=false) {
 	$action='init';
 	if (isset($_POST['mailme_send'])) {
 		$action='send';
 	}
 
-	$mail=$subject=$message=$code=$token=false;
+	$mail=$subject=$message=$date=$code=$token=false;
 
 	if (isset($_SESSION['user']['mail'])) {
 		$mail=$_SESSION['user']['mail'];
@@ -35,6 +35,11 @@ function mailme($lang) {
 			}
 			if (isset($_POST['mailme_message'])) {
 				$message=readarg($_POST['mailme_message']);
+			}
+			if ($with_appointment) {
+				if (isset($_POST['mailme_date'])) {
+					$date=readarg($_POST['mailme_date']);
+				}
 			}
 			if (isset($_POST['mailme_code'])) {
 				$code=readarg($_POST['mailme_code']);
@@ -59,6 +64,8 @@ function mailme($lang) {
 	$bad_subject=false;
 
 	$missing_message=false;
+
+	$bad_date=false;
 
 	$email_sent=false;
 	$home_page=false;
@@ -101,6 +108,20 @@ function mailme($lang) {
 				$missing_message=true;
 			}
 
+			if ($with_appointment) {
+				if ($date) {
+					if (!preg_match('#^([0-9]{4})([/-])([0-9]{2})\2([0-9]{2})$#', $date, $d)) {
+						$bad_date=true;
+					}
+					else if (!checkdate($d[3], $d[4], $d[1])) {
+						$bad_date=true;
+					}
+					else if (mktime(0, 0, 0, $d[3], $d[4], $d[1]) <= mktime(0, 0, 0, date("m"), date("d"), date("y"))) {
+						$bad_date=true;
+					}
+				}
+			}
+
 			break;
 		default:
 			break;
@@ -108,20 +129,24 @@ function mailme($lang) {
 
 	switch($action) {
 		case 'send':
-			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message) {
+			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message or $bad_date) {
 				break;
 			}
 
 			require_once 'emailme.php';
 
-			$r = emailme($subject, $message, $mail);
+			if ($date) {
+				$message .= "\n\n($date)";
+			}
+
+			$r = emailme($subject, $message, $mail, $to);
 
 			if (!$r) {
 				$internal_error=true;
 				break;
 			}
 
-			$subject=$message=false;
+			$subject=$message=$date=false;
 
 			global $home_action;
 
@@ -135,10 +160,10 @@ function mailme($lang) {
 
 	$_SESSION['mailme_token'] = $token = token_id();
 
-	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'internal_error');
+	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'bad_date', 'internal_error');
 	$infos = compact('email_sent', 'home_page');
 
-	$output = view('mailme', $lang, compact('token', 'with_captcha', 'mail', 'subject', 'message', 'errors', 'infos'));
+	$output = view('mailme', $lang, compact('token', 'with_captcha', 'with_appointment', 'mail', 'subject', 'message', 'date', 'errors', 'infos'));
 
 	return $output;
 }

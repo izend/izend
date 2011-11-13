@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -15,7 +15,11 @@
 <p class="info">Your email address is strictly confidential.</p>
 <p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Type in the subject and the text of your message:</p>
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
-<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="8" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
+<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="6" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
+<?php if ($with_appointment): ?>
+<p><span class="inlabel<?php if ($bad_date): ?> inerror<?php endif; ?>">Propose an appointment:</span>
+<input type="text" name="mailme_date" id="mailme_date" title="yyyy-mm-dd" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo $date; ?>" /><p>
+<?php endif; ?>
 <?php if ($with_captcha): ?>
 <p>
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" title="Verification code" />
@@ -23,7 +27,7 @@
 <input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
 </p>
 <?php endif; ?>
-<p><button type="submit" name="mailme_send" id="mailme_send">Send</button></p>
+<p><input type="submit" name="mailme_send" id="mailme_send" value="Send" /></p>
 </form>
 <div class="errors">
 <?php if ($missing_code): ?>
@@ -41,6 +45,15 @@
 <p>Your message has been sent. To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.</p>
 <?php endif; ?>
 </div>
+<?php endif; ?>
+<?php if ($with_appointment): ?>
+<?php head('javascript', 'jquery-ui'); ?>
+<?php head('stylesheet', 'jquery-ui', 'screen'); ?>
+<script>
+$(document).ready(function() {
+    $('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
+});
+</script>
 <?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -83,6 +96,9 @@ else if ($missing_subject or $bad_subject) {
 }
 else if ($missing_message) {
 	$focus='#mailme_message';
+}
+else if ($bad_date) {
+	$focus='#mailme_date';
 }
 ?>
 <?php if ($focus): ?>
