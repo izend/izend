@@ -12,7 +12,9 @@ foreach ($contents as $c) {
 	switch($c['type']) {
 		case 'text':
 			$s = $c['text'];
-			echo $s, PHP_EOL;
+			if ($s) {
+				echo $s, PHP_EOL;
+			}
 			break;
 		case 'file':
 			$file_content = $c['file'];

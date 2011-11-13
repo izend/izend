@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -43,6 +43,18 @@ or
 <?php
 $i=1;
 foreach ($node_contents as $c) {
+	$content_text_text='';
+	$content_text_eval=false;
+	$content_infile_path=false;
+	$content_download_name=$content_download_path=false;
+	$content_file_path=$content_file_format=$content_file_lineno=false;
+	$content_file_start=$content_file_end=0;
+	$content_longtail_file=$content_longtail_image=false;
+	$content_longtail_width=$content_longtail_height=0;
+	$content_longtail_skin=false;
+	$content_longtail_icons=false;
+	$content_longtail_duration=0;
+	$content_longtail_autostart=$content_longtail_repeat=false;
 	extract($c);	/* content_id content_number content_ignored content_type  ... */
 ?>
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
