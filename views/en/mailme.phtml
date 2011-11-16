@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -17,8 +17,22 @@
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
 <p><textarea name="mailme_message" id="mailme_message" cols="70" rows="6" title="Text"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_appointment): ?>
-<p><span class="inlabel<?php if ($bad_date): ?> inerror<?php endif; ?>">Propose an appointment:</span>
-<input type="text" name="mailme_date" id="mailme_date" title="yyyy-mm-dd" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo $date; ?>" /><p>
+<p>
+<span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">Appointment on</span>
+<input type="text" name="mailme_date" id="mailme_date" title="yyyy-mm-dd" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo $date; ?>" />
+<span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">at</span>
+<select id="mailme_hour" name="mailme_hour" size="1">
+<?php foreach (range(8, 18, 1) as $hh): ?>
+<option value="<?php echo $hh; ?>"<?php if ($hour == $hh): ?> selected="selected"<?php endif; ?>><?php echo $hh > 9 ? $hh : '0' . $hh; ?></option>
+<?php endforeach; ?>
+</select>
+<span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">:</span>
+<select id="mailme_minute" name="mailme_minute" size="1">
+<?php foreach (range(0, 45, 15) as $mm): ?>
+<option value="<?php echo $mm; ?>"<?php if ($minute == $mm): ?> selected="selected"<?php endif; ?>><?php echo $mm > 0 ? $mm : '0' . $mm; ?></option>
+<?php endforeach; ?>
+</select>
+<p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
 <p>
@@ -97,7 +111,7 @@ else if ($missing_subject or $bad_subject) {
 else if ($missing_message) {
 	$focus='#mailme_message';
 }
-else if ($bad_date) {
+else if ($bad_appointment) {
 	$focus='#mailme_date';
 }
 ?>

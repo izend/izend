@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function mailme($lang, $to=false, $with_appointment=false) {
 		$action='send';
 	}
 
-	$mail=$subject=$message=$date=$code=$token=false;
+	$mail=$subject=$message=$date=$hour=$minute=$code=$token=false;
 
 	if (isset($_SESSION['user']['mail'])) {
 		$mail=$_SESSION['user']['mail'];
@@ -39,6 +39,12 @@ function mailme($lang, $to=false, $with_appointment=false) {
 			if ($with_appointment) {
 				if (isset($_POST['mailme_date'])) {
 					$date=readarg($_POST['mailme_date']);
+				}
+				if (isset($_POST['mailme_hour'])) {
+					$hour=readarg($_POST['mailme_hour']);
+				}
+				if (isset($_POST['mailme_minute'])) {
+					$minute=readarg($_POST['mailme_minute']);
 				}
 			}
 			if (isset($_POST['mailme_code'])) {
@@ -65,7 +71,7 @@ function mailme($lang, $to=false, $with_appointment=false) {
 
 	$missing_message=false;
 
-	$bad_date=false;
+	$bad_appointment=false;
 
 	$email_sent=false;
 	$home_page=false;
@@ -111,15 +117,21 @@ function mailme($lang, $to=false, $with_appointment=false) {
 			if ($with_appointment) {
 				if ($date) {
 					if (!preg_match('#^([0-9]{4})([/-])([0-9]{2})\2([0-9]{2})$#', $date, $d)) {
-						$bad_date=true;
+						$bad_appointment=true;
 					}
 					else if (!checkdate($d[3], $d[4], $d[1])) {
-						$bad_date=true;
+						$bad_appointment=true;
 					}
 					else if (mktime(0, 0, 0, $d[3], $d[4], $d[1]) <= mktime(0, 0, 0, date("m"), date("d"), date("y"))) {
-						$bad_date=true;
+						$bad_appointment=true;
 					}
 				}
+				if (is_numeric($hour) and is_numeric($minute)) {
+					if ($hour < 0 or $hour > 23 or $minute < 0 or $minute > 59) {
+						$bad_appointment=true;
+					}
+				}
+
 			}
 
 			break;
@@ -129,14 +141,16 @@ function mailme($lang, $to=false, $with_appointment=false) {
 
 	switch($action) {
 		case 'send':
-			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message or $bad_date) {
+			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message or $bad_appointment) {
 				break;
 			}
 
 			require_once 'emailme.php';
 
 			if ($date) {
-				$message .= "\n\n($date)";
+				$f=translate('email:appointment', $lang);
+				$s=sprintf($f ? $f : "%s %02d:%02d", $date, $hour, $minute);
+				$message .= "\n\n$s";
 			}
 
 			$r = emailme($subject, $message, $mail, $to);
@@ -146,7 +160,7 @@ function mailme($lang, $to=false, $with_appointment=false) {
 				break;
 			}
 
-			$subject=$message=$date=false;
+			$subject=$message=$date=$hour=$minute=false;
 
 			global $home_action;
 
@@ -160,10 +174,10 @@ function mailme($lang, $to=false, $with_appointment=false) {
 
 	$_SESSION['mailme_token'] = $token = token_id();
 
-	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'bad_date', 'internal_error');
+	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'bad_appointment', 'internal_error');
 	$infos = compact('email_sent', 'home_page');
 
-	$output = view('mailme', $lang, compact('token', 'with_captcha', 'with_appointment', 'mail', 'subject', 'message', 'date', 'errors', 'infos'));
+	$output = view('mailme', $lang, compact('token', 'with_captcha', 'with_appointment', 'mail', 'subject', 'message', 'date', 'hour', 'minute', 'errors', 'infos'));
 
 	return $output;
 }
