@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -94,7 +94,7 @@ function folderpage($lang, $folder, $page) {
 	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial'));
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '/'. $page_id . '?' . 'clang=' . $lang : false;
-	$validate='/' . $lang . '/'. $page_name;
+	$validate=url('folder', $lang) . '/'. $folder_name . '/' . $page_name;
 
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
