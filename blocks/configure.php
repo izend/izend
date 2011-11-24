@@ -812,8 +812,8 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
-(1, 'en', 'views/fr/social.phtml'),
-(1, 'fr', 'views/en/social.phtml');
+(1, 'fr', 'views/fr/social.phtml'),
+(1, 'en', 'views/en/social.phtml');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
