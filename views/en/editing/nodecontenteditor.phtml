@@ -100,6 +100,7 @@ foreach ($node_contents as $c) {
 <img src="<?php echo $base_path; ?>/images/theme/edit/img.png" alt="&lt;img&gt;" title="img" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;img src=\x22','\x22 alt=\x22\x22 title=\x22\x22 /&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/world.png" alt="&lt;a&gt;" title="a" onclick="addtag('content_text_text_<?php echo $i; ?>', '&lt;a href=\x22#\x22&gt;','&lt;/a&gt;')"/>
 <img src="<?php echo $base_path; ?>/images/theme/edit/entquote.png" alt="entquote" title="entquote" onclick="entquote('content_text_text_<?php echo $i; ?>')"/>
+<img src="<?php echo $base_path; ?>/images/theme/edit/striptags.png" alt="striptags" title="striptags" onclick="striptags('content_text_text_<?php echo $i; ?>')"/>
 <span><input name="content_text_eval[<?php echo $i; ?>]" type="checkbox" <?php if ($content_text_eval) echo 'checked="checked"'; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="PHP" title="seval" /></span>
 </div>
 <textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?></textarea>

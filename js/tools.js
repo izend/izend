@@ -98,6 +98,35 @@ function addtag(id, open, close) {
 	}
 }
 
+function striptags(id) {
+	var e=document.getElementById(id);
+	if (e) {
+		var regexp=/<[^>]*>/gm;
+		// IE
+		if (document.selection && document.selection.createRange) {
+			e.focus();
+			sel = document.selection.createRange();
+			sel.text = sel.text.replace(regexp, '');
+		}
+
+		// Mozilla
+		else if (e.selectionStart || e.selectionStart == '0') {
+			var startPos = e.selectionStart;
+			var endPos = e.selectionEnd;
+			var value = e.value.substring(startPos, endPos).replace(regexp, '');
+			e.value = e.value.substring(0, startPos) + value + e.value.substring(endPos, e.value.length);
+			e.selectionStart = startPos;
+			e.selectionEnd = startPos + value.length;
+		}
+
+		else {
+			e.value = e.value.replace(regexp, '');
+		}
+
+		e.focus();
+	}
+}
+
 function entquote(id) {
 	var e=document.getElementById(id);
 	if (e) {
