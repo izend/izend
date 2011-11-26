@@ -9,9 +9,9 @@
 ?>
 <div id="bookpage">
 <h3><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></h3>
-<p id="bookpagenav" class="menu">
+<p class="navigation menu">
 <?php if ($prev_page_url): ?>
-<a href="<?php echo $prev_page_url; ?>"><img src="/images/theme/icons/left.png" alt=""/></a>
+<a class="previous" href="<?php echo $prev_page_url; ?>"><span>&lt;</span></a>
 <a href="<?php echo $prev_page_url; ?>"><?php echo htmlspecialchars($prev_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
 <?php endif; ?>
 <?php if ($next_page_url and $prev_page_url): ?>
@@ -19,7 +19,7 @@
 <?php endif; ?>
 <?php if ($next_page_url): ?>
 <a href="<?php echo $next_page_url; ?>"><?php echo htmlspecialchars($next_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
-<a href="<?php echo $next_page_url; ?>"><img src="/images/theme/icons/right.png" alt=""/></a>
+<a class="next" href="<?php echo $next_page_url; ?>"><span>&gt;</span></a>
 <?php endif; ?>
 </p>
 <?php if ($page_contents): ?>
