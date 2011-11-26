@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -21,7 +21,7 @@
 <input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
 </p>
 <?php endif; ?>
-<p><button type="submit" name="remindme_send" id="remindme_send">Send</button></p>
+<p><input type="submit" class="submit_send" name="remindme_send" id="remindme_send" value="Send" /></p>
 </form>
 <div class="errors">
 <?php if ($missing_code): ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -15,7 +15,7 @@
 <?php echo $inlanguages; ?>
 </p>
 <p>
-<input id="thread_create" name="thread_create" type="submit" value="Add" />
+<input class="submit_add" id="thread_create" name="thread_create" type="submit" value="Add" />
 thread
 <input id="new_thread_title" name="new_thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($new_thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" title="Titre" onkeypress="return focusonenter(event, 'new_thread_number')"/>
 #
@@ -58,13 +58,13 @@ foreach ($thread_list as $tr) {
 </table>
 </fieldset>
 <p>
-<input id="threadlist_reorder" name="threadlist_reorder" type="submit" value="Sort" />
+<input class="submit_sort" id="threadlist_reorder" name="threadlist_reorder" type="submit" value="Sort" />
 contents or
-<input id="thread_delete" name="thread_delete" type="submit" value="Delete" />
+<input class="submit_delete" id="thread_delete" name="thread_delete" type="submit" value="Delete" />
 thread #
 <input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_delete')"/>
 <?php if ($confirm_delete_thread): ?>
-<input id="thread_confirmdelete" name="thread_confirmdelete" type="submit" value="Confirm" />
+<input class="submit_confirm" id="thread_confirmdelete" name="thread_confirmdelete" type="submit" value="Confirm" />
 <?php endif; ?>
 </p>
 <?php endif; ?>

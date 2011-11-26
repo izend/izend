@@ -1,9 +1,23 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
  
 /* fr.css */
 
+.submit_add {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/ajouter.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_cancel {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/annuler.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_comment {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/commenter.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_confirm {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/confirmer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_delete {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/supprimer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_edit {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/editer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_enter {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/entrer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_hide {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/cacher.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_modify {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/modifier.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_search {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/chercher.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_send {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/envoyer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_show {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/montrer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_sort {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/trier.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_validate {width:110px;height:40px;padding:0;margin:0;border:none;background:transparent url(../images/theme/valider.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}

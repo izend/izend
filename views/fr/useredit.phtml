@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -36,17 +36,17 @@
 <p>
 <?php if ($with_delete): ?>
 <?php if ($confirm_delete): ?>
-<button id="useredit_confirmdelete" type="submit" name="useredit_confirmdelete">Confirmer</button>
+<input type="submit" class="submit_confirm" name="useredit_confirmdelete" id="useredit_confirmdelete" value="Confirmer" />
 la suppression ou
-<button id="useredit_cancel" type="submit" name="useredit_cancel">Annuler</button>
+<input type="submit" class="submit_cancel" name="useredit_cancel" id="useredit_cancel" value="Annuler" />
 <?php else: ?>
-<button id="useredit_modify" type="submit" name="useredit_modify">Modifier</button>
+<input type="submit" class="submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
 le profil ou
-<button id="useredit_delete" type="submit" name="useredit_delete">Supprimer</button>
+<input type="submit" class="submit_delete" name="useredit_delete" id="useredit_delete" value="Supprimer" />
 le compte
 <?php endif; ?>
 <?php else: ?>
-<button id="useredit_modify" type="submit" name="useredit_modify">Modifier</button>
+<input type="submit" class="submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
 <?php endif; ?>
 </p>
 </form>

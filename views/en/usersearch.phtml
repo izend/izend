@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <form action="" method="post">
 <p>
 <input id="usersearch_what" name="usersearch_what" type="text" size="30" maxlength="100" title="" value="<?php echo htmlspecialchars($what, ENT_COMPAT, 'UTF-8'); ?>" onkeypress="return submitonenter(event, 'usersearch_search')" />
-<button id="usersearch_search" name="usersearch_search" type="submit">Search</button>
+<input type="submit" class="submit_search" name="usersearch_search" id="usersearch_search" value="Search" />
 </p>
 </form>
 <?php if ($count): $i=1; ?>
