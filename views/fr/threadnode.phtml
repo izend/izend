@@ -20,7 +20,7 @@
 <?php endif; ?>
 <?php if ($next_node_url): ?>
 <a href="<?php echo $next_node_url; ?>"><?php echo htmlspecialchars($next_node_label, ENT_COMPAT, 'UTF-8'); ?></a>
-<a class="next" href="<?php echo $prev_node_url; ?>"><span>&gt;</span></a>
+<a class="next" href="<?php echo $next_node_url; ?>"><span>&gt;</span></a>
 <?php endif; ?>
 </p>
 <p class="info"><?php echo longdatetime_fr($node_modified); ?></p>
