@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -18,8 +18,8 @@ require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function useredit($lang, $user_id, $administrator=false) {
-	$with_status=$administrator == true;
-	$with_delete=$user_id != user_profile('id');
+	$with_status=($user_id != 1 and $administrator == true);
+	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
 
 	$confirmed=false;
 
