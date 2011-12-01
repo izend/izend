@@ -3,16 +3,16 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'strflat.php';
-require_once 'validateusername.php';
+require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
-require_once 'tokenid.php';
+require_once 'validateusername.php';
 
 function login($lang) {
 	$action='init';
@@ -106,6 +106,9 @@ function login($lang) {
 			}
 
 			$user['ip'] = client_ip_address();
+
+			session_regenerate();
+
 			$_SESSION['user'] = $user;
 
 			unset($_SESSION['login_token']);

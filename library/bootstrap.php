@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
+require_once 'session.php';
 require_once 'unsetglobals.php';
 require_once 'validatehostname.php';
-require_once 'session.php';
 
 function bootstrap() {
 	global $base_url, $base_path, $base_root;
@@ -79,5 +79,9 @@ function bootstrap() {
 
 	session_name(md5($session_name));
 	session_open();
+
+	$now = time();
+	$_SESSION['idletime'] = isset($_SESSION['lasttime']) ? $now - $_SESSION['lasttime'] : 0;
+	$_SESSION['lasttime'] = $now;
 }
 

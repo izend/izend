@@ -81,9 +81,9 @@ function addtag(id, open, close) {
 
 		// Mozilla
 		else if (e.selectionStart || e.selectionStart == '0') {
+			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
-			var scrollTop = e.scrollTop;
 			e.value = e.value.substring(0, startPos) + open + e.value.substring(startPos, endPos) + close + e.value.substring(endPos, e.value.length);
 			e.selectionStart = startPos;
 			e.selectionEnd = endPos + open.length + close.length;
@@ -111,12 +111,14 @@ function striptags(id) {
 
 		// Mozilla
 		else if (e.selectionStart || e.selectionStart == '0') {
+			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
 			var value = e.value.substring(startPos, endPos).replace(regexp, '');
 			e.value = e.value.substring(0, startPos) + value + e.value.substring(endPos, e.value.length);
 			e.selectionStart = startPos;
 			e.selectionEnd = startPos + value.length;
+			e.scrollTop = scrollTop;
 		}
 
 		else {
@@ -139,9 +141,9 @@ function entquote(id) {
 
 		// Mozilla
 		else if (e.selectionStart || e.selectionStart == '0') {
+			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
-			var scrollTop = e.scrollTop;
 			e.value = e.value.substring(0, startPos) + entreplace(e.value.substring(startPos, endPos)) + e.value.substring(endPos, e.value.length);
 			e.scrollTop = scrollTop;
 		}

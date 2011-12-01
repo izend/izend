@@ -3,11 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function user_is_identified() {
-	return isset($_SESSION['user']);
+	global $login_lifetime;
+
+	return isset($_SESSION['user']) and (!$login_lifetime or $_SESSION['idletime'] <= $login_lifetime);
 }
 

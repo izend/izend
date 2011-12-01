@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -21,22 +21,6 @@ function session_close() {
 	$_SESSION=array();
 }
 
-function session_check($lang=false) {
-	if (!isset($_SESSION['user'])) {
-		$login_page = url('user', $lang);
-		header("Location: $login_page");
-		die();
-	}
-
-	$now=time();
-	if (isset($_SESSION['user']['lasttime'])) {
-		$lasttime=$_SESSION['user']['lasttime'];
-		if ($now-$lasttime > SESSION_EXPIRE*60) {
-			$login_page = url('home', $lang);
-			header("Location: $login_page");
-			die();
-		}
-	}
-	$_SESSION['user']['lasttime'] = $now;
+function session_regenerate() {
+	session_regenerate_id(true);
 }
-
