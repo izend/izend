@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function file_mime_type($file, $encoding=true) {
 	$file = escapeshellarg($file);
-	$arg = $encoding ? '--mime-type -mime-encoding' : '--mime-type';
+	$arg = $encoding ? '--mime-type --mime-encoding' : '--mime-type';
 	$cmd = "file $arg $file";
 
 	exec($cmd, $output, $r);
