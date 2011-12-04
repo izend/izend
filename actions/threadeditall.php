@@ -107,7 +107,7 @@ function threadeditall($lang, $clang, $type=false) {
 			if (!$new_thread_name) {
 				$missing_new_thread_name = true;
 			}
-			else if (!preg_match('#^[\w-]{3,}$#', $new_thread_name)) {
+			else if (!preg_match('#^[\w-]{2,}$#', $new_thread_name)) {
 				$bad_new_thread_name = true;
 			}
 			if (!$new_thread_number) {

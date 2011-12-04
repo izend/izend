@@ -176,7 +176,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			if (!$thread_name) {
 				$missing_thread_name = true;
 			}
-			else if (!preg_match('#^[\w-]{3,}$#', $thread_name)) {
+			else if (!preg_match('#^[\w-]{2,}$#', $thread_name)) {
 				$bad_thread_name = true;
 			}
 			if (!$thread_type) {
@@ -194,7 +194,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			else if (!$new_node_name) {
 				$bad_new_node_title = true;
 			}
-			else if (!preg_match('#^[\w-]{3,}$#', $new_node_name)) {
+			else if (!preg_match('#^[\w-]{2,}$#', $new_node_name)) {
 				$bad_new_node_title = true;
 			}
 			if (!$new_node_number) {
@@ -276,6 +276,8 @@ function threadeditsummary($lang, $clang, $thread) {
 				$pos=1;
 				$thread_contents=array($pos => compact('node_id', 'node_title', 'node_number', 'node_ignored', 'node_url', 'pos'));
 			}
+
+			$new_node_number=$node_number+1;
 
 			break;
 

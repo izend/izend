@@ -79,7 +79,7 @@ function nodeeditor($lang, $clang, $node_id) {
 			if (empty($node_name)) {
 				$missing_node_name = true;
 			}
-			else if (!preg_match('#^[\w-]{3,}$#', $node_name)) {
+			else if (!preg_match('#^[\w-]{2,}$#', $node_name)) {
 				$bad_node_name = true;
 			}
 			break;
