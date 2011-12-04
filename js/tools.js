@@ -144,7 +144,10 @@ function entquote(id) {
 			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
-			e.value = e.value.substring(0, startPos) + entreplace(e.value.substring(startPos, endPos)) + e.value.substring(endPos, e.value.length);
+			var value = entreplace(e.value.substring(startPos, endPos));
+			e.value = e.value.substring(0, startPos) + value + e.value.substring(endPos, e.value.length);
+			e.selectionStart = startPos;
+			e.selectionEnd = startPos + value.length;
 			e.scrollTop = scrollTop;
 		}
 
