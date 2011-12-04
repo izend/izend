@@ -3,9 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
+
+require_once 'registry.php';
 
 function cron_run() {
 	$semaphore = registry_get('cron_semaphore', FALSE);
