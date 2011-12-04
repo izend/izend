@@ -3,14 +3,18 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'strtag.php';
 
-function emailcrypto($text, $tag, $to, $subject, $sender) {
+function emailcrypto($text, $tag, $to, $subject, $sender=false) {
 	global $signature, $mailer, $webmaster;
+
+	if (!$sender) {
+		$sender = $webmaster;
+	}
 
 	$img=strtag($tag);
 
@@ -25,7 +29,7 @@ function emailcrypto($text, $tag, $to, $subject, $sender) {
 
 	$headers = <<<_SEP_
 From: $sender
-Return-Path: $webmaster
+Return-Path: $sender
 Content-Type: multipart/mixed; boundary="$sep"
 X-Mailer: $mailer
 _SEP_;
