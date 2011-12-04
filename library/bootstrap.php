@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -13,8 +13,7 @@ require_once 'validatehostname.php';
 
 function bootstrap() {
 	global $base_url, $base_path, $base_root;
-	global $session_name;
-	global $db_url, $db_prefix, $db_debug;
+	global $db_url, $session_name;
 
 	if (isset($_SERVER['HTTP_HOST'])) {
 		$_SERVER['HTTP_HOST'] = strtolower($_SERVER['HTTP_HOST']);
@@ -33,7 +32,7 @@ function bootstrap() {
 	@include 'config.inc';
 	@include 'db.inc';
 
-	if (isset($db_url) && $db_url == 'mysql://username:password@localhost/databasename') {
+	if ($db_url == 'mysql://username:password@localhost/databasename') {
 		$db_url = false;
 	}
 
@@ -42,7 +41,7 @@ function bootstrap() {
 		db_connect($db_url);
 	}
 
-	if (isset($base_url)) {
+	if ($base_url) {
 		$base_url = trim($base_url, '/');
 
 		$url = parse_url($base_url);
@@ -68,7 +67,7 @@ function bootstrap() {
 		}
 	}
 
-	if (!isset($session_name)) {
+	if (!$session_name) {
 		list( , $session_name) = explode('://', $base_url, 2);
 		$session_name = 'izend@' . $session_name;
 
@@ -77,8 +76,7 @@ function bootstrap() {
 		}
 	}
 
-	session_name(md5($session_name));
-	session_open();
+	session_open(md5($session_name));
 
 	$now = time();
 	$_SESSION['idletime'] = isset($_SESSION['lasttime']) ? $now - $_SESSION['lasttime'] : 0;

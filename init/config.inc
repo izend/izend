@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 <?php
@@ -82,7 +82,8 @@ global $search_distance, $search_closest;
 $search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
 $search_closest=true;	// true - best matches, false - all matches
 
-global $login_lifetime;
+global $session_name, $login_lifetime;
+$session_name=false;	// see bootstrap
 $login_lifetime=false;	// false or in seconds
 
 global $track_db, $track_log;

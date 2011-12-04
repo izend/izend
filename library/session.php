@@ -3,16 +3,19 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
-function session_reopen() {
+function session_reopen($name=false) {
 	session_close();
-	session_open();
+	session_open($name);
 }
 
-function session_open() {
+function session_open($name=false) {
+	if ($name) {
+		session_name($name);
+	}
 	session_start();
 }
 
