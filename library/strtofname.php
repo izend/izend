@@ -5,12 +5,6 @@
  * @copyright  2010-2011 izend.org
  * @version    1
  * @link       http://www.izend.org
- *
- * Converts a string into a filename by removing all accents and replacing special characters with a dash.
- * Useful for URL rewriting.
- *
- * @param $s
- * @return string
  */
 
 require_once 'strflat.php';
