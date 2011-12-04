@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
  
@@ -26,6 +26,8 @@ h3 {font-size:140%;}
 h4 {font-size:110%;}
 h5 {font-size:110%;}
 h6 {font-size:100%;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
 
 h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid}
 blockquote, table, pre {page-break-inside:avoid}
