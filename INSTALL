@@ -37,7 +37,7 @@ Eventually, prevent an accidental push:
 
 Go to your branch:
 
-    git checkout master
+    git checkout -b master
 
 Make sure the server is allowed to read all the files and 
 write the configuration files includes/config.inc, 
@@ -124,6 +124,7 @@ Create a bare repository for your site:
 
 Push the initial version of your site to its repository:
 
+    cd /var/www/sitename.net
     git remote add origin ssh://githost/git/sitename.net.git
     git push origin master
     git branch master --set-upstream origin/master
@@ -153,5 +154,3 @@ Check your configuration:
 [remote "origin"]
 	url = ssh://githost/git/sitename.net
 	fetch = +refs/heads/*:refs/remotes/origin/*
-
-
