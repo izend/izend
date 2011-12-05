@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -288,7 +288,7 @@ function configure($lang) {
 
 			if ($db_flag) {
 				if (!$db_reuse) {
-					if (!create_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_user, $db_password)) {
+					if (!create_db($db_admin_user, $db_admin_password, 'localhost', $db_name, $db_user, $db_password)) {
 						$db_error=mysql_error();
 						break;
 					}
