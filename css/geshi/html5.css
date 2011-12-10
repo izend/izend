@@ -2,7 +2,7 @@
  * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
  * (http://qbnz.com/highlighter/ and http://geshi.org/)
  */
-.html5  {font-family:monospace;font-size 10pt;}
+.html5  {font-family:monospace;font-size:10pt;}
 .html5 .de1, .html5 .de2 {margin:0; padding:0; background:none; vertical-align:top;}
 .html5 .imp {font-weight: bold; color: red;}
 .html5 li, .html5 .li1 {font-weight: normal; vertical-align:top;}
