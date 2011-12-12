@@ -36,6 +36,8 @@ form.compact p {margin-top:0.75em; margin-bottom:0.5em;}
 
 textarea {resize:none;}
 
+th {background-color:#ffffe0;font-weight:bold;}
+
 .grippie {display:block;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 
 .vignette {float:right;margin:0 0 0 1em;}
