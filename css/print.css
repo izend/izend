@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
  
@@ -10,13 +10,11 @@
 * {background-color:white !important;}
 
 body {line-height:1.5;font-family:inherit;color:#000;background:none;font-size:10pt;}
-.container {background:none;}
 hr {background:#ccc;color:#ccc;width:100%;height:2px;margin:2em 0;padding:0;border:none;}
 hr.space {background:#fff;color:#fff;}
 h1, h2, h3, h4, h5, h6 {font-family:inherit}
 code {font:.9em "Courier New", Courier, monospace;}
 a img {border:none;}
-p img.top {margin-top:0;}
 blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
 a {color:#fff;text-decoration:none;}
 
@@ -29,15 +27,33 @@ h6 {font-size:100%;}
 
 h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
 
+fieldset {display:inline-block;padding:0.5em;}
+
+img {vertical-align:middle;}
+
+ol {list-style-image:decimal;}
+ul {list-style-type:disc;}
+
 h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid}
 blockquote, table, pre {page-break-inside:avoid}
 ul, ol, dl {page-break-before:avoid}
-img {page-break-inside:avoid; page-break-after:avoid; float:none}
+img {page-break-inside:avoid;page-break-after:avoid;float:none}
 
 .pagebreak {page-break-before:avoid}
 
 .hidden {display:none;}
 .noprint {display:none;}
+
+.top {margin-top:0 !important;}
+.bottom {margin-bottom:0 !important;}
+
+div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
+div.hbar > *:first-child {margin-left:0;}
+div.hbar > *:last-child {margin-right:0}
+
+div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
+div.vbar > *:first-child {margin-top:0;}
+div.vbar > *:last-child {margin-bottom:0;}
 
 .menu, .menubar, .sidebar, .link, .readmore, .summary, .vignette, .social {display:none;}
 
