@@ -28,7 +28,7 @@
 <li><a class="btn_view" href="<?php echo $view_page; ?>" title="View" rel="nofollow"><span>View</span></a></li>
 <?php endif; ?>
 <?php if (!empty($validate_page)): ?>
-<li><a class="btn_validate" href="http://validator.w3.org/check?uri=<?php echo $base_url . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
+<li><a class="btn_validate" href="http://validator.w3.org/check?uri=<?php echo $base_root . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Validate"><span>Validate</span></a></li>
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <li><a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage"><span>Manage</span></a></li>
