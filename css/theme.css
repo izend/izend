@@ -44,7 +44,7 @@ th {background-color:#ffffe0;font-weight:bold;}
 
 .readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
 
-.date {float:left;width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;position:relative;}
+.date {float:left;width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;margin-bottom:5px;position:relative;}
 .date span {width:100%;text-align:center;margin:0;padding:0;position:absolute;}
 .date .day {color:#333333;font-family:"Times New Roman", Times, serif;font-size:24px;font-weight:bold;top:0.8em;}
 .date .month {color:#333333;font-size:8px;text-transform:uppercase;top:0.5em;}

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -48,6 +48,11 @@ the account
 <?php else: ?>
 <input type="submit" class="submit_modify" name="useredit_modify" id="useredit_modify" value="Modify" />
 <?php endif; ?>
+<?php if ($with_newpassword): ?>
+<p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
+<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="> 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
+<input type="submit" class="submit_change" name="useredit_change" id="useredit_change" value="Change" />
+<?php endif; ?>
 </p>
 </form>
 <?php if ($missing_name): ?>
@@ -67,6 +72,9 @@ the account
 <?php if ($bad_website): ?>
 <p class="error">The URL of the website is invalid.</p>
 <?php endif; ?>
+<?php if ($missing_newpassword or $bad_newpassword): ?>
+<p class="error">Enter a combination of letters and digits of at least 6 characters.</p>
+<?php endif; ?>
 <?php if ($internal_error): ?>
 <p class="error">An internal error has occurred.
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
@@ -74,6 +82,9 @@ the account
 <?php if ($infos): extract($infos); ?>
 <?php if ($account_modified): ?>
 <p>The account information has been modified.</p>
+<?php endif; ?>
+<?php if ($password_changed): ?>
+<p>The password was changed.</p>
 <?php endif; ?>
 <?php endif; ?>
 <?php
@@ -86,6 +97,9 @@ else if ($missing_mail or $bad_mail or $duplicated_mail) {
 }
 else if ($bad_website) {
 	$focus='#useredit_website';
+}
+else if ($missing_newpassword or $bad_newpassword) {
+	$focus='#useredit_newpassword';
 }
 ?>
 <?php if ($focus): ?>

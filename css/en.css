@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
  
@@ -9,6 +9,7 @@
 
 .submit_add {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/add.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_cancel {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/cancel.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_change {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/change.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_comment {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/comment.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_confirm {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/confirm.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_delete {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/delete.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}

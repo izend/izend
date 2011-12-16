@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -14,18 +14,25 @@ require_once 'userprofile.php';
 require_once 'validateusername.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
+require_once 'validatepassword.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function useredit($lang, $user_id, $administrator=false) {
 	$with_status=($user_id != 1 and $administrator == true);
 	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
+	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
 
 	$confirmed=false;
 
 	$action='init';
 	if (isset($_POST['useredit_modify'])) {
 		$action='modify';
+	}
+	if ($with_newpassword) {
+		if (isset($_POST['useredit_change'])) {
+			$action='change';
+		}
 	}
 	if ($with_delete) {
 		if (isset($_POST['useredit_delete'])) {
@@ -46,6 +53,8 @@ function useredit($lang, $user_id, $administrator=false) {
 	$user_active=$user_banned=false;
 	$user_accessed=false;
 
+	$user_newpassword=false;
+
 	$token=false;
 
 	switch($action) {
@@ -55,8 +64,10 @@ function useredit($lang, $user_id, $administrator=false) {
 			if ($r) {
 				extract($r);
 			}
+			$user_newpassword=false;
 			break;
 		case 'modify':
+		case 'change':
 		case 'delete':
 		case 'cancel':
 			if (isset($_POST['useredit_name'])) {
@@ -82,6 +93,11 @@ function useredit($lang, $user_id, $administrator=false) {
 					$user_accessed=(int)readarg($_POST['useredit_accessed']);
 				}
 			}
+			if ($with_newpassword) {
+				if (isset($_POST['useredit_newpassword'])) {
+					$user_newpassword=readarg($_POST['useredit_newpassword']);
+				}
+			}
 			if (isset($_POST['useredit_token'])) {
 				$token=readarg($_POST['useredit_token']);
 			}
@@ -102,7 +118,11 @@ function useredit($lang, $user_id, $administrator=false) {
 	$missing_locale=false;
 	$bad_locale=false;
 
+	$missing_newpassword=false;
+	$bad_newpassword=false;
+
 	$account_modified=false;
+	$password_changed=false;
 
 	$internal_error=false;
 	$contact_page=false;
@@ -146,7 +166,15 @@ function useredit($lang, $user_id, $administrator=false) {
 			else if (!validate_locale($user_locale)) {
 				$bad_locale=true;
 			}
+			break;
 
+		case 'change':
+			if (!$user_newpassword) {
+				$missing_newpassword=true;
+			}
+			else if (!validate_password($user_newpassword)) {
+				$bad_newpassword=true;
+			}
 			break;
 
 		default:
@@ -185,6 +213,17 @@ function useredit($lang, $user_id, $administrator=false) {
 
 			break;
 
+		case 'change':
+			if ($missing_newpassword or $bad_newpassword) {
+				break;
+			}
+
+			$r = user_set_newpassword($user_id, $user_newpassword);
+
+			$password_changed=true;
+
+			break;
+
 		case 'delete':
 			if (!$confirmed) {
 				$confirm_delete=true;
@@ -203,16 +242,18 @@ function useredit($lang, $user_id, $administrator=false) {
 			break;
 	}
 
+	$user_newpassword=false;
+
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
 
 	$_SESSION['useredit_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'internal_error', 'contact_page');
-	$infos = compact('account_modified');
+	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'internal_error', 'contact_page');
+	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'user_name', 'user_mail', 'user_website', 'user_locale', 'user_banned', 'user_active', 'user_accessed', 'with_status', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'user_name', 'user_mail', 'user_website', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }
