@@ -3,16 +3,18 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
-<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>">What is your connection name?</p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>What is your connection name?<?php else: ?>What is your email address?<?php endif; ?></p>
 <p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifier" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo $login; ?>" /></p>
+<?php if ($with_name): ?>
 <p class="info">You may also enter your email address.</p>
+<?php endif; ?>
 <p><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I want to receive a new password</p>
 <?php if ($with_captcha): ?>
 <p>

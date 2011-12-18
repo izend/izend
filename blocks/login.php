@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -15,6 +15,9 @@ require_once 'validatepassword.php';
 require_once 'validateusername.php';
 
 function login($lang) {
+	$with_name=true;
+	$with_captcha=true;
+
 	$action='init';
 	if (isset($_POST['login_enter'])) {
 		$action='enter';
@@ -51,8 +54,6 @@ function login($lang) {
 	$missing_password=false;
 	$access_denied=false;
 
-	$with_captcha=true;
-
 	switch($action) {
 		case 'enter':
 			if (!isset($_SESSION['login_token']) or $token != $_SESSION['login_token']) {
@@ -75,9 +76,10 @@ function login($lang) {
 			if (!$login) {
 				$missing_login=true;
 			}
-			else if (!validate_user_name($login) and !validate_mail($login)) {
+			else if (!(($with_name and validate_user_name($login)) or validate_mail($login))) {
 				$bad_login=true;
 			}
+
 			if (!$password) {
 				$missing_password=true;
 			}
@@ -126,7 +128,7 @@ function login($lang) {
 
 	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied');
 
-	$output = view('login', $lang, compact('token', 'with_captcha', 'password_page', 'newuser_page', 'login', 'errors'));
+	$output = view('login', $lang, compact('token', 'with_captcha', 'with_name', 'password_page', 'newuser_page', 'login', 'errors'));
 
 	return $output;
 }

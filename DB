@@ -19,6 +19,13 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Mon Dec 19 2011
+
+	Accepts users with no name
+
+ALTER TABLE `izend_user` CHANGE `name` `name` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+---
+
 Date:	Tue Nov 8 2011
 
 	Adds fields ilike/tweet/plusone to table thread

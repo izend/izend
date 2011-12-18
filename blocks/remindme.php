@@ -3,29 +3,28 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
+require_once 'ismailallowed.php';
+require_once 'isusernameallowed.php';
 require_once 'readarg.php';
 require_once 'strflat.php';
-require_once 'validateusername.php';
-require_once 'validatemail.php';
-require_once 'isusernameallowed.php';
-require_once 'ismailallowed.php';
 require_once 'tokenid.php';
+require_once 'validatemail.php';
+require_once 'validateusername.php';
 
 function remindme($lang, $login=false) {
+	$with_name=true;
+	$with_captcha=true;
+
 	$action='init';
 	if (isset($_POST['remindme_send'])) {
 		$action='remindme';
 	}
 
 	$login=$confirmed=$code=$token=false;
-
-	if (isset($_SESSION['form']['login'])) {
-		$login=$_SESSION['form']['login']['login'];
-	}
 
 	switch($action) {
 		case 'remindme':
@@ -60,8 +59,6 @@ function remindme($lang, $login=false) {
 
 	$internal_error=false;
 	$contact_page=false;
-
-	$with_captcha=true;
 
 	switch($action) {
 		case 'remindme':
@@ -124,6 +121,11 @@ function remindme($lang, $login=false) {
 				break;
 			}
 
+			if (!$user['user_active'] or $user['user_banned']) {
+				$bad_login=true;
+				break;
+			}
+
 			require_once 'newpassword.php';
 
 			$newpassword=newpassword();
@@ -145,7 +147,6 @@ function remindme($lang, $login=false) {
 				$internal_error=true;
 			}
 			else {
-				$_SESSION['form']['login']['login'] = $login;
 				$email_sent=$to;
 			}
 
@@ -168,7 +169,7 @@ function remindme($lang, $login=false) {
 	$errors = compact('missing_login', 'bad_login', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_sent', 'user_page');
 
-	$output = view('remindme', $lang, compact('token', 'with_captcha', 'login', 'confirmed', 'errors', 'infos'));
+	$output = view('remindme', $lang, compact('token', 'with_captcha', 'with_name', 'login', 'confirmed', 'errors', 'infos'));
 
 	return $output;
 }

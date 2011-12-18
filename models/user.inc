@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -41,7 +41,7 @@ function user_id($user) {
 }
 
 function user_create($name, $password, $mail, $locale='en') {
-	$sqlname=db_sql_arg($name, true);
+	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqllocale=db_sql_arg($locale);
 
@@ -59,7 +59,9 @@ function user_create($name, $password, $mail, $locale='en') {
 
 	$user_id = db_insert_id();
 
-	user_create_avatar($name);
+	if ($name) {
+		user_create_avatar($name);
+	}
 
 	return $user_id;
 }
@@ -123,7 +125,7 @@ function user_set($user_id, $name, $mail, $website, $locale) {
 	}
 	extract($r[0]);	/* oldname */
 
-	$sqlname=db_sql_arg($name, true);
+	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqlwebsite=db_sql_arg($website, true, true);
 	$sqllocale=db_sql_arg($locale);
@@ -138,7 +140,9 @@ function user_set($user_id, $name, $mail, $website, $locale) {
 
 	if ($name != $oldname) {
 		user_delete_avatar($oldname);
-		user_create_avatar($name);
+		if ($name) {
+			user_create_avatar($name);
+		}
 	}
 
 	return true;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -11,14 +11,15 @@ require_once 'readarg.php';
 require_once 'strflat.php';
 require_once 'tokenid.php';
 require_once 'userprofile.php';
-require_once 'validateusername.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
 require_once 'validatepassword.php';
+require_once 'validateusername.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function useredit($lang, $user_id, $administrator=false) {
+	$with_name=true;
 	$with_status=($user_id != 1 and $administrator == true);
 	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
 	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
@@ -70,8 +71,10 @@ function useredit($lang, $user_id, $administrator=false) {
 		case 'change':
 		case 'delete':
 		case 'cancel':
-			if (isset($_POST['useredit_name'])) {
-				$user_name=strtolower(strflat(readarg($_POST['useredit_name'])))                                                                                                      ;
+			if ($with_name) {
+				if (isset($_POST['useredit_name'])) {
+					$user_name=strtolower(strflat(readarg($_POST['useredit_name'])))                                                                                                      ;
+				}
 			}
 			if (isset($_POST['useredit_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['useredit_mail'])));
@@ -133,14 +136,16 @@ function useredit($lang, $user_id, $administrator=false) {
 				$bad_token=true;
 			}
 
-			if (!$user_name) {
-				$missing_name=true;
-			}
-			else if (!validate_user_name($user_name)) {
-				$bad_name=true;
-			}
-			else if (!user_check_name($user_name, $user_id)) {
-				$duplicated_name=true;
+			if ($with_name) {
+				if (!$user_name) {
+					$missing_name=true;
+				}
+				else if (!validate_user_name($user_name)) {
+					$bad_name=true;
+				}
+				else if (!user_check_name($user_name, $user_id)) {
+					$duplicated_name=true;
+				}
 			}
 
 			if (!$user_mail) {
@@ -253,7 +258,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'user_name', 'user_mail', 'user_website', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'user_website', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

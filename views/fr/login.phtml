@@ -3,18 +3,20 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
-<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>">Quel est votre nom de connexion ?</p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion ?<?php else: ?>Quelle est votre adresse d'email ?<?php endif; ?></p>
 <p><input type="text" name="login_login" id="login_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo $login; ?>" /></p>
+<?php if ($with_name): ?>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
+<?php endif; ?>
 <p class="inlabel<?php if ($missing_password or $access_denied): ?> inerror<?php endif; ?>">Et votre clé d'accès ?</p>
-<p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'login_code')" /></p>
+<p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Mot de passe" onkeypress="<?php if ($with_captcha): ?>return focusonenter(event, 'login_code')<?php else: ?>return submitonenter(event, 'login_enter')<?php endif; ?>" /></p>
 <?php if ($password_page): ?>
 <p class="info link">Si vous avez oublié votre mot de passe, <a href="<?php echo $password_page; ?>" rel="nofollow">cliquez ici</a>.</p>
 <?php endif; ?>

@@ -3,20 +3,23 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
-require_once 'readarg.php';
-require_once 'strflat.php';
-require_once 'validateusername.php';
-require_once 'validatemail.php';
 require_once 'isusernameallowed.php';
 require_once 'ismailallowed.php';
+require_once 'readarg.php';
+require_once 'strflat.php';
 require_once 'tokenid.php';
+require_once 'validatemail.php';
+require_once 'validateusername.php';
 require_once 'models/user.inc';
 
 function register($lang) {
+	$with_name=true;
+	$with_captcha=true;
+
 	$action='init';
 	if (isset($_POST['register_register'])) {
 		$action='register';
@@ -66,8 +69,6 @@ function register($lang) {
 	$internal_error=false;
 	$contact_page=false;
 
-	$with_captcha=true;
-
 	switch($action) {
 		case 'register':
 			if (!isset($_SESSION['register_token']) or $token != $_SESSION['register_token']) {
@@ -86,14 +87,16 @@ function register($lang) {
 				}
 			}
 
-			if (!$name) {
-				$missing_name=true;
-			}
-			else if (!validate_user_name($name) or !is_user_name_allowed($name)) {
-				$bad_name=true;
-			}
-			else if (!user_check_name($name)) {
-				$duplicated_name=true;
+			if ($with_name) {
+				if (!$name) {
+					$missing_name=true;
+				}
+				else if (!validate_user_name($name) or !is_user_name_allowed($name)) {
+					$bad_name=true;
+				}
+				else if (!user_check_name($name)) {
+					$duplicated_name=true;
+				}
 			}
 			if (!$mail) {
 				$missing_mail=true;
@@ -151,10 +154,9 @@ function register($lang) {
 
 			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
 			$subject = 'new_account' . '@' . $sitename;
-			$msg = $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $name . ' ' . $mail;
+			$msg = $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $mail;
 			emailme($subject, $msg);
 
-			$_SESSION['form']['login']['login'] = $name;
 			$account_created=true;
 			$confirmed=false;
 
@@ -175,7 +177,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }
