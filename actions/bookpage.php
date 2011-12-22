@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -45,7 +45,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -110,11 +110,12 @@ function bookpage($lang, $book, $page) {
 		$ilike=$thread_ilike && $node_ilike;
 		$tweetit=$thread_tweet && $node_tweet;
 		$plusone=$thread_plusone && $node_plusone;
+		$linkedin=$thread_linkedin && $node_linkedin;
 		if ($tweetit) {
 			$tweet_text=($book_title && $page_title) ? "$book_title - $page_title" : ($page_title ? $page_title : $book_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label',  'next_page_url', 'next_page_label', 'besocial'));

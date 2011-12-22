@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -60,7 +60,7 @@ function story($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -107,11 +107,12 @@ function story($lang, $arglist=false) {
 		$ilike=$thread_ilike && $node_ilike;
 		$tweetit=$thread_tweet && $node_tweet;
 		$plusone=$thread_plusone && $node_plusone;
+		$linkedin=$thread_linkedin && $node_linkedin;
 		if ($tweetit) {
 			$tweet_text=($story_title && $page_title) ? "$story_title - $page_title" : ($page_title ? $page_title : $story_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial'));

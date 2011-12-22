@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -43,11 +43,12 @@ function home($lang) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
 		$plusone=$node_plusone;
+		$linkedin=$node_linkedin;
 		if ($tweetit) {
 			$tweet_text=$sitename;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
 	$content = view('home', false, compact('page_contents', 'besocial'));

@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function besocial($lang, $components=false) {
-	$ilike=$tweetit=$plusone=false;
+	$ilike=$tweetit=$plusone=$linkedin=false;
 
-	extract($components);	/* ilike, tweetit, plusone */
+	extract($components);	/* ilike, tweetit, plusone, linkedin */
 
 	$mode='inline';
 
@@ -27,8 +27,11 @@ function besocial($lang, $components=false) {
 	if ($plusone) {
 		$plusone=view('plusone', $lang, compact('mode'));
 	}
+	if ($linkedin) {
+		$linkedin=view('linkedin', $lang, compact('mode'));
+	}
 
-	$output = view('besocial', false, compact('ilike', 'tweetit', 'plusone'));
+	$output = view('besocial', false, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -64,11 +64,12 @@ function booksummary($lang, $book) {
 		$ilike=$thread_ilike;
 		$tweetit=$thread_tweet;
 		$plusone=$thread_plusone;
+		$linkedin=$thread_linkedin;
 		if ($tweetit) {
 			$tweet_text=$book_title;
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
 	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents', 'besocial'));

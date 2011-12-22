@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -546,6 +546,7 @@ CREATE TABLE `${db_prefix}node` (
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
   `plusone` tinyint(1) NOT NULL DEFAULT '1',
+  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
@@ -596,7 +597,8 @@ CREATE TABLE `${db_prefix}thread` (
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
   `plusone` tinyint(1) NOT NULL DEFAULT '1',
-   PRIMARY KEY (`thread_id`)
+  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`thread_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
@@ -770,9 +772,9 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`) VALUES
-('1', '1', NOW(), NOW(), '1', '1', '1', '1', '1'),
-('2', '1', NOW(), NOW(), '1', '1', '0', '0', '0');
+INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
+(1, 1, NOW(), NOW(), 1, 1, 1, 1, 1, 1),
+(2, 1, NOW(), NOW(), 1, 1, 0, 0, 0, 0);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -838,8 +840,8 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`) VALUES
-('1', '1', 'folder', NOW(), NOW(), '0', '0', '0', '0', '1', '1', '1');
+INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
+(1, 1, 'folder', NOW(), NOW(), 0, 0, 0, 0, 1, 1, 1, 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -847,8 +849,8 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread_locale` (`thread_id`, `locale`, `name`, `title`) VALUES
-('1', 'fr', 'contenu', 'Contenu'),
-('1', 'en', 'content', 'Content');
+(1, 'fr', 'contenu', 'Contenu'),
+(1, 'en', 'content', 'Content');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -865,7 +867,7 @@ _SEP_;
 
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread_list` (`thread_id`, `number`) VALUES
-('1', '1');
+(1, 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

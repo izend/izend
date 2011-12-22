@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -18,7 +18,7 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
-<?php if ($node_comment or $node_morecomment or $node_ilike or $node_tweet or $node_plusone): ?>
+<?php if ($node_comment or $node_morecomment or $node_ilike or $node_tweet or $node_plusone or $node_linkedin): ?>
 <fieldset id="node_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -27,6 +27,7 @@
 <?php if ($node_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
 <?php if ($node_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
 <?php if ($node_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>
+<?php if ($node_linkedin): ?><img src="<?php echo $base_path; ?>/images/theme/edit/linkedin.png" alt="" /><?php endif; ?>
 </div>
 </fieldset>
 <?php endif; ?>

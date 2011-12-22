@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -89,7 +89,7 @@ function threadnode($lang, $thread, $node) {
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

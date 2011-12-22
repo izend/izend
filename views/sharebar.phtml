@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($ilike or $tweetit or $plusone): ?>
+<?php if ($ilike or $tweetit or $plusone or $linkedin): ?>
 <ul id="sharebar" class="menu sidebar">
 <?php if ($ilike): ?>
 <li class="ilike">
@@ -17,6 +17,11 @@
 <?php if ($tweetit): ?>
 <li class="tweetit">
 <?php echo $tweetit; ?>
+</li>
+<?php endif; ?>
+<?php if ($linkedin): ?>
+<li class="linkedin">
+<?php echo $linkedin; ?>
 </li>
 <?php endif; ?>
 <?php if ($plusone): ?>

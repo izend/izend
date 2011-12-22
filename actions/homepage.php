@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -18,11 +18,12 @@ function homepage($lang) {
 	$ilike=true;
 	$tweetit=true;
 	$plusone=true;
+	$linkedin=true;
 	if ($tweetit) {
 		$tweet_text=$sitename;
 		$tweetit=$tweet_text ? compact('tweet_text') : true;
 	}
-	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone'));
+	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
 

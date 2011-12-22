@@ -3,12 +3,17 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($ilike or $tweetit or $plusone): ?>
+<?php if ($ilike or $tweetit or $plusone or $linkedin): ?>
 <ul class="menu besocial">
+<?php if ($linkedin): ?>
+<li class="linkedin">
+<?php echo $linkedin; ?>
+</li>
+<?php endif; ?>
 <?php if ($tweetit): ?>
 <li class="tweetit">
 <?php echo $tweetit; ?>

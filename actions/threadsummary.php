@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -73,7 +73,7 @@ function threadsummary($lang, $thread) {
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_created', 'thread_modified', 'thread_contents'));
+	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_created', 'thread_modified', 'thread_contents'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

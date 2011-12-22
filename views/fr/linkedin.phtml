@@ -1,0 +1,19 @@
+<?php
+
+/**
+ *
+ * @copyright  2010-2011 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php head('javascript', 'http://platform.linkedin.com/in.js'); ?>
+<?php switch ($mode): ?>
+<?php case 'bar': ?>
+<script type="in/share" data-counter="top" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"></script>
+<?php break; ?>
+<?php case 'inline': ?>
+<script type="in/share" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"></script>
+<?php default: ?>
+<?php break; ?>
+<?php endswitch; ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,7 @@ function node($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
 
 	$node_comment=!$node_nocomment;
 	$node_morecomment=!$node_nomorecomment;
@@ -67,7 +67,7 @@ function node($lang, $arglist=false) {
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
-	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_contents'));
+	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_contents'));
 
 	$output = layout('standard', compact('toolbar', 'banner', 'content'));
 

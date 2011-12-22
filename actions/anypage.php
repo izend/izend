@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -27,8 +27,8 @@ function anypage($lang, $arglist=false) {
 
 	$besocial=false;
 	if ($page_contents) {
-		$ilike=$tweetit=$plusone=true;
-		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone'));
+		$ilike=$tweetit=$plusone=$linkedin=true;
+		$besocial=build('besocial', $lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
