@@ -3,17 +3,23 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <?php head('javascript', 'http://platform.linkedin.com/in.js'); ?>
+<?php $id = uniqid('id'); ?>
+<div id="<?php echo $id; ?>"></div>
+<script type="text/javascript">
+//<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-<script type="in/share" data-counter="top" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"></script>
+$('#<?php echo $id; ?>').replaceWith('<script type="in/share" data-counter="top" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"><\/script>');
 <?php break; ?>
 <?php case 'inline': ?>
-<script type="in/share" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"></script>
 <?php default: ?>
+$('#<?php echo $id; ?>').replaceWith('<script type="in/share" data-counter="right" data-url="<?php echo $base_url; ?>/<?php echo $request_path; ?>"><\/script>');
 <?php break; ?>
 <?php endswitch; ?>
+//]]>
+</script>
