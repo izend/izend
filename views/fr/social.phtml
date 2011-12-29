@@ -3,16 +3,16 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
-<p id="social" class="noprint">
-<a href="http://fr-fr.facebook.com/pages/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/facebook.png" alt="Facebook" title="Rejoignez-nous sur Facebook" /></a>
-<a href="http://www.twitter.com/#!/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/twitter.png" alt="Twitter" title="Suivez-nous sur Twitter" /></a>
-<a href="http://fr.linkedin.com/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/linkedin.png" alt="LinkedIn" title="Notre profil LinkedIn" /></a>
-<a href="<?php echo $base_path; ?>/fr/rss" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/rss.png" alt="RSS" title="Inscrivez-vous au flux RSS" /></a>
+<p id="socialbar" class="menu noprint">
+<a class="facebook" href="http://fr-fr.facebook.com/pages/" target="_blank" title="Rejoignez-nous sur Facebook" /><span>Facebook</span></a>
+<a class="twitter" href="http://www.twitter.com/#!/" target="_blank" title="Suivez-nous sur Twitter" /><span>Twitter</span></a>
+<a class="linkedin" href="http://fr.linkedin.com/" target="_blank" title="Connectez-vous à notre réseau sur LinkedIn" /><span>LinkedIn</span></a>
+<a class="rss" href="<?php echo $base_path; ?>/fr/rss" target="_blank" title="Inscrivez-vous au flux RSS" /><span>RSS</span></a
 </p>
 <script type="text/javascript">
-$('#social img').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );
+$('#socialbar a').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );
 </script>

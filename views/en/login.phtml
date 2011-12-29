@@ -10,7 +10,7 @@
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
-<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>What is your connection name?<?php else: ?>What is your email address?<?php endif; ?>"</p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>What is your connection name?<?php else: ?>What is your email address?<?php endif; ?></p>
 <p><input type="text" name="login_login" id="login_login" size="40" maxlength="100" title="Identifier" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo $login; ?>" /></p>
 <?php if ($with_name): ?>
 <p class="info">You may also enter your email address.</p>

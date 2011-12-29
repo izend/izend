@@ -3,16 +3,16 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
-<p id="social" class="noprint">
-<a href="http://www.facebook.com/pages/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/facebook.png" alt="Facebook" title="Connect with us on Facebook" /></a>
-<a href="http://www.twitter.com/#!/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/twitter.png" alt="Twitter" title="Follow us on Twitter" /></a>
-<a href="http://www.linkedin.com/" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/linkedin.png" alt="LinkedIn" title="Our LinkedIn profile" /></a>
-<a href="<?php echo $base_path; ?>/en/rss" target="_blank"><img src="<?php echo $base_path; ?>/images/theme/social/rss.png" alt="RSS" title="Subscribe to the RSS feed" /></a>
+<p id="socialbar" class="menu noprint">
+<a class="facebook" href="http://www.facebook.com/pages/" target="_blank" title="Join us on Facebook" /><span>Facebook</span></a>
+<a class="twitter" href="http://www.twitter.com/#!/" target="_blank" title="Follow us on Twitter" /><span>Twitter</span></a>
+<a class="linkedin" href="http://www.linkedin.com/" target="_blank" title="Connect to our network on LinkedIn" /><span>LinkedIn</span></a>
+<a class="rss" href="<?php echo $base_path; ?>/en/rss" target="_blank" title="Subscribe to the RSS feed" /><span>RSS</span></a>
 </p>
 <script type="text/javascript">
-$('#social img').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );
+$('#socialbar a').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );
 </script>

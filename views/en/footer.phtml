@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <div id="footer">
-<p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?> <span class="hidden">by <a href="http://www.izend.org">iZend</a></span>
+<p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?><span class="hidden"> &bull; <a href="http://www.izend.org">iZend</a></span>
 <?php if (!empty($contact_page)): ?>
 &bull;
 <a href="<?php echo $contact_page; ?>" rel="nofollow">Contact</a>
@@ -20,7 +20,7 @@
 <a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Your account">Account</a>
 <?php endif; ?>
 <?php if (!empty($nobody_page)): ?>
-<a class="btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">"Disconnect"</a>
+<a class="btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">Disconnect</a>
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage">Manage</a>
