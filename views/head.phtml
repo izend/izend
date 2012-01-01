@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -68,7 +68,7 @@
 <?php
 $name=$css['name'];
 $media=isset($css['media']) ? $css['media'] : '';
-if (substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
+if ($name[0] == '/' or substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
 	$url=$name;
 }
 else if (substr_compare('.css', $name, -4, 4) == 0) {
