@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -86,7 +86,7 @@ else {
 <?php
 $name=$js['name'];
 $param=isset($js['param']) ? $js['param'] : '';
-if (substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
+if ($name[0] == '/' or substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
 	$url=$name;
 }
 else if (substr_compare('.js', $name, -3, 3) == 0) {
