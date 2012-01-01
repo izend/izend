@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function folderpage($lang, $folder, $page) {
-	global $with_toolbar, $socialize;
+	global $with_toolbar;
 
 	$folder_id = thread_id($folder);
 	if (!$folder_id) {
