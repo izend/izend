@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -21,14 +21,14 @@ function node_id($node) {
 	return $r ? $r[0]['node_id'] : false;
 }
 
-function node_create($lang, $node_name, $node_title) {
+function node_create($lang, $user_id, $node_name, $node_title) {
 	$sqllang=db_sql_arg($lang, false);
 	$sqlname=db_sql_arg($node_name, true);
 	$sqltitle=db_sql_arg($node_title, true, true);
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="INSERT $tabnode SET created=NOW(), modified=created";
+	$sql="INSERT $tabnode SET user_id=$user_id, created=NOW(), modified=created";
 
 	$r = db_insert($sql);
 

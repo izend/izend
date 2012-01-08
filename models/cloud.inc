@@ -339,7 +339,6 @@ function cloud_untag_node($node_id) {
 		}
 		$in=implode(',', $id);
 		$sql="DELETE FROM $tabtag WHERE tag_id IN ($in)";
-		dump($sql);
 		$r = db_delete($sql);
 
 		if (!$r) {

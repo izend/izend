@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
-require_once 'models/node.inc';
 require_once 'models/cloud.inc';
+require_once 'models/node.inc';
 
 function thread_list($lang, $type, $strict=true) {
 	$sqllang=db_sql_arg($lang, false);
@@ -87,7 +87,7 @@ function thread_next_number() {
 	return $r ? $r[0]['number'] : false;
 }
 
-function thread_create($lang, $thread_name, $thread_title, $thread_type='thread', $thread_number=false) {
+function thread_create($lang, $user_id, $thread_name, $thread_title, $thread_type='thread', $thread_number=false) {
 	if (!$thread_type) {
 		$thread_type='thread';
 	}
@@ -108,7 +108,7 @@ function thread_create($lang, $thread_name, $thread_title, $thread_type='thread'
 
 	$tabthread=db_prefix_table('thread');
 
-	$sql="INSERT $tabthread SET thread_type=$sqltype, created=NOW(), modified=created";
+	$sql="INSERT $tabthread SET user_id=$user_id, thread_type=$sqltype, created=NOW(), modified=created";
 
 	$r = db_insert($sql);
 
@@ -309,7 +309,7 @@ function thread_node_prev($lang, $thread_id, $node_id, $strict=true) {
 	return $r ? $r[0] : false;
 }
 
-function thread_create_node($lang, $thread_id, $node_name, $node_title, $node_number=0) {
+function thread_create_node($lang, $user_id, $thread_id, $node_name, $node_title, $node_number=0) {
 	$tabthreadnode=db_prefix_table('thread_node');
 
 	$sql="SELECT COUNT(*)+1 AS n FROM $tabthreadnode WHERE thread_id=$thread_id";
@@ -326,7 +326,7 @@ function thread_create_node($lang, $thread_id, $node_name, $node_title, $node_nu
 		$node_number = $n;
 	}
 
-	$r = node_create($lang, $node_name, $node_title);
+	$r = node_create($lang, $user_id, $node_name, $node_title);
 
 	if (!$r) {
 		return false;

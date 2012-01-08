@@ -3,13 +3,14 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
-require_once 'userhasrole.php';
 require_once 'readarg.php';
 require_once 'strtofname.php';
+require_once 'userhasrole.php';
+require_once 'userprofile.php';
 require_once 'models/thread.inc';
 
 function threadeditsummary($lang, $clang, $thread) {
@@ -253,7 +254,8 @@ function threadeditsummary($lang, $clang, $thread) {
 				break;
 			}
 
-			$np = thread_create_node($clang, $thread_id, $new_node_name, $new_node_title, $new_node_number);
+			$user_id=user_profile('id');
+			$np = thread_create_node($clang, $user_id, $thread_id, $new_node_name, $new_node_title, $new_node_number);
 			if (!$np) {
 				break;
 			}

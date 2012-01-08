@@ -19,6 +19,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Sat Jan 7 2012
+
+UPDATE `izend_thread` SET user_id=1 WHERE user_id=0;
+UPDATE `izend_node` SET user_id=1 WHERE user_id=0;
+---
+
 Date:	Wed Dec 21 2011
 
 ALTER TABLE `izend_node` ADD `linkedin` BOOLEAN NOT NULL DEFAULT '1';
