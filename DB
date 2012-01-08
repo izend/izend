@@ -23,27 +23,27 @@ Date:	Sat Jan 7 2012
 
 UPDATE `izend_thread` SET user_id=1 WHERE user_id=0;
 UPDATE `izend_node` SET user_id=1 WHERE user_id=0;
----
+----
 
 Date:	Wed Dec 21 2011
 
 ALTER TABLE `izend_node` ADD `linkedin` BOOLEAN NOT NULL DEFAULT '1';
 ALTER TABLE `izend_thread` ADD `linkedin` BOOLEAN NOT NULL DEFAULT '1';
----
+----
 
 Date:	Mon Dec 19 2011
 
 	Accepts users with no name
 
 ALTER TABLE `izend_user` CHANGE `name` `name` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
----
+----
 
 Date:	Tue Nov 8 2011
 
 	Adds fields ilike/tweet/plusone to table thread
 
 ALTER TABLE `izend_thread` ADD `ilike` BOOLEAN NOT NULL DEFAULT '1', ADD `tweet` BOOLEAN NOT NULL DEFAULT '1', ADD `plusone` BOOLEAN NOT NULL DEFAULT '1';
----
+----
 
 Date:	Fri Oct 7 2011
 
@@ -209,6 +209,10 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   `modified` datetime NOT NULL,
   `nocomment` tinyint(1) NOT NULL DEFAULT '0',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
+  `ilike` tinyint(1) NOT NULL DEFAULT '1',
+  `tweet` tinyint(1) NOT NULL DEFAULT '1',
+  `plusone` tinyint(1) NOT NULL DEFAULT '1',
+  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -268,6 +272,10 @@ CREATE TABLE IF NOT EXISTS `izend_thread` (
   `nocloud` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
+  `ilike` tinyint(1) NOT NULL DEFAULT '1',
+  `tweet` tinyint(1) NOT NULL DEFAULT '1',
+  `plusone` tinyint(1) NOT NULL DEFAULT '1',
+  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`thread_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -306,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `izend_track` (
 
 CREATE TABLE IF NOT EXISTS `izend_user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
   `password` varchar(32) NOT NULL,
   `newpassword` varchar(32) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
