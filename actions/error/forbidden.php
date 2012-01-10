@@ -2,7 +2,7 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
+ * @copyright  2010-2012 izend.org
  * @version    1
  * @link       http://www.izend.org
  */
@@ -17,7 +17,7 @@ function forbidden($lang) {
 	$contact_page=url('contact', $lang);
 	$content = view('error/forbidden', $lang, compact('contact_page'));
 
-	$output = layout('standard', compact('header', 'banner', 'content'));
+	$output = layout('standard', compact('banner', 'content'));
 
 	header('HTTP/1.1 403 Forbidden');
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,9 @@ function head($type=false) {
 	static $head = array(
 		'javascripts' => array(
 			array('name' => 'jquery'),
+		),
+		'stylesheets' => array(
+			array('name' => 'content', 'media' => 'screen'),
 		),
 	);
 
