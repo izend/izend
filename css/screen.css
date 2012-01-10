@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    11
+ * @copyright  2010-2012 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
  
@@ -135,5 +135,5 @@ ol.tree li.filenode {font-style:normal;}
 #sidebar {margin:1em 0 1em 0;}
 
 #footer {font-size:small;margin:2em 0 1em 0;clear:both;}
-#footer p {margin: 0.5em 0 0.5em 0;}
+#footer p, #footer ul {margin: 0.5em 0;}
 #footer p img {vertical-align:middle;}

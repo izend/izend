@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,9 @@ require_once 'userisidentified.php';
 require_once 'userhasrole.php';
 
 function footer($lang, $components=false) {
-	$contact_page=$user_page=$admin_page=false;
+	$languages=false;
+
+	$contact_page=$user_page=$nobody_page=$admin_page=false;
 
 	$is_identified = user_is_identified();
 	$is_admin = user_has_role('administrator');
@@ -21,6 +23,11 @@ function footer($lang, $components=false) {
 	if ($components) {
 		foreach ($components as $v => $param) {
 			switch ($v) {
+				case 'languages':
+					if ($param) {
+						$languages = build('languages', $lang, $param);
+					}
+					break;
 				case 'contact':
 					if ($param) {
 						$contact_page=url('contact', $lang);
@@ -42,7 +49,7 @@ function footer($lang, $components=false) {
 		}
 	}
 
-	$output = view('footer', $lang, compact('contact_page', 'user_page', 'nobody_page', 'admin_page'));
+	$output = view('footer', $lang, compact('languages', 'contact_page', 'user_page', 'nobody_page', 'admin_page'));
 
 	return $output;
 }

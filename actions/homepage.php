@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -33,10 +33,11 @@ function homepage($lang) {
 	$contact=true;
 	$banner = build('banner', $lang, compact('languages', 'contact'));
 
-	$contact_page=url('contact', $lang);
-	$footer = build('content', $lang, 'footer', compact('contact_page'));
+	$languages=false;
+	$contact=false;
+	$footer = build('footer', $lang, compact('languages', 'contact'));
 
-	$output = layout('standard', compact('footer', 'banner', 'content', 'sharebar'));
+	$output = layout('standard', compact('sharebar', 'banner', 'footer', 'content'));
 
 	return $output;
 }
