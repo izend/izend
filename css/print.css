@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2012 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
  
@@ -46,6 +46,11 @@ img {page-break-inside:avoid;page-break-after:avoid;float:none}
 
 .top {margin-top:0 !important;}
 .bottom {margin-bottom:0 !important;}
+
+.left {float:left;margin:0 1em 0 0;}
+.right {float:right;margin:0 0 0 1em;}
+
+.date {font-style:italic;}
 
 div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
 div.hbar > *:first-child {margin-left:0;}
