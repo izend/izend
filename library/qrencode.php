@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,6 @@ function qrencode($s, $size=100, $quality='M') {
 	$url = 'http://chart.googleapis.com/chart';
 	$args = array(
 		'cht'	=> 'qr',
-		'chf'	=> 'bg,s,ffffff',
 		'chs'	=> "${size}x${size}",
 		'chld'	=> "${quality}|0",
 		'chl'	=> $s,
