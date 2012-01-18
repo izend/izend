@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    9
+ * @copyright  2010-2012 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -39,7 +39,7 @@ function home($lang) {
 	$page_contents = build('nodecontent', $lang, $root_node);
 
 	$besocial=$sharebar=false;
-	if ($page_contents or $page_comment) {
+	if ($page_contents) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
 		$plusone=$node_plusone;
