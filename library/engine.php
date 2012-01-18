@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright	2010-2011 izend.org
- * @version		7
+ * @copyright	2010-2012 izend.org
+ * @version		8
  * @link		http://www.izend.org
  */
 
@@ -116,7 +116,7 @@ function dispatch($languages) {
 		track($req, $track_visitor_agent);
 	}
 
-	$url = parse_url($req);
+	$url = @parse_url($req);
 	$path = isset($url['path']) ? trim(urldecode($url['path']), '/') : false;
 	$query = isset($url['query']) ? $url['query'] : false;
 
