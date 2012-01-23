@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -33,8 +33,8 @@ db_connect($db_url);
 
 require 'models/cloud.inc';
 
-$sql='SELECT thread_id FROM thread';
-
+$tabthread=db_prefix_table('thread');
+$sql="SELECT thread_id FROM $tabthread";
 $r = db_query($sql);
 
 if ($r) {
