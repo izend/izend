@@ -100,7 +100,7 @@ Check your answers and rerun the configuration.</p>
 <div class="alert">
 <p>The configuration of the database has failed with the error:</p>
 <p><?php echo $db_error; ?></p>
-<?php if ($db_flag): ?>
+<?php if ($db_flag and !$db_reuse): ?>
 <p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
 and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.</p>
 <?php endif; ?>

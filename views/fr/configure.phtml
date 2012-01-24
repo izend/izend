@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -100,7 +100,7 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <div class="alert">
 <p>La configuration de la base de données a échoué avec l'erreur&nbsp;:</p>
 <p><?php echo $db_error; ?></p>
-<?php if ($db_flag): ?>
+<?php if ($db_flag and !$db_reuse): ?>
 <p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
 et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.</p>
 <?php endif; ?>
