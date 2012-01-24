@@ -59,7 +59,7 @@ function home($lang) {
 	$validate=url('home', $lang);
 
 	$banner = build('banner', $lang, $with_toolbar ? compact('languages', 'contact', 'account', 'admin') : compact('languages', 'contact', 'account', 'admin', 'edit', 'validate'));
-	$toolbar = build('toolbar', $lang, $with_toolbar ? compact('edit', 'validate') : false);
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
 	$search_text='';
 	$search_url=url('search', $lang);
