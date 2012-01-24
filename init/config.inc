@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 <?php
@@ -51,7 +51,7 @@ $opening_time=0;	// $closing_time+30*60;
 
 global $system_languages;
 
-$system_languages=array('en', 'fr');	// 'en', 'fr'
+$system_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $i == 0 ? "'$languages[$i]'" : ", '$languages[$i]'"; } ?>);	// 'en', 'fr'
 
 global $supported_languages;
 
