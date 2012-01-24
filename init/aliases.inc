@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,7 @@ $aliases = array(
 		'home'			=> 'accueil',
 		'contact'		=> 'contact',
 		'user'			=> 'utilisateur',
-		'nobody'		=> 'déconnexion',
+		'nobody'		=> 'deconnexion',
 		'account'		=> 'compte',
 		'password'		=> 'mot-de-passe',
 		'newuser'		=> 'nouvel-utilisateur',
