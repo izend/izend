@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    8
+ * @copyright  2010-2012 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -313,6 +313,13 @@ function user_check_mail($mail, $user_id=false) {
 }
 
 function user_search($s, $pagesize=false, $page=1) {
+	if (!is_numeric($pagesize) or $pagesize < 1) {
+		$pagesize=false;
+	}
+	else if (!is_numeric($page) or $page < 1) {
+		$page=1;
+	}
+
 	preg_match_all('/(\S+)/', $s, $r);
 	$termlist = array_unique($r[0]);
 
