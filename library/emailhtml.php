@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -40,9 +40,13 @@ _SEP_;
 				$filetype=file_mime_type($fname, false);
 				if (strpos($filetype, 'image') !== 0)
 					continue;
-				$base64=chunk_split(base64_encode(file_get_contents($fname)));
-				if (!$base64)
+				$data=file_get_contents($fname);
+				if (get_magic_quotes_runtime()) {
+					$data = stripslashes($data);
+				}
+				if (!$data)
 					continue;
+				$base64=chunk_split(base64_encode($data));
 				$cid=md5(uniqid('cid'));
 				$qfname=preg_quote($url);
 				$pattern[]='#(<img[^>]+src=)"' . $qfname . '"([^>]*>)#is';

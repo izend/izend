@@ -2,12 +2,13 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
 ini_set('arg_separator.output',		'&amp;');
+ini_set('magic_quotes_gpc',			0);
 ini_set('magic_quotes_runtime',		0);
 ini_set('magic_quotes_sybase',		0);
 ini_set('register_globals',			0);

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -31,6 +31,10 @@ function read_file($file, $startline=0, $endline=0) {
 	$s=implode('', $lines);
 
 	$s=rtrim($s);
+
+	if (get_magic_quotes_runtime()) {
+		$s = stripslashes($s);
+	}
 
 	return $s;
 }

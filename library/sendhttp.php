@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -69,6 +69,9 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 					$data = file_get_contents($v['tmp_name']);
 					if ($data === false) {
 						break;
+					}
+					if (get_magic_quotes_runtime()) {
+						$data = stripslashes($data);
 					}
 					$content_string .= '--' . $boundary . "\r\n";
 					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . "\r\n";

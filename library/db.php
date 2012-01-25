@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -39,6 +39,11 @@ function db_query($sql) {
 	if ($found) {
 		$r = array();
 		while ($row = mysql_fetch_assoc($result)) {
+			if (get_magic_quotes_runtime()) {
+				foreach ($row as $k => &$v) {
+					$v = stripslashes($v);
+				}
+			}
 			$r[] = $row;
 		}
 	}
