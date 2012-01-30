@@ -11,6 +11,7 @@
 .submit_cancel {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/cancel.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_change {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/change.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_comment {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/comment.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_configure {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/configure.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_confirm {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/confirm.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_delete {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/delete.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_edit {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/edit.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}

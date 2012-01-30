@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    3
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -30,7 +30,7 @@ Choose this configuration to put on-line a site with limited resources.
 Note that <b>iZend</b> can occupy very little space on disk.</p>
 <p>To exploit the full potential of <b>iZend</b>, you need a database server.
 The configurator can create a new database or use an already existing database.
-<b>IMPORTANT</b>: If the database is shared with other programs, ask the configurator to add a prefix to the table names.
+<b>IMPORTANT</b>: If the database is shared, ask the configurator to add a prefix to the table names.
 In any case, using a prefix is safer.</p>
 <p>NOTE: If you develop the site locally before it is put on-line, which is recommended, use the same parameters on both servers.</p>
 <h5 id="configuration">Configuration</h5>
@@ -99,7 +99,7 @@ Check your answers and rerun the configuration.</p>
 <?php if ($db_error): ?>
 <div class="alert">
 <p>The configuration of the database has failed with the error:</p>
-<p><?php echo $db_error; ?></p>
+<p><?php echo htmlspecialchars($db_error); ?></p>
 <?php if ($db_flag and !$db_reuse): ?>
 <p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
 and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.</p>
@@ -183,5 +183,5 @@ and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user
 <p class="error">Enter a combination of letters and digits of at least 6 characters.</p>
 <?php endif; ?>
 <?php endif; ?>
-<p><button type="submit" name="configure_configure" id="configure_configure" value="configure">Configure</button></p>
+<p><input type="submit" class="submit_configure" name="configure_configure" id="configure_configure" value="Configure" /></p>
 </form>

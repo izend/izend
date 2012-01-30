@@ -14,7 +14,7 @@ a:hover {color:#333333;text-decoration:none;}
 
 body {color:#333333;width:960px;margin-left:150px;}
 
-@media (min-device-width:481px) and (max-device-width:1024px) {
+@media (max-device-width:1024px) {
 body {margin:auto;}
 }
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -30,7 +30,7 @@ Optez pour cette configuration pour mettre en ligne un site avec des ressources 
 Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
 <p>Pour exploiter tout le potentiel d'<b>iZend</b>, vous devez disposer d'un serveur de bases de données.
 Le configurateur peut créer une nouvelle base de données ou utiliser une base de données déjà existante.
-<b>IMPORTANT</b>&nbsp;: Si la base de données est partagée par plusieurs logiciels, demandez au configurateur d'ajouter un préfixe aux noms des tables.
+<b>IMPORTANT</b>&nbsp;: Si la base de données est partagée, demandez au configurateur d'ajouter un préfixe aux noms des tables.
 Dans tous les cas, utilisez un préfixe est plus prudent.</p>
 <p>NOTE&nbsp;: Si vous développez le site en local avant de le mettre en ligne, ce qui est recommandé, utilisez les mêmes paramètres sur les deux serveurs.</p>
 <h5 id="configuration">Configuration</h5>
@@ -99,7 +99,7 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <?php if ($db_error): ?>
 <div class="alert">
 <p>La configuration de la base de données a échoué avec l'erreur&nbsp;:</p>
-<p><?php echo $db_error; ?></p>
+<p><?php echo htmlspecialchars($db_error); ?></p>
 <?php if ($db_flag and !$db_reuse): ?>
 <p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
 et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.</p>
@@ -183,5 +183,5 @@ et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les
 <p class="error">Entrez une combinaison de lettres et de chiffres d'au moins 6 caractères.</p>
 <?php endif; ?>
 <?php endif; ?>
-<p><button type="submit" name="configure_configure" id="configure_configure" value="configure">Configurer</button></p>
+<p><input type="submit" class="submit_configure" name="configure_configure" id="configure_configure" value="Configurer" /></p>
 </form>

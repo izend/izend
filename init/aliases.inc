@@ -17,8 +17,8 @@ $aliases = array(
 	),
 	'en' => array(
 		'install'		=> 'install',
-		'home'			=> 'home',
 		'homepage'		=> 'home',
+		'home'			=> 'home',
 		'contact'		=> 'contact',
 		'user'			=> 'user',
 		'nobody'		=> 'disconnect',

@@ -11,6 +11,7 @@
 .submit_cancel {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/annuler.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_change {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/changer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_comment {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/commenter.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_configure {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/configurer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_confirm {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/confirmer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_delete {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/supprimer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
 .submit_edit {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/editer.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
