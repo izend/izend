@@ -72,7 +72,6 @@ function banner($lang, $components=false) {
 					if ($param) {
 						if ($is_writer) {
 							$view_page=$param;
-							$view=true;
 						}
 					}
 					break;

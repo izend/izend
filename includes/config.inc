@@ -15,7 +15,7 @@ global $sitename, $webmaster, $mailer, $blackmaillist, $blacknamelist;
 
 $sitename = 'izend.org';
 $webmaster = 'izend@izend.org';
-$mailer = 'izend';
+$mailer = 'iZend';
 $blackmaillist = array('izend@izend.org', 'webmaster@izend.org', 'keymaster@izend.org');
 $blacknamelist = array('izend', 'webmaster', 'keymaster');
 

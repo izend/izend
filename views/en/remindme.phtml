@@ -18,7 +18,7 @@
 <p><input name="remindme_confirmed" id="remindme_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I want to receive a new password</p>
 <?php if ($with_captcha): ?>
 <p>
-<img src="<?php echo $base_path; ?>/captcha/remindme" alt="" title="Verification code" />
+<img src="<?php echo $base_path; ?>/captcha/remindme" alt="" height="40px" title="Verification code" />
 &nbsp;:&nbsp;
 <input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
 </p>

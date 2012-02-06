@@ -21,7 +21,7 @@
 <p><input name="register_confirmed" id="register_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
 <?php if ($with_captcha): ?>
 <p>
-<img src="<?php echo $base_path; ?>/captcha/register" alt="" title="Verification code" />
+<img src="<?php echo $base_path; ?>/captcha/register" alt="" height="40px" title="Verification code" />
 &nbsp;:&nbsp;
 <input type="text" name="register_code" id="register_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'register_register')" value="" />
 </p>
