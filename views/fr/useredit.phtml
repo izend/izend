@@ -8,18 +8,18 @@
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post" class="compact">
+<form action="" method="post">
 <input type="hidden" name="useredit_token" value="<?php echo $token; ?>" />
 <?php if ($user_accessed): ?>
 <input type="hidden" name="useredit_accessed" value="<?php echo $user_accessed; ?>" />
 <?php endif; ?>
 <?php if ($with_name): ?>
-<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Identifiant&nbsp;:</p>
+<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Nom de connexion&nbsp;:</p>
 <p><input id="useredit_name" type="text" name="useredit_name" size="20" maxlength="20" title="2 à 20 lettres" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /><?php endif; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_name" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
-<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Email&nbsp;:</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Adresse d'email&nbsp;:</p>
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Site web&nbsp;:</p>
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
@@ -87,7 +87,7 @@ le compte
 <?php endif; ?>
 <?php if ($infos): extract($infos); ?>
 <?php if ($account_modified): ?>
-<p>Les informations personnelles ont bien été modifiées.</p>
+<p>Les données du compte ont été modifiées.</p>
 <?php endif; ?>
 <?php if ($password_changed): ?>
 <p>Le mot de passe a été changé.</p>
