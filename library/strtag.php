@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -15,7 +15,7 @@ function strtag($text) {
 
 	$bbox = imageftbbox($fontsize, 0, $fontfile, $text);
 
-	$w=$bbox[2]+($len-1)*20;
+	$w=$bbox[2]+$len*15;
 	$h=40;
 
 	$img = @imagecreatetruecolor($w, $h) or die();
