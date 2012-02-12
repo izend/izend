@@ -3,10 +3,10 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <h3>Autorisation requise</h3>
 <p>Ce serveur n'a pas été en mesure de vérifier que vous avez l'autorisation d'accéder à l'URL demandée.
-<?php if ($contact_page): ?>Si vous pensez qu'il s'agit d'une erreur du serveur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>
+<?php if (!empty($contact_page)): ?>Si vous pensez qu'il s'agit d'une erreur du serveur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>

@@ -3,10 +3,10 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <h3>Accès interdit</h3>
 <p>Vous n'avez pas le droit d'accéder à l'objet demandé.
-<?php if ($contact_page): ?>Si vous pensez qu'il s'agit d'une erreur du serveur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>
+<?php if (!empty($contact_page)): ?>Si vous pensez qu'il s'agit d'une erreur du serveur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>

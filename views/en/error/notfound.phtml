@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <h3>URL not found</h3>
 <p>The requested URL was not found on this server.
 If you entered the URL manually please check your input and try again.
-<?php if ($contact_page): ?>If you think this is a server error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<?php if (!empty($contact_page)): ?>If you think this is a server error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>

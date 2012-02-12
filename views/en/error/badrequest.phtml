@@ -3,10 +3,10 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <h3>Bad request</h3>
 <p>The service has received a malformed or incomplete request which could not be interpreted.
-<?php if ($contact_page): ?>If you think this is a server error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<?php if (!empty($contact_page)): ?>If you think this is a server error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
