@@ -17,7 +17,7 @@
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
-<p class="info">Your password will be sent at this address.</p>
+<p class="info">Your password will be sent to this address.</p>
 <p><input name="register_confirmed" id="register_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
 <?php if ($with_captcha): ?>
 <p>
