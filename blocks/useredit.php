@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -26,6 +26,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
 	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
 	$with_locale=count($system_languages) > 1 ? true : false;
+	$with_website=true;
 
 	$confirmed=false;
 
@@ -159,11 +160,13 @@ function useredit($lang, $user_id, $administrator=false) {
 				$duplicated_mail=true;
 			}
 
-			if ($user_website and !validate_website($user_website)) {
-				$bad_website=true;
-			}
-			else {
-				$user_website=normalize_website($user_website);
+			if ($user_website) {
+				if (!validate_website($user_website)) {
+					$bad_website=true;
+				}
+				else {
+					$user_website=normalize_website($user_website);
+				}
 			}
 
 			if ($with_locale and !$user_locale) {
@@ -261,7 +264,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'user_website', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

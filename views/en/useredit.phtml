@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -21,8 +21,12 @@
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Email address:</p>
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php else: ?>
+<input type="hidden" name="useredit_website" value="<?php echo htmlspecialchars($useredit_website, ENT_COMPAT, 'UTF-8'); ?>" />
+<?php endif; ?>
 <?php if ($with_locale): ?>
 <p><?php foreach ($system_languages as $lang): ?> <input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $user_locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
 <?php else: ?>
