@@ -49,7 +49,7 @@ function user_create($name, $password, $mail, $locale='en') {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT IGNORE $tabuser (name, password, mail, created, locale) VALUES ($sqlname, $sqlpassword, $sqlmail, NOw(), $sqllocale)";
+	$sql="INSERT IGNORE $tabuser (name, password, mail, created, locale) VALUES ($sqlname, $sqlpassword, $sqlmail, NOW(), $sqllocale)";
 
 	$r = db_insert($sql);
 

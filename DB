@@ -19,6 +19,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Sat Feb 18 2012
+
+ALTER TABLE `izend_user` CHANGE `name` `name` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+----
+
 Date:	Sat Jan 7 2012
 
 UPDATE `izend_thread` SET user_id=1 WHERE user_id=0;
