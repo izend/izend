@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -70,7 +70,7 @@ function nodecontent($lang, $node_id) {
 					$autostart = $c['content_longtail_autostart'] == 1 ? true : false;
 					$repeat = $c['content_longtail_repeat'] == 1 ? true : false;
 					if ($file) {
-						head('javascript', 'swfobject');
+						head('javascript', 'jwplayer');
 						$contents[] = compact('type', 'file', 'image', 'width', 'height', 'icons', 'skin', 'duration', 'autostart', 'repeat');
 					}
 					break;
