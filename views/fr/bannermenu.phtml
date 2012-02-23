@@ -3,13 +3,12 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
-<div id="bannermenu">
 <?php if (!empty($contact_page) or !empty($user_page) or !empty($nobody_page) or !empty($account_page) or !empty($edit_page) or !empty($view_page) or !empty($validate_page) or !empty($admin_page)): ?>
-<ul class="menu menubar">
+<ul id="bannermenu" class="menu menubar">
 <?php if (!empty($contact_page)): ?>
 <li><a class="btn_mail" href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter"><span>Contact</span></a></li>
 <?php endif; ?>
@@ -35,4 +34,3 @@
 <?php endif; ?>
 </ul>
 <?php endif; ?>
-</div>

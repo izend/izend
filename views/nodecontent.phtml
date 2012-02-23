@@ -33,7 +33,9 @@ foreach ($contents as $c) {
 		case 'longtail':
 			extract($c);	/* file image width height skin icons duration autostart repeat */
 			$id = uniqid('id');
-			echo '<div id="', $id, '" class="longtail"></div>', PHP_EOL;
+			echo '<div class="longtail">', PHP_EOL;
+			echo '<div id="', $id, '"></div>', PHP_EOL;
+			echo '</div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
 			echo 'jwplayer("', $id, '").setup({', PHP_EOL;
 			echo '    flashplayer: "/longtail/player.swf",', PHP_EOL;

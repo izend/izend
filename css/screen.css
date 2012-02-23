@@ -81,7 +81,7 @@ div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
-.clear {clear: both;}
+.clear {clear:both;}
 
 .block {display:block !important;}
 .inline {display:inline !important;}
@@ -112,7 +112,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 .aright {text-align:right;}
 .acenter {text-align:center;}
 
-.rounded {-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
+.rounded {border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;}
 
 .cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 .cloud {padding:0;margin:0;text-align:center;}

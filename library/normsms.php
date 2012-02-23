@@ -66,3 +66,4 @@ function normsms($s) {
 
 	return ereg_replace('[^' . implode($gsmset) . ']', '.', str_replace($from, $to, $s));
 }
+
