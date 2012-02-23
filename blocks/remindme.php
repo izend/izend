@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -25,6 +25,10 @@ function remindme($lang, $login=false) {
 	}
 
 	$login=$confirmed=$code=$token=false;
+
+	if (isset($_SESSION['login'])) {
+		$login=$_SESSION['login'];
+	}
 
 	switch($action) {
 		case 'remindme':

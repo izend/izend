@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    7
+ * @copyright  2010-2012 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -132,6 +132,8 @@ function register($lang) {
 				$internal_error=true;
 				break;
 			}
+
+			$_SESSION['login'] = $name ? $name : $mail;
 
 			$user_id = $r;
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2012 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -25,6 +25,10 @@ function login($lang) {
 
 	$login=$password=$code=$token=false;
 
+	if (isset($_SESSION['login'])) {
+		$login=$_SESSION['login'];
+	}
+
 	switch($action) {
 		case 'enter':
 			if (isset($_POST['login_login'])) {
@@ -43,6 +47,8 @@ function login($lang) {
 		default:
 			break;
 	}
+
+	$_SESSION['login']=$login;
 
 	$missing_code=false;
 	$bad_code=false;
