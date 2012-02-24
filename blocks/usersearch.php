@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -12,6 +12,7 @@ require_once 'models/user.inc';
 
 function usersearch($lang) {
 	$with_name=true;
+	$with_website=true;
 
 	$action='init';
 	if (isset($_POST['usersearch_search']) or isset($_GET['q'])) {
@@ -66,7 +67,7 @@ function usersearch($lang) {
 			break;
 	}
 
-	$output = view('usersearch', $lang, compact('what', 'page', 'pagesize', 'count', 'result', 'with_name'));
+	$output = view('usersearch', $lang, compact('what', 'page', 'pagesize', 'count', 'result', 'with_name', 'with_website'));
 
 	return $output;
 }
