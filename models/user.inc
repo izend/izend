@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -204,6 +204,30 @@ function user_get_role($user_id) {
 	}
 
 	return $role;
+}
+
+function user_set_role($user_id, $role_names) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$tabuserrole=db_prefix_table('user_role');
+
+	$sql="DELETE FROM $tabuserrole WHERE user_id=$user_id";
+
+	$r = db_delete($sql);
+
+	if ($role_names) {
+		$sqlrolenames=implode(',', db_sql_arg($role_names, true));
+
+		$tabrole=db_prefix_table('role');
+
+		$sql="INSERT IGNORE user_role (user_id, role_id) SELECT $user_id, r.role_id FROM role r WHERE r.name IN ($sqlrolenames)";
+
+		$r = db_insert($sql);
+	}
+
+	return true;
 }
 
 function user_find($login) {

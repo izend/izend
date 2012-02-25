@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    10
+ * @copyright  2010-2012 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -48,6 +48,10 @@ $system_languages=array('en', 'fr');	// 'en', 'fr'
 global $supported_languages;
 
 $supported_languages=array('en', 'fr');	// 'en', 'fr'
+
+global $supported_roles;
+
+$supported_roles=array('administrator', 'writer', 'reader', 'moderator');
 
 global $supported_threads;
 

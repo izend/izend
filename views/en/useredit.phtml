@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011 izend.org
- * @version    8
+ * @copyright  2011-2012 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -21,6 +21,10 @@
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Email address:</p>
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php if ($with_role): ?>
+<?php $rolename=array('administrator' => 'administrator', 'writer' => 'writer', 'reader' => 'reader', 'moderator' => 'moderator'); ?>
+<p><?php foreach ($supported_roles as $role): ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>" <?php if (in_array($role, $user_role)) echo 'checked="checked"'; ?> /> <?php echo $rolename[$role]; ?><?php endforeach; ?></p>
+<?php endif; ?>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>

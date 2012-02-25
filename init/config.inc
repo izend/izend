@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    11
+ * @copyright  2010-2012 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 <?php
@@ -56,6 +56,10 @@ $system_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $i =
 global $supported_languages;
 
 $supported_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $i == 0 ? "'$languages[$i]'" : ", '$languages[$i]'"; } ?>);	// 'en', 'fr'
+
+global $supported_roles;
+
+$supported_roles=array('administrator', 'writer', 'reader', 'moderator');
 
 global $supported_threads;
 

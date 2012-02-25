@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011 izend.org
- * @version    7
+ * @copyright  2011-2012 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -14,18 +14,20 @@ require_once 'userprofile.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
 require_once 'validatepassword.php';
+require_once 'validaterole.php';
 require_once 'validateusername.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function useredit($lang, $user_id, $administrator=false) {
-	global $system_languages;
+	global $system_languages, $supported_roles;
 
-	$with_name=false;
+	$with_name=true;
 	$with_status=($user_id != 1 and $administrator == true);
 	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
 	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
 	$with_locale=count($system_languages) > 1 ? true : false;
+	$with_role=($user_id != 1 and $administrator == true);
 	$with_website=true;
 
 	$confirmed=false;
@@ -58,6 +60,8 @@ function useredit($lang, $user_id, $administrator=false) {
 	$user_active=$user_banned=false;
 	$user_accessed=false;
 
+	$user_role=array();
+
 	$user_newpassword=false;
 
 	$token=false;
@@ -70,6 +74,10 @@ function useredit($lang, $user_id, $administrator=false) {
 				extract($r);
 			}
 			$user_newpassword=false;
+
+			if ($with_role) {
+				$user_role = user_get_role($user_id);
+			}
 			break;
 		case 'modify':
 		case 'change':
@@ -86,6 +94,11 @@ function useredit($lang, $user_id, $administrator=false) {
 			}
 			if (isset($_POST['useredit_locale'])) {
 				$user_locale=readarg($_POST['useredit_locale']);
+			}
+			if ($with_role) {
+				if (isset($_POST['useredit_role'])) {
+					$user_role=readarg($_POST['useredit_role']);
+				}
 			}
 			if ($with_status) {
 				if (isset($_POST['useredit_active'])) {
@@ -119,6 +132,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$missing_mail=false;
 	$bad_mail=false;
 	$duplicated_mail=false;
+	$bad_role=false;
 	$bad_website=false;
 	$missing_locale=false;
 	$bad_locale=false;
@@ -160,6 +174,15 @@ function useredit($lang, $user_id, $administrator=false) {
 				$duplicated_mail=true;
 			}
 
+			if ($user_role) {
+				foreach ($user_role as $role) {
+					if (!validate_role($role)) {
+						$bad_role=true;
+						break;
+					}
+				}
+			}
+
 			if ($user_website) {
 				if (!validate_website($user_website)) {
 					$bad_website=true;
@@ -196,7 +219,7 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	switch($action) {
 		case 'modify':
-			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_locale or $bad_locale) {
+			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_role or $bad_website or $missing_locale or $bad_locale) {
 				break;
 			}
 
@@ -211,6 +234,14 @@ function useredit($lang, $user_id, $administrator=false) {
 			$_SESSION['user']['mail'] = $user_mail;
 			$_SESSION['user']['website'] = $user_website;
 			$_SESSION['user']['locale'] = $user_locale;
+
+			if ($with_role) {
+				$r = user_set_role($user_id, $user_role);
+				if (!$r) {
+					$internal_error=true;
+					break;
+				}
+			}
 
 			if ($with_status) {
 				$r = user_set_status($user_id, $user_active, $user_banned);
@@ -264,7 +295,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }
