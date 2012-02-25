@@ -84,7 +84,7 @@ function useredit($lang, $user_id, $administrator=false) {
 		case 'delete':
 		case 'cancel':
 			if (isset($_POST['useredit_name'])) {
-				$user_name=strtolower(strflat(readarg($_POST['useredit_name'])))                                                                                                      ;
+				$user_name=strtolower(strflat(readarg($_POST['useredit_name'])));
 			}
 			if (isset($_POST['useredit_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['useredit_mail'])));

@@ -222,7 +222,7 @@ function user_set_role($user_id, $role_names) {
 
 		$tabrole=db_prefix_table('role');
 
-		$sql="INSERT IGNORE user_role (user_id, role_id) SELECT $user_id, r.role_id FROM role r WHERE r.name IN ($sqlrolenames)";
+		$sql="INSERT IGNORE $tabuserrole (user_id, role_id) SELECT $user_id, r.role_id FROM $tabrole r WHERE r.name IN ($sqlrolenames)";
 
 		$r = db_insert($sql);
 	}
