@@ -60,7 +60,7 @@ function useredit($lang, $user_id, $administrator=false) {
 	$user_active=$user_banned=false;
 	$user_accessed=false;
 
-	$user_role=array();
+	$user_role=false;
 
 	$user_newpassword=false;
 

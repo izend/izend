@@ -23,7 +23,7 @@
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php if ($with_role): ?>
 <?php $rolename=array('administrator' => 'administrator', 'writer' => 'writer', 'reader' => 'reader', 'moderator' => 'moderator'); ?>
-<p><?php foreach ($supported_roles as $role): ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>" <?php if (in_array($role, $user_role)) echo 'checked="checked"'; ?> /> <?php echo $rolename[$role]; ?><?php endforeach; ?></p>
+<p><?php foreach ($supported_roles as $role): ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>" <?php if ($user_role and in_array($role, $user_role)) echo 'checked="checked"'; ?> /> <?php echo $rolename[$role]; ?><?php endforeach; ?></p>
 <?php endif; ?>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
