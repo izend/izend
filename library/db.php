@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -79,6 +79,14 @@ function db_insert_id() {
 
 function db_sql_arg($s, $escape=true, $optional=false) {
 	global $db_conn;
+
+	if (is_array($s)) {
+		$r=array();
+		foreach ($s as $ss) {
+			$r[]=db_sql_arg($ss, $escape, $optional);
+		}
+		return $r;
+	}
 
 	if ($s) {
 		return '\'' . ($escape ? mysql_real_escape_string($s, $db_conn) : $s) . '\'';	// MUST be connected!
