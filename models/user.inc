@@ -218,7 +218,10 @@ function user_set_role($user_id, $role_names) {
 	$r = db_delete($sql);
 
 	if ($role_names) {
-		$sqlrolenames=implode(',', db_sql_arg($role_names, true));
+		$sqlrolenames=db_sql_arg($role_names, true);
+		if (is_array($sqlrolenames)) {
+			$sqlrolenames=implode(',', $sqlrolenames);
+		}
 
 		$tabrole=db_prefix_table('role');
 
