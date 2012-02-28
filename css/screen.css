@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
  
@@ -71,7 +71,8 @@ div.gallery img {border-color:#ffffff;border-style:solid;border-width:0 3px 0 3p
 div.gallery img:first-child {border-left-width:0 !important;}
 div.gallery img:last-child {border-right-width:0 !important;}
 
-.shadow {-moz-box-shadow:3px 3px 5px #aaaaaa;-webkit-box-shadow:3px 3px 5px #aaaaaa;box-shadow:3px 3px 5px #aaaaaa;margin-right:3px !important;margin-bottom:5px !important;}
+.round {border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;}
+.shadow {box-shadow:2px 2px 3px #999999;-webkit-box-shadow:2px 2px 3px #999999;-moz-box-shadow:2px 2px 3px #999999;}
 
 div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
 div.hbar > *:first-child {margin-left:0;}
