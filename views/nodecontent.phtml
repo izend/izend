@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -38,21 +38,21 @@ foreach ($contents as $c) {
 			echo '</div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
 			echo 'jwplayer("', $id, '").setup({', PHP_EOL;
-			echo '    flashplayer: "/longtail/player.swf",', PHP_EOL;
+			echo '    flashplayer: "', $base_path, '/longtail/player.swf",', PHP_EOL;
 			echo '    id: "', $id, '",', PHP_EOL;
 			echo '    width: ', $width, ',', PHP_EOL;
 			echo '    height: ', $height, ',', PHP_EOL;
 			if ($image) {
-				echo '    image: "', $image, '",', PHP_EOL;
+				echo '    image: "', $base_path, $image, '",', PHP_EOL;
 			}
 			if ($file) {
-				echo '    file: "', $file, '",', PHP_EOL;
+				echo '    file: "', $base_path, $file, '",', PHP_EOL;
 			}
 			if ($duration) {
 				echo '    duration: "', $duration, '",', PHP_EOL;
 			}
 			if ($skin) {
-				echo '    skin: "', $skin, '",', PHP_EOL;
+				echo '    skin: "', $base_path, $skin, '",', PHP_EOL;
 			}
 			echo '    icons: "', $icons ? 'true' : 'false', '",', PHP_EOL;
 			echo '    repeat: "', $repeat ? 'always' : 'none', '",', PHP_EOL;
