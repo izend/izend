@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2012 izend.org
- * @version		8
+ * @version		9
  * @link		http://www.izend.org
  */
 
@@ -147,7 +147,7 @@ function dispatch($languages) {
 	$request_path=$path ? $lang . '/' . $path : $lang;
 
 	$action=$args=$params=false;
-	if ($closing_time and $closing_time <= time()) {
+	if ($closing_time) {
 		$action='error/serviceunavailable';
 		$args=array($closing_time, $opening_time);
 	}
