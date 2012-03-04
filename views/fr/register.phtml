@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2012 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -16,8 +16,13 @@
 <p class="info">Choisissez un pseudo de 2 à 20 lettres.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
-<p><input type="text" name="register_mail" id="register_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $mail; ?>" /></p>
+<p><input type="text" name="register_mail" id="register_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo $mail; ?>" /></p>
 <p class="info">Votre mot de passe sera envoyé à cette adresse.</p>
+<?php if ($with_password): ?>
+<p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choisissez un mot de passe&nbsp;:</p>
+<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $password; ?>" /></p>
+<p class="info">Entrez au moins 6 caractères dont 1 chiffre.</p>
+<?php endif; ?>
 <p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> onkeypress="return focusonenter(event, 'register_code')"/>&nbsp;Je souhaite créer un compte</p>
 <?php if ($with_captcha): ?>
 <p>
@@ -43,6 +48,11 @@
 <p>N'oubliez pas votre adresse d'email.</p>
 <?php elseif ($bad_mail): ?>
 <p>L'adresse d'email est invalide.</p>
+<?php endif; ?>
+<?php if ($missing_password): ?>
+<p>Vous n'avez pas entré votre mot de passe.</p>
+<?php elseif ($bad_password): ?>
+<p>Un mot de passe doit contenir un chiffre et au moins 6 caractères.</p>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Cochez la case de confirmation.</p>

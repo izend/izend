@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -13,11 +13,13 @@ require_once 'readarg.php';
 require_once 'strflat.php';
 require_once 'tokenid.php';
 require_once 'validatemail.php';
+require_once 'validatepassword.php';
 require_once 'validateusername.php';
 require_once 'models/user.inc';
 
 function register($lang) {
 	$with_name=true;
+	$with_password=true;
 	$with_captcha=true;
 
 	$action='init';
@@ -25,7 +27,7 @@ function register($lang) {
 		$action='register';
 	}
 
-	$name=$mail=$confirmed=$code=$token=false;
+	$name=$mail=$password=$confirmed=$code=$token=false;
 	$locale=$lang;
 
 	switch($action) {
@@ -35,6 +37,9 @@ function register($lang) {
 			}
 			if (isset($_POST['register_mail'])) {
 				$mail=strtolower(strflat(readarg($_POST['register_mail'])));
+			}
+			if ($with_password) {
+				$password=readarg($_POST['register_password']);
 			}
 			if (isset($_POST['register_confirmed'])) {
 				$confirmed=readarg($_POST['register_confirmed']) == 'on' ? true : false;
@@ -61,6 +66,8 @@ function register($lang) {
 	$missing_mail=false;
 	$bad_mail=false;
 	$duplicated_mail=false;
+	$missing_password=false;
+	$bad_password=false;
 	$missing_confirmation=false;
 
 	$account_created=false;
@@ -107,6 +114,14 @@ function register($lang) {
 			else if (!user_check_mail($mail)) {
 				$duplicated_mail=true;
 			}
+			if ($with_password) {
+				if (!$password) {
+					$missing_password=true;
+				}
+				else if (!validate_password($password)) {
+					$bad_password=true;
+				}
+			}
 			if (!$confirmed) {
 				$missing_confirmation=true;
 			}
@@ -118,13 +133,15 @@ function register($lang) {
 
 	switch($action) {
 		case 'register':
-			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $missing_confirmation) {
+			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $missing_password or $bad_password or $missing_confirmation) {
 				break;
 			}
 
-			require_once 'newpassword.php';
+			if (!$with_password) {
+				require_once 'newpassword.php';
 
-			$password=newpassword();
+				$password=newpassword();
+			}
 
 			$r = user_create($name, $password, $mail, $locale);
 
@@ -159,6 +176,8 @@ function register($lang) {
 			$msg = $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $mail;
 			emailme($subject, $msg);
 
+			$password=false;
+
 			$account_created=true;
 			$confirmed=false;
 
@@ -176,10 +195,10 @@ function register($lang) {
 
 	$_SESSION['register_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'name', 'mail', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_password', 'name', 'mail', 'password', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }
