@@ -87,6 +87,9 @@ else if ($missing_name or $bad_name or $duplicated_name) {
 else if ($missing_mail or $bad_mail or $duplicated_mail) {
 	$focus='#register_mail';
 }
+else if ($missing_password or $bad_password) {
+	$focus='#register_password';
+}
 else if ($missing_confirmation) {
 	$focus='#register_confirmed';
 }

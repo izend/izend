@@ -39,7 +39,9 @@ function register($lang) {
 				$mail=strtolower(strflat(readarg($_POST['register_mail'])));
 			}
 			if ($with_password) {
-				$password=readarg($_POST['register_password']);
+				if (isset($_POST['register_password'])) {
+					$password=readarg($_POST['register_password']);
+				}
 			}
 			if (isset($_POST['register_confirmed'])) {
 				$confirmed=readarg($_POST['register_confirmed']) == 'on' ? true : false;
