@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    9
+ * @copyright  2010-2012 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -11,15 +11,15 @@
 <form action="" method="post">
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
-<p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo $mail; ?>" /></p>
+<p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Votre adresse d'email est strictement confidentielle.</p>
 <p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Tapez le sujet et le texte de votre message&nbsp;:</p>
-<p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Sujet" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo $subject; ?>" /></p>
-<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="6" title="Texte"><?php echo $message; ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
+<p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Sujet" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="6" title="Texte"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_appointment): ?>
 <p>
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">Rendez-vous le</span>
-<input type="text" name="mailme_date" id="mailme_date" title="aaaa-mm-jj" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo $date; ?>" />
+<input type="text" name="mailme_date" id="mailme_date" title="aaaa-mm-jj" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo htmlspecialchars($date, ENT_COMPAT, 'UTF-8'); ?>" />
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">à</span>
 <select id="mailme_hour" name="mailme_hour" size="1">
 <?php foreach (range(8, 18, 1) as $hh): ?>

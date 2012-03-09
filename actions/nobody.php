@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function nobody($lang) {
 	session_reopen();
 
-	return redirect('home', $lang);
+	redirect('home', $lang);
 }
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -12,15 +12,15 @@
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
 <?php if ($with_name): ?>
 <p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">What connection name do you want?</p>
-<p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!empty($name)): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo $name; ?>" /><?php if (!$missing_name and !$bad_name): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
-<p><input type="text" name="register_mail" id="register_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo $mail; ?>" /></p>
+<p><input type="text" name="register_mail" id="register_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your password will be sent to this address.</p>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choose a password:</p>
-<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo $password; ?>" /></p>
+<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Enter at least 6 characters including 1 digit.</p>
 <?php endif; ?>
 <p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I wish to create an account</p>
