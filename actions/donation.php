@@ -7,8 +7,8 @@
  * @link       http://www.izend.org
  */
 
+require_once 'paypal.inc';
 require_once 'userisidentified.php';
-require_once 'models/paypal.inc';
 
 function donation($lang) {
 	global $paypal_username, $paypal_password, $paypal_signature;
