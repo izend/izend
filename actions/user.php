@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ function user($lang, $arglist=false) {
 	if ($login === true) {
 		global $base_url;
 
-		$next_page = (is_array($arglist) and isset($arglist['page'])) ? $arglist['page'] : url('home', $lang);
+		$next_page = (is_array($arglist) and isset($arglist['r'])) ? $arglist['r'] : url('home', $lang);
 
 		return reload($base_url . $next_page);
 	}
