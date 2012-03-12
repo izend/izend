@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -48,6 +48,10 @@ $system_languages=array('en', 'fr');	// 'en', 'fr'
 global $supported_languages;
 
 $supported_languages=array('en', 'fr');	// 'en', 'fr'
+
+global $supported_currencies;
+
+$supported_currencies=array('EUR', 'USD', 'GBP');      // 'EUR', 'USD', 'GBP'
 
 global $supported_roles;
 

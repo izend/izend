@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 <?php
@@ -56,6 +56,10 @@ $system_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $i =
 global $supported_languages;
 
 $supported_languages=array(<?php for ($i=0; $i<count($languages); $i++) { echo $i == 0 ? "'$languages[$i]'" : ", '$languages[$i]'"; } ?>);	// 'en', 'fr'
+
+global $supported_currencies;
+
+$supported_currencies=array('EUR', 'USD', 'GBP');      // 'EUR', 'USD', 'GBP'
 
 global $supported_roles;
 

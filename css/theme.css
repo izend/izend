@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
  
@@ -135,8 +135,12 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #languages .btn_fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat;}
 #languages .btn_en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat;}
 
-#banner #headline {float:right;margin-top:13px;margin-bottom:0;}
-#banner #searchinput {float:right;margin-top:11px;margin-bottom:0;}
+#donate {width:120px;float:right;margin-top:13px;}
+#donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
+#donate .btn_donate_en {width:74px;height:21px;float:right;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
+
+#banner #headline {float:right;margin:13px 0 0 10px;}
+#banner #searchinput {float:right;margin:11px 0 0 10px;}
 
 #sidebar {float:right;width:200px;margin:0 0 1em 1em;}
 

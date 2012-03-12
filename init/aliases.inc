@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2012 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,8 @@ $aliases = array(
 		'avatar'		=> 'avatar',
 		'logo'			=> 'logo',
 		'rssfeed'		=> 'rss',
+		'paypalreturn'	=> 'paypal/return',
+		'paypalcancel'	=> 'paypal/cancel',
 	),
 	'en' => array(
 		'install'		=> 'install',
@@ -28,6 +30,7 @@ $aliases = array(
 		'search'		=> 'search',
 		'suggest'		=> 'suggest',
 		'download'		=> 'download',
+		'donation'		=> 'donation',
 		'admin'			=> 'manage',
 		'adminuser'		=> 'manage/user',
 		'page'			=> 'page',
@@ -56,6 +59,7 @@ $aliases = array(
 		'search'		=> 'recherche',
 		'suggest'		=> 'suggestion',
 		'download'		=> 'telechargement',
+		'donation'		=> 'donation',
 		'admin'			=> 'gestion',
 		'adminuser'		=> 'gestion/utilisateur',
 		'page'			=> 'page',

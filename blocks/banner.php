@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2011 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -16,7 +16,7 @@ function banner($lang, $components=false) {
 	$home_page=url($home_action, $lang);
 	$logo = view('logo', $lang, compact('home_page'));
 
-	$menu=$languages=$headline=$search=false;
+	$menu=$languages=$headline=$search=$donate=false;
 
 	$contact_page=$user_page=$nobody_page=$account_page=$edit_page=$view_page=$validate_page=$admin_page=false;
 
@@ -49,6 +49,11 @@ function banner($lang, $components=false) {
 				case 'languages':
 					if ($param) {
 						$languages = build('languages', $lang, $param);
+					}
+					break;
+				case 'donate':
+					if ($param) {
+						$donate = build('donate', $lang, $param);
 					}
 					break;
 				case 'headline':
@@ -97,7 +102,7 @@ function banner($lang, $components=false) {
 
 	$menu = view('bannermenu', $lang, compact('user_page', 'nobody_page', 'account_page', 'contact_page', 'edit_page', 'view_page', 'validate_page', 'admin_page'));
 
-	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search'));
+	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search', 'donate'));
 
 	return $output;
 }

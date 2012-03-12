@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    17
+ * @copyright  2010-2012 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -304,13 +304,13 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode');
+				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
 				$db_inc = build_db_inc(false, false, false, false, false);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, false, 'homepage', 'anypage', $languages);
-				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact');
+				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact', 'donation', 'paypalreturn', 'paypalcancel');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 
@@ -340,7 +340,7 @@ function configure($lang) {
 			imagedestroy($logo);
 
 			session_reopen();
-			header("Location: $base_url");
+			reload($base_url);
 
 			return false;
 

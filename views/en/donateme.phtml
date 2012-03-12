@@ -1,0 +1,37 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if (!empty($supported_currencies)): ?>
+<?php extract($errors); ?>
+<form id="donateme" class="noprint" action="" method="post">
+<input type="hidden" name="donateme_token" value="<?php echo $token; ?>" />
+<input id="donateme_amount" name="donateme_amount" type="text" size="3" maxlength="5" value="<?php echo $amount; ?>" title="Amount"/>
+<?php if (count($supported_currencies) > 1): ?>
+<select name="donateme_currency">
+<?php foreach ($supported_currencies as $curr): ?>
+<option value="<?php echo $curr; ?>"<?php echo $currency == $curr ? 'selected="selected"' : ''; ?>><?php echo $curr; ?></option>
+<?php endforeach; ?>
+</select>
+<?php else: ?>
+<span class="smaller"><?php echo $supported_currencies[0]; ?></span>&nbsp;
+<?php endif; ?>
+<input type="submit" class="submit_donate" name="donateme_donate" id="donateme_donate" value="Donate" title="PayPal - The safer, easier way to pay online!"/>
+</form>
+<?php endif; ?>
+<?php
+$focus=false;
+if ($missing_amount or $bad_amount or $missing_currency or $bad_currency) {
+	$focus='#donateme_amount';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
