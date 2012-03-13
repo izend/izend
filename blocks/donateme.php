@@ -54,7 +54,7 @@ function donateme($lang) {
 			if (!$amount) {
 				$missing_amount=true;
 			}
-			else if (!(is_numeric($amount) and $amount > 0)) {
+			else if (!(is_numeric($amount) and $amount >= 1)) {
 				$bad_amount=true;
 			}
 
