@@ -3,17 +3,17 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
+require_once 'paypal.php';
 require_once 'userisidentified.php';
 require_once 'userprofile.php';
 require_once 'validatecurrency.php';
-require_once 'models/paypal.inc';
 
 function paypalcheckout($lang, $amount, $currency=false) {
-	global $base_url, $paypal_url, $sitename, $supported_currencies;
+	global $base_url, $paypal_url, $sitename, $supported_currencies, $supported_languages;
 
 	if (!user_is_identified()) {
 		return run('error/unauthorized', $lang);

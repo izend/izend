@@ -3,11 +3,9 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
-
-require_once 'models/paypal.inc';
 
 function paypalcancel($lang, $arglist=false) {
 	if (!isset($_SESSION['paypal']['token'])) {

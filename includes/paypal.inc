@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -18,11 +18,10 @@ $paypal_api_version='65.3';
 
 global $paypal_username, $paypal_password, $paypal_signature;
 
-$paypal_username=false;
-$paypal_password=false;
-$paypal_signature=false;
+$paypal_username=$paypal_context == 'sandbox' ? false : false;
+$paypal_password=$paypal_context == 'sandbox' ? false : false;
+$paypal_signature=$paypal_context == 'sandbox' ? false : false;
 
 global $paypal_log;
 
 $paypal_log=true;
-

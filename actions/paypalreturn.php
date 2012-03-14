@@ -3,17 +3,15 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
+require_once 'paypal.php';
 require_once 'userisidentified.php';
 require_once 'userprofile.php';
-require_once 'models/paypal.inc';
 
 function paypalreturn($lang, $arglist=false) {
-	global $supported_languages;
-
 	if (!isset($_SESSION['paypal']['token'])) {
 		return run('error/badrequest', $lang);
 	}
