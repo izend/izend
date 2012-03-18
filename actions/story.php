@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    12
+ * @copyright  2010-2012 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -96,10 +96,9 @@ function story($lang, $arglist=false) {
 
 	$page_comment=false;
 	if (!($thread_nocomment or $node_nocomment)) {
-		$moderate=user_has_role('moderator');
 		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('story', $lang) . '/'. $story_name . '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
+		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
 	$besocial=$sharebar=false;

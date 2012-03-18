@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    13
+ * @copyright  2010-2012 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -73,10 +73,9 @@ function folderpage($lang, $folder, $page) {
 
 	$page_comment = false;
 	if (!($thread_nocomment or $node_nocomment)) {
-		$moderate=user_has_role('moderator');
 		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('folder', $lang) . '/' . $folder_name. '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore, $moderate);
+		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
 	$besocial=$sharebar=false;
