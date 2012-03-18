@@ -53,7 +53,7 @@ function banner($lang, $components=false) {
 					break;
 				case 'donate':
 					if ($param) {
-						$donate = build('donate', $lang, $param);
+						$donate = build('donate', $lang);
 					}
 					break;
 				case 'headline':
