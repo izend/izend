@@ -3,13 +3,16 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
+require_once 'paypal.inc';
 require_once 'userhasrole.php';
 
 function admin($lang) {
+	global $paypal_username, $paypal_password, $paypal_signature;
+
 	if (!user_has_role('administrator')) {
 		return run('error/unauthorized', $lang);
 	}
@@ -21,9 +24,12 @@ function admin($lang) {
 
 	$banner = build('banner', $lang);
 
+	$balance=false;
+	if (!(empty($paypal_username) or empty($paypal_password) or empty($paypal_signature))) {
+		$balance = build('balance', $lang);
+	}
 	$usersearch = build('usersearch', $lang);
-	$balance = build('balance', $lang);
-	$content = view('admin', $lang, compact('usersearch', 'balance'));
+	$content = view('admin', $lang, compact('balance', 'usersearch'));
 
 	$output = layout('standard', compact('banner', 'content'));
 
