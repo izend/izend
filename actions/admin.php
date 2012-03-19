@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011 izend.org
- * @version    1
+ * @copyright  2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -22,7 +22,8 @@ function admin($lang) {
 	$banner = build('banner', $lang);
 
 	$usersearch = build('usersearch', $lang);
-	$content = view('admin', $lang, compact('usersearch'));
+	$balance = build('balance', $lang);
+	$content = view('admin', $lang, compact('usersearch', 'balance'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<form action="" method="post" class="compact">
+<p class="balance">
+<input type="submit" class="submit submit_paypal" name="balance_balance" id="balance_balance" value="Solde" title="Solde"/>
+<?php if ($balance): ?>
+<span><?php echo number_format($balance, 2, ',', ' '); ?>&nbsp;<?php echo $currency; ?></span>
+<?php endif; ?>
+</p>
+</form>
