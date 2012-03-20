@@ -7,7 +7,6 @@
  * @link       http://www.izend.org
  */
 
-require_once 'readarg.php';
 require_once 'paypal.php';
 
 function balance($lang) {

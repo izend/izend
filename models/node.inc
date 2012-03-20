@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    9
+ * @copyright  2010-2012 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -339,7 +339,7 @@ function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="INSERT $tabcomment (node_id, locale, created, user_id, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), $user_id, $sqlipaddress, $sqltext)";
+	$sql="INSERT $tabcomment (node_id, locale, created, edited, user_id, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), created, $user_id, $sqlipaddress, $sqltext)";
 
 	$r = db_insert($sql);
 
@@ -368,7 +368,7 @@ function node_set_comment($node_id, $comment_id, $text, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="UPDATE $tabcomment SET text=$sqltext WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+	$sql="UPDATE $tabcomment SET text=$sqltext, edited=NOW() WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
 
 	$r = db_update($sql);
 
@@ -380,7 +380,7 @@ function node_get_comment($node_id, $comment_id, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, user_id AS comment_user_id, ip_address AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited, user_id AS comment_user_id, ip_address AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -397,7 +397,7 @@ function node_get_all_comments($node_id, $locale) {
 	$tabcomment=db_prefix_table('comment');
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, UNIX_TIMESTAMP(c.created) AS comment_created FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
+	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, UNIX_TIMESTAMP(c.created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
 
 	$r = db_query($sql);
 

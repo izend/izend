@@ -19,6 +19,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Tue Mar 20 2012
+
+ALTER TABLE `izend_comment` ADD `edited` DATETIME NOT NULL AFTER `created`;
+UPDATE `izend_comment` SET `edited` = `created`;
+----
+
 Date:	Sat Feb 18 2012
 
 ALTER TABLE `izend_user` CHANGE `name` `name` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
@@ -151,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `izend_comment` (
   `node_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT 'en',
   `created` datetime NOT NULL,
+  `edited` datetime NOT NULL,
   `user_id` int(10) NOT NULL DEFAULT '0',
   `ip_address` varchar(15) NOT NULL,
   `text` text NOT NULL,

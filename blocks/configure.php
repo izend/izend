@@ -450,6 +450,7 @@ CREATE TABLE `${db_prefix}comment` (
   `node_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
+  `edited` datetime NOT NULL,
   `user_id` int(10) NOT NULL DEFAULT '0',
   `ip_address` varchar(15) NOT NULL,
   `text` text NOT NULL,
