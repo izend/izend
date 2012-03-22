@@ -1,0 +1,32 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<form enctype="multipart/form-data" action="" method="post" class="compact">
+<input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
+<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+<p><input type="file" name="upload_file" id="upload_file" size="40"/></p>
+<p><input type="submit" class="submit_put" id="upload_put" name="upload_put" value="Télécharger"/>
+<?php extract($errors); ?>
+<?php if ($bad_name or $bad_size or $copy_error): ?>
+<img src="/images/theme/icons/delete.png" alt=""/>
+<?php endif; ?>
+<?php extract($infos); ?>
+<?php if ($file_copied): ?>
+<img src="/images/theme/icons/check.png" alt=""/>
+<?php endif; ?>
+</p>
+</form>
+<script type="text/javascript">
+var file=$('#upload_file');
+var upload=$('#upload_put');
+
+file.hide().change(function() {if (file.val()) {upload.unbind('click').click();}});
+
+upload.click(function(event) {event.preventDefault();file.click();});
+</script>

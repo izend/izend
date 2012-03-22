@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -18,6 +18,10 @@ $webmaster = 'izend@izend.org';
 $mailer = 'iZend';
 $blackmaillist = array('izend@izend.org', 'webmaster@izend.org', 'keymaster@izend.org');
 $blacknamelist = array('izend', 'webmaster', 'keymaster');
+
+global $blackfilelist;
+
+$blackfilelist = array('.htaccess', 'index.html', 'index.phtml', 'index.php');
 
 global $logoascii;
 

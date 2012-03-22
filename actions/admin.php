@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -28,8 +28,9 @@ function admin($lang) {
 	if (!(empty($paypal_username) or empty($paypal_password) or empty($paypal_signature))) {
 		$balance = build('balance', $lang);
 	}
+	$upload = build('upload', $lang);
 	$usersearch = build('usersearch', $lang);
-	$content = view('admin', $lang, compact('balance', 'usersearch'));
+	$content = view('admin', $lang, compact('balance', 'usersearch', 'upload'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

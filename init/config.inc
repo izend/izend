@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 <?php
@@ -24,8 +24,12 @@ global $sitename, $webmaster, $mailer, $blackmaillist, $blacknamelist;
 $sitename = '<?php echo $sitename; ?>';
 $webmaster = '<?php echo $webmaster; ?>';
 $mailer = 'iZend';
-$blackmaillist=array($webmaster);
-$blacknamelist=array('<?php echo $username; ?>');
+$blackmaillist = array($webmaster);
+$blacknamelist = array('<?php echo $username; ?>');
+
+global $blackfilelist;
+
+$blackfilelist = array('.htaccess', 'index.html', 'index.phtml', 'index.php');
 
 global $logoascii;
 
