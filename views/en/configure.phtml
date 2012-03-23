@@ -18,7 +18,7 @@ All the parameters of the software are in the folder <i>includes</i>.
 The configurator rewrites the files <i>config.inc</i>, <i>db.inc</i> and <i>aliases.inc</i>.</p>
 <p>For more security, check that the access to the configuration files is limited to the server:</p>
 <pre><code>$ cd <?php echo ROOT_DIR; ?>; sudo chgrp -R www-data .; chmod -R g+w .
-$ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc</code></pre>
+$ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc aliases.inc paypal.inc</code></pre>
 <p>NOTE: The name of the execution group of the server is defined by the Group directive, generally in the file <i>/etc/apache2/apache2.conf</i>.</p>
 <h6>Logo</h6>
 <p>The configurator generates a logo based on the name of the site and saves it in the file <i>sitelogo.png</i> in the folder <i>logos</i>.
