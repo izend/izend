@@ -39,6 +39,8 @@ blockquote, table, pre {page-break-inside:avoid;}
 ul, ol, dl {page-break-before:avoid;}
 img {page-break-inside:avoid;page-break-after:avoid;float:none;}
 
+video {display:none;}
+
 .pagebreak {page-break-before:avoid !important;}
 
 .clear {clear:both;}
@@ -76,6 +78,8 @@ div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
 .menu, .menubar, .sidebar, .link, .readmore, .summary, .vignette, .social {display:none;}
+
+.video-js {display:none;}
 
 #banner, #footer, #sidebar {display:none;}
 
