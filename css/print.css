@@ -81,7 +81,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 .video-js {display:none;}
 
-#banner, #footer, #sidebar {display:none;}
+#banner, #sidebar {display:none;}
 
 div.file {font-family:monospace;font-size:.9em;}
 div.download, div.longtail {display:none;}

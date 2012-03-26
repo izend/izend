@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -12,6 +12,8 @@
 <?php echo $languages; ?>
 <?php endif; ?>
 <p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?><span class="hidden"> &bull; <a href="http://www.izend.org">iZend</a></span>
+<?php if (!empty($contact_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+<span class="noprint">
 <?php if (!empty($contact_page)): ?>
 &bull;
 <a href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter">Contact</a>
@@ -27,6 +29,8 @@
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Gestion">Gestion</a>
+<?php endif; ?>
+</span>
 <?php endif; ?>
 </p>
 </div>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -57,7 +57,8 @@ foreach ($contents as $c) {
 			echo '    icons: "', $icons ? 'true' : 'false', '",', PHP_EOL;
 			echo '    repeat: "', $repeat ? 'always' : 'none', '",', PHP_EOL;
 			echo '    autostart: "', $autostart ? 'true' : 'false', '",', PHP_EOL;
-			echo '    controlbar: "', $skin ? 'bottom' : 'none', '"', PHP_EOL;
+			echo '    controlbar: "', $skin ? 'bottom' : 'none', '",', PHP_EOL;
+			echo '    screencolor: "ffffff"', PHP_EOL;
 			echo '});', PHP_EOL;
 			echo '</script>', PHP_EOL;
 			break;
