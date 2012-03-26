@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <h3>Service indisponible</h3>
-<p>Le site est en maintenance<?php if (!empty($closing_time)): ?> depuis <?php echo date('H\hi', $closing_time); ?><?php if (!empty($opening_time)): ?>. Retour à la normale prévu à <b><?php echo date('H\hi', $opening_time); ?></b><?php endif; ?><?php endif; ?>.
+<p>Le site est en maintenance<?php if ($closing_time !== true): ?> depuis <?php echo date('H\hi', $closing_time); ?><?php endif; ?><?php if ($opening_time): ?>. Retour à la normale prévu à <b><?php echo date('H\hi', $opening_time); ?></b><?php endif; ?>.
 Veuillez nous excuser pour les désagréments causés par les travaux.
 Merci de réessayer plus tard.</p>
