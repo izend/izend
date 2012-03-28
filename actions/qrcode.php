@@ -8,6 +8,7 @@
  */
 
 require_once 'qrencode.php';
+require_once 'validatecolor.php';
 
 function qrcode($lang, $arglist=false) {
 	$s=false;
@@ -35,13 +36,7 @@ function qrcode($lang, $arglist=false) {
 		}
 	}
 
-	if (!$s or !$size or !is_numeric($size) or $size < 1 or $size > 10 or !$quality or !isset($qs[$quality])) {
-		return run('error/badrequest', $lang);
-	}
-
-	$colorexp='/#?([0-9A-F]){6}/i';
-
-	if (($fg and !preg_match($colorexp, $fg)) or ($bg and !preg_match($colorexp, $bg))) {
+	if (!$s or !$size or !is_numeric($size) or $size < 1 or $size > 10 or !$quality or !isset($qs[$quality]) or ($fg and !validate_color($fg)) or ($bg and !validate_color($bg))) {
 		return run('error/badrequest', $lang);
 	}
 
