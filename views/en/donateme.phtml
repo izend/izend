@@ -15,7 +15,7 @@
 <?php if (count($supported_currencies) > 1): ?>
 <select name="donateme_currency">
 <?php foreach ($supported_currencies as $curr): ?>
-<option value="<?php echo $curr; ?>"<?php echo $currency == $curr ? 'selected="selected"' : ''; ?>><?php echo $curr; ?></option>
+<option value="<?php echo $curr; ?>"<?php if ($currency == $curr) : ?> selected="selected"<?php endif; ?>><?php echo $curr; ?></option>
 <?php endforeach; ?>
 </select>
 <?php else: ?>

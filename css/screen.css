@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
  
@@ -94,7 +94,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 .bottom {margin-bottom:0 !important;}
 
 .left {float:left;margin:0 1em 0 0;}
-.right {float:right;margin:0 0 1em 0;}
+.right {float:right;margin:0 0 0 1em;}
 
 .x-large {font-size:x-large;}
 .large {font-size:large;}
