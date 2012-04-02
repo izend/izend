@@ -14,9 +14,9 @@ function qrcode($lang, $arglist=false) {
 	$s=false;
 	$size=1;
 	$fg=$bg=false;
-	$quality='L';
+	$quality='M';
 
-	$qs = array('L' => 25, 'M' => 29, 'Q' => 29, 'H' => 33);
+	$qs = array('L' => 25, 'M' => 25, 'Q' => 29, 'H' => 33);
 
 	if (is_array($arglist)) {
 		if (isset($arglist['s'])) {
