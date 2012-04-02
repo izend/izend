@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    9
+ * @copyright  2010-2012 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -52,6 +52,7 @@ foreach ($node_contents as $c) {
 	$content_longtail_file=$content_longtail_image=false;
 	$content_longtail_width=$content_longtail_height=0;
 	$content_longtail_skin=false;
+	$content_longtail_controlbar='none';
 	$content_longtail_icons=false;
 	$content_longtail_duration=0;
 	$content_longtail_autostart=$content_longtail_repeat=false;
@@ -142,6 +143,11 @@ x
 </p>
 <p>
 <input name="content_longtail_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_longtail_skin, ENT_COMPAT, 'UTF-8'); ?>" title="Skin" />
+<select name="content_longtail_controlbar[<?php echo $i; ?>]" title="Control bar">
+<?php foreach (array('none' => 'none', 'over' => 'over', 'top' => 'top', 'bottom' => 'bottom') as $cb => $tr): ?>
+<option value="<?php echo $cb; ?>"<?php if ($content_longtail_controlbar == $cb) : ?> selected="selected"<?php endif; ?>><?php echo $tr; ?></option>
+<?php endforeach; ?>
+</select>
 </p>
 <?php break; ?>
 <?php endswitch; ?>

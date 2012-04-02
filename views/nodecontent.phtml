@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -31,7 +31,7 @@ foreach ($contents as $c) {
 			include $c['infile'];
 			break;
 		case 'longtail':
-			extract($c);	/* file image width height skin icons duration autostart repeat */
+			extract($c);	/* file image width height skin icons controlbar duration autostart repeat */
 			$id = uniqid('id');
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
@@ -64,10 +64,10 @@ foreach ($contents as $c) {
 			if ($skin) {
 				echo '    skin: "', $base_path, $skin, '",', PHP_EOL;
 			}
+			echo '    controlbar: "', $controlbar, '",', PHP_EOL;
 			echo '    icons: "', $icons ? 'true' : 'false', '",', PHP_EOL;
 			echo '    repeat: "', $repeat ? 'always' : 'none', '",', PHP_EOL;
 			echo '    autostart: "', $autostart ? 'true' : 'false', '",', PHP_EOL;
-			echo '    controlbar: "', $skin ? 'bottom' : 'none', '",', PHP_EOL;
 			echo '    screencolor: "ffffff"', PHP_EOL;
 			echo '});', PHP_EOL;
 			echo '</script>', PHP_EOL;

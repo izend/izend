@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -513,6 +513,7 @@ CREATE TABLE `${db_prefix}content_longtail` (
   `height` int(4) unsigned NOT NULL DEFAULT '0',
   `icons` tinyint(1) NOT NULL DEFAULT '0',
   `skin` varchar(200) DEFAULT NULL,
+  `controlbar` enum('none','bottom','top','over') NOT NULL DEFAULT 'none',
   `duration` int(5) unsigned NOT NULL DEFAULT '0',
   `autostart` tinyint(1) NOT NULL DEFAULT '0',
   `repeat` tinyint(1) NOT NULL DEFAULT '0',

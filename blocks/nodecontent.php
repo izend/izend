@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -66,12 +66,13 @@ function nodecontent($lang, $node_id) {
 					$height=$c['content_longtail_height'];
 					$icons=$c['content_longtail_icons'];
 					$skin=$c['content_longtail_skin'];
+					$controlbar=$c['content_longtail_controlbar'];
 					$duration=$c['content_longtail_duration'];
 					$autostart = $c['content_longtail_autostart'] == 1 ? true : false;
 					$repeat = $c['content_longtail_repeat'] == 1 ? true : false;
 					if ($file) {
 						head('javascript', 'jwplayer');
-						$contents[] = compact('type', 'file', 'image', 'width', 'height', 'icons', 'skin', 'duration', 'autostart', 'repeat');
+						$contents[] = compact('type', 'file', 'image', 'width', 'height', 'icons', 'skin', 'controlbar', 'duration', 'autostart', 'repeat');
 					}
 					break;
 				default:

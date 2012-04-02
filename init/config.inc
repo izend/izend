@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 <?php
@@ -80,7 +80,7 @@ $contents_model = array(
 	'infile'	=>	array('path' => array('type' => 'string', 'null' => true)),
 	'download'	=>	array('name' => array('type' => 'string', 'null' => true), 'path' => array('type' => 'string', 'null' => true)),
 	'file'		=>	array('path' => array('type' => 'string', 'null' => true), 'start' => array('type' => 'number', 'default' => 0), 'end' => array('type' => 'number', 'default' => 0), 'format' => array('type' => 'string', 'null' => true), 'lineno' => array('type' => 'boolean', 'default' => true)),
-	'longtail'	=>	array('file' => array('type' => 'string', 'null' => true), 'image' => array('type' => 'string', 'null' => true), 'width' => array('type' => 'number', 'default' => 0), 'height' => array('type' => 'number', 'default' => 0), 'icons' => array('type' => 'boolean'), 'skin' => array('type' => 'string', 'null' => true), 'duration' => array('type' => 'number', 'default' => 0), 'autostart' => array('type' => 'boolean'), 'repeat' => array('type' => 'boolean'))
+	'longtail'	=>	array('file' => array('type' => 'string', 'null' => true), 'image' => array('type' => 'string', 'null' => true), 'width' => array('type' => 'number', 'default' => 0), 'height' => array('type' => 'number', 'default' => 0), 'icons' => array('type' => 'boolean'), 'skin' => array('type' => 'string', 'null' => true), 'controlbar' => array('type' => 'string', 'default' => 'none'), 'duration' => array('type' => 'number', 'default' => 0), 'autostart' => array('type' => 'boolean'), 'repeat' => array('type' => 'boolean'))
 );
 
 $supported_contents=array('text', 'infile', 'download', 'file', 'longtail');	// 'text', 'infile', 'download', 'file', 'longtail'
