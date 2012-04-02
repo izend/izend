@@ -3,9 +3,11 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
+
+require_once 'ismobile.php';
 
 global $base_url, $base_path, $base_root;
 
@@ -33,7 +35,7 @@ $signature='izend.org - http://www.izend.org';
 
 global $socializing, $facebookid;
 
-$socializing='inline';	// false, 'bar', 'inline'
+$socializing='inline';	// is_mobile() ? 'inline' : 'bar';	// false, 'inline', 'bar'
 $facebookid = false;
 
 global $log_dir;
@@ -79,7 +81,7 @@ $supported_contents=array('text', 'infile', 'download', 'file', 'longtail');	// 
 
 global $with_toolbar;
 
-$with_toolbar=false;
+$with_toolbar=is_mobile() ? false : true;
 
 global $search_distance, $search_closest;
 
