@@ -21,8 +21,8 @@ UPDATES
 
 Date:	Mon Apr 2 2012
 
-ALTER TABLE `izend_content_longtail` ADD `controlbar` ENUM( 'none', 'bottom', 'top', 'over' ) NOT NULL DEFAULT 'none' AFTER `skin` ;
-UPDATE `izend_content_longtail` SET `controlbar` = `bottom`;
+ALTER TABLE `izend_content_longtail` ADD `controlbar` ENUM( 'none', 'bottom', 'top', 'over' ) NOT NULL DEFAULT 'none' AFTER `skin`;
+UPDATE `izend_content_longtail` SET `controlbar` = 'bottom';
 ----
 
 Date:	Tue Mar 20 2012
