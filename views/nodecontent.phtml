@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -45,8 +45,18 @@ foreach ($contents as $c) {
 			if ($image) {
 				echo '    image: "', $base_path, $image, '",', PHP_EOL;
 			}
-			if ($file) {
-				echo '    file: "', $base_path, $file, '",', PHP_EOL;
+			$levels=preg_split('/[\s]+/', $file);
+			switch (count($levels)) {
+				case 1:
+					echo '    file: "', $base_path, $file, '",', PHP_EOL;
+					break;
+				default:
+					echo '    levels: [', PHP_EOL;
+					foreach ($levels as $file) {
+						echo '        { file: "', $base_path, $file, '" },', PHP_EOL;
+					}
+					echo '    ],', PHP_EOL;
+					break;
 			}
 			if ($duration) {
 				echo '    duration: "', $duration, '",', PHP_EOL;
