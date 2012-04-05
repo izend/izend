@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -38,12 +38,21 @@ foreach ($contents as $c) {
 			echo '</div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
 			echo 'jwplayer("', $id, '").setup({', PHP_EOL;
-			echo '    flashplayer: "', $base_path, '/longtail/player.swf",', PHP_EOL;
+			if (true) {
+				echo '    flashplayer: "', $base_path, '/longtail/player.swf",', PHP_EOL;
+			}
 			echo '    id: "', $id, '",', PHP_EOL;
 			echo '    width: ', $width, ',', PHP_EOL;
 			echo '    height: ', $height, ',', PHP_EOL;
 			if ($image) {
 				echo '    image: "', $base_path, $image, '",', PHP_EOL;
+			}
+			if (false) {
+				echo '    modes: [', PHP_EOL;
+				echo '        { type: "html5" },', PHP_EOL;
+				echo '        { type: "flash", src: "', $base_path, '/longtail/player.swf" },', PHP_EOL;
+				echo '        { type: "download" },', PHP_EOL;
+				echo '    ],', PHP_EOL;
 			}
 			$levels=preg_split('/[\s]+/', $file);
 			switch (count($levels)) {
