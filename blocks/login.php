@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -82,7 +82,7 @@ function login($lang) {
 			if (!$login) {
 				$missing_login=true;
 			}
-			else if (!(($with_name and validate_user_name($login)) or validate_mail($login))) {
+			else if (!(validate_user_name($login) or validate_mail($login))) {
 				$bad_login=true;
 			}
 
