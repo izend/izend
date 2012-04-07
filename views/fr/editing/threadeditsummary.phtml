@@ -56,7 +56,7 @@
 <input name="thread_linkedin" type="checkbox"<?php if ($thread_linkedin): ?> checked="checked"<?php endif; ?> /><img src="<?php echo $base_path; ?>/images/theme/edit/linkedin.png" alt="" />
 </fieldset>
 <p>
-<input class="submit_edit" id="thread_edit" name="thread_edit" type="submit" value="Éditer" />
+<input class="submit submit_edit" id="thread_edit" name="thread_edit" type="submit" value="Éditer" />
 </p>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -88,7 +88,7 @@ $(document).ready(function() {
 </script>
 <h4>Contenu</h4>
 <p>
-<input class="submit_add" id="node_create" name="node_create" type="submit" value="Ajouter" />
+<input class="submit submit_add" id="node_create" name="node_create" type="submit" value="Ajouter" />
 le contenu
 <input id="new_node_title" name="new_node_title" type="text" size="50" maxlength="100" value="<?php echo htmlspecialchars($new_node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_node_number')"/>
 #
@@ -119,17 +119,17 @@ foreach ($thread_contents as $c) {
 </table>
 </fieldset>
 <p>
-<input class="submit_sort" id="thread_reorder" name="thread_reorder" type="submit" value="Trier" />
+<input class="submit submit_sort" id="thread_reorder" name="thread_reorder" type="submit" value="Trier" />
 le fil ou
-<input class="submit_hide" id="node_hide" name="node_hide" type="submit" value="Cacher" />
+<input class="submit submit_hide" id="node_hide" name="node_hide" type="submit" value="Cacher" />
 ou
-<input class="submit_show" id="node_show" name="node_show" type="submit" value="Montrer" />
+<input class="submit submit_show" id="node_show" name="node_show" type="submit" value="Montrer" />
 ou
-<input class="submit_delete" id="node_delete" name="node_delete" type="submit" value="Supprimer" />
+<input class="submit submit_delete" id="node_delete" name="node_delete" type="submit" value="Supprimer" />
 le contenu #
 <input id="old_node_number" name="old_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_delete')"/>
 <?php if ($confirm_delete_node): ?>
-<input class="submit_confirm" id="node_confirmdelete" name="node_confirmdelete" type="submit" value="Confirmer" />
+<input class="submit submit_confirm" id="node_confirmdelete" name="node_confirmdelete" type="submit" value="Confirmer" />
 <?php endif; ?>
 </p>
 <?php endif; ?>

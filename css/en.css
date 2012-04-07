@@ -1,29 +1,29 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
  
 /* en.css */
 
-.submit_add {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/add.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_cancel {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/cancel.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_change {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/change.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_comment {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/comment.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_configure {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/configure.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_confirm {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/confirm.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_delete {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/delete.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_edit {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/edit.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_enter {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/enter.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_hide {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/hide.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_modify {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/modify.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_put {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/upload.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_search {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/search.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_send {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/send.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_show {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/show.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_sort {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/sort.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-.submit_validate {width:100px;height:30px;padding:0;margin:0;border:none;background:transparent url(../images/theme/validate.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+.submit_add {width:100px;height:30px;background:transparent url(../images/theme/add.png) no-repeat;}
+.submit_cancel {width:100px;height:30px;background:transparent url(../images/theme/cancel.png) no-repeat;}
+.submit_change {width:100px;height:30px;background:transparent url(../images/theme/change.png) no-repeat;}
+.submit_comment {width:100px;height:30px;background:transparent url(../images/theme/comment.png) no-repeat;}
+.submit_configure {width:100px;height:30px;background:transparent url(../images/theme/configure.png) no-repeat;}
+.submit_confirm {width:100px;height:30px;background:transparent url(../images/theme/confirm.png) no-repeat;}
+.submit_delete {width:100px;height:30px;background:transparent url(../images/theme/delete.png) no-repeat;}
+.submit_edit {width:100px;height:30px;background:transparent url(../images/theme/edit.png) no-repeat;}
+.submit_enter {width:100px;height:30px;background:transparent url(../images/theme/enter.png) no-repeat;}
+.submit_hide {width:100px;height:30px;background:transparent url(../images/theme/hide.png) no-repeat;}
+.submit_modify {width:100px;height:30px;background:transparent url(../images/theme/modify.png) no-repeat;}
+.submit_put {width:100px;height:30px;background:transparent url(../images/theme/upload.png) no-repeat;}
+.submit_search {width:100px;height:30px;background:transparent url(../images/theme/search.png) no-repeat;}
+.submit_send {width:100px;height:30px;background:transparent url(../images/theme/send.png) no-repeat;}
+.submit_show {width:100px;height:30px;background:transparent url(../images/theme/show.png) no-repeat;}
+.submit_sort {width:100px;height:30px;background:transparent url(../images/theme/sort.png) no-repeat;}
+.submit_validate {width:100px;height:30px;background:transparent url(../images/theme/validate.png) no-repeat;}
 
 .submit_donate {width:74px;height:21px;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
 .submit_paypal {width:100px;height:35px;background:transparent url(../logos/paypal.gif) no-repeat;}

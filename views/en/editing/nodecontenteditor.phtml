@@ -11,7 +11,7 @@
 <form action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
-<input class="submit_add" id="content_create" name="content_create" type="submit" value="Add" />
+<input class="submit submit_add" id="content_create" name="content_create" type="submit" value="Add" />
 a type
 <?php
 $selected=$new_content_type ? $new_content_type : 'text';
@@ -34,7 +34,7 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php if ($node_contents): ?>
 or
-<input class="submit_delete" id="content_delete" name="content_delete" type="submit" value="Delete" />
+<input class="submit submit_delete" id="content_delete" name="content_delete" type="submit" value="Delete" />
 #
 <input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 <?php endif; ?>
@@ -156,7 +156,7 @@ x
 }
 ?>
 <p>
-<input class="submit_modify" id="content_modify" name="content_modify" type="submit" value="Modify" />
+<input class="submit submit_modify" id="content_modify" name="content_modify" type="submit" value="Modify" />
 contents
 </p>
 <?php endif; ?>

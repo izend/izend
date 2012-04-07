@@ -50,22 +50,22 @@
 <p>
 <?php if ($with_delete): ?>
 <?php if ($confirm_delete): ?>
-<input type="submit" class="submit_confirm" name="useredit_confirmdelete" id="useredit_confirmdelete" value="Confirmer" />
+<input type="submit" class="submit submit_confirm" name="useredit_confirmdelete" id="useredit_confirmdelete" value="Confirmer" />
 la suppression ou
-<input type="submit" class="submit_cancel" name="useredit_cancel" id="useredit_cancel" value="Annuler" />
+<input type="submit" class="submit submit_cancel" name="useredit_cancel" id="useredit_cancel" value="Annuler" />
 <?php else: ?>
-<input type="submit" class="submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
+<input type="submit" class="submit submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
 le profil ou
-<input type="submit" class="submit_delete" name="useredit_delete" id="useredit_delete" value="Supprimer" />
+<input type="submit" class="submit submit_delete" name="useredit_delete" id="useredit_delete" value="Supprimer" />
 le compte
 <?php endif; ?>
 <?php else: ?>
-<input type="submit" class="submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
+<input type="submit" class="submit submit_modify" name="useredit_modify" id="useredit_modify" value="Modifier" />
 <?php endif; ?>
 <?php if ($with_newpassword): ?>
 <p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Mot de passe&nbsp;:</p>
 <p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="> 6 lettres et chiffres" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
-<input type="submit" class="submit_change" name="useredit_change" id="useredit_change" value="Changer" />
+<input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Changer" />
 <?php endif; ?>
 </p>
 </form>

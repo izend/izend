@@ -44,9 +44,9 @@ if (!$message) {
 <?php endif; ?>
 <?php echo view('editcomment', 'en', compact('message', 'message_maxlen')); ?>
 <p>
-<input class="submit_modify" name="comment_modify" type="submit" value="Modify" />
+<input class="submit submit_modify" name="comment_modify" type="submit" value="Modify" />
 the comment or
-<input class="submit_delete" name="comment_delete" type="submit" value="Delete" />
+<input class="submit submit_delete" name="comment_delete" type="submit" value="Delete" />
 it
 </p>
 </div>
@@ -68,12 +68,12 @@ it
 <?php echo view('editcomment', 'en', compact('message', 'message_maxlen')); ?>
 <p>
 <?php if ($message): ?>
-<input class="submit_edit" name="comment_edit" type="submit" value="Edit" />
+<input class="submit submit_edit" name="comment_edit" type="submit" value="Edit" />
 the text or
-<input class="submit_validate" name="comment_validate" type="submit" value="Validate" />
+<input class="submit submit_validate" name="comment_validate" type="submit" value="Validate" />
 it
 <?php else: ?>
-<input class="submit_comment" name="comment_comment" type="submit" value="Comment" />
+<input class="submit submit_comment" name="comment_comment" type="submit" value="Comment" />
 <?php endif; ?>
 </p>
 </div>
