@@ -144,7 +144,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 #sidebar {float:right;width:200px;margin:0 0 1em 1em;}
 
-#toolbar {width:24px;padding:6px;border-style:solid;border-color:#aec14e;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;float:left;margin-left:-70px;z-index:2000;}
+#toolbar {width:24px;padding:6px;border-style:solid;border-color:#aec14e;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;float:left;margin-left:-70px;}
 #toolbar #exit {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/cancel.png) no-repeat;}
 #toolbar #admin {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/work.png) no-repeat;}
 #toolbar #edit {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/edit.png) no-repeat;}
@@ -157,7 +157,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 .navigation .previous {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons/left.png) no-repeat;vertical-align:bottom;}
 .navigation .next {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons/right.png) no-repeat;vertical-align:bottom;}
 
-#sharebar {width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:200px;float:left;margin-left:-120px;padding:5px;z-index:2000;}
+#sharebar {width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:200px;float:left;margin-left:-120px;padding:5px;}
 #sharebar > li {padding:5px;}
 
 .besocial {width:100%;height:35px;padding:0;margin:1em 0;}
