@@ -11,11 +11,11 @@
 <form action="" method="post">
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
-<p><input type="text" name="mailme_mail" id="mailme_mail" size="50" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="mailme_mail" id="mailme_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
 <p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Type in the subject and the text of your message:</p>
-<p><input type="text" name="mailme_subject" id="mailme_subject" size="60" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
-<p><textarea name="mailme_message" id="mailme_message" cols="70" rows="6" title="Text"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
+<p><input type="text" name="mailme_subject" id="mailme_subject" size="40" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><textarea name="mailme_message" id="mailme_message" cols="50" rows="5" title="Text"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea><br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" /></p>
 <?php if ($with_appointment): ?>
 <p>
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">Appointment on</span>
