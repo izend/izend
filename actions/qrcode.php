@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,11 @@ function qrcode($lang, $arglist=false) {
 	$fg=$bg=false;
 	$quality='M';
 
+	$token=false;
+
 	$qs = array('L', 'M', 'Q', 'H');
+
+	$with_token=false;
 
 	if (is_array($arglist)) {
 		if (isset($arglist['s'])) {
@@ -38,6 +42,18 @@ function qrcode($lang, $arglist=false) {
 		if (isset($arglist['margin'])) {
 			$margin = $arglist['margin'];
 		}
+		if ($with_token) {
+			if (isset($arglist['token'])) {
+				$token = $arglist['token'];
+			}
+		}
+	}
+
+	if ($with_token) {
+		if (!isset($_SESSION['qrcode_token']) or $token != $_SESSION['qrcode_token']) {
+			return run('error/badrequest', $lang);
+		}
+		unset($_SESSION['qrcode_token']);
 	}
 
 	if (!$s or !is_numeric($size) or !is_numeric($margin) or !$quality or !in_array($quality, $qs) or ($fg and !validate_color($fg)) or ($bg and !validate_color($bg))) {
