@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -30,9 +30,8 @@
 <?php else: ?>
 <meta name="robots" content="index, follow" />
 <?php endif; ?>
-<?php if (true): ?>
-<!--
-<?php endif; ?>
+<?php require_once 'isagent.php'; ?>
+<?php if (is_facebook()): ?>
 <meta property="og:title" content="<?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
@@ -44,8 +43,6 @@
 <?php if (!empty($facebookid)): ?>
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
-<?php if (true): ?>
--->
 <?php endif; ?>
 <?php if (false): ?>
 <meta name="viewport" content="initial-scale=1.0">
