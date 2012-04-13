@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -370,7 +370,7 @@ function build_aliases_inc($features, $languages) {
 }
 
 function build_sitemap_xml($sitename, $languages) {
-	$date=date('Y-n-j');
+	$date=date('Y-m-d');
 	return render(INIT_DIR . DIRECTORY_SEPARATOR . SITEMAP_XML, compact('sitename', 'languages', 'date'));
 }
 
