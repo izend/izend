@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version	1
+ * @version    2
  * @link	   http://www.izend.org
  */
 
@@ -69,7 +69,16 @@ function normalize_url($url) {
 	$newurl .= $path;
 
 	if ($query) {
-		$newurl .= '?' . $query;
+		$q = array();
+		foreach (explode('&', $query) as $s) {
+			if ($s and preg_match('/[^=]+=[^=]+/', $s)) {
+				$q[] = $s;
+			}
+		}
+		if ($q) {
+			sort($q);
+			$newurl .= '?' . implode('&', $q);
+		}
 	}
 
 	if ($fragment) {

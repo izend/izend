@@ -4,6 +4,7 @@ define('ROOT_DIR', dirname(__FILE__));
 set_include_path(get_include_path() . PATH_SEPARATOR . ROOT_DIR . DIRECTORY_SEPARATOR . 'library');
 set_include_path(get_include_path() . PATH_SEPARATOR . ROOT_DIR . DIRECTORY_SEPARATOR . 'includes');
 
+
 require_once 'dump.php';
 
 require_once 'validateurl.php';
@@ -18,6 +19,10 @@ $testcases = array(
 	array('eXAMPLE://a/./b/../b/%63/%7bfoo%7d',          'example://a/b/c/%7Bfoo%7D'),
 	array('http://www.yahoo.com/%a1',                    'http://www.yahoo.com/%A1'),
 	array('http://fancysite.nl/links/doit.pl?id=2029',   'http://fancysite.nl/links/doit.pl?id=2029'),
+	array('http://example.com?arg1=1',                   'http://example.com/?arg1=1'),
+	array('http://example.com/index.php?arg2=2&arg1=1',  'http://example.com/index.php?arg1=1&arg2=2'),
+	array('http://example.com/?&arg1=1&&arg2',           'http://example.com/?arg1=1'),
+	array('http://example.com/?arg1=',                   'http://example.com/'),
 	array('http://example.com/index.html#fragment',      'http://example.com/index.html#fragment'),
 	array('HtTp://User:Pass@www.ExAmPle.com:80/Blah',    'http://User:Pass@www.example.com/Blah'),
 	array('http://example.com:81/index.html',            'http://example.com:81/index.html'),
