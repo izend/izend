@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -41,15 +41,18 @@ function user_id($user) {
 }
 
 function user_create($name, $password, $mail, $locale='en') {
+	$seed=substr(md5(uniqid()), 1, 8);
+	$password=$password ? md5($seed . $password) : '';
+
 	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqllocale=db_sql_arg($locale);
-
-	$sqlpassword=$password ? '\'' . md5($password) . '\'' : NULL;
+	$sqlpassword=db_sql_arg($password);
+	$sqlseed=db_sql_arg($seed);
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT IGNORE $tabuser (name, password, mail, created, locale) VALUES ($sqlname, $sqlpassword, $sqlmail, NOW(), $sqllocale)";
+	$sql="INSERT IGNORE $tabuser (name, password, seed, mail, created, locale) VALUES ($sqlname, $sqlpassword, $sqlseed, $sqlmail, NOW(), $sqllocale)";
 
 	$r = db_insert($sql);
 
@@ -102,7 +105,7 @@ function user_get($user_id) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, mail AS user_mail, website AS user_website, logged AS user_logged, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, seed AS user_seed, mail AS user_mail, website AS user_website, logged AS user_logged, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -165,12 +168,22 @@ function user_set_status($user_id, $active, $banned) {
 	return $r;
 }
 
-function user_set_newpassword($user_id, $password) {
+function user_set_newpassword($user_id, $newpassword) {
 	if (!is_numeric($user_id)) {
 		return false;
 	}
 
-	$sqlnewpassword=$password ? '\'' . md5($password) . '\'' : NULL;
+	$r = user_get($user_id);
+
+	if (!$r) {
+		return false;
+	}
+
+	extract($r);	/* user_seed */
+
+	$newpassword=$newpassword ? md5($user_seed . $newpassword) : '';
+
+	$sqlnewpassword=db_sql_arg($newpassword);
 
 	$tabuser=db_prefix_table('user');
 
@@ -258,13 +271,13 @@ function user_login($login, $password) {
 		return false;
 	}
 
-	extract($r);	/* user_name user_password user_newpassword user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
+	extract($r);	/* user_name user_password user_newpassword user_seed user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
 
 	if (!$user_active or $user_banned) {
 		return false;
 	}
 
-	$password=md5($password);
+	$password=md5($user_seed . $password);
 
 	if ( ! ($password == $user_password or $password == $user_newpassword) ) {
 		return false;
@@ -273,7 +286,6 @@ function user_login($login, $password) {
 	$user = array();
 	$user['id'] = $user_id;
 	$user['name'] = $user_name;
-	$user['password'] = $user_password;
 	$user['mail'] = $user_mail;
 	$user['website'] = $user_website;
 	$user['locale'] = $user_locale;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -674,8 +674,9 @@ _SEP_;
 CREATE TABLE `${db_prefix}user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) DEFAULT NULL,
-  `password` varchar(32) NOT NULL,
-  `newpassword` varchar(32) DEFAULT NULL,
+  `password` char(32) CHARACTER SET ascii NOT NULL,
+  `newpassword` char(32) CHARACTER SET ascii DEFAULT NULL,
+  `seed` char(8) CHARACTER SET ascii NOT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -748,15 +749,18 @@ INSERT INTO `${db_prefix}role` (`role_id`, `name`) VALUES
 (1, 'administrator'),
 (2, 'writer'),
 (3, 'reader'),
-(4, 'moderator');
+(4, 'moderator'),
+(5, 'member');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
 	}
 
+	$seed=substr(md5(uniqid()), 1, 8);
+
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `mail`, `created`, `locale`, `active`, `banned`) VALUES
-(1, '$site_admin_user', MD5('$site_admin_password'), '$site_admin_mail', NOW(), '$default_language', 1, 0);
+INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`) VALUES
+(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', 1, 0);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
