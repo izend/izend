@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -16,7 +16,48 @@
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script type="text/javascript">
-$('input#searchtext').autocomplete({appendTo: '#searchinput', minLength: 3, source: '<?php echo $suggest_url; ?>'});
+$('input#searchtext')
+.bind('keydown', function(event) {
+    if (event.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active) {
+        event.preventDefault();
+   }
+})
+.autocomplete({
+    appendTo: '#searchinput',
+    minLength: 3,
+    source: function(request, response) {
+        var pos = getcaretposition(this.element.get(0));
+        var term = getwordat(request.term, pos);
+
+        if (!term || term.length < this.options.minLength) {
+            this.close();
+        }
+        else {
+            $.getJSON('<?php echo $suggest_url; ?>', {term: term}, response);
+        }
+    },
+    select: function(event, ui) {
+        var pos = getcaretposition(this);
+		var s = this.value;
+
+        for (i = pos-1; i >= 0 && s[i] != ' '; i--)
+            ;
+        var beg = i < 0 ? 0 : i+1;
+
+        for (i = pos; i < s.length && s[i] != ' '; i++)
+             ;
+        var end = i >= s.length ? s.length : i;
+
+        this.value = s.substring(0, beg) + ui.item.value + s.substring(end);
+
+        setcaretposition(this, beg + ui.item.value.length);
+
+        return false;
+    },
+    focus: function() {
+        return false;
+    }
+});
 </script>
 <?php endif; ?>
 <?php endif; ?>

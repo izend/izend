@@ -1,3 +1,10 @@
+/**
+ *
+ * @copyright  2010-2012 izend.org
+ * @version    3
+ * @link       http://www.izend.org
+ */
+
 function returnonenter(e) {
 	var keycode;
 
@@ -51,6 +58,51 @@ function focusonenter(e, id) {
 		return true;
 }
 
+function getcaretposition(e) {
+	var pos = 0;
+
+	if (document.selection && document.selection.createRange) {		// IE
+		e.focus();
+		var sel = document.selection.createRange();
+		sel.moveStart('character', -e.value.length);
+		pos = sel.text.length;
+	}
+	else if (e.selectionStart || e.selectionStart == '0') {			// Mozilla
+		pos = e.selectionStart;
+	}
+
+	return pos;
+}
+
+function setcaretposition(e, pos) {
+	if (e.createTextRange) {
+		var range = e.createTextRange();
+		range.collapse(true);
+		range.moveEnd('character', pos);
+		range.moveStart('character', pos);
+		range.select();
+	}
+	else if (e.setSelectionRange) {
+		e.setSelectionRange(pos, pos);
+	}
+}
+
+function getwordat(s, pos) {
+	if ((s[pos] == ' ' || pos == s.length) && (pos == 0 || s[pos-1] == ' ')) {
+		return false;
+	}
+
+	for (i = pos-1; i >= 0 && s[i] != ' '; i--)
+		;
+	var beg = i < 0 ? 0 : i+1;
+
+	for (i = pos; i < s.length && s[i] != ' '; i++)
+		;
+	var end = i >= s.length ? s.length : i;
+
+	return s.substring(beg, end);
+}
+
 function inputlimit(inputid, labelid, maxlength) {
 	var input = document.getElementById(inputid);
 	if (input == null)
@@ -72,15 +124,12 @@ function inputlimit(inputid, labelid, maxlength) {
 function addtag(id, open, close) {
 	var e=document.getElementById(id);
 	if (e) {
-		// IE
-		if (document.selection && document.selection.createRange) {
+		if (document.selection && document.selection.createRange) {		// IE
 			e.focus();
-			sel = document.selection.createRange();
+			var sel = document.selection.createRange();
 			sel.text = open + sel.text + close;
 		}
-
-		// Mozilla
-		else if (e.selectionStart || e.selectionStart == '0') {
+		else if (e.selectionStart || e.selectionStart == '0') {			// Mozilla
 			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
@@ -89,7 +138,6 @@ function addtag(id, open, close) {
 			e.selectionEnd = endPos + open.length + close.length;
 			e.scrollTop = scrollTop;
 		}
-
 		else {
 			e.value = open + e.value + close;
 		}
@@ -102,15 +150,14 @@ function striptags(id) {
 	var e=document.getElementById(id);
 	if (e) {
 		var regexp=/<[^>]*>/gm;
-		// IE
-		if (document.selection && document.selection.createRange) {
+
+		if (document.selection && document.selection.createRange) {		// IE
 			e.focus();
-			sel = document.selection.createRange();
+			var sel = document.selection.createRange();
 			sel.text = sel.text.replace(regexp, '');
 		}
 
-		// Mozilla
-		else if (e.selectionStart || e.selectionStart == '0') {
+		else if (e.selectionStart || e.selectionStart == '0') {			// Mozilla
 			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
@@ -132,15 +179,13 @@ function striptags(id) {
 function entquote(id) {
 	var e=document.getElementById(id);
 	if (e) {
-		// IE
-		if (document.selection && document.selection.createRange) {
+		if (document.selection && document.selection.createRange) {		// IE
 			e.focus();
-			sel = document.selection.createRange();
+			var sel = document.selection.createRange();
 			sel.text = entreplace(sel.text);
 		}
 
-		// Mozilla
-		else if (e.selectionStart || e.selectionStart == '0') {
+		else if (e.selectionStart || e.selectionStart == '0') {			// Mozilla
 			var scrollTop = e.scrollTop;
 			var startPos = e.selectionStart;
 			var endPos = e.selectionEnd;
