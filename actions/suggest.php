@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -23,29 +23,34 @@ function suggest($lang, $arglist=false) {
 	if ($cloud) {
 		$cloud_id = cloud_id($cloud);
 		if (!$cloud_id) {
-			return run('error/notfound', $lang);
+			header('HTTP/1.1 404 Not Found');
+			return false;
 		}
 
 		$r = thread_get($lang, $cloud_id);
 		if (!$r) {
-			return run('error/notfound', $lang);
+			header('HTTP/1.1 404 Not Found');
+			return false;
 		}
 		extract($r); /* thread_type thread_nosearch */
 
 		if ($thread_nosearch) {
-			return run('error/notfound', $lang);
+			header('HTTP/1.1 404 Not Found');
+			return false;
 		}
 	}
 
 	$term=isset($arglist['term']) ? $arglist['term'] : false;
 	if (!$term) {
-		return run('error/badrequest', $lang);
+		header('HTTP/1.1 400 Bad Request');
+		return false;
 	}
 
 	$r = cloud_suggest($lang, $cloud_id, $term);
 
 	if (!$r) {
-		return run('error/notfound', $lang);
+		header('HTTP/1.1 404 Not Found');
+		return false;
 	}
 
 	$taglist=array();
