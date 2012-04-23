@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -64,6 +64,6 @@ function normsms($s) {
 				'[', ']', '{', '}', '~', '^', '|', '\\',
 	);
 
-	return ereg_replace('[^' . implode($gsmset) . ']', '.', str_replace($from, $to, $s));
+	return preg_replace('/[^' . preg_quote(implode($gsmset), '/') . ']/', '.', str_replace($from, $to, $s));
 }
 
