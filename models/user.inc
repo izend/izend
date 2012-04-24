@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -40,7 +40,7 @@ function user_id($user) {
 	return $r ? $r[0]['user_id'] : false;
 }
 
-function user_create($name, $password, $mail, $locale='en') {
+function user_create($name, $password, $mail, $locale='en', $role_names=false) {
 	$seed=substr(md5(uniqid()), 1, 8);
 	$password=$password ? md5($seed . $password) : '';
 
@@ -61,6 +61,10 @@ function user_create($name, $password, $mail, $locale='en') {
 	}
 
 	$user_id = db_insert_id();
+
+	if ($role_names) {
+		user_set_role($user_id, $role_names);
+	}
 
 	if ($name) {
 		user_create_avatar($name);
