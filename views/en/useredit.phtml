@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2012 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php if ($with_role): ?>
 <?php $rolename=array('administrator' => 'administrator', 'writer' => 'writer', 'reader' => 'reader', 'moderator' => 'moderator'); ?>
-<p><?php foreach ($supported_roles as $role): ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>" <?php if ($user_role and in_array($role, $user_role)) echo 'checked="checked"'; ?> /> <?php echo $rolename[$role]; ?><?php endforeach; ?></p>
+<p><?php foreach ($supported_roles as $role): ?><?php echo PHP_EOL; ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>"<?php if ($user_role and in_array($role, $user_role)) echo ' checked="checked"'; ?> />&nbsp;<?php echo $rolename[$role]; ?><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php endif; ?>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Website:</p>
@@ -32,7 +32,7 @@
 <input type="hidden" name="useredit_website" value="<?php echo htmlspecialchars($useredit_website, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
 <?php if ($with_locale): ?>
-<p><?php foreach ($system_languages as $lang): ?> <input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" <?php if ($lang == $user_locale) echo 'checked="checked"'; ?> /> <?php echo $lang; ?><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="useredit_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<?php echo $lang; ?><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_locale" value="<?php echo htmlspecialchars($user_locale, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
@@ -62,12 +62,12 @@ the account
 <?php else: ?>
 <input type="submit" class="submit submit_modify" name="useredit_modify" id="useredit_modify" value="Modify" />
 <?php endif; ?>
+</p>
 <?php if ($with_newpassword): ?>
 <p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
 <p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="> 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
-<input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" />
+<p><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
-</p>
 </form>
 <?php if ($missing_name): ?>
 <p class="error">An identifier is required.</p>
