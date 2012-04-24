@@ -17,10 +17,10 @@ function searchlist($lang, $rsearch, $taglist) {
 		$link_title=$node_title;
 		$link_description=$node_abstract;
 		$link_cloud=array();
-		preg_match_all('/(\S+)/', $node_cloud, $r);
-		foreach ($r[0] as $tag) {
-			$w=htmlspecialchars($tag, ENT_COMPAT, 'UTF-8');
-			$link_cloud[]=in_array($tag, $taglist) ? "<span class=\"tag\">$w</span>" : $w;
+		$wordlist = preg_split('/\s+/', $node_cloud, -1, PREG_SPLIT_NO_EMPTY);
+		foreach ($wordlist as $w) {
+			$tag=htmlspecialchars($w, ENT_COMPAT, 'UTF-8');
+			$link_cloud[]=in_array($w, $taglist) ? "<span class=\"tag\">$tag</span>" : $tag;
 		}
 		$link_cloud=implode(' ', $link_cloud);
 		if ($thread_type == 'folder' and ((is_array($default_folder) and in_array($thread_id, $default_folder)) or $thread_id == $default_folder)) {

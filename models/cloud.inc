@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -25,17 +25,15 @@ function cloud_create($cloud_id) {
 
 	if ($r) {
 		foreach ($r as $n) {
-			$cloud=$n['node_cloud'];
-			if ($cloud) {
+			$node_cloud=$n['node_cloud'];
+			if ($node_cloud) {
 				$node_id=$n['node_id'];
 				$lang=$n['node_locale'];
 				// build a list with all the different tags
-				preg_match_all('/(\S+)/', $cloud, $wlist);
-				$tags = array_unique($wlist[0]);
-
+				$taglist = array_unique(preg_split('/\s+/', $node_cloud, -1, PREG_SPLIT_NO_EMPTY));
 				// add all the tags in the node
-				foreach ($tags as $w) {
-					cloud_add_node_tag($lang, $node_id, $w);
+				foreach ($taglist as $tag) {
+					cloud_add_node_tag($lang, $node_id, $tag);
 				}
 			}
 		}
@@ -121,6 +119,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 
 function cloud_search($lang, $cloud_id, $taglist) {
 	// return the nodes which are associated to a list of tags in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
+	$taglist=array_slice(array_unique($taglist), 0, 10);
 	$ntags = count($taglist);
 	if ($ntags == 0) {
 		return false;
@@ -157,8 +156,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 
 function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	// return the tags which match a word in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
-	preg_match_all('/(\S+)/', $s, $r);
-	$wordlist = array_unique($r[0]);
+	$wordlist=array_slice(array_unique(preg_split('/\s+/', $s, -1, PREG_SPLIT_NO_EMPTY)), 0, 10);
 	$nwords=count($wordlist);
 	if ($nwords == 0) {
 		return false;
@@ -208,7 +206,7 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 }
 
 function cloud_suggest($lang, $cloud_id, $term) {
-	// return the tags which contain a string in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
+	// return the tags which contain a term in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
 	$sqllang=db_sql_arg($lang, false);
 	$sqlterm=db_sql_arg("%$term%", false);
 
@@ -230,9 +228,9 @@ function cloud_suggest($lang, $cloud_id, $term) {
 }
 
 function cloud_list_node_tags($lang, $node_id) {
+	// return all the tags ordered by tag_name which are associated to a node for a specific language
 	$sqllang=db_sql_arg($lang, false);
 
-	// list tag_id, tag_name ordered by tag_name for all the tags which are in lang and associated to node_id
 	$tabtag=db_prefix_table('tag');
 	$tabtagindex=db_prefix_table('tag_index');
 
@@ -245,8 +243,7 @@ function cloud_list_node_tags($lang, $node_id) {
 
 function cloud_tag_node($lang, $node_id, $s) {
 	// build a list with all the different tags
-	preg_match_all('/(\S+)/', $s, $r);
-	$newtags = array_unique($r[0]);
+	$newtags = array_unique(preg_split('/\s+/', $s, -1, PREG_SPLIT_NO_EMPTY));
 
 	// build a list with all the current tags
 	$oldtags = array();
