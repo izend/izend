@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -19,6 +19,7 @@
 <?php endforeach; ?>
 </select>
 <?php else: ?>
+<input type="hidden" name="donateme_currency" value="<?php echo $supported_currencies[0]; ?>" />
 <span class="smaller"><?php echo $supported_currencies[0]; ?></span>&nbsp;
 <?php endif; ?>
 <input type="submit" class="submit submit_donate" name="donateme_donate" id="donateme_donate" value="Donate" title="PayPal - The safer, easier way to pay online!"/>
