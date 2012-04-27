@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -23,10 +23,11 @@
 </p>
 </form>
 <script type="text/javascript">
-var file=$('#upload_file');
-var upload=$('#upload_put');
+$(function() {
+    var file=$('#upload_file');
+    var upload=$('#upload_put');
 
-file.hide().change(function() {if (file.val()) {upload.unbind('click').click();}});
-
-upload.click(function(event) {event.preventDefault();file.click();});
+    file.hide().change(function() {if (file.val()) {upload.unbind('click').click();}});
+    upload.unbind('click').click(function(event) {event.preventDefault();file.click();});
+});
 </script>
