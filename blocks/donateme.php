@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -74,6 +74,8 @@ function donateme($lang) {
 			if ($bad_token or $missing_amount or $bad_amount or $missing_currency or $bad_currency) {
 				break;
 			}
+
+			unset($_SESSION['donateme_token']);
 
 			require_once 'actions/paypalcheckout.php';
 
