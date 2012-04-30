@@ -3,10 +3,10 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <h3>Paiement rejeté</h3>
-<p>Votre paiment a été rejeté. Merci d'essayer de nouveau en vérifiant vos détails de paiement.
-<?php if (!empty($contact_page)): ?>Si vous pensez qu'il s'agit d'une erreur du serveur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>
+<p>Votre paiement de <?php echo number_format($amount, 2, ',', ' '); ?>&nbsp;<?php echo $currency; ?> a été rejeté. Merci d'essayer de nouveau en vérifiant vos détails de paiement.
+<?php if (!empty($contact_page)): ?>Si vous pensez qu'il s'agit d'une erreur, merci de <a href="<?php echo $contact_page; ?>">nous contacter</a>.<?php endif; ?></p>

@@ -3,10 +3,10 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <h3>Payment cancelled</h3>
-<p>Your payment has been cancelled.
-<?php if (!empty($contact_page)): ?>If you think this is a server error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>
+<p>Your payment of <?php echo number_format($amount, 2, '.', ','); ?>&nbsp;<?php echo $currency; ?> has been cancelled.
+<?php if (!empty($contact_page)): ?>If you think this is an error, please <a href="<?php echo $contact_page; ?>">contact us</a>.<?php endif; ?></p>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 

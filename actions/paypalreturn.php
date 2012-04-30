@@ -29,6 +29,8 @@ function paypalreturn($lang, $arglist=false) {
 	$amt=paypal_amt($_SESSION['paypal']['amt']);
 	$currencycode=$_SESSION['paypal']['currencycode'];
 
+	unset($_SESSION['paypal']);
+
 	$params = array(
 		'TOKEN' 							=> $token,
 	);
@@ -45,8 +47,6 @@ function paypalreturn($lang, $arglist=false) {
 
 	$payerid = $r['PAYERID'];
 	$email = $r['EMAIL'];
-
-	$_SESSION['paypal']['payerid'] = $payerid;
 
 	$params = array(
 		'TOKEN' 							=> $token,
@@ -74,7 +74,6 @@ function paypalreturn($lang, $arglist=false) {
 	switch ($paymentstatus) {
 		case 'COMPLETED':
 			$feeamt=$r['PAYMENTINFO_0_FEEAMT'];
-			$taxamt=$r['PAYMENTINFO_0_TAXAMT'];
 			$completed=true;
 			break;
 		case 'PENDING':
@@ -84,8 +83,17 @@ function paypalreturn($lang, $arglist=false) {
 			break;
 	}
 
-	unset($_SESSION['paypal']);
+	if (!$completed) {
+		require_once 'actions/paymentrejected.php';
 
-	return run($completed ? 'paymentaccepted' : 'paymentrejected', $lang);
+		$output = paymentrejected($lang, $amt, $currencycode);
+	}
+	else {
+		require_once 'actions/paymentaccepted.php';
+
+		$output = paymentaccepted($lang, $amt, $currencycode);
+	}
+
+	return $output;
 }
 

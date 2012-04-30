@@ -3,23 +3,28 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function paypalcancel($lang, $arglist=false) {
-	if (!isset($_SESSION['paypal']['token'])) {
+	if (!isset($_SESSION['paypal'])) {
 		return run('error/badrequest', $lang);
 	}
 
 	$token=$_SESSION['paypal']['token'];
 
+	$amt=$_SESSION['paypal']['amt'];
+	$currencycode=$_SESSION['paypal']['currencycode'];
+
+	unset($_SESSION['paypal']);
+
 	if (!isset($arglist['token']) or $arglist['token'] != $token) {
 		return run('error/badrequest', $lang);
 	}
 
-	unset($_SESSION['paypal']);
+	require_once 'actions/paymentcancelled.php';
 
-	return run('paymentcancelled', $lang);
+	return paymentcancelled($lang, $amt, $currencycode);
 }
 
