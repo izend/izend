@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -22,6 +22,7 @@ function paypalreturn($lang, $arglist=false) {
 	$itemamt=$_SESSION['paypal']['itemamt'];
 	$taxamt=$_SESSION['paypal']['taxamt'];
 	$currencycode=$_SESSION['paypal']['currencycode'];
+	$context=$_SESSION['paypal']['context'];
 
 	unset($_SESSION['paypal']);
 
@@ -86,12 +87,12 @@ function paypalreturn($lang, $arglist=false) {
 	if (!$completed) {
 		require_once 'actions/paymentrejected.php';
 
-		$output = paymentrejected($lang, $amt, $currencycode);
+		$output = paymentrejected($lang, $amt, $currencycode, $context);
 	}
 	else {
 		require_once 'actions/paymentaccepted.php';
 
-		$output = paymentaccepted($lang, $amt, $currencycode);
+		$output = paymentaccepted($lang, $amt, $currencycode, $context);
 	}
 
 	return $output;

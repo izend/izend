@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
-function paymentcancelled($lang, $amount, $currency) {
+function paymentcancelled($lang, $amount, $currency, $context) {
 	head('title', translate('payment_cancelled:title', $lang));
 	head('robots', 'noindex, nofollow');
 

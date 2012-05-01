@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
-function paymentrejected($lang, $amount, $currency) {
+function paymentrejected($lang, $amount, $currency, $context) {
 	head('title', translate('payment_rejected:title', $lang));
 	head('robots', 'noindex, nofollow');
 

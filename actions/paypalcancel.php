@@ -16,6 +16,7 @@ function paypalcancel($lang, $arglist=false) {
 
 	$amt=$_SESSION['paypal']['amt'];
 	$currencycode=$_SESSION['paypal']['currencycode'];
+	$context=$_SESSION['paypal']['context'];
 
 	unset($_SESSION['paypal']);
 
@@ -25,6 +26,6 @@ function paypalcancel($lang, $arglist=false) {
 
 	require_once 'actions/paymentcancelled.php';
 
-	return paymentcancelled($lang, $amt, $currencycode);
+	return paymentcancelled($lang, $amt, $currencycode, $context);
 }
 

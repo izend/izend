@@ -12,7 +12,7 @@ require_once 'userisidentified.php';
 require_once 'userprofile.php';
 require_once 'validatecurrency.php';
 
-function paypalcheckout($lang, $amount, $currency, $tax=0) {
+function paypalcheckout($lang, $amount, $currency, $tax=0, $context=false) {
 	global $base_url, $paypal_url, $sitename, $supported_languages;
 
 	if (!user_is_identified()) {
@@ -61,7 +61,6 @@ function paypalcheckout($lang, $amount, $currency, $tax=0) {
 		'PAYMENTREQUEST_0_AMT' 				=> $amt,
 		'PAYMENTREQUEST_0_ITEMAMT' 			=> $itemamt,
 		'PAYMENTREQUEST_0_TAXAMT' 			=> $taxamt,
-		'L_PAYMENTREQUEST_0_ITEMCATEGORY0'	=> 'Digital',
 		'L_PAYMENTREQUEST_0_NAME0'			=> $name,
 		'L_PAYMENTREQUEST_0_AMT0'			=> $itemamt,
 		'L_PAYMENTREQUEST_0_TAXAMT0'		=> $taxamt,
@@ -83,7 +82,7 @@ function paypalcheckout($lang, $amount, $currency, $tax=0) {
 
 	$token = $r['TOKEN'];
 
-	$_SESSION['paypal'] = compact('token', 'amt', 'itemamt', 'taxamt', 'currencycode');
+	$_SESSION['paypal'] = compact('token', 'amt', 'itemamt', 'taxamt', 'currencycode', 'context');
 
 	reload($paypal_url . '/webscr&cmd=_express-checkout&token=' . $token);
 }
