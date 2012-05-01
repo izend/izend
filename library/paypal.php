@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -114,12 +114,16 @@ function logpaypal($method, $r) {
 		$n=0;
 		$err=array();
 		while (isset($r["L_ERRORCODE${n}"])) {
-			$err[]=$r["L_ERRORCODE${n}"];
+			$e=$r["L_ERRORCODE${n}"];
+			if (isset($r["L_LONGMESSAGE${n}"])) {
+				$e .= ':' . $r["L_LONGMESSAGE${n}"];
+			}
+			$err[]=$e;
 			$n++;
 		}
 
 		if ($err) {
-			$msg[] = 'ERRORCODE=' . implode(',', $err);
+			$msg[] = 'ERRORCODE=' . implode('|', $err);
 		}
 	}
 
