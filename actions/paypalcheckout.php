@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -12,8 +12,8 @@ require_once 'userisidentified.php';
 require_once 'userprofile.php';
 require_once 'validatecurrency.php';
 
-function paypalcheckout($lang, $amount, $currency=false) {
-	global $base_url, $paypal_url, $sitename, $supported_currencies, $supported_languages;
+function paypalcheckout($lang, $amount, $currency, $tax=0) {
+	global $base_url, $paypal_url, $sitename, $supported_languages;
 
 	if (!user_is_identified()) {
 		return run('error/unauthorized', $lang);
@@ -23,15 +23,18 @@ function paypalcheckout($lang, $amount, $currency=false) {
 		return run('error/badrequest', $lang);
 	}
 	$amt=paypal_amt($amount);
-	if ($currency) {
-		if (!validate_currency($currency)) {
-			return run('error/badrequest', $lang);
-		}
-		$currencycode=$currency;
+
+	if (!validate_currency($currency)) {
+		return run('error/badrequest', $lang);
 	}
-	else {
-		$currencycode=$supported_currencies[0];
+	$currencycode=$currency;
+
+	if (!(is_numeric($tax) and $tax >= 0)) {
+		return run('error/badrequest', $lang);
 	}
+	$taxamt=paypal_amt($tax);
+
+	$itemamt=paypal_amt($amount-$tax);
 
 	$name=translate('donate:name', $lang);
 
@@ -56,9 +59,12 @@ function paypalcheckout($lang, $amount, $currency=false) {
 		'PAYMENTREQUEST_0_PAYMENTACTION'	=> 'Sale',
 		'PAYMENTREQUEST_0_CURRENCYCODE' 	=> $currencycode,
 		'PAYMENTREQUEST_0_AMT' 				=> $amt,
-		'PAYMENTREQUEST_0_ITEMAMT' 			=> $amt,
+		'PAYMENTREQUEST_0_ITEMAMT' 			=> $itemamt,
+		'PAYMENTREQUEST_0_TAXAMT' 			=> $taxamt,
+		'L_PAYMENTREQUEST_0_ITEMCATEGORY0'	=> 'Digital',
 		'L_PAYMENTREQUEST_0_NAME0'			=> $name,
-		'L_PAYMENTREQUEST_0_AMT0'			=> $amt,
+		'L_PAYMENTREQUEST_0_AMT0'			=> $itemamt,
+		'L_PAYMENTREQUEST_0_TAXAMT0'		=> $taxamt,
 		'L_PAYMENTREQUEST_0_QTY0'			=> '1',
 		'NOSHIPPING' 						=> '1',
 		'ALLOWNOTE' 						=> '0',
@@ -77,7 +83,7 @@ function paypalcheckout($lang, $amount, $currency=false) {
 
 	$token = $r['TOKEN'];
 
-	$_SESSION['paypal'] = array('token' => $token, 'amt' => $amt, 'currencycode' => $currencycode);
+	$_SESSION['paypal'] = compact('token', 'amt', 'itemamt', 'taxamt', 'currencycode');
 
 	reload($paypal_url . '/webscr&cmd=_express-checkout&token=' . $token);
 }

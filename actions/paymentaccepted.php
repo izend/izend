@@ -14,7 +14,7 @@ function paymentaccepted($lang, $amount, $currency) {
 	$contact=true;
 	$banner = build('banner', $lang, compact('contact'));
 
-	$content = view('paymentaccepted', $lang, compact('amount', 'currency', 'contact_page'));
+	$content = view('paymentaccepted', $lang, compact('amount', 'currency'));
 
 	$output = layout('standard', compact('banner', 'content'));
 
