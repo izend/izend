@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -262,7 +262,7 @@ function user_find($login) {
 	return $r ? $r[0]['user_id'] : false;
 }
 
-function user_login($login, $password) {
+function user_login($login, $password, $quick=false) {
 	$user_id = user_find($login);
 
 	if (!$user_id) {
@@ -285,6 +285,10 @@ function user_login($login, $password) {
 
 	if ( ! ($password == $user_password or $password == $user_newpassword) ) {
 		return false;
+	}
+
+	if ($quick) {
+		return $user_id;
 	}
 
 	$user = array();

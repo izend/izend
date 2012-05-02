@@ -108,7 +108,8 @@ function login($lang) {
 				$access_denied=true;
 
 				require_once 'log.php';
-				write_log('enter.err', substr($login, 0, 40));
+
+				write_log('enter.err', substr($login, 0, 100));
 
 				break;
 			}
