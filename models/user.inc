@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -263,6 +263,8 @@ function user_find($login) {
 }
 
 function user_login($login, $password, $quick=false) {
+	global $login_lifetime;
+
 	$user_id = user_find($login);
 
 	if (!$user_id) {
@@ -301,6 +303,10 @@ function user_login($login, $password, $quick=false) {
 	$user['created'] = (int)$user_created;
 	$user['modified'] = (int)$user_modified;
 	$user['accessed'] = (int)$user_accessed;
+
+	if ($login_lifetime) {
+		$user['lasttime'] = time();
+	}
 
 	$r = user_get_role($user_id);
 

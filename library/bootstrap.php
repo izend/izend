@@ -13,7 +13,7 @@ require_once 'validatehostname.php';
 
 function bootstrap() {
 	global $base_url, $base_path, $base_root;
-	global $db_url, $session_name;
+	global $db_url, $session_name, $login_lifetime;
 
 	if (isset($_SERVER['HTTP_HOST'])) {
 		$_SERVER['HTTP_HOST'] = strtolower($_SERVER['HTTP_HOST']);
@@ -78,8 +78,14 @@ function bootstrap() {
 
 	session_open(md5($session_name));
 
-	$now = time();
-	$_SESSION['idletime'] = isset($_SESSION['lasttime']) ? $now - $_SESSION['lasttime'] : 0;
-	$_SESSION['lasttime'] = $now;
+	if (isset($_SESSION['user']['lasttime'])) {
+		$now = time();
+		if ($now - $_SESSION['user']['lasttime'] > $login_lifetime) {
+			unset($_SESSION['user']);
+		}
+		else {
+			$_SESSION['user']['lasttime'] = $now;
+		}
+	}
 }
 
