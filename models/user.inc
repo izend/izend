@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -263,7 +263,7 @@ function user_find($login) {
 }
 
 function user_login($login, $password, $quick=false) {
-	global $login_lifetime;
+	global $login_lifetime, $login_failed_delay;
 
 	$user_id = user_find($login);
 
@@ -286,6 +286,9 @@ function user_login($login, $password, $quick=false) {
 	$password=md5($user_seed . $password);
 
 	if ( ! ($password == $user_password or $password == $user_newpassword) ) {
+		if ($login_failed_delay) {
+			sleep($login_failed_delay);
+		}
 		return false;
 	}
 
@@ -315,14 +318,14 @@ function user_login($login, $password, $quick=false) {
 	$tabuser=db_prefix_table('user');
 
 	if ($user_newpassword) {
-		if ($password == $user_newpassword) {	// use the new one
+		if ($password == $user_newpassword) {
 			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), password='$user_newpassword', newpassword=NULL, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 		}
-		else {									// keep the old one
+		else {
 			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), newpassword=NULL WHERE user_id=$user_id LIMIT 1";
 		}
 	}
-	else {										// just keep track
+	else {
 		$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW() WHERE user_id=$user_id LIMIT 1";
 	}
 

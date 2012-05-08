@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 <?php
@@ -96,15 +96,18 @@ global $search_distance, $search_closest;
 $search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
 $search_closest=true;	// true - best matches, false - all matches
 
-global $session_name, $login_lifetime;
+global $session_name;
 $session_name=false;	// see bootstrap
+
+global $login_lifetime, $login_failed_delay;
 $login_lifetime=false;	// false or in seconds
+$login_failed_delay=1;	// false or in seconds
 
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
 
 $track_db=false;
-$track_log=false;
+$track_log=false;		// true, file name or false
 $track_visitor=false;
 $track_visitor_agent=false;
 
