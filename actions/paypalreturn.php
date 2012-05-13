@@ -8,8 +8,6 @@
  */
 
 require_once 'paypal.php';
-require_once 'userisidentified.php';
-require_once 'userprofile.php';
 
 function paypalreturn($lang, $arglist=false) {
 	if (!isset($_SESSION['paypal'])) {
