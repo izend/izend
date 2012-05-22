@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -59,7 +59,7 @@ function track($request_uri=false, $track_agent=false) {
 
 		$tabtrack=db_prefix_table($track_db === true ? 'track' : $track_db);
 
-		$sql="INSERT $tabtrack (ip_address, request_uri, user_agent) VALUES ($sqlipaddress, $sqlrequesturi, $sqluseragent)";
+		$sql="INSERT $tabtrack (ip_address, request_uri, user_agent) VALUES (INET_ATON($sqlipaddress), $sqlrequesturi, $sqluseragent)";
 
 		$r = db_insert($sql);
 	}

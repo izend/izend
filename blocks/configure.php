@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -452,7 +452,7 @@ CREATE TABLE `${db_prefix}comment` (
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
   `user_id` int(10) NOT NULL DEFAULT '0',
-  `ip_address` varchar(15) NOT NULL,
+  `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
@@ -734,7 +734,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}track` (
   `track_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ip_address` varchar(15) NOT NULL,
+  `ip_address` int(10) unsigned NOT NULL,
   `request_uri` varchar(255) NOT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`track_id`)
