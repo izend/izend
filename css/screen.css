@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
  
@@ -114,6 +114,8 @@ div.vbar > *:last-child {margin-bottom:0;}
 .acenter {text-align:center;}
 
 .submit {padding:0;margin:0;border:none;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+
+a.button {padding:5px 10px;margin:0;display:inline-block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-weight:bold;cursor:pointer;}
 
 .cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 .cloud {padding:0;margin:0;text-align:center;}
