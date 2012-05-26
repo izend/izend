@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 <?php
@@ -121,3 +121,6 @@ $home_action = <?php echo "'$home_action'"; ?>;		// 'home' or 'homepage'
 $default_action = <?php echo $default_action ? "'$default_action'" : 'false'; ?>;	// 'page' or 'anypage' or false
 $default_folder = 1;			// can be an array
 
+global $theme;
+
+$theme = false;		// see css/themes

@@ -733,7 +733,7 @@ _SEP_;
 	$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}track` (
   `track_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip_address` int(10) unsigned NOT NULL,
   `request_uri` varchar(255) NOT NULL,
   `user_agent` varchar(255) DEFAULT NULL,

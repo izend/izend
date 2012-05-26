@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -48,6 +48,9 @@ function head($type=false) {
 			break;
 		case 'robots':
 			$head['robots'] = $args[0];
+			break;
+		case 'theme':
+			$head['theme'] = $args[0];
 			break;
 		case 'stylesheet':
 			$name=$args[0];

@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($lang): ?>
+<?php if (!empty($lang)): ?>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" lang="<?php echo $lang; ?>" />
 <?php else: ?>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -65,10 +65,13 @@
 <?php endif; ?>
 <link href="<?php echo $base_path; ?>/css/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo $base_path; ?>/css/theme.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
-<?php if ($lang): ?>
+<?php if (!empty($theme)): ?>
+<link href="<?php echo $base_path; ?>/css/themes/<?php echo $theme; ?>.css" rel="stylesheet" type="text/css" media="screen" />
+<?php endif; ?>
+<?php if (!empty($lang)): ?>
 <link href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" rel="stylesheet" type="text/css" media="screen" />
 <?php endif; ?>
+<link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <?php if (!empty($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
 <?php

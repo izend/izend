@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -113,3 +113,6 @@ $home_action = 'install';		// 'home' or 'install'
 $default_action = 'install';	// 'page' or 'install' or false
 $default_folder = 1;			// can be an array
 
+global $theme;
+
+$theme = false;		// see css/themes
