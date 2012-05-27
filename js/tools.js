@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -205,6 +205,6 @@ function entquote(id) {
 }
 
 function entreplace(s) {
-	return s.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/"/gm, '&quot;').replace(/'/gm, '&apos;');
+	return s.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;').replace(/"/gm, '&quot;');
 }
 
