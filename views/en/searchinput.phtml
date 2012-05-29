@@ -16,6 +16,7 @@
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script type="text/javascript">
+//<![CDATA[
 $('input#searchtext')
 .bind('keydown', function(event) {
     if (event.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active) {
@@ -58,6 +59,7 @@ $('input#searchtext')
         return false;
     }
 });
+//]]>
 </script>
 <?php endif; ?>
 <?php endif; ?>
