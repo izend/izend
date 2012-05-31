@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -66,12 +66,17 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 					}
 				}
 				foreach ($files as $k => $v ) {
-					$data = file_get_contents($v['tmp_name']);
-					if ($data === false) {
-						break;
+					if (isset($v['tmp_name'])) {
+						$data = file_get_contents($v['tmp_name']);
+						if (get_magic_quotes_runtime()) {
+							$data = stripslashes($data);
+						}
 					}
-					if (get_magic_quotes_runtime()) {
-						$data = stripslashes($data);
+					else if (isset($v['data'])) {
+						$data = $v['data'];
+					}
+					if (!$data) {
+						break;
 					}
 					$content_string .= '--' . $boundary . "\r\n";
 					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . "\r\n";
