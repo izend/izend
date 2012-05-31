@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    9
+ * @copyright  2010-2012 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'userhasrole.php';
 require_once 'userprofile.php';
 require_once 'models/thread.inc';
 
-function threadeditall($lang, $clang, $type=false) {
+function threadeditall($lang, $clang) {
 	global $supported_threads, $with_toolbar;
 
 	if (!user_has_role('writer')) {
@@ -72,7 +72,7 @@ function threadeditall($lang, $clang, $type=false) {
 			break;
 	}
 
-	$r = thread_list($clang, $type, false);
+	$r = thread_list($clang);
 
 	if (count($p) != count($r)) {
 		$p = false;
@@ -248,7 +248,7 @@ function threadeditall($lang, $clang, $type=false) {
 	$site_title=translate('title', $lang);
 
 	$view=url('thread', $clang) . '?' . 'slang=' . $lang;
-	$validate=url($type ? $type : 'thread', $clang);
+	$validate=url('thread', $clang);
 
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;

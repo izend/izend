@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    8
+ * @copyright  2010-2012 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
 require_once 'models/cloud.inc';
 require_once 'models/node.inc';
 
-function thread_list($lang, $type, $strict=true) {
+function thread_list($lang, $type=false, $strict=true) {
 	$sqllang=db_sql_arg($lang, false);
 
 	$join = $strict ? 'JOIN' : 'LEFT JOIN';
