@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -404,8 +404,8 @@ function create_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_u
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO mysql.`user` (`Host`, `User`, `Password`)
-VALUES ('$db_host', '$db_user', PASSWORD('$db_password'));
+INSERT INTO mysql.`user` (`Host`, `User`, `Password`, `ssl_cipher`, `x509_issuer`, `x509_subject`)
+VALUES ('$db_host', '$db_user', PASSWORD('$db_password'), '', '', '');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
