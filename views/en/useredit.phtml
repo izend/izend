@@ -15,7 +15,7 @@
 <?php endif; ?>
 <?php if ($with_name): ?>
 <p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Connection name:</p>
-<p><input id="useredit_name" type="text" name="useredit_name" size="20" maxlength="20" title="2 to 20 letters" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" /><?php endif; ?></p>
+<p><input id="useredit_name" type="text" name="useredit_name" size="20" maxlength="20" title="2 to 20 letters" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" alt="" /><?php endif; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_name" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
