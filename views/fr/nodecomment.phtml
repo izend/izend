@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -32,7 +32,7 @@ foreach ($comments as $c) {
 <?php endif; ?>
 <p><span class="longdate">Le <?php echo longdate_fr($comment_created); ?> à <?php echo date('H:i', $comment_created); ?></span>
 <?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Éditer" /><?php endif; ?>
-<?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php echo $comment_user_name; ?></span>&nbsp;<img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?>" /></span><?php endif; ?></p>
+<?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php echo $comment_user_name; ?></span>&nbsp;<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?><?php if ($comment_user_website): ?> - <?php echo $comment_user_website; ?><?php endif; ?>" /><?php if ($comment_user_website): ?></a><?php endif; ?></span><?php endif; ?></p>
 <?php if ($id and $comment_id == $id): ?>
 <?php if (!($missing_message or $message_too_long)): ?>
 <?php
