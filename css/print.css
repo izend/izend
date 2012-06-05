@@ -59,6 +59,7 @@ video {display:none;}
 .acenter {text-align:center;}
 
 .date {font-style:italic;}
+.date .month {text-transform:capitalize;}
 
 div.row {width:100%;overflow:hidden;}
 div.row > * {float:left;margin-left:1%;margin-right:1%;}
