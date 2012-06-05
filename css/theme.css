@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    25
+ * @version    26
  * @link       http://www.izend.org
  */
  
@@ -166,6 +166,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #socialbar a {width:24px;height:24px;display:inline-block;}
 #socialbar a.facebook {background:transparent url(../images/theme/social/facebook.png) no-repeat;}
 #socialbar a.twitter {background:transparent url(../images/theme/social/twitter.png) no-repeat;}
+#socialbar a.gplus {background:transparent url(../images/theme/social/gplus.png) no-repeat;}
 #socialbar a.linkedin {background:transparent url(../images/theme/social/linkedin.png) no-repeat;}
 #socialbar a.rss {background:transparent url(../images/theme/social/rss.png) no-repeat;}
 

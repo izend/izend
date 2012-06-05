@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -13,8 +13,8 @@ $strings = array(
 	array(
 	),
 	'en' => array(
-		'description'			=> 'The website engine.',
-		'keywords'				=> 'iZend CMS',
+		'description'			=> '',
+		'keywords'				=> 'iZend',
 		'http_bad_request:title'			=> 'Bad Request',
 		'http_forbidden:title'				=> 'Forbidden',
 		'http_internal_error:title'			=> 'Internal Error',
@@ -46,8 +46,8 @@ $strings = array(
 		'donate:name'			=> 'Donation to ' . $sitename,
 	),
 	'fr' => array(
-		'description'			=> 'Le moteur de site web.',
-		'keywords'				=> 'iZend CMS',
+		'description'			=> '',
+		'keywords'				=> 'iZend',
 		'http_bad_request:title'			=> 'Mauvaise requête',
 		'http_forbidden:title'				=> 'Interdit',
 		'http_internal_error:title'			=> 'Erreur interne',
