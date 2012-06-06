@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
  
@@ -43,6 +43,11 @@ th {background-color:#ffffe0;font-weight:bold;}
 .vignette {float:right;margin:0 0 0 1em;}
 
 .readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
+
+.topbar a:link, #topbar a:visited {color:#ffffff;}
+.topbar a:hover {color:#ffffff;}
+.topbar > li {background-color:#aec14e;}
+.topbar ul li a {background-color:#aec14e;}
 
 .date {float:left;width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;position:relative;}
 .date span {width:100%;text-align:center;margin:0;padding:0;position:absolute;}

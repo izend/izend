@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
  
@@ -40,6 +40,13 @@ ul {list-style-type:disc;}
 .menu a span {display:none;}
 
 .menubar li {display:inline;}
+
+.topbar {display:inline-block;margin:1em 0;}
+.topbar > li {float:left;width:7em;padding:5px 0;overflow:auto;}
+.topbar li a {display:block;padding:0.5em 1em;}
+.topbar ul {position:absolute;margin:0;padding:0.5em 0;left:-1000em;z-index:3000;}
+.topbar ul li a {width:7em;padding:0.5em 1em;}
+.topbar li:hover ul {left:auto;}
 
 .pagebar {display:inline-block;margin:0;padding:0.5em 0 0.5em 0;}
 .pagebar li {display:inline;list-style:none;padding:0.5em;}
