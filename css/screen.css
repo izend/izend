@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
  
@@ -55,7 +55,7 @@ ul {list-style-type:disc;}
 .popup ul li a {width:10em;}
 .popup li:hover ul {display:block;}
 
-div.row {width:100%;overflow:hidden;}
+div.row {width:100%;overflow:hidden;margin:1em 0;}
 div.row > * {float:left;margin-left:1%;margin-right:1%;}
 div.row > *:first-child {margin-left:0;}
 div.row > *:last-child {margin-right:0;}

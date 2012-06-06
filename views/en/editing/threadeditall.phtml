@@ -21,7 +21,6 @@ thread
 #
 <input id="new_thread_number" name="new_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return submitonenter(event, 'thread_create')"/>
 type
-<?php global $supported_threads; ?>
 <select name="new_thread_type" size="1">
 <option value="thread"<?php if ($new_thread_type == 'thread'): ?> selected="selected"<?php endif; ?>>Thread</option>
 <?php foreach ($supported_threads as $type): ?>
