@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -133,7 +133,9 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	$tabthreadlist=db_prefix_table('thread_list');
 	$tabthreadlocale=db_prefix_table('thread_locale');
 	$tabthreadnode=db_prefix_table('thread_node');
+	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
+	$tabuser=db_prefix_table('user');
 
 	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
@@ -147,7 +149,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	}
 	$where = "tg.locale=$sqllang AND " . ($ntags > 1 ? '('.implode(' OR ', $namelist).')' : $namelist[0]);
 
-	$sql = "SELECT tl.thread_id, nl.node_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread' JOIN $tabthreadlist tlist ON tlist.thread_id=tn.thread_id JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, tlist.number, tn.number";
+	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread' JOIN $tabthreadlist tlist ON tlist.thread_id=tn.thread_id JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnode n ON n.node_id=ti.node_id JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale JOIN $tabuser u ON u.user_id=n.user_id WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, tlist.number, tn.number";
 
 	$r = db_query($sql);
 
