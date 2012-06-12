@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -53,10 +53,9 @@ function search($lang, $arglist=false) {
 	$rsearch=false;
 	switch($action) {
 		case 'none':
-			$tag=isset($arglist['q']) ? $arglist['q'] : false;
-			if ($tag) {
-				$taglist=array($tag);
-				$searchtext=$tag;
+			if (!empty($arglist['q'])) {
+				$searchtext=$arglist['q'];
+				$taglist=explode(' ', $searchtext);
 			}
 			break;
 		case 'search':

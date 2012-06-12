@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -19,7 +19,9 @@
 <?php extract($link); /* link_title link_url link_description link_cloud */ ?>
 <li>
 <a href="<?php echo $link_url; ?>"><span><?php echo htmlspecialchars($link_title, ENT_COMPAT, 'UTF-8'); ?></span></a>
+<?php if ($link_description): ?>
 <p><?php echo htmlspecialchars($link_description, ENT_COMPAT, 'UTF-8'); ?></p>
+<?php endif; ?>
 <p><?php echo $link_cloud; /* already escaped */ ?></p>
 </li>
 <?php endforeach; ?>
