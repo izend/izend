@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
  
@@ -58,8 +58,7 @@ video {display:none;}
 .aright {text-align:right;}
 .acenter {text-align:center;}
 
-.date {font-style:italic;}
-.date .month {text-transform:capitalize;}
+.date, .author {font-style:italic;}
 
 div.row {width:100%;overflow:hidden;}
 div.row > * {float:left;margin-left:1%;margin-right:1%;}

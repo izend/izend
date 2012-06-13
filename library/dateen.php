@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -16,7 +16,7 @@ function longmonth_en($unixtime) {
 }
 
 function shortmonth_en($unixtime) {
-	static $shortmonthname=array('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug;', 'sep', 'oct', 'nov', 'dec');
+	static $shortmonthname=array('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec');
 
 	$month = idate('m', $unixtime);
 
