@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -113,16 +113,16 @@ function search($lang, $arglist=false) {
 			if (!$thread_nosearch) {
 				$search_url=url('search', $lang, $cloud_name);
 			}
+			$cloud_url=url('search', $lang, $cloud_name);
 		}
 		else {
 			$headline_text=$search_title;
 			$headline_url=false;
-			$search_url=url('search', $lang);
+			$search_url=$cloud_url=url('search', $lang);
 		}
 		$headline = compact('headline_text', 'headline_url');
 		$title = view('headline', false, $headline);
 
-		$cloud_url=$search_url;
 		$byname=true;
 		$bycount=$index=false;
 		$content = build('cloud', $lang, $cloud_url, $cloud_id, false, false, compact('byname', 'bycount', 'index'));
