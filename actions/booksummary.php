@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    10
+ * @copyright  2010-2012 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -84,7 +84,9 @@ function booksummary($lang, $book) {
 
 	$cloud=false;
 	if (!$book_nocloud) {
-		$cloud = build('cloud', $lang, $book_id, false, 50, true, true);
+		$cloud_url= url('search', $lang, $book_name);
+		$byname=$bycount=$index=true;
+		$cloud = build('cloud', $lang, $cloud_url, $book_id, false, 30, compact('byname', 'bycount', 'index'));
 	}
 
 	$headline_text=	translate('bookall:title', $lang);

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -75,7 +75,7 @@ function cloud_get($lang, $cloud_id) {
 	return $r ? $r[0] : false;
 }
 
-function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=false) {
+function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=false, $inclusive=true) {
 	// list the tags in a thread or in all the threads which are optionally related to a node count and/or by name skipping threads of type 'thread' and nodes which are ignored
 	$sqllang=db_sql_arg($lang, false);
 
@@ -93,7 +93,9 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	$in=$having='';
 	if ($node_id) {
 		$in="WHERE ti.tag_id IN (SELECT ti.tag_id FROM $tabtagindex ti JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang WHERE ti.node_id=$node_id)";
-		$having='HAVING tag_count > 1';
+		if (!$inclusive) {
+			$having='HAVING tag_count > 1';
+		}
 	}
 
 	$order='';

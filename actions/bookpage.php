@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -129,7 +129,9 @@ function bookpage($lang, $book, $page) {
 
 	$cloud=false;
 	if (!$book_nocloud) {
-		$cloud = build('cloud', $lang, $book_id, false, 50, true, true);
+		$cloud_url= url('search', $lang, $book_name);
+		$byname=$bycount=$index=true;
+		$cloud = build('cloud', $lang, $cloud_url, $book_id, false, 30, compact('byname', 'bycount', 'index'));
 	}
 
 	$headline_text=$book_title ? $book_title : $book_id;

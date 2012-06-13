@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -126,7 +126,9 @@ function story($lang, $arglist=false) {
 
 	$cloud=false;
 	if (!$story_nocloud) {
-		$cloud = build('cloud', $lang, $story_id, false, 50, true, true);
+		$cloud_url= url('search', $lang, $story_name);
+		$byname=$bycount=$index=true;
+		$cloud = build('cloud', $lang, $cloud_url, $story_id, false, 30, compact('byname', 'bycount', 'index'));
 	}
 
 	$summary=array();

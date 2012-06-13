@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -13,12 +13,14 @@
 <li><a class="btn_index" href="<?php echo $index; ?>" title="Index">Index</a></li>
 <?php endif; ?>
 <?php
-$fontsizes = array('x-small', 'small', 'medium', 'large', 'x-large');
+if (!$flat) {
+	$fontsizes = array('x-small', 'small', 'medium', 'large', 'x-large');
+}
 foreach ($linklist as $link) {
 	extract($link);	/* name, count, url */
-	$span=$fontsizes[rand(0, count($fontsizes)-1)];
+	$span=!$flat ? $fontsizes[rand(0, count($fontsizes)-1)] : false;
 ?>
-<li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>"><span class="<?php echo $span; ?>"><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?></span></a></li>
+<li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>"><?php if ($span): ?><span class="<?php echo $span; ?>"><?php endif; ?><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?><?php if ($span): ?></span><?php endif; ?></a></li>
 <?php
 }
 ?>
