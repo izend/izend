@@ -39,7 +39,7 @@ function folderpage($lang, $folder, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -71,14 +71,18 @@ function folderpage($lang, $folder, $page) {
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
-	$page_comment = false;
+	$page_comment=false;
 	if (!($thread_nocomment or $node_nocomment)) {
 		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('folder', $lang) . '/' . $folder_name. '/' . $page_name;
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
-	$vote=build('vote', $lang, $page_id, 'node');
+	$vote=false;
+	if (!($thread_novote or $node_novote)) {
+		$nomore=(!$page_contents or $thread_nomorevote or $node_nomorevote) ? true : false;
+		$vote=build('vote', $lang, $page_id, 'node', $nomore);
+	}
 
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {

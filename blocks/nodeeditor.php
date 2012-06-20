@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2012 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -17,8 +17,10 @@ function nodeeditor($lang, $clang, $node_id) {
 		$action='edit';
 	}
 
-	$node_name=$node_title=$node_abstract=$node_cloud=$node_comment=$node_morecomment=$node_ilike=$node_tweet=$node_plusone=$node_linkedin=false;
-	$node_nocomment=$node_nomorecomment=true;
+	$node_name=$node_title=$node_abstract=$node_cloud=$node_comment=$node_morecomment=$node_vote=$node_morevote=false;
+	$node_ilike=$node_tweet=$node_plusone=$node_linkedin=false;
+
+	$node_nocomment=$node_nomorecomment=$node_novote=$node_nomorevote=true;
 
 	switch($action) {
 		case 'init':
@@ -29,6 +31,8 @@ function nodeeditor($lang, $clang, $node_id) {
 			}
 			$node_comment=!$node_nocomment;
 			$node_morecomment=!$node_nomorecomment;
+			$node_vote=!$node_novote;
+			$node_morevote=!$node_nomorevote;
 
 			break;
 		case 'edit':
@@ -56,6 +60,14 @@ function nodeeditor($lang, $clang, $node_id) {
 			if (isset($_POST['node_morecomment'])) {
 				$node_morecomment=readarg($_POST['node_morecomment']) == 'on' ? true : false;
 				$node_nomorecomment=!$node_morecomment;
+			}
+			if (isset($_POST['node_vote'])) {
+				$node_vote=readarg($_POST['node_vote']) == 'on' ? true : false;
+				$node_novote=!$node_vote;
+			}
+			if (isset($_POST['node_morevote'])) {
+				$node_morevote=readarg($_POST['node_morevote']) == 'on' ? true : false;
+				$node_nomorevote=!$node_morevote;
 			}
 			if (isset($_POST['node_ilike'])) {
 				$node_ilike=readarg($_POST['node_ilike'] == 'on' ? true : false);
@@ -96,7 +108,7 @@ function nodeeditor($lang, $clang, $node_id) {
 				break;
 			}
 
-			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_ilike, $node_tweet, $node_plusone, $node_linkedin);
+			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin);
 
 			if (!$r) {
 				break;
@@ -114,7 +126,7 @@ function nodeeditor($lang, $clang, $node_id) {
 
 	$errors = compact('missing_node_name', 'bad_node_name');
 
-	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'content_editor', 'errors'));
+	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'content_editor', 'errors'));
 
 	return $output;
 }

@@ -45,7 +45,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -88,6 +88,12 @@ function bookpage($lang, $book, $page) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
+	$vote=false;
+	if (!($thread_novote or $node_novote)) {
+		$nomore=(!$page_contents or $thread_nomorevote or $node_nomorevote) ? true : false;
+		$vote=build('vote', $lang, $page_id, 'node', $nomore);
+	}
+
 	$prev_page_label=$prev_page_url=false;
 	$r=thread_node_prev($lang, $book_id, $page_id);
 	if ($r) {
@@ -116,8 +122,6 @@ function bookpage($lang, $book, $page) {
 		}
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
-
-	$vote=build('vote', $lang, 'node', $page_id);
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'besocial', 'vote'));
 

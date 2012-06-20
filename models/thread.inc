@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -184,6 +184,10 @@ function thread_delete($thread_id) {
 
 	$r = db_delete($sql);
 
+	$tabvote=db_prefix_table('vote');
+	$sql="DELETE FROM $tabvote WHERE content_id=$thread_id AND content_type='thread'";
+	db_delete($sql);
+
 	return $r;
 }
 
@@ -195,19 +199,21 @@ function thread_get($lang, $thread_id, $strict=true) {
 	$tabthread=db_prefix_table('thread');
 	$tabthreadlocale=db_prefix_table('thread_locale');
 
-	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id LIMIT 1";
+	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.novote AS thread_novote, t.nomorevote AS thread_nomorevote, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin) {
+function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin) {
 	$sqltype=db_sql_arg($thread_type, false);
 	$sqlnosearch=$thread_nosearch ? 1 : 0;
 	$sqlnocloud=$thread_nocloud ? 1 : 0;
 	$sqlnocomment=$thread_nocomment ? 1 : 0;
 	$sqlnomorecomment=$thread_nocomment ? 1 : ($thread_nomorecomment ? 1 : 0);
+	$sqlnovote=$thread_novote ? 1 : 0;
+	$sqlnomorevote=$thread_novote ? 1 : ($thread_nomorevote ? 1 : 0);
 	$sqlilike=$thread_ilike ? 1 : 0;
 	$sqltweet=$thread_tweet ? 1 : 0;
 	$sqlplusone=$thread_plusone ? 1 : 0;
@@ -215,7 +221,7 @@ function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type
 
 	$tabthread=db_prefix_table('thread');
 
-	$sql="UPDATE $tabthread SET thread_type=$sqltype, modified=NOW(), nosearch=$sqlnosearch, nocloud=$sqlnocloud, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin WHERE thread_id=$thread_id LIMIT 1";
+	$sql="UPDATE $tabthread SET thread_type=$sqltype, modified=NOW(), nosearch=$sqlnosearch, nocloud=$sqlnocloud, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin WHERE thread_id=$thread_id LIMIT 1";
 	$r = db_update($sql);
 
 	if (!$r) {
@@ -391,7 +397,7 @@ function thread_get_node($lang, $thread_id, $node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
+	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
 
 	$r = db_query($sql);
 

@@ -35,6 +35,8 @@ function booksummary($lang, $book) {
 	$book_cloud = $thread_cloud;
 	$book_nocloud = $thread_nocloud;
 	$book_nosearch = $thread_nosearch;
+	$book_novote = $thread_novote;
+	$book_nomorevote = $thread_nomorevote;
 
 	if ($book_title) {
 		head('title', $book_title);
@@ -59,6 +61,12 @@ function booksummary($lang, $book) {
 		}
 	}
 
+	$vote=false;
+	if (!$book_novote) {
+		$nomore=(!$book_contents or $book_nomorevote) ? true : false;
+		$vote=build('vote', $lang, $book_id, 'thread', $nomore);
+	}
+
 	$besocial=$sharebar=false;
 	if ($book_contents) {
 		$ilike=$thread_ilike;
@@ -71,8 +79,6 @@ function booksummary($lang, $book) {
 		}
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
-
-	$vote=build('vote', $lang, $book_id, 'thread');
 
 	$content = view('booksummary', false, compact('book_id', 'book_title', 'book_abstract', 'book_contents', 'besocial', 'vote'));
 

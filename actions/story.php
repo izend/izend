@@ -60,7 +60,7 @@ function story($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -101,6 +101,12 @@ function story($lang, $arglist=false) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
+	$vote=false;
+	if (!($thread_novote or $node_novote)) {
+		$nomore=(!$page_contents or $thread_nomorevote or $node_nomorevote) ? true : false;
+		$vote=build('vote', $lang, $page_id, 'node', $nomore);
+	}
+
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
 		$ilike=$thread_ilike && $node_ilike;
@@ -113,8 +119,6 @@ function story($lang, $arglist=false) {
 		}
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
-
-	$vote=build('vote', $lang, $page_id, 'node');
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial', 'vote'));
 

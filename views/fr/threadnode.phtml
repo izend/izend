@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    7
+ * @copyright  2010-2012 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -32,12 +32,14 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
-<?php if ($node_comment or $node_morecomment or $node_ilike or $node_tweet or $node_plusone): ?>
+<?php if ($node_comment or $node_morecomment or $node_vote or $node_morevote or $node_ilike or $node_tweet or $node_plusone): ?>
 <fieldset id="node_options">
 <legend>Options</legend>
 <div class="hbar">
 <?php if ($node_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
 <?php if ($node_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
+<?php if ($node_vote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award.png" alt="" /><?php endif; ?>
+<?php if ($node_morevote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award_add.png" alt="" /><?php endif; ?>
 <?php if ($node_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
 <?php if ($node_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
 <?php if ($node_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>

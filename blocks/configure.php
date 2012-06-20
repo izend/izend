@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -545,6 +545,8 @@ CREATE TABLE `${db_prefix}node` (
   `modified` datetime NOT NULL,
   `nocomment` tinyint(1) NOT NULL DEFAULT '0',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
+  `novote` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
   `plusone` tinyint(1) NOT NULL DEFAULT '1',
@@ -594,8 +596,10 @@ CREATE TABLE `${db_prefix}thread` (
   `modified` datetime NOT NULL,
   `nosearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocloud` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
+  `novote` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
   `plusone` tinyint(1) NOT NULL DEFAULT '1',

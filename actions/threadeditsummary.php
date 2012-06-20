@@ -51,8 +51,12 @@ function threadeditsummary($lang, $clang, $thread) {
 		$action='show';
 	}
 
-	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=$thread_search=$thread_tag=$thread_comment=$thread_morecomment=$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=false;
-	$thread_nosearch=$thread_nocloud=$thread_nocomment=$thread_nomorecomment=true;
+	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=false;
+	$thread_search=$thread_tag=false;
+	$thread_comment=$thread_morecomment=$thread_vote=$thread_morevote=false;
+	$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=false;
+
+	$thread_nosearch=$thread_nocloud=$thread_nocomment=$thread_nomorecomment=$thread_novote=$thread_nomorevote=true;
 
 	$new_node_name=$new_node_title=$new_node_number=false;
 	$old_node_number=false;
@@ -65,12 +69,14 @@ function threadeditsummary($lang, $clang, $thread) {
 		case 'reset':
 			$r = thread_get($clang, $thread_id, false);
 			if ($r) {
-				extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment */
+				extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment thread_novote thread_nomorevote */
 			}
 			$thread_search=!$thread_nosearch;
 			$thread_tag=!$thread_nocloud;
 			$thread_comment=!$thread_nocomment;
 			$thread_morecomment=!$thread_nomorecomment;
+			$thread_vote=!$thread_novote;
+			$thread_morevote=!$thread_nomorevote;
 
 			break;
 		case 'edit':
@@ -114,6 +120,14 @@ function threadeditsummary($lang, $clang, $thread) {
 			if (isset($_POST['thread_morecomment'])) {
 				$thread_morecomment=readarg($_POST['thread_morecomment']) == 'on' ? true : false;
 				$thread_nomorecomment=!$thread_morecomment;
+			}
+			if (isset($_POST['thread_vote'])) {
+				$thread_vote=readarg($_POST['thread_vote']) == 'on' ? true : false;
+				$thread_novote=!$thread_vote;
+			}
+			if (isset($_POST['thread_morevote'])) {
+				$thread_morevote=readarg($_POST['thread_morevote']) == 'on' ? true : false;
+				$thread_nomorevote=!$thread_morevote;
 			}
 			if (isset($_POST['thread_ilike'])) {
 				$thread_ilike=readarg($_POST['thread_ilike'] == 'on' ? true : false);
@@ -241,7 +255,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				break;
 			}
 
-			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin);
+			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin);
 
 			if (!$r) {
 				break;
@@ -407,7 +421,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
-	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
+	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
 	$output = layout('editing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

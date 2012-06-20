@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -65,16 +65,18 @@ function node_get($lang, $node_id, $strict=true) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, n.user_id AS node_user, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id LIMIT 1";
+	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, n.user_id AS node_user, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_ilike, $node_tweet, $node_plusone, $node_linkedin) {
+function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin) {
 	$sqlnocomment=$node_nocomment ? 1 : 0;
 	$sqlnomorecomment=$node_nocomment ? 1 : ($node_nomorecomment ? 1 : 0);
+	$sqlnovote=$node_novote ? 1 : 0;
+	$sqlnomorevote=$node_novote ? 1 : ($node_nomorevote ? 1 : 0);
 	$sqlilike=$node_ilike ? 1 : 0;
 	$sqltweet=$node_tweet ? 1 : 0;
 	$sqlplusone=$node_plusone ? 1 : 0;
@@ -82,7 +84,8 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin WHERE node_id=$node_id LIMIT 1";
+	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin WHERE node_id=$node_id LIMIT 1";
+
 	$r = db_update($sql);
 
 	if (!$r) {
@@ -108,8 +111,6 @@ function node_delete($node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 	$tabnodecontent=db_prefix_table('node_content');
-
-	$tabcomment=db_prefix_table('comment');
 
 	$sql="DELETE FROM $tabnode WHERE node_id=$node_id";
 	$r = db_delete($sql);
@@ -144,7 +145,12 @@ function node_delete($node_id) {
 		db_delete($sql);
 	}
 
+	$tabcomment=db_prefix_table('comment');
 	$sql="DELETE FROM $tabcomment WHERE node_id=$node_id";
+	db_delete($sql);
+
+	$tabvote=db_prefix_table('vote');
+	$sql="DELETE FROM $tabvote WHERE content_id=$node_id AND content_type='node'";
 	db_delete($sql);
 
 	return true;
@@ -392,7 +398,7 @@ function node_get_all_comments($node_id, $locale) {
 		return false;
 	}
 
-	$sqllocale=db_sql_arg($locale);
+	$sqllocale=db_sql_arg($locale, false);
 
 	$tabcomment=db_prefix_table('comment');
 	$tabuser=db_prefix_table('user');

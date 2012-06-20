@@ -58,7 +58,7 @@ th {background-color:#ffffe0;font-weight:bold;}
 
 .cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
 .cloud li a:hover {color:#333333;text-decoration:none;}
-.cloud li .btn_index {float:left;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
+.cloud li .btn_index {float:left;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
 .tag {color:#df6f6f;font-size:large;}
 
@@ -102,19 +102,19 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 .hidy {height:16px;background:transparent url(../images/theme/icons/down.png) top right no-repeat;margin:0 8px 0 0;}
 
-input#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/fr.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
-input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/en.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+input#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/fr.png) no-repeat;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/en.png) no-repeat;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 
 #headline {margin:0 0 0.5em 0;text-align:right;}
 
 #searchinput {border:2px solid #aec14e;padding:0;background-color:#ffffff;}
 #searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}
-#search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-1000em;cursor:pointer;}
+#search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/find.png) no-repeat;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 
-#footer .btn_mail {width:16px;height:16px;background:transparent url(../images/theme/icons/small/mail.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
-#footer .btn_login {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
-#footer .btn_logout {width:16px;height:16px;background:transparent url(../images/theme/icons/small/cancel.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
-#footer .btn_admin {width:16px;height:16px;background:transparent url(../images/theme/icons/small/work.png) no-repeat;display:inline-block;text-indent:-1000em;vertical-align:middle;}
+#footer .btn_mail {width:16px;height:16px;background:transparent url(../images/theme/icons/small/mail.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
+#footer .btn_login {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
+#footer .btn_logout {width:16px;height:16px;background:transparent url(../images/theme/icons/small/cancel.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
+#footer .btn_admin {width:16px;height:16px;background:transparent url(../images/theme/icons/small/work.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
 #footer #languages {float:right;}
 #footer #languages a span {display:inline;}
@@ -182,7 +182,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #comments .signature {float:right;margin-top:-4px;}
 #comments .longdate {color:#666666;font-size:small;}
 #comments .author {color:#666666;font-size:small;font-style:italic;}
-#comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/moderate.png) no-repeat;vertical-align:bottom;text-indent:-1000em;cursor:pointer;}
+#comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/moderate.png) no-repeat;vertical-align:bottom;text-indent:-9999px;cursor:pointer;}
 #comments pre {font-family:monospace;font-size:10pt;}
 #comments blockquote {font-size:small;margin-right:0;}
 
@@ -193,10 +193,9 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 .bbcodebar .alert {color:#df6f6f;font-style:italic;}
 .bbcodehelp {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
 
-.vote {float:right;}
-.vote p {margin:0;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;text-align:center}
+.vote {float:right;margin:0;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;text-align:center}
 .vote .count {float:left;font-size:large;font-weight:bold;line-height:24px;margin-right:0.5em;}
-.vote .plusone {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/vote.png) no-repeat;vertical-align:bottom;text-indent:-1000em;cursor:pointer;}
+.vote .plusone {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons/vote.png) no-repeat;vertical-align:bottom;text-indent:-9999px;cursor:pointer;}
 
 #searchlinks h3 a:link {color:#aec14e;}
 #searchlinks h3 a:hover {color:#ec902d;}

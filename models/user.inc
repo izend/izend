@@ -46,9 +46,9 @@ function user_create($name, $password, $mail, $locale='en', $role_names=false) {
 
 	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
-	$sqllocale=db_sql_arg($locale);
-	$sqlpassword=db_sql_arg($password);
-	$sqlseed=db_sql_arg($seed);
+	$sqllocale=db_sql_arg($locale, false);
+	$sqlpassword=db_sql_arg($password, false);
+	$sqlseed=db_sql_arg($seed, false);
 
 	$tabuser=db_prefix_table('user');
 
@@ -135,7 +135,7 @@ function user_set($user_id, $name, $mail, $website, $locale) {
 	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqlwebsite=db_sql_arg($website, true, true);
-	$sqllocale=db_sql_arg($locale);
+	$sqllocale=db_sql_arg($locale, false);
 
 	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, website=$sqlwebsite, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 
@@ -187,7 +187,7 @@ function user_set_newpassword($user_id, $newpassword) {
 
 	$newpassword=$newpassword ? md5($user_seed . $newpassword) : '';
 
-	$sqlnewpassword=db_sql_arg($newpassword);
+	$sqlnewpassword=db_sql_arg($newpassword, false);
 
 	$tabuser=db_prefix_table('user');
 

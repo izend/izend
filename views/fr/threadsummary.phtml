@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    8
+ * @copyright  2010-2012 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -19,7 +19,7 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo $thread_cloud; ?></p>
 <?php endif; ?>
-<?php if ($thread_comment or $thread_morecomment or $thread_search or $thread_tag or $thread_ilike or $thread_tweet or $thread_plusone): ?>
+<?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_plusone): ?>
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -27,6 +27,8 @@
 <?php if ($thread_tag): ?><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" /><?php endif; ?>
 <?php if ($thread_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
 <?php if ($thread_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
+<?php if ($thread_vote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award.png" alt="" /><?php endif; ?>
+<?php if ($thread_morevote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award_add.png" alt="" /><?php endif; ?>
 <?php if ($thread_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
 <?php if ($thread_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
 <?php if ($thread_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>

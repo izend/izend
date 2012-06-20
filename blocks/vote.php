@@ -3,17 +3,19 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
 require_once 'models/vote.inc';
 
-function vote($lang, $content_id, $content_type) {
+function vote($lang, $content_id, $content_type, $nomore) {
 	$action='init';
 
-	if (isset($_POST['vote_plusone'])) {
-		$action='vote';
+	if (!$nomore) {
+		if (isset($_POST['vote_plusone'])) {
+			$action='vote';
+		}
 	}
 
 	switch($action) {
@@ -39,7 +41,7 @@ function vote($lang, $content_id, $content_type) {
 		extract($r);	// vote_count, vote_total
 	}
 
-	$output = view('vote', $lang, compact('vote_total'));
+	$output = view('vote', $lang, compact('vote_total', 'nomore'));
 
 	return $output;
 }
