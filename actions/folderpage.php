@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -78,6 +78,8 @@ function folderpage($lang, $folder, $page) {
 		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
 	}
 
+	$vote=build('vote', $lang, $page_id, 'node');
+
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
 		$ilike=$thread_ilike && $node_ilike;
@@ -91,7 +93,7 @@ function folderpage($lang, $folder, $page) {
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
 	}
 
-	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial'));
+	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial', 'vote'));
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '/'. $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('folder', $lang) . '/'. $folder_name . '/' . $page_name;

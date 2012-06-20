@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
  
@@ -77,7 +77,7 @@ div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
-.menu, .menubar, .sidebar, .cloud, .link, .readmore, .summary, .vignette, .social {display:none !important;}
+.menu, .menubar, .sidebar, .cloud, .link, .readmore, .summary, .vignette, .social, .vote {display:none !important;}
 
 .video-js {display:none;}
 

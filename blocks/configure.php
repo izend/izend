@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
 
@@ -451,7 +451,7 @@ CREATE TABLE `${db_prefix}comment` (
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
-  `user_id` int(10) NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`comment_id`),
@@ -575,7 +575,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `content_type` enum('text','file','download','infile','longtail') CHARACTER SET ascii NOT NULL DEFAULT 'text',
+  `content_type` enum('text','file','download','infile','longtail') NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
@@ -588,7 +588,7 @@ _SEP_;
 	$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) NOT NULL DEFAULT '1',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '1',
   `thread_type` enum('thread','folder','story','book') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
@@ -709,8 +709,8 @@ _SEP_;
 
 	$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}user_role` (
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `role_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `role` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -738,6 +738,24 @@ CREATE TABLE `${db_prefix}track` (
   `request_uri` varchar(255) NOT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`track_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+CREATE TABLE `${db_prefix}vote` (
+  `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` int(10) unsigned NOT NULL,
+  `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
+  `content_locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `created` datetime NOT NULL,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `ip_address` int(10) unsigned NOT NULL,
+  `value` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`vote_id`),
+  UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {

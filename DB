@@ -19,6 +19,31 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Wed Jun 20 2012
+
+CREATE TABLE IF NOT EXISTS `izend_vote` (
+  `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` int(10) unsigned NOT NULL,
+  `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
+  `content_locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `created` datetime NOT NULL,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `ip_address` int(10) unsigned NOT NULL,
+  `value` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`vote_id`),
+  UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+----
+
+Date:	Mon Jun 18 2012
+
+ALTER TABLE `izend_comment` CHANGE `user_id` `user_id` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `izend_user_role` CHANGE `user_id` `user_id` INT( 10 ) UNSIGNED NOT NULL;
+ALTER TABLE `izend_user_role` CHANGE `role_id` `role_id` INT( 10 ) UNSIGNED NOT NULL;
+
+ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'longtail' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text';
+----
+
 Date:	Wed May 23 2012
 
 ALTER TABLE `izend_comment` CHANGE `ip_address` `ip_address_old` VARCHAR( 15 ) NOT NULL;
@@ -181,15 +206,15 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `izend_comment` (
   `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `node_id` int(10) unsigned NOT NULL,
-  `locale` enum('en','fr') NOT NULL DEFAULT 'en',
+  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
-  `user_id` int(10) NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_content_download` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -255,14 +280,14 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `izend_node_content` (
+CREATE TABLE IF NOT EXISTS `izendnode_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `content_type` enum('text','file','download','infile','longtail') CHARACTER SET ascii NOT NULL DEFAULT 'text',
+  `content_type` enum('text','file','download','infile','longtail') NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
 CREATE TABLE IF NOT EXISTS `izend_node_locale` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -372,9 +397,21 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_user_role` (
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `role_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `role` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `izend_vote` (
+  `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` int(10) unsigned NOT NULL,
+  `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
+  `content_locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `created` datetime NOT NULL,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `ip_address` int(10) unsigned NOT NULL,
+  `value` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`vote_id`),
+  UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

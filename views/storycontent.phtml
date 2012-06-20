@@ -2,12 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <div id="story">
+<?php if ($vote): ?>
+<?php echo $vote; ?>
+<?php endif; ?>
 <h3><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($page_contents): ?>
 <?php echo $page_contents; ?>

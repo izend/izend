@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -86,9 +86,6 @@ function nodecomment($lang, $node_id, $node_url, $nomore) {
 	$bad_id=false;
 	$missing_message=false;
 	$message_too_long=false;
-
-	$internal_error=false;
-	$contact_page=false;
 
 	switch($action) {
 		case 'comment':
@@ -259,11 +256,7 @@ function nodecomment($lang, $node_id, $node_url, $nomore) {
 
 	$_SESSION['comment_token'] = $token = token_id();
 
-	if ($internal_error) {
-		$contact_page=url('contact', $lang);
-	}
-
-	$errors = compact('missing_message', 'message_too_long', 'internal_error', 'contact_page');
+	$errors = compact('missing_message', 'message_too_long');
 
 	$output = view('nodecomment', $lang, compact('token', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_name', 'user_page', 'node_url', 'errors'));
 

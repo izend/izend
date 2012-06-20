@@ -2,12 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <div id="folderpage">
+<?php if ($vote): ?>
+<?php echo $vote; ?>
+<?php endif; ?>
 <?php if ($page_title): ?>
 <h3><?php echo htmlspecialchars($page_title, ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php endif; ?>

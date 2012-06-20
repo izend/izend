@@ -2,12 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <div id="booksummary">
+<?php if ($vote): ?>
+<?php echo $vote; ?>
+<?php endif; ?>
 <h3><?php echo htmlspecialchars($book_title ? $book_title : $book_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($book_abstract): ?>
 <p><?php echo htmlspecialchars($book_abstract, ENT_COMPAT, 'UTF-8'); ?></p>

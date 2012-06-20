@@ -334,8 +334,8 @@ function node_delete_content($node_id, $content_id, $content_type) {
 
 function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
 	$sqltext=db_sql_arg($text, true);
-	$sqllocale=db_sql_arg($locale);
-	$sqlipaddress=db_sql_arg($ip_address);
+	$sqllocale=db_sql_arg($locale, false);
+	$sqlipaddress=db_sql_arg($ip_address, false);
 
 	$tabcomment=db_prefix_table('comment');
 
@@ -364,7 +364,7 @@ function node_delete_comment($node_id, $comment_id) {
 
 function node_set_comment($node_id, $comment_id, $text, $locale) {
 	$sqltext=db_sql_arg($text, true);
-	$sqllocale=db_sql_arg($locale);
+	$sqllocale=db_sql_arg($locale, false);
 
 	$tabcomment=db_prefix_table('comment');
 
@@ -376,7 +376,7 @@ function node_set_comment($node_id, $comment_id, $text, $locale) {
 }
 
 function node_get_comment($node_id, $comment_id, $locale) {
-	$sqllocale=db_sql_arg($locale);
+	$sqllocale=db_sql_arg($locale, false);
 
 	$tabcomment=db_prefix_table('comment');
 

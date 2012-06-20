@@ -7,6 +7,7 @@
  * @link       http://www.izend.org
  */
 ?>
+<?php if (!empty($title) or !empty($search) or !empty($summary) or !empty($cloud)): ?>
 <div id="sidebar">
 <?php if (true): ?>
 <?php if (!empty($search)): ?>
@@ -30,19 +31,15 @@
 <?php head('javascript', 'jquery.cookie'); ?>
 <div id="cloud" class="hidy"></div>
 <?php echo $cloud; ?>
-<?php endif; ?>
-<?php if (!empty($donate)): ?>
-<?php echo $donate; ?>
-<?php endif; ?>
-</div>
-<?php if (!empty($cloud)): ?>
 <script type="text/javascript">
-if ($.cookie('nosidecloud') == 1) {
-	$('#sidebar .cloud').hide();
+if ($.cookie('nocloud') == 1) {
+		$('.cloud').hide();
 }
 $('#cloud').click(function() {
-	$('#sidebar .cloud').toggle();
-	$.cookie('nosidecloud', $('#sidebar .cloud').is(':hidden') ? 1 : 0, { path: '/' });
+	$('.cloud').toggle();
+	$.cookie('nocloud', $('.cloud').is(':hidden') ? 1 : 0, { path: '/' });
 });
 </script>
+<?php endif; ?>
+</div>
 <?php endif; ?>

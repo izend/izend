@@ -1,0 +1,18 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<form class="vote" action="" method="post">
+<?php require_once 'countformat.php'; ?>
+<p>
+<?php if ($vote_total > 0): ?>
+<span class="count" title="<?php echo number_format($vote_total, 0, '.', ','); ?> recommendation<?php if ($vote_total > 1): ?>s<?php endif; ?>"><?php echo count_format($vote_total, '.', ','); ?></span>
+<?php endif; ?>
+<input type="submit" class="plusone" name="vote_plusone" value="+1" title="Recommend" />
+</p>
+</form>
