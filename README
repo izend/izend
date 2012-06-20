@@ -18,8 +18,12 @@ community.
 iZend is built with a straightforward architecture specially 
 designed for organizing publications in several languages and for
 different media. It includes a content editor, a set of presentation 
-models, a search engine and a payment system. It can manage a 
-community of users with specific privileges.
+models, a search engine with an input corrector, editable comments,
+secure votes and a payment system. It's ready to interface social
+networks. It manages a community of users with specific privileges.
+
+iZend has one variant, iZend Blog, a specialized version for
+publishing a full featured blog.
 
 iZend is normally hosted by a LAMP like web server but it can work
 without a database and take very little space on disk. Put online a
