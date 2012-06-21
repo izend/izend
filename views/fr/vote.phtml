@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -17,9 +17,9 @@
 <span class="count" title="<?php echo number_format($vote_total, 0, ',', ' '); ?> recommandation<?php if ($vote_total > 1): ?>s<?php endif; ?>"><?php echo count_format($vote_total, ',', ' '); ?></span>
 <?php endif; ?>
 <?php if ($nomore): ?>
-<span class="icon plusone"></span>
+<span class="plusone"></span>
 <?php else: ?>
-<input type="submit" class="submit plusone" name="vote_plusone" value="+1" title="Recommander" />
+<input type="submit" class="plusone" name="vote_plusone" value="+1" title="Recommander" />
 <?php endif; ?>
 </p>
 <?php if (!$nomore): ?>
