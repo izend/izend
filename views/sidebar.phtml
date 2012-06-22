@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -32,12 +32,12 @@
 <div id="cloud" class="hidy"></div>
 <?php echo $cloud; ?>
 <script type="text/javascript">
-if ($.cookie('nocloud') == 1) {
-		$('.cloud').hide();
+if ($.cookie('nosidecloud') == 1) {
+		$('#sidebar .cloud').hide();
 }
-$('#cloud').click(function() {
-	$('.cloud').toggle();
-	$.cookie('nocloud', $('.cloud').is(':hidden') ? 1 : 0, { path: '/' });
+$('#sidebar #cloud').click(function() {
+	$('#sidebar .cloud').toggle();
+	$.cookie('nosidecloud', $('#sidebar .cloud').is(':hidden') ? 1 : 0, { path: '/' });
 });
 </script>
 <?php endif; ?>
