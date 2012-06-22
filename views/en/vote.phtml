@@ -20,6 +20,8 @@
 <?php if ($nomore): ?>
 <span class="plusone"></span>
 <?php else: ?>
+<input type="hidden" name="vote_id" value="<?php echo $content_id; ?>" />
+<input type="hidden" name="vote_type" value="<?php echo $content_type; ?>" />
 <input type="submit" class="plusone" name="vote_plusone" value="+1" title="Recommend" />
 <?php endif; ?>
 <?php if (!$nomore): ?>
