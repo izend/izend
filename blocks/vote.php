@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ function vote($lang, $content_id, $content_type, $nomore) {
 	$action='init';
 
 	if (!$nomore) {
-		if (isset($_POST['vote_plusone'])) {
+		if (isset($_POST['vote_plusone']) and isset($_POST['vote_id']) and $_POST['vote_id'] == $content_id and isset($_POST['vote_type']) and $_POST['vote_type'] == $content_type) {
 			$action='vote';
 		}
 	}
@@ -41,7 +41,7 @@ function vote($lang, $content_id, $content_type, $nomore) {
 		extract($r);	// vote_count, vote_total
 	}
 
-	$output = view('vote', $lang, compact('vote_total', 'nomore'));
+	$output = view('vote', $lang, compact('content_type', 'content_id', 'vote_total', 'nomore'));
 
 	return $output;
 }

@@ -3,15 +3,16 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($vote_total > 0 or !$nomore): ?>
 <?php if (!$nomore): ?>
-<form action="" method="post">
+<form class="vote" action="" method="post">
+<?php else: ?>
+<div class="vote" >
 <?php endif; ?>
-<p class="vote" >
 <?php if ($vote_total > 0): ?>
 <?php require_once 'countformat.php'; ?>
 <span class="count" title="<?php echo number_format($vote_total, 0, '.', ','); ?> recommendation<?php if ($vote_total > 1): ?>s<?php endif; ?>"><?php echo count_format($vote_total, '.', ','); ?></span>
@@ -21,8 +22,9 @@
 <?php else: ?>
 <input type="submit" class="plusone" name="vote_plusone" value="+1" title="Recommend" />
 <?php endif; ?>
-</p>
 <?php if (!$nomore): ?>
 </form>
+<?php else: ?>
+</div>
 <?php endif; ?>
 <?php endif; ?>
