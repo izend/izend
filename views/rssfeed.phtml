@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -16,7 +16,9 @@
 <?php else: ?>
 	<link><?php echo $base_url; ?></link>
 <?php endif; ?>
+<?php if ($description): ?>
 	<description><![CDATA[<?php echo $description; ?>]]></description>
+<?php endif; ?>
 <?php if ($lang): ?>
 	<language><?php echo $lang; ?></language>
 <?php endif; ?>
@@ -30,9 +32,10 @@
 <?php else: ?>
 		<link><?php echo $base_url; ?></link>
 <?php endif; ?>
-		<url><?php echo $base_url; ?>/logos/sitelogo.png</url>
-		<width>300</width>
+		<url><?php echo $base_url; ?>/logos/siteqr.png</url>
+		<width>50</width>
 	</image>
+<?php if ($itemlist): ?>
 <?php foreach ($itemlist as $item): ?>
 <?php extract($item) ?>
 	<item>
@@ -45,5 +48,6 @@
 		<pubDate><?php echo date('r', $created); ?></pubDate>
 	</item>
 <?php endforeach; ?>
+<?php endif; ?>
 </channel>
 </rss>
