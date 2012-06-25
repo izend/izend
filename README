@@ -7,28 +7,28 @@
 
 
 iZend is a PHP engine for developing well structured web applications 
-with a content manager. It's aimed at programmers who want full 
-control on the code they use with maximum adaptability and 
-reusability. It's simple to understand, easy to extend, open to other 
-components in PHP, Javascript or Flash. The goal is to let it become 
-your own very quickly while still keeping all the benefits of using a 
-software program which is constantly enriched by an open source 
-community.
+with a content manager. It's aimed at programmers who want full control
+on the code they use with maximum adaptability and reusability. It's
+simple to understand, easy to extend, open to other components in PHP,
+Javascript or Flash. The goal is to let it become your own very quickly
+while still keeping all the benefits of using a software program which
+is constantly enriched by an open source community.
 
-iZend is built with a straightforward architecture specially 
-designed for organizing publications in several languages and for
-different media. It includes a content editor, a set of presentation 
-models, a search engine with an input corrector, editable comments,
-secure votes and a payment system. It's ready to interface social
-networks. It manages a community of users with specific privileges.
+iZend is built with a straightforward architecture designed for
+organizing publications in several languages and for different media.
+It includes a content editor, a set of presentation models, a search
+engine with an input corrector, editable comments, file downloads,
+secure votes, RSS feeds, a payment system (PayPal) and more. It
+carefully interfaces social networks. It manages a community of users
+with configurable privileges.
 
 iZend has one variant, iZend Blog, a specialized version for
 publishing a full featured blog.
 
 iZend is normally hosted by a LAMP like web server but it can work
 without a database and take very little space on disk. Put online a
-a multimedia website in several languages with a contact page in 
-just a few minutes!
+multimedia website in several languages with a contact page in just a
+few minutes!
 
 Start with the installation guide on www.izend.org.
 
