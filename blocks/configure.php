@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    25
+ * @version    26
  * @link       http://www.izend.org
  */
 
@@ -800,9 +800,9 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
-(1, 1, NOW(), NOW(), 1, 1, 1, 1, 1, 1),
-(2, 1, NOW(), NOW(), 1, 1, 0, 0, 0, 0);
+INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
+(1, 1, NOW(), NOW(), 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 1, NOW(), NOW(), 1, 1, 1, 1, 0, 0, 0, 0);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -868,8 +868,8 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
-(1, 1, 'folder', NOW(), NOW(), 0, 0, 0, 0, 1, 1, 1, 1);
+INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
+(1, 1, 'folder', NOW(), NOW(), 0, 0, 0, 0, 0, 0, 1, 1, 1, 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
