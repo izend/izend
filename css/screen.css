@@ -132,19 +132,10 @@ a.button {padding:5px 10px;margin:0;display:inline-block;font-family:"Helvetica 
 div.download {margin:1em 0 1em 0;}
 div.longtail {margin:1em 0 1em 0;}
 
-ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;background:url(../images/vline.png) repeat-y;}
-ol.tree ol {margin-left:12px;}
+ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;}
+ol.tree ol {margin-left:12px;background:url(../images/vline.png) repeat-y;}
 ol.tree li {margin:0;padding:0 12px;line-height:20px;background:url(../images/tline.png) no-repeat;} 
 ol.tree li.lastnode {background:#ffffff url(../images/lline.png) no-repeat;} 
 ol.tree li.firstnode {background:#ffffff;}
 ol.tree li.dirnode {font-style:italic;} 
 ol.tree li.filenode {font-style:normal;}
-
-#banner {width:100%;overflow:hidden;}
-
-#content {margin:1em 0 1em 0;}
-#sidebar {margin:1em 0 1em 0;}
-
-#footer {font-size:small;margin:2em 0 1em 0;clear:both;}
-#footer p, #footer ul {margin: 0.5em 0;}
-#footer p img {vertical-align:middle;}
