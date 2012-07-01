@@ -19,6 +19,13 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Sat Jun 30 2012
+
+ALTER TABLE `izend_thread` ADD `number` INT( 3 ) UNSIGNED NOT NULL AFTER `modified`;
+UPDATE `izend_thread` t JOIN `izend_thread_list` tlist SET t.number=tlist.number WHERE tlist.thread_id=t.thread_id;
+DROP TABLE `izend_thread_list`;
+----
+
 Date:	Wed Jun 20 2012
 
 CREATE TABLE IF NOT EXISTS `izend_vote` (

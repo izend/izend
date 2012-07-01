@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -17,16 +17,15 @@ function thread_list($lang, $type=false, $strict=true) {
 
 	$tabthread=db_prefix_table('thread');
 	$tabthreadlocale=db_prefix_table('thread_locale');
-	$tabthreadlist=db_prefix_table('thread_list');
 
-	$sql="SELECT tl.thread_id, tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, tl.number AS thread_number FROM $tabthreadlist tl JOIN $tabthread t ON t.thread_id=tl.thread_id $join $tabthreadlocale tloc ON tloc.thread_id=tl.thread_id AND tloc.locale=$sqllang";
+	$sql="SELECT t.thread_id, tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, t.number AS thread_number FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang";
 
 	if ($type) {
 		$sqltype=db_sql_arg($type, false);
 		$sql .= " WHERE thread_type=$sqltype";
 	}
 
-	$sql .= ' ORDER BY tl.number';
+	$sql .= ' ORDER BY t.number';
 
 	$r = db_query($sql);
 
@@ -78,9 +77,9 @@ function thread_node_id($thread_id, $node) {
 }
 
 function thread_next_number() {
-	$tabthreadlist=db_prefix_table('thread_list');
+	$tabthread=db_prefix_table('thread');
 
-	$sql="SELECT IFNULL(MAX(number),0)+1 AS number FROM $tabthreadlist";
+	$sql="SELECT IFNULL(MAX(number),0)+1 AS number FROM $tabthread";
 
 	$r = db_query($sql);
 
@@ -108,7 +107,7 @@ function thread_create($lang, $user_id, $thread_name, $thread_title, $thread_typ
 
 	$tabthread=db_prefix_table('thread');
 
-	$sql="INSERT $tabthread SET user_id=$user_id, thread_type=$sqltype, created=NOW(), modified=created";
+	$sql="INSERT $tabthread SET user_id=$user_id, thread_type=$sqltype, created=NOW(), modified=created, number=$thread_number";
 
 	$r = db_insert($sql);
 
@@ -126,24 +125,6 @@ function thread_create($lang, $user_id, $thread_name, $thread_title, $thread_typ
 
 	if (!$r) {
 		$sql="DELETE FROM $tabthread WHERE thread_id=$thread_id LIMIT 1";
-
-		$r = db_delete($sql);
-
-		return false;
-	}
-
-	$tabthreadlist=db_prefix_table('thread_list');
-
-	$sql="INSERT $tabthreadlist SET thread_id=$thread_id, number=$thread_number";
-
-	$r = db_insert($sql);
-
-	if (!$r) {
-		$sql="DELETE FROM $tabthread WHERE thread_id=$thread_id LIMIT 1";
-
-		$r = db_delete($sql);
-
-		$sql="DELETE FROM $tabthreadlocale WHERE thread_id=$thread_id LIMIT 1";
 
 		$r = db_delete($sql);
 
@@ -178,9 +159,8 @@ function thread_delete($thread_id) {
 
 	$tabthread=db_prefix_table('thread');
 	$tabthreadlocale=db_prefix_table('thread_locale');
-	$tabthreadlist=db_prefix_table('thread_list');
 
-	$sql="DELETE tl, t, tloc, tn FROM $tabthreadlist tl JOIN $tabthread t ON t.thread_id=tl.thread_id JOIN $tabthreadlocale tloc on tloc.thread_id=t.thread_id LEFT JOIN $tabthreadnode tn ON tn.thread_id=tl.thread_id WHERE tl.thread_id=$thread_id";
+	$sql="DELETE t, tloc, tn FROM $tabthread t LEFT JOIN $tabthreadlocale tloc ON tloc.thread_id=t.thread_id LEFT JOIN $tabthreadnode tn ON tn.thread_id=t.thread_id WHERE t.thread_id=$thread_id";
 
 	$r = db_delete($sql);
 
@@ -244,9 +224,9 @@ function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type
 }
 
 function thread_set_number($thread_id, $number) {
-	$tabthreadlist=db_prefix_table('thread_list');
+	$tabthread=db_prefix_table('thread');
 
-	$sql="UPDATE $tabthreadlist SET number=$number WHERE thread_id=$thread_id LIMIT 1";
+	$sql="UPDATE $tabthread SET number=$number WHERE thread_id=$thread_id LIMIT 1";
 
 	$r = db_update($sql);
 
