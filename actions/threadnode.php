@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -65,7 +65,7 @@ function threadnode($lang, $thread, $node) {
 	$sidebar = view('sidebar', false, compact('title'));
 
 	$prev_node_label=$prev_node_url=false;
-	$r=thread_node_prev($lang, $thread_id, $node_id);
+	$r=thread_node_prev($lang, $thread_id, $node_id, false);
 	if ($r) {
 		extract($r);
 		$prev_node_label = $prev_node_title ? $prev_node_title : $prev_node_id;
@@ -73,7 +73,7 @@ function threadnode($lang, $thread, $node) {
 	}
 
 	$next_node_label=$next_node_url=false;
-	$r=thread_node_next($lang, $thread_id, $node_id);
+	$r=thread_node_next($lang, $thread_id, $node_id, false);
 	if ($r) {
 		extract($r);
 		$next_node_label = $next_node_title ? $next_node_title : $next_node_id;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -111,7 +111,7 @@ foreach ($thread_contents as $c) {
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo $pos; ?>" /></td>
 <td><a href="<?php echo $node_url; ?>"><?php echo $node_title ? htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8') : $node_id; ?></a></td>
-<?php if ($node_ignored): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="ignoré" title="Ignoré" /></td><?php endif; ?>
+<?php if ($node_ignored): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="X" /></td><?php endif; ?>
 </tr>
 <?php
 	$i++;

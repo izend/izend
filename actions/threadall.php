@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ function threadall($lang) {
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$threadlist = build('threadlist', $lang, false, $slang);
+	$threadlist = build('threadlist', $lang, false, false, $slang);
 
 	$content = view('threadall', $slang, compact('site_title', 'site_abstract', 'site_cloud', 'threadlist'));
 

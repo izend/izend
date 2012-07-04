@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
 require_once 'models/thread.inc';
 
-function threadlist($lang, $type=false, $slang=false ) {
-	$r = thread_list($lang, $type);
+function threadlist($lang, $type=false, $strict=true, $slang=false ) {
+	$r = thread_list($lang, $type, $strict);
 
 	if (!$r) {
 		return false;
@@ -20,7 +20,7 @@ function threadlist($lang, $type=false, $slang=false ) {
 	$url = url($type ? $type : 'thread', $lang);
 	foreach ($r as $thread) {
 		extract($thread);	/* thread_id thread_name thread_title thread_abstract thread_number */
-		$thread_url = $url . '/' . $thread_name;
+		$thread_url = $url . '/' . ($type ? $thread_name : $thread_id);
 		if ($slang) {
 			 $thread_url .= '?' . 'slang=' . $slang;
 		}

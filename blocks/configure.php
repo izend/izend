@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -594,6 +594,7 @@ CREATE TABLE `${db_prefix}thread` (
   `thread_type` enum('thread','folder','story','book') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `number` int(4) unsigned NOT NULL,
   `nosearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocloud` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -633,17 +634,6 @@ CREATE TABLE `${db_prefix}thread_node` (
   `number` int(4) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`thread_id`,`node_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-_SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
-
-	$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}thread_list` (
-  `thread_id` int(10) unsigned NOT NULL,
-  `number` int(4) unsigned NOT NULL,
-  PRIMARY KEY (`thread_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
@@ -868,8 +858,8 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
-(1, 1, 'folder', NOW(), NOW(), 0, 0, 0, 0, 0, 0, 1, 1, 1, 1);
+INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
+(1, 1, 'folder', NOW(), NOW(), 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
@@ -893,18 +883,9 @@ _SEP_;
 		return false;
 	}
 
-	$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread_list` (`thread_id`, `number`) VALUES
-(1, 1);
-_SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
-
 	if (!@mysql_close($db_conn)) {
 		return false;
 	}
 
 	return true;
 }
-

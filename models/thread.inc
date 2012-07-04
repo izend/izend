@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -22,7 +22,7 @@ function thread_list($lang, $type=false, $strict=true) {
 
 	if ($type) {
 		$sqltype=db_sql_arg($type, false);
-		$sql .= " WHERE thread_type=$sqltype";
+		$sql .= " WHERE t.thread_type=$sqltype";
 	}
 
 	$sql .= ' ORDER BY t.number';

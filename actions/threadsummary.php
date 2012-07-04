@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -47,7 +47,7 @@ function threadsummary($lang, $thread) {
 	$thread_morevote=!$thread_nomorevote;
 
 	$thread_contents = array();
-	$r = thread_get_contents($lang, $thread_id);
+	$r = thread_get_contents($lang, $thread_id, false);
 	if ($r) {
 		$thread_url = url('thread', $lang) . '/'. $thread_name;
 		foreach ($r as $c) {
