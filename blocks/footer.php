@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'userhasrole.php';
 function footer($lang, $components=false) {
 	$languages=false;
 
-	$contact_page=$user_page=$nobody_page=$admin_page=false;
+	$contact_page=$user_page=$nobody_page=$account_page=$admin_page=false;
 
 	$is_identified = user_is_identified();
 	$is_admin = user_has_role('administrator');
@@ -35,7 +35,14 @@ function footer($lang, $components=false) {
 					break;
 				case 'account':
 					if ($param) {
-						$user_page=$is_identified ? false : url('user', $lang);
+						if ($is_identified) {
+							if (!$is_admin) {
+								$account_page=url('account', $lang);
+							}
+						}
+						else {
+							$user_page=url('user', $lang);
+						}
 					}
 					break;
 				case 'admin':
@@ -49,7 +56,7 @@ function footer($lang, $components=false) {
 		}
 	}
 
-	$output = view('footer', $lang, compact('languages', 'contact_page', 'user_page', 'nobody_page', 'admin_page'));
+	$output = view('footer', $lang, compact('languages', 'contact_page', 'user_page', 'nobody_page', 'account_page', 'admin_page'));
 
 	return $output;
 }

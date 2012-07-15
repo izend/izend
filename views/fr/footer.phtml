@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -18,14 +18,17 @@
 &bull;
 <a href="<?php echo $contact_page; ?>" rel="nofollow" title="Nous contacter">Contact</a>
 <?php endif; ?>
-<?php if (!empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+<?php if (!empty($account_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
 &bull;
-<?php endif; ?>
-<?php if (!empty($user_page)): ?>
-<a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Votre compte">Compte</a>
 <?php endif; ?>
 <?php if (!empty($nobody_page)): ?>
 <a class="btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Déconnexion">Déconnexion</a>
+<?php endif; ?>
+<?php if (!empty($account_page)): ?>
+<a class="btn_account" href="<?php echo $account_page; ?>" rel="nofollow" title="Votre compte">Votre Compte</a>
+<?php endif; ?>
+<?php if (!empty($user_page)): ?>
+<a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Votre compte">Votre Compte</a>
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Gestion">Gestion</a>

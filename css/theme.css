@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
  
@@ -151,6 +151,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #footer p img {vertical-align:middle;}
 
 #footer .btn_mail {width:16px;height:16px;background:transparent url(../images/theme/icons/small/mail.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
+#footer .btn_account {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_login {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_logout {width:16px;height:16px;background:transparent url(../images/theme/icons/small/cancel.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_admin {width:16px;height:16px;background:transparent url(../images/theme/icons/small/work.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
