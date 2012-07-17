@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -14,11 +14,11 @@
 <p><input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Télécharger"/>
 <?php extract($errors); ?>
 <?php if ($bad_name or $bad_size or $copy_error): ?>
-<img src="/images/theme/icons/delete.png" alt=""/>
+<img src="/images/theme/icons/no.png" alt=""/>
 <?php endif; ?>
 <?php extract($infos); ?>
 <?php if ($file_copied): ?>
-<img src="/images/theme/icons/check.png" alt=""/>
+<img src="/images/theme/icons/yes.png" alt=""/>
 <?php endif; ?>
 </p>
 </form>
