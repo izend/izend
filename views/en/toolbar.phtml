@@ -30,8 +30,8 @@
 </ul>
 <?php if ($scroll): ?>
 <script type="text/javascript">
-$('#scrolltop').click(function (e) {$('html, body').animate({scrollTop: 0}, 500); e.preventDefault(); });
-$('#scrollbottom').click(function (e) {$('html, body').animate({scrollTop: $(document).height()}, 500); e.preventDefault(); });
+$('#scrolltop').click(function (e) {$('html, body').scrollTop(0); e.preventDefault(); });
+$('#scrollbottom').click(function (e) {$('html, body').scrollTop($(document).height()); e.preventDefault(); });
 </script>
 <?php endif; ?>
 <?php endif; ?>

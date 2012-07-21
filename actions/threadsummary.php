@@ -49,10 +49,10 @@ function threadsummary($lang, $thread) {
 	$thread_contents = array();
 	$r = thread_get_contents($lang, $thread_id, false);
 	if ($r) {
-		$thread_url = url('thread', $lang) . '/'. $thread_name;
+		$thread_url = url('thread', $lang) . '/'. $thread_id;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number node_ignored */
-			$node_url = $thread_url . '/' . ($node_name ? $node_name : $node_id) . '?' . 'slang=' . $slang;
+			$node_url = $thread_url . '/' . $node_id . '?' . 'slang=' . $slang;
 			$thread_contents[] = compact('node_id', 'node_title' , 'node_url', 'node_ignored');
 		}
 	}
