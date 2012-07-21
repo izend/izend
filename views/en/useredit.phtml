@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -65,7 +65,7 @@ the account
 </p>
 <?php if ($with_newpassword): ?>
 <p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
-<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="> 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
+<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
 <p><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
 </form>
