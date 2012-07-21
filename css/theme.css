@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    31
+ * @version    34
  * @link       http://www.izend.org
  */
  
@@ -55,17 +55,6 @@ th {background-color:#ffffe0;font-weight:bold;}
 .date .month {color:#333333;font-size:8px;text-transform:uppercase;top:0.5em;}
 .date .year {color:#999999;font-size:9px;top:5em;}
 .date .comma {display:none;}
-
-.blogsummarytitle {height:60px;margin:1em 0;}
-.blogsummarytitle > div {float:left;}
-.blogsummarytitle h4 {margin:0.25em 0;}
-.blogsummarytitle h4 a:link, .blogsummarytitle h4 a:visited {color:#aec14e;}
-.blogsummarytitle h4 a:hover {color:#ec902d;}
-.blogsummarytitle .author {color:#999999;font-size:smaller;font-style:italic;margin:0.5em 0;}
-
-.blogsummary .cloud {font-size:small;text-align:left;}
-
-.blogsummary, .blogsummarycontent, .blogsummary .readmore, .blogsummary .cloud {clear:both;}
 
 .cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
 .cloud li a:hover {color:#333333;text-decoration:none;}
@@ -128,7 +117,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 #logo {width:300px;float:left;}
 #logo h1 {padding:0;margin:0;}
-#logo h1 a {float:left;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+#logo h1 a {float:left;width:300px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:220px;float:left;margin-top:13px;margin-left:40px;position:relative;}
 #bannermenu .btn_mail {width:24px;height:24px;position:absolute;left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat;}
@@ -148,7 +137,6 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
 #donate .btn_donate_en {width:74px;height:21px;float:right;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
 
-#banner #headline {float:right;margin:13px 0 0 10px;}
 #banner #headline {float:right;margin:13px 0 0 10px;text-align:right;}
 #banner #headline a:hover {color:#aec14e;}
 #banner #searchinput {float:right;margin:11px 0 0 10px;}
