@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -49,6 +49,7 @@ function upload($lang) {
 	$bad_name=false;
 	$bad_type=false;
 	$bad_size=false;
+	$bad_copy=false;
 
 	$file_copied=false;
 
@@ -69,6 +70,9 @@ function upload($lang) {
 			else if ($size > 1000000) {
 				$bad_size=true;
 			}
+			else if ($error) {
+				$bad_copy=true;
+			}
 
 			if (!validate_filename($name) or !is_filename_allowed($name)) {
 				$bad_name=true;
@@ -81,7 +85,7 @@ function upload($lang) {
 
 	switch($action) {
 		case 'upload':
-			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type) {
+			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type or $bad_copy) {
 				break;
 			}
 
@@ -100,7 +104,7 @@ function upload($lang) {
 
 	$_SESSION['upload_token'] = $token = token_id();
 
-	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'copy_error');
+	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
 	$output = view('upload', $lang, compact('token', 'name', 'errors', 'infos'));

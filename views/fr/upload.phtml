@@ -13,7 +13,7 @@
 <p><input type="file" name="upload_file" id="upload_file" size="40"/></p>
 <p><input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Télécharger"/>
 <?php extract($errors); ?>
-<?php if ($bad_name or $bad_size or $copy_error): ?>
+<?php if ($missing_file or $bad_file or $bad_name or $bad_size or $bad_file or $bad_copy or $copy_error): ?>
 <img src="/images/theme/icons/no.png" alt=""/>
 <?php endif; ?>
 <?php extract($infos); ?>
@@ -28,6 +28,6 @@ $(function() {
     var upload=$('#upload_put');
 
     file.hide().change(function() {if (file.val()) {upload.unbind('click').click();}});
-    upload.unbind('click').click(function(event) {event.preventDefault();file.click();});
+    upload.click(function(event) {event.preventDefault();file.click();});
 });
 </script>
