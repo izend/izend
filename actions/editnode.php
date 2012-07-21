@@ -64,10 +64,11 @@ function editnode($lang, $arglist=false) {
 	head('robots', 'noindex, nofollow');
 
 	$view=url('node', $clang) . '/'. $node_id . '?' . 'slang=' . $lang;
-	$validate=url('node', $clang) . '/'. $node_id;
 
-	$banner = build('banner', $lang, $with_toolbar ? false : compact('view', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? false : compact('view'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$content = view('editing/editnode', $lang, compact('node_editor'));
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -62,10 +62,11 @@ function node($lang, $arglist=false) {
 	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('editnode', $_SESSION['user']['locale']) . '/'. $node_id . '?' . 'clang=' . $lang : false;
-	$validate=url('node', $lang) . '/' . $node_id;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -55,10 +55,11 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
 	$view=$node_name ? url('thread', $clang) . '/'. $thread_id . '/'. $node_id . '?' . 'slang=' . $lang : false;
-	$validate=$node_name ? url($thread_type, $clang) . '/'. $thread_name . '/'. $node_id : false;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$prev_node_label=$prev_node_url=false;
 	$r=thread_node_prev($clang, $thread_id, $node_id, false);

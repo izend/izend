@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -37,10 +37,11 @@ function threadall($lang) {
 	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '?' . 'clang=' . $lang : false;
-	$validate=url('thread', $lang);
 
-	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
 	$threadlist = build('threadlist', $lang, false, false, $slang);
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -409,10 +409,11 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
 	$view=$thread_name ? url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang : false;
-	$validate=$thread_name ? url($thread_type, $clang) . '/'. $thread_id : false;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$title = view('headline', false, $headline);
 	$sidebar = view('sidebar', false, compact('title'));

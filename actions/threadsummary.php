@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -70,10 +70,11 @@ function threadsummary($lang, $thread) {
 	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $lang : false;
-	$validate=url('thread', $lang) . '/'. $thread_name;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
 	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_created', 'thread_modified', 'thread_contents'));
 

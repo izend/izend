@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -86,10 +86,11 @@ function threadnode($lang, $thread, $node) {
 	head('robots', 'noindex, nofollow');
 
 	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/' . $thread_id . '/' . $node_id . '?' . 'clang=' . $lang : false;
-	$validate=url('thread', $lang) . '/'. $thread_id . '/'. $node_id;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
 	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 

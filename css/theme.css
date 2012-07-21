@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    33
+ * @version    31
  * @link       http://www.izend.org
  */
  
@@ -15,7 +15,7 @@ a:hover {color:#333333;text-decoration:none;}
 body {color:#333333;width:960px;margin-left:150px;}
 
 @media (max-device-width:1024px) {
-body {margin-left:auto;margin-right:auto;}
+body {margin:auto;}
 }
 
 h1,h2,h3 {color:#aec14e;}
@@ -55,6 +55,17 @@ th {background-color:#ffffe0;font-weight:bold;}
 .date .month {color:#333333;font-size:8px;text-transform:uppercase;top:0.5em;}
 .date .year {color:#999999;font-size:9px;top:5em;}
 .date .comma {display:none;}
+
+.blogsummarytitle {height:60px;margin:1em 0;}
+.blogsummarytitle > div {float:left;}
+.blogsummarytitle h4 {margin:0.25em 0;}
+.blogsummarytitle h4 a:link, .blogsummarytitle h4 a:visited {color:#aec14e;}
+.blogsummarytitle h4 a:hover {color:#ec902d;}
+.blogsummarytitle .author {color:#999999;font-size:smaller;font-style:italic;margin:0.5em 0;}
+
+.blogsummary .cloud {font-size:small;text-align:left;}
+
+.blogsummary, .blogsummarycontent, .blogsummary .readmore, .blogsummary .cloud {clear:both;}
 
 .cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
 .cloud li a:hover {color:#333333;text-decoration:none;}
@@ -117,7 +128,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 #logo {width:300px;float:left;}
 #logo h1 {padding:0;margin:0;}
-#logo h1 a {float:left;width:400px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
+#logo h1 a {float:left;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:220px;float:left;margin-top:13px;margin-left:40px;position:relative;}
 #bannermenu .btn_mail {width:24px;height:24px;position:absolute;left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat;}
@@ -137,6 +148,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
 #donate .btn_donate_en {width:74px;height:21px;float:right;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
 
+#banner #headline {float:right;margin:13px 0 0 10px;}
 #banner #headline {float:right;margin:13px 0 0 10px;text-align:right;}
 #banner #headline a:hover {color:#aec14e;}
 #banner #searchinput {float:right;margin:11px 0 0 10px;}
@@ -151,7 +163,6 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #footer p img {vertical-align:middle;}
 
 #footer .btn_mail {width:16px;height:16px;background:transparent url(../images/theme/icons/small/mail.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
-#footer .btn_account {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_login {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_logout {width:16px;height:16px;background:transparent url(../images/theme/icons/small/cancel.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_admin {width:16px;height:16px;background:transparent url(../images/theme/icons/small/work.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
@@ -165,6 +176,8 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #toolbar #edit {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/edit.png) no-repeat;}
 #toolbar #view {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/web.png) no-repeat;}
 #toolbar #validate {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/check.png) no-repeat;}
+#toolbar #scrolltop {width:24px;height:12px;float:left;background:transparent url(../images/theme/icons/top.png) no-repeat;}
+#toolbar #scrollbottom {width:24px;height:12px;float:left;background:transparent url(../images/theme/icons/bottom.png) no-repeat;}
 
 #threadlist {margin-top:1em;}
 
@@ -172,7 +185,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 .navigation .previous {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons/left.png) no-repeat;vertical-align:bottom;}
 .navigation .next {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons/right.png) no-repeat;vertical-align:bottom;}
 
-#sharebar {display:none;width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:200px;float:left;margin-left:-120px;padding:5px;}
+#sharebar {display:none;width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:160px;float:left;margin-left:-120px;padding:5px;}
 #sharebar > li {padding:5px;}
 
 .besocial {width:100%;height:35px;padding:0;margin:1em 0;}
@@ -185,7 +198,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #socialbar a.linkedin {background:transparent url(../images/theme/social/linkedin.png) no-repeat;}
 #socialbar a.rss {background:transparent url(../images/theme/social/rss.png) no-repeat;}
 
-#comments {margin-top:1em;}
+#comments {margin-top:2em;}
 #comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}
 #comments .signature {float:right;margin-top:-4px;}
 #comments .longdate {color:#666666;font-size:small;}

@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($nobody_page or $edit_page or $view_page or $admin_page): ?>
+<?php if ($scroll or $nobody_page or $edit_page or $view_page or $admin_page): ?>
 <ul id="toolbar" class="menu sidebar">
 <?php if ($nobody_page): ?>
 <li><a id="exit" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Déconnexion"><span>Déconnexion</span></a></li>
@@ -17,6 +17,10 @@
 <?php elseif ($view_page): ?>
 <li><a id="view" href="<?php echo $view_page; ?>" title="Voir" rel="nofollow"><span>Voir</span></a></li>
 <?php endif; ?>
+<?php if ($scroll): ?>
+<li><a id="scrolltop" href="" rel="nofollow"><span>=&lt;</span></a></li>
+<li><a id="scrollbottom" href="" rel="nofollow"><span>&gt;=</span></a></li>
+<?php endif; ?>
 <?php if ($validate_page): ?>
 <li><a id="validate" href="http://validator.w3.org/check?uri=<?php echo $base_root . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Valider"><span>Valider</span></a></li>
 <?php endif; ?>
@@ -24,4 +28,10 @@
 <li><a id="admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Gérer"><span>Gérer</span></a></li>
 <?php endif; ?>
 </ul>
+<?php if ($scroll): ?>
+<script type="text/javascript">
+$('#scrolltop').click(function (e) {$('html, body').scrollTop(0); e.preventDefault(); });
+$('#scrollbottom').click(function (e) {$('html, body').scrollTop($(document).height()); e.preventDefault(); });
+</script>
+<?php endif; ?>
 <?php endif; ?>

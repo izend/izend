@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -248,10 +248,11 @@ function threadeditall($lang, $clang) {
 	$site_title=translate('title', $lang);
 
 	$view=url('thread', $clang) . '?' . 'slang=' . $lang;
-	$validate=url('thread', $clang);
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view', 'validate'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
+
+	$scroll=true;
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$inlanguages=view('inlanguages', false, compact('clang'));
 
