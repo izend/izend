@@ -7,7 +7,7 @@ Options +FollowSymLinks
 ErrorDocument 404 /index.php
 
 RewriteEngine On
-RewriteRule ^(favicon\.ico|robots\.txt|sitemap\.xml) - [NC,L]
+RewriteRule ^(favicon\.ico|robots\.txt|sitemap\.xml|google.*\.html) - [NC,L]
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule /*\.(css|js|gif|png|jpe?g|ico|swf|flv|mp3|mp4|m4v|m4a|ogg|webm|zip|jar)$ - [NC,L]
 RewriteRule ^(.*)$ index.php [QSA,L]
