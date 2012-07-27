@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
-<h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id , ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3<?php if ($node_title): ?> title="<?php echo $node_id; ?>"<?php endif; ?>><?php echo htmlspecialchars($node_title ? $node_title : $node_id , ENT_COMPAT, 'UTF-8'); ?></h3>
 <?php if ($next_node_url or $prev_node_url): ?>
 <p class="navigation menu">
 <?php if ($prev_node_url): ?>

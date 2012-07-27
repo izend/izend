@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<h3><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3<?php if ($thread_title): ?> title="<?php echo $thread_id; ?>"<?php endif; ?>><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <form class="compact" action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
@@ -110,7 +110,10 @@ foreach ($thread_contents as $c) {
 ?>
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo $pos; ?>" /></td>
-<td><a href="<?php echo $node_url; ?>"><?php echo $node_title ? htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8') : $node_id; ?></a></td>
+<td class="aright"><a href="<?php echo $node_url; ?>"><?php echo $node_id; ?></a></td>
+<?php if ($node_title): ?>
+<td><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?></a></td>
+<?php endif; ?>
 <?php if ($node_ignored): ?><td><img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="X" /></td><?php endif; ?>
 </tr>
 <?php
