@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -33,7 +33,7 @@ $pagenums=page_range($page, $npages, 2);
 <?php endforeach; ?>
 </p>
 <?php endif; ?>
-<table border="0" cellpadding="4" cellspacing="0" rules="none">
+<table id="userlist" border="0" cellpadding="4" cellspacing="0" rules="none">
 <tbody>
 <?php foreach ($result as $r): extract($r);?>
 <tr>
