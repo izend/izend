@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
 require_once 'filemimetype.php';
 
-function emailhtml($text, $html, $to, $subject, $sender=false) {
-	global $mailer, $webmaster;
+function emailhtml($text, $html, $css, $to, $subject, $sender=false) {
+	global $mailer, $webmaster, $sitename;
 
 	if (!$sender) {
 		$sender = $webmaster;
@@ -36,6 +36,8 @@ _SEP_;
 			foreach ($matches[1] as $url) {
 				if ($url[0] != '/')
 					continue;
+				if (array_key_exists($url, $related))
+					continue;
 				$fname=ROOT_DIR . $url;
 				$filetype=file_mime_type($fname, false);
 				if (strpos($filetype, 'image') !== 0)
@@ -51,18 +53,23 @@ _SEP_;
 				$qfname=preg_quote($url);
 				$pattern[]='#(<img[^>]+src=)"' . $qfname . '"([^>]*>)#is';
 				$replacement[]='${1}"cid:' . $cid . '"${2}';
-				$related[]=array(basename($fname), $filetype, $cid, $base64);
+				$related[$url]=array(basename($fname), $filetype, $cid, $base64);
 			}
 
-			$html=preg_replace($pattern, $replacement, $html, 1);
+			$html=preg_replace($pattern, $replacement, $html);
 		}
+
+		$title=htmlspecialchars($sitename, ENT_COMPAT, 'UTF-8');
 
 		$htmlheader = 'Content-Type: text/html; charset=utf-8';
 		$htmlbody = <<<_SEP_
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title></title>
+<title>$title</title>
+<style type="text/css">
+$css
+</style>
 </head>
 <body>
 $html
@@ -116,7 +123,7 @@ _SEP_;
 Content-Type: multipart/related; boundary="$sep"
 _SEP_;
 
-		foreach ($related as $r) {
+		foreach ($related as $url => $r) {
 			list($filename, $filetype, $cid, $base64)=$r;
 			$body .= <<<_SEP_
 --$sep
