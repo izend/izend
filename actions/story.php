@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -71,6 +71,7 @@ function story($lang, $arglist=false) {
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
 	$page_number=$node_number;
+	$page_modified=$node_modified;
 
 	if (!$page) {
 		$request_path .= '/' . $page_name;
@@ -91,6 +92,7 @@ function story($lang, $arglist=false) {
 	else if ($story_cloud) {
 		head('keywords', $story_cloud);
 	}
+	head('date', $page_modified);
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 

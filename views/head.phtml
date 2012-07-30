@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -24,6 +24,9 @@
 <meta name="generator" content="iZend" />
 <?php if (!empty($author)): ?>
 <meta name="author" content="<?php echo htmlspecialchars($author, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<?php endif; ?>
+<?php if (!empty($date)): ?>
+<meta name="date" content="<?php echo date('Y-m-d', $date); ?>" />
 <?php endif; ?>
 <?php if (!empty($robots)): ?>
 <meta name="robots" content="<?php echo $robots; ?>" />

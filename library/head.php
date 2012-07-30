@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -45,6 +45,9 @@ function head($type=false) {
 			break;
 		case 'author':
 			$head['author'] = $args[0];
+			break;
+		case 'date':
+			$head['date'] = $args[0];
 			break;
 		case 'robots':
 			$head['robots'] = $args[0];

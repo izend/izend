@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -56,6 +56,7 @@ function bookpage($lang, $book, $page) {
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
 	$page_number=$node_number;
+	$page_modified=$node_modified;
 
 	if ($book_title and $page_title) {
 		head('title', $book_title . ' - ' . $page_title );
@@ -78,6 +79,7 @@ function bookpage($lang, $book, $page) {
 	else if ($book_cloud) {
 		head('keywords', $book_cloud);
 	}
+	head('date', $page_modified);
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -33,6 +33,7 @@ function booksummary($lang, $book) {
 	$book_title = $thread_title;
 	$book_abstract = $thread_abstract;
 	$book_cloud = $thread_cloud;
+	$book_modified= $thread_modified;
 	$book_nocloud = $thread_nocloud;
 	$book_nosearch = $thread_nosearch;
 	$book_novote = $thread_novote;
@@ -47,6 +48,7 @@ function booksummary($lang, $book) {
 	if ($book_cloud) {
 		head('keywords', $book_cloud);
 	}
+	head('date', $book_modified);
 
 	$book_contents = array();
 	$r = thread_get_contents($lang, $book_id);

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -49,6 +49,7 @@ function folderpage($lang, $folder, $page) {
 	$page_title=$node_title;
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
+	$page_modified=$node_modified;
 
 	if ($page_title) {
 		head('title', $page_title);
@@ -68,6 +69,7 @@ function folderpage($lang, $folder, $page) {
 	else if ($folder_cloud) {
 		head('keywords', $folder_cloud);
 	}
+	head('date', $page_modified);
 
 	$page_contents = build('nodecontent', $lang, $page_id);
 
