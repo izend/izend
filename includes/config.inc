@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -97,11 +97,13 @@ $login_failed_delay=1;	// false or in seconds
 
 global $track_db, $track_log;
 global $track_visitor, $track_visitor_agent;
+global $track_agent_blacklist;
 
 $track_db=false;
 $track_log=false;		// true, file name or false
 $track_visitor=false;
 $track_visitor_agent=false;
+$track_agent_blacklist=false;	// false or array of agent signatures
 
 global $root_node;
 

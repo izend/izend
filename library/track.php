@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -15,6 +15,7 @@ require_once 'validateuseragent.php';
 
 function track($request_uri=false, $track_agent=false) {
 	global $track_log, $track_db;
+	global $track_agent_blacklist;
 
 	if (! ($track_log or $track_db) ) {
 		return true;
@@ -28,9 +29,21 @@ function track($request_uri=false, $track_agent=false) {
 		return false;
 	}
 
-	$user_agent=$track_agent ? user_agent() : false;
-	if (!validate_user_agent($user_agent)) {
-		$user_agent=false;
+	$user_agent=false;
+
+	if ($track_agent or $track_agent_blacklist) {
+		$user_agent=user_agent();
+		if (!validate_user_agent($user_agent)) {
+			$user_agent=false;
+		}
+
+		if ($user_agent and $track_agent_blacklist) {
+			$reg = '/' . implode('|', $track_agent_blacklist) . '/i';
+
+			if (preg_match($reg, $user_agent)) {
+				return true;
+			}
+		}
 	}
 
 	$r = true;
