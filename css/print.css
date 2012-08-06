@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
  
@@ -26,6 +26,8 @@ h5 {font-size:110%;}
 h6 {font-size:100%;}
 
 h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
+
+input, select, textarea {font-size:100%;border:none;vertical-align:middle;}
 
 fieldset {display:inline-block;padding:0.5em;}
 
@@ -60,6 +62,8 @@ video {display:none;}
 
 .date, .author {font-style:italic;}
 
+.submit {border:none;vertical-align:middle;}
+
 div.row {width:100%;overflow:hidden;}
 div.row > * {float:left;margin-left:1%;margin-right:1%;}
 div.row > *:first-child {margin-left:0;}
@@ -77,7 +81,7 @@ div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
-.menu, .menubar, .sidebar, .cloud, .link, .readmore, .summary, .vignette, .social, .vote {display:none !important;}
+.menu, .menubar, .sidebar, .cloud, .link, .readmore, .summary, .vignette, .social, .vote, .grippie, .tagbar {display:none !important;}
 
 .video-js {display:none;}
 
