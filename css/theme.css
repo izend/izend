@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
  
@@ -9,7 +9,7 @@
 
 * {outline:none;}
 
-a:link, a:visited {color:#ec902d;}
+a:link, a:visited {color:#ec902d;text-decoration:none;}
 a:hover {color:#333333;text-decoration:none;}
 
 body {color:#333333;width:960px;margin-left:150px;}
@@ -56,8 +56,8 @@ th {background-color:#ffffe0;font-weight:bold;}
 .date .year {color:#999999;font-size:9px;top:5em;}
 .date .comma {display:none;}
 
-.cloud li a:link, .cloud li a:visited {color:#df6f6f;text-decoration:none;}
-.cloud li a:hover {color:#333333;text-decoration:none;}
+.cloud li a:link, .cloud li a:visited {color:#df6f6f;}
+.cloud li a:hover {color:#333333;}
 .cloud li .btn_index {float:left;width:24px;height:24px;background:transparent url(../images/theme/icons/tag.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
 .tag {color:#df6f6f;font-size:large;}
@@ -141,7 +141,7 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 #banner #headline a:hover {color:#aec14e;}
 #banner #searchinput {float:right;margin:11px 0 0 10px;}
 
-#sidebar {float:right;width:200px;margin:0 0 1em 1em;}
+#sidebar {float:right;width:200px;margin-left:1em;}
 
 #sidebar #headline {margin:0.25em 0 0.5em 0;text-align:right;}
 #sidebar #searchinput {margin:-2px 0 0.5em 0;}
@@ -236,4 +236,3 @@ input#en {width:24px;height:24px;padding:0;margin:0;border:none;background:trans
 
 .summary {float:right;display:block;font-size:small;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}
-.summary li a:link, .summary li a:visited {text-decoration:none;}
