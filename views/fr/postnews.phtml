@@ -1,0 +1,68 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php if($mailed): ?>
+<?php require_once 'datefr.php'; ?>
+<p><img src="/images/theme/envelopesmall.png" alt="" /> Le message a été envoyé le <b><?php echo longdate_fr($mailed); ?></b> à <b><?php echo date('H\\hi', $mailed); ?></b>.</p>
+<?php elseif($scheduled): ?>
+<?php require_once 'datefr.php'; ?>
+<form action="" method="post">
+<input type="hidden" name="postnews_token" value="<?php echo $token; ?>" />
+<p>
+<input type="submit" class="submit submit_cancel" name="postnews_cancel" id="postnews_cancel" value="Annuler" />
+l'envoi du message prévu le <b><?php echo longdate_fr($scheduled); ?></b> à <b><?php echo date('H\\hi', $scheduled); ?></b>
+</p>
+</form>
+<?php else: ?>
+<?php extract($errors); ?>
+<?php
+$date=date('Y-m-d', $postdate);
+$hour=idate('H', $postdate);
+$minute=idate('i', $postdate);
+?>
+<form action="" method="post">
+<input type="hidden" name="postnews_token" value="<?php echo $token; ?>" />
+<p>
+<input type="submit" class="submit submit_post" name="postnews_post" id="postnews_post" value="Poster" />
+le
+<input type="text" name="postnews_date" id="postnews_date" title="aaaa-mm-jj" value="<?php echo htmlspecialchars($date, ENT_COMPAT, 'UTF-8'); ?>" />
+<span class="inlabel">à</span>
+<select id="postnews_hour" name="postnews_hour" size="1">
+<?php foreach (range($hmin, $hmax, 1) as $hh): ?>
+<option value="<?php echo $hh; ?>"<?php if ($hour == $hh): ?> selected="selected"<?php endif; ?>><?php echo $hh > 9 ? $hh : '0' . $hh; ?></option>
+<?php endforeach; ?>
+</select>
+<span class="inlabel">:</span>
+<select id="postnews_minute" name="postnews_minute" size="1">
+<?php foreach (range(0, 45, 15) as $mm): ?>
+<option value="<?php echo $mm; ?>"<?php if ($minute == $mm): ?> selected="selected"<?php endif; ?>><?php echo $mm > 0 ? $mm : '0' . $mm; ?></option>
+<?php endforeach; ?>
+</select>
+</p>
+</form>
+<?php head('javascript', 'jquery-ui'); ?>
+<?php head('javascript', 'jquery.ui.datepicker-fr'); ?>
+<?php head('stylesheet', 'jquery-ui', 'screen'); ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#postnews_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendrier', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+0d', maxDate: '+1m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM'});
+});
+</script>
+<?php
+$focus=false;
+if ($bad_date) {
+	$focus='#postnews_date';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
+<?php endif; ?>

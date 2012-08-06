@@ -3,11 +3,14 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <h3>Management</h3>
+<?php if (!empty($newsletter_page)): ?>
+<p class="vignette"><a href="<?php echo $newsletter_page; ?>" rel="nofollow"><img src="/images/theme/envelopelarge.png" alt="" title="Newsletter" /></a></p>
+<?php endif; ?>
 <div id="userbalance">
 <?php echo $balance; ?>
 </div>

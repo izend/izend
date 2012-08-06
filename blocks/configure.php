@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 
@@ -304,7 +304,7 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel');
+				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'newsletter', 'newsletteredit', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
@@ -538,6 +538,33 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
+CREATE TABLE IF NOT EXISTS `${db_prefix}newsletter_post` (
+  `thread_id` int(10) unsigned NOT NULL,
+  `node_id` int(10) unsigned NOT NULL,
+  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `scheduled` datetime NOT NULL,
+  `mailed` datetime DEFAULT NULL,
+  PRIMARY KEY (`thread_id`,`node_id`,`locale`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+CREATE TABLE IF NOT EXISTS `${db_prefix}newsletter_user` (
+  `mail` varchar(100) NOT NULL,
+  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`mail`),
+  KEY `locale` (`locale`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}node` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -591,7 +618,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '1',
-  `thread_type` enum('thread','folder','story','book') NOT NULL DEFAULT 'thread',
+  `thread_type` enum('thread','folder','story','book','newsletter') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `number` int(4) unsigned NOT NULL,

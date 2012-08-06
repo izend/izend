@@ -1,0 +1,76 @@
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+ 
+/* newsletter.css */
+
+body {font-family:Verdana, sans-serif;font-size:100%;line-height:1.25;background-color:#ffffff;color:#333333;}
+
+h1, h2, h3, h4, h5, h6, label, caption, #rate-it legend {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+code {font-family:"Courier New", Courier, monospace;}
+pre code {font-size:10pt;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0 1em 0;}
+
+h1 {font-size:170%;}
+h2 {font-size:160%;line-height:130%;}
+h3 {font-size:140%;}
+h4 {font-size:110%;}
+h5 {font-size:110%;}
+h6 {font-size:100%;}
+
+fieldset {display:inline-block;padding:0.5em;}
+
+label, legend {font-size:80%;}
+
+table th, table td {padding:5px;margin:0;}
+table th {background-color:#ffffce;font-weight:bold;}
+
+input {font-family:Verdana, sans-serif;font-size:10pt;}
+
+img {vertical-align:middle;}
+
+a img {border:0;vertical-align:middle;margin:0;}
+
+ol {list-style-type:decimal;}
+ul {list-style-type:disc;}
+
+ul, pre {margin-top:1em;}
+
+pre {background:#ffffe0;border-style:solid;border-color:#eaefb3;border-width:1px 0 4px 6px;padding:0.5em;overflow:auto;}
+
+h1,h2,h3 {color:#aec14e;}
+h4 {color:#aec14e;}
+h5 {color:#df6f6f;}
+h6 {color:#666666;}
+
+label, legend {color:#666666;}
+
+a {text-decoration:none;}
+a:link, a:visited {color:#ec902d;}
+a:hover {color:#333333;}
+
+.top {margin-top:0 !important;}
+.bottom {margin-bottom:0 !important;}
+
+.left {float:left;margin:0 1em 0 0;}
+.right {float:right;margin:0 0 0 1em;}
+
+div.row {width:100%;overflow:hidden;}
+div.row > * {float:left;margin-left:1%;margin-right:1%;}
+div.row > *:first-child {margin-left:0;}
+div.row > *:last-child {margin-right:0;}
+
+div.bytwo > * {width:48%;}
+div.bythree > * {width:32%;}
+div.byfour > * {width:23.5%;}
+
+.summary {float:right;display:block;font-size:small;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
+.summary li {list-style:none;}
+.summary li a:link, .summary li a:visited {text-decoration:none;}
+
+.vignette {float:right;margin:0 0 0 1em;}

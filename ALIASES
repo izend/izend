@@ -1,0 +1,90 @@
+
+    _    _     ___    _    ____  _____ ____  
+   / \  | |   |_ _|  / \  / ___|| ____/ ___| 
+  / _ \ | |    | |  / _ \ \___ \|  _| \___ \ 
+ / ___ \| |___ | | / ___ \ ___) | |___ ___) |
+/_/   \_\_____|___/_/   \_\____/|_____|____/ 
+                                             
+                                             
+When this file changes after a merge of the lastest version of iZend, 
+update your copy of includes/aliases.inc in order to have access to
+actions added after the initial configuration of your website.
+
+UPDATES
+-------
+
+Date:	Mon Aug 6 2012
+
+Adds actions newsletter and newsletteredit.
+----
+
+COMPLETE
+--------
+
+$aliases = array(
+	array(
+		'captcha' 				=> 'captcha',
+		'avatar' 				=> 'avatar',
+		'rss' 					=> 'rssfeed',
+		'paypal/return' 		=> 'paypalreturn',
+		'paypal/cancel' 		=> 'paypalcancel',
+	),
+	'en' => array(
+		'home' 					=> 'home',
+		'contact' 				=> 'contact',
+		'user' 					=> 'user',
+		'disconnect' 			=> 'nobody',
+		'account' 				=> 'account',
+		'password' 				=> 'password',
+		'new-user' 				=> 'newuser',
+		'search' 				=> 'search',
+		'suggest' 				=> 'suggest',
+		'download' 				=> 'download',
+		'donation' 				=> 'donation',
+		'manage' 				=> 'admin',
+		'manage/user' 			=> 'adminuser',
+		'page' 					=> 'page',
+		'edit' 					=> 'editpage',
+		'folder' 				=> 'folder',
+		'edit/folder' 			=> 'folderedit',
+		'article' 				=> 'story',
+		'edit/article' 			=> 'storyedit',
+		'manual' 				=> 'book',
+		'edit/manual' 			=> 'bookedit',
+		'newsletter' 			=> 'newsletter',
+		'edit/newsletter' 		=> 'newsletteredit',
+		'thread' 				=> 'thread',
+		'edit/thread' 			=> 'threadedit',
+		'node' 					=> 'node',
+		'edit/node' 			=> 'editnode',
+	),
+	'fr' => array(	
+		'accueil' 				=> 'home',
+		'contact' 				=> 'contact',
+		'utilisateur' 			=> 'user',
+		'deconnexion' 			=> 'nobody',
+		'compte' 				=> 'account',
+		'mot-de-passe' 			=> 'password',
+		'nouvel-utilisateur' 	=> 'newuser',
+		'recherche' 			=> 'search',
+		'suggestion' 			=> 'suggest',
+		'telechargement' 		=> 'download',
+		'donation' 				=> 'donation',
+		'gestion' 				=> 'admin',
+		'gestion/utilisateur' 	=> 'adminuser',
+		'page' 					=> 'page',
+		'edition' 				=> 'editpage',
+		'dossier' 				=> 'folder',
+		'edit/dossier' 			=> 'folderedit',
+		'article' 				=> 'story',
+		'edition/article' 		=> 'storyedit',
+		'manuel' 				=> 'book',
+		'edition/manuel' 		=> 'bookedit',
+		'infolettre' 			=> 'newsletter',
+		'edition/infolettre' 	=> 'newsletteredit',
+		'fil' 					=> 'thread',
+		'edition/fil' 			=> 'threadedit',
+		'noeud' 				=> 'node',
+		'edition/noeud' 		=> 'editnode',
+	),
+);

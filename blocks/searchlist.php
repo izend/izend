@@ -2,13 +2,13 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
 function searchlist($lang, $rsearch, $taglist) {
-	global $default_folder;
+	global $default_folder, $newsletter_thread;
 	global $base_path;
 
 	$linklist=array();
@@ -25,6 +25,9 @@ function searchlist($lang, $rsearch, $taglist) {
 		$link_cloud=implode(' ', $link_cloud);
 		if ($thread_type == 'folder' and ((is_array($default_folder) and in_array($thread_id, $default_folder)) or $thread_id == $default_folder)) {
 			$thread_url=$base_path . '/' . $lang;
+		}
+		if ($thread_type == 'newsletter' and $thread_id == $newsletter_thread) {
+			$thread_url=url($thread_type, $lang);
 		}
 		else {
 			$thread_url=url($thread_type, $lang) . '/'. $thread_name;

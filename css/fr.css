@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
  
@@ -18,11 +18,13 @@
 .submit_enter {width:100px;height:30px;background:transparent url(../images/theme/entrer.png) no-repeat;}
 .submit_hide {width:100px;height:30px;background:transparent url(../images/theme/cacher.png) no-repeat;}
 .submit_modify {width:100px;height:30px;background:transparent url(../images/theme/modifier.png) no-repeat;}
+.submit_post {width:100px;height:30px;background:transparent url(../images/theme/poster.png) no-repeat;}
 .submit_put {width:100px;height:30px;background:transparent url(../images/theme/telecharger.png) no-repeat;}
 .submit_search {width:100px;height:30px;background:transparent url(../images/theme/chercher.png) no-repeat;}
 .submit_send {width:100px;height:30px;background:transparent url(../images/theme/envoyer.png) no-repeat;}
 .submit_show {width:100px;height:30px;background:transparent url(../images/theme/montrer.png) no-repeat;}
 .submit_sort {width:100px;height:30px;background:transparent url(../images/theme/trier.png) no-repeat;}
+.submit_test {width:100px;height:30px;background:transparent url(../images/theme/tester.png) no-repeat;}
 .submit_validate {width:100px;height:30px;background:transparent url(../images/theme/valider.png) no-repeat;}
 
 .submit_donate {width:108px !important;height:21px !important;background:transparent url(../images/paypal_donate_fr.gif) no-repeat !important;text-indent:-1000em !important;}

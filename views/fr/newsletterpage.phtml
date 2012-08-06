@@ -1,0 +1,46 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php require_once 'datefr.php'; ?>
+<div id="newsletterpage">
+<h3><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<p class="navigation menu">
+<?php if ($prev_page_url): ?>
+<a class="previous" href="<?php echo $prev_page_url; ?>"><span>&lt;</span></a>
+<a href="<?php echo $prev_page_url; ?>"><?php echo htmlspecialchars($prev_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
+<?php endif; ?>
+<?php if ($next_page_url and $prev_page_url): ?>
+&nbsp;|&nbsp;
+<?php endif; ?>
+<?php if ($next_page_url): ?>
+<a href="<?php echo $next_page_url; ?>"><?php echo htmlspecialchars($next_page_label, ENT_COMPAT, 'UTF-8'); ?></a>
+<a class="next" href="<?php echo $next_page_url; ?>"><span>&gt;</span></a>
+<?php endif; ?>
+</p>
+<p class="info"><?php echo longdatetime_fr($page_modified); ?></p>
+<?php if ($postnews): ?>
+<?php echo $postnews; ?>
+<?php endif; ?>
+<?php if ($html_message): ?>
+<h5>HTML</h5>
+<?php echo $html_message; ?>
+<?php endif; ?>
+<?php if ($text_message): ?>
+<h6>Texte</h6>
+<pre><code><?php echo $text_message; ?></code></pre>
+<?php endif; ?>
+<?php if ($with_test): ?>
+<form class="noprint" action="" method="post">
+<p><input type="submit" class="submit submit_test" name="newsletterpage_test" id="newsletterpage_test" value="Tester" /></p>
+</form>
+<?php endif; ?>
+<?php if ($email_sent): ?>
+<p>Le message a été envoyé à <i><?php echo $webmaster; ?></i>.</p>
+<?php endif; ?>
+</div>
