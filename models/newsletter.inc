@@ -3,9 +3,74 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
+
+function newsletter_post() {
+	$tabnewsletterpost=db_prefix_table('newsletter_post');
+
+	$sql="SELECT thread_id AS newsletter_id, node_id AS page_id, locale FROM $tabnewsletterpost WHERE mailed IS NULL AND NOW() >= scheduled";
+
+	$r = db_query($sql);
+
+	if (!$r) {
+		return true;
+	}
+
+	$newslist=array();
+
+	foreach ($r as $post) {
+		extract($post);	// newsletter_id, page_id, locale
+
+		$r = newsletter_get_message($newsletter_id, $page_id, $locale);
+
+		if ($r) {
+			list($message_title, $message_html, $message_text)=$r;
+
+			if ($message_title and ($message_html or $message_text)) {
+				$newslist[]=array('newsletter_id', 'page_id', 'locale', 'message_title', 'message_text', 'message_html');
+			}
+		}
+	}
+
+	require_once 'emailhtml.php';
+
+	$cssfile=ROOT_DIR . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'newsletter.css';
+	$css=@file_get_contents($cssfile);
+
+	$mailinglist=array();
+
+	foreach ($newslist as $news) {
+		extract($news);	// newsletter_id, page_id, locale, message_title, message_text, message_html
+
+		if (!isset($mailinglist[$locale])) {
+			$mailinglist[$locale]=newsletter_mailinglist($locale);
+		}
+
+		if (!$mailinglist[$locale]) {
+			continue;
+		}
+
+		foreach ($mailinglist[$locale] as $to) {
+			$r = emailhtml($message_text, $message_html, $css, $to, $message_title);
+
+			if (!$r) {
+				break;
+			}
+		}
+
+		if (!$r) {
+			break;
+		}
+
+		$sqllocale=db_sql_arg($locale, false);
+
+		$sql="UPDATE $tabnewsletterpost SET mailed=NOW() WHERE thread_id=$newsletter_id AND node_id=$page_id AND locale=$sqllocale LIMIT 1";
+
+		$r = db_update($sql);
+	}
+}
 
 function newsletter_get_message($newsletter_id, $page_id, $lang) {
 	$sqllang=db_sql_arg($lang, false);
@@ -25,7 +90,7 @@ function newsletter_get_message($newsletter_id, $page_id, $lang) {
 		return false;
 	}
 
-	$msg=array();
+	$title=$html=$text=false;
 
 	for ($i=0; $i < 2; $i++) {
 		$c = isset($r[$i]) ? $r[$i] : false;
@@ -39,19 +104,19 @@ function newsletter_get_message($newsletter_id, $page_id, $lang) {
 		}
 		switch ($i) {
 			case 0:
-				$msg['newsletter_message_title']=$c['node_title'];
-				$msg['newsletter_message_html']=$s;
+				$title=$c['node_title'];
+				$html=$s;
 				break;
 			case 1:
 				if ($i==1) {
 					$s=strip_tags($s);
 				}
-				$msg['newsletter_message_text']=$s;
+				$text=$s;
 				break;
 		}
 	}
 
-	return $msg;
+	return array($title, $html, $text);
 }
 
 function newsletter_schedule_post($newsletter_id, $page_id, $locale, $scheduled) {
@@ -129,4 +194,26 @@ function newsletter_remove_user($mail) {
 	$r = db_delete($sql);
 
 	return $r;
+}
+
+function newsletter_mailinglist($lang) {
+	$sqllang=db_sql_arg($lang, false);
+
+	$tabnewsletteruser=db_prefix_table('newsletter_user');
+
+	$sql="SELECT mail FROM $tabnewsletteruser WHERE locale=$sqllang";
+
+	$r = db_query($sql);
+
+	if (!$r) {
+		return false;
+	}
+
+	$mailinglist=array();
+
+	foreach ($r as $u) {
+		$mailinglist[]=$u['mail'];
+	}
+
+	return $mailinglist;
 }

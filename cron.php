@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    3
+ * @copyright  2012 izend.org
+ * @version    1
  * @link       http://www.izend.org
  */
 
@@ -13,13 +13,22 @@ set_include_path(ROOT_DIR . PATH_SEPARATOR . get_include_path());
 set_include_path(ROOT_DIR . DIRECTORY_SEPARATOR . 'includes' . PATH_SEPARATOR . get_include_path());
 set_include_path(ROOT_DIR . DIRECTORY_SEPARATOR . 'library' . PATH_SEPARATOR . get_include_path());
 
-require_once 'dump.php';
+global $db_url;
 
-require_once 'bootstrap.php';
+@include 'settings.inc';
+@include 'config.inc';
+@include 'db.inc';
 
-bootstrap();
+if ($db_url == 'mysql://username:password@localhost/databasename') {
+	$db_url = false;
+}
 
-require_once 'engine.php';
+if ($db_url) {
+	require_once 'db.php';
 
-dispatch($supported_languages);	// see config.inc
+	db_connect($db_url);
 
+	require_once 'cron.php';
+
+	cron_run();
+}

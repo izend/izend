@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -27,13 +27,13 @@
 <?php if ($postnews): ?>
 <?php echo $postnews; ?>
 <?php endif; ?>
-<?php if ($html_message): ?>
+<?php if ($message_html): ?>
 <h5>HTML</h5>
-<?php echo $html_message; ?>
+<?php echo $message_html; ?>
 <?php endif; ?>
-<?php if ($text_message): ?>
+<?php if ($message_text): ?>
 <h6>Text</h6>
-<pre><code><?php echo $text_message; ?></code></pre>
+<pre><code><?php echo $message_text; ?></code></pre>
 <?php endif; ?>
 <?php if ($with_test): ?>
 <form class="noprint" action="" method="post">

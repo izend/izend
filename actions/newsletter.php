@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function newsletter($lang, $arglist=false) {
 	}
 
 	if (!$newsletter_thread) {
-		return run('error/internalerror', $lang);
+		return run('error/notfound', $lang);
 	}
 
 	$page=false;

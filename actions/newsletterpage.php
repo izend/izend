@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -64,15 +64,12 @@ function newsletterpage($lang, $newsletter, $page) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	$html_message=$text_message=false;
+	$message_title=$message_html=$message_text=false;
 
 	$r = newsletter_get_message($newsletter_id, $page_id, $lang);
 
 	if ($r) {
-		extract($r);	// newsletter_message_html, $newsletter_message_text
-
-		$html_message = $newsletter_message_html;
-		$text_message = $newsletter_message_text;
+		list($message_title, $message_html, $message_text)=$r;
 	}
 
 	$postnews=false;
@@ -81,7 +78,7 @@ function newsletterpage($lang, $newsletter, $page) {
 
 	$email_sent=false;
 
-	if ($html_message or $text_message) {
+	if ($message_title and ($message_html or $message_text)) {
 		$with_test=true;
 
 		if (isset($_POST['newsletterpage_test'])) {
@@ -90,7 +87,7 @@ function newsletterpage($lang, $newsletter, $page) {
 			$cssfile=ROOT_DIR . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'newsletter.css';
 			$css=@file_get_contents($cssfile);
 
-			$r = emailhtml($text_message, $html_message, $css, $webmaster, $page_title);
+			$r = emailhtml($message_text, $message_html, $css, $webmaster, $message_title);
 
 			if ($r) {
 				$email_sent=true;
@@ -116,7 +113,7 @@ function newsletterpage($lang, $newsletter, $page) {
 		$next_page_url=url('newsletter', $lang) . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
-	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'text_message', 'html_message', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_test', 'email_sent', 'webmaster'));
+	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'message_title', 'message_text', 'message_html', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_test', 'email_sent', 'webmaster'));
 
 	$search=false;
 	if (!$newsletter_nosearch) {
