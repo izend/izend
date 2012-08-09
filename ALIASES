@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Thu Aug 9 2012
+
+Adds action newsletteruser.
+----
+
 Date:	Mon Aug 6 2012
 
 Adds actions newsletter and newsletteredit.
@@ -53,6 +58,7 @@ $aliases = array(
 		'edit/manual' 			=> 'bookedit',
 		'newsletter' 			=> 'newsletter',
 		'edit/newsletter' 		=> 'newsletteredit',
+		'newsletter/subscribe' 	=> 'newsletteruser',
 		'thread' 				=> 'thread',
 		'edit/thread' 			=> 'threadedit',
 		'node' 					=> 'node',
@@ -82,6 +88,7 @@ $aliases = array(
 		'edition/manuel' 		=> 'bookedit',
 		'infolettre' 			=> 'newsletter',
 		'edition/infolettre' 	=> 'newsletteredit',
+		'infolettre/abonnement'	=> 'newsletteruser',
 		'fil' 					=> 'thread',
 		'edition/fil' 			=> 'threadedit',
 		'noeud' 				=> 'node',

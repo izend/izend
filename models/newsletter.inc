@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -70,6 +70,8 @@ function newsletter_post() {
 
 		$r = db_update($sql);
 	}
+
+	return true;
 }
 
 function newsletter_get_message($newsletter_id, $page_id, $lang) {
@@ -171,7 +173,7 @@ function newsletter_count_users($locale=false) {
 	return $r ? $r[0]['count'] : false;
 }
 
-function newsletter_add_user($mail, $locale) {
+function newsletter_create_user($mail, $locale) {
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqllocale=db_sql_arg($locale, false);
 
@@ -184,7 +186,7 @@ function newsletter_add_user($mail, $locale) {
 	return $r;
 }
 
-function newsletter_remove_user($mail) {
+function newsletter_delete_user($mail) {
 	$sqlmail=db_sql_arg($mail, true, true);
 
 	$tabnewsletteruser=db_prefix_table('newsletter_user');
@@ -194,6 +196,18 @@ function newsletter_remove_user($mail) {
 	$r = db_delete($sql);
 
 	return $r;
+}
+
+function newsletter_get_user($mail) {
+	$sqlmail=db_sql_arg($mail, true, true);
+
+	$tabnewsletteruser=db_prefix_table('newsletter_user');
+
+	$sql="SELECT mail AS newsletter_user_mail, locale AS newsletter_user_locale FROM $tabnewsletteruser WHERE mail=$sqlmail LIMIT 1";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0] : false;
 }
 
 function newsletter_mailinglist($lang) {

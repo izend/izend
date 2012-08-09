@@ -1,0 +1,71 @@
+<?php
+
+/**
+ *
+ * @copyright  2012 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<form action="" method="post">
+<input type="hidden" name="subscribe_token" value="<?php echo $token; ?>" />
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quel est votre adresse d'email&nbsp;?</p>
+<p><input type="text" name="subscribe_mail" id="subscribe_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return focusonenter(event, 'subscribe_code')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="inlabel">Dans quelle langue voulez-vous recevoir la lettre&nbsp;?</p>
+<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="subscribe_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
+<p><input name="subscribe_confirmed" id="subscribe_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je veux m'abonner à la lettre d'information</p>
+<?php if ($with_captcha): ?>
+<p>
+<img src="<?php echo $base_path; ?>/captcha/subscribe" alt="" height="40px" title="Code de vérification" />
+&nbsp;:&nbsp;
+<input type="text" name="subscribe_code" id="subscribe_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'subscribe_send')" value="" />
+</p>
+<?php endif; ?>
+<p><input type="submit" class="submit submit_send" name="subscribe_send" id="subscribe_send" value="Envoyer" /></p>
+</form>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_mail): ?>
+<p>Entrez une adresse d'email valide.</p>
+<?php elseif ($bad_mail): ?>
+<p>L'adresse d'email est incorrecte.</p>
+<?php elseif ($duplicated_mail): ?>
+<p class="error">Cette adresse d'email est déjà enregistrée.</p>
+<?php endif; ?>
+<?php if ($missing_confirmation): ?>
+<p>Cochez la case de confirmation.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.
+<?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
+<?php endif; ?>
+</div>
+<?php if ($infos): extract($infos); ?>
+<div class="infos">
+<?php if ($email_registered): ?>
+<p>Votre adresse d'email a été enregistrée.</p>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#subscribe_code';
+}
+else if ($missing_mail or $bad_mail or $duplicated_mail) {
+	$focus='#subscribe_mail';
+}
+else if ($missing_confirmation) {
+	$focus='#subscribe_confirmed';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>

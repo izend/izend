@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -43,6 +43,7 @@ $aliases = array(
 		'bookedit'			=> 'edit/manual',
 		'newsletter'		=> 'newsletter',
 		'newsletteredit'	=> 'edit/newsletter',
+		'newsletteruser' 	=> 'newsletter/subscribe',
 		'thread'			=> 'thread',
 		'threadedit'		=> 'edit/thread',
 		'node'				=> 'node',
@@ -74,6 +75,7 @@ $aliases = array(
 		'bookedit'			=> 'edition/manuel',
 		'newsletter'		=> 'infolettre',
 		'newsletteredit'	=> 'edition/infolettre',
+		'newsletteruser' 	=> 'infolettre/abonnement',
 		'thread'			=> 'fil',
 		'threadedit'		=> 'edition/fil',
 		'node'				=> 'noeud',

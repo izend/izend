@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2012 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function captcha($lang, $arglist=false) {
 		}
 	}
 
-	$accepted = array('login', 'register', 'remindme', 'mailme');
+	$accepted = array('login', 'register', 'remindme', 'mailme', 'subscribe');
 
 	if ($id and !in_array($id, $accepted)) {
 		return run('error/badrequest', $lang);
