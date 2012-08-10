@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userprofile.php';
 
 function account($lang) {
 	if (!user_is_identified()) {
-		return run('error/unauthorized', $lang);
+		return run('user', $lang);
 	}
 
 	head('title', translate('account:title', $lang));
