@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2012 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -86,12 +86,12 @@ Check your answers and rerun the configuration.</p>
 <?php endif; ?>
 <p>In what languages is the content of the site written?</p>
 <p class="info">You will alway be able to add more languages later.</p>
-<p><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <?php echo $slang; ?><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" /><?php endforeach; ?></p>
 <?php if ($missing_content_languages): ?>
 <p class="error">Choose at least one language for the content of the site.</p>
 <?php endif; ?>
 <p>What is the default language?</p>
-<p><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <?php echo $slang; ?><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" /><?php endforeach; ?></p>
 <?php if ($bad_default_language): ?>
 <p class="error">You haven't mentionned this language in the previous list.</p>
 <?php endif; ?>

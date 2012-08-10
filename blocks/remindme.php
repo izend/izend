@@ -15,7 +15,7 @@ require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validateusername.php';
 
-function remindme($lang, $login=false) {
+function remindme($lang) {
 	$with_name=true;
 	$with_captcha=true;
 
@@ -91,9 +91,7 @@ function remindme($lang, $login=false) {
 			if (!$confirmed) {
 				$missing_confirmation=true;
 			}
-			if (!$code) {
-				$missing_code=true;
-			}
+
 			break;
 		default:
 			break;
