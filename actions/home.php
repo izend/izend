@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -68,7 +68,8 @@ function home($lang) {
 	$sidebar = view('sidebar', false, compact('search'));
 
 	$contact_page=url('contact', $lang);
-	$footer = view('footer', $lang, compact('contact_page'));
+	$newsletter_page=false;
+	$footer = view('footer', $lang, compact('contact_page', 'newsletter_page'));
 
 	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar', 'sharebar', 'toolbar'));
 

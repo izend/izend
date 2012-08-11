@@ -12,9 +12,11 @@
 <input type="hidden" name="subscribe_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quel est votre adresse d'email&nbsp;?</p>
 <p><input type="text" name="subscribe_mail" id="subscribe_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return focusonenter(event, 'subscribe_code')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="info">Votre adresse d'email est strictement confidentielle.</p>
 <p class="inlabel">Dans quelle langue voulez-vous recevoir la lettre&nbsp;?</p>
 <p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="subscribe_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
-<p><input name="subscribe_confirmed" id="subscribe_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je veux m'abonner à la lettre d'information</p>
+<p class="inlabel<?php if ($missing_confirmation): ?> inerror<?php endif; ?>">Merci de confirmer votre inscription&nbsp;:</p>
+<p><input name="subscribe_confirmed" id="subscribe_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je veux recevoir la lettre d'information par email</p>
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/subscribe" alt="" height="40px" title="Code de vérification" />

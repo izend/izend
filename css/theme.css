@@ -185,6 +185,7 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #socialbar a.gplus {background:transparent url(../images/theme/social/gplus.png) no-repeat;}
 #socialbar a.linkedin {background:transparent url(../images/theme/social/linkedin.png) no-repeat;}
 #socialbar a.rss {background:transparent url(../images/theme/social/rss.png) no-repeat;}
+#socialbar a.newsletter {background:transparent url(../images/theme/social/newsletter.png) no-repeat;}
 
 #comments {margin-top:2em;}
 #comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}

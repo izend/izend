@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -12,7 +12,8 @@
 <a class="twitter" href="http://www.twitter.com/#!/" target="_blank" title="Follow us on Twitter"><span>Twitter</span></a>
 <a class="gplus" href="https://plus.google.com/" target="_blank" title="Stay in touch with Google+"><span>Google+</span></a>
 <a class="linkedin" href="http://www.linkedin.com/" target="_blank" title="Connect to our network on LinkedIn"><span>LinkedIn</span></a>
-<a class="rss" href="<?php echo $base_path; ?>/en/rss" target="_blank" title="Subscribe to the RSS feed"><span>RSS</span></a>
+<a class="rss" href="<?php echo $base_path; ?>/en/rss" target="_blank" rel="nofollow" title="Subscribe to the RSS feed"><span>RSS</span></a>
+<a class="newsletter" href="<?php echo $base_path; ?>/en/newsletter/subscribe" rel="nofollow" title="Receive our newsletter"><span>Newsletter</span></a>
 </p>
 <script type="text/javascript">
 $('#socialbar a').hover(function() { $(this).animate({'opacity' : '0.5'}, 200); }, function() { $(this).animate({'opacity' : '1.0'}, 200); } );

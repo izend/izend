@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -17,6 +17,10 @@
 <?php if (!empty($contact_page)): ?>
 &bull;
 <a href="<?php echo $contact_page; ?>" rel="nofollow" title="Contact us">Contact</a>
+<?php endif; ?>
+<?php if (!empty($newsletter_page)): ?>
+&bull;
+<a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
 <?php endif; ?>
 <?php if (!empty($account_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
 &bull;
