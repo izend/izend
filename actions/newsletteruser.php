@@ -8,7 +8,7 @@
  */
 
 function newsletteruser($lang) {
-	head('title', translate('newslettter:title', $lang));
+	head('title', translate('newsletter:title', $lang));
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');

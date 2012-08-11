@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -126,6 +126,15 @@ function subscribe($lang) {
 				$internal_error=true;
 				break;
 			}
+
+			require_once 'emailme.php';
+
+			global $sitename;
+
+			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
+			$subject = 'new_registration' . '@' . $sitename;
+			$msg = $timestamp . ' ' . $lang . ' ' . $user_mail;
+			emailme($subject, $msg);
 
 			$email_registered=true;
 
