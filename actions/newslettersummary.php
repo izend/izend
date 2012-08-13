@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -70,8 +70,8 @@ function newslettersummary($lang, $newsletter) {
 		$cloud = build('cloud', $lang, $cloud_url, $newsletter_id, false, 30, compact('byname', 'bycount', 'index'));
 	}
 
-	$headline_text=	translate('newsletterall:title', $lang);
-	$headline_url=url('newsletter', $lang);
+	$headline_text=	translate('newsletter:title', $lang);
+	$headline_url=false;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
 
