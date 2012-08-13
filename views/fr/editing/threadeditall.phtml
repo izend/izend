@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -30,6 +30,8 @@ type
 <option value="story"<?php if ($new_thread_type == 'story'): ?> selected="selected"<?php endif; ?>>Article</option>
 <?php elseif ($type == 'book'): ?>
 <option value="book"<?php if ($new_thread_type == 'book'): ?> selected="selected"<?php endif; ?>>Manuel</option>
+<?php elseif ($type == 'rss'): ?>
+<option value="rss"<?php if ($new_thread_type == 'rss'): ?> selected="selected"<?php endif; ?>>RSS</option>
 <?php elseif ($type == 'newsletter'): ?>
 <option value="newsletter"<?php if ($new_thread_type == 'newsletter'): ?> selected="selected"<?php endif; ?>>Infolettre</option>
 <?php endif; ?>

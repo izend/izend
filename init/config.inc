@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 <?php
@@ -73,7 +73,7 @@ $supported_roles=array('administrator', 'writer', 'reader', 'moderator');
 
 global $supported_threads;
 
-$supported_threads=array('thread', 'folder', 'story', 'book', 'newsletter');	// 'thread', 'folder', 'story', 'book', 'newsletter'
+$supported_threads=array('thread', 'folder', 'story', 'book', 'rss', 'newsletter');	// 'thread', 'folder', 'story', 'book', 'rss', 'newsletter'
 
 global $contents_model, $supported_contents;
 
