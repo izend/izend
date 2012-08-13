@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
-require_once 'models/thread.inc';
-
 function cloud_id($cloud) {
 	// a cloud_id is actually a thread_id
+	require_once 'models/thread.inc';
+
 	return thread_id($cloud);
 }
 
@@ -76,7 +76,7 @@ function cloud_get($lang, $cloud_id) {
 }
 
 function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=false, $inclusive=true) {
-	// list the tags in a thread or in all the threads which are optionally related to a node count and/or by name skipping threads of type 'thread' and nodes which are ignored
+	// list the tags in a thread or in all the threads which are optionally related to a node by count and/or by name skipping threads of type 'thread' and nodes which are ignored
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabtag=db_prefix_table('tag');
@@ -84,11 +84,15 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabthread=db_prefix_table('thread');
 
-	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$join .= " AND tn.thread_id=$cloud_id";
+		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
-	$join .= " JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+
+	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	if (!$cloud_id) {
+		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
+	}
 
 	$in=$having='';
 	if ($node_id) {
@@ -112,7 +116,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 		}
 	}
 
-	$sql = "SELECT tg.tag_id, ti.node_id, tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang $in GROUP BY ti.tag_id $having $order";
+	$sql = "SELECT tg.tag_id, ti.node_id, tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join1 $join2 JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang $in GROUP BY ti.tag_id $having $order";
 
 	$r = db_query($sql);
 
@@ -138,9 +142,14 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	$tabnodelocale=db_prefix_table('node_locale');
 	$tabuser=db_prefix_table('user');
 
-	$join = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$join .= " AND tn.thread_id=$cloud_id";
+		$join1 .= " AND tn.thread_id=$cloud_id";
+	}
+
+	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	if (!$cloud_id) {
+		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
 	}
 
 	$namelist=array();
@@ -150,7 +159,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	}
 	$where = "tg.locale=$sqllang AND " . ($ntags > 1 ? '('.implode(' OR ', $namelist).')' : $namelist[0]);
 
-	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread' JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnode n ON n.node_id=ti.node_id JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale LEFT JOIN $tabuser u ON u.user_id=n.user_id WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, t.number, tn.number";
+	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnode n ON n.node_id=ti.node_id JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale LEFT JOIN $tabuser u ON u.user_id=n.user_id WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, t.number, tn.number";
 
 	$r = db_query($sql);
 
@@ -172,12 +181,17 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0 JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$join .= " AND tn.thread_id=$cloud_id";
+		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang";
+	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	if (!$cloud_id) {
+		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
+	}
+
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE tg.locale=$sqllang";
 
 	$r = db_query($sql);
 
@@ -218,12 +232,17 @@ function cloud_suggest($lang, $cloud_id, $term) {
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$join = "JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0 JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
 	if ($cloud_id) {
-		$join .= " AND tn.thread_id=$cloud_id";
+		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg $join WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm ORDER BY tag_name";
+	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
+	if (!$cloud_id) {
+		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
+	}
+
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm ORDER BY tag_name";
 
 	$r = db_query($sql);
 

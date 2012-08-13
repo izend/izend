@@ -6,7 +6,7 @@
 /_/   \_\_____|___/_/   \_\____/|_____|____/ 
                                              
                                              
-When this file changes after a merge of the lastest version of iZend, 
+When this file changes after a merge of the latest version of iZend, 
 update your copy of includes/aliases.inc in order to have access to
 actions added after the initial configuration of your website.
 

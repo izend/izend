@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 
@@ -618,7 +618,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '1',
-  `thread_type` enum('thread','folder','story','book','newsletter') NOT NULL DEFAULT 'thread',
+  `thread_type` enum('thread','folder','story','book','rss','newsletter') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `number` int(4) unsigned NOT NULL,

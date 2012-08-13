@@ -6,7 +6,7 @@
 |____/|____/ 
              
 
-When this file changes after a merge of the lastest version of iZend, 
+When this file changes after a merge of the latest version of iZend, 
 execute all the SQL orders associated to all the commits which are 
 newer than the previous update in chronological order.
 
@@ -19,7 +19,17 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Mon Aug 13 2012
+
+	Limits searching rss and newsletter threads to administrator
+
+ALTER TABLE `izend_thread` CHANGE `thread_type` `thread_type` ENUM( 'thread', 'folder', 'story', 'book', 'rss', 'newsletter' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'thread';
+
+----
+
 Date:	Mon Aug 6 2012
+
+	Adds editing a newsletter
 
 ALTER TABLE `izend_thread` CHANGE `thread_type` `thread_type` ENUM( 'thread', 'folder', 'story', 'book', 'newsletter' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'thread';
 
@@ -43,12 +53,16 @@ CREATE TABLE IF NOT EXISTS `izend_newsletter_user` (
 
 Date:	Sat Jun 30 2012
 
+	Drops table thread_list
+
 ALTER TABLE `izend_thread` ADD `number` INT( 3 ) UNSIGNED NOT NULL AFTER `modified`;
 UPDATE `izend_thread` t JOIN `izend_thread_list` tlist SET t.number=tlist.number WHERE tlist.thread_id=t.thread_id;
 DROP TABLE `izend_thread_list`;
 ----
 
 Date:	Wed Jun 20 2012
+
+	Adds voting
 
 CREATE TABLE IF NOT EXISTS `izend_vote` (
   `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -383,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `izend_tag_index` (
 CREATE TABLE IF NOT EXISTS `izend_thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL DEFAULT '1',
-  `thread_type` enum('thread','folder','story','book','newsletter') NOT NULL DEFAULT 'thread',
+  `thread_type` enum('thread','folder','story','book','rss','newsletter') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `nosearch` tinyint(1) unsigned NOT NULL DEFAULT '0',

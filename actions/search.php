@@ -3,14 +3,17 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
+require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
 
 function search($lang, $arglist=false) {
+	global $rss_thread, $newsletter_thread;
+
 	$cloud=false;
 
 	if (is_array($arglist)) {
@@ -25,6 +28,12 @@ function search($lang, $arglist=false) {
 		$cloud_id = cloud_id($cloud);
 		if (!$cloud_id) {
 			return run('error/notfound', $lang);
+		}
+
+		if ($cloud_id == $rss_thread or $cloud_id == $newsletter_thread) {
+			if (!user_has_role('administrator')) {
+				return run('error/unauthorized', $lang);
+			}
 		}
 
 		$r = cloud_get($lang, $cloud_id);
