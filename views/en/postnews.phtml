@@ -3,20 +3,20 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
 <?php if($mailed): ?>
 <?php require_once 'dateen.php'; ?>
-<p><img src="/images/theme/envelopesmall.png" alt="" /> The message was sent <b><?php echo longdate_en($mailed); ?></b> at <b><?php echo date('H\\hi', $mailed); ?></b>.</p>
+<p><img src="/images/theme/envelopesmall.png" alt="" /> The message was sent <b><?php echo longdate_en($mailed); ?></b> at <b><?php echo date('H:i', $mailed); ?></b>.</p>
 <?php elseif($scheduled): ?>
 <?php require_once 'dateen.php'; ?>
 <form action="" method="post">
 <input type="hidden" name="postnews_token" value="<?php echo $token; ?>" />
 <p>
 <input type="submit" class="submit submit_cancel" name="postnews_cancel" id="postnews_cancel" value="Cancel" />
-sending the message scheduled <b><?php echo longdate_en($scheduled); ?></b> at <b><?php echo date('H\\hi', $scheduled); ?></b>
+sending the message scheduled <b><?php echo longdate_en($scheduled); ?></b> at <b><?php echo date('H:i', $scheduled); ?></b>
 </p>
 </form>
 <?php else: ?>

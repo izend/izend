@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -63,7 +63,7 @@ function shortdatetime_en($unixtime) {
 	$hour = date('H', $unixtime);
 	$minute = date('i', $unixtime);
 
-	return "$date ${hour}h{$minute}";
+	return "$date ${hour}:{$minute}";
 }
 
 function longdatetime_en($unixtime) {
@@ -72,6 +72,6 @@ function longdatetime_en($unixtime) {
 	$hour = date('H', $unixtime);
 	$minute = date('i', $unixtime);
 
-	return "$date ${hour}h{$minute}";
+	return "$date ${hour}:{$minute}";
 }
 

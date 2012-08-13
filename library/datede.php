@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -39,15 +39,6 @@ function shortday_de($unixtime) {
 	return $shortdayname[$weekday];
 }
 
-function shortdatetime_de($unixtime) {
-	$date = shortdate_de($unixtime);
-
-	$hour = date('H', $unixtime);
-	$minute = date('i', $unixtime);
-
-	return "$date ${hour}h{$minute}";
-}
-
 function longdate_de($unixtime) {
 	$day = date('j', $unixtime);
 	$year = date('Y', $unixtime);
@@ -66,12 +57,21 @@ function shortdate_de($unixtime) {
 	return "$day-$month-$year";
 }
 
-function longdatetime_de($unixtime) {
-	$date = longdate_en($unixtime);
+function shortdatetime_de($unixtime) {
+	$date = shortdate_de($unixtime);
 
 	$hour = date('H', $unixtime);
 	$minute = date('i', $unixtime);
 
-	return "$date ${hour}h{$minute}";
+	return "$date ${hour}:{$minute}";
+}
+
+function longdatetime_de($unixtime) {
+	$date = longdate_de($unixtime);
+
+	$hour = date('H', $unixtime);
+	$minute = date('i', $unixtime);
+
+	return "$date ${hour}:{$minute}";
 }
 
