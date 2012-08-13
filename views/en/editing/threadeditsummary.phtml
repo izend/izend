@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -32,16 +32,16 @@
 <p>
 <label>Type:</label>
 <select name="thread_type" size="1">
-<option value="thread" <?php echo $thread_type == 'thread' ? 'selected="selected"' : ''; ?>>Thread</option>
+<option value="thread"<?php if ($thread_type == 'thread'): ?> selected="selected"<?php endif; ?>>Thread</option>
 <?php foreach ($supported_threads as $type): ?>
 <?php if ($type == 'folder'): ?>
-<option value="folder" <?php echo $thread_type == 'folder' ? 'selected="selected"' : ''; ?>>Folder</option>
+<option value="folder"<?php if ($thread_type == 'folder'): ?> selected="selected"<?php endif; ?>>Folder</option>
 <?php elseif ($type == 'story'): ?>
-<option value="story" <?php echo $thread_type == 'story' ? 'selected="selected"' : ''; ?>>Article</option>
+<option value="story"<?php if ($thread_type == 'story'): ?> selected="selected"<?php endif; ?>>Article</option>
 <?php elseif ($type == 'book'): ?>
-<option value="book" <?php echo $thread_type == 'book' ? 'selected="selected"' : ''; ?>>Manual</option>
+<option value="book"<?php if ($thread_type == 'book'): ?> selected="selected"<?php endif; ?>>Manual</option>
 <?php elseif ($type == 'newsletter'): ?>
-<option value="newsletter" <?php echo $thread_type == 'newsletter' ? 'selected="selected"' : ''; ?>>Newsletter</option>
+<option value="newsletter"<?php if ($thread_type == 'newsletter'): ?> selected="selected"<?php endif; ?>>Newsletter</option>
 <?php endif; ?>
 <?php endforeach; ?>
 </select>

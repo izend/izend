@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -31,7 +31,7 @@ type
 <?php elseif ($type == 'book'): ?>
 <option value="book"<?php if ($new_thread_type == 'book'): ?> selected="selected"<?php endif; ?>>Manual</option>
 <?php elseif ($type == 'newsletter'): ?>
-<option value="newsletter" <?php echo $thread_type == 'newsletter' ? 'selected="selected"' : ''; ?>>Newsletter</option>
+<option value="newsletter"<?php if ($new_thread_type == 'newsletter'): ?> selected="selected"<?php endif; ?>>Newsletter</option>
 <?php endif; ?>
 <?php endforeach; ?>
 </select>
