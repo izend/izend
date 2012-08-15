@@ -1,0 +1,25 @@
+
+  ____ ____   ___  _   _ 
+ / ___|  _ \ / _ \| \ | |
+| |   | |_) | | | |  \| |
+| |___|  _ <| |_| | |\  |
+ \____|_| \_\\___/|_| \_|
+
+
+LINUX
+-----
+
+Program the cron system service by adding a file called izend in /etc/cron.d
+with the following content:
+
+# /etc/cron.d/izend: crontab for iZend
+# Runs cron.php every quarter of an hour for every site.
+
+*/15 * * * * www-data [ -f /var/www/sitename.net/cron.php ] && /usr/bin/php5 -f /var/www/sitename.net/cron.php
+
+cron.php will run every script file located in the cron directory.
+
+You may want to uncomment the following line in the configuration file of the
+syslog utility to be notified by mail in case of error:
+
+cron.*				/var/log/cron.log
