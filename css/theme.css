@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    37
+ * @version    38
  * @link       http://www.izend.org
  */
  
@@ -130,10 +130,11 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #bannermenu .btn_admin {width:24px;height:24px;position:absolute;left:180px;background:transparent url(../images/theme/icons/work.png) no-repeat;}
 
 #banner #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
-#banner #languages .btn_fr {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/fr.png) no-repeat;}
-#banner #languages .btn_en {width:32px;height:24px;float:left;margin-right:2px;background:transparent url(../images/theme/flags/en.png) no-repeat;}
+#banner #languages a {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+#banner #languages .btn_fr {background:transparent url(../images/theme/flags/fr.png) no-repeat;}
+#banner #languages .btn_en {background:transparent url(../images/theme/flags/en.png) no-repeat;}
 
-#donate {width:120px;float:right;margin-top:15px;}
+#banner #donate {width:120px;float:right;margin-top:15px;}
 #donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
 #donate .btn_donate_en {width:74px;height:21px;float:right;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
 
@@ -145,6 +146,7 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 
 #sidebar #headline {margin:0.25em 0 0.5em 0;text-align:right;}
 #sidebar #searchinput {margin:-2px 0 0.5em 0;}
+#sidebar .cloud {margin-bottom:1em;}
 
 #footer {font-size:small;margin:2em 0 1em 0;clear:both;}
 #footer p, #footer ul {margin: 0.5em 0;}
