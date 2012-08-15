@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -296,6 +296,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				$thread_contents=array($pos => compact('node_id', 'node_title', 'node_number', 'node_ignored', 'node_url', 'pos'));
 			}
 
+			$new_node_name=$new_node_title=false;
 			$new_node_number=$node_number+1;
 
 			break;
