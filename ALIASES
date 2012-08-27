@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Mon Aug 27 2012
+
+Adds action pagecontent.
+----
+
 Date:	Thu Aug 9 2012
 
 Adds action newsletteruser.
@@ -63,6 +68,7 @@ $aliases = array(
 		'edit/thread' 			=> 'threadedit',
 		'node' 					=> 'node',
 		'edit/node' 			=> 'editnode',
+		'content' 				=> 'pagecontent',
 	),
 	'fr' => array(	
 		'accueil' 				=> 'home',
@@ -93,5 +99,6 @@ $aliases = array(
 		'edition/fil' 			=> 'threadedit',
 		'noeud' 				=> 'node',
 		'edition/noeud' 		=> 'editnode',
+		'contenu' 				=> 'pagecontent',
 	),
 );
