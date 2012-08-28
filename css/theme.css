@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    39
+ * @version    40
  * @link       http://www.izend.org
  */
  
@@ -120,14 +120,15 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #logo h1 a {float:left;width:300px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
 
 #bannermenu {width:220px;float:left;margin-top:13px;margin-left:40px;position:relative;}
-#bannermenu .btn_mail {width:24px;height:24px;position:absolute;left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat;}
-#bannermenu .btn_login {width:24px;height:24px;position:absolute;left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat;}
-#bannermenu .btn_logout {width:24px;height:24px;position:absolute;left:0px;background:transparent url(../images/theme/icons/cancel.png) no-repeat;}
-#bannermenu .btn_account {width:24px;height:24px;position:absolute;left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat;}
-#bannermenu .btn_edit {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/edit.png) no-repeat;}
-#bannermenu .btn_view {width:24px;height:24px;position:absolute;left:30px;background:transparent url(../images/theme/icons/web.png) no-repeat;}
-#bannermenu .btn_validate {width:24px;height:24px;position:absolute;left:60px;background:transparent url(../images/theme/icons/check.png) no-repeat;}
-#bannermenu .btn_admin {width:24px;height:24px;position:absolute;left:180px;background:transparent url(../images/theme/icons/work.png) no-repeat;}
+#bannermenu a {width:24px;height:24px;position:absolute;}
+#bannermenu .btn_mail {left:130px;background:transparent url(../images/theme/icons/mail.png) no-repeat;}
+#bannermenu .btn_login {left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat;}
+#bannermenu .btn_logout {left:0px;background:transparent url(../images/theme/icons/cancel.png) no-repeat;}
+#bannermenu .btn_account {left:100px;background:transparent url(../images/theme/icons/user.png) no-repeat;}
+#bannermenu .btn_edit {left:30px;background:transparent url(../images/theme/icons/edit.png) no-repeat;}
+#bannermenu .btn_view {left:30px;background:transparent url(../images/theme/icons/web.png) no-repeat;}
+#bannermenu .btn_validate {left:60px;background:transparent url(../images/theme/icons/check.png) no-repeat;}
+#bannermenu .btn_admin {left:180px;background:transparent url(../images/theme/icons/work.png) no-repeat;}
 
 #banner #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
 #banner #languages a {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
@@ -161,13 +162,14 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #footer #languages a span {display:inline;}
 
 #toolbar {width:24px;padding:6px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;float:left;margin-left:-70px;}
-#toolbar #exit {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/cancel.png) no-repeat;}
-#toolbar #admin {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/work.png) no-repeat;}
-#toolbar #edit {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/edit.png) no-repeat;}
-#toolbar #view {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/web.png) no-repeat;}
-#toolbar #validate {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons/check.png) no-repeat;}
-#toolbar #scrolltop {width:24px;height:12px;float:left;background:transparent url(../images/theme/icons/top.png) no-repeat;}
-#toolbar #scrollbottom {width:24px;height:12px;float:left;background:transparent url(../images/theme/icons/bottom.png) no-repeat;}
+#toolbar a {width:24px;height:24px;float:left;}
+#toolbar #exit {background:transparent url(../images/theme/icons/cancel.png) no-repeat;}
+#toolbar #admin {background:transparent url(../images/theme/icons/work.png) no-repeat;}
+#toolbar #edit {background:transparent url(../images/theme/icons/edit.png) no-repeat;}
+#toolbar #view {background:transparent url(../images/theme/icons/web.png) no-repeat;}
+#toolbar #validate {background:transparent url(../images/theme/icons/check.png) no-repeat;}
+#toolbar #scrolltop {height:12px;background:transparent url(../images/theme/icons/top.png) no-repeat;}
+#toolbar #scrollbottom {height:12px;background:transparent url(../images/theme/icons/bottom.png) no-repeat;}
 
 #threadlist {margin-top:1em;}
 
