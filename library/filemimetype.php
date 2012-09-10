@@ -2,25 +2,40 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
 function file_mime_type($file, $encoding=true) {
-	$file = escapeshellarg($file);
-	$cmd = "file -iL $file";
+	$mime=false;
 
-	exec($cmd, $output, $r);
+	if (function_exists('finfo_file')) {
+		$finfo = finfo_open(FILEINFO_MIME);
+		$mime = finfo_file($finfo, $file);
+		finfo_close($finfo);
+	}
+	else if (substr(PHP_OS, 0, 3) == 'WIN') {
+		$mime = mime_content_type($file);
+	}
+	else {
+		$file = escapeshellarg($file);
+		$cmd = "file -iL $file";
 
-	if ($r == 0) {
-		$s = $output[0];
-		$beg = strpos($s, ': ');
-		if ($beg) {
-			$end = $encoding ? false : strpos($s, '; ');
-			return $end ? substr($s, $beg+2, $end - ($beg + 2)) : substr($s, $beg+2);
+		exec($cmd, $output, $r);
+
+		if ($r == 0) {
+			$mime = substr($mime, strpos($mime, ': ')+2);
 		}
 	}
 
-	return 'application/octet-stream';
+	if (!$mime) {
+		return false;
+	}
+
+	if ($encoding) {
+		return $mime;
+	}
+		
+	return substr($mime, 0, strpos($mime, '; '));
 }

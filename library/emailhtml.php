@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -40,7 +40,7 @@ _SEP_;
 					continue;
 				$fname=ROOT_DIR . $url;
 				$filetype=file_mime_type($fname, false);
-				if (strpos($filetype, 'image') !== 0)
+				if (!$filetype or strpos($filetype, 'image') !== 0)
 					continue;
 				$data=file_get_contents($fname);
 				if (get_magic_quotes_runtime()) {

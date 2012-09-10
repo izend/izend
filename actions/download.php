@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2012 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -54,6 +54,9 @@ function download($lang, $arglist=false) {
 	$filename=$download_name;
 	$filesize=filesize($filepath);
 	$filetype=file_mime_type($filepath);
+	if (!$filetype) {
+		$filetype = 'application/octet-stream';
+	}
 
 	header('HTTP/1.1 200 OK');	// Make sure status code is OK in case URL pointed to a plausible file not found like an image
 	header('Content-Description: File Transfer');
