@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -26,7 +26,7 @@ function searchlist($lang, $rsearch, $taglist) {
 		if ($thread_type == 'folder' and ((is_array($default_folder) and in_array($thread_id, $default_folder)) or $thread_id == $default_folder)) {
 			$thread_url=$base_path . '/' . $lang;
 		}
-		if ($thread_type == 'newsletter' and $thread_id == $newsletter_thread) {
+		else if ($thread_type == 'newsletter' and $thread_id == $newsletter_thread) {
 			$thread_url=url($thread_type, $lang);
 		}
 		else {
