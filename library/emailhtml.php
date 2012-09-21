@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,7 @@ _SEP_;
 				if (!$data)
 					continue;
 				$base64=chunk_split(base64_encode($data));
-				$cid=md5(uniqid('cid'));
+				$cid=md5(uniqid('cid', true));
 				$qfname=preg_quote($url);
 				$pattern[]='#(<img[^>]+src=)"' . $qfname . '"([^>]*>)#is';
 				$replacement[]='${1}"cid:' . $cid . '"${2}';
@@ -90,7 +90,7 @@ _SEP_;
 
 	if ($related) {
 		if ($textbody) {
-			$sep=md5(uniqid('sep'));
+			$sep=md5(uniqid('sep', true));
 
 			$body .= <<<_SEP_
 Content-Type: multipart/alternative; boundary="$sep"
@@ -117,7 +117,7 @@ $htmlbody
 _SEP_;
 		}
 
-		$sep=md5(uniqid('sep'));
+		$sep=md5(uniqid('sep', true));
 
 		$headers .= <<<_SEP_
 Content-Type: multipart/related; boundary="$sep"
@@ -144,7 +144,7 @@ $body
 _SEP_;
 	}
 	else if ($textbody and $htmlbody) {
-		$sep=md5(uniqid('sep'));
+		$sep=md5(uniqid('sep', true));
 
 		$headers .= <<<_SEP_
 Content-Type: multipart/alternative; boundary="$sep"
