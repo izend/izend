@@ -3,7 +3,7 @@
 /**
  *
  * @copyright	2010-2012 izend.org
- * @version		10
+ * @version		11
  * @link		http://www.izend.org
  */
 
@@ -180,12 +180,13 @@ function dispatch($languages) {
 }
 
 function run($action, $lang=false, $arglist=false) {
-	global $theme;
+	global $theme, $author;
 
 	head('lang', $lang);
 	head('title', translate('title', $lang));
 	head('description', translate('description', $lang));
 	head('keywords', translate('keywords', $lang));
+	head('author', $author);
 	head('favicon', 'favicon');
 	head('theme', $theme);
 
