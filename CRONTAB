@@ -23,3 +23,27 @@ You may want to uncomment the following line in the configuration file of the
 syslog utility to be notified by mail in case of error:
 
 cron.*				/var/log/cron.log
+
+WINDOWS
+-------
+
+Start the Task Scheduler with Start Menu -> All Programs -> Accessories -> System tools -> Task Scheduler.
+
+Choose New task... and create a task called "Cron sitename.net" described as 
+"Runs cron.php every quarter of an hour for sitename.net".
+Let the task run whether a user is logged on or not. Check the Hidden option. Check Do not store password.
+
+Go to Triggers.
+Create a new trigger.
+Begin the task at startup.
+Repeat it every 15 minutes indefinitely.
+
+Go to Actions.
+Create a new action.
+Select Start a program.
+Program the php command, e.g. "C:\xampp\php\php.exe", with the argument "-f cron.php".
+Run the program in the root directory of the site, e.g. "C:\xampp\htdocs\sitename.net".
+
+Go to Conditions.
+You may want to run the program only if a network connection is available.
+
