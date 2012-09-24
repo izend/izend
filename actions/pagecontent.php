@@ -3,35 +3,36 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'models/thread.inc';
 
 function pagecontent($lang, $arglist=false) {
-	global $default_folder;
+	global $content_folder;
 
-	$folder=$page=false;
-	$folder_id=$page_id=false;
-
-	if (is_array($arglist)) {
-		if (isset($arglist[1])) {
-			$folder=$arglist[0];
-			$page=$arglist[1];
-		}
-		else if (isset($arglist[0])) {
-			$folder=$default_folder;
-			$page=$arglist[0];
-		}
-	}
-
-	if (!$folder or !$page) {
+	if (!$content_folder) {
 		header('HTTP/1.1 404 Not Found');
 		return false;
 	}
 
-	foreach (is_array($folder) ? $folder : array($folder) as $folder) {
+	$page=false;
+
+	if (is_array($arglist)) {
+		if (isset($arglist[0])) {
+			$page=$arglist[0];
+		}
+	}
+
+	if (!$page) {
+		header('HTTP/1.1 404 Not Found');
+		return false;
+	}
+
+	$folder_id=$page_id=false;
+
+	foreach (is_array($content_folder) ? $content_folder : array($content_folder) as $folder) {
 		$folder_id = thread_id($folder);
 		if ($folder_id) {
 			$page_id = thread_node_id($folder_id, $page);

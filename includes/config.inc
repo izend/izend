@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -121,6 +121,10 @@ global $home_action, $default_action, $default_folder;
 $home_action = 'install';		// 'home' or 'install'
 $default_action = 'install';	// 'page' or 'install' or false
 $default_folder = 1;			// can be an array
+
+global $content_folder;
+
+$content_folder = false;		// can be an array
 
 global $rss_thread;
 
