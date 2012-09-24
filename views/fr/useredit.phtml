@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -32,7 +32,7 @@
 <input type="hidden" name="useredit_website" value="<?php echo htmlspecialchars($useredit_website, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
 <?php if ($with_locale): ?>
-<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="useredit_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
+<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="useredit_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" title="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_locale" value="<?php echo htmlspecialchars($user_locale, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>

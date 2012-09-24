@@ -14,7 +14,7 @@
 <p><input type="text" name="subscribe_mail" id="subscribe_mail" size="40" maxlength="100" title="name@domain.net" onkeypress="return focusonenter(event, 'subscribe_code')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
 <p class="inlabel">In which language do you want to receive the letter?</p>
-<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="subscribe_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
+<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input id="<?php echo $lang; ?>" name="subscribe_locale" type="radio" value="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<img src="/images/theme/flags/<?php echo $lang; ?>.png" alt="<?php echo $lang; ?>" title="<?php echo $lang; ?>" /><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <p class="inlabel<?php if ($missing_confirmation): ?> inerror<?php endif; ?>">Please confirm your registration:</p>
 <p><input name="subscribe_confirmed" id="subscribe_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;I want to receive the newsletter by email</p>
 <?php if ($with_captcha): ?>

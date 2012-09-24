@@ -31,7 +31,7 @@ Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
 <p>Pour exploiter tout le potentiel d'<b>iZend</b>, vous devez disposer d'un serveur de bases de données.
 Le configurateur peut créer une nouvelle base de données ou utiliser une base de données déjà existante.
 <b>IMPORTANT</b>&nbsp;: Si la base de données est partagée, demandez au configurateur d'ajouter un préfixe aux noms des tables.
-Dans tous les cas, utilisez un préfixe est plus prudent.</p>
+Dans tous les cas, utiliser un préfixe est plus prudent.</p>
 <p>NOTE&nbsp;: Si vous développez le site en local avant de le mettre en ligne, ce qui est recommandé, utilisez les mêmes paramètres sur les deux serveurs.</p>
 <h5 id="configuration">Configuration</h5>
 <?php if ($bad_write_permission): ?>
@@ -86,12 +86,12 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <?php endif; ?>
 <p>Dans quelles langues le contenu du site est-il rédigé&nbsp;?</p>
 <p class="info">Vous pourrez toujours ajouter d'autres langues plus tard.</p>
-<p><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" /><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_content_languages[]" type="checkbox" value="<?php echo $slang; ?>" <?php if (in_array($slang, $content_languages)) echo 'checked="checked"'; ?>/> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" title="<?php echo $slang; ?>" /><?php endforeach; ?></p>
 <?php if ($missing_content_languages): ?>
 <p class="error">Choisissez au moins une langue pour le contenu du site.</p>
 <?php endif; ?>
 <p>Quelle est la langue par défaut&nbsp;?</p>
-<p><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" /><?php endforeach; ?></p>
+<p><?php foreach ($system_languages as $slang): ?> <input name="configure_default_language" type="radio" value="<?php echo $slang; ?>" <?php if ($slang == $default_language) echo 'checked="checked"'; ?> /> <img src="/images/theme/flags/<?php echo $slang; ?>.png" alt="<?php echo $slang; ?>" title="<?php echo $slang; ?>" /><?php endforeach; ?></p>
 <?php if ($bad_default_language): ?>
 <p class="error">Vous n'avez pas mentionné cette langue dans la liste précédente.</p>
 <?php endif; ?>
