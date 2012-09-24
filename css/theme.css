@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    42
+ * @version    43
  * @link       http://www.izend.org
  */
  
@@ -183,8 +183,8 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #sharebar {display:none;width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:160px;float:left;margin-left:-120px;padding:5px;}
 #sharebar > li {padding:5px;}
 
-.besocial {width:100%;height:35px;padding:0;margin:1em 0;}
-.besocial li {display:inline-block;vertical-align:top;}
+.besocial {width:100%;padding:0;margin:1em 0;}
+.besocial li {display:inline-block;height:30px;vertical-align:top;padding:0;margin:0;}
 
 #socialbar a {width:24px;height:24px;display:inline-block;}
 #socialbar a.facebook {background:transparent url(../images/theme/social/facebook.png) no-repeat;}
