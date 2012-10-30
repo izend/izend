@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    43
+ * @version    44
  * @link       http://www.izend.org
  */
  
@@ -104,6 +104,10 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
 input[type="submit"]#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/fr.png) no-repeat;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags/en.png) no-repeat;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+
+.lang {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;}
+.lang.fr {background:transparent url(../images/theme/flags/fr.png) no-repeat;}
+.lang.en {background:transparent url(../images/theme/flags/en.png) no-repeat;}
 
 #content {margin:1em 0 1em 0;}
 
