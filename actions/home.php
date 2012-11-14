@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -13,6 +13,10 @@ require_once 'models/node.inc';
 
 function home($lang) {
 	global $root_node, $request_path, $with_toolbar, $sitename;
+
+	if (!$root_node) {
+		return run('error/internalerror', $lang);
+	}
 
 	$r = node_get($lang, $root_node);
 	if (!$r) {
