@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function bookpage($lang, $book, $page) {
 		return run('error/notfound', $lang);
 	}
 
-	$page_id = thread_node_id($book_id, $page);
+	$page_id = thread_node_id($book_id, $page, $lang);
 	if (!$page_id) {
 		return run('error/notfound', $lang);
 	}

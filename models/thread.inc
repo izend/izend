@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -51,7 +51,7 @@ function thread_id($thread) {
 	return $r ? $r[0]['thread_id'] : false;
 }
 
-function thread_node_id($thread_id, $node) {
+function thread_node_id($thread_id, $node, $lang=false) {
 	if (!$node) {
 		$tabthreadnode=db_prefix_table('thread_node');
 
@@ -63,12 +63,13 @@ function thread_node_id($thread_id, $node) {
 		$sql="SELECT tn.node_id AS node_id FROM $tabthreadnode tn WHERE tn.thread_id=$thread_id AND tn.node_id=$node LIMIT 1";
 	}
 	else {
-		$sqlname = db_sql_arg($node, true);
+		$sqlname=db_sql_arg($node, true);
+		$sqllang=db_sql_arg($lang, false);
 
 		$tabthreadnode=db_prefix_table('thread_node');
 		$tabnodelocale=db_prefix_table('node_locale');
 
-		$sql="SELECT tn.node_id AS node_id FROM $tabthreadnode tn JOIN $tabnodelocale nl ON nl.node_id=tn.node_id WHERE tn.thread_id=$thread_id AND nl.name=$sqlname LIMIT 1";
+		$sql="SELECT tn.node_id AS node_id FROM $tabthreadnode tn JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND nl.name=$sqlname LIMIT 1";
 	}
 
 	$r = db_query($sql);

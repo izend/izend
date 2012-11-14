@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -33,7 +33,7 @@ function page($lang, $arglist=false) {
 	foreach (is_array($default_folder) ? $default_folder : array($default_folder) as $folder) {
 		$folder_id = thread_id($folder);
 		if ($folder_id) {
-			$page_id = thread_node_id($folder_id, $page);
+			$page_id = thread_node_id($folder_id, $page, $lang);
 			if ($page_id) {
 				break;
 			}

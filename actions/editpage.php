@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2012 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -32,7 +32,7 @@ function editpage($lang, $arglist=false) {
 	foreach (is_array($folder) ? $folder : array($folder) as $folder) {
 		$folder_id = thread_id($folder);
 		if ($folder_id) {
-			$page_id = thread_node_id($folder_id, $page);
+			$page_id = thread_node_id($folder_id, $page, $lang);
 			if ($page_id) {
 				break;
 			}

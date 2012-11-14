@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -39,7 +39,7 @@ function threadnode($lang, $thread, $node) {
 	}
 	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_nocloud thread_nosearch thread_created thread_modified */
 
-	$node_id = thread_node_id($thread_id, $node);
+	$node_id = thread_node_id($thread_id, $node, $lang);
 	if (!$node_id) {
 		return run('error/notfound', $lang);
 	}

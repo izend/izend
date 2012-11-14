@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function newsletterpage($lang, $newsletter, $page) {
 		return run('error/notfound', $lang);
 	}
 
-	$page_id = thread_node_id($newsletter_id, $page);
+	$page_id = thread_node_id($newsletter_id, $page, $lang);
 	if (!$page_id) {
 		return run('error/notfound', $lang);
 	}

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function folderpage($lang, $folder, $page) {
 		return run('error/notfound', $lang);
 	}
 
-	$page_id = thread_node_id($folder_id, $page);
+	$page_id = thread_node_id($folder_id, $page, $lang);
 	if (!$page_id) {
 		return run('error/notfound', $lang);
 	}

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,7 @@ function story($lang, $arglist=false) {
 		return run('error/notfound', $lang);
 	}
 
-	$page_id = thread_node_id($story_id, $page);
+	$page_id = thread_node_id($story_id, $page, $lang);
 	if (!$page_id) {
 		return run('error/notfound', $lang);
 	}
