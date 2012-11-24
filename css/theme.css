@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    45
+ * @version    46
  * @link       http://www.izend.org
  */
  
@@ -133,10 +133,10 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #bannermenu .btn_validate {left:60px;background:transparent url(../images/theme/icons/check.png) no-repeat;}
 #bannermenu .btn_admin {left:180px;background:transparent url(../images/theme/icons/work.png) no-repeat;}
 
-#banner #languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
-#banner #languages a {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
-#banner #languages .btn_fr {background:transparent url(../images/theme/flags/fr.png) no-repeat;}
-#banner #languages .btn_en {background:transparent url(../images/theme/flags/en.png) no-repeat;}
+#banner .languages {width:40px;float:left;margin-top:13px;margin-left:20px;}
+#banner .languages a {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+#banner .languages .btn_fr {background:transparent url(../images/theme/flags/fr.png) no-repeat;}
+#banner .languages .btn_en {background:transparent url(../images/theme/flags/en.png) no-repeat;}
 
 #banner #donate {width:120px;float:right;margin-top:15px;}
 #donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
@@ -164,8 +164,8 @@ input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;b
 #footer .btn_account {width:16px;height:16px;background:transparent url(../images/theme/icons/small/user.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 #footer .btn_admin {width:16px;height:16px;background:transparent url(../images/theme/icons/small/work.png) no-repeat;display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
-#footer #languages {float:right;}
-#footer #languages a span {display:inline;}
+#footer .languages {float:right;}
+#footer .languages a span {display:inline;}
 
 #toolbar {width:24px;padding:6px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;float:left;margin-left:-70px;}
 #toolbar a {width:24px;height:24px;float:left;}

@@ -18,7 +18,7 @@ function postnews($lang, $newsletter_id, $page_id) {
 	$r = newsletter_get_post($newsletter_id, $page_id, $lang);
 
 	if ($r) {
-		extract($r);	// newsletter_post_scheduled, $newsletter_post_mailed
+		extract($r);	// newsletter_post_scheduled, newsletter_post_mailed
 
 		$postadate=$scheduled=$newsletter_post_scheduled;
 		$mailed=$newsletter_post_mailed;
