@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -57,7 +57,7 @@ function pagecontent($lang, $arglist=false) {
 		header('HTTP/1.1 404 Not Found');
 		return false;
 	}
-dump($page_id);
+
 	$content = build('nodecontent', $lang, $page_id);
 
 	return $content;
