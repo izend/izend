@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2012 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -210,6 +210,8 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			if ($new_content_number) {
 				$new_content_number++;
 			}
+
+			$new_content_type=false;
 
 			break;
 
