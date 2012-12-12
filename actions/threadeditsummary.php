@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -194,7 +194,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			if (!$thread_name) {
 				$missing_thread_name = true;
 			}
-			else if (!preg_match('#^[\w-]{2,}$#', $thread_name)) {
+			else if (!preg_match('#^\w+(-\w+)*$#', $thread_name)) {
 				$bad_thread_name = true;
 			}
 			if (!$thread_type) {
@@ -212,7 +212,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			else if (!$new_node_name) {
 				$bad_new_node_title = true;
 			}
-			else if (!preg_match('#^[\w-]{2,}$#', $new_node_name)) {
+			else if (!preg_match('#^\w+(-\w+)*$#', $new_node_name)) {
 				$bad_new_node_title = true;
 			}
 			if (!$new_node_number) {

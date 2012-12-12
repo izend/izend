@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2012 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -43,7 +43,7 @@ function nodeeditor($lang, $clang, $node_id) {
 				$node_name=strtofname(readarg($_POST['node_name']));
 			}
 			if (empty($node_name) and !empty($node_title)) {
-				$node_name = strtofname($node_title);
+				$node_name=strtofname($node_title);
 			}
 			if (isset($_POST['node_abstract'])) {
 				$node_abstract=readarg($_POST['node_abstract']);
@@ -94,7 +94,7 @@ function nodeeditor($lang, $clang, $node_id) {
 			if (empty($node_name)) {
 				$missing_node_name = true;
 			}
-			else if (!preg_match('#^[\w-]{2,}$#', $node_name)) {
+			else if (!preg_match('#^\w+(-\w+)*$#', $node_name)) {
 				$bad_node_name = true;
 			}
 			break;
