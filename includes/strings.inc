@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    9
+ * @copyright  2010-2013 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -30,7 +30,7 @@ $strings = array(
 		'account:title'			=> 'Account',
 		'newuser:title'			=> 'Registration',
 		'password:title'		=> 'Password',
-		'threadall:title'		=> 'Catalog',
+		'threadall:title'		=> 'Threads',
 		'bookall:title'			=> 'Manuals',
 		'admin:title'			=> 'Management',
 		'donation:title'		=> 'Donation',
@@ -64,7 +64,7 @@ $strings = array(
 		'account:title'			=> 'Compte',
 		'newuser:title'			=> 'Inscription',
 		'password:title'		=> 'Mot de passe',
-		'threadall:title'		=> 'Catalogue',
+		'threadall:title'		=> 'Fils',
 		'bookall:title'			=> 'Manuels',
 		'admin:title'			=> 'Gestion',
 		'donation:title'		=> 'Donation',
