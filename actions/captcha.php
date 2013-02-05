@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -37,6 +37,7 @@ function captcha($lang, $arglist=false) {
 
 	header('Content-Type: image/png');
 	header("Content-Disposition: inline; filename=captcha.png");
+	header("Cache-Control: no-cache");
 
 	imagepng($img);
 	imagedestroy($img);
