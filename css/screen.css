@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    28
+ * @copyright  2010-2013 izend.org
+ * @version    29
  * @link       http://www.izend.org
  */
  
@@ -68,7 +68,7 @@ ul {list-style-type:disc;}
 .sidebar {padding:0;margin:0;}
 .sidebar li {display:block;}
 
-.sidemenu * {border:none !important;}
+.sidemenu * {border:none !important;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif !important;}
 .sidemenu .ui-widget-header {background:none;}
 .sidemenu .ui-tabs .ui-tabs-nav, #sidemenu .ui-tabs .ui-tabs-panel {padding:0;}
 .sidemenu .ui-accordion .ui-accordion-header , #sidemenu .ui-tabs .ui-tabs-panel {margin-top:0.1em;}
