@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    1
+ * @copyright  2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -118,12 +118,6 @@ function postnews($lang, $newsletter_id, $page_id) {
 
 			if ($postdate < mktime($hmin, 0, 0)) {
 				$bad_date=true;
-			}
-			else {
-				$dt=new DateTime("today ${hmax}:00 +1 month");
-				if ($postdate > $dt->getTimeStamp()) {
-					$bad_date=true;
-				}
 			}
 
 			break;
