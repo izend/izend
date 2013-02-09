@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2013 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -25,7 +25,7 @@ function file_mime_type($file, $encoding=true) {
 		exec($cmd, $output, $r);
 
 		if ($r == 0) {
-			$mime = substr($mime, strpos($mime, ': ')+2);
+			$mime = substr($output[0], strpos($output[0], ': ')+2);
 		}
 	}
 
@@ -36,6 +36,6 @@ function file_mime_type($file, $encoding=true) {
 	if ($encoding) {
 		return $mime;
 	}
-		
+
 	return substr($mime, 0, strpos($mime, '; '));
 }
