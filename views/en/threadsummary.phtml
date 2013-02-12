@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    10
+ * @copyright  2010-2013 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -23,16 +23,16 @@
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
-<?php if ($thread_search): ?><img src="<?php echo $base_path; ?>/images/theme/edit/search.png" alt="" /><?php endif; ?>
-<?php if ($thread_tag): ?><img src="<?php echo $base_path; ?>/images/theme/edit/tag.png" alt="" /><?php endif; ?>
-<?php if ($thread_comment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment.png" alt="" /><?php endif; ?>
-<?php if ($thread_morecomment): ?><img src="<?php echo $base_path; ?>/images/theme/edit/comment_add.png" alt="" /><?php endif; ?>
-<?php if ($thread_vote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award.png" alt="" /><?php endif; ?>
-<?php if ($thread_morevote): ?><img src="<?php echo $base_path; ?>/images/theme/edit/award_add.png" alt="" /><?php endif; ?>
-<?php if ($thread_ilike): ?><img src="<?php echo $base_path; ?>/images/theme/edit/facebook.png" alt="" /><?php endif; ?>
-<?php if ($thread_tweet): ?><img src="<?php echo $base_path; ?>/images/theme/edit/twitter.png" alt="" /><?php endif; ?>
-<?php if ($thread_plusone): ?><img src="<?php echo $base_path; ?>/images/theme/edit/plusone.png" alt="" /><?php endif; ?>
-<?php if ($thread_linkedin): ?><img src="<?php echo $base_path; ?>/images/theme/edit/linkedin.png" alt="" /><?php endif; ?>
+<?php if ($thread_search): ?><span class="btn_edit btn_search">search</span><?php endif; ?>
+<?php if ($thread_tag): ?><span class="btn_edit btn_tag">cloud</span><?php endif; ?>
+<?php if ($thread_comment): ?><span class="btn_edit btn_comment">comment</span><?php endif; ?>
+<?php if ($thread_morecomment): ?><span class="btn_edit btn_morecomment">comment+</span><?php endif; ?>
+<?php if ($thread_vote): ?><span class="btn_edit btn_vote">vote</span><?php endif; ?>
+<?php if ($thread_morevote): ?><span class="btn_edit btn_morevote">vote+</span><?php endif; ?>
+<?php if ($thread_ilike): ?><span class="btn_edit btn_ilike">facebook</span><?php endif; ?>
+<?php if ($thread_tweet): ?><span class="btn_edit btn_tweet">twitter</span><?php endif; ?>
+<?php if ($thread_plusone): ?><span class="btn_edit btn_plusone">google+</span><?php endif; ?>
+<?php if ($thread_linkedin): ?><span class="btn_edit btn_linkedin">linkedin</span><?php endif; ?>
 </div>
 </fieldset>
 <?php endif; ?>
@@ -41,7 +41,7 @@
 <ol>
 <?php foreach ($thread_contents as $c): ?>
 <?php extract($c);	/* node_title node_url node_ignored */ ?>
-<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></a><?php if ($node_ignored): ?> <img src="<?php echo $base_path; ?>/images/theme/edit/cross.png" alt="X" /><?php endif; ?></li>
+<li><a href="<?php echo $node_url; ?>"><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></a><?php if ($node_ignored): ?> <span class="btn_edit btn_ignored">X</span><?php endif; ?></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>

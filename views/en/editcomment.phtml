@@ -2,28 +2,28 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
 <div class="bbcodebar">
-<img src="<?php echo $base_path; ?>/images/theme/edit/p.png" alt="[p]" title="p" onclick="tagcomment('[p]','[/p]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/b.png" alt="[b]" title="b" onclick="tagcomment('[b]','[/b]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/i.png" alt="[i]" title="i" onclick="tagcomment('[i]','[/i]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/u.png" alt="[u]" title="u" onclick="tagcomment('[u]','[/u]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/s.png" alt="[s]" title="s" onclick="tagcomment('[s]','[/s]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/quote.png" alt="[quote]" title="quote" onclick="tagcomment('[quote]','[/quote]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/pre.png" alt="[pre]" title="pre" onclick="tagcomment('[pre]','[/pre]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/br.png" alt="[br]" title="br" onclick="tagcomment('','[br]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/code.png" alt="[code]" title="code" onclick="tagcomment('[code]','[/code]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/world.png" alt="[url]" title="url" onclick="tagcomment('[url]','[/url]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/email.png" alt="[email]" title="email" onclick="tagcomment('[email]','[/email]')"/>
-<img src="<?php echo $base_path; ?>/images/theme/edit/help.png" alt="?" title="?" onclick="togglehelp()" />
+<span class="btn_edit btn_p" title="p" onclick="tagcomment('[p]','[/p]')">[p]</span>
+<span class="btn_edit btn_b" title="b" onclick="tagcomment('[b]','[/b]')">[b]</span>
+<span class="btn_edit btn_i" title="i" onclick="tagcomment('[i]','[/i]')">[i]</span>
+<span class="btn_edit btn_u" title="u" onclick="tagcomment('[u]','[/u]')">[u]</span>
+<span class="btn_edit btn_s" title="s" onclick="tagcomment('[s]','[/s]')">[s]</span>
+<span class="btn_edit btn_quote" title="quote" onclick="tagcomment('[quote]','[/quote]')">[quote]</span>
+<span class="btn_edit btn_pre" title="pre" onclick="tagcomment('[pre]','[/pre]')">[pre]</span>
+<span class="btn_edit btn_br" title="br" onclick="tagcomment('','[br]')">[br]</span>
+<span class="btn_edit btn_php" title="code" onclick="tagcomment('[code]','[/code]')">[code]</span>
+<span class="btn_edit btn_url" title="url" onclick="tagcomment('[url]','[/url]')">[url]</span>
+<span class="btn_edit btn_email" title="email" onclick="tagcomment('[email]','[/email]')">[email]</span>
+<span class="btn_edit btn_help" title="Help" onclick="togglehelp()">help</span>
 <span id="comment_limiter"><?php echo $message_maxlen; ?></span>
 </div>
 <textarea id="comment_message" name="comment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><img class="grippie" src="<?php echo $base_path; ?>/images/theme/edit/grippie.png" alt="===" />
+<br/><span class="grippie btn_edit btn_grippie">===</span>
 <p id="comment_help" class="bbcodehelp">
 Enter a maximum of <b><?php echo $message_maxlen; ?></b> characters. Improve the presentation of your text with the following formatting tags:<br />
 [<b>p</b>]paragraph[/p], [<b>b</b>]<b>bold</b>[/b], [<b>i</b>]<i>italics</i>[/i], [<b>u</b>]<u>underline</u>[/u], [<b>s</b>]<s>strike</s>[/s],
