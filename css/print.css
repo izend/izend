@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
  
@@ -40,7 +40,7 @@ blockquote, table, pre {page-break-inside:avoid;}
 ul, ol, dl {page-break-before:avoid;}
 img {page-break-inside:avoid;page-break-after:avoid;float:none;}
 
-video {display:none;}
+audio, video {display:none;}
 
 .pagebreak {page-break-before:avoid !important;}
 
@@ -88,3 +88,6 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 div.file {font-family:monospace;font-size:.9em;}
 div.download, div.longtail {display:none;}
+
+ol.tree li.dirnode {font-style:italic;}
+ol.tree li.filenode {font-style:normal;}
