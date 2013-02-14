@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -27,7 +27,7 @@ caption, th, td {text-align:left;font-weight:400;}
 
 blockquote:before, blockquote:after, q:before, q:after {content:"";}
 blockquote, q {quotes:"" "";}
-blockquote {margin-left:2em;margin-right:0;}
+blockquote {margin:1em 2em;padding:0;}
 
 h1 {font-size:170%;}
 h2 {font-size:160%;line-height:130%;}
