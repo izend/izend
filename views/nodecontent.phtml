@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -35,7 +35,6 @@ foreach ($contents as $c) {
 			$id = uniqid('id');
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
-			echo '</div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
 			echo 'jwplayer("', $id, '").setup({', PHP_EOL;
 			if (true) {
@@ -80,6 +79,7 @@ foreach ($contents as $c) {
 			echo '    screencolor: "ffffff"', PHP_EOL;
 			echo '});', PHP_EOL;
 			echo '</script>', PHP_EOL;
+			echo '</div>', PHP_EOL;
 			break;
 		default:
 			break;
