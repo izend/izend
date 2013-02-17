@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -12,7 +12,7 @@
 <?php echo $languages; ?>
 <?php endif; ?>
 <p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?><span class="hidden"> &bull; <a href="http://www.izend.org">iZend</a></span>
-<?php if (!empty($contact_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+<?php if (!empty($contact_page) or !empty($newsletter_page) or !empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
 <span class="noprint">
 <?php if (!empty($contact_page)): ?>
 &bull;
@@ -22,20 +22,20 @@
 &bull;
 <a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
 <?php endif; ?>
-<?php if (!empty($account_page) or !empty($user_page) or !empty($nobody_page) or !empty($admin_page)): ?>
+<?php if (!empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
 &bull;
 <?php endif; ?>
 <?php if (!empty($nobody_page)): ?>
-<a class="btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">Disconnect</a>
+<a class="btn btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">Disconnect</a>
 <?php endif; ?>
 <?php if (!empty($account_page)): ?>
-<a class="btn_account" href="<?php echo $account_page; ?>" rel="nofollow" title="Your account">Your account</a>
+<a class="btn btn_account" href="<?php echo $account_page; ?>" rel="nofollow" title="Your account">Your account</a>
 <?php endif; ?>
 <?php if (!empty($user_page)): ?>
-<a class="btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Your account">Your account</a>
+<a class="btn btn_login" href="<?php echo $user_page; ?>" rel="nofollow" title="Your account">Your account</a>
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
-<a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage">Manage</a>
+<a class="btn btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage">Manage</a>
 <?php endif; ?>
 </span>
 <?php endif; ?>

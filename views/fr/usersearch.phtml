@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    6
+ * @copyright  2013 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -44,7 +44,7 @@ $pagenums=page_range($page, $npages, 2);
 <td class="usermail"><?php if ($user_mail): ?><?php if ($edit and (!$with_name or !$user_name)): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_mail; ?><?php if ($edit): ?></a><?php endif; ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="userlogged"><?php if ($user_logged): ?><?php echo $user_logged; ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="useraccessed"><?php if ($user_accessed): ?><?php echo date('d/m/Y H:i', $user_accessed); ?><?php else: ?>&nbsp;<?php endif; ?></td>
-<td class="userlocked"><?php if (!$user_active or $user_banned): ?><img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" /><?php else: ?>&nbsp;<?php endif; ?></td>
+<td class="userlocked"><?php if (!$user_active or $user_banned): ?><span class="icon icon_lock">bloqué</span><?php else: ?>&nbsp;<?php endif; ?></td>
 <?php if ($with_website): ?>
 <td class="userwebsite"><?php if ($user_website): ?><a href="http://<?php echo $user_website; ?>"><?php echo $user_website; ?></a><?php else: ?>&nbsp;<?php endif; ?></td>
 <?php endif; ?>

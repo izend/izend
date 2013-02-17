@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    7
+ * @copyright  2010-2013 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -70,7 +70,7 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <p class="info">Spécifiez un nom de domaine sans le préfixer par www.</p>
 <p>
 <input type="text" name="configure_sitename" size="30" maxlength="40" title="" value="<?php echo $sitename; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/web.png" alt="" />
+<span class="icon icon_web"></span>
 </p>
 <?php if ($missing_sitename): ?>
 <p class="error">Entrez un nom de domaine tel que izend.org.</p>
@@ -79,7 +79,7 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <p class="info">La page de contact envoient les messages à cette adresse.</p>
 <p>
 <input type="text" name="configure_webmaster" size="50" maxlength="100" title="Email" value="<?php echo $webmaster; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/mail.png" alt="" />
+<span class="icon icon_mail"></span>
 </p>
 <?php if ($missing_webmaster): ?>
 <p class="error">Spécifiez une adresse d'email valide.</p>
@@ -122,9 +122,9 @@ et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les
 <p>Quels sont le nom et le mot de passe de l'utilisateur de la base de données&nbsp;?</p>
 <p>
 <input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="text" name="configure_db_password"  size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_user and $missing_db_password): ?>
 <p class="error">Choisissez un identifiant pour l'utilisateur de la base de données et un mot de passe.</p>
@@ -144,9 +144,9 @@ et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les
 <p class="info">Ces informations ne seront pas enregistrées.</p>
 <p>
 <input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php echo $db_admin_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_admin_user and $missing_db_admin_password): ?>
 <p class="error">Entrez l'identifiant de l'administrateur du serveur de bases de données suivi de son mot de passe.</p>
@@ -167,9 +167,9 @@ et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les
 <p>Quels sont le nom et le mot de passe de l'administrateur du site&nbsp;?</p>
 <p>
 <input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php echo $site_admin_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_site_admin_user and $missing_site_admin_password): ?>
 <p class="error">Choisissez un identifiant pour l'administrateur du site et un mot de passe.</p>

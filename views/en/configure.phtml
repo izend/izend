@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    7
+ * @copyright  2010-2013 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -70,7 +70,7 @@ Check your answers and rerun the configuration.</p>
 <p class="info">Specify a domain name without the www prefix.</p>
 <p>
 <input type="text" name="configure_sitename" size="30" maxlength="40" title="" value="<?php echo $sitename; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/web.png" alt="" />
+<span class="icon icon_web"></span>
 </p>
 <?php if ($missing_sitename): ?>
 <p class="error">Enter a domain name such as izend.org.</p>
@@ -79,7 +79,7 @@ Check your answers and rerun the configuration.</p>
 <p class="info">The contact page will send messages to this address.</p>
 <p>
 <input type="text" name="configure_webmaster" size="50" maxlength="100" title="Email" value="<?php echo $webmaster; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/mail.png" alt="" />
+<span class="icon icon_mail"></span>
 </p>
 <?php if ($missing_webmaster): ?>
 <p class="error">Specify a valid email address.</p>
@@ -122,9 +122,9 @@ and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user
 <p>What are the name and the password of the user of the database?</p>
 <p>
 <input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_user and $missing_db_password): ?>
 <p class="error">Choose an identifier for the user of the database and a password.</p>
@@ -144,9 +144,9 @@ and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user
 <p class="info">This information will not be registered.</p>
 <p>
 <input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php echo $db_admin_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_admin_user and $missing_db_admin_password): ?>
 <p class="error">Enter the identifier of the administrator of the database server followed by his password.</p>
@@ -167,9 +167,9 @@ and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user
 <p>What are the name and the password of the administrator of the site?</p>
 <p>
 <input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/user.png" alt="" />
+<span class="icon icon_user"></span>
 <input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php echo $site_admin_password; ?>" />
-<img src="<?php echo $base_path; ?>/images/theme/icons/lock.png" alt="" />
+<span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_site_admin_user and $missing_site_admin_password): ?>
 <p class="error">Choose an identifier for the administrator of the site and a password.</p>
