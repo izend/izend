@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    9
+ * @copyright  2010-2013 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -20,7 +20,10 @@ require_once 'models/user.inc';
 function register($lang) {
 	$with_name=true;
 	$with_password=true;
+	$with_newsletter=false;
 	$with_captcha=true;
+
+	$newsletter=false;
 
 	$action='init';
 	if (isset($_POST['register_register'])) {
@@ -28,9 +31,16 @@ function register($lang) {
 	}
 
 	$name=$mail=$password=$confirmed=$code=$token=false;
+	$newsletter=false;
 	$locale=$lang;
 
 	switch($action) {
+		case 'init':
+			if ($with_newsletter) {
+				$newsletter=true;
+			}
+			break;
+
 		case 'register':
 			if (isset($_POST['register_name'])) {
 				$name=strtolower(strflat(readarg($_POST['register_name'])));
@@ -41,6 +51,11 @@ function register($lang) {
 			if ($with_password) {
 				if (isset($_POST['register_password'])) {
 					$password=readarg($_POST['register_password']);
+				}
+			}
+			if ($with_newsletter) {
+				if (isset($_POST['register_newsletter'])) {
+					$newsletter=readarg($_POST['register_newsletter']) == 'on' ? true : false;
 				}
 			}
 			if (isset($_POST['register_confirmed'])) {
@@ -152,6 +167,12 @@ function register($lang) {
 				break;
 			}
 
+			if ($newsletter) {
+				require_once 'models/newsletter.inc';
+
+				newsletter_create_user($mail, $locale);
+			}
+
 			$_SESSION['login'] = $name ? $name : $mail;
 
 			$user_id = $r;
@@ -200,7 +221,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_password', 'name', 'mail', 'password', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_password', 'with_newsletter', 'name', 'mail', 'password', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

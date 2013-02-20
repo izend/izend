@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,10 @@
 <p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Entrez au moins 6 caractères dont 1 chiffre.</p>
 <?php endif; ?>
-<p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> onkeypress="return focusonenter(event, 'register_code')"/>&nbsp;Je souhaite créer un compte</p>
+<?php if ($with_newsletter): ?>
+<p><input type="checkbox" name="register_newsletter" id="register_newsletter" title="Infolettre"<?php if ($newsletter): ?> checked="checked"<?php endif; ?> />&nbsp;Je veux recevoir la lettre d'information par email</p>
+<?php endif; ?>
+<p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation"<?php if ($confirmed): ?> checked="checked"<?php endif; ?> />&nbsp;Je souhaite créer un compte</p>
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/register" alt="" height="40px" title="Code de vérification" />
