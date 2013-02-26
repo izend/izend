@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2012 izend.org
- * @version    8
+ * @copyright  2011-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -29,6 +29,8 @@ function useredit($lang, $user_id, $administrator=false) {
 	$with_locale=count($system_languages) > 1 ? true : false;
 	$with_role=($user_id != 1 and $administrator == true);
 	$with_website=true;
+
+	$with_info=false;
 
 	$confirmed=false;
 
@@ -64,6 +66,8 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	$user_newpassword=false;
 
+	$user_lastname=$user_firstname=false;
+
 	$token=false;
 
 	switch($action) {
@@ -71,9 +75,16 @@ function useredit($lang, $user_id, $administrator=false) {
 		case 'reset':
 			$r = user_get($user_id);
 			if ($r) {
-				extract($r);
+				extract($r);		/* user_name user_password user_newpassword user_seed user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
 			}
 			$user_newpassword=false;
+
+			if ($with_info) {
+				$r = user_get_info($user_id);
+				if ($r) {
+					extract($r);	/* user_lastname, user_firstname */
+				}
+			}
 
 			if ($with_role) {
 				$user_role = user_get_role($user_id);
@@ -83,6 +94,14 @@ function useredit($lang, $user_id, $administrator=false) {
 		case 'change':
 		case 'delete':
 		case 'cancel':
+			if ($with_info) {
+				if (isset($_POST['useredit_lastname'])) {
+					$user_lastname=readarg($_POST['useredit_lastname']);
+				}
+				if (isset($_POST['useredit_firstname'])) {
+					$user_firstname=readarg($_POST['useredit_firstname']);
+				}
+			}
 			if (isset($_POST['useredit_name'])) {
 				$user_name=strtolower(strflat(readarg($_POST['useredit_name'])));
 			}
@@ -126,6 +145,9 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	$bad_token=false;
 
+	$missing_lastname=false;
+	$missing_firstname=false;
+
 	$missing_name=false;
 	$bad_name=false;
 	$duplicated_name=false;
@@ -150,6 +172,15 @@ function useredit($lang, $user_id, $administrator=false) {
 		case 'modify':
 			if (!isset($_SESSION['useredit_token']) or $token != $_SESSION['useredit_token']) {
 				$bad_token=true;
+			}
+
+			if ($with_info) {
+				if (!$user_lastname) {
+					$missing_lastname=true;
+				}
+				if (!$user_firstname) {
+					$missing_firstname=true;
+				}
 			}
 
 			if ($with_name and !$user_name) {
@@ -219,7 +250,7 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	switch($action) {
 		case 'modify':
-			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_role or $bad_website or $missing_locale or $bad_locale) {
+			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_role or $bad_website or $missing_locale or $bad_locale or $missing_lastname or $missing_firstname) {
 				break;
 			}
 
@@ -234,6 +265,14 @@ function useredit($lang, $user_id, $administrator=false) {
 			$_SESSION['user']['mail'] = $user_mail;
 			$_SESSION['user']['website'] = $user_website;
 			$_SESSION['user']['locale'] = $user_locale;
+
+			if ($with_info) {
+				$r = user_set_info($user_id, $user_lastname, $user_firstname);
+				if (!$r) {
+					$internal_error=true;
+					break;
+				}
+			}
 
 			if ($with_role) {
 				$r = user_set_role($user_id, $user_role);
@@ -292,10 +331,10 @@ function useredit($lang, $user_id, $administrator=false) {
 
 	$_SESSION['useredit_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

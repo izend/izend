@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    15
+ * @copyright  2010-2013 izend.org
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -40,19 +40,20 @@ function user_id($user) {
 	return $r ? $r[0]['user_id'] : false;
 }
 
-function user_create($name, $password, $mail, $locale='en', $role_names=false) {
+function user_create($name, $password, $mail, $locale='en', $website=false) {
 	$seed=substr(md5(uniqid()), 1, 8);
 	$password=$password ? md5($seed . $password) : '';
 
 	$sqlname=db_sql_arg($name, true, true);
 	$sqlmail=db_sql_arg($mail, true, true);
 	$sqllocale=db_sql_arg($locale, false);
+	$sqlwebsite=db_sql_arg($website, true, true);
 	$sqlpassword=db_sql_arg($password, false);
 	$sqlseed=db_sql_arg($seed, false);
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT IGNORE $tabuser (name, password, seed, mail, created, locale) VALUES ($sqlname, $sqlpassword, $sqlseed, $sqlmail, NOW(), $sqllocale)";
+	$sql="INSERT IGNORE $tabuser (name, password, seed, mail, created, locale, website) VALUES ($sqlname, $sqlpassword, $sqlseed, $sqlmail, NOW(), $sqllocale, $sqlwebsite)";
 
 	$r = db_insert($sql);
 
@@ -61,10 +62,6 @@ function user_create($name, $password, $mail, $locale='en', $role_names=false) {
 	}
 
 	$user_id = db_insert_id();
-
-	if ($role_names) {
-		user_set_role($user_id, $role_names);
-	}
 
 	if ($name) {
 		user_create_avatar($name);
@@ -93,9 +90,10 @@ function user_delete($user_id) {
 		user_delete_avatar($name);
 	}
 
+	$tabuserinfo=db_prefix_table('user_info');
 	$tabuserrole=db_prefix_table('user_role');
 
-	$sql="DELETE u, ur FROM $tabuser u LEFT JOIN $tabuserrole ur ON ur.user_id=u.user_id WHERE u.user_id=$user_id";
+	$sql="DELETE u, ui, ur FROM $tabuser u LEFT JOIN $tabuserinfo ui ON ui.user_id=u.user_id LEFT JOIN $tabuserrole ur ON ur.user_id=u.user_id WHERE u.user_id=$user_id";
 
 	$r = db_delete($sql);
 
@@ -153,6 +151,37 @@ function user_set($user_id, $name, $mail, $website, $locale) {
 	}
 
 	return true;
+}
+
+function user_get_info($user_id) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$tabuserinfo=db_prefix_table('user_info');
+
+	$sql="SELECT lastname AS user_lastname, firstname AS user_firstname FROM $tabuserinfo WHERE user_id=$user_id LIMIT 1";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0] : false;
+}
+
+function user_set_info($user_id, $lastname, $firstname) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$sqllastname=db_sql_arg($lastname, true, true);
+	$sqlfirstname=db_sql_arg($firstname, true, true);
+
+	$tabuserinfo=db_prefix_table('user_info');
+
+	$sql="INSERT $tabuserinfo SET user_id=$user_id, lastname=$sqllastname, firstname=$sqlfirstname ON DUPLICATE KEY UPDATE lastname=VALUES(lastname), firstname=VALUES(firstname)";
+
+	$r = db_update($sql);
+
+	return $r;
 }
 
 function user_set_status($user_id, $active, $banned) {
@@ -223,7 +252,7 @@ function user_get_role($user_id) {
 	return $role;
 }
 
-function user_set_role($user_id, $role_names) {
+function user_set_role($user_id, $role) {
 	if (!is_numeric($user_id)) {
 		return false;
 	}
@@ -234,15 +263,15 @@ function user_set_role($user_id, $role_names) {
 
 	$r = db_delete($sql);
 
-	if ($role_names) {
-		$sqlrolenames=db_sql_arg($role_names, true);
-		if (is_array($sqlrolenames)) {
-			$sqlrolenames=implode(',', $sqlrolenames);
+	if ($role) {
+		$sqlrole=db_sql_arg($role, true);
+		if (is_array($sqlrole)) {
+			$sqlrole=implode(',', $sqlrole);
 		}
 
 		$tabrole=db_prefix_table('role');
 
-		$sql="INSERT IGNORE $tabuserrole (user_id, role_id) SELECT $user_id, r.role_id FROM $tabrole r WHERE r.name IN ($sqlrolenames)";
+		$sql="INSERT IGNORE $tabuserrole (user_id, role_id) SELECT $user_id, r.role_id FROM $tabrole r WHERE r.name IN ($sqlrole)";
 
 		$r = db_insert($sql);
 	}
@@ -309,6 +338,15 @@ function user_login($login, $password, $quick=false) {
 
 	if ($login_lifetime) {
 		$user['lasttime'] = time();
+	}
+
+	$r = user_get_info($user_id);
+
+	if ($r) {
+		extract($r);	/* user_lastname, user_firstname */
+
+		$user['lastname'] = $user_lastname;
+		$user['firstname'] = $user_firstname;
 	}
 
 	$r = user_get_role($user_id);

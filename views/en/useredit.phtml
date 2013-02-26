@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2012 izend.org
- * @version    14
+ * @copyright  2011-2013 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -13,8 +13,14 @@
 <?php if ($user_accessed): ?>
 <input type="hidden" name="useredit_accessed" value="<?php echo $user_accessed; ?>" />
 <?php endif; ?>
+<?php if ($with_info): ?>
+<p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">First name:</p>
+<p><input type="text" name="useredit_firstname" id="useredit_firstname" size="30" maxlength="100" title="First name" onkeypress="return focusonenter(event, 'useredit_lastname')" value="<?php echo htmlspecialchars($user_firstname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="inlabel<?php if ($missing_lastname): ?> inerror<?php endif; ?>">Last name:</p>
+<p><input type="text" name="useredit_lastname" id="useredit_lastname" size="30" maxlength="100" title="Last name" onkeypress="return focusonenter(event, '<?php echo $with_name ? 'useredit_name' : 'useredit_mail'; ?>')" value="<?php echo htmlspecialchars($user_lastname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php endif; ?>
 <?php if ($with_name): ?>
-<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Connection name:</p>
+<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">Identifier:</p>
 <p><input id="useredit_name" type="text" name="useredit_name" size="20" maxlength="20" title="2 to 20 letters" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!empty($user_name)): ?>&nbsp;<img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" alt="" /><?php endif; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_name" value="<?php echo htmlspecialchars($user_name, ENT_COMPAT, 'UTF-8'); ?>" />
@@ -65,10 +71,20 @@ the account
 </p>
 <?php if ($with_newpassword): ?>
 <p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
-<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo $user_newpassword; ?>" /></p>
+<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
 </form>
+<?php if ($missing_lastname and $missing_firstname): ?>
+<p class="error">A last name and a first name are required.</p>
+<?php else: ?>
+<?php if ($missing_lastname): ?>
+<p class="error">A last name is required.</p>
+<?php endif; ?>
+<?php if ($missing_firstname): ?>
+<p class="error">A first name is required.</p>
+<?php endif; ?>
+<?php endif; ?>
 <?php if ($missing_name): ?>
 <p class="error">An identifier is required.</p>
 <?php elseif ($bad_name): ?>
@@ -103,7 +119,13 @@ the account
 <?php endif; ?>
 <?php
 $focus=false;
-if ($missing_name or $bad_name or $duplicated_name) {
+if ($missing_firstname) {
+	$focus='#useredit_firstname';
+}
+else if ($missing_lastname) {
+	$focus='#useredit_lastname';
+}
+else if ($missing_name or $bad_name or $duplicated_name) {
 	$focus='#useredit_name';
 }
 else if ($missing_mail or $bad_mail or $duplicated_mail) {

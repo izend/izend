@@ -3,21 +3,31 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
+<?php if ($with_info): ?>
+<p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">What is your first name?</p>
+<p><input type="text" name="register_firstname" id="register_firstname" size="30" maxlength="100" title="First name" onkeypress="return focusonenter(event, 'register_lastname')" value="<?php echo htmlspecialchars($firstname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="inlabel<?php if ($missing_lastname): ?> inerror<?php endif; ?>">And your last name?</p>
+<p><input type="text" name="register_lastname" id="register_lastname" size="30" maxlength="100" title="Last name" onkeypress="return focusonenter(event, '<?php echo $with_name ? 'register_name' : 'register_mail'; ?>')" value="<?php echo htmlspecialchars($lastname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php endif; ?>
 <?php if ($with_name): ?>
-<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">What connection name do you want?</p>
+<p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">What identifier do you want?</p>
 <p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo htmlspecialchars($name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if (!$missing_name and !$bad_name): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" alt="" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your password will be sent to this address.</p>
+<?php if ($with_website): ?>
+<p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Do you have a website?</p>
+<p><input type="text" name="register_website" id="register_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php endif; ?>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choose a password:</p>
 <p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
@@ -42,29 +52,37 @@
 <?php elseif ($bad_code): ?>
 <p>The verification code is incorrect.</p>
 <?php endif; ?>
+<?php if ($missing_lastname and $missing_firstname): ?>
+<p>A last name and a first name are required.</p>
+<?php else: ?>
+<?php if ($missing_lastname): ?>
+<p>A last name is required.</p>
+<?php endif; ?>
+<?php if ($missing_firstname): ?>
+<p>A first name is required.</p>
+<?php endif; ?>
+<?php endif; ?>
 <?php if ($missing_name): ?>
 <p>You haven't typed your identifier.</p>
 <?php elseif ($bad_name): ?>
 <p>An identifier must contain between 2 and 20 letters.</p>
+<?php elseif ($duplicated_name): ?>
+<p>This identifier is already taken.</p>
 <?php endif; ?>
 <?php if ($missing_mail): ?>
 <p>Don't forget your email address.</p>
 <?php elseif ($bad_mail): ?>
 <p>The email address is invalid.</p>
+<?php elseif ($duplicated_mail): ?>
+<p>This email address is already being used.</p>
 <?php endif; ?>
 <?php if ($missing_password): ?>
-<p>You haven't entered your password.</p>
+<p>You haven't entered a password.</p>
 <?php elseif ($bad_password): ?>
 <p>A password must contain a digit and at least 6 characters.</p>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Check the confirmation box.</p>
-<?php endif; ?>
-<?php if ($duplicated_name): ?>
-<p>This identifier is already taken.</p>
-<?php endif; ?>
-<?php if ($duplicated_mail): ?>
-<p>This email address is already being used.</p>
 <?php endif; ?>
 <?php if ($internal_error): ?>
 <p>An internal error has occurred.
@@ -84,11 +102,20 @@ $focus=false;
 if ($missing_code or $bad_code) {
 	$focus='#register_code';
 }
+else if ($missing_firstname) {
+	$focus='#register_firstname';
+}
+else if ($missing_lastname) {
+	$focus='#register_lastname';
+}
 else if ($missing_name or $bad_name or $duplicated_name) {
 	$focus='#register_name';
 }
 else if ($missing_mail or $bad_mail or $duplicated_mail) {
 	$focus='#register_mail';
+}
+else if ($bad_website) {
+	$focus='#register_website';
 }
 else if ($missing_password or $bad_password) {
 	$focus='#register_password';

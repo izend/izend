@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -15,24 +15,29 @@ require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
 require_once 'validateusername.php';
+require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function register($lang) {
 	$with_name=true;
+	$with_website=false;
 	$with_password=true;
 	$with_newsletter=false;
 	$with_captcha=true;
 
-	$newsletter=false;
+	$with_info=false;
 
 	$action='init';
 	if (isset($_POST['register_register'])) {
 		$action='register';
 	}
 
-	$name=$mail=$password=$confirmed=$code=$token=false;
-	$newsletter=false;
+	$name=$mail=$website=$password=$confirmed=$code=$token=false;
 	$locale=$lang;
+
+	$newsletter=false;
+
+	$lastname=$firstname=false;
 
 	switch($action) {
 		case 'init':
@@ -42,11 +47,24 @@ function register($lang) {
 			break;
 
 		case 'register':
+			if ($with_info) {
+				if (isset($_POST['register_lastname'])) {
+					$lastname=readarg($_POST['register_lastname']);
+				}
+				if (isset($_POST['register_firstname'])) {
+					$firstname=readarg($_POST['register_firstname']);
+				}
+			}
 			if (isset($_POST['register_name'])) {
 				$name=strtolower(strflat(readarg($_POST['register_name'])));
 			}
 			if (isset($_POST['register_mail'])) {
 				$mail=strtolower(strflat(readarg($_POST['register_mail'])));
+			}
+			if ($with_website) {
+				if (isset($_POST['register_website'])) {
+					$website=strtolower(strflat(readarg($_POST['register_website'])));
+				}
 			}
 			if ($with_password) {
 				if (isset($_POST['register_password'])) {
@@ -77,12 +95,16 @@ function register($lang) {
 
 	$bad_token=false;
 
+	$missing_lastname=false;
+	$missing_firstname=false;
+
 	$missing_name=false;
 	$bad_name=false;
 	$duplicated_name=false;
 	$missing_mail=false;
 	$bad_mail=false;
 	$duplicated_mail=false;
+	$bad_website=false;
 	$missing_password=false;
 	$bad_password=false;
 	$missing_confirmation=false;
@@ -111,6 +133,15 @@ function register($lang) {
 				}
 			}
 
+			if ($with_info) {
+				if (!$lastname) {
+					$missing_lastname=true;
+				}
+				if (!$firstname) {
+					$missing_firstname=true;
+				}
+			}
+
 			if ($with_name) {
 				if (!$name) {
 					$missing_name=true;
@@ -131,6 +162,14 @@ function register($lang) {
 			else if (!user_check_mail($mail)) {
 				$duplicated_mail=true;
 			}
+			if ($website) {
+				if (!validate_website($website)) {
+					$bad_website=true;
+				}
+				else {
+					$website=normalize_website($website);
+				}
+			}
 			if ($with_password) {
 				if (!$password) {
 					$missing_password=true;
@@ -150,7 +189,7 @@ function register($lang) {
 
 	switch($action) {
 		case 'register':
-			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $missing_password or $bad_password or $missing_confirmation) {
+			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_password or $bad_password or $missing_lastname or $missing_firstname or $missing_confirmation) {
 				break;
 			}
 
@@ -160,11 +199,17 @@ function register($lang) {
 				$password=newpassword();
 			}
 
-			$r = user_create($name, $password, $mail, $locale);
+			$r = user_create($name, $password, $mail, $locale, $website);
 
 			if (!$r) {
 				$internal_error=true;
 				break;
+			}
+
+			$user_id = $r;
+
+			if ($with_info) {
+				user_set_info($user_id, $lastname, $firstname);
 			}
 
 			if ($newsletter) {
@@ -174,8 +219,6 @@ function register($lang) {
 			}
 
 			$_SESSION['login'] = $name ? $name : $mail;
-
-			$user_id = $r;
 
 			require_once 'emailcrypto.php';
 
@@ -218,10 +261,10 @@ function register($lang) {
 
 	$_SESSION['register_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_password', 'with_newsletter', 'name', 'mail', 'password', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

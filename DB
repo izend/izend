@@ -15,16 +15,24 @@ IMPORTANT: Change the database table prefix if it's not 'izend_'.
 Follow the instructions in README about rebuildcloud in utilities if 
 you have to rebuild the search engine data.
 
-
 UPDATES
 -------
+
+Date:	Mon Feb 25 2013
+
+CREATE TABLE IF NOT EXISTS `izend_user_info` (
+  `user_id` int(10) unsigned NOT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+----
 
 Date:	Mon Aug 13 2012
 
 	Limits searching rss and newsletter threads to administrator
 
 ALTER TABLE `izend_thread` CHANGE `thread_type` `thread_type` ENUM( 'thread', 'folder', 'story', 'book', 'rss', 'newsletter' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'thread';
-
 ----
 
 Date:	Mon Aug 6 2012
@@ -81,7 +89,6 @@ ALTER TABLE `izend_node` ADD `novote` BOOLEAN NOT NULL DEFAULT '0' AFTER `nomore
 ADD `nomorevote` BOOLEAN NOT NULL DEFAULT '0' AFTER `novote`;
 ALTER TABLE `izend_thread` ADD `novote` BOOLEAN NOT NULL DEFAULT '0' AFTER `nomorecomment` ,
 ADD `nomorevote` BOOLEAN NOT NULL DEFAULT '0' AFTER `novote`;
-
 ----
 
 Date:	Mon Jun 18 2012
@@ -241,9 +248,8 @@ ALTER TABLE `izend_thread` CHANGE `thread_type` `thread_type` ENUM( 'thread', 'f
 CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'thread';
 ----
 
-
-CURRENT
--------
+CURRENT DEFINITION
+------------------
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -465,6 +471,13 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `izend_user_info` (
+  `user_id` int(10) unsigned NOT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_user_role` (
   `user_id` int(10) unsigned NOT NULL,
