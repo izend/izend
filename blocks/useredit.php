@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -261,16 +261,23 @@ function useredit($lang, $user_id, $administrator=false) {
 				break;
 			}
 
-			$_SESSION['user']['name'] = $user_name;
-			$_SESSION['user']['mail'] = $user_mail;
-			$_SESSION['user']['website'] = $user_website;
-			$_SESSION['user']['locale'] = $user_locale;
+			if ($user_id == user_profile('id')) {
+				$_SESSION['user']['name'] = $user_name;
+				$_SESSION['user']['mail'] = $user_mail;
+				$_SESSION['user']['website'] = $user_website;
+				$_SESSION['user']['locale'] = $user_locale;
+			}
 
 			if ($with_info) {
 				$r = user_set_info($user_id, $user_lastname, $user_firstname);
 				if (!$r) {
 					$internal_error=true;
 					break;
+				}
+
+				if ($user_id == user_profile('id')) {
+					$_SESSION['user']['lastname'] = $user_lastname;
+					$_SESSION['user']['firstname'] = $user_firstname;
 				}
 			}
 
