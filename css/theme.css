@@ -247,7 +247,7 @@ span.btn_linkedin {background-position:-48px -48px;}
 .navigation .next {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-48px -88px;vertical-align:bottom;}
 
 #sharebar {display:none;width:75px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffff;position:fixed;top:160px;float:left;margin-left:-120px;padding:5px;}
-#sharebar > li {padding:5px;}
+#sharebar > li {padding:3px 2px;}
 
 .besocial {width:100%;padding:0;margin:1em 0;}
 .besocial li {display:inline-block;height:30px;vertical-align:top;padding:0;margin:0;}
