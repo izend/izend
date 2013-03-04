@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    31
+ * @copyright  2010-2013 izend.org
+ * @version    32
  * @link       http://www.izend.org
  */
 
@@ -711,6 +711,18 @@ CREATE TABLE `${db_prefix}user` (
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+CREATE TABLE IF NOT EXISTS `${db_prefix}user_info` (
+  `user_id` int(10) unsigned NOT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;
