@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
  
@@ -33,6 +33,7 @@ select {padding:2px;}
 input, textarea, select, fieldset {border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;}
 
 form.compact p {margin-top:0.75em;margin-bottom:0.5em;}
+form div.row {margin-top:0;margin-bottom:0;}
 
 textarea {resize:none;}
 
