@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    13
+ * @copyright  2010-2013 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -402,8 +402,9 @@ function node_get_all_comments($node_id, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 	$tabuser=db_prefix_table('user');
+	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, u.website AS comment_user_website, UNIX_TIMESTAMP(c.created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
+	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, u.website AS comment_user_website, ui.lastname AS comment_user_lastname, ui.firstname AS comment_user_firstname, UNIX_TIMESTAMP(c.created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id LEFT JOIN $tabuserinfo ui ON ui.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
 
 	$r = db_query($sql);
 

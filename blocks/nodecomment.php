@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -225,11 +225,10 @@ function nodecomment($lang, $node_id, $node_url, $nomore) {
 			break;
 	}
 
-	$newcomment=$user_name=$user_page=false;
+	$newcomment=$user_page=false;
 
 	if (!$id and !$nomore) {
 		if ($user_id) {
-			$user_name = user_profile('name');
 			$newcomment = true;
 		}
 		else {
@@ -258,7 +257,7 @@ function nodecomment($lang, $node_id, $node_url, $nomore) {
 
 	$errors = compact('missing_message', 'message_too_long');
 
-	$output = view('nodecomment', $lang, compact('token', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_name', 'user_page', 'node_url', 'errors'));
+	$output = view('nodecomment', $lang, compact('token', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_page', 'node_url', 'errors'));
 
 	return $output;
 }
