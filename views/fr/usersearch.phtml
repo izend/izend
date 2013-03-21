@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -39,7 +39,7 @@ $pagenums=page_range($page, $npages, 2);
 <tr>
 <?php if ($with_name): ?>
 <td class="username"><?php if ($user_name): ?><?php if ($edit): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_name; ?><?php if ($edit): ?></a><?php endif; ?><?php else: ?>&nbsp;<?php endif; ?></td>
-<td><?php if ($user_name): ?><img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" alt="" /><?php else: ?>&nbsp;<?php endif; ?></td>
+<td width="24"><?php if ($user_name): ?><img class="avatar" src="<?php echo $base_path; ?>/avatars/<?php echo $user_name; ?>.png" alt="" width="24" height="24" /><?php else: ?>&nbsp;<?php endif; ?></td>
 <?php endif; ?>
 <td class="usermail"><?php if ($user_mail): ?><?php if ($edit and (!$with_name or !$user_name)): ?><a href="<?php echo $edit; ?>"><?php endif; ?><?php echo $user_mail; ?><?php if ($edit): ?></a><?php endif; ?><?php else: ?>&nbsp;<?php endif; ?></td>
 <td class="userlogged"><?php if ($user_logged): ?><?php echo $user_logged; ?><?php else: ?>&nbsp;<?php endif; ?></td>
