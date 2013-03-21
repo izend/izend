@@ -1,19 +1,50 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
  
 /* media.css */
 
 @media screen and (max-width:1024px) {
+body {width:100%;margin-left:auto;margin-right:auto;}
+}
+
+@media screen and (max-width:960px) {
+#banner, #content, #footer {padding-left:5px;padding-right:5px;}
+}
+
+@media screen and (max-width:720px) {
+#logo {float:none;width:100%;}
+#logo h1 a {width:100%;}
+#bannermenu {margin-left:0;}
+h3 {background:none;text-indent:0;}
+}
+
+@media screen and (max-width:640px) {
+div.row > * {display:block;margin:0;}
+div.bytwo > *, div.bythree > *, div.byfour > * {width:100%;}
 }
 
 @media screen and (max-width:480px) {
+#bannertools {float:left;clear:left;}
+#banner #donate {float:left;margin:3px 0 12px 0;}
+#banner #searchinput {float:left;margin:-2px 10px 10px 0;}
+#banner #headline {float:left;margin:0 10px 10px 0;text-align:left;}	
+#sidebar .cloud {display:none;}
 }
 
 @media screen and (max-width:320px) {
+#sidebar {width:100%;float:none;margin-left:0;margin-bottom:1em;}
+#sidebar #searchinput {max-width:100%;margin-left:0;margin-right:auto;}
+#sidebar #headline {text-align:left;}
+#sidebar .hidy {margin-left:4px;}
+#sidebar .cloud li .btn_index {float:right;margin-left:6px;margin-right:0;}
+#summary {border:none;padding:0;text-align:left;}
+#comments .signature {float:none;}
+.bbcodehelp {display:none;}
+.vignette {float:none;margin:1em 0;}
 }
 
 @media screen and (max-width:240px) {
