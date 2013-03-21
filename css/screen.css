@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    34
+ * @version    35
  * @link       http://www.izend.org
  */
  
@@ -37,7 +37,9 @@ form div.row {margin-top:0;margin-bottom:0;}
 
 textarea {resize:none;}
 
-img {vertical-align:middle;}
+img {vertical-align:middle;max-width:100%;height:auto;}
+
+video, audio {max-width:100%;height:auto;}
 
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
