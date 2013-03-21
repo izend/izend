@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -36,13 +36,18 @@ foreach ($contents as $c) {
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
+			echo 'var w=', $width,', h=', $height, ', maxw=$(\'#', $id, '\').width();', PHP_EOL;
+			echo 'if (maxw < w) {', PHP_EOL;
+			echo '    h=Math.floor(h*maxw/w);', PHP_EOL;
+			echo '    w=maxw;', PHP_EOL;
+			echo '}', PHP_EOL;
 			echo 'jwplayer("', $id, '").setup({', PHP_EOL;
 			if (true) {
 				echo '    flashplayer: "', $base_path, '/longtail/player.swf",', PHP_EOL;
 			}
 			echo '    id: "', $id, '",', PHP_EOL;
-			echo '    width: ', $width, ',', PHP_EOL;
-			echo '    height: ', $height, ',', PHP_EOL;
+			echo '    width: w,', PHP_EOL;
+			echo '    height: h,', PHP_EOL;
 			if ($image) {
 				echo '    image: "', $base_path, $image, '",', PHP_EOL;
 			}
