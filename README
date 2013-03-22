@@ -15,15 +15,15 @@ while still keeping all the benefits of using a software program which
 is constantly enriched by an open source community.
 
 iZend is built with a straightforward architecture designed for
-organizing publications in several languages and for different media.
-It includes a content editor, a set of presentation models, a search
-engine with an input corrector, editable comments, file downloads,
-secure votes, RSS feeds, HTML newsletters, a payment system (PayPal)
-and more. It carefully interfaces social networks. It manages a
-community of users with configurable privileges.
+organizing publications in several languages and for different media
+with a responsive layout. It includes a content editor, a set of
+presentation models, a search engine with an input corrector, editable
+comments, file downloads, secure votes, RSS feeds, HTML newsletters, a
+payment system (PayPal) and more. It carefully interfaces social
+networks. It manages a community of users with configurable privileges.
 
-iZend has one variant, iZend Blog, a specialized version for
-publishing a full featured blog.
+iZend has one variant, iZend Blog, a specialized version for editing a
+full featured blog.
 
 iZend is normally hosted by a LAMP like web server but it can work
 without a database and take very little space on disk. Put online a
