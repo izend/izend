@@ -1,10 +1,10 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    54
+ * @version    56
  * @link       http://www.izend.org
  */
- 
+
 /* theme.css */
 
 * {outline:none;}
@@ -12,14 +12,14 @@
 a:link, a:visited {color:#ec902d;text-decoration:none;}
 a:hover {color:#333333;text-decoration:none;}
 
-body {color:#333333;max-width:960px;margin-left:140px;margin-bottom:20px;}
+body {color:#333333;margin-left:140px;margin-bottom:20px;max-width:960px;}
 
 h1,h2,h3 {color:#aec14e;}
 h4 {color:#aec14e;}
 h5 {color:#df6f6f;}
 h6 {color:#666666;}
 
-h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;line-height:24px;margin:0 0 0.5em 0;}
+h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;line-height:24px;margin:0 0 1em;}
 
 hr {background:#ffffff;color:#aec14e;width:100%;height:0;padding:0;margin:1em 0;border:1px solid;}
 
@@ -44,7 +44,7 @@ input[type="text"], textarea {max-width:90%;}
 .topbar a:hover {color:#ffffff;}
 .topbar, .topbar ul li a {background-color:#aec14e;}
 
-.date {width:60px;height:60px;margin:0 0 1em;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;margin-right:1em;position:relative;}
+.date {width:60px;height:60px;margin:0;padding:0;background:#ffffff url(../images/theme/calendar.jpg) no-repeat;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;position:relative;}
 .date span {width:100%;text-align:center;margin:0;padding:0;position:absolute;}
 .date .day {color:#333333;font-family:"Times New Roman", Times, serif;font-size:24px;font-weight:bold;top:0.8em;}
 .date .month {color:#333333;font-size:8px;text-transform:uppercase;top:0.5em;}
@@ -174,10 +174,6 @@ span.btn_linkedin {background-position:-48px -48px;}
 #bannercontrols {width:230px;float:left;}
 #bannertools {width:auto;float:right;}
 
-#searchinput {width:196px;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
-#searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}
-#search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-144px -24px;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
-
 #logo {width:40%;height:40px;float:left;margin-bottom:10px;}
 #logo h1 {padding:0;margin:0;}
 #logo h1 a {display:inline-block;width:226px;height:40px;background:transparent url(../logos/sitelogo.png) no-repeat;margin-top:2px;}
@@ -198,25 +194,31 @@ span.btn_linkedin {background-position:-48px -48px;}
 #banner .languages .btn_fr {background-position:0 0;}
 #banner .languages .btn_en {background-position:-24px 0;}
 
-#banner #donate {height:21px;float:right;margin:15px 0 14px;}
-#donate .btn_donate_fr {width:108px;height:21px;float:right;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
-#donate .btn_donate_en {width:74px;height:21px;float:right;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
+#donate {height:21px;}
+#donate .btn_donate_fr {width:108px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
+#donate .btn_donate_en {width:74px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
+
+#searchinput {width:196px;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
+#searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}
+#search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-144px -24px;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 
 #banner #headline {float:right;margin:15px 0 12px 10px;text-align:right;}
 #banner #headline a:hover {color:#aec14e;}
 #banner #searchinput {float:right;margin:11px 0 11px 10px;}
+#banner #donate {float:right;margin:15px 0 14px;}
 
 #sidebar {float:right;width:200px;margin-left:1em;}
 
 #sidebar #headline {margin:0.1em 0 0.5em;text-align:right;}
 #sidebar #searchinput {margin:-2px 0 0.5em auto;}
+#sidebar #donate {float:right;margin:1em 0;}
 #sidebar .cloud {margin-bottom:1em;}
 #sidebar .hidy {height:16px;background:transparent url(../images/theme/icons/down.png) no-repeat;margin-left:176px;cursor:pointer;}
 
 #sidemenu {width:260px;font-size:90%;}
 
 #footer {font-size:small;margin:2em 0 1em 0;clear:both;}
-#footer p, #footer ul {margin: 0.5em 0;}
+#footer ul {margin:1em 0 1em 1em;}
 #footer p img {vertical-align:middle;}
 
 #footer .btn {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;text-indent:-9999px;vertical-align:middle;}
@@ -226,10 +228,12 @@ span.btn_linkedin {background-position:-48px -48px;}
 #footer .btn_account {width:16px;height:16px;background-position:-104px -88px;}
 #footer .btn_admin {width:16px;height:16px;background-position:-136px -88px;}
 
-#footer .languages {float:right;}
+#footer .languages {float:right;font-family:Verdana, sans-serif;}
 #footer .languages a span {display:inline;}
 
-#toolbar {width:24px;padding:6px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;margin-left:-60px;}
+#footer .controls {display:inline-block;}
+
+#toolbar {width:24px;padding:5px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;margin-left:-65px;}
 #toolbar a {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons.png) no-repeat;}
 #toolbar #exit {background-position:-72px 0;}
 #toolbar #admin {background-position:-48px 0;}
@@ -291,7 +295,7 @@ span.btn_linkedin {background-position:-48px -48px;}
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:small;font-style:italic;}
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
-#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 0.5em 0;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
+#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin-bottom:0.5em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
 
@@ -309,5 +313,5 @@ span.btn_linkedin {background-position:-48px -48px;}
 .balance {text-align:right;}
 .balance span {font-size:larger;display:block;}
 
-.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 0 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
+.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin-left:2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}

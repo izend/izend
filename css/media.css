@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
  
@@ -28,12 +28,12 @@ div.bytwo > *, div.bythree > *, div.byfour > * {width:100%;}
 }
 
 @media screen and (max-width:480px) {
-video, audio {max-width:100%;height:auto;}
+audio, video {max-width:100%;}
+video {height:auto;}
 #bannertools {float:left;clear:left;}
 #banner #donate {float:left;margin:3px 0 12px 0;}
 #banner #searchinput {float:left;margin:-2px 10px 10px 0;}
 #banner #headline {float:left;margin:0 10px 10px 0;text-align:left;}	
-#sidebar .cloud {display:none;}
 }
 
 @media screen and (max-width:320px) {
@@ -42,6 +42,7 @@ video, audio {max-width:100%;height:auto;}
 #sidebar #headline {text-align:left;}
 #sidebar #donate {float:none;}
 #sidebar .hidy {margin-left:4px;}
+#sidebar .cloud {display:none;}
 #sidebar .cloud li .btn_index {float:right;margin-left:6px;margin-right:0;}
 #summary {border:none;padding:0;text-align:left;}
 #comments .signature {float:none;}
