@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
  
@@ -38,8 +38,6 @@ form div.row {margin-top:0;margin-bottom:0;}
 textarea {resize:none;}
 
 img {vertical-align:middle;max-width:100%;height:auto;}
-
-video, audio {max-width:100%;height:auto;}
 
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
@@ -152,8 +150,9 @@ a.button {padding:5px 10px;margin:0;display:inline-block;font-family:"Helvetica 
 .cloud {padding:0;margin:0;text-align:center;}
 .cloud li {list-style:none;display:inline;}
 
-div.download {margin:1em 0 1em 0;}
-div.longtail {margin:1em 0 1em 0;}
+div.download {margin:1em 0;}
+
+div.longtail {margin:1em 0;overflow:hidden;}
 
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;}
 ol.tree ol {margin-left:12px;background:url(../images/vline.png) repeat-y;}
