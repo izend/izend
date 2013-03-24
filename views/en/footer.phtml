@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -24,7 +24,7 @@
 <?php endif; ?>
 <?php if (!empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
 &bull;
-<?php endif; ?>
+<span class="controls">
 <?php if (!empty($nobody_page)): ?>
 <a class="btn btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">Disconnect</a>
 <?php endif; ?>
@@ -36,6 +36,8 @@
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <a class="btn btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Manage">Manage</a>
+<?php endif; ?>
+</span>
 <?php endif; ?>
 </span>
 <?php endif; ?>
