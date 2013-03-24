@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -16,7 +16,10 @@ $('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
-$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="standard" data-show-faces="false" data-font="arial"></div>');
+var w=$('body').width();
+var datalayout=w > 240 ? 'standard' : 'button_count';
+var datawidth=datalayout == 'button_count' ? '0' : w > 480 ? '450' : '300';
+$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>
