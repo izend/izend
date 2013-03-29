@@ -1,14 +1,14 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
  
 /* media.css */
 
 @media screen and (max-width:1024px) {
-body {width:100%;margin-left:auto;margin-right:auto;}
+body {width:100%;max-width:none;margin-left:auto;margin-right:auto;}
 }
 
 @media screen and (max-width:960px) {
@@ -23,7 +23,7 @@ h3 {background:none;text-indent:0;}
 }
 
 @media screen and (max-width:640px) {
-div.row > * {display:block;margin:0;}
+div.row > * {display:block;margin:1em 0;}
 div.bytwo > *, div.bythree > *, div.byfour > * {width:100%;}
 }
 

@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    56
+ * @version    57
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ h4 {color:#aec14e;}
 h5 {color:#df6f6f;}
 h6 {color:#666666;}
 
-h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;line-height:24px;margin:0 0 1em;}
+h3 {background:transparent url(../images/theme/heading.png) no-repeat;text-indent:30px;line-height:24px;margin:0 0 0.5em;}
 
 hr {background:#ffffff;color:#aec14e;width:100%;height:0;padding:0;margin:1em 0;border:1px solid;}
 
@@ -36,7 +36,7 @@ input[type="text"], textarea {max-width:90%;}
 
 .grippie {display:block;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 
-.vignette {float:right;margin:0 0 0 1em;}
+.vignette {float:right;margin:0 0 0.25em 1em;}
 
 .readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
 
@@ -202,10 +202,10 @@ span.btn_linkedin {background-position:-48px -48px;}
 #searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}
 #search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-144px -24px;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 
-#banner #headline {float:right;margin:15px 0 12px 10px;text-align:right;}
+#banner #headline {float:right;margin:14px 0 13px 10px;text-align:right;}
 #banner #headline a:hover {color:#aec14e;}
-#banner #searchinput {float:right;margin:11px 0 11px 10px;}
-#banner #donate {float:right;margin:15px 0 14px;}
+#banner #searchinput {float:right;margin:10px 0 12px 10px;}
+#banner #donate {float:right;margin:14px 0 15px 10px}
 
 #sidebar {float:right;width:200px;margin-left:1em;}
 
@@ -218,7 +218,6 @@ span.btn_linkedin {background-position:-48px -48px;}
 #sidemenu {width:260px;font-size:90%;}
 
 #footer {font-size:small;margin:2em 0 1em 0;clear:both;}
-#footer ul {margin:1em 0 1em 1em;}
 #footer p img {vertical-align:middle;}
 
 #footer .btn {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;text-indent:-9999px;vertical-align:middle;}
@@ -228,7 +227,7 @@ span.btn_linkedin {background-position:-48px -48px;}
 #footer .btn_account {width:16px;height:16px;background-position:-104px -88px;}
 #footer .btn_admin {width:16px;height:16px;background-position:-136px -88px;}
 
-#footer .languages {float:right;font-family:Verdana, sans-serif;}
+#footer .languages {float:right;margin-left:2em;font-family:Verdana, sans-serif;}
 #footer .languages a span {display:inline;}
 
 #footer .controls {display:inline-block;}
