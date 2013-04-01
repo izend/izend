@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,6 @@ function dump($var, $label=null, $echo=true) {
 	var_dump($var);
 	$output = ob_get_clean();
 
-	// remove newlines and tabs
 	$output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
 	if (PHP_SAPI == 'cli') {
 		$output = PHP_EOL . $label . $output . PHP_EOL;
@@ -22,7 +21,7 @@ function dump($var, $label=null, $echo=true) {
 	else {
 		$output = htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 
-		$output = '<pre>' . PHP_EOL . $label . $output . '</pre>'. PHP_EOL;
+		$output = '<pre><code>' . $label . $output . '</code></pre>' . PHP_EOL;
 	}
 
 	if ($echo) {
