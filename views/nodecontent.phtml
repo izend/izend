@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -36,7 +36,8 @@ foreach ($contents as $c) {
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
 			echo '<script type="text/javascript">', PHP_EOL;
-			echo 'var w=', $width,', h=', $height, ', maxw=$(\'#', $id, '\').width();', PHP_EOL;
+			echo '//<![CDATA[', PHP_EOL;
+			echo 'var w=', $width,', h=', $height, ', maxw=$(window).innerWidth();', PHP_EOL;
 			echo 'if (maxw < w) {', PHP_EOL;
 			echo '    h=Math.floor(h*maxw/w);', PHP_EOL;
 			echo '    w=maxw;', PHP_EOL;
@@ -83,6 +84,7 @@ foreach ($contents as $c) {
 			echo '    autostart: "', $autostart ? 'true' : 'false', '",', PHP_EOL;
 			echo '    screencolor: "ffffff"', PHP_EOL;
 			echo '});', PHP_EOL;
+			echo '//]]>', PHP_EOL;
 			echo '</script>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			break;
