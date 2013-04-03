@@ -32,8 +32,6 @@ ol.tree li.filenode {color:#333333;}
 
 th {background-color:#ffffe0;font-weight:bold;}
 
-input[type="text"], textarea {max-width:90%;}
-
 .grippie {display:block;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 
 .vignette {float:right;margin:0 0 0.25em 1em;}
@@ -294,7 +292,7 @@ span.btn_linkedin {background-position:-48px -48px;}
 #searchlinks li p {margin:0.5em 0 0.5em 0;font-size:small;font-style:italic;}
 #searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
 
-#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin-bottom:0.5em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
+#summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 1em 0;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
 
@@ -312,5 +310,5 @@ span.btn_linkedin {background-position:-48px -48px;}
 .balance {text-align:right;}
 .balance span {font-size:larger;display:block;}
 
-.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin-left:2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
+.summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 1em 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}
