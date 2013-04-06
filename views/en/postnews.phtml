@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    3
+ * @copyright  2012-2013 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -31,6 +31,7 @@ $minute=idate('i', $postdate);
 <p>
 <input type="submit" class="submit submit_post" name="postnews_post" id="postnews_post" value="Post" />
 <input type="text" name="postnews_date" id="postnews_date" title="aaaa-mm-jj" value="<?php echo htmlspecialchars($date, ENT_COMPAT, 'UTF-8'); ?>" />
+<span class="nowrap">
 at
 <select id="postnews_hour" name="postnews_hour" size="1">
 <?php foreach (range($hmin, $hmax, 1) as $hh): ?>
@@ -43,6 +44,7 @@ at
 <option value="<?php echo $mm; ?>"<?php if ($minute == $mm): ?> selected="selected"<?php endif; ?>><?php echo $mm > 0 ? $mm : '0' . $mm; ?></option>
 <?php endforeach; ?>
 </select>
+</span>
 </p>
 </form>
 <?php head('javascript', 'jquery-ui'); ?>
