@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -30,13 +30,18 @@ $selected=$new_content_type ? $new_content_type : 'text';
 <?php endif; ?>
 <?php endforeach; ?>
 </select>
+<span class="nowrap">
 #
 <input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
+</span>
 <?php if ($node_contents): ?>
 ou
 <input class="submit submit_delete" id="content_delete" name="content_delete" type="submit" value="Supprimer" />
-le #
+le
+<span class="nowrap">
+#
 <input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro"/>
+</span>
 <?php endif; ?>
 </p>
 <?php if ($node_contents): ?>
