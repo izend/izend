@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    58
+ * @version    59
  * @link       http://www.izend.org
  */
 
@@ -38,6 +38,7 @@ th {background-color:#ffffe0;font-weight:bold;}
 
 .readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
 
+.topbar li {color:#ffffff;}
 .topbar a:link, .topbar a:visited {color:#ffffff;}
 .topbar a:hover {color:#ffffff;}
 .topbar, .topbar ul li a {background-color:#aec14e;}
