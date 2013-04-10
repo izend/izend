@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -120,6 +120,7 @@ function login($lang) {
 
 			$_SESSION['user'] = $user;
 
+			unset($_SESSION['login']);
 			unset($_SESSION['login_token']);
 
 			return true;
