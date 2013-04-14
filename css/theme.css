@@ -1,13 +1,11 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    60
+ * @version    61
  * @link       http://www.izend.org
  */
 
 /* theme.css */
-
-* {outline:none;}
 
 a:link, a:visited {color:#ec902d;text-decoration:none;}
 a:hover {color:#333333;text-decoration:none;}
