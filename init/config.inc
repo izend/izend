@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    25
+ * @copyright  2010-2013 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
 <?php
@@ -45,9 +45,10 @@ global $socializing;
 
 $socializing='inline';	// is_mobile() ? 'inline' : 'bar';	// false, 'inline', 'bar'
 
-global $facebookid;
+global $facebookid, $facebooksecret;
 
-$facebookid = false;
+$facebookid=false;
+$facebooksecret=false;
 
 global $author;
 

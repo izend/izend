@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -24,8 +24,15 @@ function register($lang) {
 	$with_password=true;
 	$with_newsletter=false;
 	$with_captcha=true;
+	$with_facebook=false;
 
 	$with_info=false;
+
+	if ($with_facebook) {
+		require_once 'facebook.php';
+
+		$facebook=facebook();
+	}
 
 	$action='init';
 	if (isset($_POST['register_register'])) {
@@ -41,6 +48,40 @@ function register($lang) {
 
 	switch($action) {
 		case 'init':
+			if ($with_facebook) {
+				$facebook_user=$facebook->getUser();
+				if ($facebook_user) {
+					try {
+						$facebook_user_profile = $facebook->api('/me', 'GET');
+						if (!empty($facebook_user_profile['email'])) {
+							$mail=$facebook_user_profile['email'];
+						}
+						if ($with_info) {
+							if (!empty($facebook_user_profile['last_name'])) {
+								$lastname=$facebook_user_profile['last_name'];
+							}
+							if (!empty($facebook_user_profile['first_name'])) {
+								$firstname=$facebook_user_profile['first_name'];
+							}
+						}
+						if ($with_name) {
+							if (!empty($facebook_user_profile['username'])) {
+								$name=$facebook_user_profile['username'];
+							}
+						}
+						if ($with_website) {
+							if (!empty($facebook_user_profile['website'])) {
+								$website=$facebook_user_profile['website'];
+							}
+						}
+						$action='facebook';
+					}
+					catch(FacebookApiException $e) {
+					}
+					$facebook->destroySession();
+				}
+			}
+
 			if ($with_newsletter) {
 				$newsletter=true;
 			}
@@ -55,8 +96,10 @@ function register($lang) {
 					$firstname=readarg($_POST['register_firstname']);
 				}
 			}
-			if (isset($_POST['register_name'])) {
-				$name=strtolower(strflat(readarg($_POST['register_name'])));
+			if ($with_name) {
+				if (isset($_POST['register_name'])) {
+					$name=strtolower(strflat(readarg($_POST['register_name'])));
+				}
 			}
 			if (isset($_POST['register_mail'])) {
 				$mail=strtolower(strflat(readarg($_POST['register_mail'])));
@@ -133,6 +176,7 @@ function register($lang) {
 				}
 			}
 
+		case 'facebook':
 			if ($with_info) {
 				if (!$lastname) {
 					$missing_lastname=true;
@@ -189,7 +233,11 @@ function register($lang) {
 
 	switch($action) {
 		case 'register':
-			if ($bad_token or $missing_code or $bad_code or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_password or $bad_password or $missing_lastname or $missing_firstname or $missing_confirmation) {
+			if ($bad_token or $missing_code or $bad_code ) {
+				break;
+			}
+		case 'facebook':
+			if ($missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_password or $bad_password or $missing_lastname or $missing_firstname or $missing_confirmation) {
 				break;
 			}
 
@@ -252,6 +300,14 @@ function register($lang) {
 			break;
 	}
 
+	$connectbar=false;
+	if ($with_facebook) {
+		$scope=$with_website ? 'email, user_website' : 'email';
+		$display='popup';
+		$facebook_login_url=$facebook->getLoginUrl(compact('scope', 'display'));
+		$connectbar=view('connect', $lang, compact('facebook_login_url'));
+	}
+
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
@@ -264,7 +320,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

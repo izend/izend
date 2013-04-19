@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -22,7 +22,11 @@
 <p class="info">Choisissez un pseudo de 2 à 20 lettres.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
-<p><input type="text" name="register_mail" id="register_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
+<?php if ($connectbar): ?>
+<?php echo $connectbar; ?>
+<?php endif; ?>
+</p>
 <p class="info">Votre mot de passe sera envoyé à cette adresse.</p>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Avez-vous un site web&nbsp;?</p>

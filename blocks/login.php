@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -17,19 +17,43 @@ require_once 'validateusername.php';
 function login($lang) {
 	$with_name=true;
 	$with_captcha=true;
+	$with_facebook=false;
+
+	if ($with_facebook) {
+		require_once 'facebook.php';
+
+		$facebook=facebook();
+	}
+
+	$login=$password=$code=$token=false;
 
 	$action='init';
 	if (isset($_POST['login_enter'])) {
 		$action='enter';
 	}
 
-	$login=$password=$code=$token=false;
-
-	if (isset($_SESSION['login'])) {
-		$login=$_SESSION['login'];
-	}
-
 	switch($action) {
+		case 'init':
+			if ($with_facebook) {
+				$facebook_user=$facebook->getUser();
+				if ($facebook_user) {
+					try {
+						$facebook_user_profile = $facebook->api('/me', 'GET');
+						if (!empty($facebook_user_profile['email'])) {
+							$login=$facebook_user_profile['email'];
+						}
+						$action='facebook';
+					}
+					catch(FacebookApiException $e) {
+					}
+					$facebook->destroySession();
+				}
+			}
+			else if (isset($_SESSION['login'])) {
+				$login=$_SESSION['login'];
+			}
+			break;
+
 		case 'enter':
 			if (isset($_POST['login_login'])) {
 				$login=strtolower(strflat(readarg($_POST['login_login'])));
@@ -47,8 +71,6 @@ function login($lang) {
 		default:
 			break;
 	}
-
-	$_SESSION['login']=$login;
 
 	$missing_code=false;
 	$bad_code=false;
@@ -79,6 +101,11 @@ function login($lang) {
 				}
 			}
 
+			if (!$password) {
+				$missing_password=true;
+			}
+
+		case 'facebook':
 			if (!$login) {
 				$missing_login=true;
 			}
@@ -86,9 +113,6 @@ function login($lang) {
 				$bad_login=true;
 			}
 
-			if (!$password) {
-				$missing_password=true;
-			}
 			break;
 		default:
 			break;
@@ -96,7 +120,11 @@ function login($lang) {
 
 	switch($action) {
 		case 'enter':
-			if ($bad_token or $missing_code or $bad_code or $missing_login or $bad_login or $missing_password) {
+			if ($bad_token or $missing_code or $missing_password) {
+				break;
+			}
+		case 'facebook':
+			if ($missing_login or $bad_login) {
 				break;
 			}
 
@@ -129,6 +157,14 @@ function login($lang) {
 			break;
 	}
 
+	$connectbar=false;
+	if ($with_facebook) {
+		$scope='email';
+		$display='popup';
+		$facebook_login_url=$facebook->getLoginUrl(compact('scope', 'display'));
+		$connectbar=view('connect', $lang, compact('facebook_login_url'));
+	}
+
 	$password_page=url('password', $lang);
 	$newuser_page=url('newuser', $lang);
 
@@ -136,7 +172,7 @@ function login($lang) {
 
 	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied');
 
-	$output = view('login', $lang, compact('token', 'with_captcha', 'with_name', 'password_page', 'newuser_page', 'login', 'errors'));
+	$output = view('login', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'password_page', 'newuser_page', 'login', 'errors'));
 
 	return $output;
 }

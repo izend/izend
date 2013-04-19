@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -312,13 +312,15 @@ function user_login($login, $password, $quick=false) {
 		return false;
 	}
 
-	$password=md5($user_seed . $password);
+	if ($password) {
+		$password=md5($user_seed . $password);
 
-	if ( ! ($password == $user_password or $password == $user_newpassword) ) {
-		if ($login_failed_delay) {
-			sleep($login_failed_delay);
+		if ( ! ($password == $user_password or $password == $user_newpassword) ) {
+			if ($login_failed_delay) {
+				sleep($login_failed_delay);
+			}
+			return false;
 		}
-		return false;
 	}
 
 	if ($quick) {
@@ -355,7 +357,7 @@ function user_login($login, $password, $quick=false) {
 
 	$tabuser=db_prefix_table('user');
 
-	if ($user_newpassword) {
+	if ($password and $user_newpassword) {
 		if ($password == $user_newpassword) {
 			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), password='$user_newpassword', newpassword=NULL, modified=NOW() WHERE user_id=$user_id LIMIT 1";
 		}

@@ -11,7 +11,11 @@
 <form action="" method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion ?<?php else: ?>Quelle est votre adresse d'email ?<?php endif; ?></p>
-<p><input type="text" name="login_login" id="login_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="login_login" id="login_login" size="30" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" />
+<?php if ($connectbar): ?>
+<?php echo $connectbar; ?>
+<?php endif; ?>
+</p>
 <?php if ($with_name): ?>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
 <?php endif; ?>
