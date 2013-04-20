@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -27,6 +27,10 @@ function login($lang) {
 
 	$login=$password=$code=$token=false;
 
+	if (isset($_SESSION['login'])) {
+		$login=$_SESSION['login'];
+	}
+
 	$action='init';
 	if (isset($_POST['login_enter'])) {
 		$action='enter';
@@ -48,9 +52,6 @@ function login($lang) {
 					}
 					$facebook->destroySession();
 				}
-			}
-			else if (isset($_SESSION['login'])) {
-				$login=$_SESSION['login'];
 			}
 			break;
 
