@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -154,6 +154,11 @@ function login($lang) {
 				$subject = 'admin_login' . '@' . $sitename;
 				$msg = $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
 				emailme($subject, $msg);
+
+				if ($action == 'facebook') {
+					$access_denied=true;
+					break;
+				}
 			}
 
 			session_regenerate();
