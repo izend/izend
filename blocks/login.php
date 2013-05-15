@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -105,6 +105,7 @@ function login($lang) {
 			if (!$password) {
 				$missing_password=true;
 			}
+			/* fall thru */
 
 		case 'facebook':
 			if (!$login) {
@@ -121,11 +122,8 @@ function login($lang) {
 
 	switch($action) {
 		case 'enter':
-			if ($bad_token or $missing_code or $missing_password) {
-				break;
-			}
 		case 'facebook':
-			if ($missing_login or $bad_login) {
+			if ($bad_token or $missing_code or $bad_code or $missing_login or $bad_login or $missing_password) {
 				break;
 			}
 
