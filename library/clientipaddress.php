@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function client_ip_address() {
-	return array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+	return $_SERVER['REMOTE_ADDR'];	// DON'T TRUST $_SERVER['HTTP_X_FORWARDED_FOR']
 }
 
