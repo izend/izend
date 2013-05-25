@@ -1,9 +1,13 @@
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
+
+function trim(s) {
+	return s.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
 
 function returnonenter(e) {
 	var keycode;
