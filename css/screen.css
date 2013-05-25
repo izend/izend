@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    43
+ * @version    44
  * @link       http://www.izend.org
  */
  
@@ -47,7 +47,7 @@ img {vertical-align:middle;max-width:100%;height:auto;}
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
 
-.monospace {font-family:monospace;}
+.monospace {font-family:monospace;font-size:9pt;}
 .proportional {font-family:sans-serif;}
 
 .menu {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
