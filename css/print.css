@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
  
@@ -91,3 +91,6 @@ div.download, div.longtail {display:none;}
 
 ol.tree li.dirnode {font-style:italic;}
 ol.tree li.filenode {font-style:normal;}
+
+.monospace {font-family:monospace;font-size:9pt;}
+.proportional {font-family:sans-serif;}
