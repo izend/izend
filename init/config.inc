@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 <?php
@@ -105,9 +105,15 @@ $search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
 $search_closest=true;	// true - best matches, false - all matches
 
 global $session_name;
+
 $session_name=false;	// see bootstrap
 
+global $login_verified;
+
+$login_verified=false;	// false or array of roles
+
 global $login_lifetime, $login_failed_delay;
+
 $login_lifetime=false;	// false or in seconds
 $login_failed_delay=1;	// false or in seconds
 

@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Thu Jun 13 2013
+
+Adds action sslverifyclient.
+----
+
 Date:	Mon Aug 27 2012
 
 Adds action pagecontent.
@@ -38,6 +43,7 @@ $aliases = array(
 		'rss' 					=> 'rssfeed',
 		'paypal/return' 		=> 'paypalreturn',
 		'paypal/cancel' 		=> 'paypalcancel',
+		'sslverifyclient'		=> 'sslverifyclient',
 	),
 	'en' => array(
 		'home' 					=> 'home',

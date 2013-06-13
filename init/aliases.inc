@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    10
+ * @copyright  2010-2013 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -16,6 +16,7 @@ $aliases = array(
 		'rssfeed'			=> 'rss',
 		'paypalreturn'		=> 'paypal/return',
 		'paypalcancel'		=> 'paypal/cancel',
+		'sslverifyclient'	=> 'sslverifyclient',
 	),
 	'en' 	=> array(
 		'install'			=> 'install',
