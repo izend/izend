@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
 
@@ -304,13 +304,13 @@ function configure($lang) {
 
 				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
-				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'pagecontent', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'newsletter', 'newsletteredit', 'newsletteruser', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel');
+				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'pagecontent', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'newsletter', 'newsletteredit', 'newsletteruser', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel', 'sslverifyclient');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
 				$db_inc = build_db_inc(false, false, false, false, false);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, false, 'homepage', 'anypage', $languages);
-				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact', 'donation', 'paypalreturn', 'paypalcancel');
+				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact', 'donation', 'paypalreturn', 'paypalcancel', 'sslverifyclient');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 
