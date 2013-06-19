@@ -2,17 +2,20 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    3
+ * @copyright  2012-2013 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
+require_once 'readarg.php';
+require_once 'strflat.php';
 require_once 'userhasrole.php';
+require_once 'validatemail.php';
 require_once 'models/thread.inc';
 require_once 'models/newsletter.inc';
 
 function newsletterpage($lang, $newsletter, $page) {
-	global $with_toolbar, $webmaster;
+	global $with_toolbar;
 
 	$newsletter_id = thread_id($newsletter);
 	if (!$newsletter_id) {
@@ -74,23 +77,45 @@ function newsletterpage($lang, $newsletter, $page) {
 
 	$postnews=false;
 
-	$with_test=false;
+	$with_mail=false;
+
+	$mailto=false;
+
+	$missing_mail=false;
+	$bad_mail=false;
 
 	$email_sent=false;
 
 	if ($message_title and ($message_html or $message_text)) {
-		$with_test=true;
+		global $webmaster;
 
-		if (isset($_POST['newsletterpage_test'])) {
-			require_once 'emailhtml.php';
+		$mailto=$webmaster;
 
-			$cssfile=ROOT_DIR . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'newsletter.css';
-			$css=@file_get_contents($cssfile);
+		$with_mail=true;
 
-			$r = emailhtml($message_text, $message_html, $css, $webmaster, $message_title);
+		if (isset($_POST['newsletterpage_send'])) {
+			if (isset($_POST['newsletterpage_mailto'])) {
+				$mailto=strtolower(strflat(readarg($_POST['newsletterpage_mailto'])));
 
-			if ($r) {
-				$email_sent=true;
+				if (!$mailto) {
+					$missing_mail=true;
+				}
+				else if (!validate_mail($mailto)) {
+					$bad_mail=true;
+				}
+			}
+
+			if (!($missing_mail or $bad_mail)) {
+				require_once 'emailhtml.php';
+
+				$cssfile=ROOT_DIR . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'newsletter.css';
+				$css=@file_get_contents($cssfile);
+
+				$r = emailhtml($message_text, $message_html, $css, $mailto, $message_title);
+
+				if ($r) {
+					$email_sent=true;
+				}
 			}
 		}
 
@@ -113,7 +138,7 @@ function newsletterpage($lang, $newsletter, $page) {
 		$next_page_url=url('newsletter', $lang) . '/'. ($next_node_name ? $next_node_name : $next_node_id);
 	}
 
-	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'message_title', 'message_text', 'message_html', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_test', 'email_sent', 'webmaster'));
+	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'message_title', 'message_text', 'message_html', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_mail', 'mailto', 'missing_mail', 'bad_mail', 'email_sent'));
 
 	$search=false;
 	if (!$newsletter_nosearch) {

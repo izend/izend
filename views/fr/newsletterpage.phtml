@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -35,12 +35,27 @@
 <h6>Texte</h6>
 <pre><code><?php echo $message_text; ?></code></pre>
 <?php endif; ?>
-<?php if ($with_test): ?>
+<?php if ($with_mail): ?>
 <form class="noprint" action="" method="post">
-<p><input type="submit" class="submit submit_test" name="newsletterpage_test" id="newsletterpage_test" value="Tester" /></p>
+<p>
+<input type="submit" class="submit submit_send" name="newsletterpage_send" id="newsletterpage_send" value="Envoyer" />
+à
+<input type="text" name="newsletterpage_mailto" id="newsletterpage_mailto" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return submitonenter(event, 'newsletterpage_send')" value="<?php echo htmlspecialchars($mailto, ENT_COMPAT, 'UTF-8'); ?>" />
+</p>
 </form>
 <?php endif; ?>
 <?php if ($email_sent): ?>
-<p>Le message a été envoyé à <i><?php echo $webmaster; ?></i>.</p>
+<p>Le message a été envoyé à <i><?php echo $mailto; ?></i>.</p>
+<?php endif; ?>
+<?php
+$focus=false;
+if ($missing_mail or $bad_mail) {
+	$focus='#newsletterpage_mailto';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
 <?php endif; ?>
 </div>
