@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    44
+ * @version    45
  * @link       http://www.izend.org
  */
  
@@ -19,7 +19,7 @@ pre code {font-size:10pt;white-space:pre-wrap;}
 
 h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0;}
 
-fieldset {display:inline-block;margin:0;}
+fieldset {display:inline-block;}
 
 label, legend {font-size:80%;}
 
@@ -34,7 +34,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {border-c
 
 input[type="text"], input[type="password"], textarea, select, fieldset {border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;}
 
-input[type="text"], input[type="password"], textarea {padding:3px;}
+input[type="text"], input[type="password"], textarea {padding:2px 3px 4px;}
 select {padding:2px;}
 
 form.compact p {margin-top:0.75em;margin-bottom:0.5em;}
