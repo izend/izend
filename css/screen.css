@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    45
+ * @version    46
  * @link       http://www.izend.org
  */
  
@@ -149,7 +149,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 .nowrap {white-space:nowrap !important;}
 
-input.submit {padding:0;margin:1px 0;border:none;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+input.submit {padding:0;margin:1px 0;border:none;vertical-align:middle;text-indent:-9999px;cursor:pointer;-webkit-appearance:none;}
 span.icon {display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
 a.button {padding:5px 10px;margin:0;display:inline-block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-weight:bold;cursor:pointer;}
