@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -180,7 +180,7 @@ et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les
 <?php if ($missing_site_admin_password): ?>
 <p class="error">Entrez un mot de passe.</p>
 <?php elseif ($weak_site_admin_password): ?>
-<p class="error">Entrez une combinaison de lettres et de chiffres d'au moins 6 caractères.</p>
+<p class="error">Entrez une combinaison de lettres minuscules et majuscules et de chiffres d'au moins 6 caractères .</p>
 <?php endif; ?>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_configure" name="configure_configure" id="configure_configure" value="Configurer" /></p>
