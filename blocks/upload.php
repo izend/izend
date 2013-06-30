@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -15,27 +15,37 @@ require_once 'validatefilename.php';
 define('FILES_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'files');
 
 function upload($lang) {
+	$maxfilesize=1000000;
+
 	$action='init';
 	if (isset($_POST['upload_put'])) {
 		$action='upload';
 	}
 
-	$file=$name=$type=false;
-	$error=UPLOAD_ERR_OK;
+	$file=$name=$type=$error=false;
 	$size=0;
 	$token=false;
 
+	$bad_copy=false;
+
 	switch($action) {
 		case 'upload':
+			if (isset($_POST['upload_token'])) {
+				$token=readarg($_POST['upload_token']);
+			}
+
 			if (isset($_FILES['upload_file'])) {
+				$error=$_FILES['upload_file']['error'];
+
+				if ($error != UPLOAD_ERR_OK) {
+					$bad_copy=true;
+					break;
+				}
+
 				$file=$_FILES['upload_file']['tmp_name'];
 				$name=$_FILES['upload_file']['name'];
 				$type=$_FILES['upload_file']['type'];
 				$size=$_FILES['upload_file']['size'];
-				$error=$_FILES['upload_file']['error'];
-			}
-			if (isset($_POST['upload_token'])) {
-				$token=readarg($_POST['upload_token']);
 			}
 			break;
 		default:
@@ -49,7 +59,6 @@ function upload($lang) {
 	$bad_name=false;
 	$bad_type=false;
 	$bad_size=false;
-	$bad_copy=false;
 
 	$file_copied=false;
 
@@ -61,20 +70,20 @@ function upload($lang) {
 				$bad_token=true;
 			}
 
+			if ($bad_copy) {
+				break;
+			}
+
 			if (!$file) {
 				$missing_file=true;
 			}
 			else if (!is_uploaded_file($file)) {
 				$bad_file=true;
 			}
-			else if ($size > 1000000) {
+			else if ($size > $maxfilesize) {
 				$bad_size=true;
 			}
-			else if ($error) {
-				$bad_copy=true;
-			}
-
-			if (!validate_filename($name) or !is_filename_allowed($name)) {
+			else if (!validate_filename($name) or !is_filename_allowed($name)) {
 				$bad_name=true;
 			}
 
@@ -85,7 +94,7 @@ function upload($lang) {
 
 	switch($action) {
 		case 'upload':
-			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type or $bad_copy) {
+			if ($bad_copy or $bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type) {
 				break;
 			}
 
@@ -107,7 +116,7 @@ function upload($lang) {
 	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
-	$output = view('upload', $lang, compact('token', 'name', 'errors', 'infos'));
+	$output = view('upload', $lang, compact('token', 'maxfilesize', 'name', 'errors', 'infos'));
 
 	return $output;
 }
