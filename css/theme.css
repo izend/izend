@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    66
+ * @version    67
  * @link       http://www.izend.org
  */
 
@@ -72,6 +72,8 @@ th {background-color:#ffffe0;font-weight:bold;}
 .formatted {font-size:80%;}
 
 div.download {background:transparent url(../images/theme/icons/download.png) no-repeat;text-indent:30px;line-height:24px;}
+
+.loading {width:30px;height:30px;background:transparent url(../images/theme/loading.gif) no-repeat 50% 50%;}
 
 .odd {background-color:#ffffe0;}
 .even {background-color:#eaefb3;}
