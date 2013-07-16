@@ -26,8 +26,6 @@ function upload($lang) {
 	$size=0;
 	$token=false;
 
-	$bad_copy=false;
-
 	switch($action) {
 		case 'upload':
 			if (isset($_POST['upload_token'])) {
@@ -35,17 +33,21 @@ function upload($lang) {
 			}
 
 			if (isset($_FILES['upload_file'])) {
-				$error=$_FILES['upload_file']['error'];
-
-				if ($error != UPLOAD_ERR_OK) {
-					$bad_copy=true;
-					break;
+				if (isset($_FILES['upload_file']['tmp_name'])) {
+					$file=$_FILES['upload_file']['tmp_name'];
 				}
-
-				$file=$_FILES['upload_file']['tmp_name'];
-				$name=$_FILES['upload_file']['name'];
-				$type=$_FILES['upload_file']['type'];
-				$size=$_FILES['upload_file']['size'];
+				if (isset($_FILES['upload_file']['error'])) {
+					$error=$_FILES['upload_file']['error'];
+				}
+				if (isset($_FILES['upload_file']['name'])) {
+					$name=$_FILES['upload_file']['name'];
+				}
+				if (isset($_FILES['upload_file']['type'])) {
+					$type=$_FILES['upload_file']['type'];
+				}
+				if (isset($_FILES['upload_file']['size'])) {
+					$size=$_FILES['upload_file']['size'];
+				}
 			}
 			break;
 		default:
@@ -57,20 +59,17 @@ function upload($lang) {
 	$missing_file=false;
 	$bad_file=false;
 	$bad_name=false;
-	$bad_type=false;
 	$bad_size=false;
-
-	$file_copied=false;
+	$bad_copy=false;
 
 	$copy_error=false;
+
+	$file_copied=false;
 
 	switch($action) {
 		case 'upload':
 			if (!isset($_SESSION['upload_token']) or $token != $_SESSION['upload_token']) {
 				$bad_token=true;
-			}
-
-			if ($bad_copy) {
 				break;
 			}
 
@@ -79,6 +78,9 @@ function upload($lang) {
 			}
 			else if (!is_uploaded_file($file)) {
 				$bad_file=true;
+			}
+			else if ($error != UPLOAD_ERR_OK) {
+				$bad_copy=true;
 			}
 			else if ($size > $maxfilesize) {
 				$bad_size=true;
@@ -94,7 +96,7 @@ function upload($lang) {
 
 	switch($action) {
 		case 'upload':
-			if ($bad_copy or $bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type) {
+			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_copy) {
 				break;
 			}
 
@@ -113,7 +115,7 @@ function upload($lang) {
 
 	$_SESSION['upload_token'] = $token = token_id();
 
-	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
+	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
 	$output = view('upload', $lang, compact('token', 'maxfilesize', 'name', 'errors', 'infos'));

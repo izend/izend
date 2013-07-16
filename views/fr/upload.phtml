@@ -3,31 +3,41 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <form enctype="multipart/form-data" action="" method="post" class="compact">
 <input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
-<p><input type="file" name="upload_file" id="upload_file" size="40"/></p>
-<p><input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Télécharger"/>
+<p>
+<input type="file" name="upload_file" id="upload_file"/>
+<input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Télécharger"/>
 <?php extract($errors); ?>
 <?php if ($missing_file or $bad_file or $bad_name or $bad_size or $bad_file or $bad_copy or $copy_error): ?>
-<span class="icon icon_ko">ko</span>
-<?php endif; ?>
+<span class="icon icon_ko">-</span>
+<?php else: ?>
 <?php extract($infos); ?>
 <?php if ($file_copied): ?>
-<span class="icon icon_ok">ok</span>
+<span class="icon icon_ok">+</span>
+<?php endif; ?>
 <?php endif; ?>
 </p>
 </form>
+<?php head('javascript', 'jquery-ui'); ?>
+<?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script type="text/javascript">
-$(function() {
+$(document).ready(function() {
     var file=$('#upload_file');
     var upload=$('#upload_put');
 
-    file.hide().change(function() {if (file.val()) {upload.unbind('click').click();}});
-    upload.click(function(event) {event.preventDefault();file.click();});
+    $('#upload_file, #upload_put').wrapAll('<span style="position:relative;overflow:hidden;cursor:pointer"></span>');
+    file.css({height: upload.outerHeight(true) + 'px', fontSize: '100px', position: 'absolute', right: 0, opacity: 0, cursor: 'pointer'});
+
+    file.change(function() {
+        if (file.val()) {
+            upload.click();
+        }
+    });
 });
 </script>
