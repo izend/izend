@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -179,7 +179,7 @@ function user_set_info($user_id, $lastname, $firstname) {
 
 	$sql="INSERT $tabuserinfo SET user_id=$user_id, lastname=$sqllastname, firstname=$sqlfirstname ON DUPLICATE KEY UPDATE lastname=VALUES(lastname), firstname=VALUES(firstname)";
 
-	$r = db_update($sql);
+	$r = db_insert($sql);
 
 	return $r;
 }
