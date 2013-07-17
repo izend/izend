@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,7 @@ function dirlist($dir='.') {
 
 	$files = array();
 	dirlistaux($dir, $files);
+
 	return $files;
 }
 
