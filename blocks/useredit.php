@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2013 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -308,6 +308,11 @@ function useredit($lang, $user_id, $administrator=false) {
 
 			$r = user_set_newpassword($user_id, $user_newpassword);
 
+			if (!$r) {
+				$internal_error=true;
+				break;
+			}
+
 			$password_changed=true;
 
 			break;
@@ -321,6 +326,7 @@ function useredit($lang, $user_id, $administrator=false) {
 			$r = user_delete($user_id);
 
 			if (!$r) {
+				$internal_error=true;
 				break;
 			}
 
