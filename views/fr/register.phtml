@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -123,9 +123,6 @@ else if ($bad_website) {
 }
 else if ($missing_password or $bad_password) {
 	$focus='#register_password';
-}
-else if ($missing_confirmation) {
-	$focus='#register_confirmed';
 }
 ?>
 <?php if ($focus): ?>
