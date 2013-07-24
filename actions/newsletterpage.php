@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ function newsletterpage($lang, $newsletter, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_modified */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -86,7 +86,7 @@ function newsletterpage($lang, $newsletter, $page) {
 
 	$email_sent=false;
 
-	if ($message_title and ($message_html or $message_text)) {
+	if (user_has_role('administrator') and $message_title and ($message_html or $message_text)) {
 		global $webmaster;
 
 		$mailto=$webmaster;

@@ -2,19 +2,13 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
-require_once 'userhasrole.php';
-
 function newsletter($lang, $arglist=false) {
-	global $supported_languages, $newsletter_thread;
-
-	if (!user_has_role('administrator')) {
-		return run('error/unauthorized', $lang);
-	}
+	global $newsletter_thread;
 
 	if (!$newsletter_thread) {
 		return run('error/notfound', $lang);

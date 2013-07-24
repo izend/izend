@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -28,11 +28,9 @@
 <?php echo $postnews; ?>
 <?php endif; ?>
 <?php if ($message_html): ?>
-<h5>HTML</h5>
 <?php echo $message_html; ?>
 <?php endif; ?>
 <?php if ($message_text): ?>
-<h6>Texte</h6>
 <pre><code><?php echo $message_text; ?></code></pre>
 <?php endif; ?>
 <?php if ($with_mail): ?>
