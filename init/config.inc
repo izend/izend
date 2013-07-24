@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 <?php
@@ -83,7 +83,7 @@ global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book', 'rss', 'newsletter');	// 'thread', 'folder', 'story', 'book', 'rss', 'newsletter'
 
-global $contents_model, $supported_contents;
+global $contents_model, $supported_contents, $limited_contents;
 
 $contents_model = array(
 	'text'		=>	array('text' => array('type' => 'string', 'null' => true), 'eval' => array('type' => 'boolean', 'default' => false)),
@@ -94,6 +94,8 @@ $contents_model = array(
 );
 
 $supported_contents=array('text', 'infile', 'download', 'file', 'longtail');	// 'text', 'infile', 'download', 'file', 'longtail'
+
+$limited_contents=array('rss' => array('text'), 'newsletter' => array('text'));
 
 global $with_toolbar;
 

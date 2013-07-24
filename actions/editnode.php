@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    5
+ * @copyright  2010-2013 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function editnode($lang, $arglist=false) {
-	global $supported_languages, $with_toolbar;
+	global $supported_languages, $supported_contents, $with_toolbar;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -56,7 +56,7 @@ function editnode($lang, $arglist=false) {
 		}
 	}
 
-	$node_editor = build('nodeeditor', $lang, $clang, $node_id);
+	$node_editor = build('nodeeditor', $lang, $clang, $node_id, $supported_contents);
 
 	head('title', $node_id);
 	head('description', false);

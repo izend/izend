@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'readarg.php';
 require_once 'strtofname.php';
 require_once 'models/node.inc';
 
-function nodeeditor($lang, $clang, $node_id) {
+function nodeeditor($lang, $clang, $node_id, $content_types) {
 	$action='init';
 	if (isset($_POST['node_edit'])) {
 		$action='edit';
@@ -120,7 +120,7 @@ function nodeeditor($lang, $clang, $node_id) {
 			break;
 	}
 
-	$content_editor = build('nodecontenteditor', $lang, $clang, $node_id);
+	$content_editor = build('nodecontenteditor', $lang, $clang, $node_id, $content_types);
 
 	$inlanguages=view('inlanguages', false, compact('clang'));
 

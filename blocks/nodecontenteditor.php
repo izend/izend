@@ -2,16 +2,16 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2013 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'models/node.inc';
 
-function nodecontenteditor($lang, $clang, $node_id) {
-	global $contents_model, $supported_contents;
+function nodecontenteditor($lang, $clang, $node_id, $content_types) {
+	global $contents_model;
 
 	$action='init';
 	if (isset($_POST['content_modify'])) {
@@ -109,7 +109,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 			if (empty($new_content_type)) {
 				$missing_new_content_type = true;
 			}
-			else if (!in_array($new_content_type, $supported_contents)) {
+			else if (!$content_types or !in_array($new_content_type, $content_types)) {
 				$bad_new_content_type = true;
 			}
 			if (empty($new_content_number)) {
@@ -249,7 +249,7 @@ function nodecontenteditor($lang, $clang, $node_id) {
 
 	$errors = compact('missing_new_content_type', 'bad_new_content_type', 'bad_new_content_number', 'missing_old_content_number', 'bad_old_content_number');
 
-	$output = view('editing/nodecontenteditor', $lang, compact('clang', 'supported_contents', 'new_content_type', 'new_content_number', 'old_content_number', 'node_contents', 'errors'));
+	$output = view('editing/nodecontenteditor', $lang, compact('clang', 'content_types', 'new_content_type', 'new_content_number', 'old_content_number', 'node_contents', 'errors'));
 
 	return $output;
 }

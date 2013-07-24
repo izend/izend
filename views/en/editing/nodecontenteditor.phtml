@@ -3,22 +3,24 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
+<?php if($content_types or $node_contents): ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
+<?php if ($content_types) :?>
 <input class="submit submit_add" id="content_create" name="content_create" type="submit" value="Add" />
 a type
 <?php
-$selected=$new_content_type ? $new_content_type : 'text';
+$selected=$new_content_type ? $new_content_type : $content_types[0];
 ?>
 <select id="content_new_type" name="content_new_type" size="1">
 <option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Text</option>
-<?php foreach ($supported_contents as $type): ?>
+<?php foreach ($content_types as $type): ?>
 <?php if ($type == 'infile'): ?>
 <option value="infile" <?php echo $selected == 'infile' ? 'selected="selected"' : ''; ?>>Insertion</option>
 <?php elseif ($type == 'download'): ?>
@@ -34,8 +36,11 @@ $selected=$new_content_type ? $new_content_type : 'text';
 #
 <input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 </span>
+<?php endif; ?>
 <?php if ($node_contents): ?>
+<?php if ($content_types) :?>
 or
+<?php endif; ?>
 <input class="submit submit_delete" id="content_delete" name="content_delete" type="submit" value="Delete" />
 <span class="nowrap">
 #
@@ -210,3 +215,4 @@ $(document).ready(function() {
 	});
 });
 </script>
+<?php endif; ?>

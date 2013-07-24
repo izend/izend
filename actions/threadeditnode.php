@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    7
+ * @copyright  2010-2013 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'strtofname.php';
 require_once 'models/thread.inc';
 
 function threadeditnode($lang, $clang, $thread, $node) {
-	global $with_toolbar;
+	global $with_toolbar, $supported_contents, $limited_contents;
 
 	if (!user_has_role('writer')) {
 		return run('error/unauthorized', $lang);
@@ -29,14 +29,18 @@ function threadeditnode($lang, $clang, $thread, $node) {
 		return run('error/notfound', $lang);
 	}
 
-	$thread_name=$thread_title=$thread_abstract=$thread_cloud=false;
+	$thread_name=$thread_title=$thread_abstract=$thread_cloud=$thread_type=false;
 	$r = thread_get($clang, $thread_id, false);
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* thread_name thread_title thread_abstract thread_cloud */
+	extract($r); /* thread_name thread_title thread_abstract thread_cloud thread_type */
 
-	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id);
+	$content_types=$supported_contents;
+	if ($thread_type and $limited_contents and array_key_exists($thread_type, $limited_contents)) {
+		$content_types=$limited_contents[$thread_type];
+	}
+	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id, $content_types);
 
 	$node_name=$node_title=false;
 	$r = thread_get_node($clang, $thread_id, $node_id, false);

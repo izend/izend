@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -54,5 +54,7 @@ if ($missing_node_name or $bad_node_name) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
+<?php if ($content_editor): ?>
 <h4>Contents</h4>
 <?php echo $content_editor; ?>
+<?php endif; ?>
