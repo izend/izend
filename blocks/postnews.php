@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,6 @@ require_once 'models/newsletter.inc';
 function postnews($lang, $newsletter_id, $page_id) {
 	$postdate=$scheduled=$mailed=false;
 
-
 	$r = newsletter_get_post($newsletter_id, $page_id, $lang);
 
 	if ($r) {
@@ -22,6 +21,10 @@ function postnews($lang, $newsletter_id, $page_id) {
 
 		$postadate=$scheduled=$newsletter_post_scheduled;
 		$mailed=$newsletter_post_mailed;
+	}
+
+	if ($mailed) {
+		return view('postnews', $lang, compact('mailed'));
 	}
 
 	$action='init';
