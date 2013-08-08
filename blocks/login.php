@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -137,6 +137,8 @@ function login($lang) {
 				require_once 'log.php';
 
 				write_log('enter.err', substr($login, 0, 100));
+
+				$_SESSION['login']=$login;
 
 				break;
 			}
