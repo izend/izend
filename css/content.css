@@ -1,8 +1,20 @@
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    1
+ * @copyright  2010-2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
  
 /* content.css */
+
+.btn_browser {width:18px;height:18px;background-image:url(../images/browser.png);background-repeat:no-repeat;display:inline-block;text-indent:-1000em;vertical-align:bottom;cursor:text;}
+#browser_firefox {background-position:0 0;}
+#browser_firefox:hover {background-position:0 -18px;}
+#browser_chrome {background-position:-18px 0;}
+#browser_chrome:hover {background-position:-18px -18px;}
+#browser_opera {background-position:-36px 0;}
+#browser_opera:hover {background-position:-36px -18px;}
+#browser_safari {background-position:-54px 0;}
+#browser_safari:hover {background-position:-54px -18px;}
+#browser_ie {background-position:-72px 0;}
+#browser_ie:hover {background-position:-72px -18px;}
