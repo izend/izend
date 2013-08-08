@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -27,6 +27,8 @@ $selected=$new_content_type ? $new_content_type : $content_types[0];
 <option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Téléchargement</option>
 <?php elseif ($type == 'file'): ?>
 <option value="file" <?php echo $selected == 'file' ? 'selected="selected"' : ''; ?>>Fichier</option>
+<?php elseif ($type == 'youtube'): ?>
+<option value="youtube" <?php echo $selected == 'youtube' ? 'selected="youtube"' : ''; ?>>YouTube</option>
 <?php elseif ($type == 'longtail'): ?>
 <option value="longtail" <?php echo $selected == 'longtail' ? 'selected="selected"' : ''; ?>>LongTail</option>
 <?php endif; ?>
@@ -59,6 +61,9 @@ foreach ($node_contents as $c) {
 	$content_download_name=$content_download_path=false;
 	$content_file_path=$content_file_format=$content_file_lineno=false;
 	$content_file_start=$content_file_end=0;
+	$content_youtube_id=false;
+	$content_youtube_width=$content_youtube_height=0;
+	$content_youtube_autoplay=$content_youtube_rel=false;
 	$content_longtail_file=$content_longtail_image=false;
 	$content_longtail_width=$content_longtail_height=0;
 	$content_longtail_skin=false;
@@ -84,6 +89,9 @@ foreach ($node_contents as $c) {
 <?php break; ?>
 <?php case 'file': ?>
 <label>Fichier :</label>
+<?php break; ?>
+<?php case 'youtube': ?>
+<label>YouTube :</label>
 <?php break; ?>
 <?php case 'longtail': ?>
 <label>LongTail :</label>
@@ -137,6 +145,21 @@ foreach ($node_contents as $c) {
 <input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?>" title="Fin" />
 <input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" />
 <input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><label for="content_file_lineno[<?php echo $i; ?>]"><span class="btn_edit btn_number" title="Numéroter">numéroter</span></label>
+</p>
+<?php break; ?>
+<?php case 'youtube': ?>
+<p>
+<input name="content_youtube_id[<?php echo $i; ?>]" type="text" size="11" maxlength="20" value="<?php echo htmlspecialchars($content_youtube_id, ENT_COMPAT, 'UTF-8'); ?>" title="Id" />
+<input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?>" title="Largeur" />
+x
+<input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?>" title="Hauteur" />
+<input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_autostart" title="Auto">auto</span></label>
+<select name="content_youtube_theme[<?php echo $i; ?>]" title="Thème">
+<?php foreach (array('dark' => 'sombre', 'light' => 'clair') as $tm => $ts): ?>
+<option value="<?php echo $tm; ?>"<?php if ($content_youtube_theme == $tm) : ?> selected="selected"<?php endif; ?>><?php echo $ts; ?></option>
+<?php endforeach; ?>
+<input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_link" title="Liens">liens</span></label>
+</select>
 </p>
 <?php break; ?>
 <?php case 'longtail': ?>

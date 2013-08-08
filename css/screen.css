@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    48
+ * @version    49
  * @link       http://www.izend.org
  */
  
@@ -161,6 +161,9 @@ a.button {padding:6px 0 4px;margin:1px 0;display:inline-block;text-align:center;
 div.download {margin:1em 0;}
 
 div.longtail {margin:1em 0;overflow:hidden;}
+
+div.youtube > div {position:relative;overflow:hidden;}
+div.youtube iframe {position:absolute;top:0;left:0;width:100%;height:100%;}
 
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;}
 ol.tree ol {margin-left:12px;background:url(../images/vline.png) repeat-y;}

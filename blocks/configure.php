@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    33
+ * @version    34
  * @link       http://www.izend.org
  */
 
@@ -538,10 +538,27 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-CREATE TABLE IF NOT EXISTS `${db_prefix}newsletter_post` (
+CREATE TABLE `${db_prefix}content_youtube` (
+  `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
+  `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `width` int(4) unsigned NOT NULL DEFAULT '0',
+  `height` int(4) unsigned NOT NULL DEFAULT '0',
+  `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
+  `rel` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`,`locale`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+_SEP_;
+	if (!@mysql_query($sql, $db_conn)) {
+		return false;
+	}
+
+	$sql= <<<_SEP_
+CREATE TABLE `${db_prefix}newsletter_post` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
-  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `locale` enum('fr','en') NOT NULL DEFAULT '$default_language',
   `scheduled` datetime NOT NULL,
   `mailed` datetime DEFAULT NULL,
   PRIMARY KEY (`thread_id`,`node_id`,`locale`)
@@ -552,9 +569,9 @@ _SEP_;
 	}
 
 	$sql= <<<_SEP_
-CREATE TABLE IF NOT EXISTS `${db_prefix}newsletter_user` (
+CREATE TABLE `${db_prefix}newsletter_user` (
   `mail` varchar(100) NOT NULL,
-  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `locale` enum('fr','en') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
   PRIMARY KEY (`mail`),
   KEY `locale` (`locale`)
@@ -604,7 +621,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `content_type` enum('text','file','download','infile','longtail') NOT NULL DEFAULT 'text',
+  `content_type` enum('text','file','download','infile','youtube','longtail') NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)

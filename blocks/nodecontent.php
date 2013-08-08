@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -57,6 +57,17 @@ function nodecontent($lang, $node_id) {
 							head('stylesheet', 'geshi'.'/'.$format, 'screen');
 							$contents[] = compact('type', 'file', 'start', 'end', 'format', 'lineno');
 						}
+					}
+					break;
+				case 'youtube':
+					$id=$c['content_youtube_id'];
+					$width=$c['content_youtube_width'];
+					$height=$c['content_youtube_height'];
+					$autoplay = $c['content_youtube_autoplay'];
+					$rel = $c['content_youtube_rel'];
+					$theme = $c['content_youtube_theme'];
+					if ($id and $width > 0 and $height > 0) {
+						$contents[] = compact('type', 'id', 'width', 'height', 'autoplay', 'theme', 'rel');
 					}
 					break;
 				case 'longtail':

@@ -87,7 +87,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 #banner, #sidebar {display:none;}
 
 div.file {font-family:monospace;font-size:.9em;}
-div.download, div.longtail {display:none;}
+div.download, div.longtail, div.youtube {display:none;}
 
 ol.tree li.dirnode {font-style:italic;}
 ol.tree li.filenode {font-style:normal;}

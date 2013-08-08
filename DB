@@ -18,6 +18,24 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Thu Aug 8 2013
+
+	Adds content type youtube
+
+ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'youtube', 'longtail' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text'
+CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
+  `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `locale` enum('en','fr') NOT NULL DEFAULT 'en',
+  `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `width` int(4) unsigned NOT NULL DEFAULT '0',
+  `height` int(4) unsigned NOT NULL DEFAULT '0',
+  `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
+  `rel` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`,`locale`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+----
+
 Date:	Mon Feb 25 2013
 
 CREATE TABLE IF NOT EXISTS `izend_user_info` (
@@ -313,6 +331,18 @@ CREATE TABLE IF NOT EXISTS `izend_content_longtail` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
+  `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `locale` enum('en','fr') NOT NULL DEFAULT 'en',
+  `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `width` int(4) unsigned NOT NULL DEFAULT '0',
+  `height` int(4) unsigned NOT NULL DEFAULT '0',
+  `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
+  `rel` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`content_id`,`locale`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `izend_content_text` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT 'en',
@@ -354,14 +384,14 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `izendnode_content` (
+CREATE TABLE IF NOT EXISTS `izend_node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `content_type` enum('text','file','download','infile','longtail') NOT NULL DEFAULT 'text',
+  `content_type` enum('text','file','download','infile','youtube','longtail') NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
   `ignored` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_node_locale` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
