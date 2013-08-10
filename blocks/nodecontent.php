@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -64,10 +64,12 @@ function nodecontent($lang, $node_id) {
 					$width=$c['content_youtube_width'];
 					$height=$c['content_youtube_height'];
 					$autoplay = $c['content_youtube_autoplay'];
+					$controls = $c['content_youtube_controls'];
+					$fs = $c['content_youtube_fs'];
 					$rel = $c['content_youtube_rel'];
 					$theme = $c['content_youtube_theme'];
 					if ($id and $width > 0 and $height > 0) {
-						$contents[] = compact('type', 'id', 'width', 'height', 'autoplay', 'theme', 'rel');
+						$contents[] = compact('type', 'id', 'width', 'height', 'autoplay', 'theme', 'controls', 'fs', 'rel');
 					}
 					break;
 				case 'longtail':

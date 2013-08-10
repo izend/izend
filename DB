@@ -18,6 +18,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Sat Aug 10 2013
+
+ALTER TABLE `izend_content_youtube` ADD `controls` BOOLEAN NOT NULL DEFAULT '0' AFTER `theme`;
+ALTER TABLE `izend_content_youtube` ADD `fs` BOOLEAN NOT NULL DEFAULT '0' AFTER `controls` ;
+----
+
 Date:	Thu Aug 8 2013
 
 	Adds content type youtube
@@ -338,6 +344,8 @@ CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
   `width` int(4) unsigned NOT NULL DEFAULT '0',
   `height` int(4) unsigned NOT NULL DEFAULT '0',
   `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `controls` tinyint(1) NOT NULL DEFAULT '0',
+  `fs` tinyint(1) NOT NULL DEFAULT '0',
   `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
   `rel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)

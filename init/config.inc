@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 <?php
@@ -90,7 +90,7 @@ $contents_model = array(
 	'infile'	=>	array('path' => array('type' => 'string', 'null' => true)),
 	'download'	=>	array('name' => array('type' => 'string', 'null' => true), 'path' => array('type' => 'string', 'null' => true)),
 	'file'		=>	array('path' => array('type' => 'string', 'null' => true), 'start' => array('type' => 'number', 'default' => 0), 'end' => array('type' => 'number', 'default' => 0), 'format' => array('type' => 'string', 'null' => true), 'lineno' => array('type' => 'boolean', 'default' => true)),
-	'youtube'	=>	array('id' => array('type' => 'string', 'null' => true), 'width' => array('type' => 'number', 'default' => 0), 'height' => array('type' => 'number', 'default' => 0), 'autoplay' => array('type' => 'boolean'), 'rel' => array('type' => 'boolean'), 'theme' => array('type' => 'string', 'default' => 'dark')),
+	'youtube'	=>	array('id' => array('type' => 'string', 'null' => true), 'width' => array('type' => 'number', 'default' => 0), 'height' => array('type' => 'number', 'default' => 0), 'autoplay' => array('type' => 'boolean'), 'controls' => array('type' => 'boolean'), 'fs' => array('type' => 'boolean'), 'rel' => array('type' => 'boolean'), 'theme' => array('type' => 'string', 'default' => 'dark')),
 	'longtail'	=>	array('file' => array('type' => 'string', 'null' => true), 'image' => array('type' => 'string', 'null' => true), 'width' => array('type' => 'number', 'default' => 0), 'height' => array('type' => 'number', 'default' => 0), 'icons' => array('type' => 'boolean'), 'skin' => array('type' => 'string', 'null' => true), 'controlbar' => array('type' => 'string', 'default' => 'none'), 'duration' => array('type' => 'number', 'default' => 0), 'autostart' => array('type' => 'boolean'), 'repeat' => array('type' => 'boolean'))
 );
 

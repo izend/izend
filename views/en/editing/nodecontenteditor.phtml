@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -62,7 +62,7 @@ foreach ($node_contents as $c) {
 	$content_file_start=$content_file_end=0;
 	$content_youtube_id=false;
 	$content_youtube_width=$content_youtube_height=0;
-	$content_youtube_autoplay=$content_youtube_rel=false;
+	$content_youtube_autoplay=$content_youtube_controls=$content_youtube_fs=$content_youtube_rel=false;
 	$content_longtail_file=$content_longtail_image=false;
 	$content_longtail_width=$content_longtail_height=0;
 	$content_longtail_skin=false;
@@ -152,12 +152,14 @@ foreach ($node_contents as $c) {
 <input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?>" title="Width" />
 x
 <input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?>" title="Height" />
-<input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_autostart" title="Auto">auto</span></label>
+<input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
 <select name="content_youtube_theme[<?php echo $i; ?>]" title="Theme">
 <?php foreach (array('dark' => 'dark', 'light' => 'light') as $tm => $ts): ?>
 <option value="<?php echo $tm; ?>"<?php if ($content_youtube_theme == $tm) : ?> selected="selected"<?php endif; ?>><?php echo $ts; ?></option>
 <?php endforeach; ?>
-<input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_link" title="Links">links</span></label>
+<input id="content_youtube_controls[<?php echo $i; ?>]" name="content_youtube_controls[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_controls): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_controls[<?php echo $i; ?>]"><span class="btn_edit btn_controls" title="Controls">controls</span></label>
+<input id="content_youtube_fs[<?php echo $i; ?>]" name="content_youtube_fs[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_fs): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_fs[<?php echo $i; ?>]"><span class="btn_edit btn_fs" title="Full screen">fs</span></label>
+<input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_rel[<?php echo $i; ?>]"><span class="btn_edit btn_rel" title="Links">links</span></label>
 </select>
 </p>
 <?php break; ?>

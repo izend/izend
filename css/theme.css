@@ -150,7 +150,10 @@ span.btn_autostart {background-position:-16px -16px;}
 span.btn_playicon {background-position:-32px -16px;}
 span.btn_repeat {background-position:-48px -16px;}
 span.btn_time {background-position:-0 -16px;}
-span.btn_link {background-position:-112px -32px;}
+span.btn_autoplay {background-position:-16px -16px;}
+span.btn_controls {background-position:-128px -32px;}
+span.btn_fs {background-position:-208px -16px;}
+span.btn_rel {background-position:-112px -32px;}
 span.btn_comment {background-position:0 -32px;}
 span.btn_morecomment {background-position:-16px -32px;}
 span.btn_vote {background-position:-32px -32px;}
