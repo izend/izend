@@ -28,7 +28,6 @@ Date:	Thu Aug 8 2013
 
 	Adds content type youtube
 
-ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'youtube', 'longtail' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text'
 CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT 'en',
@@ -40,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
   `rel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'youtube', 'longtail' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text';
 ----
 
 Date:	Mon Feb 25 2013

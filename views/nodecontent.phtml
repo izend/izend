@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -31,10 +31,10 @@ foreach ($contents as $c) {
 			include $c['infile'];
 			break;
 		case 'youtube':
-			extract($c);	/* id width height autoplay theme rel */
+			extract($c);	/* id width height autoplay theme controls fs rel */
 			echo '<div class="youtube" style="max-width:', $width, 'px;">', PHP_EOL;
 			echo '<div style="width:', $width, 'px;padding-bottom:', round($height/$width, 2) * 100, '%;">', PHP_EOL;
-			echo '<iframe frameborder="0" width="', $width, '" height="', $height, '" src="http://www.youtube.com/embed/', $id, '?autoplay=', $autoplay, '&amp;autohide=1&amp;controls=', $controls, '&amp;HD=1&amp;fs=', $fs, '&amp;modestbranding=0&amp;showinfo=0&amp;rel=', $rel, '&amp;theme=', $theme, '"></iframe>', PHP_EOL;
+			echo '<iframe frameborder="0" width="', $width, '" height="', $height, '" src="http://www.youtube.com/embed/', $id, '?wmode=transparent&amp;autoplay=', $autoplay, '&amp;autohide=1&amp;controls=', $controls, '&amp;fs=', $fs, '&amp;modestbranding=0&amp;showinfo=0&amp;rel=', $rel, '&amp;theme=', $theme, '"></iframe>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			break;
