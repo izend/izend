@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
 
@@ -869,6 +869,7 @@ _SEP_;
 INSERT INTO `${db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
 (1, 1, 'infile', 1),
 (1, 1, 'text', 2),
+(1, 2, 'infile', 3),
 (2, 2, 'text', 1);
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
@@ -889,7 +890,9 @@ _SEP_;
 	$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
 (1, 'fr', 'views/fr/social.phtml'),
-(1, 'en', 'views/en/social.phtml');
+(1, 'en', 'views/en/social.phtml'),
+(2, 'fr', 'views/fr/link.phtml'),
+(2, 'en', 'views/en/link.phtml');
 _SEP_;
 	if (!@mysql_query($sql, $db_conn)) {
 		return false;

@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    68
+ * @version    69
  * @link       http://www.izend.org
  */
 
@@ -266,6 +266,24 @@ span.btn_linkedin {background-position:-48px -48px;}
 #socialbar a.linkedin {background-position:-72px 0;}
 #socialbar a.rss {background-position:-96px 0;}
 #socialbar a.newsletter {background-position:-120px 0;}
+
+a .icon_facebook {width:111px;height:30px;display:inline-block;background:transparent url(../images/facebook.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_facebook, a:visited span.icon_facebook {background-position:0 -30px;}
+a:hover .icon_facebook {background-position:0 0;}
+a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/twitter.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_twitter, a:visited span.icon_twitter {background-position:0 -30px;}
+a:hover .icon_twitter {background-position:0 0;}
+a .icon_rss {width:51px;height:30px;display:inline-block;background:transparent url(../images/rss.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_rss, a:visited span.icon_rss {background-position:0 -30px;}
+a:hover .icon_rss {background-position:0 0;}
+a .icon_newsletter {width:192px;height:30px;display:inline-block;background:transparent url(../images/newsletter.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_newsletter, a:visited span.icon_newsletter {background-position:0 -30px;}
+a:hover .icon_newsletter {background-position:0 0;}
+
+#linkbar {margin:1em 0;}
+#linkbar > a {margin:0 30px;}
+#linkbar > *:first-child {margin-left:0;}
+#linkbar > *:last-child {margin-right:0;}
 
 #connectbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
 #connectbar a.facebook {background-position:0 0;}
