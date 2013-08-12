@@ -545,6 +545,8 @@ CREATE TABLE `${db_prefix}content_youtube` (
   `width` int(4) unsigned NOT NULL DEFAULT '0',
   `height` int(4) unsigned NOT NULL DEFAULT '0',
   `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `controls` tinyint(1) NOT NULL DEFAULT '0',
+  `fs` tinyint(1) NOT NULL DEFAULT '0',
   `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
   `rel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)
