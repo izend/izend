@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    14
+ * @copyright  2010-2013 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -385,8 +385,8 @@ function thread_get_node($lang, $thread_id, $node_id) {
 	return $r ? $r[0] : false;
 }
 
-function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud) {
-	$r = node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud);
+function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin) {
+	$r = node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin);
 
 	if (!$r) {
 		return false;
