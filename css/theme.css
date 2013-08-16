@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    69
+ * @version    70
  * @link       http://www.izend.org
  */
 
@@ -94,8 +94,9 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .tagbar {margin-bottom:5px;}
 .tagbar .tagmore {margin-left:50px;}
 
-input[type="submit"]#fr {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags.png) no-repeat;background-position:0 0;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
-input[type="submit"]#en {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/flags.png) no-repeat;background-position:-24px 0;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+.lang {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/flags.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
+.lang.fr {background-position:0 0;}
+.lang.en {background-position:-24px 0;}
 
 span.icon {width:24px;height:24px;background:transparent url(../images/theme/icons.png) no-repeat;text-indent:-9999px;}
 span.icon_ok {background-position:0 -48px;}
@@ -164,10 +165,6 @@ span.btn_ilike {background-position:0 -48px;}
 span.btn_tweet {background-position:-16px -48px;}
 span.btn_plusone {background-position:-32px -48px;}
 span.btn_linkedin {background-position:-48px -48px;}
-
-.lang {width:24px;height:24px;display:inline-block;vertical-align:middle;text-indent:-9999px;}
-.lang.fr {background:transparent url(../images/theme/flags/fr.png) no-repeat;}
-.lang.en {background:transparent url(../images/theme/flags/en.png) no-repeat;}
 
 #content {margin:1em 0;clear:both;}
 
