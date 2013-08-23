@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
@@ -114,3 +114,10 @@ else {
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
 <title><?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?></title>
+<?php if (!empty($style)): ?>
+<?php foreach ($style as $media => $css) : ?>
+<style type="text/css" media="<?php echo $media; ?>">
+<?php echo $css, PHP_EOL; ?>
+</style>
+<?php endforeach; ?>
+<?php endif; ?>

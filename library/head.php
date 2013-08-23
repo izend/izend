@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    7
+ * @copyright  2010-2013 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -54,6 +54,19 @@ function head($type=false) {
 			break;
 		case 'theme':
 			$head['theme'] = $args[0];
+			break;
+		case 'style':
+			$s=$args[0];
+			$media=isset($args[1]) ? $args[1] : 'all';
+			if (!isset($head['style'])) {
+				$head['style'] = array($media => $s);
+			}
+			else if (!isset($head['style'][$media])) {
+				$head['style'][$media] = $s;
+			}
+			else {
+				$head['style'][$media] .= PHP_EOL . PHP_EOL . $s;
+			}
 			break;
 		case 'stylesheet':
 			$name=$args[0];
