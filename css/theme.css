@@ -278,8 +278,7 @@ a:link .icon_newsletter, a:visited span.icon_newsletter {background-position:0 -
 a:hover .icon_newsletter {background-position:0 0;}
 
 #linkbar {margin:1em 0;}
-#linkbar > a {margin:0 30px;}
-#linkbar > *:first-child {margin-left:0;}
+#linkbar > a {margin:0 30px 0 0;}
 #linkbar > *:last-child {margin-right:0;}
 
 #connectbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
