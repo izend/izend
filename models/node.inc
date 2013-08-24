@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -386,7 +386,7 @@ function node_get_comment($node_id, $comment_id, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited, user_id AS comment_user_id, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(edited) AS comment_edited, user_id AS comment_user_id, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
 
 	$r = db_query($sql);
 
