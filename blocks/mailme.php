@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2013 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'validatemail.php';
 require_once 'ismailinjected.php';
 require_once 'tokenid.php';
 
-function mailme($lang, $to=false, $with_appointment=false) {
+function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $with_home=true) {
 	$action='init';
 	if (isset($_POST['mailme_send'])) {
 		$action='send';
@@ -77,8 +77,6 @@ function mailme($lang, $to=false, $with_appointment=false) {
 	$home_page=false;
 
 	$internal_error=false;
-
-	$with_captcha=true;
 
 	switch($action) {
 		case 'send':
@@ -162,9 +160,12 @@ function mailme($lang, $to=false, $with_appointment=false) {
 
 			$subject=$message=$date=$hour=$minute=false;
 
-			global $home_action;
+			if ($with_home) {
+				global $home_action;
 
-			$home_page=url($home_action, $lang);
+				$home_page=url($home_action, $lang);
+			}
+
 			$email_sent=true;
 
 			break;

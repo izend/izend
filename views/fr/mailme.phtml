@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -57,7 +57,11 @@
 <?php if ($infos): extract($infos); ?>
 <div class="infos">
 <?php if ($email_sent): ?>
-<p>Votre message a bien été envoyé. Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez ici</a>.</p>
+<p>Votre message a bien été envoyé.
+<?php if ($home_page): ?>
+Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez ici</a>.
+<?php endif; ?>
+</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>
