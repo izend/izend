@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'userprofile.php';
 require_once 'tokenid.php';
 require_once 'models/node.inc';
 
-function nodecomment($lang, $node_id, $node_url, $nomore) {
+function nodecomment($lang, $node_id, $node_user, $node_url, $nomore) {
 	$moderator=user_has_role('moderator');
 	$user_id=user_profile('id');
 

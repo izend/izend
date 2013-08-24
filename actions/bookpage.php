@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    16
+ * @copyright  2010-2013 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -45,12 +45,13 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
 	}
 
+	$page_user=$node_user;
 	$page_name=$node_name;
 	$page_title=$node_title;
 	$page_abstract=$node_abstract;
@@ -87,7 +88,7 @@ function bookpage($lang, $book, $page) {
 	if (!($thread_nocomment or $node_nocomment)) {
 		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('book', $lang) . '/'. $book_name . '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_url, $nomore);
+		$page_comment = build('nodecomment', $lang, $page_id, $page_user, $page_url, $nomore);
 	}
 
 	$vote=false;
