@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -378,7 +378,7 @@ function thread_get_node($lang, $thread_id, $node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.user_id AS node_user, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
+	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, n.user_id AS node_user_id, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id LIMIT 1";
 
 	$r = db_query($sql);
 

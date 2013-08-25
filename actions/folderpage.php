@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -43,13 +43,13 @@ function folderpage($lang, $folder, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
 	}
 
-	$page_user=$node_user;
+	$page_user_id=$node_user_id;
 	$page_name=$node_name;
 	$page_title=$node_title;
 	$page_abstract=$node_abstract;
@@ -82,7 +82,7 @@ function folderpage($lang, $folder, $page) {
 	if (!($thread_nocomment or $node_nocomment)) {
 		$nomore=(!$page_contents or $thread_nomorecomment or $node_nomorecomment) ? true : false;
 		$page_url = url('folder', $lang) . '/' . $folder_name. '/' . $page_name;
-		$page_comment = build('nodecomment', $lang, $page_id, $page_user, $page_url, $nomore);
+		$page_comment = build('nodecomment', $lang, $page_id, $page_user_id, $page_url, $nomore);
 	}
 
 	$vote=false;
