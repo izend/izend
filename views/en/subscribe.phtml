@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -20,7 +20,7 @@
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/subscribe" alt="" height="40" title="Verification code" />
-&nbsp;:&nbsp;
+:
 <input type="text" name="subscribe_code" id="subscribe_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'subscribe_send')" value="" />
 </p>
 <?php endif; ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -19,7 +19,7 @@
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/remindme" alt="" height="40" title="Verification code" />
-&nbsp;:&nbsp;
+:
 <input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
 </p>
 <?php endif; ?>

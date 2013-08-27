@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    8
+ * @copyright  2010-2013 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -27,7 +27,7 @@
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/login" alt="" height="40" title="Verification code" />
-&nbsp;:&nbsp;
+:
 <input type="text" name="login_code" id="login_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'login_enter')" value="" />
 </p>
 <?php endif; ?>
