@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -20,12 +20,13 @@
 <span class="btn_edit btn_url" title="url" onclick="tagcomment('[url]','[/url]')">[url]</span>
 <span class="btn_edit btn_email" title="email" onclick="tagcomment('[email]','[/email]')">[email]</span>
 <span class="btn_edit btn_help" title="Aide" onclick="togglehelp()">aide</span>
-<span id="comment_limiter"><?php echo $message_maxlen; ?></span>
+<span id="comment_limiter" class="bbcodebar_limiter"><?php echo $message_maxlen; ?></span>
 </div>
 <textarea id="comment_message" name="comment_message" cols="80" rows="10" title="Texte" onkeyup="return inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
 <p id="comment_help" class="bbcodehelp">
-Entrez un maximum de <b><?php echo $message_maxlen; ?></b> caractères. Améliorez la présentation de votre texte avec les balises de formatage suivantes&nbsp;:<br />
+Entrez un maximum de <b><?php echo $message_maxlen; ?></b> caractères.<br />
+Améliorez la présentation de votre texte avec les balises de formatage suivantes&nbsp;:<br />
 [<b>p</b>]paragraphe[/p], [<b>b</b>]<b>gras</b>[/b], [<b>i</b>]<i>italique</i>[/i], [<b>u</b>]<u>souligné</u>[/u], [<b>s</b>]<s>barré</s>[/s],
 [<b>quote</b>]citation[/quote], [<b>pre</b>]tel quel[/pre], [<b>br</b>]à la ligne,<br />
 [<b>url</b>]http://www.izend.org[/url], [<b>url</b>=http://www.izend.org]site[/url],

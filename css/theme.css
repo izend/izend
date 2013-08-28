@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    70
+ * @version    71
  * @link       http://www.izend.org
  */
 
@@ -298,8 +298,7 @@ a:hover .icon_newsletter {background-position:0 0;}
 #newcomment > h6 {color:#666666;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
 
 .bbcodebar {margin-bottom:5px;}
-.bbcodebar #comment_limiter {font-size:x-small;margin-left:10px;}
-.bbcodebar .alert {color:#df6f6f;font-style:italic;}
+.bbcodebar_limiter {font-size:x-small;margin-left:10px;}
 .bbcodehelp {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
 
 .vote {float:right;margin-left:1em;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}

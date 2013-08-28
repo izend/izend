@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -118,11 +118,8 @@ function inputlimit(inputid, labelid, maxlength) {
 	var s = input.value.replace("#\r\n#g","\n");
 	var length = s.length;
 	var remaining = maxlength - length;
-	var v = document.createElement('span');
-	v.id = labelid;
-	v.innerHTML = Math.abs(remaining);
-	v.className = remaining < 0 ? 'alert' : 'normal';
-	label.parentNode.replaceChild(v, label);
+
+	label.innerHTML=remaining;
 }
 
 function addtag(id, open, close) {
