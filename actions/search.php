@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -155,10 +155,7 @@ function search($lang, $arglist=false) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	$social=true;
-	$footer = ($cloud_id == $rss_thread or $cloud_id == $newsletter_thread) ? false : build('footer', $lang, compact('social'));
-
-	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar'));
+	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 
 	return $output;
 }
