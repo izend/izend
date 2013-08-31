@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -32,8 +32,8 @@ foreach ($contents as $c) {
 			break;
 		case 'youtube':
 			extract($c);	/* id width height autoplay theme controls fs rel */
-			echo '<div class="youtube" style="max-width:', $width, 'px;">', PHP_EOL;
-			echo '<div style="width:', $width, 'px;padding-bottom:', round($height/$width, 2) * 100, '%;">', PHP_EOL;
+			echo '<div class="youtube" style="width:', $width, 'px;max-width:100%;">', PHP_EOL;
+			echo '<div style="padding-bottom:', round($height/$width, 2) * 100, '%;">', PHP_EOL;
 			echo '<iframe frameborder="0" width="', $width, '" height="', $height, '" src="http://www.youtube.com/embed/', $id, '?wmode=transparent&amp;autoplay=', $autoplay, '&amp;autohide=1&amp;controls=', $controls, '&amp;fs=', $fs, '&amp;modestbranding=0&amp;showinfo=0&amp;rel=', $rel, '&amp;theme=', $theme, '"></iframe>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			echo '</div>', PHP_EOL;
