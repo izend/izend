@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ ul, pre {margin-top:1em;}
 
 form {margin:0;}
 
-input, select {vertical-align:middle;}
+input[type="checkbox"], input[type="radio"] {vertical-align:middle;}
 
 p, dl, multicol {margin:1em 0;}
 
