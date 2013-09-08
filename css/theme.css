@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    71
+ * @version    72
  * @link       http://www.izend.org
  */
 
@@ -146,6 +146,7 @@ span.btn_entquote {background-position:-176px -16px;}
 span.btn_number {background-position:-192px 0;}
 span.btn_seval{background-position:-240px 0;}
 span.btn_striptags {background-position:-192px -16px;}
+span.btn_stripbbcodes {background-position:-192px -16px;}
 span.btn_calendar {background-position:-80px -16px;}
 span.btn_autostart {background-position:-16px -16px;}
 span.btn_playicon {background-position:-32px -16px;}

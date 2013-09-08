@@ -148,10 +148,20 @@ function addtag(id, open, close) {
 }
 
 function striptags(id) {
+	var regexp=/<[^>]*>/gm;
+
+	stripit(id, regexp);
+}
+
+function stripbbcodes(id) {
+	var regexp=/\[[^\]]*\]/gm;
+
+	stripit(id, regexp);
+}
+
+function stripit(id, regexp) {
 	var e=document.getElementById(id);
 	if (e) {
-		var regexp=/<[^>]*>/gm;
-
 		if (document.selection && document.selection.createRange) {		// IE
 			e.focus();
 			var sel = document.selection.createRange();

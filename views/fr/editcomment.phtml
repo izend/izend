@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -19,6 +19,7 @@
 <span class="btn_edit btn_php" title="code" onclick="tagcomment('[code]','[/code]')">[code]</span>
 <span class="btn_edit btn_url" title="url" onclick="tagcomment('[url]','[/url]')">[url]</span>
 <span class="btn_edit btn_email" title="email" onclick="tagcomment('[email]','[/email]')">[email]</span>
+<span class="btn_edit btn_stripbbcodes" title="strip" onclick="stripbbcodes('comment_message')">strip</span>
 <span class="btn_edit btn_help" title="Aide" onclick="togglehelp()">aide</span>
 <span id="comment_limiter" class="bbcodebar_limiter"><?php echo $message_maxlen; ?></span>
 </div>
