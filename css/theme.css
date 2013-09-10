@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    72
+ * @version    73
  * @link       http://www.izend.org
  */
 
@@ -310,11 +310,11 @@ a:hover .icon_newsletter {background-position:0 0;}
 
 #searchlinks h3 a:link {color:#aec14e;}
 #searchlinks h3 a:hover {color:#ec902d;}
-#searchlinks ol {margin-left:0;padding:0;}
+#searchlinks ol {margin-top:0.5em;margin-left:0;padding:0;}
 #searchlinks li {list-style:none;margin-bottom:1em;}
 #searchlinks a {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-#searchlinks li p {margin:0.5em 0 0.5em 0;font-size:small;font-style:italic;}
-#searchlinks li p+p {color:#666666;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;}
+#searchlinks li p {margin:0.5em 0;font-size:small;font-style:italic;}
+#searchlinks li div {color:#666666;margin:0.5em 0;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-style:normal;font-size:small;}
 
 #summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;line-height:1.5;text-align:right;margin:0 0 1em 0;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 

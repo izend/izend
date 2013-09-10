@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
  
@@ -85,6 +85,12 @@ div.vbar > *:last-child {margin-bottom:0;}
 .video-js {display:none;}
 
 #banner, #sidebar {display:none;}
+
+#searchlinks ol {margin:1em 0;padding:0;}
+#searchlinks li {list-style:none;}
+#searchlinks li > * {display:block;margin:1em 0;}
+#searchlinks li a {font-weight:bold;}
+#searchlinks li div {font-style:italic;}
 
 div.file {font-family:monospace;font-size:.9em;}
 div.download, div.longtail, div.youtube {display:none;}

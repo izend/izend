@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -90,7 +90,7 @@ function search($lang, $arglist=false) {
 
 	$search_url=false;
 
-	$search=$cloud=false;
+	$search=$cloud=$title=false;
 
 	if ($rsearch) {
 		if ($cloud_id) {
