@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -33,6 +33,9 @@ function head($type=false) {
 			break;
 		case 'description':
 			$head['description'] = $args[0];
+			break;
+		case 'image':
+			$head['image'] = $args[0];
 			break;
 		case 'canonical':
 			$head['canonical'] = $args[0];
