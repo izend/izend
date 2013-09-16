@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    73
+ * @version    74
  * @link       http://www.izend.org
  */
 
@@ -211,8 +211,8 @@ span.btn_linkedin {background-position:-48px -48px;}
 
 #sidebar {float:right;width:200px;margin-left:1em;}
 
-#sidebar #headline {margin:0.1em 0 0.5em;text-align:right;}
-#sidebar #searchinput {margin:-2px 0 0.5em auto;}
+#sidebar #headline {margin-top:0;margin-bottom:0.75em;text-align:right;}
+#sidebar #searchinput {margin-bottom:0.5em;}
 #sidebar #donate {float:right;margin:1em 0;}
 #sidebar .cloud {margin-bottom:1em;}
 #sidebar .hidy {height:16px;background:transparent url(../images/theme/icons/down.png) no-repeat;margin-left:176px;cursor:pointer;}
