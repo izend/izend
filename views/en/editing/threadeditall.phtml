@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -55,10 +55,7 @@ foreach ($thread_list as $tr) {
 ?>
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php echo $pos; ?>" /></td>
-<td class="aright"><a href="<?php echo $thread_url; ?>"><?php echo $thread_id; ?></a></td>
-<?php if ($thread_title): ?>
-<td><a href="<?php echo $thread_url; ?>"><?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?></a></td>
-<?php endif; ?>
+<td><a href="<?php echo $thread_url; ?>" title="<?php echo $thread_id; ?>"><?php echo $thread_title ? htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8') : $thread_id; ?></a></td>
 </tr>
 <?php
 	$i++;
