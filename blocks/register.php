@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -303,8 +303,7 @@ function register($lang) {
 	$connectbar=false;
 	if ($with_facebook) {
 		$scope=$with_website ? 'email, user_website' : 'email';
-		$display='popup';
-		$facebook_login_url=$facebook->getLoginUrl(compact('scope', 'display'));
+		$facebook_login_url=$facebook->getLoginUrl(compact('scope'));
 		$connectbar=view('connect', $lang, compact('facebook_login_url'));
 	}
 
