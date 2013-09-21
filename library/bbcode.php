@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'geshi.php';
 function bbcode($s) {
 	static $bbcode = array(
 			'#\[br\]#is'							=> '<br />',
-//			'#\[(h[1-6])\](.+?)\[/\1\]#is'			=> '<\1>\2</\1>',
+//			'#\[(h[4-6])\](.+?)\[/\1\]#is'			=> '<\1>\2</\1>',
 			'#\[b\](.+?)\[/b\]#is'					=> '<b>\1</b>',
 			'#\[i\](.+?)\[/i\]#is'					=> '<i>\1</i>',
 			'#\[u\](.+?)\[/u\]#is'					=> '<u>\1</u>',
@@ -26,6 +26,8 @@ function bbcode($s) {
 			'#\[(e?mail)\](.*?)\[/\1\]#ise'			=> "filter_var('\\2', FILTER_VALIDATE_EMAIL) ? '<a href=\"mailto:\\2\">\\2</a>' : '\\0'",
 			'#\[code\=(.+?)\](.+?)\[/code\]#ise'	=> "bbcode_highlite('\\2', '\\1')",
 			'#\[code\](.+?)\[/code\]#ise'			=> "bbcode_highlite('\\1')",
+//			'#\[small\](.+?)\[/small\]#is'			=> '<span class="smaller">\1</span>',
+//			'#\[big\](.+?)\[/big\]#is'				=> '<span class="larger">\1</span>',
 	);
 
 	$s = preg_replace('#\[code([^\]]*?)\](.*?)\[/code\]#ise', "'[code\\1]'.bbcode_protect('\\2').'[/code]'", $s);
