@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -112,6 +112,13 @@ function nodeeditor($lang, $clang, $node_id, $content_types) {
 
 			if (!$r) {
 				break;
+			}
+
+			if (!$node_comment) {
+				$node_morecomment=false;
+			}
+			if (!$node_vote) {
+				$node_morevote=false;
 			}
 
 			break;
