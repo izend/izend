@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -57,6 +57,17 @@ function head($type=false) {
 			break;
 		case 'theme':
 			$head['theme'] = $args[0];
+			break;
+		case 'font':
+			$fname=$args[0];
+			if (!isset($head['fonts'])) {
+				$head['fonts'] = array($fname);
+			}
+			else {
+				if (!in_array($fname, $head['fonts'])) {
+					$head['fonts'][]=$fname;
+				}
+			}
 			break;
 		case 'style':
 			$s=$args[0];
