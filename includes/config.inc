@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    30
+ * @version    31
  * @link       http://www.izend.org
  */
 
@@ -36,6 +36,10 @@ $signature='izend.org - http://www.izend.org';
 global $socializing;
 
 $socializing='inline';	// is_mobile() ? 'inline' : 'bar';	// false, 'inline', 'bar'
+
+global $opengraph_agent_list;
+
+$opengraph_agent_list=array('facebook', 'google');	// false or array of agent signatures
 
 global $facebookid, $facebooksecret;
 

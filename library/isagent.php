@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    1
+ * @copyright  2010-2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -31,4 +31,14 @@ function is_android($agent=false) {
 
 function is_facebook($agent=false) {
 	return is_agent('facebook', $agent);
+}
+
+function is_google($agent=false) {
+	return is_agent('google', $agent);
+}
+
+function is_opengraph($agent=false) {
+	global $opengraph_agent_list;
+
+	return $opengraph_agent_list ? is_agent(implode('|', $opengraph_agent_list), $agent) : false;
 }
