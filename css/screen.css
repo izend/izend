@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    50
+ * @version    51
  * @link       http://www.izend.org
  */
  
@@ -60,6 +60,7 @@ ul {list-style-type:disc;}
 .menu a span {display:none;}
 
 .menubar li {display:inline;}
+.iconbar li {display:inline-block;}
 
 .topbar {display:inline-block;margin:1em 0;}
 .topbar > li {float:left;width:7em;padding:5px 0;overflow:hidden;}
