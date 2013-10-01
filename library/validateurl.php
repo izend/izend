@@ -2,13 +2,21 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2013 izend.org
+ * @version    3
  * @link	   http://www.izend.org
  */
 
 function validate_url($url) {
 	return filter_var($url, FILTER_VALIDATE_URL);
+}
+
+function prefix_url($url, $protocol='http') {
+	if (!@parse_url($url, PHP_URL_SCHEME)) {
+        $url = $protocol . '://' . $url;
+    }
+
+    return $url;
 }
 
 function normalize_url($url) {
