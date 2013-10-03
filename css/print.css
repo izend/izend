@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
  
@@ -30,7 +30,7 @@ input, select, textarea {font-size:100%;border:none;vertical-align:middle;}
 
 fieldset {display:inline-block;padding:0.5em;}
 
-img {vertical-align:middle;}
+img {vertical-align:middle;max-width:100%;height:auto;}
 
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
