@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
@@ -86,7 +86,7 @@ else {
 	$url=$base_path . '/css/' . $name . '.css';
 }
 ?>
-<link href="<?php echo $url; ?>" rel="stylesheet" type="text/css" media="<?php echo $media; ?>" />
+<link href="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>" rel="stylesheet" type="text/css" media="<?php echo $media; ?>" />
 <?php endforeach; ?>
 <?php endif; ?>
 <?php if (!empty($theme)): ?>
@@ -112,7 +112,7 @@ else {
 	$url=$base_path . '/js/' . $name . '.js';
 }
 ?>
-<script type="text/javascript" src="<?php echo $url; ?>"><?php echo $param; ?></script>
+<script type="text/javascript" src="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>"><?php echo htmlspecialchars($param, ENT_NOQUOTES, 'UTF-8', false); ?></script>
 <?php endforeach; ?>
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>
