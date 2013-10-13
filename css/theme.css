@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    78
+ * @version    79
  * @link       http://www.izend.org
  */
 
@@ -170,6 +170,8 @@ span.btn_pinterest {background-position:-64px -48px;}
 span.btn_world {background-position:-240px -16px;}
 span.btn_map {background-position:-144px -32px;}
 span.btn_marker {background-position:-160px -32px;}
+span.btn_film {background-position:-144px -48px;}
+span.btn_camera {background-position:-160px -48px;}
 
 #content {margin:1em 0;clear:both;}
 
