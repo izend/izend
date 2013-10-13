@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    77
+ * @version    78
  * @link       http://www.izend.org
  */
 
@@ -315,8 +315,6 @@ a:hover .icon_newsletter {background-position:0 0;}
 .vote span.plusone {display:inline-block;cursor:default;}
 .vote input.plusone {cursor:pointer;}
 
-#searchlinks h3 a:link {color:#aec14e;}
-#searchlinks h3 a:hover {color:#ec902d;}
 #searchlinks ol {margin-top:0.5em;margin-left:0;padding:0;}
 #searchlinks li {list-style:none;margin-bottom:1em;}
 #searchlinks a {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
