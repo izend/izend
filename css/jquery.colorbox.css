@@ -21,14 +21,15 @@
 */
 #cboxOverlay{background:#000;}
 #colorbox{}
-    #cboxTopLeft{width:25px; height:25px; background:url(colorbox/border1.png) no-repeat 0 0;}
-    #cboxTopCenter{height:25px; background:url(colorbox/border1.png) repeat-x 0 -50px;}
-    #cboxTopRight{width:25px; height:25px; background:url(colorbox/border1.png) no-repeat -25px 0;}
-    #cboxBottomLeft{width:25px; height:25px; background:url(colorbox/border1.png) no-repeat 0 -25px;}
-    #cboxBottomCenter{height:25px; background:url(colorbox/border1.png) repeat-x 0 -75px;}
-    #cboxBottomRight{width:25px; height:25px; background:url(colorbox/border1.png) no-repeat -25px -25px;}
-    #cboxMiddleLeft{width:25px; background:url(colorbox/border2.png) repeat-y 0 0;}
-    #cboxMiddleRight{width:25px; background:url(colorbox/border2.png) repeat-y -25px 0;}
+    #colorbox{border-radius:10px; -webkit-border-radius:10px; -moz-border-radius:10px;}
+    #cboxTopLeft{width:10px; height:10px; background: #fff;}
+    #cboxTopRight{width:10px; height:10px; background: #fff;}
+    #cboxBottomLeft{width:10px; height:10px; background: #fff;}
+    #cboxBottomRight{width:10px; height:10px; background: #fff;}
+    #cboxMiddleLeft{width:10px; background: #fff;}
+    #cboxMiddleRight{width:10px; background: #fff;}
+    #cboxTopCenter{height:10px; background: #fff;}
+    #cboxBottomCenter{height:10px; background: #fff;}
     #cboxContent{background:#fff;}
         .cboxIframe{background:#fff;}
         #cboxError{padding:50px; border:1px solid #ccc;}
@@ -38,10 +39,7 @@
         #cboxLoadingOverlay{background:transparent url(colorbox/loading.gif) no-repeat 50% 50%;}
 
         /* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
-        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {border:0; padding:0; margin:0; overflow:visible; width:auto; background:none; text-indent:-9999px;}
- 
-        #cboxClose {width:18px; height:18px; background:#fff url("colorbox/close.png") no-repeat center center; position:absolute; top:-19px; right:-18px; border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;}
-/*
-        #cboxPrevious {width:12px; height:12px; background:#fff url("colorbox/previous.png") no-repeat center center; position:absolute; top:50%; left:-12px;}
-        #cboxNext {width:12px; height:12px; background:#fff url("colorbox/next.png") no-repeat center center; position:absolute; top:50%; right:-12px;}
-*/
+        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {border:0; padding:0; margin:0; overflow:visible; width:20px; height:20px; background:none; text-indent:-9999px; border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
+        #cboxClose {background:#fff url("colorbox/close.png") no-repeat center center; position:absolute; top:-10px; right:-10px;}
+        #cboxPrevious {background:#fff url("colorbox/previous.png") no-repeat center center; position:absolute; bottom:-10px; left:-10px;}
+        #cboxNext {background:#fff url("colorbox/next.png") no-repeat center center; position:absolute; bottom:-10px; right:-10px;}
