@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    52
+ * @version    53
  * @link       http://www.izend.org
  */
  
@@ -34,7 +34,7 @@ input[type="text"], input[type="password"], textarea {max-width:90%;}
 input[type="text"], input[type="password"], textarea, select, fieldset {border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;}
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus {border-color:#aaaaaa;}
 
-input[type="text"], input[type="password"], textarea, select, fieldset {border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;}
+input[type="text"], input[type="password"], textarea, select, fieldset {border-radius:2px;}
 
 input[type="text"], input[type="password"], textarea {padding:2px 3px 4px;}
 select {padding:2px;}
@@ -108,7 +108,7 @@ div.gallery img:first-child, div.gallery a:first-child {border-left-width:0 !imp
 div.gallery img:last-child, div.gallery a:last-child {border-right-width:0 !important;}
 div.gallery.compact img, div.gallery.compact a {border:none;}
 
-.round {border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;}
+.round {border-radius:8px;}
 .shadow {box-shadow:2px 2px 3px #999999;-webkit-box-shadow:2px 2px 3px #999999;-moz-box-shadow:2px 2px 3px #999999;}
 
 div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
