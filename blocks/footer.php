@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2013 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -35,7 +35,7 @@ function footer($lang, $components=false) {
 					break;
 				case 'newsletter':
 					if ($param) {
-						$newsletter_page=url('newsletteruser', $lang);
+						$newsletter_page=url('newslettersubscribe', $lang);
 					}
 					break;
 				case 'account':

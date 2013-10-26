@@ -16,6 +16,7 @@ UPDATES
 Date:	Fri Oct 25 2013
 
 Adds action newsletterunsubscribe.
+Renames action newsletteruser to newslettersubscribe.
 ----
 
 Date:	Thu Jun 13 2013
@@ -75,7 +76,7 @@ $aliases = array(
 		'edit/manual'				=> 'bookedit',
 		'newsletter' 				=> 'newsletter',
 		'edit/newsletter' 			=> 'newsletteredit',
-		'newsletter/subscribe' 		=> 'newsletteruser',
+		'newsletter/subscribe' 		=> 'newslettersubscribe',
 		'newsletter/unsubscribe' 	=> 'newsletterunsubscribe',
 		'thread'					=> 'thread',
 		'edit/thread'				=> 'threadedit',
@@ -107,7 +108,7 @@ $aliases = array(
 		'edition/manuel'			=> 'bookedit',
 		'infolettre' 				=> 'newsletter',
 		'edition/infolettre' 		=> 'newsletteredit',
-		'infolettre/abonnement'		=> 'newsletteruser',
+		'infolettre/abonnement'		=> 'newslettersubscribe',
 		'infolettre/desabonnement'	=> 'newsletterunsubscribe',
 		'fil'						=> 'thread',
 		'edition/fil'				=> 'threadedit',

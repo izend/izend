@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    1
+ * @copyright  2012-2013 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
-function newsletteruser($lang) {
+function newslettersubscribe($lang) {
 	head('title', translate('newsletter:title', $lang));
 	head('description', false);
 	head('keywords', false);
@@ -17,7 +17,7 @@ function newsletteruser($lang) {
 
 	$subscribe = build('subscribe', $lang);
 
-	$content = view('newsletteruser', $lang, compact('subscribe'));
+	$content = view('newslettersubscribe', $lang, compact('subscribe'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

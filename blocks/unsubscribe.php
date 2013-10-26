@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -36,7 +36,7 @@ function unsubscribe($lang) {
 	$subscribe_page=false;
 	switch($action) {
 		case 'init':
-			$subscribe_page=url('newsletteruser', $lang);
+			$subscribe_page=url('newslettersubscribe', $lang);
 			break;
 
 		case 'unsubscribe':
