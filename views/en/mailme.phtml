@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -50,12 +50,12 @@
 <?php elseif ($bad_code): ?>
 <p>The verification code is incorrect.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>An internal error has occurred.</p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($email_sent): ?>
 <p>Your message has been sent.
 <?php if ($home_page): ?>
@@ -64,7 +64,6 @@ To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.
 </p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php if ($with_appointment): ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -50,12 +50,12 @@
 <?php elseif ($bad_code): ?>
 <p>Le code de vérification est incorrect.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>Une erreur interne s'est produite.</p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($email_sent): ?>
 <p>Votre message a bien été envoyé.
 <?php if ($home_page): ?>
@@ -64,7 +64,6 @@ Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez i
 </p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php if ($with_appointment): ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('javascript', 'jquery.ui.datepicker-fr'); ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -88,19 +88,18 @@
 <?php if ($missing_confirmation): ?>
 <p>Check the confirmation box.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>An internal error has occurred.
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($account_created): ?>
 <p>Your account has been created. Your password has been emailed to your address.<br />
 To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {
@@ -130,4 +129,3 @@ else if ($missing_password or $bad_password) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
-

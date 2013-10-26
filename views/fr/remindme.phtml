@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
-<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion&nbsp;?<?php else: ?>Quel est votre adresse d'email&nbsp;?<?php endif; ?></p>
+<p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion&nbsp;?<?php else: ?>Quelle est votre adresse d'email&nbsp;?<?php endif; ?></p>
 <p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="Identifiant" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php if ($with_name): ?>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
@@ -39,19 +39,18 @@
 <?php if ($missing_confirmation): ?>
 <p>Cochez la case de confirmation.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>Une erreur interne s'est produite.
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($email_sent): ?>
 <p>Un nouveau mot de passe vous a été envoyé par email.<br />
 Pour vous identifier, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {
