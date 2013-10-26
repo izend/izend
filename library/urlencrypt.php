@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2013 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -29,5 +29,5 @@ function urlencrypt($s, $key) {
 }
 
 function urldecrypt($s64, $key) {
-	return aesdecrypt(urldecodebase64($s64), $key);
+	return rtrim(aesdecrypt(urldecodebase64($s64), $key));
 }
