@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 <?php
@@ -28,6 +28,10 @@ $webmaster = '<?php echo $webmaster; ?>';
 $mailer = 'iZend';
 $blackmaillist = array($webmaster);
 $blacknamelist = array('<?php echo $username; ?>');
+
+global $sitekey;
+
+$sitekey=pack('H*', '<?php echo $sitekey; ?>');	// 32 random bytes - see openssl_random_pseudo_bytes
 
 global $blackfilelist;
 

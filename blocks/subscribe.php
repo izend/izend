@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2013 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -17,6 +17,8 @@ require_once 'validatelocale.php';
 require_once 'models/newsletter.inc';
 
 function subscribe($lang) {
+	global $sitekey;
+
 	$with_captcha=true;
 
 	$action='init';
@@ -32,7 +34,14 @@ function subscribe($lang) {
 		$user_locale=$lang;
 	}
 
+	$unsubscribe_page=false;
 	switch($action) {
+		case 'init':
+			if ($sitekey) {
+				$unsubscribe_page=url('newsletterunsubscribe', $lang);
+			}
+			break;
+
 		case 'subscribe':
 			if (isset($_POST['subscribe_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['subscribe_mail'])));
@@ -154,7 +163,7 @@ function subscribe($lang) {
 	$errors = compact('missing_mail', 'bad_mail', 'missing_locale', 'bad_locale', 'duplicated_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_registered');
 
-	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'user_locale', 'confirmed', 'errors', 'infos'));
+	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'user_locale', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
 
 	return $output;
 }

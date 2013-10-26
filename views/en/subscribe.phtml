@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -35,25 +35,27 @@
 <?php if ($missing_mail): ?>
 <p>Enter a valid email address.</p>
 <?php elseif ($bad_mail): ?>
-<p class="error">The email address is invalid.</p>
+<p>The email address is invalid.</p>
 <?php elseif ($duplicated_mail): ?>
-<p class="error">This email address is already registered.</p>
+<p>This email address is already registered.</p>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Check the confirmation box.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>An internal error has occurred.
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($email_registered): ?>
 <p>Your email address has been registered.</p>
 <?php endif; ?>
-</div>
+<?php if ($unsubscribe_page): ?>
+<p>To stop receiving the newsletter, <a href="<?php echo $unsubscribe_page; ?>">click here</a>.</p>
 <?php endif; ?>
+</div>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {

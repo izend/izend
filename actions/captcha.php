@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function captcha($lang, $arglist=false) {
 		}
 	}
 
-	$accepted = array('login', 'register', 'remindme', 'mailme', 'subscribe');
+	$accepted = array('login', 'register', 'remindme', 'mailme', 'subscribe', 'unsubscribe');
 
 	if ($id and !in_array($id, $accepted)) {
 		return run('error/badrequest', $lang);

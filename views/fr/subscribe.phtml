@@ -3,14 +3,14 @@
 /**
  *
  * @copyright  2012-2013 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="subscribe_token" value="<?php echo $token; ?>" />
-<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quel est votre adresse d'email&nbsp;?</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
 <p><input type="text" name="subscribe_mail" id="subscribe_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return focusonenter(event, 'subscribe_code')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Votre adresse d'email est strictement confidentielle.</p>
 <p class="inlabel">Dans quelle langue voulez-vous recevoir la lettre&nbsp;?</p>
@@ -37,23 +37,25 @@
 <?php elseif ($bad_mail): ?>
 <p>L'adresse d'email est incorrecte.</p>
 <?php elseif ($duplicated_mail): ?>
-<p class="error">Cette adresse d'email est déjà enregistrée.</p>
+<p>Cette adresse d'email est déjà enregistrée.</p>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Cochez la case de confirmation.</p>
 <?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
 <?php if ($internal_error): ?>
 <p>Une erreur interne s'est produite.
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
-</div>
-<?php if ($infos): extract($infos); ?>
-<div class="infos">
 <?php if ($email_registered): ?>
 <p>Votre adresse d'email a été enregistrée.</p>
 <?php endif; ?>
-</div>
+<?php if ($unsubscribe_page): ?>
+<p>Pour ne plus recevoir la lettre d'information, <a href="<?php echo $unsubscribe_page; ?>">cliquez ici</a>.</p>
 <?php endif; ?>
+</div>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {

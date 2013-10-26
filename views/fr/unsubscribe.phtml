@@ -1,0 +1,71 @@
+<?php
+
+/**
+ *
+ * @copyright  2013 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<form action="" method="post">
+<input type="hidden" name="unsubscribe_token" value="<?php echo $token; ?>" />
+<p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
+<p><input type="text" name="unsubscribe_mail" id="unsubscribe_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return focusonenter(event, 'unsubscribe_code')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="info">Votre adresse d'email est strictement confidentielle.</p>
+<p class="inlabel<?php if ($missing_confirmation): ?> inerror<?php endif; ?>">Merci de confirmer votre désinscription&nbsp;:</p>
+<p><input name="unsubscribe_confirmed" id="unsubscribe_confirmed" type="checkbox" title="Confirmation" <?php if ($confirmed) echo 'checked="checked"'; ?> />&nbsp;Je ne veux plus recevoir la lettre d'information par email</p>
+<?php if ($with_captcha): ?>
+<p>
+<img src="<?php echo $base_path; ?>/captcha/unsubscribe" alt="" height="40" title="Code de vérification" />
+:
+<input type="text" name="unsubscribe_code" id="unsubscribe_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'unsubscribe_send')" value="" />
+</p>
+<?php endif; ?>
+<p><input type="submit" class="submit submit_send" name="unsubscribe_send" id="unsubscribe_send" value="Envoyer" /></p>
+</form>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+<?php endif; ?>
+<?php if ($missing_mail): ?>
+<p>Entrez une adresse d'email valide.</p>
+<?php elseif ($bad_mail): ?>
+<p>L'adresse d'email est incorrecte.</p>
+<?php endif; ?>
+<?php if ($missing_confirmation): ?>
+<p>Cochez la case de confirmation.</p>
+<?php endif; ?>
+</div>
+<?php extract($infos); ?>
+<div class="infos">
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.
+<?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
+<?php endif; ?>
+<?php if ($mail_unsubscribed): ?>
+<p>Un email de validation a été envoyé à votre adresse.</p>
+<?php endif; ?>
+<?php if ($mail_unregistered): ?>
+<p>Votre adresse d'email a été désenregistrée.</p>
+<?php endif; ?>
+<?php if ($subscribe_page): ?>
+<p>Pour recevoir la lettre d'information, <a href="<?php echo $subscribe_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+</div>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#unsubscribe_code';
+}
+else if ($missing_mail or $bad_mail) {
+	$focus='#unsubscribe_mail';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
