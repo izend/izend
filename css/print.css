@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
  
@@ -42,7 +42,8 @@ img {page-break-inside:avoid;page-break-after:avoid;float:none;}
 
 audio, video {display:none;}
 
-.pagebreak {page-break-before:avoid !important;}
+.pagebreak {page-break-before:always;}
+.nopagebreak {page-break-before:avoid !important;}
 
 .clear {clear:both;}
 
