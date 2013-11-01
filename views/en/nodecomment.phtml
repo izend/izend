@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <?php extract($errors); ?>
-<div id="comments">
+<div id="comments"<?php if ($comments): ?> class="pagebreak"; <?php endif; ?>>
 <h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Comments</h4>
 <?php if ($moderated or $newcomment): ?>
 <form action="#pagemark" method="post">
@@ -33,7 +33,7 @@ foreach ($comments as $c) {
 <p class="headline"><span class="longdate"><?php echo longdate_en($comment_created); ?> at <?php echo date('H:i', $comment_created); ?></span>
 <?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Edit" /><?php endif; ?>
 <?php if (true): ?>
-<?php if ($comment_user_name): ?><span class="signature"><span class="author"> by <?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>" title="<?php echo $comment_user_website; ?>"><?php endif; ?><?php echo $comment_user_name; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span>&nbsp;<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?><?php if ($comment_user_website): ?> - <?php echo $comment_user_website; ?><?php endif; ?>" /><?php if ($comment_user_website): ?></a><?php endif; ?></span><?php endif; ?></p>
+<?php if ($comment_user_name): ?><span class="signature"><span class="author"> by <?php if ($comment_user_id > 99): ?><a href="/<?php echo $comment_user_name; ?>" title="Visit <?php echo $comment_user_name; ?>"><?php endif; ?><?php echo $comment_user_name; ?><?php if ($comment_user_id > 99): ?></a><?php endif; ?></span>&nbsp;<?php if ($comment_user_id > 99): ?><a href="/<?php echo $comment_user_name; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="Visit <?php echo $comment_user_name; ?>" /><?php if ($comment_user_id > 99): ?></a><?php endif; ?></span><?php endif; ?></p>
 <?php else: ?>
 <?php if ($comment_user_lastname): ?><span class="signature"><span class="author"> by<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><?php if ($comment_user_firstname): ?> <?php echo $comment_user_firstname; ?> <?php endif; ?><?php echo $comment_user_lastname; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span></span><?php endif; ?></p>
 <?php endif; ?>
