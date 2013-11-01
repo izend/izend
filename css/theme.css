@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    80
+ * @version    81
  * @link       http://www.izend.org
  */
 
@@ -301,7 +301,7 @@ a:hover .icon_newsletter {background-position:0 0;}
 #comments .author {font-style:italic;}
 #comments .author a:link, #comments .author a:visited {color:#666666;}
 #comments .author a:hover {color:#ec902d;}
-#comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:0 -72px;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
+#comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:0 -72px;vertical-align:text-bottom;text-indent:-9999px;cursor:pointer;}
 #comments pre {font-family:monospace;font-size:10pt;}
 #comments blockquote {font-size:small;margin-right:0;}
 
