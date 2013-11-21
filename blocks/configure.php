@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    39
+ * @version    40
  * @link       http://www.izend.org
  */
 
@@ -367,7 +367,7 @@ function build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix) {
 }
 
 function build_config_inc($sitename, $webmaster, $username, $root_node, $home_action, $default_action, $languages) {
-	$sitekey=bin2hex(openssl_random_pseudo_bytes(32));
+	$sitekey=function_exists('openssl_random_pseudo_bytes') ? bin2hex(openssl_random_pseudo_bytes(32)) : false;
 
 	return render(INIT_DIR . DIRECTORY_SEPARATOR . CONFIG_INC, compact('sitename', 'webmaster', 'username', 'root_node', 'home_action', 'default_action', 'languages', 'sitekey'));
 }
