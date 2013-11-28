@@ -31,7 +31,7 @@ $blacknamelist = array('<?php echo $username; ?>');
 
 global $sitekey;
 
-$sitekey=pack('H*', '<?php echo $sitekey; ?>');	// 32 random bytes - see openssl_random_pseudo_bytes
+$sitekey=<?php if ($sitekey): ?>pack('H*', '<?php echo $sitekey; ?>')<?php else: ?>false<?php endif; ?>;	// 32 random bytes - see openssl_random_pseudo_bytes
 
 global $blackfilelist;
 
