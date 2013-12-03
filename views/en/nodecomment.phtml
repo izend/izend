@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <?php extract($errors); ?>
-<div id="comments"<?php if ($comments): ?> class="pagebreak"; <?php endif; ?>>
+<div id="comments"<?php if ($comments): ?> class="pagebreak"<?php endif; ?>>
 <h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Comments</h4>
 <?php if ($moderated or $newcomment): ?>
 <form action="#pagemark" method="post">
