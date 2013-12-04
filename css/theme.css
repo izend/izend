@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    81
+ * @version    82
  * @link       http://www.izend.org
  */
 
@@ -97,6 +97,10 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .lang {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/flags.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 .lang.fr {background-position:0 0;}
 .lang.en {background-position:-24px 0;}
+.lang.de {background-position:-48px 0;}
+.lang.it {background-position:-72px 0;}
+.lang.es {background-position:-96px 0;}
+.lang.ru {background-position:-120px 0;}
 
 span.icon {width:24px;height:24px;background:transparent url(../images/theme/icons.png) no-repeat;text-indent:-9999px;}
 span.icon_ok {background-position:0 -48px;}
@@ -201,10 +205,18 @@ span.btn_camera {background-position:-160px -48px;}
 #banner .languages a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/flags.png) no-repeat;text-indent:-9999px;}
 #banner .languages .btn_fr {background-position:0 0;}
 #banner .languages .btn_en {background-position:-24px 0;}
+#banner .languages .btn_de {background-position:-48px 0;}
+#banner .languages .btn_it {background-position:-72px 0;}
+#banner .languages .btn_es {background-position:-96px 0;}
+#banner .languages .btn_ru {background-position:-120px 0;}
 
 #donate {height:21px;}
 #donate .btn_donate_fr {width:108px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_fr.gif) no-repeat;}
 #donate .btn_donate_en {width:74px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_en.gif) no-repeat;}
+#donate .btn_donate_de {width:86px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_de.gif) no-repeat;}
+#donate .btn_donate_it {width:96px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_it.gif) no-repeat;}
+#donate .btn_donate_es {width:74px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_es.gif) no-repeat;}
+#donate .btn_donate_ru {width:156px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_ru.gif) no-repeat;}
 
 #searchinput {width:196px;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
 #searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}

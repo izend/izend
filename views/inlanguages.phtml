@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -13,6 +13,14 @@
 <input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Français" />
 <?php elseif ($lang == 'en'): ?>
 <input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="English" />
+<?php elseif ($lang == 'de'): ?>
+<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Deutsch" />
+<?php elseif ($lang == 'it'): ?>
+<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Italiano" />
+<?php elseif ($lang == 'es'): ?>
+<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Español" />
+<?php elseif ($lang == 'ru'): ?>
+<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Pусский" />
 <?php elseif ($lang == 'ar'): ?>
 <input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="عربي" />
 <?php endif; ?>
