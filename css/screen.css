@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    53
+ * @version    54
  * @link       http://www.izend.org
  */
  
@@ -36,7 +36,8 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {border-c
 
 input[type="text"], input[type="password"], textarea, select, fieldset {border-radius:2px;}
 
-input[type="text"], input[type="password"], textarea {padding:2px 3px 4px;}
+input[type="text"], input[type="password"], textarea {padding:3px;}
+fieldset {padding:5px 10px 8px;}
 select {padding:2px;}
 
 form.compact p {margin-top:0.75em;margin-bottom:0.5em;}
