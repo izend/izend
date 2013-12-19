@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -152,6 +152,8 @@ function cloud_search($lang, $cloud_id, $taglist) {
 		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
 	}
 
+	$join3="JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnode n ON n.node_id=ti.node_id JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale LEFT JOIN $tabuser u ON u.user_id=n.user_id";
+
 	$namelist=array();
 	foreach ($taglist as $tag) {
 		$sqlname=db_sql_arg($tag, true);
@@ -159,7 +161,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	}
 	$where = "tg.locale=$sqllang AND " . ($ntags > 1 ? '('.implode(' OR ', $namelist).')' : $namelist[0]);
 
-	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 JOIN $tabthreadlocale tl ON tl.thread_id=tn.thread_id AND tl.locale=$sqllang JOIN $tabnode n ON n.node_id=ti.node_id JOIN $tabnodelocale nl ON nl.node_id=ti.node_id AND nl.locale=tg.locale LEFT JOIN $tabuser u ON u.user_id=n.user_id WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, t.number, tn.number";
+	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 $join3 WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, t.number, tn.number";
 
 	$r = db_query($sql);
 
@@ -191,7 +193,9 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE tg.locale=$sqllang";
+	$where = "tg.locale=$sqllang";
+
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where";
 
 	$r = db_query($sql);
 
@@ -242,7 +246,9 @@ function cloud_suggest($lang, $cloud_id, $term) {
 		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
 	}
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm ORDER BY tag_name";
+	$where = "tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm";
+
+	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where ORDER BY tag_name";
 
 	$r = db_query($sql);
 
