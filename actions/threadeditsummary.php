@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    19
+ * @copyright  2010-2013 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -51,10 +51,10 @@ function threadeditsummary($lang, $clang, $thread) {
 		$action='show';
 	}
 
-	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=false;
+	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=$thread_image=false;
 	$thread_search=$thread_tag=false;
 	$thread_comment=$thread_morecomment=$thread_vote=$thread_morevote=false;
-	$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=false;
+	$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=$thread_pinit=false;
 
 	$thread_nosearch=$thread_nocloud=$thread_nocomment=$thread_nomorecomment=$thread_novote=$thread_nomorevote=true;
 
@@ -69,7 +69,7 @@ function threadeditsummary($lang, $clang, $thread) {
 		case 'reset':
 			$r = thread_get($clang, $thread_id, false);
 			if ($r) {
-				extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment thread_novote thread_nomorevote */
+				extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_image thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment thread_novote thread_nomorevote */
 			}
 			$thread_search=!$thread_nosearch;
 			$thread_tag=!$thread_nocloud;
@@ -99,6 +99,9 @@ function threadeditsummary($lang, $clang, $thread) {
 			}
 			if (isset($_POST['thread_abstract'])) {
 				$thread_abstract=readarg($_POST['thread_abstract']);
+			}
+			if (isset($_POST['thread_image'])) {
+				$thread_image=readarg($_POST['thread_image']);
 			}
 			if (isset($_POST['thread_cloud'])) {
 				$thread_cloud=readarg($_POST['thread_cloud'], true, false);	// trim but DON'T strip!
@@ -141,6 +144,9 @@ function threadeditsummary($lang, $clang, $thread) {
 			if (isset($_POST['thread_linkedin'])) {
 				$thread_linkedin=readarg($_POST['thread_linkedin'] == 'on' ? true : false);
 			}
+			if (isset($_POST['thread_pinit'])) {
+				$thread_pinit=readarg($_POST['thread_pinit'] == 'on' ? true : false);
+			}
 			if (isset($_POST['new_node_title'])) {
 				$new_node_title=readarg($_POST['new_node_title']);
 				$new_node_name = strtofname($new_node_title);
@@ -159,7 +165,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 	}
 
-	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_number node_ignored node_name node_title node_cloud ... */
+	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_number node_ignored node_name node_title node_cloud thread_image */
 
 	if (count($p) != count($r)) {
 		$p = false;
@@ -255,7 +261,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				break;
 			}
 
-			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin);
+			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_image, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin, $thread_pinit);
 
 			if (!$r) {
 				break;
@@ -423,7 +429,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
-	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
+	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
 	$output = layout('editing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

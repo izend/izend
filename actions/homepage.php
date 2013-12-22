@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2013 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
 require_once 'socialize.php';
 
 function homepage($lang) {
-	global $sitename;
+	global $sitename, $siteshot;
 
 	$page_contents = build('content', $lang, 'homepage');
 
@@ -19,11 +19,20 @@ function homepage($lang) {
 	$tweetit=true;
 	$plusone=true;
 	$linkedin=true;
-	if ($tweetit) {
-		$tweet_text=$sitename;
-		$tweetit=$tweet_text ? compact('tweet_text') : true;
+	$pinit=true;
+	if ($tweetit or $pinit) {
+		$description=translate('description', $lang);
+		if ($tweetit) {
+			$tweet_text=$description ? $description : $sitename;
+			$tweetit=$tweet_text ? compact('tweet_text') : true;
+		}
+		if ($pinit) {
+			$pinit_text=$description ? $description : $sitename;
+			$pinit_image=$siteshot;
+			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
+		}
 	}
-	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
+	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 ?>
@@ -21,13 +21,17 @@
 </p>
 <p><label>Extrait :</label></p>
 <p>
-<textarea name="thread_abstract" cols="80" rows="5"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea name="thread_abstract" cols="80" rows="3"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
 </p>
 <p><label>Nuage :</label></p>
 <p>
-<textarea name="thread_cloud" cols="80" rows="5"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea name="thread_cloud" cols="80" rows="2"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
+</p>
+<p><label>Image :</label></p>
+<p>
+<input name="thread_image" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
 </p>
 <p>
 <label>Type :</label>
@@ -60,6 +64,7 @@
 <input id="thread_tweet" name="thread_tweet" type="checkbox"<?php if ($thread_tweet): ?> checked="checked"<?php endif; ?> /><label for="thread_tweet"><span class="btn_edit btn_tweet">twitter</span></label>
 <input id="thread_plusone" name="thread_plusone" type="checkbox"<?php if ($thread_plusone): ?> checked="checked"<?php endif; ?> /><label for="thread_plusone"><span class="btn_edit btn_plusone">google+</span></label>
 <input id="thread_linkedin" name="thread_linkedin" type="checkbox"<?php if ($thread_linkedin): ?> checked="checked"<?php endif; ?> /><label for="thread_linkedin"><span class="btn_edit btn_linkedin">linkedin</span></label>
+<input id="thread_pinit" name="thread_pinit" type="checkbox"<?php if ($thread_pinit): ?> checked="checked"<?php endif; ?> /><label for="thread_pinit"><span class="btn_edit btn_pinit">pinit</span></label>
 </fieldset>
 <p>
 <input class="submit submit_edit" id="thread_edit" name="thread_edit" type="submit" value="Éditer" />

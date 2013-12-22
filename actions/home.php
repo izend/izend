@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    13
+ * @copyright  2010-2013 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/node.inc';
 
 function home($lang) {
-	global $root_node, $request_path, $with_toolbar, $sitename;
+	global $root_node, $request_path, $with_toolbar, $sitename, $siteshot;
 
 	if (!$root_node) {
 		return run('error/internalerror', $lang);
@@ -22,7 +22,7 @@ function home($lang) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_name node_title node_abstract node_cloud node_created node_modified node_nocomment node_nomorecomment node_ilike node_tweet node_plusone */
+	extract($r); /* node_name node_title node_abstract node_cloud node_image node_created node_modified node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin node_pinit */
 
 	head('title', translate('home:title', $lang));
 	if ($node_abstract) {
@@ -48,11 +48,20 @@ function home($lang) {
 		$tweetit=$node_tweet;
 		$plusone=$node_plusone;
 		$linkedin=$node_linkedin;
-		if ($tweetit) {
-			$tweet_text=$sitename;
-			$tweetit=$tweet_text ? compact('tweet_text') : true;
+		$pinit=$node_pinit;
+		if ($tweetit or $pinit) {
+			$description=$node_abstract ? $node_abstract : translate('description', $lang);
+			if ($tweetit) {
+				$tweet_text=$description ? $description : $sitename;
+				$tweetit=$tweet_text ? compact('tweet_text') : true;
+			}
+			if ($pinit) {
+				$pinit_text=$description ? $description : $sitename;
+				$pinit_image=$node_image ? $node_image : $siteshot;
+				$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
+			}
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
 	$content = view('home', false, compact('page_contents', 'besocial'));

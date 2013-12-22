@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -28,7 +28,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_nocloud thread_nosearch thread_nocomment thread_nomorecomment */
+	extract($r); /* thread_type thread_name thread_title thread_abstract thread_cloud thread_image thread_nocloud thread_nosearch thread_nocomment thread_nomorecomment */
 
 	if ($thread_type != 'book') {
 		return run('error/notfound', $lang);
@@ -45,7 +45,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -119,11 +119,17 @@ function bookpage($lang, $book, $page) {
 		$tweetit=$thread_tweet && $node_tweet;
 		$plusone=$thread_plusone && $node_plusone;
 		$linkedin=$thread_linkedin && $node_linkedin;
+		$pinit=$thread_pinit && $node_pinit;
 		if ($tweetit) {
-			$tweet_text=($book_title && $page_title) ? "$book_title - $page_title" : ($page_title ? $page_title : $book_title);
+			$tweet_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
+		if ($pinit) {
+			$pinit_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
+			$pinit_image=$node_image;
+			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
+		}
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'besocial', 'vote'));

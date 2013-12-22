@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -116,11 +116,17 @@ function story($lang, $arglist=false) {
 		$tweetit=$thread_tweet && $node_tweet;
 		$plusone=$thread_plusone && $node_plusone;
 		$linkedin=$thread_linkedin && $node_linkedin;
+		$pinit=$thread_pinit && $node_pinit;
 		if ($tweetit) {
-			$tweet_text=($story_title && $page_title) ? "$story_title - $page_title" : ($page_title ? $page_title : $story_title);
+			$tweet_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin'));
+		if ($pinit) {
+			$pinit_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
+			$pinit_image=$node_image;
+			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
+		}
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
 	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial', 'vote'));

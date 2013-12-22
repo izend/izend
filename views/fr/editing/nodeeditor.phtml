@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -28,6 +28,10 @@
 <textarea name="node_cloud" cols="80" rows="2" ><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
 </p>
+<p><label>Image :</label></p>
+<p>
+<input name="node_image" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($node_image, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
+</p>
 <fieldset id="node_options">
 <legend>Options</legend>
 <input id="node_comment" name="node_comment" type="checkbox"<?php if ($node_comment): ?> checked="checked"<?php endif; ?> /><label for="node_comment"><span class="btn_edit btn_comment">commenter</span></label>
@@ -38,6 +42,7 @@
 <input id="node_tweet" name="node_tweet" type="checkbox"<?php if ($node_tweet): ?> checked="checked"<?php endif; ?> /><label for="node_tweet"><span class="btn_edit btn_tweet">twitter</span></label>
 <input id="node_plusone" name="node_plusone" type="checkbox"<?php if ($node_plusone): ?> checked="checked"<?php endif; ?> /><label for="node_plusone"><span class="btn_edit btn_plusone">google+</span></label>
 <input id="node_linkedin" name="node_linkedin" type="checkbox"<?php if ($node_linkedin): ?> checked="checked"<?php endif; ?> /><label for="node_linkedin"><span class="btn_edit btn_linkedin">linkedin</span></label>
+<input id="node_pinit" name="node_pinit" type="checkbox"<?php if ($node_pinit): ?> checked="checked"<?php endif; ?> /><label for="node_pinit"><span class="btn_edit btn_pinit">pinit</span></label>
 </fieldset>
 <p>
 <input class="submit submit_edit" id="node_edit" name="node_edit" type="submit" value="Éditer" />

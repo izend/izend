@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
 <?php
@@ -32,6 +32,10 @@ $blacknamelist = array('<?php echo $username; ?>');
 global $sitekey;
 
 $sitekey=<?php if ($sitekey): ?>pack('H*', '<?php echo $sitekey; ?>')<?php else: ?>false<?php endif; ?>;	// 32 random bytes - see openssl_random_pseudo_bytes
+
+global $siteshot;
+
+$siteshot=false;	// false or pathname
 
 global $blackfilelist;
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -18,7 +18,11 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
-<?php if ($node_comment or $node_morecomment or $node_vote or $node_morevote or $node_ilike or $node_tweet or $node_plusone): ?>
+<?php if ($node_image): ?>
+<h6>Image</h6>
+<p><img src="<?php echo str_replace('%2F', '/', urlencode($node_image)); ?>" alt="<?php echo htmlspecialchars($node_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php endif; ?>
+<?php if ($node_comment or $node_morecomment or $node_vote or $node_morevote or $node_ilike or $node_tweet or $node_plusone or $node_linkedin or $node_pinit): ?>
 <fieldset id="node_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -30,6 +34,7 @@
 <?php if ($node_tweet): ?><span class="btn_edit btn_tweet">twitter</span><?php endif; ?>
 <?php if ($node_plusone): ?><span class="btn_edit btn_plusone">google+</span><?php endif; ?>
 <?php if ($node_linkedin): ?><span class="btn_edit btn_linkedin">linkedin</span><?php endif; ?>
+<?php if ($node_pinit): ?><span class="btn_edit btn_pinit">pinit</span><?php endif; ?>
 </div>
 </fieldset>
 <?php endif; ?>

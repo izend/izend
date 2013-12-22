@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -65,14 +65,14 @@ function node_get($lang, $node_id, $strict=true) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id LIMIT 1";
+	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin) {
+function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
 	$sqlnocomment=$node_nocomment ? 1 : 0;
 	$sqlnomorecomment=$node_nocomment ? 1 : ($node_nomorecomment ? 1 : 0);
 	$sqlnovote=$node_novote ? 1 : 0;
@@ -81,10 +81,11 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 	$sqltweet=$node_tweet ? 1 : 0;
 	$sqlplusone=$node_plusone ? 1 : 0;
 	$sqllinkedin=$node_linkedin ? 1 : 0;
+	$sqlpinit=$node_pinit ? 1 : 0;
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin WHERE node_id=$node_id LIMIT 1";
+	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE node_id=$node_id LIMIT 1";
 
 	$r = db_update($sql);
 
@@ -97,10 +98,11 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 	$sqltitle=db_sql_arg($node_title, true, true);
 	$sqlabstract=db_sql_arg($node_abstract, true, true);
 	$sqlcloud=db_sql_arg($node_cloud, true, true);
+	$sqlimage=db_sql_arg($node_image, true, true);
 
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="INSERT $tabnodelocale SET node_id=$node_id, locale=$sqllang, name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud ON DUPLICATE KEY UPDATE node_id=LAST_INSERT_ID(node_id), locale=VALUES(locale), name=VALUES(name), title=VALUES(title), abstract=VALUES(abstract), cloud=VALUES(cloud)";
+	$sql="INSERT $tabnodelocale SET node_id=$node_id, locale=$sqllang, name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage ON DUPLICATE KEY UPDATE node_id=LAST_INSERT_ID(node_id), locale=VALUES(locale), name=VALUES(name), title=VALUES(title), abstract=VALUES(abstract), cloud=VALUES(cloud), image=VALUES(image)";
 
 	$r = db_insert($sql);
 

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -19,7 +19,11 @@
 <h6>Nuage</h6>
 <p class="small"><?php echo $thread_cloud; ?></p>
 <?php endif; ?>
-<?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_plusone): ?>
+<?php if ($thread_image): ?>
+<h6>Image</h6>
+<p><img src="<?php echo str_replace('%2F', '/', urlencode($thread_image)); ?>" alt="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php endif; ?>
+<?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_plusone or $thread_linkedin or $thread_pinit): ?>
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -33,6 +37,7 @@
 <?php if ($thread_tweet): ?><span class="btn_edit btn_tweet">twitter</span><?php endif; ?>
 <?php if ($thread_plusone): ?><span class="btn_edit btn_plusone">google+</span><?php endif; ?>
 <?php if ($thread_linkedin): ?><span class="btn_edit btn_linkedin">linkedin</span><?php endif; ?>
+<?php if ($thread_pinit): ?><span class="btn_edit btn_pinit">pinit</span><?php endif; ?>
 </div>
 </fieldset>
 <?php endif; ?>

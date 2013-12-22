@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2013 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($ilike or $tweetit or $plusone or $linkedin): ?>
+<?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit): ?>
 <ul id="sharebar" class="menu sidebar">
 <?php if ($ilike): ?>
 <li class="ilike">
@@ -22,6 +22,11 @@
 <?php if ($linkedin): ?>
 <li class="linkedin">
 <?php echo $linkedin; ?>
+</li>
+<?php endif; ?>
+<?php if ($pinit): ?>
+<li class="pinit">
+<?php echo $pinit; ?>
 </li>
 <?php endif; ?>
 <?php if ($plusone): ?>
