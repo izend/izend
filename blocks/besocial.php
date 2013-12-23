@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -22,6 +22,7 @@ function besocial($lang, $components=false) {
 		if (is_array($tweetit)) {
 			extract($tweetit);	/* tweet_text */
 		}
+		$tweet_text=preg_replace('/\s+/', ' ', trim($tweet_text));
 		$tweetit=view('tweetit', $lang, compact('mode', 'tweet_text'));
 	}
 	if ($plusone) {
