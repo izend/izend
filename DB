@@ -418,6 +418,7 @@ CREATE TABLE IF NOT EXISTS `izend_node_locale` (
   `title` varchar(100) NULL default NULL,
   `abstract` text,
   `cloud` text,
+  `image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`node_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -478,9 +479,10 @@ CREATE TABLE IF NOT EXISTS `izend_thread_locale` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
   `name` varchar(100) NOT NULL,
-  `title` varchar(100) NULL default NULL,
+  `title` varchar(100) DEFAULT NULL,
   `abstract` text,
   `cloud` text,
+  `image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`thread_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
