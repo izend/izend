@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    83
+ * @copyright  2010-2014 izend.org
+ * @version    84
  * @link       http://www.izend.org
  */
 
@@ -274,7 +274,6 @@ span.btn_camera {background-position:-160px -48px;}
 
 .besocial {width:100%;padding:0;margin:1em 0;}
 .besocial li {display:inline-block;height:30px;vertical-align:top;padding:0;margin:0;}
-.besocial li.pinit {margin-top:-2px;}
 
 #socialbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
 #socialbar a.facebook {background-position:0 0;}
