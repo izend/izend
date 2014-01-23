@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    11
+ * @copyright  2010-2014 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -37,7 +37,7 @@ function threadnode($lang, $thread, $node) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_nocloud thread_nosearch thread_created thread_modified */
+	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_image thread_nocloud thread_nosearch thread_created thread_modified */
 
 	$node_id = thread_node_id($thread_id, $node, $lang);
 	if (!$node_id) {
@@ -48,7 +48,7 @@ function threadnode($lang, $thread, $node) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin node_pinit */
 
 	$node_comment=!$node_nocomment;
 	$node_morecomment=!$node_nomorecomment;
@@ -92,7 +92,7 @@ function threadnode($lang, $thread, $node) {
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 
