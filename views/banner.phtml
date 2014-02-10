@@ -2,13 +2,14 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    4
+ * @copyright  2010-2014 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <div id="banner">
 <?php echo $logo; ?>
+<?php if (!empty($menu) or !empty($languages)): ?>
 <div id="bannercontrols">
 <?php if (!empty($menu)): ?>
 <?php echo $menu; ?>
@@ -17,6 +18,8 @@
 <?php echo $languages; ?>
 <?php endif; ?>
 </div>
+<?php endif; ?>
+<?php if (!empty($search) or !empty($headline) or !empty($donate)): ?>
 <div id="bannertools">
 <?php if (false): ?>
 <?php if (!empty($search)): ?>
@@ -32,4 +35,5 @@
 <?php echo $donate; ?>
 <?php endif; ?>
 </div>
+<?php endif; ?>
 </div>
