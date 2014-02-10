@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Mon Feb 10 2014
+
+Adds action saction.
+----
+
 Date:	Fri Oct 25 2013
 
 Adds action newsletterunsubscribe.
@@ -51,6 +56,7 @@ $aliases = array(
 		'paypal/return'				=> 'paypalreturn',
 		'paypal/cancel'				=> 'paypalcancel',
 		'sslverifyclient'			=> 'sslverifyclient',
+		's'							=> 'saction',
 	),
 	'en' 	=> array(
 		'home'						=> 'home',

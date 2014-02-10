@@ -1,0 +1,28 @@
+<?php
+
+/**
+ *
+ * @copyright  2014 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3>Lettre d'information</h3>
+<?php extract($errors); ?>
+<?php if ($bad_mail): ?>
+<p>L'adresse d'email <i><?php echo $mail; ?></i> n'est pas enregistrée.</p>
+<?php elseif ($bad_time): ?>
+<p>Le délai autorisé pour cette opération est dépassé.</p>
+<?php else: ?>
+<p>L'adresse d'email <i><?php echo $mail; ?></i> a été desenregistrée.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.
+<?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
+<?php endif; ?>
+<?php if ($subscribe_page): ?>
+<p>Pour recevoir la lettre d'information, <a href="<?php echo $subscribe_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
+<?php if ($unsubscribe_page): ?>
+<p>Pour ne plus recevoir la lettre d'information, <a href="<?php echo $unsubscribe_page; ?>">cliquez ici</a>.</p>
+<?php endif; ?>
