@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    1
+ * @copyright  2013-2014 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -22,5 +22,5 @@ function aesdecrypt($s, $key) {
 
 	$crypto=substr($s, $iv_size);
 
-	return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $crypto, MCRYPT_MODE_CBC, $iv);
+	return @mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $crypto, MCRYPT_MODE_CBC, $iv);
 }
