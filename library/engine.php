@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright	2010-2012 izend.org
- * @version		11
+ * @copyright	2010-2014 izend.org
+ * @version		12
  * @link		http://www.izend.org
  */
 
@@ -246,7 +246,7 @@ function layout($layout, $vars=false) {
 function render($file, $vars=false) {
 	global $base_path, $base_url, $base_root;
 	global $request_path, $request_query;
-	global $sitename, $webmaster, $facebookid;
+	global $sitename, $webmaster;
 	global $supported_languages, $system_languages;
 
 	if ($vars) {

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    33
+ * @copyright  2010-2014 izend.org
+ * @version    34
  * @link       http://www.izend.org
  */
 
@@ -53,6 +53,10 @@ global $facebookid, $facebooksecret;
 
 $facebookid=false;
 $facebooksecret=false;
+
+global $googleanalyticsid;
+
+$googleanalyticsid=false;
 
 global $author;
 

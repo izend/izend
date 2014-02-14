@@ -7,7 +7,6 @@
  * @link       http://www.izend.org
  */
 ?>
-<?php require_once 'ismobile.php'; ?>
 <?php if (!empty($lang)): ?>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" lang="<?php echo $lang; ?>" />
 <?php else: ?>
@@ -45,6 +44,7 @@
 <?php endif; ?>
 <meta property="og:site_name" content="<?php echo $sitename; ?>" />
 <?php endif; ?>
+<?php global $facebookid; ?>
 <?php if (!empty($facebookid) and is_facebook()): ?>
 <meta property="fb:admins" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
@@ -98,6 +98,7 @@ else {
 <link href="<?php echo $base_path; ?>/css/media.css" rel="stylesheet" type="text/css" />
 <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1" />
 <?php endif; ?>
+<?php require_once 'ismobile.php'; ?>
 <?php if (is_mobile()): ?>
 <meta name="format-detection" content="telephone=no" />
 <?php endif; ?>

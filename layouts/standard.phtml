@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    8
+ * @copyright  2010-2014 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -11,6 +11,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <?php echo $head; ?>
+<?php global $googleanalyticsid; ?>
+<?php if (!empty($googleanalyticsid)): ?>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?php echo $googleanalyticsid; ?>', '<?php echo $sitename; ?>');
+  ga('send', 'pageview');
+</script>
+<?php endif; ?>
 </head>
 <body>
 <div id="standard">
