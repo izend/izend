@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2014 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -37,7 +37,7 @@ function bootstrap() {
 	}
 
 	if ($db_url) {
-		require_once 'db.php';
+		require_once 'pdo.php';
 		db_connect($db_url);
 	}
 
