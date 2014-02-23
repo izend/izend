@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    3
+ * @copyright  2012-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -174,7 +174,7 @@ function newsletter_count_users($locale=false) {
 }
 
 function newsletter_create_user($mail, $locale) {
-	$sqlmail=db_sql_arg($mail, true, true);
+	$sqlmail=db_sql_arg($mail);
 	$sqllocale=db_sql_arg($locale, false);
 
 	$tabnewsletteruser=db_prefix_table('newsletter_user');
@@ -187,7 +187,7 @@ function newsletter_create_user($mail, $locale) {
 }
 
 function newsletter_delete_user($mail) {
-	$sqlmail=db_sql_arg($mail, true, true);
+	$sqlmail=db_sql_arg($mail);
 
 	$tabnewsletteruser=db_prefix_table('newsletter_user');
 
@@ -199,7 +199,7 @@ function newsletter_delete_user($mail) {
 }
 
 function newsletter_get_user($mail) {
-	$sqlmail=db_sql_arg($mail, true, true);
+	$sqlmail=db_sql_arg($mail);
 
 	$tabnewsletteruser=db_prefix_table('newsletter_user');
 
