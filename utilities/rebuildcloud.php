@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011 izend.org
- * @version    2
+ * @copyright  2011-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -28,7 +28,7 @@ if (!$db_url) {
 	exit( 1 );
 }
 
-require_once 'db.php';
+require_once 'pdo.php';
 db_connect($db_url);
 
 require 'models/cloud.inc';
@@ -39,9 +39,9 @@ $r = db_query($sql);
 
 if ($r) {
 	$tabtagindex=db_prefix_table('tag_index');
-	mysql_query("TRUNCATE TABLE $tabtagindex");
+	db_exec("TRUNCATE TABLE $tabtagindex");
 	$tabtag=db_prefix_table('tag');
-	mysql_query("TRUNCATE TABLE $tabtag");
+	db_exec("TRUNCATE TABLE $tabtag");
 
 	foreach ($r as $t) {
 		$thread_id=$t['thread_id'];
