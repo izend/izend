@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    42
+ * @version    43
  * @link       http://www.izend.org
  */
 
@@ -86,15 +86,15 @@ function configure($lang) {
 
 	switch($action) {
 		case 'init':
-			$sitename='izendnew.org';
-			$webmaster='webmaster@izendnew.org';
+			$sitename='izendsite.net';
+			$webmaster='webmaster@izendsite.net';
 			$content_languages=array($lang);
 			$default_language=$lang;
 			$db_flag=true;
 			$db_reuse=false;
-			$db_name='izendnew';
-			$db_user='izendnew';
-			$db_prefix='izendnew_';
+			$db_name='izendsite';
+			$db_user='izendsite';
+			$db_prefix='izendsite_';
 
 			do {
 				$db_password=newpassword(8);
@@ -293,14 +293,20 @@ function configure($lang) {
 
 			if ($db_flag) {
 				if (!$db_reuse) {
-					if (!create_db($db_admin_user, $db_admin_password, 'localhost', $db_name, $db_user, $db_password)) {
-						$db_error=mysql_error();
+					try {
+						create_db($db_admin_user, $db_admin_password, 'localhost', $db_name, $db_user, $db_password);
+					}
+					catch (PDOException $e) {
+						$db_error=$e->getMessage();
 						break;
 					}
 				}
 
-				if (!init_db($db_host, $db_name, $db_user, $db_password, $db_prefix, $site_admin_user, $site_admin_password, $site_admin_mail, $default_language)) {
-					$db_error=mysql_error();
+				try {
+					init_db($db_host, $db_name, $db_user, $db_password, $db_prefix, $site_admin_user, $site_admin_password, $site_admin_mail, $default_language);
+				}
+				catch (PDOException $e) {
+					$db_error=$e->getMessage();
 					break;
 				}
 
@@ -383,76 +389,72 @@ function build_sitemap_xml($sitename, $languages) {
 }
 
 function recover_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_user) {
-	$db_conn=@mysql_connect($db_host, $db_admin_user, $db_admin_password);
-	if (!$db_conn) {
-		return false;
+	$dsn = "mysql:host=$db_host;charset=UTF8";
+
+	try {
+		$db_conn = new PDO($dsn, $db_admin_user, $db_admin_password);
+		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$sql="DELETE FROM mysql.`user` WHERE `user`.`Host` = '$db_host' AND `user`.`User` = '$db_user'";
+		$db_conn->exec($sql);
+
+		$sql="DELETE FROM mysql.`db` WHERE `db`.`Host` = '$db_host' AND `db`.`Db` = '$db_name' AND `db`.`User` = '$db_user'";
+		$db_conn->exec($sql);
+
+		$sql="DROP DATABASE `$db_name`";
+		$db_conn->exec($sql);
+	}
+	catch (PDOException $e) {
+		throw($e);
 	}
 
-	$sql="DELETE FROM mysql.`user` WHERE `user`.`Host` = '$db_host' AND `user`.`User` = '$db_user'";
-	@mysql_query($sql, $db_conn);
-
-	$sql="DELETE FROM mysql.`db` WHERE `db`.`Host` = '$db_host' AND `db`.`Db` = '$db_name' AND `db`.`User` = '$db_user'";
-	@mysql_query($sql, $db_conn);
-
-	$sql="DROP DATABASE `$db_name`";
-	@mysql_query($sql, $db_conn);
+	$db_conn=null;
 
 	return true;
 }
 
 function create_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_user, $db_password) {
-	$db_conn=@mysql_connect($db_host, $db_admin_user, $db_admin_password);
-	if (!$db_conn) {
-		return false;
-	}
+	$dsn = "mysql:host=$db_host;charset=UTF8";
 
-	$sql="CREATE DATABASE `$db_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+	try {
+		$db_conn = new PDO($dsn, $db_admin_user, $db_admin_password);
+		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$sql= <<<_SEP_
+		$sql="CREATE DATABASE `$db_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+		$db_conn->exec($sql);
+
+		$sql= <<<_SEP_
 INSERT INTO mysql.`user` (`Host`, `User`, `Password`, `ssl_cipher`, `x509_issuer`, `x509_subject`)
 VALUES ('$db_host', '$db_user', PASSWORD('$db_password'), '', '', '');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO mysql.`db` (`Host`, `Db`, `User`, `Select_priv`, `Insert_priv`, `Update_priv`, `Delete_priv`, `Create_priv`, `Drop_priv`)
 VALUES ('$db_host', '$db_name', '$db_user', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
+		$db_conn->exec($sql);
+
+		$sql="FLUSH PRIVILEGES";
+		$db_conn->exec($sql);
+	}
+	catch (PDOException $e) {
+		throw($e);
 	}
 
-	if (!@mysql_query("FLUSH PRIVILEGES", $db_conn)) {
-		return false;
-	}
-
-	if (!@mysql_close($db_conn)) {
-		return false;
-	}
+	$db_conn=null;
 
 	return true;
 }
 
 function init_db($db_host, $db_name, $db_user, $db_password, $db_prefix, $site_admin_user, $site_admin_password, $site_admin_mail, $default_language) {
-	$db_conn=@mysql_connect($db_host, $db_user, $db_password);
-	if (!$db_conn) {
-		return false;
-	}
+	$dsn = "mysql:host=$db_host;dbname=$db_name;charset=UTF8";
 
-	if (!@mysql_select_db($db_name, $db_conn)) {
-		return false;
-	}
+	try {
+		$db_conn = new PDO($dsn, $db_user, $db_password);
+		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	if (!@mysql_query("SET NAMES 'utf8'", $db_conn)) {
-		return false;
-	}
-
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}comment` (
   `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `node_id` int(10) unsigned NOT NULL,
@@ -466,11 +468,9 @@ CREATE TABLE `${db_prefix}comment` (
   KEY `NODE` (`node_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_download` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -479,11 +479,9 @@ CREATE TABLE `${db_prefix}content_download` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_file` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -495,11 +493,9 @@ CREATE TABLE `${db_prefix}content_file` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+			$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_infile` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -507,11 +503,9 @@ CREATE TABLE `${db_prefix}content_infile` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+			$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_longtail` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -528,11 +522,9 @@ CREATE TABLE `${db_prefix}content_longtail` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+			$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_text` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -541,11 +533,9 @@ CREATE TABLE `${db_prefix}content_text` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+			$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}content_youtube` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -560,11 +550,9 @@ CREATE TABLE `${db_prefix}content_youtube` (
   PRIMARY KEY (`content_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}newsletter_post` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -574,11 +562,9 @@ CREATE TABLE `${db_prefix}newsletter_post` (
   PRIMARY KEY (`thread_id`,`node_id`,`locale`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}newsletter_user` (
   `mail` varchar(100) NOT NULL,
   `locale` enum('fr','en') NOT NULL DEFAULT '$default_language',
@@ -587,11 +573,9 @@ CREATE TABLE `${db_prefix}newsletter_user` (
   KEY `locale` (`locale`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}node` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -609,11 +593,9 @@ CREATE TABLE `${db_prefix}node` (
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}node_locale` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -625,11 +607,9 @@ CREATE TABLE `${db_prefix}node_locale` (
   PRIMARY KEY (`node_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
@@ -639,11 +619,9 @@ CREATE TABLE `${db_prefix}node_content` (
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '1',
@@ -665,11 +643,9 @@ CREATE TABLE `${db_prefix}thread` (
   PRIMARY KEY (`thread_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}thread_locale` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
@@ -681,11 +657,9 @@ CREATE TABLE `${db_prefix}thread_locale` (
   PRIMARY KEY (`thread_id`,`locale`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
@@ -694,11 +668,9 @@ CREATE TABLE `${db_prefix}thread_node` (
   PRIMARY KEY (`thread_id`,`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}tag` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
@@ -707,22 +679,18 @@ CREATE TABLE `${db_prefix}tag` (
   UNIQUE KEY `locale` (`locale`,`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}tag_index` (
   `tag_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`tag_id`,`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) DEFAULT NULL,
@@ -743,11 +711,9 @@ CREATE TABLE `${db_prefix}user` (
   UNIQUE KEY `mail` (`mail`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE IF NOT EXISTS `${db_prefix}user_info` (
   `user_id` int(10) unsigned NOT NULL,
   `lastname` varchar(100) DEFAULT NULL,
@@ -755,11 +721,9 @@ CREATE TABLE IF NOT EXISTS `${db_prefix}user_info` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}role` (
   `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
@@ -767,11 +731,9 @@ CREATE TABLE `${db_prefix}role` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}user_role` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
@@ -779,22 +741,18 @@ CREATE TABLE `${db_prefix}user_role` (
   KEY `role` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}registry` (
   `name` varchar(100) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}track` (
   `track_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -804,11 +762,9 @@ CREATE TABLE `${db_prefix}track` (
   PRIMARY KEY (`track_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}vote` (
   `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `content_id` int(10) unsigned NOT NULL,
@@ -822,11 +778,9 @@ CREATE TABLE `${db_prefix}vote` (
   UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}role` (`role_id`, `name`) VALUES
 (1, 'administrator'),
 (2, 'writer'),
@@ -834,131 +788,107 @@ INSERT INTO `${db_prefix}role` (`role_id`, `name`) VALUES
 (4, 'moderator'),
 (5, 'member');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
 	$seed=substr(md5(uniqid()), 1, 8);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`) VALUES
 (1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', 1, 0);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
 (1, 4);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
 (1, 1, NOW(), NOW(), 1, 1, 1, 1, 1, 1, 1, 1),
 (2, 1, NOW(), NOW(), 1, 1, 1, 1, 0, 0, 0, 0);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node_locale` (`node_id`, `locale`, `name`, `title`, `abstract`, `cloud`) VALUES
 (1, 'fr', 'bienvenue', 'Bienvenue', NULL, NULL),
 (1, 'en', 'welcome', 'Welcome', NULL, NULL),
 (2, 'fr', 'documentation', 'Documentation', 'Manuel de l''utilisateur.', 'documentation'),
 (2, 'en', 'documentation', 'Documentation', 'User''s manual.', 'documentation');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
 (1, 1, 'infile', 1),
 (1, 1, 'text', 2),
 (1, 2, 'infile', 3),
 (2, 2, 'text', 1);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `text`, `eval`) VALUES
 (1, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>\r\n<p>Validé avec\r\n<span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\net\r\n<span class="nowrap"><span class="btn_browser" id="browser_ie" title="Internet Explorer">Internet Explorer</span>.</span></p>', 0),
 (1, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>\r\n<p>Validated with <span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\nand\r\n<span class="nowrap"><span class="btn_browser" id="browser_ie" title="Internet Explorer">Internet Explorer</span>.</span></p>', 0),
 (2, 'fr', '<p class="readmore">Consultez la <a href="http://www.izend.org/fr/documentation">documentation en ligne</a>.</p>', 0),
 (2, 'en', '<p class="readmore">Read the <a href="http://www.izend.org/en/documentation">on-line documentation</a>.</p>', 0);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
 (1, 'fr', 'views/fr/social.phtml'),
 (1, 'en', 'views/en/social.phtml'),
 (2, 'fr', 'views/fr/link.phtml'),
 (2, 'en', 'views/en/link.phtml');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}tag` (`tag_id`, `locale`, `name`) VALUES
 (1, 'fr', 'documentation'),
 (2, 'en', 'documentation');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}tag_index` (`tag_id`, `node_id`) VALUES
 (1, 2),
 (2, 2);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
 (1, 1, 'folder', NOW(), NOW(), 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread_locale` (`thread_id`, `locale`, `name`, `title`) VALUES
 (1, 'fr', 'contenu', 'Contenu'),
 (1, 'en', 'content', 'Content');
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
-	}
+		$db_conn->exec($sql);
 
-	$sql= <<<_SEP_
+		$sql= <<<_SEP_
 INSERT INTO `${db_prefix}thread_node` (`thread_id`, `node_id`, `number`) VALUES
 (1, 1, 1),
 (1, 2, 2);
 _SEP_;
-	if (!@mysql_query($sql, $db_conn)) {
-		return false;
+		$db_conn->exec($sql);
+	}
+	catch (PDOException $e) {
+		throw($e);
 	}
 
-	if (!@mysql_close($db_conn)) {
-		return false;
-	}
+	$db_conn=null;
 
 	return true;
 }
