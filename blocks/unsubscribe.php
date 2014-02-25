@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    2
+ * @copyright  2013-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -17,16 +17,11 @@ require_once 'validatemail.php';
 require_once 'models/newsletter.inc';
 
 function unsubscribe($lang) {
-	global $base_url, $sitekey;
-
 	$with_captcha=true;
 
 	$action='init';
 	if (isset($_POST['unsubscribe_send'])) {
 		$action='unsubscribe';
-	}
-	else if (isset($_GET['mail'])) {
-		$action='unregister';
 	}
 
 	$confirmed=$code=$token=false;
@@ -54,10 +49,6 @@ function unsubscribe($lang) {
 			}
 			break;
 
-		case 'unregister':
-			$user_mail=$sitekey ? urldecrypt($_GET['mail'], $sitekey) : false;
-			break;
-
 		default:
 			break;
 	}
@@ -69,10 +60,11 @@ function unsubscribe($lang) {
 
 	$missing_mail=false;
 	$bad_mail=false;
+	$unknown_mail=false;
 
 	$missing_confirmation=false;
 
-	$mail_unsubscribed=$mail_unregistered=false;
+	$mail_unsubscribed=false;
 
 	$internal_error=false;
 	$contact_page=false;
@@ -102,7 +94,7 @@ function unsubscribe($lang) {
 				$bad_mail=true;
 			}
 			else if (!newsletter_get_user($user_mail)) {
-				$bad_mail=true;
+				$unknown_mail=true;
 			}
 			if (!$confirmed) {
 				$missing_confirmation=true;
@@ -110,35 +102,38 @@ function unsubscribe($lang) {
 
 			break;
 
-		case 'unregister':
-			if (!$user_mail) {
-				$missing_mail=true;
-			}
-			else if (!validate_mail($user_mail) or !is_mail_allowed($user_mail)) {
-				$bad_mail=true;
-			}
-			else if (!newsletter_get_user($user_mail)) {
-				$bad_mail=true;
-			}
-			break;
 		default:
 			break;
 	}
 
 	switch($action) {
 		case 'unsubscribe':
-			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_confirmation) {
+			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $unknown_mail or $missing_confirmation) {
 				break;
 			}
 
-			$unregister_page=url('newsletterunsubscribe', $lang);
+			require_once 'urlencodeaction.php';
 
-			if (!$unregister_page) {
+			$id=1;	// confirmnewsletterunsubscribe, see saction
+			$param=$user_mail;
+
+			$s64=urlencodeaction($id, $param);
+
+			if (!$s64) {
 				$internal_error=true;
 				break;
 			}
 
-			$url = $base_url . $unregister_page . '?' . 'mail=' . urlencrypt($user_mail, $sitekey);
+			$saction_page=url('saction', $lang);
+
+			if (!$saction_page) {
+				$internal_error=true;
+				break;
+			}
+
+			global $base_url;
+
+			$url = $base_url . $saction_page . '/' . $s64;
 
 			require_once 'emailtext.php';
 
@@ -155,30 +150,6 @@ function unsubscribe($lang) {
 
 			break;
 
-		case 'unregister':
-			if ($missing_mail or $bad_mail) {
-				return run('error/badrequest', $lang);
-			}
-
-			$r = newsletter_delete_user($user_mail);
-
-			if (!$r) {
-				$internal_error=true;
-				break;
-			}
-
-			require_once 'emailme.php';
-
-			global $sitename;
-
-			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
-			$subject = 'old_registration' . '@' . $sitename;
-			$msg = $timestamp . ' ' . $lang . ' ' . $user_mail;
-			emailme($subject, $msg);
-
-			$mail_unregistered=$user_mail;
-
-			break;
 		default:
 			break;
 	}
@@ -189,11 +160,10 @@ function unsubscribe($lang) {
 
 	$_SESSION['unsubscribe_token'] = $token = token_id();
 
-	$errors = compact('missing_mail', 'bad_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
-	$infos = compact('mail_unsubscribed', 'mail_unregistered');
+	$errors = compact('missing_mail', 'bad_mail', 'unknown_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
+	$infos = compact('mail_unsubscribed');
 
 	$output = view('unsubscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'confirmed', 'subscribe_page', 'errors', 'infos'));
 
 	return $output;
 }
-

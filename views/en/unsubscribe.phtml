@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    1
+ * @copyright  2013-2014 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -34,6 +34,8 @@
 <p>Enter a valid email address.</p>
 <?php elseif ($bad_mail): ?>
 <p>The email address is invalid.</p>
+<?php elseif ($unknown_mail): ?>
+<p>This email address is not registered.</p>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Check the confirmation box.</p>
@@ -47,9 +49,6 @@
 <?php endif; ?>
 <?php if ($mail_unsubscribed): ?>
 <p>A validation email has been sent to your address.</p>
-<?php endif; ?>
-<?php if ($mail_unregistered): ?>
-<p>Your email address has been unregistered.</p>
 <?php endif; ?>
 <?php if ($subscribe_page): ?>
 <p>To receive the newsletter, <a href="<?php echo $subscribe_page; ?>">click here</a>.</p>
