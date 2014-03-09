@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    43
+ * @version    44
  * @link       http://www.izend.org
  */
 
@@ -542,6 +542,8 @@ CREATE TABLE `${db_prefix}content_youtube` (
   `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
   `width` int(4) unsigned NOT NULL DEFAULT '0',
   `height` int(4) unsigned NOT NULL DEFAULT '0',
+  `miniature` VARCHAR(200) DEFAULT NULL,
+  `title` VARCHAR(200) DEFAULT NULL,
   `autoplay` tinyint(1) NOT NULL DEFAULT '0',
   `controls` tinyint(1) NOT NULL DEFAULT '0',
   `fs` tinyint(1) NOT NULL DEFAULT '0',

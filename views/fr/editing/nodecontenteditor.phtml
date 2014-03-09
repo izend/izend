@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    15
+ * @copyright  2010-2014 izend.org
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -63,6 +63,7 @@ foreach ($node_contents as $c) {
 	$content_file_start=$content_file_end=0;
 	$content_youtube_id=false;
 	$content_youtube_width=$content_youtube_height=0;
+	$content_youtube_miniature=$content_youtube_title=false;
 	$content_youtube_autoplay=$content_youtube_controls=$content_youtube_fs=$content_youtube_rel=false;
 	$content_longtail_file=$content_longtail_image=false;
 	$content_longtail_width=$content_longtail_height=0;
@@ -162,6 +163,10 @@ x
 <input id="content_youtube_fs[<?php echo $i; ?>]" name="content_youtube_fs[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_fs): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_fs[<?php echo $i; ?>]"><span class="btn_edit btn_fs" title="Plein écran">fs</span></label>
 <input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_rel[<?php echo $i; ?>]"><span class="btn_edit btn_rel" title="Liens">liens</span></label>
 </select>
+</p>
+<p>
+<input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?>" title="Miniature" />
+<input name="content_youtube_title[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_youtube_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" />
 </p>
 <?php break; ?>
 <?php case 'longtail': ?>
