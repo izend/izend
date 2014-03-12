@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    86
+ * @version    87
  * @link       http://www.izend.org
  */
 
@@ -289,21 +289,24 @@ span.btn_camera {background-position:-160px -48px;}
 #socialbar a.yahoo {background-position:-240px 0;}
 #socialbar a.youtube {background-position:-264px 0;}
 
-a .icon_facebook {width:111px;height:30px;display:inline-block;background:transparent url(../images/facebook.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a .icon_facebook {width:111px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_facebook, a:visited span.icon_facebook {background-position:0 -30px;}
 a:hover .icon_facebook {background-position:0 0;}
-a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/twitter.png) no-repeat;text-indent:-9999px;cursor:pointer;}
-a:link .icon_twitter, a:visited span.icon_twitter {background-position:0 -30px;}
-a:hover .icon_twitter {background-position:0 0;}
-a .icon_buzzmii {width:105px;height:30px;display:inline-block;background:transparent url(../images/buzzmii.png) no-repeat;text-indent:-9999px;cursor:pointer;}
-a:link .icon_buzzmii, a:visited span.icon_buzzmii {background-position:0 -30px;}
-a:hover .icon_buzzmii {background-position:0 0;}
-a .icon_rss {width:51px;height:30px;display:inline-block;background:transparent url(../images/rss.png) no-repeat;text-indent:-9999px;cursor:pointer;}
-a:link .icon_rss, a:visited span.icon_rss {background-position:0 -30px;}
-a:hover .icon_rss {background-position:0 0;}
-a .icon_newsletter {width:192px;height:30px;display:inline-block;background:transparent url(../images/newsletter.png) no-repeat;text-indent:-9999px;cursor:pointer;}
-a:link .icon_newsletter, a:visited span.icon_newsletter {background-position:0 -30px;}
-a:hover .icon_newsletter {background-position:0 0;}
+a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;;text-indent:-9999px;cursor:pointer;}
+a:link .icon_twitter, a:visited span.icon_twitter {background-position:-111px -30px;}
+a:hover .icon_twitter {background-position:-111px 0;}
+a .icon_rss {width:51px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_rss, a:visited span.icon_rss {background-position:-225px -30px;}
+a:hover .icon_rss {background-position:-225px 0;}
+a .icon_newsletter {width:192px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_newsletter, a:visited span.icon_newsletter {background-position:-276px -30px;}
+a:hover .icon_newsletter {background-position:-276px 0;}
+a .icon_buzzmii {width:90px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_buzzmii, a:visited span.icon_buzzmii {background-position:-468px -30px;}
+a:hover .icon_buzzmii {background-position:-468px 0;}
+a .icon_youtube {width:77px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_youtube, a:visited span.icon_youtube {background-position:-558px -30px;}
+a:hover .icon_youtube {background-position:-558px 0;}
 
 #linkbar {margin:2em 0;}
 #linkbar > a {margin:0 30px 0 0;}
