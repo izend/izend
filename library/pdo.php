@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -31,7 +31,8 @@ function db_connect($url) {
 
 	try {
 		$db_conn = new PDO($dsn, $user, $pass, $options);
-    	$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db_conn->exec("SET NAMES 'utf8'");
 	}
 	catch (PDOException $e) {
 		die($e->getMessage());
