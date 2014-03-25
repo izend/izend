@@ -464,6 +464,10 @@ button.ui-button::-moz-focus-inner {
 	border-right-width: 0;
 	border-left-width: 1px;
 }
+.ui-datepicker-trigger {
+	margin-left: 1px;
+	vertical-align: text-top;
+}
 .ui-dialog {
 	overflow: hidden;
 	position: absolute;
