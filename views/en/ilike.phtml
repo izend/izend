@@ -2,24 +2,25 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    6
+ * @copyright  2010-2014 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
-<div id="fb-root"></div>
+<?php $id = uniqid('id'); ?>
+<div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
 var w=$('body').width();
 var datalayout=w < 320 ? 'button_count' : 'standard';
 var datawidth=datalayout == 'standard' ? (w > 480 ? '450' : '300') : '100';
-$('#fb-root').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>

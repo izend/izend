@@ -1,14 +1,26 @@
 /**
  *
- * @copyright  2013 izend.org
- * @version    13
+ * @copyright  2013-2014 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
  
 /* media.css */
 
+@media screen and (max-width:1100px) {
+body {margin-left:auto;margin-right:5px;}
+}
+
+@media screen and (min-width:1100px) {
+#shareline {position:absolute !important;top:-9999px !important;left:-9999px !important;}
+}
+
+@media screen and (max-width:1099px) {
+#sharebar, #toolbar {position:absolute !important;top:-9999px !important;left:-9999px !important;}
+}
+
 @media screen and (max-width:1024px) {
-body {margin-left:auto;margin-right:auto;}
+body{margin-left:auto;margin-right:auto;}
 }
 
 @media screen and (max-width:960px) {

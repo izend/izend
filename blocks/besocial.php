@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    5
+ * @copyright  2010-2014 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
-function besocial($lang, $components=false) {
+function besocial($lang, $components=false, $shareline=false) {
 	$ilike=$tweetit=$plusone=$linkedin=$pinit=false;
 
 	extract($components);	/* ilike, tweetit, plusone, linkedin, pinit */
@@ -39,7 +39,7 @@ function besocial($lang, $components=false) {
 		$pinit=view('pinit', $lang, compact('mode', 'pinit_text', 'pinit_image'));
 	}
 
-	$output = view('besocial', false, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+	$output = view('besocial', false, compact('shareline', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 
 	return $output;
 }

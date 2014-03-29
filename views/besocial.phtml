@@ -2,13 +2,13 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
+ * @copyright  2010-2014 izend.org
  * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit): ?>
-<ul class="menu besocial">
+<ul<?php if ($shareline): ?> id="shareline"<?php endif; ?> class="menu besocial">
 <?php if ($linkedin): ?>
 <li class="linkedin">
 <?php echo $linkedin; ?>

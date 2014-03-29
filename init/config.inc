@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
 <?php
@@ -51,7 +51,7 @@ $signature='<?php echo $sitename; ?> - http://www.<?php echo $sitename; ?>';
 
 global $socializing;
 
-$socializing='inline';	// is_mobile() ? 'inline' : 'bar';	// false, 'inline', 'bar'
+$socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
 
 global $opengraph_agent_list;
 
