@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2013-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
  
@@ -20,7 +20,7 @@ body {margin-left:auto;margin-right:5px;}
 }
 
 @media screen and (max-width:1024px) {
-body{margin-left:auto;margin-right:auto;}
+body {margin-left:auto;margin-right:auto;}
 }
 
 @media screen and (max-width:960px) {
@@ -71,4 +71,8 @@ video {height:auto;}
 @media screen and (max-width:240px) {
 #summary {border:none;padding:0;}
 .summary {float:none;border:none;margin:1em 0;padding:0;text-align:left;}
+}
+
+@media screen and (max-width:220px) {
+#searchinput {display:none;}
 }
