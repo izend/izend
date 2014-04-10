@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    22
+ * @copyright  2010-2014 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
  
@@ -101,3 +101,6 @@ ol.tree li.filenode {font-style:normal;}
 
 .monospace {font-family:monospace;font-size:9pt;}
 .proportional {font-family:sans-serif;}
+
+.smaller {font-size:smaller;}
+.larger {font-size:larger;}
