@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -31,9 +31,11 @@ foreach ($contents as $c) {
 			include $c['infile'];
 			break;
 		case 'youtube':
+			require_once 'ishttps.php';
+
 			extract($c);	/* id width height miniature title autoplay theme controls fs rel */
 			$padding=round($height/$width, 2) * 100;
-			$url="https://www.youtube.com/embed/$id?wmode=transparent&amp;autoplay=$autoplay&amp;autohide=1&amp;controls=$controls&amp;fs=$fs&amp;modestbranding=0&amp;showinfo=0&amp;rel=$rel&amp;theme=$theme";
+			$url=(is_https() ? 'https' : 'http') . "://www.youtube.com/embed/$id?wmode=transparent&amp;autoplay=$autoplay&amp;autohide=1&amp;controls=$controls&amp;fs=$fs&amp;modestbranding=0&amp;showinfo=0&amp;rel=$rel&amp;theme=$theme";
 			$embed=<<<__MARK__
 <div style="padding-bottom:${padding}%;"><iframe frameborder="0" width="$width" height="$height" src="$url"></iframe></div>
 __MARK__;
