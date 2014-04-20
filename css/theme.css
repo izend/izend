@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    89
+ * @version    90
  * @link       http://www.izend.org
  */
 
@@ -311,6 +311,9 @@ a:hover .icon_buzzmii {background-position:-468px 0;}
 a .icon_youtube {width:77px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_youtube, a:visited span.icon_youtube {background-position:-558px -30px;}
 a:hover .icon_youtube {background-position:-558px 0;}
+a .icon_pinterest {width:118px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_pinterest, a:visited span.icon_pinterest {background-position:-635px -30px;}
+a:hover .icon_pinterest {background-position:-635px 0;}
 
 #linkbar {margin:2em 0;}
 #linkbar > a {margin:0 30px 0 0;}
