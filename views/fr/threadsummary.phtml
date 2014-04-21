@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    12
+ * @copyright  2010-2014 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -21,7 +21,7 @@
 <?php endif; ?>
 <?php if ($thread_image): ?>
 <h6>Image</h6>
-<p><img src="<?php echo str_replace('%2F', '/', urlencode($thread_image)); ?>" alt="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><img id="thread_image" src="<?php echo str_replace('%2F', '/', urlencode($thread_image)); ?>" alt="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php endif; ?>
 <?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_plusone or $thread_linkedin or $thread_pinit): ?>
 <fieldset id="thread_options">
