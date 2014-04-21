@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -49,8 +49,10 @@ or
 <input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number"/>
 </span>
 <?php endif; ?>
+<span id="nodecontent_hidy" class="hidy">+</span>
 </p>
 <?php if ($node_contents): ?>
+<div id="nodecontent">
 <?php
 $i=1;
 foreach ($node_contents as $c) {
@@ -200,8 +202,19 @@ x
 <input class="submit submit_modify" id="content_modify" name="content_modify" type="submit" value="Modify" />
 contents
 </p>
+</div>
 <?php endif; ?>
 </form>
+<?php head('javascript', 'jquery.cookie'); ?>
+<script type="text/javascript">
+if ($.cookie('hidenodecontent') == 1) {
+	$('#nodecontent').hide();
+}
+$('#nodecontent_hidy').click(function() {
+	$('#nodecontent').toggle();
+	$.cookie('hidenodecontent', $('#nodecontent').is(':hidden') ? 1 : 0, { path: '/' });
+});
+</script>
 <?php
 $focus=false;
 if ($bad_new_content_number) {
