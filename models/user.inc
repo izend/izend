@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -264,7 +264,16 @@ function user_set_role($user_id, $role) {
 	$r = db_delete($sql);
 
 	if ($role) {
-		$sqlrole=is_array($role) ? implode(',', array_map(function($r) { return db_sql_arg($r, true); }, $role)) : db_sql_arg($role, true);
+		if (is_array($role)) {
+			$sqlrole=array();
+			foreach ($role as $r) {
+				$sqlrole[]=db_sql_arg($r, true);
+			}
+			$sqlrole=implode(',', $sqlrole);
+		}
+		else {
+			$sqlrole=db_sql_arg($role, true);
+		}
 
 		$tabrole=db_prefix_table('role');
 
