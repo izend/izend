@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    16
+ * @copyright  2010-2014 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -146,13 +146,15 @@ function login($lang) {
 			$user['ip'] = client_ip_address();
 
 			if (in_array('administrator', $user['role'])) {
+				require_once 'serveripaddress.php';
 				require_once 'emailme.php';
 
 				global $sitename;
 
+				$ip=server_ip_address();
 				$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
 				$subject = 'admin_login' . '@' . $sitename;
-				$msg = $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
+				$msg = $ip . ' ' . $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
 				emailme($subject, $msg);
 
 				if ($action == 'facebook') {
