@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2014 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -17,11 +17,11 @@ function http_build_args($args) {
 	return $args_string;
 }
 
-function sendget($url, $args) {
+function sendget($url, $args=false) {
 	return sendhttp('GET', $url, $args);
 }
 
-function sendpost($url, $args, $files=false, $base64=false ) {
+function sendpost($url, $args=false, $files=false, $base64=false ) {
 	return sendhttp('POST', $url, $args, $files, $base64);
 }
 
@@ -45,7 +45,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 	}
 	$host = isset($purl['host']) ? $purl['host'] : 'localhost';
 	$portnum = isset($purl['portnum']) ? $purl['portnum'] : $scheme == 'https' ? 443 : 80;
-	$path = isset($purl['path']) ? $purl['path'] : '';
+	$path = isset($purl['path']) ? $purl['path'] : '/';
 
 	$user_agent = 'iZend';
 
@@ -98,6 +98,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 					$content_string = http_build_args($args);
 				}
 			}
+
 			$content_length = strlen($content_string);
 			$header_string="POST $path HTTP/1.0\r\nHost: $host\r\nUser-Agent: $user_agent\r\nContent-Type: $content_type\r\nContent-Length: $content_length\r\nConnection: close\r\n\r\n";
 			break;
