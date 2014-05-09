@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2013 izend.org
- * @version    3
+ * @copyright  2012-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -136,13 +136,15 @@ function subscribe($lang) {
 				break;
 			}
 
+			require_once 'serveripaddress.php';
 			require_once 'emailme.php';
 
 			global $sitename;
 
+			$ip=server_ip_address();
 			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
-			$subject = 'new_registration' . '@' . $sitename;
-			$msg = $timestamp . ' ' . $lang . ' ' . $user_mail;
+			$subject = 'subscribe' . '@' . $sitename;
+			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
 			emailme($subject, $msg);
 
 			$email_registered=true;

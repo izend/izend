@@ -153,7 +153,7 @@ function login($lang) {
 
 				$ip=server_ip_address();
 				$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
-				$subject = 'admin_login' . '@' . $sitename;
+				$subject = 'login' . '@' . $sitename;
 				$msg = $ip . ' ' . $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
 				emailme($subject, $msg);
 
