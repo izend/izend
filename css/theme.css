@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    93
+ * @version    94
  * @link       http://www.izend.org
  */
 
@@ -340,7 +340,7 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 
 #newcomment > h6 {color:#666666;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
 
-.bbcodebar {margin-bottom:5px;}
+.bbcodebar {margin:1em 0 5px;}
 .bbcodebar_limiter {font-size:x-small;margin-left:10px;}
 .bbcodehelp {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
 

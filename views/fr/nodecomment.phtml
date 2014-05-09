@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <?php require_once 'bbcode.php'; ?>
 <?php if ($comments or $newcomment or $user_page): ?>
 <?php extract($errors); ?>
-<div id="comments"<?php if ($comments): ?> class="pagebreak"<?php endif; ?>>
+<div id="comments">
 <h4<?php if (!$comments): ?> class="noprint"<?php endif; ?>>Commentaires</h4>
 <?php if ($moderated or $newcomment): ?>
 <form action="#pagemark" method="post">
@@ -33,10 +33,11 @@ foreach ($comments as $c) {
 <p class="headline"><span class="longdate">Le <?php echo longdate_fr($comment_created); ?> à <?php echo date('H:i', $comment_created); ?></span>
 <?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Éditer" /><?php endif; ?>
 <?php if (true): ?>
-<?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php if ($comment_user_id > 99): ?><a href="/<?php echo $comment_user_name; ?>" title="Visitez <?php echo $comment_user_name; ?>"><?php endif; ?><?php echo $comment_user_name; ?><?php if ($comment_user_id > 99): ?></a><?php endif; ?></span>&nbsp;<?php if ($comment_user_id > 99): ?><a href="/<?php echo $comment_user_name; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="Visitez <?php echo $comment_user_name; ?>" /><?php if ($comment_user_id > 99): ?></a><?php endif; ?></span><?php endif; ?></p>
+<?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>" title="<?php echo $comment_user_website; ?>"><?php endif; ?><?php echo $comment_user_name; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span>&nbsp;<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?><?php if ($comment_user_website): ?> - <?php echo $comment_user_website; ?><?php endif; ?>" /><?php if ($comment_user_website): ?></a><?php endif; ?></span><?php endif; ?>
 <?php else: ?>
-<?php if ($comment_user_lastname): ?><span class="signature"><span class="author"> par<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><?php if ($comment_user_firstname): ?> <?php echo $comment_user_firstname; ?> <?php endif; ?><?php echo $comment_user_lastname; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span></span><?php endif; ?></p>
+<?php if ($comment_user_lastname): ?><span class="signature"><span class="author"> par <?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><?php if ($comment_user_firstname): ?><?php echo $comment_user_firstname; ?> <?php endif; ?><?php echo $comment_user_lastname; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span></span><?php endif; ?>
 <?php endif; ?>
+</p>
 <?php if ($id and $comment_id == $id): ?>
 <?php if (!($missing_message or $message_too_long)): ?>
 <?php
@@ -44,7 +45,9 @@ if (!$message) {
 	$message=$comment_text;
 }
 ?>
+<div>
 <?php echo bbcode($message), PHP_EOL; ?>
+</div>
 <?php endif; ?>
 <?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
 <p>
@@ -54,7 +57,9 @@ le commentaire ou le
 </p>
 </div>
 <?php else: ?>
+<div>
 <?php echo bbcode($comment_text), PHP_EOL; ?>
+</div>
 <?php endif; ?>
 <?php
 	$i++;
@@ -66,22 +71,53 @@ le commentaire ou le
 <div id="newcomment" class="noprint">
 <h6>Votre commentaire&nbsp;:</h6>
 <?php if ($message and !$message_too_long): ?>
+<div>
 <?php echo bbcode($message), PHP_EOL; ?>
+</div>
 <?php endif; ?>
 <?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
-<p>
 <?php if ($message): ?>
+<?php if ($with_captcha): ?>
+<p>
+<img src="<?php echo $base_path; ?>/captcha/comment" alt="" height="40" title="Code de vérification" />
+:
+<input type="text" name="comment_code" id="comment_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'comment_validate')" value="" />
+</p>
+<?php endif; ?>
+<p>
 <input class="submit submit_edit" name="comment_edit" type="submit" value="Éditer" />
 le texte ou le
-<input class="submit submit_validate" name="comment_validate" type="submit" value="Valider" />
-<?php else: ?>
-<input class="submit submit_comment" name="comment_comment" type="submit" value="Commenter" />
-<?php endif; ?>
+<input class="submit submit_validate" name="comment_validate" id="comment_validate" type="submit" value="Valider" />
 </p>
+<?php else: ?>
+<p>
+<input class="submit submit_comment" name="comment_comment" type="submit" value="Commenter" />
+</p>
+<?php endif; ?>
 </div>
 <?php endif; ?>
 <?php if ($moderated or $newcomment): ?>
 </form>
+<?php if ($with_captcha): ?>
+<div class="errors">
+<?php if ($missing_code): ?>
+<p>Entrez le code de vérification affiché dans l'image.</p>
+<?php elseif ($bad_code): ?>
+<p>Le code de vérification est incorrect.</p>
+</div>
+<?php endif; ?>
+<?php
+$focus=false;
+if ($missing_code or $bad_code) {
+	$focus='#comment_code';
+}
+?>
+<?php if ($focus): ?>
+<script type="text/javascript">
+$(function() {$('<?php echo $focus; ?>').focus();});
+</script>
+<?php endif; ?>
+<?php endif; ?>
 <?php endif; ?>
 <?php if ($user_page): ?>
 <p class="info noprint">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>?r=<?php echo $node_url; ?>#pagemark" rel="nofollow">cliquez ici</a>.</p>

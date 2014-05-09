@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    7
+ * @copyright  2010-2014 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,9 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	$now=time();
 
-	$message_maxlen=2000;
+	$message_maxlen=1000;
+
+	$with_captcha=false;
 
 	$action='init';
 	if ($user_id) {
@@ -46,8 +48,12 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$id=$message=$token=false;
 
 	switch($action) {
-		case 'comment':
 		case 'validate':
+			if (isset($_POST['comment_code'])) {
+				$code=readarg($_POST['comment_code']);
+			}
+			/* fall thru */
+		case 'comment':
 		case 'edit':
 			if (isset($_POST['comment_message'])) {
 				$message=readarg($_POST['comment_message'], true, false);	// trim but DON'T strip!
@@ -80,6 +86,9 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			break;
 	}
 
+	$missing_code=false;
+	$bad_code=false;
+
 	$bad_token=false;
 
 	$missing_id=false;
@@ -88,8 +97,20 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$message_too_long=false;
 
 	switch($action) {
-		case 'comment':
 		case 'validate':
+			if ($with_captcha) {
+				if (!$code) {
+					$missing_code=true;
+					break;
+				}
+				$captcha=isset($_SESSION['captcha']['comment']) ? $_SESSION['captcha']['comment'] : false;
+				if (!$captcha or $captcha != strtoupper($code)) {
+					$bad_code=true;
+					break;
+				}
+			}
+			/* fall thru */
+		case 'comment':
 		case 'edit':
 		case 'modify':
 		case 'delete':
@@ -147,7 +168,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 		case 'validate':
 		case 'edit':
 		case 'modify':
-			if ($bad_token or $missing_id or $bad_id) {
+			if ($bad_token or $missing_code or $bad_code or $missing_id or $bad_id) {
 				break;
 			}
 
@@ -165,7 +186,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	switch($action) {
 		case 'validate':
-			if ($bad_token or $missing_message or $message_too_long) {
+			if ($bad_token or $missing_code or $bad_code or $missing_message or $message_too_long) {
 				break;
 			}
 
@@ -255,9 +276,9 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	$_SESSION['comment_token'] = $token = token_id();
 
-	$errors = compact('missing_message', 'message_too_long');
+	$errors = compact('missing_code', 'bad_code', 'missing_message', 'message_too_long');
 
-	$output = view('nodecomment', $lang, compact('token', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_page', 'node_url', 'errors'));
+	$output = view('nodecomment', $lang, compact('token', 'with_captcha', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_page', 'node_url', 'errors'));
 
 	return $output;
 }
