@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -45,13 +45,15 @@ function confirmnewsletterunsubscribe($lang, $arglist) {
 			$internal_error=true;
 		}
 		else {
+			require_once 'serveripaddress.php';
 			require_once 'emailme.php';
 
 			global $sitename;
 
+			$ip=server_ip_address();
 			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
-			$subject = 'old_registration' . '@' . $sitename;
-			$msg = $timestamp . ' ' . $lang . ' ' . $mail;
+			$subject = 'unsubscribe' . '@' . $sitename;
+			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $mail;
 			emailme($subject, $msg);
 
 			$subscribe_page=url('newslettersubscribe', $lang);
