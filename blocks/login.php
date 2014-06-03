@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -152,10 +152,10 @@ function login($lang) {
 				global $sitename;
 
 				$ip=server_ip_address();
-				$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
+				$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
 				$subject = 'login' . '@' . $sitename;
 				$msg = $ip . ' ' . $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
-				emailme($subject, $msg);
+				@emailme($subject, $msg);
 
 				if ($action == 'facebook') {
 					$access_denied=true;

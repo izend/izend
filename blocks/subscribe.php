@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2014 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -142,10 +142,10 @@ function subscribe($lang) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
+			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
 			$subject = 'subscribe' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
-			emailme($subject, $msg);
+			@emailme($subject, $msg);
 
 			$email_registered=true;
 

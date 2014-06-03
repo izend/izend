@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -51,10 +51,10 @@ function confirmnewsletterunsubscribe($lang, $arglist) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
+			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
 			$subject = 'unsubscribe' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $mail;
-			emailme($subject, $msg);
+			@emailme($subject, $msg);
 
 			$subscribe_page=url('newslettersubscribe', $lang);
 		}

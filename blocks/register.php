@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -287,10 +287,10 @@ function register($lang) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%d-%m-%Y %H:%M:%S', time());
+			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
 			$subject = 'register' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $mail;
-			emailme($subject, $msg);
+			@emailme($subject, $msg);
 
 			$password=false;
 
