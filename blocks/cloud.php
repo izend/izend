@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2014 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -31,7 +31,7 @@ function cloud($lang, $cloud_url, $cloud_id=false, $node_id=false, $size=false, 
 		}
 		$linklist = array();
 		foreach ($r as $tag) {
-			extract($tag);	/* tag_id tag_name tag_count */
+			extract($tag);	/* tag_name tag_count */
 			$name=$tag_name;
 			$count=$tag_count;
 			$url=$cloud_url . '?q=' . urlencode($tag_name);

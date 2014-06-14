@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    3
+ * @copyright  2010-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -80,19 +80,11 @@ function db_insert_id() {
 function db_sql_arg($s, $escape=true, $optional=false) {
 	global $db_conn;
 
-	if (is_array($s)) {
-		$r=array();
-		foreach ($s as $ss) {
-			$r[]=db_sql_arg($ss, $escape, $optional);
-		}
-		return $r;
+	if ($s === false or $s === '') {
+		return $optional ? 'NULL' : "''";
 	}
 
-	if ($s) {
-		return '\'' . ($escape ? mysql_real_escape_string($s, $db_conn) : $s) . '\'';	// MUST be connected!
-	}
-
-	return $optional ? 'NULL' : '\'\'';
+	return '\'' . ($escape ? mysql_real_escape_string($s, $db_conn) : $s) . '\'';	// MUST be connected!
 }
 
 function db_prefix_table($table) {

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    18
+ * @copyright  2010-2014 izend.org
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -47,18 +47,26 @@ function cloud_delete($cloud_id) {
 	$tabtagindex=db_prefix_table('tag_index');
 	$tabthreadnode=db_prefix_table('thread_node');
 
-	$sql="DELETE ti FROM $tabtagindex ti JOIN $tabthreadnode tn ON tn.node_id=ti.node_id WHERE tn.thread_id=$cloud_id";
+	$sql="DELETE FROM $tabtagindex WHERE node_id IN (SELECT tn.node_id FROM $tabthreadnode tn WHERE tn.thread_id=$cloud_id)";
 
-	$r = db_delete($sql);
+	$r=db_delete($sql);
+
+	if ($r === false) {
+		return false;
+	}
 
 	// delete all the tags which are not used anymore
 	$tabtag=db_prefix_table('tag');
 
-	$sql="DELETE t FROM $tabtag t WHERE NOT EXISTS (SELECT * FROM $tabtagindex ti WHERE ti.tag_id=t.tag_id)";
+	$sql="DELETE FROM $tabtag WHERE tag_id NOT IN (SELECT ti.tag_id FROM $tabtagindex ti)";
 
-	$r = db_delete($sql);
+	$r=db_delete($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return false;
 }
 
 function cloud_get($lang, $cloud_id) {
@@ -84,7 +92,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabthread=db_prefix_table('thread');
 
-	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
@@ -98,7 +106,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	if ($node_id) {
 		$in="WHERE ti.tag_id IN (SELECT ti.tag_id FROM $tabtagindex ti JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang WHERE ti.node_id=$node_id)";
 		if (!$inclusive) {
-			$having='HAVING tag_count > 1';
+			$having='HAVING COUNT(*) > 1';
 		}
 	}
 
@@ -109,14 +117,24 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 			$orderitems[]='tag_count DESC';
 		}
 		if ($byname) {
-			$orderitems[]='tag_name COLLATE utf8_general_ci';
+			global $db_scheme;
+
+			switch ($db_scheme) {
+				case 'pgsql':
+					$orderitems[]='LOWER(STRFLAT(tg.name))';
+					break;
+				case 'mysql':
+				default:
+					$orderitems[]='tag_name COLLATE utf8_general_ci';
+					break;
+			}
 		}
 		if ($orderitems) {
 			$order = 'ORDER BY ' . implode(', ', $orderitems);
 		}
 	}
 
-	$sql = "SELECT tg.tag_id, ti.node_id, tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join1 $join2 JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang $in GROUP BY ti.tag_id $having $order";
+	$sql = "SELECT tg.name AS tag_name, COUNT(*) AS tag_count FROM $tabtagindex ti $join1 $join2 JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang $in GROUP BY tg.tag_id, tg.name $having $order";
 
 	$r = db_query($sql);
 
@@ -142,7 +160,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	$tabnodelocale=db_prefix_table('node_locale');
 	$tabuser=db_prefix_table('user');
 
-	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
@@ -161,7 +179,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	}
 	$where = "tg.locale=$sqllang AND " . ($ntags > 1 ? '('.implode(' OR ', $namelist).')' : $namelist[0]);
 
-	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 $join3 WHERE $where GROUP BY tn.thread_id, tn.node_id ORDER BY pertinence DESC, t.number, tn.number";
+	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 $join3 WHERE $where GROUP BY t.thread_id, tl.name, tl.title, t.thread_type, n.node_id, n.user_id, u.name, u.website, nl.name, nl.title, nl.abstract, nl.cloud ORDER BY pertinence DESC";
 
 	$r = db_query($sql);
 
@@ -183,7 +201,7 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
@@ -195,7 +213,7 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 
 	$where = "tg.locale=$sqllang";
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where";
+	$sql="SELECT DISTINCT tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where";
 
 	$r = db_query($sql);
 
@@ -236,7 +254,7 @@ function cloud_suggest($lang, $cloud_id, $term) {
 	$tabthreadnode=db_prefix_table('thread_node');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=0";
+	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= " AND tn.thread_id=$cloud_id";
 	}
@@ -246,9 +264,21 @@ function cloud_suggest($lang, $cloud_id, $term) {
 		$join2 .= " AND t.thread_type!='rss' AND t.thread_type!='newsletter'";
 	}
 
-	$where = "tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm";
+	global $db_scheme;
 
-	$sql="SELECT DISTINCT tg.tag_id, tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where ORDER BY tag_name";
+	switch ($db_scheme) {
+		case 'pgsql':
+			$where = "tg.locale=$sqllang AND LOWER(STRFLAT(tg.name)) LIKE LOWER(STRFLAT($sqlterm))";
+			$order = "tag_name";
+			break;
+		case 'mysql':
+		default:
+			$where = "tg.locale=$sqllang AND tg.name COLLATE utf8_general_ci LIKE $sqlterm";
+			$order = "tag_name COLLATE utf8_general_ci";
+			break;
+	}
+
+	$sql="SELECT DISTINCT tg.name AS tag_name FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 WHERE $where ORDER BY $order";
 
 	$r = db_query($sql);
 
@@ -262,7 +292,7 @@ function cloud_list_node_tags($lang, $node_id) {
 	$tabtag=db_prefix_table('tag');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$sql = "SELECT t.tag_id, t.name AS tag_name FROM $tabtagindex ti JOIN $tabtag t ON t.tag_id=ti.tag_id AND t.locale=$sqllang WHERE ti.node_id=$node_id ORDER BY tag_name COLLATE utf8_general_ci";
+	$sql = "SELECT tg.name AS tag_name FROM $tabtagindex ti JOIN $tabtag tg ON tg.tag_id=ti.tag_id AND tg.locale=$sqllang WHERE ti.node_id=$node_id";
 
 	$r = db_query($sql);
 
@@ -291,6 +321,8 @@ function cloud_tag_node($lang, $node_id, $s) {
 	foreach (array_diff($newtags, $oldtags) as $w) {
 		cloud_add_node_tag($lang, $node_id, $w);
 	}
+
+	return true;
 }
 
 function cloud_add_node_tag($lang, $node_id, $tag) {
@@ -300,7 +332,7 @@ function cloud_add_node_tag($lang, $node_id, $tag) {
 	// see if tag is already used
 	$tabtag=db_prefix_table('tag');
 
-	$sql="SELECT t.tag_id FROM $tabtag t WHERE t.locale=$sqllang AND t.name=$sqlname";
+	$sql="SELECT tg.tag_id FROM $tabtag tg WHERE tg.locale=$sqllang AND tg.name=$sqlname";
 
 	$r = db_query($sql);
 
@@ -316,17 +348,21 @@ function cloud_add_node_tag($lang, $node_id, $tag) {
 			return false;
 		}
 
-		$tag_id = db_insert_id();
+		$tag_id = db_insert_id($tabtag . '_tag_id_seq');
 	}
 
 	// associate the tag to the node
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$sql = "INSERT IGNORE INTO $tabtagindex (tag_id, node_id) VALUES ($tag_id, $node_id)";
+	$sql = "INSERT INTO $tabtagindex (tag_id, node_id) VALUES ($tag_id, $node_id)";
 
 	$r = db_insert($sql);
 
-	return $r;
+	if (!$r) {
+		return false;
+	}
+
+	return true;
 }
 
 function cloud_remove_node_tag($lang, $node_id, $tag) {
@@ -337,20 +373,24 @@ function cloud_remove_node_tag($lang, $node_id, $tag) {
 	$tabtag=db_prefix_table('tag');
 	$tabtagindex=db_prefix_table('tag_index');
 
-	$sql="DELETE ti FROM $tabtagindex ti JOIN $tabtag t ON t.locale=$sqllang AND t.name=$sqlname WHERE ti.tag_id=t.tag_id AND ti.node_id=$node_id";
+	$sql="DELETE FROM $tabtagindex WHERE node_id=$node_id AND tag_id IN (SELECT t.tag_id FROM $tabtag t WHERE t.locale=$sqllang AND t.name=$sqlname)";
 
 	$r = db_delete($sql);
 
-	if (!$r) {
+	if ($r === false) {
 		return false;
 	}
 
 	// delete the tag if it's not used anymore
-	$sql="DELETE t FROM $tabtag t WHERE t.locale=$sqllang AND t.name=$sqlname AND NOT EXISTS (SELECT * FROM $tabtagindex ti WHERE ti.tag_id=t.tag_id)";
+	$sql="DELETE FROM $tabtag WHERE locale=$sqllang AND name=$sqlname AND tag_id NOT IN (SELECT ti.tag_id FROM $tabtagindex ti)";
 
 	$r = db_delete($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function cloud_untag_node($node_id) {
@@ -370,7 +410,7 @@ function cloud_untag_node($node_id) {
 		$sql="DELETE FROM $tabtag WHERE tag_id IN ($in)";
 		$r = db_delete($sql);
 
-		if (!$r) {
+		if ($r === false) {
 			return false;
 		}
 	}
@@ -380,6 +420,10 @@ function cloud_untag_node($node_id) {
 
 	$r = db_delete($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 

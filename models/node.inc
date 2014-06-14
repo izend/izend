@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    17
+ * @copyright  2010-2014 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,7 @@ function node_id($node) {
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="SELECT node_id FROM $tabnode WHERE node_id=$node LIMIT 1";
+	$sql="SELECT node_id FROM $tabnode WHERE node_id=$node";
 
 	$r = db_query($sql);
 
@@ -28,7 +28,7 @@ function node_create($lang, $user_id, $node_name, $node_title) {
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="INSERT $tabnode SET user_id=$user_id, created=NOW(), modified=created";
+	$sql="INSERT INTO $tabnode (user_id, created, modified) VALUES ($user_id, NOW(), NOW())";
 
 	$r = db_insert($sql);
 
@@ -36,23 +36,21 @@ function node_create($lang, $user_id, $node_name, $node_title) {
 		return false;
 	}
 
-	$node_id = db_insert_id();
+	$node_id = db_insert_id($tabnode . '_node_id_seq');
 
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="INSERT $tabnodelocale SET node_id=$node_id, locale=$sqllang, name=$sqlname, title=$sqltitle";
+	$sql="INSERT INTO $tabnodelocale (node_id, locale, name, title) VALUES ($node_id, $sqllang, $sqlname, $sqltitle)";
 
 	$r = db_insert($sql);
 
 	if (!$r) {
-		$sql="DELETE FROM $tabnode WHERE node_id=$node_id LIMIT 1";
+		$sql="DELETE FROM $tabnode WHERE node_id=$node_id";
 
-		$r = db_delete($sql);
+		db_delete($sql);
 
 		return false;
 	}
-
-	$node_id = db_insert_id();
 
 	return $r ? compact('node_id') : false;
 }
@@ -65,7 +63,7 @@ function node_get($lang, $node_id, $strict=true) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id LIMIT 1";
+	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id";
 
 	$r = db_query($sql);
 
@@ -73,23 +71,23 @@ function node_get($lang, $node_id, $strict=true) {
 }
 
 function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
-	$sqlnocomment=$node_nocomment ? 1 : 0;
-	$sqlnomorecomment=$node_nocomment ? 1 : ($node_nomorecomment ? 1 : 0);
-	$sqlnovote=$node_novote ? 1 : 0;
-	$sqlnomorevote=$node_novote ? 1 : ($node_nomorevote ? 1 : 0);
-	$sqlilike=$node_ilike ? 1 : 0;
-	$sqltweet=$node_tweet ? 1 : 0;
-	$sqlplusone=$node_plusone ? 1 : 0;
-	$sqllinkedin=$node_linkedin ? 1 : 0;
-	$sqlpinit=$node_pinit ? 1 : 0;
+	$sqlnocomment=$node_nocomment ? 'TRUE' : 'FALSE';
+	$sqlnomorecomment=$node_nocomment ? 'TRUE' : ($node_nomorecomment ? 'TRUE' : 'FALSE');
+	$sqlnovote=$node_novote ? 'TRUE' : 'FALSE';
+	$sqlnomorevote=$node_novote ? 'TRUE' : ($node_nomorevote ? 'TRUE' : 'FALSE');
+	$sqlilike=$node_ilike ? 'TRUE' : 'FALSE';
+	$sqltweet=$node_tweet ? 'TRUE' : 'FALSE';
+	$sqlplusone=$node_plusone ? 'TRUE' : 'FALSE';
+	$sqllinkedin=$node_linkedin ? 'TRUE' : 'FALSE';
+	$sqlpinit=$node_pinit ? 'TRUE' : 'FALSE';
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, ilike=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE node_id=$node_id LIMIT 1";
+	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE node_id=$node_id";
 
 	$r = db_update($sql);
 
-	if (!$r) {
+	if ($r === false) {
 		return false;
 	}
 
@@ -102,11 +100,23 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="INSERT $tabnodelocale SET node_id=$node_id, locale=$sqllang, name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage ON DUPLICATE KEY UPDATE node_id=LAST_INSERT_ID(node_id), locale=VALUES(locale), name=VALUES(name), title=VALUES(title), abstract=VALUES(abstract), cloud=VALUES(cloud), image=VALUES(image)";
+	$sql="INSERT INTO $tabnodelocale (node_id, locale, name, title, abstract, cloud, image) SELECT * FROM (SELECT $node_id AS node_id, $sqllang AS locale, $sqlname AS name, $sqltitle AS title, $sqlabstract AS abstract, $sqlcloud AS cloud, $sqlimage AS image) s WHERE NOT EXISTS (SELECT node_id FROM $tabnodelocale WHERE node_id=$node_id AND locale=$sqllang)";
 
 	$r = db_insert($sql);
 
-	return $r;
+	if ($r) {
+		return true;
+	}
+
+	$sql="UPDATE $tabnodelocale SET name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage WHERE node_id=$node_id AND locale=$sqllang";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function node_delete($node_id) {
@@ -115,15 +125,19 @@ function node_delete($node_id) {
 	$tabnodecontent=db_prefix_table('node_content');
 
 	$sql="DELETE FROM $tabnode WHERE node_id=$node_id";
+
 	$r = db_delete($sql);
+
 	if (!$r) {
 		return false;
 	}
 
 	$sql="DELETE FROM $tabnodelocale WHERE node_id=$node_id";
+
 	db_delete($sql);
 
 	$sql="SELECT content_id, content_type FROM $tabnodecontent WHERE node_id=$node_id";
+
 	$r = db_query($sql);
 
 	if ($r) {
@@ -137,22 +151,30 @@ function node_delete($node_id) {
 		}
 
 		foreach ($cdata as $ctype => $id) {
-			$tabcontent=db_prefix_table('content_' . $ctype);
 			$in=implode(',', $id);
+
+			$tabcontent=db_prefix_table('content_' . $ctype);
+
 			$sql="DELETE FROM $tabcontent WHERE content_id IN ($in)";
+
 			db_delete($sql);
 		}
 
 		$sql="DELETE FROM $tabnodecontent WHERE node_id=$node_id";
+
 		db_delete($sql);
 	}
 
 	$tabcomment=db_prefix_table('comment');
+
 	$sql="DELETE FROM $tabcomment WHERE node_id=$node_id";
+
 	db_delete($sql);
 
 	$tabvote=db_prefix_table('vote');
+
 	$sql="DELETE FROM $tabvote WHERE content_id=$node_id AND content_type='node'";
+
 	db_delete($sql);
 
 	return true;
@@ -173,7 +195,7 @@ function node_get_contents($lang, $node_id) {
 		$alias="nc$n";
 		$join[]="LEFT JOIN $tabcontenttype $alias ON nc.content_type='$content_type' AND $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
 		foreach ($fields as $fname => $props) {
-			$select[]="$alias.`$fname` AS content_${content_type}_$fname";
+			$select[]="$alias.$fname AS content_${content_type}_$fname";
 		}
 		$n++;
 	}
@@ -195,11 +217,11 @@ function node_set_contents($lang, $node_id, $node_contents) {
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW() WHERE node_id=$node_id LIMIT 1";
+	$sql="UPDATE $tabnode SET modified=NOW() WHERE node_id=$node_id";
 
 	$r = db_update($sql);
 
-	if (!$r) {
+	if ($r === false) {
 		return false;
 	}
 
@@ -213,18 +235,18 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$content_ignored=$c['content_ignored'];
 
 		$sqltype=db_sql_arg($content_type, false);
-		$sqlignored=$content_ignored ? 1 : 0;
+		$sqlignored=$content_ignored ? 'TRUE' : 'FALSE';
 
 		$sql="UPDATE $tabnodecontent SET number=$number, ignored=$sqlignored WHERE node_id=$node_id AND content_id=$content_id AND content_type=$sqltype";
+
 		$r = db_update($sql);
 
-		if (!$r) {
+		if ($r === false) {
 			return false;
 		}
 
 		$tabcontenttype=db_prefix_table('content_' . $content_type);
-		$set=array("content_id=$content_id", "locale=$sqllang");
-		$dup=array();
+		$data=array('content_id' => $content_id, 'locale' => $sqllang);
 		foreach ($contents_model[$content_type] as $fname => $props) {
 			$fieldname = "content_${content_type}_$fname";
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
@@ -233,25 +255,47 @@ function node_set_contents($lang, $node_id, $node_contents) {
 					$sqlval=$val ? $val : 0;
 					break;
 				case 'boolean':
-					$sqlval=$val ? 1 : 0;
+					$sqlval=$val ? 'TRUE' : 'FALSE';
 					break;
 				case 'string':
 				default:
 					$sqlval=db_sql_arg($val, true, isset($props['null']));
 					break;
 			}
-			$set[]="`$fname`=$sqlval";
-			$dup[]="`$fname`=VALUES(`$fname`)";
+			$data[$fname]=$sqlval;
 		}
-		$set=implode(', ', $set);
-		$dup=implode(', ', $dup);
 
-		$sql="INSERT $tabcontenttype SET $set ON DUPLICATE KEY UPDATE $dup";
+		$fields=array();
+		$as=array();
+		foreach ($data as $f => $v) {
+			$fields[]="\"$f\"";
+			$as[]="$v AS \"$f\"";
+		}
+		$fields=implode(', ', $fields);
+		$as=implode(', ', $as);
 
-		$r = db_update($sql);
+		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
 
-		if (!$r) {
+		$r = db_insert($sql);
+
+		if ($r === false) {
 			return false;
+		}
+
+		if ($r === 0) {
+			$set=array();
+			foreach ($data as $f => $v) {
+				$set[]="\"$f\"=$v";
+			}
+			$set=implode(', ', $set);
+
+			$sql="UPDATE $tabcontenttype SET $set WHERE content_id=$content_id AND locale=$sqllang";
+
+			$r = db_update($sql);
+
+			if ($r === false) {
+				return false;
+			}
 		}
 
 		$number++;
@@ -287,7 +331,7 @@ function node_create_content($lang, $node_id, $content_type, $content_number=0) 
 
 	$tabcontenttype=db_prefix_table('content_' . $content_type);
 
-	$sql="INSERT $tabcontenttype SET locale=$sqllang";
+	$sql="INSERT INTO $tabcontenttype (locale) VALUES ($sqllang)";
 
 	$r = db_insert($sql);
 
@@ -295,21 +339,29 @@ function node_create_content($lang, $node_id, $content_type, $content_number=0) 
 		return false;
 	}
 
-	$content_id = db_insert_id();
+	$content_id = db_insert_id($tabcontenttype . '_content_id_seq');
 
 	if ($content_number != $n) {
-		$sql="UPDATE $tabnodecontent SET number=number+1 WHERE node_id=$node_id AND number >= $content_number ORDER BY number";
+		$sql="UPDATE $tabnodecontent SET number=number+1 WHERE node_id=$node_id AND number >= $content_number";
 
 		db_update($sql);
+
+		if ($r === false) {
+			return false;
+		}
 	}
 
 	$sqltype=db_sql_arg($content_type, false);
 
-	$sql="INSERT $tabnodecontent SET node_id=$node_id, content_id=$content_id, content_type=$sqltype, number=$content_number";
+	$sql="INSERT INTO $tabnodecontent (node_id, content_id, content_type, number) VALUES ($node_id, $content_id, $sqltype, $content_number)";
 
 	$r = db_insert($sql);
 
-	return $r ? compact('content_id', 'content_number') : false;
+	if (!$r) {
+		return false;
+	}
+
+	return compact('content_id', 'content_number');
 }
 
 function node_delete_content($node_id, $content_id, $content_type) {
@@ -322,20 +374,41 @@ function node_delete_content($node_id, $content_id, $content_type) {
 	$sqltype=db_sql_arg($content_type, false);
 
 	$tabnodecontent=db_prefix_table('node_content');
-	$tabcontenttype=db_prefix_table('content_' . $content_type);
 
-	$sql="DELETE nc, ct FROM $tabnodecontent nc JOIN $tabcontenttype ct ON ct.content_id=nc.content_id WHERE nc.node_id=$node_id AND nc.content_id=$content_id AND nc.content_type=$sqltype";
+	$sql="SELECT number FROM $tabnodecontent WHERE node_id=$node_id AND content_id=$content_id AND content_type=$sqltype";
 
-	$r = db_delete($sql);
+	$r = db_query($sql);
 
 	if (!$r) {
 		return false;
 	}
+	$number=$r[0]['number'];
 
-	$sql="SET @n=0";
-	db_update($sql);
-	$sql="UPDATE $tabnodecontent SET number=(@n:=@n+1) WHERE node_id=$node_id ORDER BY number";
-	db_update($sql);
+	$sql="DELETE FROM $tabnodecontent WHERE node_id=$node_id AND content_id=$content_id AND content_type=$sqltype";
+
+	$r = db_delete($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	$sql="UPDATE $tabnodecontent SET number=number-1 WHERE node_id=$node_id AND number > $number";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	$tabcontenttype=db_prefix_table('content_' . $content_type);
+
+	$sql="DELETE FROM $tabcontenttype WHERE content_id=$content_id";
+
+	$r = db_delete($sql);
+
+	if ($r === false) {
+		return false;
+	}
 
 	return true;
 }
@@ -347,7 +420,7 @@ function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="INSERT $tabcomment (node_id, locale, created, edited, user_id, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), created, $user_id, INET_ATON($sqlipaddress), $sqltext)";
+	$sql="INSERT INTO $tabcomment (node_id, locale, created, edited, user_id, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), NOW(), $user_id, INET_ATON($sqlipaddress), $sqltext)";
 
 	$r = db_insert($sql);
 
@@ -355,7 +428,7 @@ function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
 		return false;
 	}
 
-	$comment_id = db_insert_id();
+	$comment_id = db_insert_id($tabcomment . '_comment_id_seq');
 
 	return $comment_id;
 }
@@ -367,7 +440,11 @@ function node_delete_comment($node_id, $comment_id) {
 
 	$r = db_delete($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function node_set_comment($node_id, $comment_id, $text, $locale) {
@@ -376,11 +453,15 @@ function node_set_comment($node_id, $comment_id, $text, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="UPDATE $tabcomment SET text=$sqltext, edited=NOW() WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+	$sql="UPDATE $tabcomment SET text=$sqltext, edited=NOW() WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale";
 
 	$r = db_update($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function node_get_comment($node_id, $comment_id, $locale) {
@@ -388,7 +469,7 @@ function node_get_comment($node_id, $comment_id, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(edited) AS comment_edited, user_id AS comment_user_id, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale LIMIT 1";
+	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(edited) AS comment_edited, user_id AS comment_user_id, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale";
 
 	$r = db_query($sql);
 

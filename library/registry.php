@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,9 @@ function registry_get($name, $default=false) {
 
 	$tabregistry=db_prefix_table('registry');
 
-	$r = db_query("SELECT value FROM $tabregistry WHERE name=$sqlname LIMIT 1");
+	$sql="SELECT value FROM $tabregistry WHERE name=$sqlname";
+
+	$r = db_query($sql);
 
 	return $r ? unserialize($r[0]['value']) : $default;
 }
@@ -23,7 +25,23 @@ function registry_set($name, $value) {
 
 	$tabregistry=db_prefix_table('registry');
 
-	return db_insert("INSERT $tabregistry SET name=$sqlname, value=$sqlvalue ON DUPLICATE KEY UPDATE name=VALUES(name), value=VALUES(value)");
+	$sql="INSERT INTO $tabregistry (name, value) SELECT * FROM (SELECT $sqlname AS name, $sqlvalue AS value) s WHERE NOT EXISTS (SELECT name FROM $tabregistry WHERE name=$sqlname)";
+
+	$r = db_insert($sql);
+
+	if ($r) {
+		return true;
+	}
+
+	$sql="UPDATE $tabregistry SET name=$sqlname, value=$sqlvalue WHERE name=$sqlname";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function registry_delete($name) {
@@ -31,6 +49,13 @@ function registry_delete($name) {
 
 	$tabregistry=db_prefix_table('registry');
 
-	return db_delete("DELETE FROM $tabregistry WHERE name=$sqlname LIMIT 1");
-}
+	$sql="DELETE FROM $tabregistry WHERE name=$sqlname";
 
+	$r = db_delete($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
+}

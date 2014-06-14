@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -23,7 +23,7 @@ function user_create_avatar($name) {
 }
 
 function user_delete_avatar($name) {
-	@unlink(AVATARS_DIR . DIRECTORY_SEPARATOR . $name . '.png');
+	return @unlink(AVATARS_DIR . DIRECTORY_SEPARATOR . $name . '.png');
 }
 
 function user_id($user) {
@@ -51,9 +51,18 @@ function user_create($name, $password, $mail, $locale='en', $website=false) {
 	$sqlpassword=db_sql_arg($password, false);
 	$sqlseed=db_sql_arg($seed, false);
 
+	$wherenotexists=array();
+	if ($name) {
+		$wherenotexists[]="name=$sqlname";
+	}
+	if ($mail) {
+		$wherenotexists[]="mail=$sqlmail";
+	}
+	$wherenotexists=implode(' OR ', $wherenotexists);
+
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT IGNORE $tabuser (name, password, seed, mail, created, locale, website) VALUES ($sqlname, $sqlpassword, $sqlseed, $sqlmail, NOW(), $sqllocale, $sqlwebsite)";
+	$sql="INSERT INTO $tabuser (name, password, seed, mail, created, locale, website) SELECT * FROM (SELECT $sqlname AS name, $sqlpassword AS password, $sqlseed AS seed, $sqlmail AS mail, NOW() AS created, $sqllocale AS locale, $sqlwebsite AS website) s WHERE NOT EXISTS (SELECT user_id FROM $tabuser WHERE $wherenotexists)";
 
 	$r = db_insert($sql);
 
@@ -61,7 +70,7 @@ function user_create($name, $password, $mail, $locale='en', $website=false) {
 		return false;
 	}
 
-	$user_id = db_insert_id();
+	$user_id = db_insert_id($tabuser . '_user_id_seq');
 
 	if ($name) {
 		user_create_avatar($name);
@@ -77,7 +86,7 @@ function user_delete($user_id) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT name FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT name FROM $tabuser WHERE user_id=$user_id";
 
 	$r = db_query($sql);
 
@@ -91,13 +100,26 @@ function user_delete($user_id) {
 	}
 
 	$tabuserinfo=db_prefix_table('user_info');
-	$tabuserrole=db_prefix_table('user_role');
 
-	$sql="DELETE u, ui, ur FROM $tabuser u LEFT JOIN $tabuserinfo ui ON ui.user_id=u.user_id LEFT JOIN $tabuserrole ur ON ur.user_id=u.user_id WHERE u.user_id=$user_id";
+	$sql="DELETE FROM $tabuserinfo WHERE user_id=$user_id";
 
 	$r = db_delete($sql);
 
-	return $r;
+	$tabuserrole=db_prefix_table('user_role');
+
+	$sql="DELETE FROM $tabuserrole WHERE user_id=$user_id";
+
+	$r = db_delete($sql);
+
+	$sql="DELETE FROM $tabuser WHERE user_id=$user_id";
+
+	$r = db_delete($sql);
+
+	if (!$r) {
+		return false;
+	}
+
+	return true;
 }
 
 function user_get($user_id) {
@@ -135,11 +157,11 @@ function user_set($user_id, $name, $mail, $website, $locale) {
 	$sqlwebsite=db_sql_arg($website, true, true);
 	$sqllocale=db_sql_arg($locale, false);
 
-	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, website=$sqlwebsite, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id LIMIT 1";
+	$sql="UPDATE $tabuser SET name=$sqlname, mail=$sqlmail, website=$sqlwebsite, locale=$sqllocale, modified=NOW() WHERE user_id=$user_id";
 
 	$r = db_update($sql);
 
-	if (!$r) {
+	if ($r === false) {
 		return false;
 	}
 
@@ -177,11 +199,23 @@ function user_set_info($user_id, $lastname, $firstname) {
 
 	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="INSERT $tabuserinfo SET user_id=$user_id, lastname=$sqllastname, firstname=$sqlfirstname ON DUPLICATE KEY UPDATE lastname=VALUES(lastname), firstname=VALUES(firstname)";
+	$sql="INSERT INTO $tabuserinfo (user_id, lastname, firstname) SELECT * FROM (SELECT $user_id AS user_id, $sqllastname AS lastname, $sqlfirstname AS firstname) s WHERE NOT EXISTS (SELECT user_id FROM $tabuserinfo WHERE user_id=$user_id)";
 
 	$r = db_insert($sql);
 
-	return $r;
+	if ($r) {
+		return true;
+	}
+
+	$sql="UPDATE $tabuserinfo SET lastname=$sqllastname, firstname=$sqlfirstname WHERE user_id=$user_id";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function user_set_status($user_id, $active, $banned) {
@@ -189,16 +223,20 @@ function user_set_status($user_id, $active, $banned) {
 		return false;
 	}
 
-	$sqlactive=$active ? 1 : 0;
-	$sqlbanned=$banned ? 1 : 0;
+	$sqlactive=$active ? 'TRUE' : 'FALSE';
+	$sqlbanned=$banned ? 'TRUE' : 'FALSE';
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="UPDATE $tabuser SET active=$sqlactive, banned=$sqlbanned WHERE user_id=$user_id LIMIT 1";
+	$sql="UPDATE $tabuser SET active=$sqlactive, banned=$sqlbanned WHERE user_id=$user_id";
 
 	$r = db_update($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function user_set_newpassword($user_id, $newpassword) {
@@ -211,7 +249,6 @@ function user_set_newpassword($user_id, $newpassword) {
 	if (!$r) {
 		return false;
 	}
-
 	extract($r);	/* user_seed */
 
 	$newpassword=$newpassword ? md5($user_seed . $newpassword) : '';
@@ -220,11 +257,15 @@ function user_set_newpassword($user_id, $newpassword) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="UPDATE $tabuser SET newpassword=$sqlnewpassword WHERE user_id=$user_id LIMIT 1";
+	$sql="UPDATE $tabuser SET newpassword=$sqlnewpassword WHERE user_id=$user_id";
 
 	$r = db_update($sql);
 
-	return $r;
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function user_get_role($user_id) {
@@ -263,6 +304,10 @@ function user_set_role($user_id, $role) {
 
 	$r = db_delete($sql);
 
+	if ($r === false) {
+		return false;
+	}
+
 	if ($role) {
 		if (is_array($role)) {
 			$sqlrole=array();
@@ -277,9 +322,13 @@ function user_set_role($user_id, $role) {
 
 		$tabrole=db_prefix_table('role');
 
-		$sql="INSERT IGNORE $tabuserrole (user_id, role_id) SELECT $user_id, r.role_id FROM $tabrole r WHERE r.name IN ($sqlrole)";
+		$sql="INSERT INTO $tabuserrole (user_id, role_id) SELECT $user_id, r.role_id FROM $tabrole r WHERE r.name IN ($sqlrole)";
 
 		$r = db_insert($sql);
+
+		if (!$r) {
+			return false;
+		}
 	}
 
 	return true;
@@ -311,7 +360,6 @@ function user_login($login, $password, $quick=false) {
 	if (!$r) {
 		return false;
 	}
-
 	extract($r);	/* user_name user_password user_newpassword user_seed user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
 
 	if (!$user_active or $user_banned) {
@@ -365,17 +413,21 @@ function user_login($login, $password, $quick=false) {
 
 	if ($password and $user_newpassword) {
 		if ($password == $user_newpassword) {
-			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), password='$user_newpassword', newpassword=NULL, modified=NOW() WHERE user_id=$user_id LIMIT 1";
+			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), password='$user_newpassword', newpassword=NULL, modified=NOW() WHERE user_id=$user_id";
 		}
 		else {
-			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), newpassword=NULL WHERE user_id=$user_id LIMIT 1";
+			$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW(), newpassword=NULL WHERE user_id=$user_id";
 		}
 	}
 	else {
-		$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW() WHERE user_id=$user_id LIMIT 1";
+		$sql="UPDATE $tabuser SET logged=logged+1, accessed=NOW() WHERE user_id=$user_id";
 	}
 
-	db_update($sql);
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
 
 	return $user;
 }
@@ -394,7 +446,7 @@ function user_check_name($name, $user_id=false) {
 
 	$r = db_query($sql);
 
-	return $r ? false : true;
+	return !$r ? true : false;
 }
 
 function user_check_mail($mail, $user_id=false) {
@@ -411,7 +463,7 @@ function user_check_mail($mail, $user_id=false) {
 
 	$r = db_query($sql);
 
-	return $r ? false : true;
+	return !$r ? true : false;
 }
 
 function user_search($s, $pagesize=false, $page=1) {
@@ -458,16 +510,18 @@ function user_search($s, $pagesize=false, $page=1) {
 		}
 		$count=$r[0]['count'];
 
-		$limit=($page - 1) * $pagesize . ', ' . $pagesize;
+		$offset=($page - 1) * $pagesize;
+		$limit=$pagesize;
 	}
 
 	$sql="SELECT user_id, name AS user_name, mail AS user_mail, website AS user_website, active AS user_active, banned AS user_banned, logged AS user_logged, UNIX_TIMESTAMP(accessed) AS user_accessed FROM $tabuser $where ORDER by user_id";
 
 	if ($limit) {
-		$sql .= " LIMIT $limit";
+		$sql .= " LIMIT $limit OFFSET $offset";
 	}
 
 	$r = db_query($sql);
+
 	if (!$r) {
 		return false;
 	}

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    3
+ * @copyright  2010-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -36,7 +36,7 @@ function download($lang, $arglist=false) {
 	$tabnodecontent=db_prefix_table('node_content');
 	$tabcontentdownload=db_prefix_table('content_download');
 
-	$sql="SELECT cd.path FROM $tabnodecontent nc JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang WHERE nc.node_id=$node_id AND cd.name=$sqlname LIMIT 1";
+	$sql="SELECT cd.path FROM $tabnodecontent nc JOIN $tabcontentdownload cd ON nc.content_type='download' AND cd.content_id=nc.content_id AND cd.locale=$sqllang WHERE nc.node_id=$node_id AND cd.name=$sqlname";
 
 	$r = db_query($sql);
 
@@ -58,7 +58,7 @@ function download($lang, $arglist=false) {
 		$filetype = 'application/octet-stream';
 	}
 
-	header('HTTP/1.1 200 OK');	// Make sure status code is OK in case URL pointed to a plausible file not found like an image
+	header('HTTP/1.1 200 OK');	// make sure status code is OK in case URL pointed to a file not found like an image
 	header('Content-Description: File Transfer');
 	header("Content-Type: $filetype");
 	header("Content-Disposition: attachment; filename=$filename");

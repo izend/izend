@@ -3,14 +3,15 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    2
+ * @version    4
  * @link       http://www.izend.org
  */
 
 $db_conn=false;
+$db_scheme=false;
 
 function db_connect($url) {
-	global $db_conn;
+	global $db_conn, $db_scheme;
 
 	$url = parse_url($url);
 
@@ -26,13 +27,19 @@ function db_connect($url) {
 		$path = substr($path, 1);
 	}
 
-	$dsn = "$scheme:host=$host;dbname=$path;charset=UTF8";
+	$dsn = "$scheme:host=$host;dbname=$path";
 	$options = array(PDO::ATTR_PERSISTENT => true);
 
 	try {
 		$db_conn = new PDO($dsn, $user, $pass, $options);
 		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$db_conn->exec("SET NAMES 'utf8'");
+
+		if ($scheme == 'mysql') {
+			$db_conn->exec("SET SQL_MODE='ANSI_QUOTES'");
+		}
+
+		$db_scheme=$scheme;
 	}
 	catch (PDOException $e) {
 		die($e->getMessage());
@@ -97,10 +104,10 @@ function db_exec($sql) {
 	return _db_sql_exec($sql);
 }
 
-function db_insert_id() {
+function db_insert_id($id=null) {
 	global $db_conn;
 
-	$r = $db_conn->lastInsertId();
+	$r = $db_conn->lastInsertId($id);
 
 	return $r;
 }
@@ -108,11 +115,11 @@ function db_insert_id() {
 function db_sql_arg($s, $escape=true, $optional=false) {
 	global $db_conn;
 
-	if ($s) {
-		return $escape ? $db_conn->quote($s) : '\'' . $s . '\'';
+	if ($s === false or $s === '') {
+		return $optional ? 'NULL' : "''";
 	}
 
-	return $optional ? 'NULL' : '\'\'';
+	return $escape ? $db_conn->quote($s) : "'$s'";
 }
 
 function db_prefix_table($table) {
@@ -136,5 +143,5 @@ function _db_sql_exec($sql) {
 		die($e->getMessage());
 	}
 
-	return $r !== false ? true : false;
+	return $r;
 }

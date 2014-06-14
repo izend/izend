@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -65,7 +65,7 @@ function vote_plusone($type, $id, $locale, $ip_address, $user_id=false) {
 		if ($user_id != 0 and $r[0]['user_id'] == 0) {
 			$vote_id=$r[0]['vote_id'];
 
-			$sql="UPDATE $tabvote SET user_id=$user_id WHERE vote_id=$vote_id LIMIT 1";
+			$sql="UPDATE $tabvote SET user_id=$user_id WHERE vote_id=$vote_id";
 
 			$r = db_update($sql);
 
@@ -77,7 +77,7 @@ function vote_plusone($type, $id, $locale, $ip_address, $user_id=false) {
 		return true;
 	}
 
-	$sql="INSERT IGNORE $tabvote (content_id, content_type, content_locale, user_id, ip_address, created, value) VALUES ($id, $sqltype, $sqllocale, $user_id, INET_ATON($sqlipaddress), NOW(), 1)";
+	$sql="INSERT INTO $tabvote (content_id, content_type, content_locale, user_id, ip_address, created, value) VALUES ($id, $sqltype, $sqllocale, $user_id, INET_ATON($sqlipaddress), NOW(), 1)";
 
 	$r = db_insert($sql);
 
