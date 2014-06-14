@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    9
+ * @copyright  2010-2014 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -24,11 +24,12 @@ $ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc 
 <p>Le configurateur génère un logo à partir du nom du site et l'enregistre dans le fichier <i>sitelogo.png</i> dans le dossier <i>logos</i>.
 Vous voudrez probablement le changer.</p>
 <h6>Base de données</h6>
-<p><b>iZend</b> peut fonctionner sans une base de données.
+<p>iZend peut fonctionner sans une base de données.
 Dans ce mode, vous pourrez toujours profiter de l'architecture du logiciel mais vous devrez rédiger les pages du site sans l'éditeur.
 Optez pour cette configuration pour mettre en ligne un site avec des ressources limitées.
-Notez que <b>iZend</b> peut occuper très peu de place sur disque.</p>
-<p>Pour exploiter tout le potentiel d'<b>iZend</b>, vous devez disposer d'un serveur de bases de données.
+Notez que iZend peut occuper très peu de place sur disque.</p>
+<p>Pour exploiter tout le potentiel d'iZend, vous devez disposer d'un serveur de bases de données.
+Vous pouvez utiliser MySQL ou PostgreSQL.
 Le configurateur peut créer une nouvelle base de données ou utiliser une base de données déjà existante.
 <b>IMPORTANT</b>&nbsp;: Si la base de données est partagée, demandez au configurateur d'ajouter un préfixe aux noms des tables.
 Dans tous les cas, utiliser un préfixe est plus prudent.</p>
@@ -101,14 +102,25 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <p>La configuration de la base de données a échoué avec l'erreur&nbsp;:</p>
 <p><?php echo htmlspecialchars($db_error); ?></p>
 <?php if ($db_flag and !$db_reuse): ?>
+<?php if ($db_type == 'mysql'): ?>
 <p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
 et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.</p>
+<?php elseif ($db_type == 'pgsql'): ?>
+<p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
+et le rôle <code><?php echo $db_user; ?></code>.</p>
+<?php endif; ?>
 <?php endif; ?>
 </div>
 <?php endif; ?>
 <p>Avez-vous un serveur de bases de données&nbsp;?</p>
 <p class="info">Sans une base de données, les fonctionnalités seront plus limitées.</p>
-<p><input type="radio" name="configure_db_flag" value="yes" <?php if ($db_flag) echo 'checked="checked"'; ?> />&nbsp;oui <input type="radio" name="configure_db_flag" value="no" <?php if (!$db_flag) echo 'checked="checked"'; ?> />&nbsp;non</p>
+<p><input type="radio" name="configure_db_flag" value="yes"<?php if ($db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;oui <input type="radio" name="configure_db_flag" value="no"<?php if (!$db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;non</p>
+<p>Utilisez-vous MySQL ou PostgreSQL&nbsp;?</p>
+<p><input type="radio" name="configure_db_type" title="" value="mysql"<?php if ($db_type == 'mysql'): ?> checked="checked"<?php endif; ?> />&nbsp;MySQL
+<input type="radio" name="configure_db_type" title="" value="pgsql"<?php if ($db_type == 'pgsql'): ?> checked="checked"<?php endif; ?> />&nbsp;PostgreSQL</p>
+<?php if ($bad_db_type): ?>
+<p class="error">Cochez l'option MySQL ou l'option PostgreSQL.</p>
+<?php endif; ?>
 <p>Quel est le nom de la base de données&nbsp;?</p>
 <p><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
 <?php if ($missing_db_name or $bad_db_name): ?>

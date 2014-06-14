@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    9
+ * @copyright  2010-2014 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -24,11 +24,12 @@ $ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc 
 <p>The configurator generates a logo based on the name of the site and saves it in the file <i>sitelogo.png</i> in the folder <i>logos</i>.
 You will probably want to change it.</p>
 <h6>Database</h6>
-<p><b>iZend</b> can function without a database.
+<p>iZend can function without a database.
 In this mode, you will still be able to benefit from the architecture of the software, but you will have to write the pages of the site without the editor.
 Choose this configuration to put on-line a site with limited resources.
-Note that <b>iZend</b> can occupy very little space on disk.</p>
-<p>To exploit the full potential of <b>iZend</b>, you need a database server.
+Note that iZend can occupy very little space on disk.</p>
+<p>To exploit the full potential of iZend, you need a database server.
+You can use either MySQL or PostgreSQL.
 The configurator can create a new database or use an already existing database.
 <b>IMPORTANT</b>: If the database is shared, ask the configurator to add a prefix to the table names.
 In any case, using a prefix is safer.</p>
@@ -101,14 +102,25 @@ Check your answers and rerun the configuration.</p>
 <p>The configuration of the database has failed with the error:</p>
 <p><?php echo htmlspecialchars($db_error); ?></p>
 <?php if ($db_flag and !$db_reuse): ?>
+<?php if ($db_type == 'mysql'): ?>
 <p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
 and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.</p>
+<?php elseif ($db_type == 'pgsql'): ?>
+<p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
+and the role <code><?php echo $db_user; ?></code>.</p>
+<?php endif; ?>
 <?php endif; ?>
 </div>
 <?php endif; ?>
 <p>Do you have a database server?</p>
 <p class="info">Without a database, the functionalities will be more limited.</p>
-<p><input type="radio" name="configure_db_flag" value="yes" <?php if ($db_flag) echo 'checked="checked"'; ?> />&nbsp;yes <input name="configure_db_flag" type="radio" value="no" <?php if (!$db_flag) echo 'checked="checked"'; ?> />&nbsp;no</p>
+<p><input type="radio" name="configure_db_flag" value="yes"<?php if ($db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;yes <input name="configure_db_flag" type="radio" value="no"<?php if (!$db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;no</p>
+<p>Do you use MySQL or PostgreSQL?</p>
+<p><input type="radio" name="configure_db_type" title="" value="mysql"<?php if ($db_type == 'mysql'): ?> checked="checked"<?php endif; ?> />&nbsp;MySQL
+<input type="radio" name="configure_db_type" title="" value="pgsql"<?php if ($db_type == 'pgsql'): ?> checked="checked"<?php endif; ?> />&nbsp;PostgreSQL</p>
+<?php if ($bad_db_type): ?>
+<p class="error">Check the option MySQL or the option PostgreSQL.</p>
+<?php endif; ?>
 <p>What is the name of the database?</p>
 <p><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
 <?php if ($missing_db_name or $bad_db_name): ?>

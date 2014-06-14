@@ -78,6 +78,7 @@ function configure($lang) {
 	$content_languages=false;
 	$default_language=false;
 	$db_flag=false;
+	$db_type='mysql';
 	$db_reuse=false;
 	$db_host='localhost';
 	$db_admin_user=$db_admin_password='';
@@ -92,7 +93,6 @@ function configure($lang) {
 			$default_language=$lang;
 			$db_flag=true;
 			$db_reuse=false;
-			$db_type='mysql';
 			$db_name='mysite';
 			$db_user='mysite';
 			$db_prefix='mysite_';
@@ -171,9 +171,10 @@ function configure($lang) {
 	$missing_db_admin_user=false;
 	$missing_db_admin_password=false;
 
+	$bad_db_type=false;
+
 	$missing_db_name=false;
 	$bad_db_name=false;
-	$bad_db_type=false;
 
 	$bad_db_prefix=false;
 
@@ -286,7 +287,7 @@ function configure($lang) {
 
 	switch($action) {
 		case 'configure':
-			if ($bad_token or $bad_write_permission or $missing_sitename or $missing_webmaster or $missing_content_languages or $bad_default_language or $missing_db_admin_user or $missing_db_admin_password or $missing_db_name or $bad_db_name or $bad_bd_type or $missing_db_host or $bad_db_host or $missing_db_user or $bad_db_user or $missing_db_password or $weak_db_password or $missing_site_admin_user or $bad_site_admin_user or $missing_site_admin_password or $weak_site_admin_password) {
+			if ($bad_token or $bad_write_permission or $missing_sitename or $missing_webmaster or $missing_content_languages or $bad_default_language or $missing_db_admin_user or $missing_db_admin_password or $missing_db_name or $bad_db_name or $bad_db_type or $missing_db_host or $bad_db_host or $missing_db_user or $bad_db_user or $missing_db_password or $weak_db_password or $missing_site_admin_user or $bad_site_admin_user or $missing_site_admin_password or $weak_site_admin_password) {
 				break;
 			}
 
@@ -330,13 +331,13 @@ function configure($lang) {
 				$img=identicon($site_admin_user, AVATAR_SIZE);
 				@imagepng($img, AVATARS_DIR . DIRECTORY_SEPARATOR . $site_admin_user . '.png');
 
-				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix);
+				$db_inc = build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix, $db_type);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, 1, 'home', 'page', $languages);
 				$features=array('captcha', 'avatar', 'rssfeed', 'home', 'contact', 'user', 'nobody', 'account', 'password', 'newuser', 'search', 'suggest', 'download', 'admin', 'adminuser', 'pagecontent', 'page', 'editpage', 'folder', 'folderedit', 'story', 'storyedit', 'book', 'bookedit', 'newsletter', 'newsletteredit', 'newslettersubscribe', 'newsletterunsubscribe', 'thread', 'threadedit', 'node', 'editnode', 'donation', 'paypalreturn', 'paypalcancel', 'sslverifyclient', 's');
 				$aliases_inc = build_aliases_inc($features, $languages);
 			}
 			else {
-				$db_inc = build_db_inc(false, false, false, false, false);
+				$db_inc = build_db_inc(false, false, false, false, false, false);
 				$config_inc = build_config_inc($sitename, $webmaster, $site_admin_user, false, 'homepage', 'anypage', $languages);
 				$features=array('captcha', 'avatar', 'rssfeed', 'homepage', 'contact', 'donation', 'paypalreturn', 'paypalcancel', 'sslverifyclient', 's');
 				$aliases_inc = build_aliases_inc($features, $languages);
@@ -378,15 +379,15 @@ function configure($lang) {
 
 	$_SESSION['configure_token'] = $token = token_id();
 
-	$errors = compact('bad_write_permission', 'missing_sitename', 'missing_webmaster', 'missing_content_languages', 'bad_default_language', 'missing_db_admin_user', 'missing_db_admin_password', 'missing_db_name', 'bad_db_name', 'missing_db_host', 'bad_db_host', 'bad_db_prefix', 'missing_db_user', 'bad_db_user', 'missing_db_password', 'weak_db_password', 'missing_site_admin_user', 'bad_site_admin_user', 'missing_site_admin_password', 'weak_site_admin_password');
+	$errors = compact('bad_write_permission', 'missing_sitename', 'missing_webmaster', 'missing_content_languages', 'bad_default_language', 'missing_db_admin_user', 'missing_db_admin_password', 'bad_db_type', 'missing_db_name', 'bad_db_name', 'missing_db_host', 'bad_db_host', 'bad_db_prefix', 'missing_db_user', 'bad_db_user', 'missing_db_password', 'weak_db_password', 'missing_site_admin_user', 'bad_site_admin_user', 'missing_site_admin_password', 'weak_site_admin_password');
 
-	$output = view('configure', $lang, compact('token', 'sitename', 'webmaster', 'db_error', 'file_error', 'internal_error', 'content_languages', 'default_language', 'db_flag', 'db_reuse', 'db_admin_user', 'db_admin_password', 'db_name', 'db_host', 'db_prefix', 'db_user', 'db_password', 'site_admin_user', 'site_admin_password', 'errors'));
+	$output = view('configure', $lang, compact('token', 'sitename', 'webmaster', 'db_error', 'file_error', 'internal_error', 'content_languages', 'default_language', 'db_flag', 'db_type', 'db_reuse', 'db_admin_user', 'db_admin_password', 'db_name', 'db_host', 'db_prefix', 'db_user', 'db_password', 'site_admin_user', 'site_admin_password', 'errors'));
 
 	return $output;
 }
 
-function build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix) {
-	return render(INIT_DIR . DIRECTORY_SEPARATOR . DB_INC, compact('db_host', 'db_name', 'db_user', 'db_password', 'db_prefix'));
+function build_db_inc($db_host, $db_name, $db_user, $db_password, $db_prefix, $db_type) {
+	return render(INIT_DIR . DIRECTORY_SEPARATOR . DB_INC, compact('db_host', 'db_name', 'db_user', 'db_password', 'db_prefix', 'db_type'));
 }
 
 function build_config_inc($sitename, $webmaster, $username, $root_node, $home_action, $default_action, $languages) {
