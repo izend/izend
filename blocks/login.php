@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -18,6 +18,9 @@ function login($lang) {
 	$with_name=true;
 	$with_captcha=true;
 	$with_facebook=false;
+
+	$with_newuser=true;
+	$with_newpassword=true;
 
 	if ($with_facebook) {
 		require_once 'facebook.php';
@@ -183,8 +186,8 @@ function login($lang) {
 		$connectbar=view('connect', $lang, compact('facebook_login_url'));
 	}
 
-	$password_page=url('password', $lang);
-	$newuser_page=url('newuser', $lang);
+	$password_page=$with_newpassword ? url('password', $lang) : false;
+	$newuser_page=$with_newuser ? url('newuser', $lang) : false;
 
 	$_SESSION['login_token'] = $token = token_id();
 
