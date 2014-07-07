@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -23,10 +23,10 @@ function qrdecode($file) {
 		return false;
 	}
 
-	if (preg_match('#<html>.*</html>#', $response[2])) {
+	if (!preg_match('#<tr><td>Parsed Result</td><td><pre.*>(.*)</pre></td></tr>#', $response[2], $r)) {	// extract data - adapt when response format changes
 		return false;
 	}
 
-	return strip_tags($response[2]);
+	return strip_tags($r[1]);
 }
 
