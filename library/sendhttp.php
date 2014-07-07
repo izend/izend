@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -17,18 +17,9 @@ function http_build_args($args) {
 	return $args_string;
 }
 
-function sendget($url, $args=false) {
-	return sendhttp('GET', $url, $args);
-}
-
-function sendpost($url, $args=false, $files=false, $base64=false ) {
-	return sendhttp('POST', $url, $args, $files, $base64);
-}
-
-function sendhttp($method, $url, $args, $files=false, $base64=false) {
-	$purl = parse_url($url);
-	if ($purl === false)
-	{
+function http_parse_url($url) {
+	$purl = @parse_url($url);
+	if ($purl === false) {
 		return false;
 	}
 
@@ -44,12 +35,36 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 			return false;
 	}
 	$host = isset($purl['host']) ? $purl['host'] : 'localhost';
-	$portnum = isset($purl['portnum']) ? $purl['portnum'] : $scheme == 'https' ? 443 : 80;
+	$portnum = isset($purl['port']) ? $purl['port'] : ($scheme == 'https' ? 443 : 80);
 	$path = isset($purl['path']) ? $purl['path'] : '/';
 
-	$user_agent = 'iZend';
+	return array($proto, $scheme, $host, $portnum, $path);
+}
 
-	$header_string = $content_string = '';
+function sendget($url, $args=false) {
+	return sendhttp('GET', $url, $args);
+}
+
+function sendpost($url, $args=false, $files=false, $base64=false ) {
+	return sendhttp('POST', $url, $args, $files, $base64);
+}
+
+function sendhttp($method, $url, $args, $files=false, $base64=false) {
+	$r = http_parse_url($url);
+
+	if (!$r) {
+		return false;
+	}
+
+	list($proto, $scheme, $host, $portnum, $path)=$r;
+
+	$hostaddr=($scheme == 'http' && $portnum == 80) ? $host : $host . ':' . $portnum;
+
+	$user_agent='iZend';
+
+	$header_string=$content_string='';
+
+	$crlf="\r\n";
 
 	switch ($method) {
 		case 'POST':
@@ -61,8 +76,8 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 
 				if ($args && is_array($args)) {
 					foreach ($args as $k => $v) {
-						$content_string .= '--' . $boundary . "\r\n";
-						$content_string .= 'Content-Disposition: form-data; name="' . $k . '"' . "\r\n\r\n" . $v . "\r\n";
+						$content_string .= '--' . $boundary . $crlf;
+						$content_string .= 'Content-Disposition: form-data; name="' . $k . '"' . $crlf . $crlf . $v . $crlf;
 					}
 				}
 				foreach ($files as $k => $v ) {
@@ -78,19 +93,19 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 					if (!$data) {
 						break;
 					}
-					$content_string .= '--' . $boundary . "\r\n";
-					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . "\r\n";
-					$content_string .= 'Content-Type: ' . $v['type'] . "\r\n";
+					$content_string .= '--' . $boundary . $crlf;
+					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . $crlf;
+					$content_string .= 'Content-Type: ' . $v['type'] . $crlf;
 					if ($base64) {
-						$content_string .= 'Content-Transfer-Encoding: base64' . "\r\n\r\n";
-						$content_string .= chunk_split(base64_encode($data)) . "\r\n";
+						$content_string .= 'Content-Transfer-Encoding: base64' . $crlf . $crlf;
+						$content_string .= chunk_split(base64_encode($data)) . $crlf;
 					}
 					else {
-						$content_string .= 'Content-Transfer-Encoding: binary' . "\r\n\r\n";
-						$content_string .= $data . "\r\n";
+						$content_string .= 'Content-Transfer-Encoding: binary' . $crlf . $crlf;
+						$content_string .= $data . $crlf;
 					}
 				}
-				$content_string .= '--' . $boundary . '--'. "\r\n";
+				$content_string .= '--' . $boundary . '--' . $crlf;
 			}
 			else {
 				$content_type = 'application/x-www-form-urlencoded';
@@ -100,21 +115,25 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 			}
 
 			$content_length = strlen($content_string);
-			$header_string="POST $path HTTP/1.0\r\nHost: $host\r\nUser-Agent: $user_agent\r\nContent-Type: $content_type\r\nContent-Length: $content_length\r\nConnection: close\r\n\r\n";
+			$header_string="POST $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}Connection: close${crlf}${crlf}";
 			break;
 
 		case 'GET':
 			if ($args && is_array($args)) {
-				$path .= '?'.http_build_args($args);
+				$path .= '?' . http_build_args($args);
 			}
-			$header_string="GET $path HTTP/1.0\r\nHost: $host\r\nUser-Agent: $user_agent\r\nConnection: close\r\n\r\n";
+			$header_string="GET $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Connection: close${crlf}${crlf}";
 			break;
 
 		default:
 			return false;
 	}
 
-	$socket = @fsockopen($proto.'://'.$host, $portnum);
+	return sendhttpraw($proto, $host, $portnum, $header_string, $content_string);
+}
+
+function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=false) {
+	$socket = @fsockopen($proto . '://' . $host, $portnum);
 	if ($socket === false) {
 		return false;
 	}
@@ -122,6 +141,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 	if (fwrite($socket, $header_string) === false) {
 		return false;
 	}
+
 	if ($content_string) {
 		$content_len = strlen($content_string);
 		for ($written = 0; $written < $content_len; $written += $w) {
@@ -138,9 +158,15 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 	}
 	fclose($socket);
 
-	list($response_headers, $response_body) = explode("\r\n\r\n", $response, 2);
+	if (!$response) {
+		return false;
+	}
 
-	$response_header_lines = explode("\r\n", $response_headers);
+	$crlf="\r\n";
+
+	list($response_headers, $response_body) = explode($crlf . $crlf, $response, 2);
+
+	$response_header_lines = explode($crlf, $response_headers);
 	$http_response_line = array_shift($response_header_lines);
 
 	if (preg_match('@^HTTP/[0-9]\.[0-9] ([0-9]{3})@', $http_response_line, $r)) {
