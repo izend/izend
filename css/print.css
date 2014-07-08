@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
  
@@ -108,3 +108,5 @@ ol.tree li.filenode {font-style:normal;}
 .geshi {font-family:"Courier New", Courier, monospace;font-size:.9em;}
 
 #comments {page-break-before:always;}
+
+.ui-accordion .ui-accordion-content {display:block !important;}
