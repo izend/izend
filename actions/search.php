@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
 
 function search($lang, $arglist=false) {
-	global $rss_thread, $newsletter_thread;
+	global $search_all, $rss_thread;
 
 	$cloud=false;
 
@@ -23,6 +23,7 @@ function search($lang, $arglist=false) {
 	}
 
 	$cloud_id=$cloud_name=false;
+	$thread_nocloud=$thread_nosearch=false;
 
 	if ($cloud) {
 		$cloud_id = cloud_id($cloud);
@@ -48,8 +49,16 @@ function search($lang, $arglist=false) {
 		}
 		extract($r); /* thread_type thread_nocloud thread_nosearch */
 
-		if ($thread_nosearch and $thread_nocloud) {
+		if ($thread_type == 'thread' or ($thread_nosearch and $thread_nocloud)) {
 			return run('error/notfound', $lang);
+		}
+	}
+	else {
+		if ($search_all === false) {
+			return run('error/notfound', $lang);
+		}
+		if ($search_all !== true) {
+			$thread_nosearch=true;
 		}
 	}
 
@@ -93,20 +102,13 @@ function search($lang, $arglist=false) {
 	$search=$cloud=$title=false;
 
 	if ($rsearch) {
-		if ($cloud_id) {
-			if (!$thread_nosearch) {
-				$search_url=url('search', $lang, $cloud_name);
-			}
-			if (!$thread_nocloud) {
-				$cloud_url=url('search', $lang, $cloud_name);
-				$byname=$bycount=$index=true;
-				$cloud = build('cloud', $lang, $cloud_url, $cloud_id, false, 30, compact('byname', 'bycount', 'index'));
-			}
+		if (!$thread_nosearch) {
+			$search_url=url('search', $lang, $cloud_name);
 		}
-		else {
-			$search_url=$cloud_url=url('search', $lang);
+		if (!$thread_nocloud) {
+			$cloud_url=url('search', $lang, $cloud_name);
 			$byname=$bycount=$index=true;
-			$cloud = build('cloud', $lang, $cloud_url, false, false, 30, compact('byname', 'bycount', 'index'));
+			$cloud = build('cloud', $lang, $cloud_url, $cloud_id, false, 30, compact('byname', 'bycount', 'index'));
 		}
 		$headline_text=$search_title;
 		$headline_url=false;
@@ -116,19 +118,12 @@ function search($lang, $arglist=false) {
 		$content = build('searchlist', $lang, $rsearch, $taglist);
 	}
 	else {
-		if ($cloud_id) {
-			$headline_text=$cloud_title;
-			$headline_url=false;
-			if (!$thread_nosearch) {
-				$search_url=url('search', $lang, $cloud_name);
-			}
-			$cloud_url=url('search', $lang, $cloud_name);
+		$headline_text=$cloud_id ? $cloud_title : $search_title;
+		$headline_url=false;
+		if (!$thread_nosearch) {
+			$search_url=url('search', $lang, $cloud_name);
 		}
-		else {
-			$headline_text=$search_title;
-			$headline_url=false;
-			$search_url=$cloud_url=url('search', $lang);
-		}
+		$cloud_url=url('search', $lang, $cloud_name);
 		$headline = compact('headline_text', 'headline_url');
 		$title = view('headline', false, $headline);
 

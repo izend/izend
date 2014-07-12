@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    36
+ * @version    37
  * @link       http://www.izend.org
  */
 
@@ -110,8 +110,9 @@ global $with_toolbar;
 
 $with_toolbar=is_mobile() ? false : true;
 
-global $search_distance, $search_closest;
+global $search_all, $search_distance, $search_closest;
 
+$search_all=true;		// true, false, 'cloud'
 $search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
 $search_closest=true;	// true - best matches, false - all matches
 
