@@ -2,14 +2,17 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
+require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
 
 function suggest($lang, $arglist=false) {
+	global $rss_thread;
+
 	$cloud=false;
 
 	if (is_array($arglist)) {
@@ -27,6 +30,13 @@ function suggest($lang, $arglist=false) {
 			return false;
 		}
 
+		if ($cloud_id == $rss_thread) {
+			if (!user_has_role('administrator')) {
+				header('HTTP/1.1 401 Unauthorized');
+				return false;
+			}
+		}
+
 		$r = thread_get($lang, $cloud_id);
 		if (!$r) {
 			header('HTTP/1.1 404 Not Found');
@@ -34,7 +44,7 @@ function suggest($lang, $arglist=false) {
 		}
 		extract($r); /* thread_type thread_nosearch */
 
-		if ($thread_nosearch) {
+		if ($thread_type == 'thread' or $thread_nosearch) {
 			header('HTTP/1.1 404 Not Found');
 			return false;
 		}
