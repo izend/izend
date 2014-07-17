@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
 
 function suggest($lang, $arglist=false) {
-	global $rss_thread;
+	global $search_all, $rss_thread;
 
 	$cloud=false;
 
@@ -45,6 +45,12 @@ function suggest($lang, $arglist=false) {
 		extract($r); /* thread_type thread_nosearch */
 
 		if ($thread_type == 'thread' or $thread_nosearch) {
+			header('HTTP/1.1 404 Not Found');
+			return false;
+		}
+	}
+	else {
+		if ($search_all !== true) {
 			header('HTTP/1.1 404 Not Found');
 			return false;
 		}
