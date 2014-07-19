@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -75,6 +75,16 @@ function thread_node_id($thread_id, $node, $lang=false) {
 	$r = db_query($sql);
 
 	return $r ? $r[0]['node_id'] : false;
+}
+
+function thread_user_id($thread_id) {
+	$tabthread=db_prefix_table('thread');
+
+	$sql="SELECT user_id FROM $tabthread WHERE thread_id=$thread_id";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0]['user_id'] : false;
 }
 
 function thread_create($lang, $user_id, $thread_name, $thread_title, $thread_type='thread', $thread_number=0) {
