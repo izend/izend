@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -19,6 +19,16 @@ function node_id($node) {
 	$r = db_query($sql);
 
 	return $r ? $r[0]['node_id'] : false;
+}
+
+function node_user_id($node_id) {
+	$tabnode=db_prefix_table('node');
+
+	$sql="SELECT user_id FROM $tabnode WHERE node_id=$node_id";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0]['user_id'] : false;
 }
 
 function node_create($lang, $user_id, $node_name, $node_title) {
