@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    12
+ * @copyright  2010-2014 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -40,7 +40,6 @@ function threadeditall($lang, $clang) {
 	$new_thread_name=$new_thread_title=$new_thread_type=$new_thread_number=false;
 	$old_thread_number=false;
 
-	$thread_list=false;
 	$p=false;
 
 	switch($action) {
@@ -72,15 +71,16 @@ function threadeditall($lang, $clang) {
 			break;
 	}
 
+	$thread_list = array();
+
 	$r = thread_list($clang, false, false);
 
-	if (count($p) != count($r)) {
+	if (!$r or count($r) != count($p)) {
 		$p = false;
 	}
 
 	if ($r) {
 		$pos=1;
-		$thread_list = array();
 		$thread_url = url('threadedit', $lang);
 		foreach ($r as $b) {
 			$b['thread_url'] = $thread_url  . '/' . $b['thread_id'];
