@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    20
+ * @copyright  2010-2014 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -61,7 +61,6 @@ function threadeditsummary($lang, $clang, $thread) {
 	$new_node_name=$new_node_title=$new_node_number=false;
 	$old_node_number=false;
 
-	$thread_contents = false;
 	$p=false;
 
 	switch($action) {
@@ -165,15 +164,16 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 	}
 
+	$thread_contents = array();
+
 	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_number node_ignored node_name node_title node_cloud thread_image */
 
-	if (count($p) != count($r)) {
+	if (!$r or count($r) != count($p)) {
 		$p = false;
 	}
 
 	if ($r) {
 		$pos=1;
-		$thread_contents = array();
 		$thread_url = url('threadedit', $lang) . '/'. $thread_id;
 		foreach ($r as $c) {
 			$c['node_url'] = $thread_url  . '/' . $c['node_id'];
