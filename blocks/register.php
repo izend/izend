@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -27,6 +27,8 @@ function register($lang) {
 	$with_facebook=false;
 
 	$with_info=false;
+
+	$with_confirmation=true;
 
 	if ($with_facebook) {
 		require_once 'facebook.php';
@@ -119,8 +121,10 @@ function register($lang) {
 					$newsletter=readarg($_POST['register_newsletter']) == 'on' ? true : false;
 				}
 			}
-			if (isset($_POST['register_confirmed'])) {
-				$confirmed=readarg($_POST['register_confirmed']) == 'on' ? true : false;
+			if ($with_confirmation) {
+				if (isset($_POST['register_confirmed'])) {
+					$confirmed=readarg($_POST['register_confirmed']) == 'on' ? true : false;
+				}
 			}
 			if (isset($_POST['register_code'])) {
 				$code=readarg($_POST['register_code']);
@@ -222,10 +226,11 @@ function register($lang) {
 					$bad_password=true;
 				}
 			}
-			if (!$confirmed) {
-				$missing_confirmation=true;
+			if ($with_confirmation) {
+				if (!$confirmed) {
+					$missing_confirmation=true;
+				}
 			}
-
 			break;
 		default:
 			break;
@@ -321,7 +326,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'with_confirmation', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }
