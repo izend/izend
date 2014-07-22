@@ -2,14 +2,15 @@
 
 /**
  *
- * @copyright  2011-2013 izend.org
- * @version    11
+ * @copyright  2011-2014 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'strflat.php';
 require_once 'tokenid.php';
+require_once 'userhasrole.php';
 require_once 'userprofile.php';
 require_once 'validatemail.php';
 require_once 'validatelocale.php';
@@ -19,15 +20,17 @@ require_once 'validateusername.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
-function useredit($lang, $user_id, $administrator=false) {
+function useredit($lang, $user_id) {
 	global $system_languages, $supported_roles;
 
+	$is_admin = user_has_role('administrator');
+
 	$with_name=true;
-	$with_status=($user_id != 1 and $administrator == true);
+	$with_status=($user_id != 1 and $is_admin == true);
 	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
 	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
 	$with_locale=count($system_languages) > 1 ? true : false;
-	$with_role=($user_id != 1 and $administrator == true);
+	$with_role=($user_id != 1 and $is_admin == true);
 	$with_website=true;
 
 	$with_info=false;

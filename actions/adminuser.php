@@ -32,7 +32,7 @@ function adminuser($lang, $arglist=false) {
 		return run('error/notfound', $lang);
 	}
 
-	$useredit = build('useredit', $lang, $user_id, true);
+	$useredit = build('useredit', $lang, $user_id);
 
 	if ($useredit === false) {
 		return redirect('admin', $lang);
