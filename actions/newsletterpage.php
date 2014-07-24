@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2013 izend.org
- * @version    5
+ * @copyright  2012-2014 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -87,9 +87,9 @@ function newsletterpage($lang, $newsletter, $page) {
 	$email_sent=false;
 
 	if (user_has_role('administrator') and $message_title and ($message_html or $message_text)) {
-		global $webmaster;
+		require_once 'userprofile.php';
 
-		$mailto=$webmaster;
+		$mailto=user_profile('mail');
 
 		$with_mail=true;
 
