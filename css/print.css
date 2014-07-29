@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
  
@@ -39,6 +39,10 @@ h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid;}
 blockquote, table, pre {page-break-inside:avoid;}
 ul, ol, dl {page-break-before:avoid;}
 img {page-break-inside:avoid;page-break-after:avoid;float:none;}
+
+table th, table td {padding:5px;margin:0;}
+table td:first-child {padding-left:0;}
+table td:last-child {padding-right:0;}
 
 audio, video {display:none;}
 
