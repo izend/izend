@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    59
+ * @version    60
  * @link       http://www.izend.org
  */
  
@@ -26,6 +26,8 @@ label, legend {font-size:80%;}
 label span {vertical-align:baseline !important;}
 
 table th, table td {padding:5px;margin:0;}
+table td:first-child {padding-left:0;}
+table td:last-child {padding-right:0;}
 
 input {font-family:Verdana, sans-serif;font-size:10pt;}
 
