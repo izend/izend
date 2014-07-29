@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    5
+ * @copyright  2012-2014 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -25,6 +25,8 @@ function admin($lang) {
 
 	$banner = build('banner', $lang);
 
+	$newuser_page=url('newuser', $lang);
+
 	$newsletter_page=$newsletter_thread ? url('newsletter', $lang) : false;
 
 	$balance=false;
@@ -33,7 +35,7 @@ function admin($lang) {
 	}
 	$upload = build('upload', $lang);
 	$usersearch = build('usersearch', $lang);
-	$content = view('admin', $lang, compact('newsletter_page', 'balance', 'usersearch', 'upload'));
+	$content = view('admin', $lang, compact('newuser_page', 'newsletter_page', 'balance', 'usersearch', 'upload'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

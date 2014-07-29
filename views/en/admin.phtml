@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    3
+ * @copyright  2010-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -11,10 +11,17 @@
 <?php if (!empty($newsletter_page)): ?>
 <p class="vignette"><a href="<?php echo $newsletter_page; ?>" rel="nofollow"><img src="/images/theme/envelopelarge.png" alt="" title="Newsletter" /></a></p>
 <?php endif; ?>
+<?php if (!empty($balance)): ?>
 <div id="userbalance">
 <?php echo $balance; ?>
 </div>
+<?php endif; ?>
+<?php if (!empty($upload)): ?>
 <h5>Content</h5>
 <?php echo $upload; ?>
+<?php endif; ?>
 <h5>Community</h5>
+<?php if (!empty($newuser_page)): ?>
+<p class="info link">To create an account, <a href="<?php echo $newuser_page; ?>" rel="nofollow">click here</a>.</p>
+<?php endif; ?>
 <?php echo $usersearch; ?>
