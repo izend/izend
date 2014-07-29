@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -219,7 +219,7 @@ function thread_get($lang, $thread_id, $strict=true) {
 	$tabthread=db_prefix_table('thread');
 	$tabthreadlocale=db_prefix_table('thread_locale');
 
-	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, tloc.image AS thread_image, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.novote AS thread_novote, t.nomorevote AS thread_nomorevote, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin, t.pinit AS thread_pinit FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id";
+	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, tloc.image AS thread_image, t.user_id AS thread_user_id, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.novote AS thread_novote, t.nomorevote AS thread_nomorevote, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin, t.pinit AS thread_pinit FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id";
 
 	$r = db_query($sql);
 
