@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    3
+ * @copyright  2013-2014 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -163,6 +163,9 @@ function postnews($lang, $newsletter_id, $page_id) {
 
 	if (!$scheduled) {
 		$postdate=mktime($hour, $minute, 0);
+		if (time() > mktime($hmax+1, 0, 0)) {
+			$postdate=strtotime('+1 day', $postdate);
+		}
 	}
 
 	$_SESSION['postnews_token'] = $token = token_id();
