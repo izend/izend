@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    1
+ * @copyright  2012-2014 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,7 @@ if ($db_url == 'mysql://username:password@localhost/databasename') {
 }
 
 if ($db_url) {
-	require_once 'db.php';
+	require_once 'pdo.php';
 
 	db_connect($db_url);
 
