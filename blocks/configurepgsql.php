@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -536,9 +536,9 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "${db_prefix}node" ("node_id", "user_id", "created", "modified", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin") VALUES
-(1, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '1', '1', '1'),
-(2, 1, NOW(), NOW(), '1', '1', '1', '1', '0', '0', '0', '0');
+INSERT INTO "${db_prefix}node" ("node_id", "user_id", "created", "modified", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
+(1, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '1', '1', '1', '0'),
+(2, 1, NOW(), NOW(), '1', '1', '1', '1', '0', '0', '0', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -613,8 +613,8 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "${db_prefix}thread" ("thread_id", "user_id", "thread_type", "created", "modified", "number", "nosearch", "nocloud", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin") VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1');
+INSERT INTO "${db_prefix}thread" ("thread_id", "user_id", "thread_type", "created", "modified", "number", "nosearch", "nocloud", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
+(1, 1, 'folder', NOW(), NOW(), '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0');
 _SEP_;
 		$db_conn->exec($sql);
 

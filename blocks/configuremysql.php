@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    1
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -179,7 +179,7 @@ _SEP_;
 CREATE TABLE `${db_prefix}newsletter_post` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
-  `locale` enum('fr','en') NOT NULL DEFAULT '$default_language',
+  `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `scheduled` datetime NOT NULL,
   `mailed` datetime DEFAULT NULL,
   PRIMARY KEY (`thread_id`,`node_id`,`locale`)
@@ -190,7 +190,7 @@ _SEP_;
 		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}newsletter_user` (
   `mail` varchar(100) NOT NULL,
-  `locale` enum('fr','en') NOT NULL DEFAULT '$default_language',
+  `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
   PRIMARY KEY (`mail`),
   KEY `locale` (`locale`)
@@ -271,7 +271,7 @@ _SEP_;
 		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}thread_locale` (
   `thread_id` int(10) unsigned NOT NULL,
-  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `abstract` text,
@@ -296,7 +296,7 @@ _SEP_;
 		$sql= <<<_SEP_
 CREATE TABLE `${db_prefix}tag` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`tag_id`,`locale`),
   UNIQUE KEY `locale` (`locale`,`name`)
@@ -392,7 +392,7 @@ CREATE TABLE `${db_prefix}vote` (
   `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
-  `content_locale` enum('fr','en') NOT NULL DEFAULT 'fr',
+  `content_locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ip_address` int(10) unsigned NOT NULL,
@@ -431,9 +431,9 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
-(1, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '1', '1', '1'),
-(2, 1, NOW(), NOW(), '1', '1', '1', '1', '0', '0', '0', '0');
+INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`, `pinit`) VALUES
+(1, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '1', '1', '1', '0'),
+(2, 1, NOW(), NOW(), '1', '1', '1', '1', '0', '0', '0', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -488,8 +488,8 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`) VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1');
+INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `plusone`, `linkedin`, `pinit`) VALUES
+(1, 1, 'folder', NOW(), NOW(), '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
