@@ -3,18 +3,20 @@
 /**
  *
  * @copyright  2012-2014 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
 <form enctype="multipart/form-data" action="" method="post" class="compact">
 <input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
+<?php if (!empty($maxfilesize)): ?>
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
+<?php endif; ?>
 <p>
 <input type="file" name="upload_file" id="upload_file" title="" />
 <input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Upload" title="" />
 <?php extract($errors); ?>
-<?php if ($missing_file or $bad_file or $bad_name or $bad_size or $bad_file or $bad_copy or $copy_error): ?>
+<?php if ($missing_file or $bad_file or $bad_name or $bad_size or $bad_copy or $copy_error): ?>
 <span class="icon icon_ko">-</span>
 <?php else: ?>
 <?php extract($infos); ?>
