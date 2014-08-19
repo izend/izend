@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2014 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,9 @@ require_once 'validatelocale.php';
 require_once 'models/newsletter.inc';
 
 function subscribe($lang) {
-	global $sitekey;
+	global $sitekey, $system_languages;
+
+	$with_locale=count($system_languages) > 1;	// true, false
 
 	$with_captcha=true;
 
@@ -46,8 +48,10 @@ function subscribe($lang) {
 			if (isset($_POST['subscribe_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['subscribe_mail'])));
 			}
-			if (isset($_POST['subscribe_locale'])) {
-				$user_locale=readarg($_POST['subscribe_locale']);
+			if ($with_locale) {
+				if (isset($_POST['subscribe_locale'])) {
+					$user_locale=readarg($_POST['subscribe_locale']);
+				}
 			}
 			if (isset($_POST['subscribe_confirmed'])) {
 				$confirmed=readarg($_POST['subscribe_confirmed']) == 'on' ? true : false;
@@ -108,11 +112,13 @@ function subscribe($lang) {
 			else if (newsletter_get_user($user_mail)) {
 				$duplicated_mail=true;
 			}
-			if (!$user_locale) {
-				$missing_locale=true;
-			}
-			else if (!validate_locale($user_locale)) {
-				$bad_locale=true;
+			if ($with_locale) {
+				if (!$user_locale) {
+					$missing_locale=true;
+				}
+				else if (!validate_locale($user_locale)) {
+					$bad_locale=true;
+				}
 			}
 			if (!$confirmed) {
 				$missing_confirmation=true;
@@ -165,7 +171,7 @@ function subscribe($lang) {
 	$errors = compact('missing_mail', 'bad_mail', 'missing_locale', 'bad_locale', 'duplicated_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_registered');
 
-	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'user_locale', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
+	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_locale', 'user_locale', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
 
 	return $output;
 }
