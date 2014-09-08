@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    62
+ * @version    64
  * @link       http://www.izend.org
  */
  
@@ -42,7 +42,7 @@ input[type="text"], input[type="password"], textarea {padding:3px;}
 fieldset {padding:5px 10px 8px;}
 select {padding:2px;}
 
-input[type="radio"], input[type="checkbox"] {margin-top:1px;}
+input[type="radio"], input[type="checkbox"] {margin-top:1px;margin-bottom:1px;}
 input[type="checkbox"]:after, input[type="radio"]:after {vertical-align:middle;}
 
 form.compact p {margin-top:0.75em;margin-bottom:0.5em;}
