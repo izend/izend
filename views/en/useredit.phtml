@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -53,7 +53,7 @@
 <p><span id="useredit_accessed">Last access <?php echo longdate_en($user_accessed); ?> at <?php echo date('H:i', $user_accessed); ?></span></p>
 <?php endif; ?>
 <?php endif; ?>
-<p>
+<p class="noprint">
 <?php if ($with_delete): ?>
 <?php if ($confirm_delete): ?>
 <input type="submit" class="submit submit_confirm" name="useredit_confirmdelete" id="useredit_confirmdelete" value="Confirm" />
@@ -70,9 +70,9 @@ the account
 <?php endif; ?>
 </p>
 <?php if ($with_newpassword): ?>
-<p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
-<p><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
-<p><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
+<p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
+<p class="noprint"><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="noprint"><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
 </form>
 <div class="errors">
