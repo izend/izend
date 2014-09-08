@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    95
+ * @version    96
  * @link       http://www.izend.org
  */
 
@@ -376,3 +376,5 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 
 .summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;line-height:1.5;text-align:right;margin:0 0 1em 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 .summary li {list-style:none;}
+
+.meter.inerror > span {background-color:#df6f6f !important;}
