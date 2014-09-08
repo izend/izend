@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    14
+ * @copyright  2010-2014 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -141,7 +141,7 @@ function search($lang, $arglist=false) {
 	$sidebar = view('sidebar', false, compact('search', 'cloud', 'title'));
 
 	if ($search) {
-		$search=compact('search_url', 'search_text', 'suggest_url', 'suggest_url');
+		$search=compact('search_url', 'search_text', 'suggest_url');
 	}
 	$banner = build('banner', $lang, compact('headline', 'search'));
 
