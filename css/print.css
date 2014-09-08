@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
  
@@ -117,3 +117,4 @@ ol.tree li.filenode {font-style:normal;}
 .userlogged {text-align:right;}
 
 .ui-accordion .ui-accordion-content {display:block !important;}
+.ui-datepicker-trigger {display:none;}
