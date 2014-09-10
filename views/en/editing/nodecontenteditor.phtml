@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -160,10 +160,10 @@ x
 <?php foreach (array('dark' => 'dark', 'light' => 'light') as $tm => $ts): ?>
 <option value="<?php echo $tm; ?>"<?php if ($content_youtube_theme == $tm) : ?> selected="selected"<?php endif; ?>><?php echo $ts; ?></option>
 <?php endforeach; ?>
+</select>
 <input id="content_youtube_controls[<?php echo $i; ?>]" name="content_youtube_controls[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_controls): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_controls[<?php echo $i; ?>]"><span class="btn_edit btn_controls" title="Controls">controls</span></label>
 <input id="content_youtube_fs[<?php echo $i; ?>]" name="content_youtube_fs[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_fs): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_fs[<?php echo $i; ?>]"><span class="btn_edit btn_fs" title="Full screen">fs</span></label>
 <input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_rel[<?php echo $i; ?>]"><span class="btn_edit btn_rel" title="Links">links</span></label>
-</select>
 </p>
 <p>
 <input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?>" title="Miniature" />
