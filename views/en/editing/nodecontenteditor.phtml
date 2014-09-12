@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -19,9 +19,10 @@ a type
 $selected=$new_content_type ? $new_content_type : $content_types[0];
 ?>
 <select id="content_new_type" name="content_new_type" size="1">
-<option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Text</option>
 <?php foreach ($content_types as $type): ?>
-<?php if ($type == 'infile'): ?>
+<?php if ($type == 'text'): ?>
+<option value="text" <?php echo $selected == 'text' ? 'selected="selected"' : ''; ?>>Text</option>
+<?php elseif ($type == 'infile'): ?>
 <option value="infile" <?php echo $selected == 'infile' ? 'selected="selected"' : ''; ?>>Insertion</option>
 <?php elseif ($type == 'download'): ?>
 <option value="download" <?php echo $selected == 'download' ? 'selected="selected"' : ''; ?>>Download</option>
