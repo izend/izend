@@ -21,7 +21,7 @@ h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0;}
 
 fieldset {display:inline-block;}
 
-label, legend {font-size:80%;}
+label, legend {font-size:80%;vertical-align:middle;}
 
 label span {vertical-align:baseline !important;}
 
