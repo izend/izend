@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -205,6 +205,9 @@ function node_get_contents($lang, $node_id) {
 		$alias="nc$n";
 		$join[]="LEFT JOIN $tabcontenttype $alias ON nc.content_type='$content_type' AND $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
 		foreach ($fields as $fname => $props) {
+			if (!empty($props['ignored'])) {
+				continue;
+			}
 			$select[]="$alias.$fname AS content_${content_type}_$fname";
 		}
 		$n++;
@@ -258,6 +261,9 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$tabcontenttype=db_prefix_table('content_' . $content_type);
 		$data=array('content_id' => $content_id, 'locale' => $sqllang);
 		foreach ($contents_model[$content_type] as $fname => $props) {
+			if (!empty($props['ignored'])) {
+				continue;
+			}
 			$fieldname = "content_${content_type}_$fname";
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
 			switch ($props['type']) {
