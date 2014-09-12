@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    64
+ * @version    66
  * @link       http://www.izend.org
  */
  
@@ -55,8 +55,8 @@ img {vertical-align:middle;max-width:100%;height:auto;}
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
 
-.monospace {font-family:monospace;font-size:9pt;}
-.proportional {font-family:sans-serif;}
+.monospace {font-family:"Courier New", Courier, monospace;font-size:9pt;}
+.proportional {font-family:Verdana, sans-serif;font-size:10pt;}
 
 .menu {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 .menu {margin:0;padding:0;}
