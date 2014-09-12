@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -498,6 +498,8 @@ function thread_set_node_ignored($thread_id, $node_id, $ignored) {
 	$tabthreadnode=db_prefix_table('thread_node');
 
 	$sql="UPDATE $tabthreadnode SET ignored=$sqlignored WHERE thread_id=$thread_id AND node_id=$node_id";
+
+	$r = db_update($sql);
 
 	if ($r === false) {
 		return false;
