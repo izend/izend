@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2013 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -67,32 +67,62 @@ function nodecontenteditor($lang, $clang, $node_id, $content_types) {
 				$ignored=$_POST['content_ignored'];		// DON'T readarg!
 			}
 
-			if ($id and $p and is_array($id) and is_array($p) and count($id) == count($p)) {
-				$node_contents=array();
+			break;
+		default:
+			break;
+	}
 
-				foreach ($contents_model as $type => $fields) {
-					foreach ($fields as $fname => $props) {
-						$fieldname="content_${type}_$fname";
-						if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
-							foreach ($_POST[$fieldname] as $i => $value) {
-								$v=readarg($value, true, false);	// trim but DON'T strip_tags!
-								if (!isset($node_contents[$i])) {
-									$content_ignored = isset($ignored[$i]) && $ignored[$i] == 'on';
-									$node_contents[$i] = array('content_id' => $id[$i], 'content_pos' => $p[$i], 'content_ignored' => $content_ignored, 'content_type' => $type, $fieldname => $v);
-								}
-								else {
-									$node_contents[$i][$fieldname] = $v;
-								}
+	$bad_contents=false;
+
+	switch($action) {
+		case 'create':
+		case 'delete':
+		case 'modify':
+			if (!$id or !$p and ! (is_array($id) and is_array($p) and count($id) == count($p))) {
+				$bad_contents=true;
+			}
+			else {
+				foreach ($id as $i => $v) {
+					if (!is_numeric($v) or ! (isset($p[$i]) and is_numeric($p[$i]))) {
+						$bad_contents=true;
+						break;
+					}
+				}
+			}
+
+			if ($bad_contents) {
+				break;
+			}
+
+			$node_contents=array();
+
+			foreach ($contents_model as $type => $fields) {
+				foreach ($fields as $fname => $props) {
+					$fieldname="content_${type}_$fname";
+					if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
+						foreach ($_POST[$fieldname] as $i => $value) {
+							$v=readarg($value, true, false);	// trim but DON'T strip_tags!
+							if (!isset($node_contents[$i])) {
+								$content_ignored = isset($ignored[$i]) && $ignored[$i] == 'on';
+								$node_contents[$i] = array('content_id' => $id[$i], 'content_pos' => $p[$i], 'content_ignored' => $content_ignored, 'content_type' => $type, $fieldname => $v);
+							}
+							else {
+								$node_contents[$i][$fieldname] = $v;
 							}
 						}
 					}
 				}
-
-				if ($node_contents) {
-					ksort($node_contents);
-				}
 			}
+
+			if (!$node_contents) {
+				$bad_contents=true;
+				break;
+			}
+
+			ksort($node_contents);
+
 			break;
+
 		default:
 			break;
 	}
@@ -138,40 +168,11 @@ function nodecontenteditor($lang, $clang, $node_id, $content_types) {
 			}
 			break;
 
-		case 'modify':
-			break;
-
 		default:
 			break;
 	}
 
 	switch($action) {
-		case 'modify':
-			if (!$p) {
-				break;
-			}
-
-			$neworder=range(1, count($p));
-			array_multisort($p, SORT_NUMERIC, $neworder);
-
-			$number=1;
-			$nc=array();
-			foreach ($neworder as $i) {
-				$c = &$node_contents[$i];
-				$c['content_pos']=$number;
-
-				$nc[$number++] = $c;
-			}
-			$node_contents = $nc;
-
-			$r = node_set_contents($clang, $node_id, $node_contents);
-
-			if (!$r) {
-				break;
-			}
-
-			break;
-
 		case 'create':
 			if ($missing_new_content_type or $bad_new_content_type or $bad_new_content_number) {
 				break;
@@ -240,6 +241,32 @@ function nodecontenteditor($lang, $clang, $node_id, $content_types) {
 			}
 
 			$old_content_number = false;
+
+			break;
+
+		case 'modify':
+			if ($bad_contents) {
+				break;
+			}
+
+			$neworder=range(1, count($p));
+			array_multisort($p, SORT_NUMERIC, $neworder);
+
+			$number=1;
+			$nc=array();
+			foreach ($neworder as $i) {
+				$c = &$node_contents[$i];
+				$c['content_pos']=$number;
+
+				$nc[$number++] = $c;
+			}
+			$node_contents = $nc;
+
+			$r = node_set_contents($clang, $node_id, $node_contents);
+
+			if (!$r) {
+				break;
+			}
 
 			break;
 
