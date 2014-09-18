@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -226,6 +226,31 @@ function node_get_contents($lang, $node_id) {
 function node_set_contents($lang, $node_id, $node_contents) {
 	global $contents_model;
 
+	$tabnodecontent=db_prefix_table('node_content');
+
+	$wlist=array();
+	foreach ($node_contents as $c) {
+		$content_id=$c['content_id'];
+		$content_type=$c['content_type'];
+
+		$sqltype=db_sql_arg($content_type, false);
+
+		$wlist[]="content_id=$content_id AND content_type=$sqltype";
+	}
+	$where = implode(' OR ', $wlist);
+
+	$sql="SELECT COUNT(*) AS count FROM $tabnodecontent WHERE node_id=$node_id AND ($where)";
+
+	$r = db_query($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	if ($r[0]['count'] != count($node_contents)) {
+		return false;
+	}
+
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabnode=db_prefix_table('node');
@@ -239,8 +264,6 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	}
 
 	$number = 1;
-
-	$tabnodecontent=db_prefix_table('node_content');
 
 	foreach ($node_contents as $c) {
 		$content_id=$c['content_id'];
@@ -290,7 +313,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$fields=implode(', ', $fields);
 		$as=implode(', ', $as);
 
-		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
+		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id) AND NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
 
 		$r = db_insert($sql);
 
