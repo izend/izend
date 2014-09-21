@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2013 izend.org
- * @version    5
+ * @copyright  2012-2014 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -17,7 +17,7 @@ The message was sent <b><?php echo longdate_en($mailed); ?></b> at <b><?php echo
 <input type="hidden" name="postnews_token" value="<?php echo $token; ?>" />
 <p>
 <input type="submit" class="submit submit_cancel" name="postnews_cancel" id="postnews_cancel" value="Cancel" />
-sending the message scheduled <b><?php echo longdate_en($scheduled); ?></b> at <b><?php echo date('H:i', $scheduled); ?></b>
+sending the message <b><?php echo longdate_en($scheduled); ?></b> at <b><?php echo date('H:i', $scheduled); ?></b>
 </p>
 </form>
 <?php else: ?>
