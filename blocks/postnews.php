@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2013-2014 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function postnews($lang, $newsletter_id, $page_id) {
 	if ($r) {
 		extract($r);	// newsletter_post_scheduled, newsletter_post_mailed
 
-		$postadate=$scheduled=$newsletter_post_scheduled;
+		$scheduled=$newsletter_post_scheduled;
 		$mailed=$newsletter_post_mailed;
 	}
 
