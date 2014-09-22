@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -298,7 +298,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 					break;
 				case 'string':
 				default:
-					$sqlval=db_sql_arg($val, true, isset($props['null']));
+					$sqlval=db_sql_arg($val, true, !empty($props['null']));
 					break;
 			}
 			$data[$fname]=$sqlval;
