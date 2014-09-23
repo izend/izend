@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -291,7 +291,10 @@ function node_set_contents($lang, $node_id, $node_contents) {
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
 			switch ($props['type']) {
 				case 'number':
-					$sqlval=$val ? $val : 0;
+					if (!is_numeric($val)) {
+						continue 2;
+					}
+					$sqlval=$val;
 					break;
 				case 'boolean':
 					$sqlval=$val ? 'TRUE' : 'FALSE';
