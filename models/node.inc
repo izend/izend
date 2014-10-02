@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -532,6 +532,10 @@ function node_add_visit($node_id, $locale) {
 		return false;
 	}
 
+	if (isset($_SESSION['visits']) and in_array($node_id, $_SESSION['visits'])) {
+		return true;
+	}
+
 	$sqllocale=db_sql_arg($locale, false);
 
 	$tabnodelocale=db_prefix_table('node_locale');
@@ -543,6 +547,8 @@ function node_add_visit($node_id, $locale) {
 	if ($r === false) {
 		return false;
 	}
+
+	$_SESSION['visits'][]=$node_id;
 
 	return true;
 }
