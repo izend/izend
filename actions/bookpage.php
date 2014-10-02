@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    19
+ * @copyright  2010-2014 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -45,7 +45,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -97,6 +97,12 @@ function bookpage($lang, $book, $page) {
 		$vote=build('vote', $lang, $page_id, 'node', $nomore);
 	}
 
+	$visits=false;
+	if ($thread_visits and $node_visits) {
+		node_add_visit($page_id, $lang);
+		$visits=build('visits', $lang, $page_id);
+	}
+
 	$prev_page_label=$prev_page_url=false;
 	$r=thread_node_prev($lang, $book_id, $page_id);
 	if ($r) {
@@ -132,7 +138,7 @@ function bookpage($lang, $book, $page) {
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
-	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'besocial', 'vote'));
+	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'besocial', 'vote', 'visits'));
 
 	$search=false;
 	if (!$book_nosearch) {

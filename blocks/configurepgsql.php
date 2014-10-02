@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -250,6 +250,7 @@ CREATE TABLE "${db_prefix}node" (
   "user_id" integer NOT NULL,
   "created" timestamp NOT NULL,
   "modified" timestamp NOT NULL,
+  "visits" boolean NOT NULL DEFAULT '1',
   "nocomment" boolean NOT NULL DEFAULT '0',
   "nomorecomment" boolean NOT NULL DEFAULT '0',
   "novote" boolean NOT NULL DEFAULT '0',
@@ -273,6 +274,7 @@ CREATE TABLE "${db_prefix}node_locale" (
   "abstract" text,
   "cloud" text,
   "image" varchar(200) DEFAULT NULL,
+  "visited" integer NOT NULL DEFAULT '0',
   PRIMARY KEY ("node_id","locale")
 );
 _SEP_;
@@ -328,6 +330,7 @@ CREATE TABLE "${db_prefix}thread" (
   "created" timestamp NOT NULL,
   "modified" timestamp NOT NULL,
   "number" integer NOT NULL,
+  "visits" boolean NOT NULL DEFAULT '1',
   "nosearch" boolean NOT NULL DEFAULT '0',
   "nocloud" boolean NOT NULL DEFAULT '0',
   "nocomment" boolean NOT NULL DEFAULT '0',
@@ -536,9 +539,9 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "${db_prefix}node" ("node_id", "user_id", "created", "modified", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
-(1, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '1', '1', '1', '0'),
-(2, 1, NOW(), NOW(), '1', '1', '1', '1', '0', '0', '0', '0', '0');
+INSERT INTO "${db_prefix}node" ("node_id", "user_id", "created", "modified", "visits", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
+(1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '1', '0'),
+(2, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -613,8 +616,8 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "${db_prefix}thread" ("thread_id", "user_id", "thread_type", "created", "modified", "number", "nosearch", "nocloud", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0');
+INSERT INTO "${db_prefix}thread" ("thread_id", "user_id", "thread_type", "created", "modified", "number", "visits", "nosearch", "nocloud", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "plusone", "linkedin", "pinit") VALUES
+(1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0');
 _SEP_;
 		$db_conn->exec($sql);
 

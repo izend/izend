@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    98
+ * @version    99
  * @link       http://www.izend.org
  */
 
@@ -169,6 +169,7 @@ span.btn_fs {background-position:-208px -16px;}
 span.btn_rel {background-position:-112px -32px;}
 span.btn_comment {background-position:0 -32px;}
 span.btn_morecomment {background-position:-16px -32px;}
+span.btn_visits {background-position:-64px -16px;}
 span.btn_vote {background-position:-32px -32px;}
 span.btn_morevote {background-position:-48px -32px;}
 span.btn_search {background-position:-64px -32px;}
@@ -226,7 +227,7 @@ span.btn_camera {background-position:-160px -48px;}
 #donate .btn_donate_ru {width:156px;height:21px;display:inline-block;background:transparent url(../images/paypal_donate_ru.gif) no-repeat;}
 
 #searchinput {width:196px;border:2px solid #aec14e;padding:0;background-color:#ffffff;}
-#searchtext {width:160px;padding:2px;margin:0;border:none;outline:none;-webkit-appearance:none;}
+#searchtext {width:160px;padding-left:4px;padding-right:0;margin:0;border:none;outline:none;-webkit-appearance:none;}
 #search {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-144px -24px;vertical-align:middle;text-indent:-9999px;cursor:pointer;}
 
 #banner #headline {float:right;margin:14px 0 11px 10px;text-align:right;}
@@ -236,7 +237,7 @@ span.btn_camera {background-position:-160px -48px;}
 
 #sidebar {float:right;width:200px;margin-left:1em;}
 
-#sidebar #headline {margin-top:0;margin-bottom:0.75em;text-align:right;}
+#sidebar #headline {margin-top:0.1em;margin-bottom:0.5em;text-align:right;}
 #sidebar #searchinput {margin-bottom:0.5em;}
 #sidebar #donate {float:right;margin:1em 0;}
 #sidebar .cloud {margin-bottom:1em;}
@@ -347,7 +348,9 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 .bbcodebar_limiter {font-size:x-small;margin-left:10px;}
 .bbcodehelp {color:#666666;font-size:x-small;font-style:normal;margin-top:0.5em;}
 
-.vote {float:right;margin-left:1em;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+.visits {float:right;margin-left:1em;margin-top:0.2em;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;font-weight:bold;background:transparent url(../images/theme/icons/visit.png) no-repeat;text-indent:24px;line-height:24px;}
+
+.vote {float:right;margin-left:1em;margin-top:0.2em;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
 .vote .count {float:left;font-size:large;font-weight:bold;line-height:24px;margin-right:0.5em;}
 .vote .plusone {width:24px;height:24px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-48px -24px;text-indent:-9999px;}
 .vote span.plusone {display:inline-block;cursor:default;}

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    23
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -73,14 +73,15 @@ function node_get($lang, $node_id, $strict=true) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id";
+	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.visits AS node_visits, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
+function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
+	$sqlvisits=$node_visits ? 'TRUE' : 'FALSE';
 	$sqlnocomment=$node_nocomment ? 'TRUE' : 'FALSE';
 	$sqlnomorecomment=$node_nocomment ? 'TRUE' : ($node_nomorecomment ? 'TRUE' : 'FALSE');
 	$sqlnovote=$node_novote ? 'TRUE' : 'FALSE';
@@ -93,7 +94,7 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW(), nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE node_id=$node_id";
+	$sql="UPDATE $tabnode SET modified=NOW(), visits=$sqlvisits, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE node_id=$node_id";
 
 	$r = db_update($sql);
 
@@ -205,9 +206,6 @@ function node_get_contents($lang, $node_id) {
 		$alias="nc$n";
 		$join[]="LEFT JOIN $tabcontenttype $alias ON nc.content_type='$content_type' AND $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
 		foreach ($fields as $fname => $props) {
-			if (!empty($props['ignored'])) {
-				continue;
-			}
 			$select[]="$alias.$fname AS content_${content_type}_$fname";
 		}
 		$n++;
@@ -226,31 +224,6 @@ function node_get_contents($lang, $node_id) {
 function node_set_contents($lang, $node_id, $node_contents) {
 	global $contents_model;
 
-	$tabnodecontent=db_prefix_table('node_content');
-
-	$wlist=array();
-	foreach ($node_contents as $c) {
-		$content_id=$c['content_id'];
-		$content_type=$c['content_type'];
-
-		$sqltype=db_sql_arg($content_type, false);
-
-		$wlist[]="content_id=$content_id AND content_type=$sqltype";
-	}
-	$where = implode(' OR ', $wlist);
-
-	$sql="SELECT COUNT(*) AS count FROM $tabnodecontent WHERE node_id=$node_id AND ($where)";
-
-	$r = db_query($sql);
-
-	if ($r === false) {
-		return false;
-	}
-
-	if ($r[0]['count'] != count($node_contents)) {
-		return false;
-	}
-
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabnode=db_prefix_table('node');
@@ -264,6 +237,8 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	}
 
 	$number = 1;
+
+	$tabnodecontent=db_prefix_table('node_content');
 
 	foreach ($node_contents as $c) {
 		$content_id=$c['content_id'];
@@ -284,24 +259,18 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$tabcontenttype=db_prefix_table('content_' . $content_type);
 		$data=array('content_id' => $content_id, 'locale' => $sqllang);
 		foreach ($contents_model[$content_type] as $fname => $props) {
-			if (!empty($props['ignored'])) {
-				continue;
-			}
 			$fieldname = "content_${content_type}_$fname";
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
 			switch ($props['type']) {
 				case 'number':
-					if (!is_numeric($val)) {
-						continue 2;
-					}
-					$sqlval=$val;
+					$sqlval=$val ? $val : 0;
 					break;
 				case 'boolean':
 					$sqlval=$val ? 'TRUE' : 'FALSE';
 					break;
 				case 'string':
 				default:
-					$sqlval=db_sql_arg($val, true, !empty($props['null']));
+					$sqlval=db_sql_arg($val, true, isset($props['null']));
 					break;
 			}
 			$data[$fname]=$sqlval;
@@ -316,7 +285,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$fields=implode(', ', $fields);
 		$as=implode(', ', $as);
 
-		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id) AND NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
+		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
 
 		$r = db_insert($sql);
 
@@ -536,3 +505,44 @@ function node_get_all_comments($node_id, $locale) {
 	return $r;
 }
 
+function node_get_visits($node_id, $locale=false) {
+	if (!is_numeric($node_id)) {
+		return false;
+	}
+
+	$where = "node_id=$node_id";
+
+	if ($locale) {
+		$sqllocale=db_sql_arg($locale, false);
+
+		$where .= " AND locale=$sqllocale";
+	}
+
+	$tabnodelocale=db_prefix_table('node_locale');
+
+	$sql="SELECT SUM(visited) AS node_visited FROM $tabnodelocale WHERE $where";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0]['node_visited'] : 0;
+}
+
+function node_add_visit($node_id, $locale) {
+	if (!is_numeric($node_id)) {
+		return false;
+	}
+
+	$sqllocale=db_sql_arg($locale, false);
+
+	$tabnodelocale=db_prefix_table('node_locale');
+
+	$sql="UPDATE $tabnodelocale SET visited=visited+1 WHERE node_id=$node_id AND locale=$sqllocale";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
+}

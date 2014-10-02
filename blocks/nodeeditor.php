@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    11
+ * @copyright  2010-2014 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -19,6 +19,7 @@ function nodeeditor($lang, $clang, $node_id, $content_types) {
 
 	$node_name=$node_title=$node_abstract=$node_cloud=$node_image=$node_comment=$node_morecomment=$node_vote=$node_morevote=false;
 	$node_ilike=$node_tweet=$node_plusone=$node_linkedin=$node_pinit=false;
+	$node_visits=false;
 
 	$node_nocomment=$node_nomorecomment=$node_novote=$node_nomorevote=true;
 
@@ -55,6 +56,9 @@ function nodeeditor($lang, $clang, $node_id, $content_types) {
 			}
 			if (isset($_POST['node_image'])) {
 				$node_image=readarg($_POST['node_image']);
+			}
+			if (isset($_POST['node_visits'])) {
+				$node_visits=readarg($_POST['node_visits']) == 'on' ? true : false;
 			}
 			if (isset($_POST['node_comment'])) {
 				$node_comment=readarg($_POST['node_comment']) == 'on' ? true : false;
@@ -114,7 +118,7 @@ function nodeeditor($lang, $clang, $node_id, $content_types) {
 				break;
 			}
 
-			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
+			$r = node_set($clang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
 
 			if (!$r) {
 				break;
@@ -139,7 +143,7 @@ function nodeeditor($lang, $clang, $node_id, $content_types) {
 
 	$errors = compact('missing_node_name', 'bad_node_name');
 
-	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'content_editor', 'errors'));
+	$output = view('editing/nodeeditor', $lang, compact('clang', 'inlanguages', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_visits', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'content_editor', 'errors'));
 
 	return $output;
 }

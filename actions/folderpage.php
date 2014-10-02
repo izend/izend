@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    21
+ * @copyright  2010-2014 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -43,7 +43,7 @@ function folderpage($lang, $folder, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin node_pinit */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin node_pinit */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -91,6 +91,12 @@ function folderpage($lang, $folder, $page) {
 		$vote=build('vote', $lang, $page_id, 'node', $nomore);
 	}
 
+	$visits=false;
+	if ($thread_visits and $node_visits) {
+		node_add_visit($page_id, $lang);
+		$visits=build('visits', $lang, $page_id);
+	}
+
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
 		$ilike=$thread_ilike && $node_ilike;
@@ -110,7 +116,7 @@ function folderpage($lang, $folder, $page) {
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
-	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial', 'vote'));
+	$content = view('folderpage', false, compact('page_title', 'page_contents', 'page_comment', 'besocial', 'vote', 'visits'));
 
 	$edit=user_has_role('writer') ? url('folderedit', $_SESSION['user']['locale']) . '/'. $folder_id . '/'. $page_id . '?' . 'clang=' . $lang : false;
 	$validate=url('folder', $lang) . '/'. $folder_name . '/' . $page_name;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -37,7 +37,7 @@ function threadsummary($lang, $thread) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_image thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment thread_novote thread_nomorevote thread_created thread_modified */
+	extract($r); /* thread_name thread_title thread_type thread_abstract thread_cloud thread_image thread_visits thread_nosearch thread_nocloud thread_nocomment thread_nomorecomment thread_novote thread_nomorevote thread_created thread_modified */
 
 	$thread_search=!$thread_nosearch;
 	$thread_tag=!$thread_nocloud;
@@ -76,7 +76,7 @@ function threadsummary($lang, $thread) {
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_created', 'thread_modified', 'thread_contents'));
+	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_created', 'thread_modified', 'thread_contents'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

@@ -18,6 +18,13 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Thu Oct 2 2014
+
+ALTER TABLE `izend_thread` ADD `visits` BOOLEAN NOT NULL DEFAULT '1' AFTER `number`;
+ALTER TABLE `izend_node` ADD `visits` BOOLEAN NOT NULL DEFAULT '1' AFTER `modified`;
+ALTER TABLE `izend_node_locale` ADD `visited` int(10) unsigned NOT NULL DEFAULT '0';
+----
+
 Date:	Fri Mar 8 2014
 
 ALTER TABLE `izend_content_youtube` ADD `miniature` VARCHAR( 200 ) NULL AFTER `height`;
@@ -52,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
   `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
   `rel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 ALTER TABLE `izend_node_content` CHANGE `content_type` `content_type` ENUM( 'text', 'file', 'download', 'infile', 'youtube', 'longtail' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text';
 ----
@@ -122,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `izend_vote` (
   `value` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`vote_id`),
   UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 ALTER TABLE `izend_node` ADD `novote` BOOLEAN NOT NULL DEFAULT '0' AFTER `nomorecomment` ,
 ADD `nomorevote` BOOLEAN NOT NULL DEFAULT '0' AFTER `novote`;
@@ -308,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `izend_comment` (
   `text` text NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_content_download` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -366,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `izend_content_youtube` (
   `theme` enum('light','dark') NOT NULL DEFAULT 'dark',
   `rel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_content_text` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -374,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `izend_content_text` (
   `text` text,
   `eval` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`content_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_newsletter_post` (
   `thread_id` int(10) unsigned NOT NULL,
@@ -398,6 +405,7 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   `user_id` int(10) unsigned NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `visits` tinyint(1) NOT NULL DEFAULT '1',
   `nocomment` tinyint(1) NOT NULL DEFAULT '0',
   `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
   `novote` tinyint(1) NOT NULL DEFAULT '0',
@@ -408,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   `pinit` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_node_content` (
   `node_id` int(10) unsigned NOT NULL,
@@ -427,8 +435,9 @@ CREATE TABLE IF NOT EXISTS `izend_node_locale` (
   `abstract` text,
   `cloud` text,
   `image` varchar(200) DEFAULT NULL,
+  `visited` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`node_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_registry` (
   `name` varchar(100) NOT NULL,
@@ -441,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `izend_role` (
   `name` varchar(40) NOT NULL,
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_tag` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -463,6 +472,7 @@ CREATE TABLE IF NOT EXISTS `izend_thread` (
   `thread_type` enum('thread','folder','story','book','rss','newsletter') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `visits` tinyint(1) NOT NULL DEFAULT '1',
   `nosearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocloud` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `nocomment` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -475,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `izend_thread` (
   `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   `pinit` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`thread_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_thread_list` (
   `thread_id` int(10) unsigned NOT NULL,
@@ -492,7 +502,7 @@ CREATE TABLE IF NOT EXISTS `izend_thread_locale` (
   `cloud` text,
   `image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`thread_id`,`locale`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
@@ -529,21 +539,21 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_user_info` (
   `user_id` int(10) unsigned NOT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_user_role` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `role` (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `izend_vote` (
   `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -556,4 +566,4 @@ CREATE TABLE IF NOT EXISTS `izend_vote` (
   `value` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`vote_id`),
   UNIQUE KEY `CONTENT` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;

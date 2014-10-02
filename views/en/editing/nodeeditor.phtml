@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -36,6 +36,7 @@
 </p>
 <fieldset id="node_options">
 <legend>Options</legend>
+<input id="node_visits" name="node_visits" type="checkbox"<?php if ($node_visits): ?> checked="checked"<?php endif; ?> /><label for="node_visits"><span class="btn_edit btn_visits">visits</span></label>
 <input id="node_comment" name="node_comment" type="checkbox"<?php if ($node_comment): ?> checked="checked"<?php endif; ?> /><label for="node_comment"><span class="btn_edit btn_comment">comment</span></label>
 <input id="node_morecomment" name="node_morecomment" type="checkbox"<?php if ($node_morecomment): ?> checked="checked"<?php endif; ?> /><label for="node_morecomment"><span class="btn_edit btn_morecomment">comment+</span></label>
 <input id="node_vote" name="node_vote" type="checkbox"<?php if ($node_vote): ?> checked="checked"<?php endif; ?> /><label for="node_vote"><span class="btn_edit btn_vote">vote</span></label>

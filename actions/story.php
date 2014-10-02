@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    20
+ * @copyright  2010-2014 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -60,7 +60,7 @@ function story($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user_id node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -110,6 +110,12 @@ function story($lang, $arglist=false) {
 		$vote=build('vote', $lang, $page_id, 'node', $nomore);
 	}
 
+	$visits=false;
+	if ($thread_visits and $node_visits) {
+		node_add_visit($page_id, $lang);
+		$visits=build('visits', $lang, $page_id);
+	}
+
 	$besocial=$sharebar=false;
 	if ($page_contents or $page_comment) {
 		$ilike=$thread_ilike && $node_ilike;
@@ -129,7 +135,7 @@ function story($lang, $arglist=false) {
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
 
-	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial', 'vote'));
+	$content = view('storycontent', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'besocial', 'vote', 'visits'));
 
 	$search=false;
 	if (!$story_nosearch) {

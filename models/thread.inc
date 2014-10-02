@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    24
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -219,15 +219,16 @@ function thread_get($lang, $thread_id, $strict=true) {
 	$tabthread=db_prefix_table('thread');
 	$tabthreadlocale=db_prefix_table('thread_locale');
 
-	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, tloc.image AS thread_image, t.user_id AS thread_user_id, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.novote AS thread_novote, t.nomorevote AS thread_nomorevote, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin, t.pinit AS thread_pinit FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id";
+	$sql="SELECT tloc.name AS thread_name, tloc.title AS thread_title, tloc.abstract AS thread_abstract, tloc.cloud AS thread_cloud, tloc.image AS thread_image, t.user_id AS thread_user_id, t.thread_type AS thread_type, UNIX_TIMESTAMP(t.created) AS thread_created, UNIX_TIMESTAMP(t.modified) AS thread_modified, t.visits AS thread_visits, t.nosearch AS thread_nosearch, t.nocloud AS thread_nocloud, t.nocomment AS thread_nocomment, t.nomorecomment AS thread_nomorecomment, t.novote AS thread_novote, t.nomorevote AS thread_nomorevote, t.ilike AS thread_ilike, t.tweet AS thread_tweet, t.plusone AS thread_plusone, t.linkedin AS thread_linkedin, t.pinit AS thread_pinit FROM $tabthread t $join $tabthreadlocale tloc ON tloc.thread_id=t.thread_id AND tloc.locale=$sqllang WHERE t.thread_id=$thread_id";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_image, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin, $thread_pinit) {
+function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_image, $thread_visits, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin, $thread_pinit) {
 	$sqltype=db_sql_arg($thread_type, false);
+	$sqlvisits=$thread_visits ? 'TRUE' : 'FALSE';
 	$sqlnosearch=$thread_nosearch ? 'TRUE' : 'FALSE';
 	$sqlnocloud=$thread_nocloud ? 'TRUE' : 'FALSE';
 	$sqlnocomment=$thread_nocomment ? 'TRUE' : 'FALSE';
@@ -242,7 +243,7 @@ function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type
 
 	$tabthread=db_prefix_table('thread');
 
-	$sql="UPDATE $tabthread SET thread_type=$sqltype, modified=NOW(), nosearch=$sqlnosearch, nocloud=$sqlnocloud, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE thread_id=$thread_id";
+	$sql="UPDATE $tabthread SET thread_type=$sqltype, modified=NOW(), visits=$sqlvisits, nosearch=$sqlnosearch, nocloud=$sqlnocloud, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit WHERE thread_id=$thread_id";
 
 	$r = db_update($sql);
 
@@ -459,15 +460,15 @@ function thread_get_node($lang, $thread_id, $node_id) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, nl.image AS node_image, n.user_id AS node_user_id, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id";
+	$sql="SELECT tn.number AS node_number, tn.ignored AS node_ignored, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, nl.image AS node_image, n.user_id AS node_user_id, n.visits AS node_visits, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE tn.thread_id=$thread_id AND tn.node_id=$node_id";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
-	$r = node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
+function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
+	$r = node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
 
 	if (!$r) {
 		return false;
@@ -476,54 +477,6 @@ function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $
 	cloud_tag_node($lang, $node_id, $node_cloud);
 
 	return true;
-}
-
-function thread_copy_node($lang, $user_id, $thread_id, $node_id, $node_name, $node_title, $node_number=0) {
-	$node_contents = node_get_contents($lang, $node_id);
-
-	if (!$node_contents) {
-		return false;
-	}
-
-	$np = thread_create_node($lang, $user_id, $thread_id, $node_name, $node_title, $node_number);
-	if (!$np) {
-		return false;
-	}
-	extract($np);	/* node_id node_number */
-
-	foreach ($node_contents as &$c) {
-		$content_type=$c['content_type'];
-		$content_number=$c['content_number'];
-
-		$r = node_create_content($lang, $node_id, $content_type, $content_number);
-
-		if (!$r) {
-			return false;
-		}
-
-		extract($r);	// content_id content_number
-
-		$c['content_id']=$content_id;
-		$c['content_number']=$content_number;
-	}
-
-	$r = node_set_contents($lang, $node_id, $node_contents);
-
-	if (!$r) {
-		return false;
-	}
-
-	return $np;
-}
-
-function thread_get_node_number($thread_id, $node_id) {
-	$tabthreadnode=db_prefix_table('thread_node');
-
-	$sql="SELECT number FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id";
-
-	$r = db_query($sql);
-
-	return $r ? $r[0]['number'] : false;
 }
 
 function thread_set_node_number($thread_id, $node_id, $number) {
@@ -540,24 +493,12 @@ function thread_set_node_number($thread_id, $node_id, $number) {
 	return true;
 }
 
-function thread_get_node_ignored($thread_id, $node_id) {
-	$tabthreadnode=db_prefix_table('thread_node');
-
-	$sql="SELECT ignored FROM $tabthreadnode WHERE thread_id=$thread_id AND node_id=$node_id";
-
-	$r = db_query($sql);
-
-	return $r ? $r[0]['ignored'] : false;
-}
-
 function thread_set_node_ignored($thread_id, $node_id, $ignored) {
 	$sqlignored=$ignored ? 'TRUE' : 'FALSE';
 
 	$tabthreadnode=db_prefix_table('thread_node');
 
 	$sql="UPDATE $tabthreadnode SET ignored=$sqlignored WHERE thread_id=$thread_id AND node_id=$node_id";
-
-	$r = db_update($sql);
 
 	if ($r === false) {
 		return false;
