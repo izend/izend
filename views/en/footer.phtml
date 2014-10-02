@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    10
+ * @copyright  2010-2014 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -11,16 +11,18 @@
 <?php if (!empty($languages)): ?>
 <?php echo $languages; ?>
 <?php endif; ?>
-<p>&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename; ?><span class="hidden"> &bull; <a href="http://www.izend.org">iZend</a></span>
+<p>
+&copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename, PHP_EOL; ?>
+<span class="hidden">
+&bull;&nbsp;<a href="http://www.izend.org">iZend</a>
+</span>
 <?php if (!empty($contact_page) or !empty($newsletter_page) or !empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
 <span class="noprint">
 <?php if (!empty($contact_page)): ?>
-&bull;
-<a href="<?php echo $contact_page; ?>" rel="nofollow" title="Contact us">Contact</a>
+&bull;&nbsp;<a href="<?php echo $contact_page; ?>" rel="nofollow" title="Contact us">Contact</a>
 <?php endif; ?>
 <?php if (!empty($newsletter_page)): ?>
-&bull;
-<a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
+&bull;&nbsp;<a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
 <?php endif; ?>
 <?php if (!empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
 &bull;
