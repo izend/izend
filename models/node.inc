@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -530,6 +530,12 @@ function node_get_visits($node_id, $locale=false) {
 function node_add_visit($node_id, $locale) {
 	if (!is_numeric($node_id)) {
 		return false;
+	}
+
+	require_once 'isagent.php';
+
+	if (is_bot()) {
+		return true;
 	}
 
 	if (isset($_SESSION['visits']) and in_array($node_id, $_SESSION['visits'])) {

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    2
+ * @copyright  2010-2014 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -38,7 +38,25 @@ function is_google($agent=false) {
 }
 
 function is_opengraph($agent=false) {
-	global $opengraph_agent_list;
+	$bots = array(
+		'facebookexternalhit',
+		'google',
+		'twitterbot',
+		'linkedinbot',
+		'pinterest',
+	);
 
-	return $opengraph_agent_list ? is_agent(implode('|', $opengraph_agent_list), $agent) : false;
+	return is_agent(implode('|', $bots), $agent);
+}
+
+function is_bot($agent=false){
+	$bots = array(
+		'googlebot',
+		'bingbot',
+		'yahoo! slurp',
+		'baiduspider',
+		'yandexbot',
+	);
+
+	return is_agent(implode('|', $bots), $agent);
 }
