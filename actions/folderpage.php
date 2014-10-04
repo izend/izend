@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -93,7 +93,9 @@ function folderpage($lang, $folder, $page) {
 
 	$visits=false;
 	if ($thread_visits and $node_visits) {
-		node_add_visit($page_id, $lang);
+		if (!user_has_role('writer')) {
+			node_add_visit($page_id, $lang);
+		}
 		$visits=build('visits', $lang, $page_id);
 	}
 
