@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 ?>
@@ -35,6 +35,16 @@
 <?php endif; ?>
 <?php require_once 'isagent.php'; ?>
 <?php if (is_opengraph()): ?>
+<?php if (!empty($lang)): ?>
+<?php switch($lang): ?>
+<?php case 'en': ?>
+<meta property="og:locale" content="en_US" />
+<?php break; ?>
+<?php case 'fr': ?>
+<meta property="og:locale" content="fr_FR" />
+<?php break; ?>
+<?php endswitch; ?>
+<?php endif; ?>
 <meta property="og:title" content="<?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
@@ -53,7 +63,7 @@
 <?php else: ?>
 <link rel="canonical" href="<?php echo $base_url;?>/<?php echo $request_path; ?>" />
 <?php endif; ?>
-<?php if ($lang): ?>
+<?php if (!empty($lang)): ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
 <?php else: ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
