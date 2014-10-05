@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    30
+ * @version    31
  * @link       http://www.izend.org
  */
 ?>
@@ -56,7 +56,7 @@
 <?php endif; ?>
 <?php global $facebookid; ?>
 <?php if (!empty($facebookid) and is_facebook()): ?>
-<meta property="fb:admins" content="<?php echo $facebookid; ?>" />
+<meta property="fb:app_id" content="<?php echo $facebookid; ?>" />
 <?php endif; ?>
 <?php if (!empty($canonical)): ?>
 <link rel="canonical" href="<?php echo $canonical; ?>" />
