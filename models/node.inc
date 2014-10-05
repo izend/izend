@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -534,7 +534,7 @@ function node_add_visit($node_id, $locale) {
 
 	require_once 'isagent.php';
 
-	if (is_bot()) {
+	if (is_bot() or is_opengraph()) {
 		return true;
 	}
 
