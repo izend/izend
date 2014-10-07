@@ -206,6 +206,9 @@ function node_get_contents($lang, $node_id) {
 		$alias="nc$n";
 		$join[]="LEFT JOIN $tabcontenttype $alias ON nc.content_type='$content_type' AND $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
 		foreach ($fields as $fname => $props) {
+			if (!empty($props['ignored'])) {
+				continue;
+			}
 			$select[]="$alias.$fname AS content_${content_type}_$fname";
 		}
 		$n++;
@@ -224,6 +227,31 @@ function node_get_contents($lang, $node_id) {
 function node_set_contents($lang, $node_id, $node_contents) {
 	global $contents_model;
 
+	$tabnodecontent=db_prefix_table('node_content');
+
+	$wlist=array();
+	foreach ($node_contents as $c) {
+		$content_id=$c['content_id'];
+		$content_type=$c['content_type'];
+
+		$sqltype=db_sql_arg($content_type, false);
+
+		$wlist[]="content_id=$content_id AND content_type=$sqltype";
+	}
+	$where = implode(' OR ', $wlist);
+
+	$sql="SELECT COUNT(*) AS count FROM $tabnodecontent WHERE node_id=$node_id AND ($where)";
+
+	$r = db_query($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	if ($r[0]['count'] != count($node_contents)) {
+		return false;
+	}
+
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabnode=db_prefix_table('node');
@@ -237,8 +265,6 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	}
 
 	$number = 1;
-
-	$tabnodecontent=db_prefix_table('node_content');
 
 	foreach ($node_contents as $c) {
 		$content_id=$c['content_id'];
@@ -259,18 +285,24 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$tabcontenttype=db_prefix_table('content_' . $content_type);
 		$data=array('content_id' => $content_id, 'locale' => $sqllang);
 		foreach ($contents_model[$content_type] as $fname => $props) {
+			if (!empty($props['ignored'])) {
+				continue;
+			}
 			$fieldname = "content_${content_type}_$fname";
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
 			switch ($props['type']) {
 				case 'number':
-					$sqlval=$val ? $val : 0;
+					if (!is_numeric($val)) {
+						continue 2;
+					}
+					$sqlval=$val;
 					break;
 				case 'boolean':
 					$sqlval=$val ? 'TRUE' : 'FALSE';
 					break;
 				case 'string':
 				default:
-					$sqlval=db_sql_arg($val, true, isset($props['null']));
+					$sqlval=db_sql_arg($val, true, !empty($props['null']));
 					break;
 			}
 			$data[$fname]=$sqlval;
@@ -285,7 +317,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$fields=implode(', ', $fields);
 		$as=implode(', ', $as);
 
-		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
+		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id) AND NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
 
 		$r = db_insert($sql);
 
