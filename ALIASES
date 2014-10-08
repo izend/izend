@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Wed Oct 8 2014
+
+Adds action pagevisit.
+----
+
 Date:	Mon Feb 10 2014
 
 Adds action saction.
@@ -89,6 +94,7 @@ $aliases = array(
 		'node'						=> 'node',
 		'edit/node'					=> 'editnode',
 		'content' 					=> 'pagecontent',
+		'visit' 					=> 'pagevisit',
 	),
 	'fr' 	=> array(
 		'accueil'					=> 'home',
@@ -121,5 +127,6 @@ $aliases = array(
 		'noeud'						=> 'node',
 		'edition/noeud'				=> 'editnode',
 		'contenu' 					=> 'pagecontent',
+		'visite' 					=> 'pagevisit',
 	),
 );

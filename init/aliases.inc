@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -52,6 +52,7 @@ $aliases = array(
 		'node'					=> 'node',
 		'editnode'				=> 'edit/node',
 		'pagecontent'			=> 'content',
+		'pagevisit'				=> 'visit',
 	),
 	'fr' 	=> array(
 		'install'				=> 'installation',
@@ -86,6 +87,7 @@ $aliases = array(
 		'node'					=> 'noeud',
 		'editnode'				=> 'edition/noeud',
 		'pagecontent'			=> 'contenu',
+		'pagevisit'				=> 'visite',
 	),
 );
 ?>
