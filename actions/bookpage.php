@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -99,7 +99,8 @@ function bookpage($lang, $book, $page) {
 
 	$visits=false;
 	if ($thread_visits and $node_visits) {
-		$visits=build('visits', $lang, $page_id);
+		$nomore=user_has_role('writer');
+		$visits=build('visits', $lang, $page_id, $nomore);
 	}
 
 	$prev_page_label=$prev_page_url=false;

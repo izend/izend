@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -93,7 +93,8 @@ function folderpage($lang, $folder, $page) {
 
 	$visits=false;
 	if ($thread_visits and $node_visits) {
-		$visits=build('visits', $lang, $page_id);
+		$nomore=user_has_role('writer');
+		$visits=build('visits', $lang, $page_id, $nomore);
 	}
 
 	$besocial=$sharebar=false;
