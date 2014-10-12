@@ -18,6 +18,10 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Mon Oct 13 2014
+ALTER TABLE `izend_user` ADD `timezone` VARCHAR( 100 ) NULL AFTER `website`;
+----
+
 Date:	Thu Oct 2 2014
 
 ALTER TABLE `izend_thread` ADD `visits` BOOLEAN NOT NULL DEFAULT '1' AFTER `number`;
@@ -529,6 +533,7 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
   `seed` char(8) CHARACTER SET ascii NOT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
+  `timezone` varchar(100) DEFAULT NULL,
   `logged` int(11) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

@@ -3,13 +3,25 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
+<?php if ($with_timezone): ?>
+<?php if ($timezone): ?>
+<input type="hidden" name="register_timezone" value="<?php echo $timezone; ?>" />
+<?php else: ?>
+<input type="hidden" name="register_timezone" value="" />
+<?php head('javascript', 'jstz'); ?>
+<script type="text/javascript">
+var tz = jstz.determine();
+$('input[name=register_timezone]').val(tz.name());
+</script>
+<?php endif; ?>
+<?php endif; ?>
 <?php if ($with_info): ?>
 <p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">Quel est votre prénom&nbsp;?</p>
 <p><input type="text" name="register_firstname" id="register_firstname" size="30" maxlength="100" title="Prénom" onkeypress="return focusonenter(event, 'register_lastname')" value="<?php echo htmlspecialchars($firstname, ENT_COMPAT, 'UTF-8'); ?>" /></p>

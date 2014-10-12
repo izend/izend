@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -15,12 +15,14 @@ require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
 require_once 'validateusername.php';
+require_once 'validatetimezone.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function register($lang) {
 	$with_name=true;
 	$with_website=false;
+	$with_timezone=false;
 	$with_password=true;
 	$with_newsletter=false;
 	$with_captcha=true;
@@ -41,7 +43,7 @@ function register($lang) {
 		$action='register';
 	}
 
-	$name=$mail=$website=$password=$confirmed=$code=$token=false;
+	$name=$mail=$website=$timezone=$password=$confirmed=$code=$token=false;
 	$locale=$lang;
 
 	$newsletter=false;
@@ -109,6 +111,11 @@ function register($lang) {
 			if ($with_website) {
 				if (isset($_POST['register_website'])) {
 					$website=strtolower(strflat(readarg($_POST['register_website'])));
+				}
+			}
+			if ($with_timezone) {
+				if (isset($_POST['register_timezone'])) {
+					$timezone=readarg($_POST['register_timezone']);
 				}
 			}
 			if ($with_password) {
@@ -201,6 +208,7 @@ function register($lang) {
 					$duplicated_name=true;
 				}
 			}
+
 			if (!$mail) {
 				$missing_mail=true;
 			}
@@ -210,6 +218,7 @@ function register($lang) {
 			else if (!user_check_mail($mail)) {
 				$duplicated_mail=true;
 			}
+
 			if ($website) {
 				if (!validate_website($website)) {
 					$bad_website=true;
@@ -218,6 +227,13 @@ function register($lang) {
 					$website=normalize_website($website);
 				}
 			}
+
+			if ($with_timezone) {
+				if ($timezone and !validate_timezone($timezone)) {
+					$with_timezone=$timezone=false;
+				}
+			}
+
 			if ($with_password) {
 				if (!$password) {
 					$missing_password=true;
@@ -226,6 +242,7 @@ function register($lang) {
 					$bad_password=true;
 				}
 			}
+
 			if ($with_confirmation) {
 				if (!$confirmed) {
 					$missing_confirmation=true;
@@ -252,7 +269,7 @@ function register($lang) {
 				$password=newpassword();
 			}
 
-			$r = user_create($name, $password, $mail, $locale, $website);
+			$r = user_create($name, $password, $mail, $locale, $timezone, $website);
 
 			if (!$r) {
 				$internal_error=true;
@@ -326,7 +343,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_password', 'with_newsletter', 'with_confirmation', 'name', 'mail', 'website', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_timezone', 'with_password', 'with_newsletter', 'with_confirmation', 'name', 'mail', 'website', 'timezone', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

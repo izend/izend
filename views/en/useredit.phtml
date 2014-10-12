@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2014 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -36,6 +36,12 @@
 <p><input id="useredit_website" type="text" name="useredit_website" size="40" maxlength="100" title="www.domain.com" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php else: ?>
 <input type="hidden" name="useredit_website" value="<?php echo htmlspecialchars($user_website, ENT_COMPAT, 'UTF-8'); ?>" />
+<?php endif; ?>
+<?php if ($with_timezone): ?>
+<p class="inlabel<?php if ($bad_timezone): ?> inerror<?php endif; ?>">Time zone:</p>
+<p><input id="useredit_timezone" type="text" name="useredit_timezone" size="40" maxlength="100" title="America/Chicago" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_timezone, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php else: ?>
+<input type="hidden" name="useredit_timezone" value="<?php echo htmlspecialchars($user_timezone, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php endif; ?>
 <?php if ($with_locale): ?>
 <p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" title="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<span class="lang <?php echo $lang; ?>" title="<?php echo $lang; ?>"><?php echo $lang; ?></span><?php endforeach; ?><?php echo PHP_EOL; ?></p>
@@ -100,6 +106,9 @@ the account
 <?php elseif ($duplicated_mail): ?>
 <p>This email address is already being used.</p>
 <?php endif; ?>
+<?php if ($bad_timezone): ?>
+<p>The time zone is incorrect.</p>
+<?php endif; ?>
 <?php if ($bad_website): ?>
 <p>The URL of the website is invalid.</p>
 <?php endif; ?>
@@ -133,6 +142,9 @@ else if ($missing_name or $bad_name or $duplicated_name) {
 }
 else if ($missing_mail or $bad_mail or $duplicated_mail) {
 	$focus='#useredit_mail';
+}
+else if ($bad_timezone) {
+	$focus='#useredit_timezone';
 }
 else if ($bad_website) {
 	$focus='#useredit_website';

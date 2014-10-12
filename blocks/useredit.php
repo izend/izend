@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2014 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -17,6 +17,7 @@ require_once 'validatelocale.php';
 require_once 'validatepassword.php';
 require_once 'validaterole.php';
 require_once 'validateusername.php';
+require_once 'validatetimezone.php';
 require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
@@ -24,13 +25,15 @@ function useredit($lang, $user_id) {
 	global $system_languages, $supported_roles;
 
 	$is_admin = user_has_role('administrator');
+	$is_owner = $user_id == user_profile('id');
 
 	$with_name=true;
-	$with_status=($user_id != 1 and $is_admin == true);
-	$with_delete=($user_id != 1 and $user_id != user_profile('id'));
-	$with_newpassword=false; 	// ($user_id != 1 and $user_id == user_profile('id'));
+	$with_status=($user_id != 1 and $is_admin);
+	$with_delete=($user_id != 1 and $is_admin and !$is_owner);
+	$with_newpassword=false; 	// ($user_id != 1 and $is_owner);
 	$with_locale=count($system_languages) > 1 ? true : false;
-	$with_role=($user_id != 1 and $is_admin == true);
+	$with_role=($user_id != 1 and $is_admin);
+	$with_timezone=($user_id != 1 and $is_admin);
 	$with_website=true;
 
 	$with_info=false;
@@ -59,7 +62,7 @@ function useredit($lang, $user_id) {
 		}
 	}
 
-	$user_name=$user_mail=$user_locale=false;
+	$user_name=$user_mail=$user_locale=$user_timezone=false;
 	$user_website=false;
 
 	$user_active=$user_banned=false;
@@ -78,7 +81,7 @@ function useredit($lang, $user_id) {
 		case 'reset':
 			$r = user_get($user_id);
 			if ($r) {
-				extract($r);		/* user_name user_password user_newpassword user_seed user_mail user_website user_created user_modified user_accessed user_locale user_active user_banned */
+				extract($r);		/* user_name user_password user_newpassword user_seed user_mail user_timezone user_website user_created user_modified user_accessed user_locale user_active user_banned */
 			}
 			$user_newpassword=false;
 
@@ -113,6 +116,9 @@ function useredit($lang, $user_id) {
 			}
 			if (isset($_POST['useredit_website'])) {
 				$user_website=strtolower(strflat(readarg($_POST['useredit_website'])));
+			}
+			if (isset($_POST['useredit_timezone'])) {
+				$user_timezone=readarg($_POST['useredit_timezone']);
 			}
 			if (isset($_POST['useredit_locale'])) {
 				$user_locale=readarg($_POST['useredit_locale']);
@@ -161,6 +167,7 @@ function useredit($lang, $user_id) {
 	$bad_website=false;
 	$missing_locale=false;
 	$bad_locale=false;
+	$bad_timezone=false;
 
 	$missing_newpassword=false;
 	$bad_newpassword=false;
@@ -226,6 +233,12 @@ function useredit($lang, $user_id) {
 				}
 			}
 
+			if ($user_timezone) {
+				if (!validate_timezone($user_timezone)) {
+					$bad_timezone=true;
+				}
+			}
+
 			if ($with_locale and !$user_locale) {
 				$missing_locale=true;
 			}
@@ -253,22 +266,23 @@ function useredit($lang, $user_id) {
 
 	switch($action) {
 		case 'modify':
-			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_role or $bad_website or $missing_locale or $bad_locale or $missing_lastname or $missing_firstname) {
+			if ($bad_token or $missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_role or $bad_website or $bad_timezone or $missing_locale or $bad_locale or $missing_lastname or $missing_firstname) {
 				break;
 			}
 
-			$r = user_set($user_id, $user_name, $user_mail, $user_website, $user_locale);
+			$r = user_set($user_id, $user_name, $user_mail, $user_website, $user_locale, $user_timezone);
 
 			if (!$r) {
 				$internal_error=true;
 				break;
 			}
 
-			if ($user_id == user_profile('id')) {
+			if ($is_owner) {
 				$_SESSION['user']['name'] = $user_name;
 				$_SESSION['user']['mail'] = $user_mail;
 				$_SESSION['user']['website'] = $user_website;
 				$_SESSION['user']['locale'] = $user_locale;
+				$_SESSION['user']['timezone'] = $user_timezone;
 			}
 
 			if ($with_info) {
@@ -278,7 +292,7 @@ function useredit($lang, $user_id) {
 					break;
 				}
 
-				if ($user_id == user_profile('id')) {
+				if ($is_owner) {
 					$_SESSION['user']['lastname'] = $user_lastname;
 					$_SESSION['user']['firstname'] = $user_firstname;
 				}
@@ -347,10 +361,10 @@ function useredit($lang, $user_id) {
 
 	$_SESSION['useredit_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

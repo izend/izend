@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -86,6 +86,10 @@ function bootstrap() {
 		else {
 			$_SESSION['user']['lasttime'] = $now;
 		}
+	}
+
+	if (!empty($_SESSION['user']['timezone'])) {
+		date_default_timezone_set($_SESSION['user']['timezone']);
 	}
 }
 

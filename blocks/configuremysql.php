@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -325,6 +325,7 @@ CREATE TABLE `${db_prefix}user` (
   `seed` char(8) CHARACTER SET ascii NOT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
+  `timezone` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   `accessed` datetime DEFAULT NULL,
