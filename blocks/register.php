@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -29,7 +29,7 @@ function register($lang) {
 	$with_password=true;
 	$with_newsletter=false;
 	$with_captcha=!$is_admin;
-	$with_facebook=!$is_admin;
+	$with_facebook=false;
 
 	$with_info=false;
 
