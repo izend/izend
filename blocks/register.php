@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -12,6 +12,7 @@ require_once 'ismailallowed.php';
 require_once 'readarg.php';
 require_once 'strflat.php';
 require_once 'tokenid.php';
+require_once 'userhasrole.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
 require_once 'validateusername.php';
@@ -20,17 +21,19 @@ require_once 'validatewebsite.php';
 require_once 'models/user.inc';
 
 function register($lang) {
+	$is_admin = user_has_role('administrator');
+
 	$with_name=true;
 	$with_website=false;
 	$with_timezone=false;
 	$with_password=true;
 	$with_newsletter=false;
-	$with_captcha=true;
-	$with_facebook=false;
+	$with_captcha=!$is_admin;
+	$with_facebook=!$is_admin;
 
 	$with_info=false;
 
-	$with_confirmation=true;
+	$with_confirmation=!$is_admin;
 
 	if ($with_facebook) {
 		require_once 'facebook.php';
