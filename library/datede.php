@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2014 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -16,7 +16,7 @@ function longmonth_de($unixtime) {
 }
 
 function shortmonth_de($unixtime) {
-	static $shortmonthname=array('jan', 'feb', 'mär', 'apr', 'mai', 'jun', 'jul', 'aug;', 'sep', 'okt', 'nov', 'dez');
+	static $shortmonthname=array('Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez');
 
 	$month = idate('m', $unixtime);
 
@@ -45,7 +45,7 @@ function longdate_de($unixtime) {
 
 	$month = longmonth_de($unixtime);
 
-	return "$day $month $year";
+	return "$day. $month $year";
 }
 
 function shortdate_de($unixtime) {
@@ -54,7 +54,7 @@ function shortdate_de($unixtime) {
 
 	$month = shortmonth_de($unixtime);
 
-	return "$day-$month-$year";
+	return "$day. $month. $year";
 }
 
 function shortdatetime_de($unixtime) {
