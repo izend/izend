@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -14,18 +14,21 @@
 <p>
 &copy;&nbsp;<?php echo idate('Y'); ?> <?php echo $sitename, PHP_EOL; ?>
 <span class="hidden">
-&bull;&nbsp;<a href="http://www.izend.org">iZend</a>
+<span class="bullet">&bull;</span>
+<a href="http://www.izend.org">iZend</a>
 </span>
 <?php if (!empty($contact_page) or !empty($newsletter_page) or !empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
-<span class="noprint">
+<span id="footermenu">
 <?php if (!empty($contact_page)): ?>
-&bull;&nbsp;<a href="<?php echo $contact_page; ?>" rel="nofollow" title="Contact us">Contact</a>
+<span class="bullet">&bull;</span>
+<a href="<?php echo $contact_page; ?>" rel="nofollow" title="Contact us">Contact</a>
 <?php endif; ?>
 <?php if (!empty($newsletter_page)): ?>
-&bull;&nbsp;<a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
+<span class="bullet">&bull;</span>
+<a href="<?php echo $newsletter_page; ?>" rel="nofollow" title="Follow us">Newsletter</a>
 <?php endif; ?>
 <?php if (!empty($nobody_page) or !empty($account_page) or !empty($user_page) or !empty($admin_page)): ?>
-&bull;
+<span class="bullet">&bull;</span>
 <span class="controls">
 <?php if (!empty($nobody_page)): ?>
 <a class="btn btn_logout" href="<?php echo $nobody_page; ?>" rel="nofollow" title="Disconnect">Disconnect</a>

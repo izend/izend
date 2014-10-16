@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2013-2014 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
  
@@ -56,6 +56,8 @@ video {height:auto;}
 #summary {text-align:left;}
 .left, .right, .vignette {max-width:50%;}
 .tagbar .tagmore {margin-left:0;}
+#footermenu > * {display:block;line-height:20px;}
+#footermenu > .bullet {display:none;}
 }
 
 @media screen and (max-width:360px) {
