@@ -12,7 +12,7 @@ require_once 'validatecolor.php';
 
 function qrcode($lang, $arglist=false) {
 	$s=false;
-	$size=100;
+	$size=1;
 	$margin=0;
 	$fg=$bg=false;
 	$quality='M';
@@ -60,43 +60,18 @@ function qrcode($lang, $arglist=false) {
 		return run('error/badrequest', $lang);
 	}
 
-	if ($size < 21) {
-		$size=21;
-	}
-	else if ($size > 531) {
-		$size=531;
+	if ($size < 1) {
+		$size=1;
 	}
 
 	if ($margin < 0) {
 		$margin=0;
 	}
-	else if ($margin > 10) {
-		$margin=10;
-	}
 
-	$png=qrencode($s, $size, $quality, $margin);
+	$png=qrencode($s, $size, $quality, $fg, $bg, $margin);
 
 	if (!$png) {
 		return run('error/internalerror', $lang);
-	}
-
-	if ($fg or $bg) {
-		$img=imagecreatefromstring($png);
-		imagetruecolortopalette($img, false, 255);
-
-		if ($fg) {
-			$rgb=str_split($fg[0] == '#' ? substr($fg, 1, 6) : $fg, 2);
-			imagecolorset($img, 0, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
-		}
-		if ($bg) {
-			$rgb=str_split($bg[0] == '#' ? substr($bg, 1, 6) : $bg, 2);
-			imagecolorset($img, 1, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
-		}
-
-		ob_start();
-		imagepng($img);
-		$png=ob_get_clean();
-		imagedestroy($img);
 	}
 
 	header('Content-Type: image/png');
