@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    47
+ * @version    48
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,10 @@ define('AVATAR_SIZE', 24);
 define('AVATARS_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . AVATARS_DIRNAME);
 
 define('LOG_DIRNAME', 'log');
-define('LOG_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . LOG_DIRNAME);
+
+define('TMP_DIRNAME', 'tmp');
+
+define('PHPQRCODECACHE_DIRNAME', 'phpqrcode' . DIRECTORY_SEPARATOR . 'cache');
 
 define('SITEMAP_XML', 'sitemap.xml');
 
@@ -43,14 +46,16 @@ function configure($lang) {
 	global $base_url;
 
 	$writable_files=array(
-						CONFIG_DIRNAME . DIRECTORY_SEPARATOR . DB_INC,
-						CONFIG_DIRNAME . DIRECTORY_SEPARATOR . CONFIG_INC,
-						CONFIG_DIRNAME . DIRECTORY_SEPARATOR . ALIASES_INC,
-						LOGOS_DIRNAME . DIRECTORY_SEPARATOR . SITELOGO_PNG,
-						SITEMAP_XML,
-						AVATARS_DIRNAME,
-						LOG_DIRNAME,
-						);
+		CONFIG_DIRNAME . DIRECTORY_SEPARATOR . DB_INC,
+		CONFIG_DIRNAME . DIRECTORY_SEPARATOR . CONFIG_INC,
+		CONFIG_DIRNAME . DIRECTORY_SEPARATOR . ALIASES_INC,
+		LOGOS_DIRNAME . DIRECTORY_SEPARATOR . SITELOGO_PNG,
+		SITEMAP_XML,
+		AVATARS_DIRNAME,
+		LOG_DIRNAME,
+		TMP_DIRNAME,
+		PHPQRCODECACHE_DIRNAME,
+	);
 	$bad_write_permission=false;
 
 	foreach ($writable_files as $fname) {
