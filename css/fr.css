@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
  
@@ -15,6 +15,7 @@
 .submit_confirm {width:100px;height:30px;background:transparent url(../images/theme/confirmer.png) no-repeat;}
 .submit_copy {width:100px;height:30px;background:transparent url(../images/theme/copier.png) no-repeat;}
 .submit_delete {width:100px;height:30px;background:transparent url(../images/theme/supprimer.png) no-repeat;}
+.submit_download {width:100px;height:30px;background:transparent url(../images/theme/telecharger.png) no-repeat;}
 .submit_edit {width:100px;height:30px;background:transparent url(../images/theme/editer.png) no-repeat;}
 .submit_enter {width:100px;height:30px;background:transparent url(../images/theme/entrer.png) no-repeat;}
 .submit_hide {width:100px;height:30px;background:transparent url(../images/theme/cacher.png) no-repeat;}
@@ -26,6 +27,7 @@
 .submit_show {width:100px;height:30px;background:transparent url(../images/theme/montrer.png) no-repeat;}
 .submit_sort {width:100px;height:30px;background:transparent url(../images/theme/trier.png) no-repeat;}
 .submit_test {width:100px;height:30px;background:transparent url(../images/theme/tester.png) no-repeat;}
+.submit_upload {width:100px;height:30px;background:transparent url(../images/theme/telecharger.png) no-repeat;}
 .submit_validate {width:100px;height:30px;background:transparent url(../images/theme/valider.png) no-repeat;}
 
 .submit_subscribe {width:91px !important;height:21px !important;background:transparent url(../images/paypal_subscribe_fr.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
