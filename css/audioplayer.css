@@ -122,8 +122,7 @@
 	z-index: 1;
 }
 .audioplayer-bar-played {
-	background: #ccc;
-
+	background-color: #ccc;
 	z-index: 2;
 }
 .audioplayer-volume {
