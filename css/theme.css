@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    102
+ * @version    103
  * @link       http://www.izend.org
  */
 
@@ -324,10 +324,10 @@ a .icon_pinterest {width:118px;height:30px;display:inline-block;background:trans
 a:link .icon_pinterest, a:visited .icon_pinterest {background-position:-635px -30px;}
 a:hover .icon_pinterest {background-position:-635px 0;}
 
-#linkbar {margin:2em 0;}
+#linkbar {margin:1em 0;}
 #linkbar > a {margin-right:20px;}
 #linkbar > a:last-child {margin-right:0;}
-#linkbar a span {vertical-align:text-bottom;}
+#linkbar a span {vertical-align:text-bottom;margin-top:0.5em;}
 
 #connectbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
 #connectbar a.facebook {background-position:0 0;}

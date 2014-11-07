@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2013-2014 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
  
@@ -53,11 +53,10 @@ video {height:auto;}
 #sidebar .hidy {margin-left:4px;}
 #sidebar .cloud li .btn_index {float:right;margin-left:6px;margin-right:0;}
 #linkbar a {display:block;margin:1em 0;}
+#linkbar a span {margin:0;}
 #summary {text-align:left;}
 .left, .right, .vignette {max-width:50%;}
 .tagbar .tagmore {margin-left:0;}
-#footermenu > * {display:block;line-height:20px;}
-#footermenu > .bullet {display:none;}
 }
 
 @media screen and (max-width:360px) {
