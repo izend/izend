@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    67
+ * @version    68
  * @link       http://www.izend.org
  */
  
@@ -41,6 +41,8 @@ input[type="text"], input[type="password"], textarea, select, fieldset {border-r
 input[type="text"], input[type="password"], textarea {padding:3px;}
 fieldset {padding:5px 10px 8px;}
 select {padding:2px;}
+
+input[type="text"][readonly] {border-color:transparent;cursor:default;}
 
 input[type="radio"], input[type="checkbox"] {margin-top:1px;margin-bottom:1px;}
 input[type="checkbox"]:after, input[type="radio"]:after {vertical-align:middle;}
