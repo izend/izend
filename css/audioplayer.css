@@ -3,7 +3,7 @@
 */
 
 .audioplayer {
-	height: 2em; /* 32 */
+	height: 1.5em; /* 24 */
 	color: #ccc;
 	position: relative;
 	z-index: 1;
@@ -79,19 +79,19 @@
 	right: 0;
 }
 .audioplayer-time {
-	font-size: 87.5%; /* 14 */
-	width: 5em; /* 70 */
+	font-size: 68.75%; /* 11 */
+	width: 4em; /* 64 */
 	height: 100%;
-	line-height: 2.14em; /* 30 */
+	line-height: 2em; /* 32 */
 	text-align: center;
 	z-index: 2;
 	top: 0;
 }
 .audioplayer-time-current {
-	left: 1.75em; /* 28 */
+	left: 3em; /* 48 */
 }
 .audioplayer-time-duration {
-	right: 1.75em; /* 28 */
+	right: 3em; /* 48 */
 }
 .audioplayer-novolume .audioplayer-time-duration {
 	right: 0;
@@ -184,7 +184,7 @@
 	transform: rotate( 45deg );
 }
 .audioplayer-volume-adjust {
-	height: 4em; /* 72 */
+	height: 3em; /* 48 */
 	cursor: default;
 	position: absolute;
 	left: 0;
