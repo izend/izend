@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    10
+ * @copyright  2010-2014 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -95,6 +95,15 @@ function head($type=false) {
 					}
 				}
 				$head['stylesheets'][]=compact('name', 'media');
+			}
+			break;
+		case 'script':
+			$s=$args[0];
+			if (!isset($head['script'])) {
+				$head['script'] = $s;
+			}
+			else {
+				$head['script'] .= PHP_EOL . PHP_EOL . $s;
 			}
 			break;
 		case 'javascript':

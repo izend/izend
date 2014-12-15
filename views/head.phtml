@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 ?>
@@ -138,4 +138,11 @@ else {
 <?php echo $css, PHP_EOL; ?>
 </style>
 <?php endforeach; ?>
+<?php endif; ?>
+<?php if (!empty($script)): ?>
+<script type="text/javascript">
+//<![CDATA[
+<?php echo $script, PHP_EOL; ?>
+//]]>
+</script>
 <?php endif; ?>
