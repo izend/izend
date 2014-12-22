@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -25,6 +25,29 @@
 <?php endif; ?>
 </head>
 <body>
+<?php global $facebookjssdk; ?>
+<?php if ($facebookjssdk): ?>
+<?php global $facebookid; ?>
+<div id="fb-root"></div>
+<script type="text/javascript">
+window.fbAsyncInit = function() {
+	FB.init({
+<?php if ($facebookid): ?>
+		appId:	'<?php echo $facebookid; ?>',
+<?php endif; ?>
+		xfbml:	true,
+		status:	false,
+	});
+};
+(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/<?php echo $facebookjssdk; ?>/all.js";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<?php endif; ?>
 <div id="standard">
 <?php echo $banner; ?>
 <div id="bannerline"></div>

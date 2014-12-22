@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    38
+ * @version    39
  * @link       http://www.izend.org
  */
 
@@ -45,7 +45,9 @@ global $socializing;
 
 $socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
 
-global $facebookid, $facebooksecret;
+global $facebookjssdk, $facebookid, $facebooksecret;
+
+$facebookjssdk=false;	// false
 
 $facebookid=false;
 $facebooksecret=false;

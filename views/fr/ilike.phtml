@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -13,24 +13,16 @@
 //<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-$('#<?php echo $id; ?>').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
 var w=$('body').width();
 var datalayout=w < 320 ? 'button_count' : 'standard';
 var datawidth=datalayout == 'standard' ? (w > 480 ? '450' : '300') : '100';
-$('#<?php echo $id; ?>').after('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>
 </script>
-<script type="text/javascript">
-(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+<?php global $facebookjssdk; $facebookjssdk='fr_FR'; ?>
