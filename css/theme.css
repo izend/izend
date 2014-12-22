@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    104
+ * @version    105
  * @link       http://www.izend.org
  */
 
@@ -385,3 +385,5 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 .summary li {list-style:none;}
 
 .meter.inerror > span {background-color:#df6f6f !important;}
+
+#pinterest-board > span {box-shadow: none !important;}
