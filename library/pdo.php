@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2015 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -46,6 +46,12 @@ function db_connect($url, $persistent=true) {
 	}
 
 	return $db_conn;
+}
+
+function db_close() {
+	global $db_conn;
+
+	$db_conn=null;
 }
 
 function db_version() {
