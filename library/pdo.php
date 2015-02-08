@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    4
+ * @copyright  2014-2015 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
 $db_conn=false;
 $db_scheme=false;
 
-function db_connect($url) {
+function db_connect($url, $persistent=true) {
 	global $db_conn, $db_scheme;
 
 	$url = parse_url($url);
@@ -28,7 +28,7 @@ function db_connect($url) {
 	}
 
 	$dsn = "$scheme:host=$host;dbname=$path";
-	$options = array(PDO::ATTR_PERSISTENT => true);
+	$options = array(PDO::ATTR_PERSISTENT => $persistent ? true : false);
 
 	try {
 		$db_conn = new PDO($dsn, $user, $pass, $options);
