@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2015 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -25,10 +25,11 @@ function write_log($logfile, $textline=false) {
 	if ($textline) {
 		$logmsg .= "\t$textline";
 	}
+	$logmsg.="\n";
 
 	$file = isset($log_dir) ? ($log_dir . DIRECTORY_SEPARATOR . $logfile) : $logfile;
 
-	$r = @file_put_contents($file, array($logmsg, "\n"), FILE_APPEND);
+	$r = @file_put_contents($file, $logmsg, FILE_APPEND);
 
 	return $r;
 }
