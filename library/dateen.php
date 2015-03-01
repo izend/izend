@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2015 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -75,3 +75,14 @@ function longdatetime_en($unixtime) {
 	return "$date ${hour}:{$minute}";
 }
 
+function longtime_en($d) {
+	if ($d < 60*60) {
+		return sprintf('%dm %ds', $d / 60, $d % 60);
+	}
+	else if ($d < 24*60*60) {
+		return sprintf('%dh %dm %ds', $d / 3600, ($d % 3600) / 60, $d % 60);
+	}
+	else {
+		return sprintf('%dd %dh %dm %ds', $d / 86400, ($d % 86400) / 3600, ($d % 3600) / 60, $d % 60);
+	}
+}
