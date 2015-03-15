@@ -2,23 +2,23 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    1
+ * @copyright  2013-2015 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<?php head('javascript', 'http://assets.pinterest.com/js/pinit.js', 'screen'); ?>
+<?php head('javascript', 'https://assets.pinterest.com/js/pinit.js'); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
 //<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-$('#<?php echo $id; ?>').replaceWith('<a href="//www.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&description=<?php echo urlencode($pinit_text); ?><?php endif ?>" data-pin-do="buttonPin" data-pin-config="above" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a>');
+$('#<?php echo $id; ?>').replaceWith('<a href="//fr.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&description=<?php echo urlencode($pinit_text); ?><?php endif ?>" data-pin-do="buttonPin" data-pin-config="above" data-pin-color="white" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_28.png" /></a>');
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
-$('#<?php echo $id; ?>').replaceWith('<a href="//www.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&description=<?php echo urlencode($pinit_text); ?><?php endif ?>" data-pin-do="buttonPin" data-pin-config="beside" data-pin-color="white"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>');
+$('#<?php echo $id; ?>').replaceWith('<a href="//fr.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&description=<?php echo urlencode($pinit_text); ?><?php endif ?>" data-pin-do="buttonPin" data-pin-config="beside" data-pin-color="white"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_white_20.png" /></a>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>
