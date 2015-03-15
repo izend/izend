@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    39
+ * @copyright  2010-2015 izend.org
+ * @version    40
  * @link       http://www.izend.org
  */
 <?php
@@ -59,6 +59,10 @@ $facebookjssdk=false;	// false
 
 $facebookid=false;
 $facebooksecret=false;
+
+global $pinterestassets;
+
+$pinterestassets=false;	// false
 
 global $googleanalyticsid;
 

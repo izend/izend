@@ -3,11 +3,10 @@
 /**
  *
  * @copyright  2013-2015 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
-<?php head('javascript', 'https://assets.pinterest.com/js/pinit.js'); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
@@ -23,3 +22,4 @@ $('#<?php echo $id; ?>').replaceWith('<a href="//fr.pinterest.com/pin/create/but
 <?php endswitch; ?>
 //]]>
 </script>
+<?php global $pinteresetassets; $pinteresetassets=true; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    10
+ * @copyright  2010-2015 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -21,6 +21,18 @@
 
   ga('create', '<?php echo $googleanalyticsid; ?>', '<?php echo $sitename; ?>');
   ga('send', 'pageview');
+</script>
+<?php endif; ?>
+<?php global $pinteresetassets; ?>
+<?php if ($pinteresetassets): ?>
+<script type="text/javascript">
+(function(d){
+    var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+    p.type = 'text/javascript';
+    p.async = true;
+    p.src = '//assets.pinterest.com/js/pinit.js';
+    f.parentNode.insertBefore(p, f);
+}(document));
 </script>
 <?php endif; ?>
 </head>
