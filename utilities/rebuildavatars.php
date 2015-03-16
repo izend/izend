@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2014 izend.org
- * @version    2
+ * @copyright  2012-2015 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,7 @@ db_connect($db_url);
 require 'models/user.inc';
 
 $tabuser=db_prefix_table('user');
-$sql="SELECT name FROM $tabuser";
+$sql="SELECT name FROM $tabuser WHERE name IS NOT NULL";
 $r = db_query($sql);
 
 if ($r) {
