@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    3
+ * @copyright  2010-2015 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -31,7 +31,7 @@ function rssfeed($lang) {
 			foreach ($r as $node) {
 				extract($node);
 				$title = $node_title;
-				$uri = $lang . '/' . $node_name;
+				$uri = false;	// $lang . '/' . $node_name;
 				$created = $node_created;
 				$description = strip_tags($content_text);
 				$itemlist[] = compact('title', 'uri', 'created', 'description');

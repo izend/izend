@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2015 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -39,9 +39,10 @@
 <?php foreach ($itemlist as $item): ?>
 <?php extract($item) ?>
 	<item>
-		<guid><?php echo $base_url; ?>/<?php echo $uri; ?></guid>
 		<title><![CDATA[<?php echo $title; ?>]]></title>
+<?php if ($uri): ?>
 		<link><?php echo $base_url; ?>/<?php echo $uri; ?></link>
+<?php endif; ?>
 		<description>
 		<![CDATA[<?php echo $description; ?>]]>
 		</description>
