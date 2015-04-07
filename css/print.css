@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    32
+ * @copyright  2010-2015 izend.org
+ * @version    33
  * @link       http://www.izend.org
  */
  
@@ -89,7 +89,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 .video-js {display:none;}
 
-#banner, #sidebar {display:none;}
+#banner, #sidebar, #footermenu {display:none;}
 
 #searchlinks ol {margin:1em 0;padding:0;}
 #searchlinks li {list-style:none;}
