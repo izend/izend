@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    21
+ * @copyright  2010-2015 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -36,6 +36,9 @@ function threadeditsummary($lang, $clang, $thread) {
 	}
 	else if (isset($_POST['node_create'])) {
 		$action='create';
+	}
+	else if (isset($_POST['node_copy'])) {
+		$action='copy';
 	}
 	else if (isset($_POST['node_delete'])) {
 		$action='delete';
@@ -81,6 +84,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 		case 'edit':
 		case 'create':
+		case 'copy':
 		case 'delete':
 		case 'hide':
 		case 'show':
@@ -216,6 +220,7 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 
 		case 'create':
+		case 'copy':
 			if (!$new_node_title) {
 				$missing_new_node_title = true;
 			}
@@ -234,8 +239,11 @@ function threadeditsummary($lang, $clang, $thread) {
 			else if ($new_node_number < 1 or $new_node_number > count($thread_contents) + 1) {
 				$bad_new_node_number = true;
 			}
-			break;
 
+			if ($action == 'create') {
+				break;
+			}
+			/* fall thru */
 		case 'delete':
 		case 'hide':
 		case 'show':
@@ -274,12 +282,22 @@ function threadeditsummary($lang, $clang, $thread) {
 			break;
 
 		case 'create':
-			if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number) {
+		case 'copy':
+			if ($missing_new_node_title or $bad_new_node_title or $bad_new_node_number or ($action == 'copy' and ($missing_old_node_number or $bad_old_node_number))) {
 				break;
 			}
 
 			$user_id=user_profile('id');
-			$np = thread_create_node($clang, $user_id, $thread_id, $new_node_name, $new_node_title, $new_node_number);
+
+			if ($action == 'copy') {
+				$node_id = $thread_contents[$old_node_number]['node_id'];
+
+				$np = thread_copy_node($clang, $user_id, $thread_id, $node_id, $new_node_name, $new_node_title, $new_node_number);
+			}
+			else {
+				$np = thread_create_node($clang, $user_id, $thread_id, $new_node_name, $new_node_title, $new_node_number);
+			}
+
 			if (!$np) {
 				break;
 			}
@@ -308,6 +326,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 			$new_node_name=$new_node_title=false;
 			$new_node_number=$node_number+1;
+			$old_node_number=false;
 
 			break;
 
@@ -341,7 +360,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				}
 			}
 
-			$old_node_number = false;
+			$new_node_number = $old_node_number = false;
 
 			break;
 
@@ -360,8 +379,6 @@ function threadeditsummary($lang, $clang, $thread) {
 
 			$thread_contents[$old_node_number]['node_ignored'] = true;
 
-			$old_node_number = false;
-
 			break;
 
 		case 'show':
@@ -378,8 +395,6 @@ function threadeditsummary($lang, $clang, $thread) {
 			}
 
 			$thread_contents[$old_node_number]['node_ignored'] = false;
-
-			$old_node_number = false;
 
 			break;
 
@@ -421,9 +436,8 @@ function threadeditsummary($lang, $clang, $thread) {
 	$headline = compact('headline_text', 'headline_url');
 	$view=$thread_name ? url('thread', $clang) . '/'. $thread_id . '?' . 'slang=' . $lang : false;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
-
 	$scroll=true;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$title = view('headline', false, $headline);
