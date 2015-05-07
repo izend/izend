@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    106
+ * @copyright  2010-2015 izend.org
+ * @version    107
  * @link       http://www.izend.org
  */
 
@@ -124,7 +124,8 @@ span.icon_lock {background-position:-120px -48px;}
 span.btn_edit {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 span.btn_grippie {background-position:-224px -48px;width:27px;height:5px;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 span.btn_mouse {background-position:-208px -48px;}
-span.btn_bullet_star {background-position:-192px -32px;}
+span.btn_bullet_star {background-position:-176px -32px;}
+span.btn_accept {background-position:-192px -32px;}
 span.btn_cancel {background-position:-208px -32px;}
 span.btn_ignored {background-position:-224px -32px;}
 span.btn_help {background-position:-240px -32px;}
