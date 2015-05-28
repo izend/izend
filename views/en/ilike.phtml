@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    8
+ * @copyright  2010-2015 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -13,14 +13,14 @@
 //<![CDATA[
 <?php switch ($mode): ?>
 <?php case 'bar': ?>
-$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="box_count" data-width="70" data-show-faces="false" data-font="arial" data-colorscheme="light"></div>');
 <?php break; ?>
 <?php case 'inline': ?>
 <?php default: ?>
 var w=$('body').width();
 var datalayout=w < 320 ? 'button_count' : 'standard';
 var datawidth=datalayout == 'standard' ? (w > 480 ? '450' : '300') : '100';
-$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial"></div>');
+$('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" data-send="true" data-layout="' + datalayout + '" data-width="' + datawidth + '" data-show-faces="false" data-font="arial" data-colorscheme="light"></div>');
 <?php break; ?>
 <?php endswitch; ?>
 //]]>
