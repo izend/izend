@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    15
+ * @copyright  2010-2015 izend.org
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
 
 function search($lang, $arglist=false) {
-	global $search_all, $rss_thread;
+	global $search_all, $search_pertinence, $rss_thread;
 
 	$cloud=false;
 
@@ -92,7 +92,7 @@ function search($lang, $arglist=false) {
 	}
 
 	if ($taglist) {
-		$rsearch=cloud_search($lang, $cloud_id, $taglist);
+		$rsearch=cloud_search($lang, $cloud_id, $taglist, $search_pertinence);
 	}
 
 	$search_title=translate('search:title', $lang);

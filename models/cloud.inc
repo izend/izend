@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -141,7 +141,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	return $r;
 }
 
-function cloud_search($lang, $cloud_id, $taglist) {
+function cloud_search($lang, $cloud_id, $taglist, $pertinence=0) {
 	// return the nodes which are associated to a list of tags in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
 	$taglist=array_slice(array_unique($taglist), 0, 10);
 	$ntags = count($taglist);
@@ -179,7 +179,13 @@ function cloud_search($lang, $cloud_id, $taglist) {
 	}
 	$where = "tg.locale=$sqllang AND " . ($ntags > 1 ? '('.implode(' OR ', $namelist).')' : $namelist[0]);
 
-	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 $join3 WHERE $where GROUP BY t.thread_id, tl.name, tl.title, t.thread_type, tn.number, n.node_id, n.user_id, u.name, u.website, nl.name, nl.title, nl.abstract, nl.cloud ORDER BY pertinence DESC, tn.number";
+	$groupby='t.thread_id, tl.name, tl.title, t.thread_type, tn.number, n.node_id, n.user_id, u.name, u.website, nl.name, nl.title, nl.abstract, nl.cloud';
+
+	if ($pertinence > 0) {
+		$groupby .= " HAVING (COUNT(nl.node_id) / $ntags) >= " . 1/$pertinence;
+	}
+
+	$sql = "SELECT t.thread_id, tl.name AS thread_name, tl.title AS thread_title, t.thread_type, n.node_id, n.user_id, u.name AS user_name, u.website AS user_website, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, nl.name AS node_name, nl.title AS node_title, nl.abstract AS node_abstract, nl.cloud AS node_cloud, COUNT(nl.node_id) / $ntags AS pertinence FROM $tabtag tg JOIN $tabtagindex ti ON ti.tag_id=tg.tag_id $join1 $join2 $join3 WHERE $where GROUP BY $groupby ORDER BY pertinence DESC, tn.number";
 
 	$r = db_query($sql);
 
