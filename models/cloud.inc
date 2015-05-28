@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    20
+ * @copyright  2010-2015 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -94,7 +94,7 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
-		$join1 .= " AND tn.thread_id=$cloud_id";
+		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -162,7 +162,7 @@ function cloud_search($lang, $cloud_id, $taglist) {
 
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
-		$join1 .= " AND tn.thread_id=$cloud_id";
+		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -203,7 +203,7 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
-		$join1 .= " AND tn.thread_id=$cloud_id";
+		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -256,7 +256,7 @@ function cloud_suggest($lang, $cloud_id, $term) {
 
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
-		$join1 .= " AND tn.thread_id=$cloud_id";
+		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
