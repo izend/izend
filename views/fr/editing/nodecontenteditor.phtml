@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    19
+ * @copyright  2010-2015 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -83,22 +83,22 @@ foreach ($node_contents as $c) {
 <input id="content_ignored[<?php echo $i; ?>]" name="content_ignored[<?php echo $i; ?>]" type="checkbox"<?php if ($content_ignored): ?> checked="checked"<?php endif; ?> /><label for="content_ignored[<?php echo $i; ?>]"><span class="btn_edit btn_ignored">ignoré</span></label>
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
-<label>Texte :</label>
+<label>Texte&nbsp;:</label>
 <?php break; ?>
 <?php case 'infile': ?>
-<label>Insertion :</label>
+<label>Insertion&nbsp;:</label>
 <?php break; ?>
 <?php case 'download': ?>
-<label>Téléchargement :</label>
+<label>Téléchargement&nbsp;:</label>
 <?php break; ?>
 <?php case 'file': ?>
-<label>Fichier :</label>
+<label>Fichier&nbsp;:</label>
 <?php break; ?>
 <?php case 'youtube': ?>
-<label>YouTube :</label>
+<label>YouTube&nbsp;:</label>
 <?php break; ?>
 <?php case 'longtail': ?>
-<label>LongTail :</label>
+<label>LongTail&nbsp;:</label>
 <?php break; ?>
 <?php endswitch; ?>
 </p>

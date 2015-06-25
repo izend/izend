@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    28
+ * @version    29
  * @link       http://www.izend.org
  */
 ?>
@@ -18,25 +18,25 @@
 <div id="thread">
 <p>
 <input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
-<label>URL :</label>
+<label>URL&nbsp;:</label>
 <input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
-<p><label>Extrait :</label></p>
+<p><label>Extrait&nbsp;:</label></p>
 <p>
 <textarea name="thread_abstract" cols="80" rows="3"><?php echo htmlspecialchars($thread_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
 </p>
-<p><label>Nuage :</label></p>
+<p><label>Nuage&nbsp;:</label></p>
 <p>
 <textarea name="thread_cloud" cols="80" rows="2"><?php echo htmlspecialchars($thread_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span>
 </p>
-<p><label>Image :</label></p>
+<p><label>Image&nbsp;:</label></p>
 <p>
 <input name="thread_image" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
 </p>
 <p>
-<label>Type :</label>
+<label>Type&nbsp;:</label>
 <select name="thread_type" size="1">
 <option value="thread"<?php if ($thread_type == 'thread'): ?> selected="selected"<?php endif; ?>>Fil</option>
 <?php foreach ($supported_threads as $type): ?>
