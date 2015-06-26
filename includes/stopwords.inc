@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2015 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,6 @@ $stopwords = array(
 	'en' => array(
 		'a',
 		'about',
-		'above',
 		'above',
 		'across',
 		'after',
