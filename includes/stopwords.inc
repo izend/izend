@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2015 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -346,6 +346,7 @@ $stopwords = array(
 		'ceux',
 		'ci',
 		'dans',
+		'de',
 		'des',
 		'du',
 		'donc',
