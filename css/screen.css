@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2014 izend.org
- * @version    68
+ * @version    69
  * @link       http://www.izend.org
  */
  
@@ -117,7 +117,7 @@ div.gallery img:last-child, div.gallery a:last-child {border-right-width:0 !impo
 div.gallery.compact img, div.gallery.compact a {border:none;}
 
 .round {border-radius:8px;}
-.shadow {box-shadow:2px 2px 3px #999999;-webkit-box-shadow:2px 2px 3px #999999;-moz-box-shadow:2px 2px 3px #999999;}
+.shadow {box-shadow:2px 2px 3px #999999;-webkit-box-shadow:2px 2px 3px #999999;}
 
 div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
 div.hbar > *:first-child {margin-left:0;}
