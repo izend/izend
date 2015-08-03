@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    49
+ * @version    50
  * @link       http://www.izend.org
  */
 
@@ -369,7 +369,7 @@ function configure($lang) {
 			}
 
 			$sitemap_xml = build_sitemap_xml($sitename, $languages);
-			@file_put_contents(ROOT_DIR . DIRECTORY_SEPARATOR . SITEMAP_XML, array('<?xml version="1.0" encoding="UTF-8"?>', $sitemap_xml));
+			@file_put_contents(ROOT_DIR . DIRECTORY_SEPARATOR . SITEMAP_XML, array('<?xml version="1.0" encoding="UTF-8"?>', "\n", $sitemap_xml));
 
 			$robots_txt = build_robots_txt($sitename, $languages);
 			@file_put_contents(ROOT_DIR . DIRECTORY_SEPARATOR . ROBOTS_TXT, $robots_txt);

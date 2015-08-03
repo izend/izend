@@ -1,27 +1,19 @@
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<?php
-foreach ($languages as $lang) {
-?>
-	<url>
-<?php
-switch($lang) {
-	case 'fr':
-		echo "\t\t<loc>http://www.$sitename/fr/accueil</loc>\n";
-		break;
-	case 'en':
-		echo "\t\t<loc>http://www.$sitename/en/home</loc>\n";
-		break;
-	default:
-		break;
-}
-?>
-		<lastmod><?php echo $date; ?></lastmod>
-		<changefreq>daily</changefreq>
-		<priority>1.0</priority>
-	</url>
-<?php
-}
-?>
+<?php foreach ($languages as $lang): ?>
+<url>
+<?php switch($lang): ?>
+<?php case 'en': ?>
+<loc>http://www.<?php echo $sitename; ?>/en/home</loc>
+<?php break; ?>
+<?php case 'fr': ?>
+<loc>http://www.<?php echo $sitename; ?>/fr/accueil</loc>
+<?php break; ?>
+<?php default: ?>
+<?php break; ?>
+<?php endswitch; ?>
+<lastmod><?php echo $date; ?></lastmod>
+<changefreq>daily</changefreq>
+<priority>1.0</priority>
+</url>
+<?php endforeach; ?>
 </urlset>
-
