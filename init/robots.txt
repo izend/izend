@@ -1,0 +1,18 @@
+User-agent: *
+Sitemap: http://www.<?php echo $sitename; ?>/sitemap.xml
+<?php foreach ($languages as $lang): ?>
+<?php switch($lang): ?>
+<?php case 'en': ?>
+Disallow: /en/search
+Disallow: /en/suggest
+Disallow: /en/donation
+<?php break; ?>
+<?php case 'fr': ?>
+Disallow: /fr/recherche
+Disallow: /fr/suggestion
+Disallow: /fr/donation
+<?php break; ?>
+<?php default: ?>
+<?php break; ?>
+<?php endswitch; ?>
+<?php endforeach; ?>

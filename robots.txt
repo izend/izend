@@ -1,5 +1,4 @@
 User-agent: *
-Sitemap: /sitemap.xml
 Disallow: /en/search
 Disallow: /en/suggest
 Disallow: /en/donation
