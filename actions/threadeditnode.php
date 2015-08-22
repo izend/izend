@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    8
+ * @copyright  2010-2015 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -40,7 +40,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	if ($thread_type and $limited_contents and array_key_exists($thread_type, $limited_contents)) {
 		$content_types=$limited_contents[$thread_type];
 	}
-	$node_editor = build('threadnodeeditor', $lang, $clang, $thread_id, $node_id, $content_types);
+	$node_editor = build('nodeeditor', $lang, $clang, $node_id, $content_types);
 
 	$node_name=$node_title=false;
 	$r = thread_get_node($clang, $thread_id, $node_id, false);

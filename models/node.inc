@@ -2,10 +2,12 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    24
+ * @copyright  2010-2015 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
+
+require_once 'models/cloud.inc';
 
 function node_id($node) {
 	if (!is_numeric($node)) {
@@ -127,6 +129,8 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 		return false;
 	}
 
+	cloud_tag_node($lang, $node_id, $node_cloud);
+
 	return true;
 }
 
@@ -187,6 +191,8 @@ function node_delete($node_id) {
 	$sql="DELETE FROM $tabvote WHERE content_id=$node_id AND content_type='node'";
 
 	db_delete($sql);
+
+	cloud_untag_node($node_id);
 
 	return true;
 }

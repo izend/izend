@@ -2,12 +2,11 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    23
+ * @copyright  2010-2015 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 
-require_once 'models/cloud.inc';
 require_once 'models/node.inc';
 
 function thread_list($lang, $type=false, $strict=true) {
@@ -181,8 +180,6 @@ function thread_delete($thread_id) {
 			}
 		}
 	}
-
-	cloud_delete($thread_id);
 
 	$sql="DELETE FROM $tabthreadnode WHERE thread_id=$thread_id";
 
@@ -448,8 +445,6 @@ function thread_delete_node($thread_id, $node_id) {
 		return false;
 	}
 
-	cloud_untag_node($node_id);
-
 	return true;
 }
 
@@ -468,15 +463,7 @@ function thread_get_node($lang, $thread_id, $node_id) {
 }
 
 function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit) {
-	$r = node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
-
-	if (!$r) {
-		return false;
-	}
-
-	cloud_tag_node($lang, $node_id, $node_cloud);
-
-	return true;
+	return node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit);
 }
 
 function thread_copy_node($lang, $user_id, $thread_id, $node_id, $node_name, $node_title, $node_number=0) {
