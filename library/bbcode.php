@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    5
+ * @copyright  2010-2015 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ function bbcode_protect($s) {
 }
 
 function bbcode_highlite($s, $language=false) {
-	$s = trim(base64_decode($s));
+	$s = base64_decode($s);
 
 	if (!$language) {
 		return '<code>' . htmlspecialchars($s, ENT_COMPAT, 'UTF-8') . '</code>';
