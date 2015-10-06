@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2015 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,6 @@ function is_mobile($agent=false) {
 		$agent=user_agent();
 	}
 
-	return $agent and preg_match('/android|iphone|ipad|ipod|blackberry|opera mini/i', $agent);
+	return $agent and preg_match('/android|webos|iphone|ipad|ipod|iemobile|blackberry|opera mini/i', $agent);
 }
 
