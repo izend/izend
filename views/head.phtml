@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    32
+ * @copyright  2010-2015 izend.org
+ * @version    33
  * @link       http://www.izend.org
  */
 ?>
@@ -72,7 +72,7 @@
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo htmlspecialchars(implode('|', $fonts), ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
 <?php endif; ?>
 <?php if (true): ?>
 <link href="<?php echo $base_path; ?>/css/zero.css" rel="stylesheet" type="text/css" media="screen" />
