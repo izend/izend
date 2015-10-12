@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    9
+ * @copyright  2010-2015 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -45,7 +45,7 @@ if (!$message) {
 	$message=$comment_text;
 }
 ?>
-<div>
+<div class="comment_text">
 <?php echo bbcode($message), PHP_EOL; ?>
 </div>
 <?php endif; ?>
@@ -57,7 +57,7 @@ le commentaire ou le
 </p>
 </div>
 <?php else: ?>
-<div>
+<div class="comment_text">
 <?php echo bbcode($comment_text), PHP_EOL; ?>
 </div>
 <?php endif; ?>
@@ -71,7 +71,7 @@ le commentaire ou le
 <div id="newcomment" class="noprint">
 <h6>Votre commentaire&nbsp;:</h6>
 <?php if ($message and !$message_too_long): ?>
-<div>
+<div class="comment_text">
 <?php echo bbcode($message), PHP_EOL; ?>
 </div>
 <?php endif; ?>
