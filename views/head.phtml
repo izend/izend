@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    33
+ * @version    34
  * @link       http://www.izend.org
  */
 ?>
@@ -72,7 +72,8 @@
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
+<?php require_once 'ishttps.php'; ?>
+<link rel="stylesheet" type="text/css" href="<?php if (is_https()): ?>https<?php else: ?>http<?php endif; ?>://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
 <?php endif; ?>
 <?php if (true): ?>
 <link href="<?php echo $base_path; ?>/css/zero.css" rel="stylesheet" type="text/css" media="screen" />
