@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    34
+ * @version    35
  * @link       http://www.izend.org
  */
  
@@ -73,6 +73,7 @@ div.row {width:100%;padding:0;margin:1em 0;}
 div.row > * {display:inline-block;padding:0;margin:0 3px;vertical-align:top;}
 div.row > *:first-child {margin-left:0;}
 div.row > *:last-child {margin-right:0;}
+div.row.compact > * {margin-left:0;margin-right:0;}
 
 div.bytwo > * {width:48%;}
 div.bythree > * {width:32%;}
