@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    3
+ * @copyright  2010-2015 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -20,7 +20,7 @@ else {
 	$paypal_url = 'https://www.paypal.com';
 }
 
-$paypal_api_version='65.3';
+$paypal_api_version='124';
 
 global $paypal_username, $paypal_password, $paypal_signature;
 
