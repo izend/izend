@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    6
+ * @copyright  2010-2015 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ function file_mime_type($file, $encoding=true) {
 
 	if (function_exists('finfo_file')) {
 		$finfo = finfo_open(FILEINFO_MIME);
-		$mime = finfo_file($finfo, $file);
+		$mime = @finfo_file($finfo, $file);
 		finfo_close($finfo);
 	}
 	else if (substr(PHP_OS, 0, 3) == 'WIN') {
