@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    3
+ * @copyright  2014-2015 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($visits > 0): ?>
 <?php require_once 'countformat.php'; ?>
-<div class="visits" title="<?php echo number_format($visits, 0, '.', ','); ?> visitor<?php if ($visits > 1): ?>s<?php endif; ?>"><?php echo count_format($visits, '.', ','); ?></div>
+<div class="visits" title="<?php echo number_format($visits, 0, '.', ','); ?> visit<?php if ($visits > 1): ?>s<?php endif; ?>"><?php echo count_format($visits, '.', ','); ?></div>
 <?php endif; ?>
 <?php if ($visit_page): ?>
 <script type="text/javascript">
