@@ -3,6 +3,7 @@
 */
 
 .audioplayer {
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	height: 1.5em; /* 24 */
 	color: #ccc;
 	position: relative;
@@ -79,8 +80,7 @@
 	right: 0;
 }
 .audioplayer-time {
-	font-size: 68.75%; /* 11 */
-	width: 4em; /* 64 */
+	font-size: 0.75em; /* 12 */
 	height: 100%;
 	line-height: 2em; /* 32 */
 	text-align: center;
