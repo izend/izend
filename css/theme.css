@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    108
+ * @version    109
  * @link       http://www.izend.org
  */
 
@@ -185,7 +185,8 @@ span.btn_map {background-position:-144px -32px;}
 span.btn_marker {background-position:-160px -32px;}
 span.btn_film {background-position:-144px -48px;}
 span.btn_camera {background-position:-160px -48px;}
-span.btn_speaker {background-position:-176px -48px;}
+span.btn_sound {background-position:-176px -48px;}
+span.btn_loop {background-position:-192px -48px;}
 span.btn_cut {background-position:-112px -48px;}
 
 #content {margin:1em 0;clear:both;}
