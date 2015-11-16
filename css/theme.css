@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    109
+ * @version    110
  * @link       http://www.izend.org
  */
 
@@ -188,6 +188,28 @@ span.btn_camera {background-position:-160px -48px;}
 span.btn_sound {background-position:-176px -48px;}
 span.btn_loop {background-position:-192px -48px;}
 span.btn_cut {background-position:-112px -48px;}
+
+span.btn_control {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/controls.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
+span.btn_eject {background-position:0 0;}
+span.btn_eject_alt {background-position:0 -16px;}
+span.btn_end {background-position:-16px 0;}
+span.btn_end_alt {background-position:-16px -16px;}
+span.btn_equalizer {background-position:-32px 0;}
+span.btn_equalizer_alt {background-position:-32px -16px;}
+span.btn_fastforward {background-position:-48px 0;}
+span.btn_fastforward_alt {background-position:-48px -16px;}
+span.btn_pause {background-position:-64px 0;}
+span.btn_pause_alt {background-position:-64px -16px;}
+span.btn_play {background-position:-80px 0;}
+span.btn_play_alt {background-position:-80px -16px;}
+span.btn_repeat {background-position:-96px 0;}
+span.btn_repeat_alt {background-position:-96px -16px;}
+span.btn_rewind {background-position:-112px 0;}
+span.btn_rewind_alt {background-position:-112px -16px;}
+span.btn_start {background-position:-128px 0;}
+span.btn_start_alt {background-position:-128px -16px;}
+span.btn_stop {background-position:-144px 0;}
+span.btn_stop_alt {background-position:-144px -16px;}
 
 #content {margin:1em 0;clear:both;}
 
