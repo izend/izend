@@ -81,20 +81,21 @@
 }
 .audioplayer-time {
 	font-size: 0.75em; /* 12 */
+	width: 3em; /* 36 */
 	height: 100%;
-	line-height: 2em; /* 32 */
+	line-height: 2em; /* 24 */
 	text-align: center;
 	z-index: 2;
 	top: 0;
 }
 .audioplayer-time-current {
-	left: 3em; /* 48 */
+	left: 3em; /* 36 */
 }
 .audioplayer-time-duration {
-	right: 3em; /* 48 */
+	right: 3em; /* 36 */
 }
 .audioplayer-novolume .audioplayer-time-duration {
-	right: 0;
+	right: 1.5em; /* 18 */
 }
 .audioplayer-bar {
 	height: 0.875em; /* 14 */
