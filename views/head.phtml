@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    34
+ * @version    35
  * @link       http://www.izend.org
  */
 ?>
@@ -88,10 +88,10 @@
 <?php
 $name=$css['name'];
 $media=isset($css['media']) ? $css['media'] : 'all';
-if ($name[0] == '/' or substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
+if ($name[0] == '/' or substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
 	$url=$name;
 }
-else if (substr_compare('.css', $name, -4, 4) == 0) {
+else if (substr_compare($name, '.css', -4, 4) == 0) {
 	$url=$base_path . '/css/' . $name;
 }
 else {
@@ -118,10 +118,10 @@ else {
 <?php
 $name=$js['name'];
 $param=isset($js['param']) ? $js['param'] : '';
-if ($name[0] == '/' or substr_compare('http://', $name, 0, 7) == 0 or substr_compare('https://', $name, 0, 8) == 0) {
+if ($name[0] == '/' or substr_compare($name, 'http://', 0, 7) == 0 or substr_compare($name, 'https://', 0, 8) == 0) {
 	$url=$name;
 }
-else if (substr_compare('.js', $name, -3, 3) == 0) {
+else if (substr_compare($name, '.js', -3, 3) == 0) {
 	$url=$base_path . '/js/' . $name;
 }
 else {
