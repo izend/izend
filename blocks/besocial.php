@@ -2,17 +2,17 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    6
+ * @copyright  2010-2015 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
-function besocial($lang, $components=false, $shareline=false) {
+function besocial($lang, $components, $sharemode, $shareline=false) {
 	$ilike=$tweetit=$plusone=$linkedin=$pinit=false;
 
 	extract($components);	/* ilike, tweetit, plusone, linkedin, pinit */
 
-	$mode='inline';
+	$mode=$sharemode == 'standard' ? 'inline' : 'lite';
 
 	if ($ilike) {
 		$ilike=view('ilike', $lang, compact('mode'));
@@ -39,7 +39,7 @@ function besocial($lang, $components=false, $shareline=false) {
 		$pinit=view('pinit', $lang, compact('mode', 'pinit_text', 'pinit_image'));
 	}
 
-	$output = view('besocial', false, compact('shareline', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+	$output = view('besocial', false, compact('shareline', 'sharemode', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 
 	return $output;
 }

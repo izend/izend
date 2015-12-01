@@ -3,10 +3,13 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($mode == 'lite'): ?>
+<a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on Facebook"><span>Facebook</span></a>
+<?php else: ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
@@ -26,3 +29,4 @@ $('#<?php echo $id; ?>').replaceWith('<div class="fb-like" data-href="<?php echo
 //]]>
 </script>
 <?php global $facebookjssdk; $facebookjssdk='en_US'; ?>
+<?php endif; ?>

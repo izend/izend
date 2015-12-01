@@ -3,10 +3,13 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($mode == 'lite'): ?>
+<a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Partager sur LinkedIn"><span>LinkedIn</span></a>
+<?php else: ?>
 <?php head('javascript', 'https://platform.linkedin.com/in.js'); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
@@ -23,3 +26,4 @@ $('#<?php echo $id; ?>').replaceWith('<script type="in/share" data-counter="righ
 <?php endswitch; ?>
 //]]>
 </script>
+<?php endif; ?>

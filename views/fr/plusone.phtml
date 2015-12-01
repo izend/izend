@@ -2,11 +2,14 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    4
+ * @copyright  2010-2015 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($mode == 'lite'): ?>
+<a class="gplus" href="https://plus.google.com/share?url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Partager sur Google+"><span>Google+</span></a>
+<?php else: ?>
 <?php head('javascript', 'https://apis.google.com/js/plusone.js', "{lang: 'fr'}"); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
@@ -23,3 +26,4 @@ $('#<?php echo $id; ?>').replaceWith('<div class="g-plusone" data-href="<?php ec
 <?php endswitch; ?>
 //]]>
 </script>
+<?php endif; ?>

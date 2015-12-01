@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    110
+ * @version    111
  * @link       http://www.izend.org
  */
 
@@ -308,12 +308,21 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #sharebar, #shareline {display:none;}
 
 #sharebar {border:solid 2px #eaefb3;background-color:#ffffff;position:fixed;top:160px;padding:4px 6px;z-index:9999;}
-#sharebar > li {padding:3px 0;}
+#sharebar.standard > li {padding:3px 0;}
+#sharebar.standard > li:last-child {padding-bottom:0;}
 
 .besocial {width:100%;padding:0;margin:1em 0;}
-.besocial li {display:inline-block;height:30px;vertical-align:top;padding:0;margin:0;}
+.besocial li {display:inline-block;padding:0;margin:0;}
+.besocial.standard li {height:30px;vertical-align:top;}
 
-#socialbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
+#sharebar.lite a, .besocial.lite a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
+#sharebar.lite a.facebook, .besocial.lite a.facebook {background-position:0 0;}
+#sharebar.lite a.twitter, .besocial.lite a.twitter {background-position:-24px 0;}
+#sharebar.lite a.gplus, .besocial.lite a.gplus {background-position:-48px 0;}
+#sharebar.lite a.linkedin, .besocial.lite a.linkedin {background-position:-72px 0;}
+#sharebar.lite a.pinterest, .besocial.lite a.pinterest {background-position:-168px 0;}
+
+#socialbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
 #socialbar a.facebook {background-position:0 0;}
 #socialbar a.twitter {background-position:-24px 0;}
 #socialbar a.gplus {background-position:-48px 0;}

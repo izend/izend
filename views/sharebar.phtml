@@ -2,20 +2,47 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    8
+ * @copyright  2010-2015 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit): ?>
-<ul id="sharebar" class="menu sidebar">
+<ul id="sharebar" class="menu sidebar <?php echo $sharemode; ?>">
+<?php if ($sharemode == 'lite'): ?>
 <?php if ($ilike): ?>
-<li class="ilike">
+<li class="facebook">
 <?php echo $ilike; ?>
 </li>
 <?php endif; ?>
 <?php if ($tweetit): ?>
-<li class="tweetit">
+<li class="twitter">
+<?php echo $tweetit; ?>
+</li>
+<?php endif; ?>
+<?php if ($plusone): ?>
+<li class="gplus">
+<?php echo $plusone; ?>
+</li>
+<?php endif; ?>
+<?php if ($linkedin): ?>
+<li class="linkedin">
+<?php echo $linkedin; ?>
+</li>
+<?php endif; ?>
+<?php if ($pinit): ?>
+<li class="pinterest">
+<?php echo $pinit; ?>
+</li>
+<?php endif; ?>
+<?php else: ?>
+<?php if ($ilike): ?>
+<li class="facebook">
+<?php echo $ilike; ?>
+</li>
+<?php endif; ?>
+<?php if ($tweetit): ?>
+<li class="twitter">
 <?php echo $tweetit; ?>
 </li>
 <?php endif; ?>
@@ -25,17 +52,18 @@
 </li>
 <?php endif; ?>
 <?php if ($pinit): ?>
-<li class="pinit">
+<li class="pinterest">
 <?php echo $pinit; ?>
 </li>
 <?php endif; ?>
 <?php if ($plusone): ?>
-<li class="plusone">
+<li class="gplus">
 <?php echo $plusone; ?>
 </li>
 <?php endif; ?>
-</ul>
 <?php endif; ?>
+</ul>
 <script type="text/javascript">
 $(document).ready(function() {$('#sharebar').show();});
 </script>
+<?php endif; ?>

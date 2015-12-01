@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    17
+ * @copyright  2010-2015 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
  
@@ -36,4 +36,5 @@
 .submit_pay {width:69px !important;height:21px !important;background:transparent url(../images/paypal_pay_fr.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
 .submit_paypal {width:100px !important;height:35px !important;background:transparent url(../logos/paypal.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
 
-#sharebar {width:70px;margin-left:-115px;}
+#sharebar.standard {width:70px;margin-left:-115px;}
+#sharebar.lite {width:24px;margin-left:-65px;}

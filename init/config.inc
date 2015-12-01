@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    41
+ * @version    42
  * @link       http://www.izend.org
  */
 <?php
@@ -49,9 +49,10 @@ global $signature;
 
 $signature='<?php echo $sitename; ?> - http://www.<?php echo $sitename; ?>';
 
-global $socializing;
+global $socializing, $socializingmode;
 
 $socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
+$socializingmode='standard';       // 'standard', 'lite'
 
 global $facebookjssdk, $facebookid, $facebooksecret;
 

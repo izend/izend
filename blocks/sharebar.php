@@ -2,17 +2,17 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    4
+ * @copyright  2010-2015 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
-function sharebar($lang, $components=false) {
+function sharebar($lang, $components=false, $sharemode=false) {
 	$ilike=$tweetit=$plusone=$linkedin=$pinit=false;
 
 	extract($components);	/* ilike, tweetit, plusone, linkedin, pinit */
 
-	$mode='bar';
+	$mode=$sharemode == 'standard' ? 'bar' : 'lite';
 
 	if ($ilike) {
 		$ilike=view('ilike', $lang, compact('mode'));
@@ -39,7 +39,7 @@ function sharebar($lang, $components=false) {
 		$pinit=view('pinit', $lang, compact('mode', 'pinit_text', 'pinit_image'));
 	}
 
-	$output = view('sharebar', false, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+	$output = view('sharebar', false, compact('sharemode', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 
 	return $output;
 }
