@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2013-2015 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($mode == 'lite'): ?>
-<a class="pinterest" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&description=<?php echo urlencode($pinit_text); ?><?php endif ?>" target="_blank" title="Share on Pinterest"><span>Pinterest</span></a>
+<a class="pinterest" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&amp;media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&amp;description=<?php echo urlencode($pinit_text); ?><?php endif ?>" target="_blank" title="Share on Pinterest"><span>Pinterest</span></a>
 <?php else: ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>

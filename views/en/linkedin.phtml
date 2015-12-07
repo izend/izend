@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($mode == 'lite'): ?>
-<a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on LinkedIn"><span>LinkedIn</span></a>
+<a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on LinkedIn"><span>LinkedIn</span></a>
 <?php else: ?>
 <?php head('javascript', 'https://platform.linkedin.com/in.js'); ?>
 <?php $id = uniqid('id'); ?>
