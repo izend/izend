@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2015 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
 ?>
@@ -62,6 +62,11 @@
 <link rel="canonical" href="<?php echo $canonical; ?>" />
 <?php else: ?>
 <link rel="canonical" href="<?php echo $base_url;?>/<?php echo $request_path; ?>" />
+<?php endif; ?>
+<?php if (!empty($hreflang)): ?>
+<?php foreach ($hreflang as $lg => $url) : ?>
+<link rel="alternate" href="<?php echo $base_url;?>/<?php echo $url; ?>" hreflang="<?php echo $lg; ?>" />
+<?php endforeach; ?>
 <?php endif; ?>
 <?php if (!empty($lang)): ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />

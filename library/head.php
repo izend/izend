@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    11
+ * @copyright  2010-2015 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -119,6 +119,14 @@ function head($type=false) {
 					}
 				}
 				$head['javascripts'][]=$param ? compact('name', 'param') : compact('name');
+			}
+			break;
+		case 'hreflang':
+			if (!isset($head['hreflang'])) {
+				$head['hreflang'] = array($args[0] => $args[1]);
+			}
+			else {
+				$head['hreflang'][$args[0]] = $args[1];
 			}
 			break;
 		default:
