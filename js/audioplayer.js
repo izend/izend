@@ -60,6 +60,7 @@
 				audioType  = $this.attr( 'type' ),
 				isAutoPlay = $this.get( 0 ).getAttribute( 'autostart' ), isAutoPlay = isAutoPlay === '' || isAutoPlay === 'autoplay' ? true : false,
 				isLoop	   = $this.get( 0 ).getAttribute( 'loop' ), isLoop = isLoop === '' || isLoop === 'loop' ? true : false,
+				noVolume   = $this.get( 0 ).getAttribute( 'novolume' ), noVolume = noVolume === '' || noVolume === 'novolume' ? true : false,
 				isSupport  = false;
 
 			if( typeof audioFile === 'undefined' )
@@ -113,9 +114,14 @@
 						}, 100 );
 					};
 
-				var volumeTestDefault = theAudio.volume, volumeTestValue = theAudio.volume = 0.111;
-				if( Math.round( theAudio.volume * 1000 ) / 1000 == volumeTestValue ) theAudio.volume = volumeTestDefault;
-				else thePlayer.addClass( cssClass.noVolume );
+				if (noVolume) {
+					thePlayer.addClass( cssClass.noVolume );
+				}
+				else {
+					var volumeTestDefault = theAudio.volume, volumeTestValue = theAudio.volume = 0.111;
+					if( Math.round( theAudio.volume * 1000 ) / 1000 == volumeTestValue ) theAudio.volume = volumeTestDefault;
+					else thePlayer.addClass( cssClass.noVolume );
+				}
 
 				timeDuration.html( '&hellip;' );
 				timeCurrent.html( secondsToTime( 0 ) );
@@ -123,7 +129,6 @@
 				if( isAutoPlay ) {
 					theAudio.addEventListener( 'loadeddata', function()
 					{
-						console.log('loadeddata');
 						theAudio.play();
 						if (!theAudio.paused) {
 							thePlayer.addClass( cssClass.playing ).removeClass( cssClass.stopped );
