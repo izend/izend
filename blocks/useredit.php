@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2014 izend.org
- * @version    13
+ * @copyright  2011-2016 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -246,6 +246,10 @@ function useredit($lang, $user_id) {
 				if (!validate_locale($user_locale)) {
 					$bad_locale=true;
 				}
+			}
+
+			if ($user_banned) {
+				$user_active=false;
 			}
 			break;
 
