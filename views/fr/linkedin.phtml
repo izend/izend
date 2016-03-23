@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    7
+ * @copyright  2010-2016 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($mode == 'lite'): ?>
 <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Partager sur LinkedIn"><span>LinkedIn</span></a>
 <?php else: ?>
-<?php head('javascript', 'https://platform.linkedin.com/in.js'); ?>
+<?php head('javascript', 'https://platform.linkedin.com/in.js', 'lang: fr_FR'); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
