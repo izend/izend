@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    37
+ * @version    38
  * @link       http://www.izend.org
  */
  
@@ -69,14 +69,17 @@ audio, video {display:none;}
 
 .submit {border:none;vertical-align:middle;}
 
-div.row {width:100%;padding:0;margin:1em 0;}
-div.row > * {display:inline-block;padding:0;margin:0 3px;vertical-align:top;}
+div.row {display:flex;margin:1em 0;}
+div.row > * {margin-left:1%;margin-right:1%;}
+div.row > *, div.row.atop > *, div.row > .atop {margin-top:0;margin-bottom:auto;}
+div.row.amiddle > *, div.row > .amiddle {margin-top:auto;margin-bottom:auto;}
+div.row.abottom > *, div.row > .abottom {margin-top:auto;margin-bottom:0;}
 div.row > *:first-child {margin-left:0;}
 div.row > *:last-child {margin-right:0;}
 div.row.compact > * {margin-left:0;margin-right:0;}
 div.row.tight {margin:0;}
 
-div.bytwo > * {width:48%;}
+div.bytwo > * {width:49%;}
 div.bythree > * {width:32%;}
 div.byfour > * {width:23%;}
 
