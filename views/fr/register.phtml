@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    17
+ * @copyright  2010-2016 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -34,7 +34,7 @@ $('input[name=register_timezone]').val(tz.name());
 <p class="info">Choisissez un pseudo de 2 à 20 lettres.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
-<p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
+<p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="Email" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
 <?php if ($connectbar): ?>
 <?php echo $connectbar; ?>
 <?php endif; ?>
@@ -42,7 +42,7 @@ $('input[name=register_timezone]').val(tz.name());
 <p class="info">Votre mot de passe sera envoyé à cette adresse.</p>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Avez-vous un site web&nbsp;?</p>
-<p><input type="text" name="register_website" id="register_website" size="40" maxlength="100" title="www.domaine.fr" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_website" id="register_website" size="30" maxlength="100" title="www.domaine.fr" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php endif; ?>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choisissez un mot de passe&nbsp;:</p>
@@ -110,7 +110,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
 <?php if ($account_created): ?>
-<p>Votre compte a bien été créé. Le mot de passe a été envoyé par email à votre adresse.<br />
+<p>Votre compte a été créé. Le mot de passe a été envoyé par email à votre adresse.
 Pour vous identifier, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
