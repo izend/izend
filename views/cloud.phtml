@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    5
+ * @copyright  2010-2016 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -20,7 +20,7 @@ foreach ($linklist as $link) {
 	extract($link);	/* name, count, url */
 	$span=!$flat ? $fontsizes[rand(0, count($fontsizes)-1)] : false;
 ?>
-<li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>" rel="noindex, nofollow"><?php if ($span): ?><span class="<?php echo $span; ?>"><?php endif; ?><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?><?php if ($span): ?></span><?php endif; ?></a></li>
+<li><a href="<?php echo $url; ?>" title="<?php echo $count; ?>" rel="nofollow"><?php if ($span): ?><span class="<?php echo $span; ?>"><?php endif; ?><?php echo htmlspecialchars($name, ENT_NOQUOTES, 'UTF-8', false); ?><?php if ($span): ?></span><?php endif; ?></a></li>
 <?php
 }
 ?>
