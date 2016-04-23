@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    74
+ * @version    75
  * @link       http://www.izend.org
  */
  
@@ -139,8 +139,8 @@ div.vbar > *:last-child {margin-bottom:0;}
 .block {display:block !important;}
 .inline {display:inline !important;}
 
-.hidden {display:none;}
-.invisible {visibility:hidden;}
+.hidden {display:none !important;}
+.invisible {visibility:hidden !important;}
 
 .top {margin-top:0 !important;}
 .bottom {margin-bottom:0 !important;}
