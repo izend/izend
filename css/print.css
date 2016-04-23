@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    39
+ * @version    40
  * @link       http://www.izend.org
  */
  
@@ -52,8 +52,8 @@ audio, video {display:none;}
 
 .clear {clear:both;}
 
-.hidden {display:none;}
-.noprint {display:none;}
+.hidden {display:none !important;}
+.noprint {display:none !important;}
 
 .top {margin-top:0 !important;}
 .bottom {margin-bottom:0 !important;}
