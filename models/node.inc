@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    25
+ * @copyright  2010-2016 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
 
@@ -462,14 +462,15 @@ function node_delete_content($node_id, $content_id, $content_type) {
 	return true;
 }
 
-function node_add_comment($node_id, $user_id, $ip_address, $text, $locale) {
+function node_add_comment($node_id, $user_id, $user_mail, $ip_address, $text, $locale) {
 	$sqltext=db_sql_arg($text, true);
 	$sqllocale=db_sql_arg($locale, false);
 	$sqlipaddress=db_sql_arg($ip_address, false);
+	$sqlmail=db_sql_arg($user_mail, true, true);
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="INSERT INTO $tabcomment (node_id, locale, created, edited, user_id, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), NOW(), $user_id, INET_ATON($sqlipaddress), $sqltext)";
+	$sql="INSERT INTO $tabcomment (node_id, locale, created, edited, user_id, user_mail, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), NOW(), $user_id, $sqlmail, INET_ATON($sqlipaddress), $sqltext)";
 
 	$r = db_insert($sql);
 

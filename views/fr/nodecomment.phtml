@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    11
+ * @copyright  2010-2016 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -77,6 +77,10 @@ le commentaire ou le
 <?php endif; ?>
 <?php echo view('editcomment', 'fr', compact('message', 'message_maxlen')); ?>
 <?php if ($message): ?>
+<?php if ($with_mail): ?>
+<p><input type="text" name="comment_mail" id="comment_mail" size="30" maxlength="100" title="Email" onkeypress="return submitonenter(event, 'comment_validate')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
+<p class="info<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Entrez votre adresse d'email pour valider votre message.</p>
+<?php endif; ?>
 <?php if ($with_captcha): ?>
 <p>
 <img src="<?php echo $base_path; ?>/captcha/comment" alt="" height="40" title="Code de vérification" />
@@ -98,7 +102,7 @@ le texte ou le
 <?php endif; ?>
 <?php if ($moderated or $newcomment): ?>
 </form>
-<?php if ($with_captcha): ?>
+<?php if ($with_mail or $with_captcha): ?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Entrez le code de vérification affiché dans l'image.</p>
@@ -110,6 +114,9 @@ le texte ou le
 $focus=false;
 if ($missing_code or $bad_code) {
 	$focus='#comment_code';
+}
+else if ($missing_mail or $bad_mail) {
+	$focus='#comment_mail';
 }
 ?>
 <?php if ($focus): ?>

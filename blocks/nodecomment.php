@@ -2,15 +2,18 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    10
+ * @copyright  2010-2016 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
+require_once 'ismailallowed.php';
 require_once 'readarg.php';
+require_once 'strflat.php';
+require_once 'tokenid.php';
 require_once 'userhasrole.php';
 require_once 'userprofile.php';
-require_once 'tokenid.php';
+require_once 'validatemail.php';
 require_once 'models/node.inc';
 
 function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
@@ -20,6 +23,8 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$now=time();
 
 	$message_maxlen=1000;
+
+	$with_mail=false;
 
 	$with_captcha=false;
 
@@ -45,7 +50,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 		}
 	}
 
-	$id=$message=$token=false;
+	$id=$message=$mail=$token=false;
 
 	switch($action) {
 		case 'validate':
@@ -55,6 +60,9 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			/* fall thru */
 		case 'comment':
 		case 'edit':
+			if (isset($_POST['comment_mail'])) {
+				$mail=strtolower(strflat(readarg($_POST['comment_mail'])));
+			}
 			if (isset($_POST['comment_message'])) {
 				$message=readarg($_POST['comment_message'], true, false);	// trim but DON'T strip!
 			}
@@ -95,6 +103,8 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$bad_id=false;
 	$missing_message=false;
 	$message_too_long=false;
+	$missing_mail=false;
+	$bad_mail=false;
 
 	switch($action) {
 		case 'validate':
@@ -186,13 +196,33 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	switch($action) {
 		case 'validate':
-			if ($bad_token or $missing_code or $bad_code or $missing_message or $message_too_long) {
+			if ($bad_token or $missing_code or $bad_code or $missing_id or $bad_id or $missing_message or $message_too_long) {
+				break;
+			}
+
+			if ($with_mail) {
+				if (!$mail) {
+					$missing_mail=true;
+				}
+				else if (!validate_mail($mail) or !is_mail_allowed($mail)) {
+					$bad_mail=true;
+				}
+			}
+			break;
+
+		default:
+			break;
+	}
+
+	switch($action) {
+		case 'validate':
+			if ($bad_token or $missing_code or $bad_code or $missing_message or $message_too_long or $missing_mail or $bad_mail) {
 				break;
 			}
 
 			$ip_address=client_ip_address();
 
-			$r=node_add_comment($node_id, $user_id, $ip_address, $message, $lang);
+			$r=node_add_comment($node_id, $user_id, $mail, $ip_address, $message, $lang);
 
 			if (!$r) {
 				$internal_error=true;
@@ -278,9 +308,9 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	$_SESSION['comment_token'] = $token = token_id();
 
-	$errors = compact('missing_code', 'bad_code', 'missing_message', 'message_too_long');
+	$errors = compact('missing_code', 'bad_code', 'missing_message', 'message_too_long', 'missing_mail', 'bad_mail');
 
-	$output = view('nodecomment', $lang, compact('token', 'with_captcha', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'user_page', 'node_url', 'errors'));
+	$output = view('nodecomment', $lang, compact('token', 'with_mail', 'with_captcha', 'comments', 'moderated', 'id', 'newcomment', 'message', 'message_maxlen', 'mail', 'user_page', 'node_url', 'errors'));
 
 	return $output;
 }
