@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    38
+ * @version    39
  * @link       http://www.izend.org
  */
  
@@ -69,11 +69,11 @@ audio, video {display:none;}
 
 .submit {border:none;vertical-align:middle;}
 
-div.row {display:flex;margin:1em 0;overflow-x:hidden;}
+div.row {display:flex;display:-webkit-flex;display:-webkit-box;margin:1em 0;overflow:hidden;}
 div.row > * {margin-left:1%;margin-right:1%;}
-div.row > *, div.row.atop > *, div.row > .atop {margin-top:0;margin-bottom:auto;}
-div.row.amiddle > *, div.row > .amiddle {margin-top:auto;margin-bottom:auto;}
-div.row.abottom > *, div.row > .abottom {margin-top:auto;margin-bottom:0;}
+div.row > *, div.row.atop > *, div.row > .atop {align-self:flex-start;-webkit-align-self:flex-start;}
+div.row.amiddle > *, div.row > .amiddle {align-self:center;-webkit-align-self:center;}
+div.row.abottom > *, div.row > .abottom {align-self:flex-end;-webkit-align-self:flex-end;}
 div.row > *:first-child {margin-left:0;}
 div.row > *:last-child {margin-right:0;}
 div.row.compact > * {margin-left:0;margin-right:0;}
