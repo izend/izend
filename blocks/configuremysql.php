@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    5
+ * @copyright  2014-2016 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -83,6 +83,7 @@ CREATE TABLE `${db_prefix}comment` (
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_mail` varchar(100) DEFAULT NULL,
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`comment_id`),
