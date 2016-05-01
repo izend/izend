@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    113
+ * @version    114
  * @link       http://www.izend.org
  */
 
@@ -213,7 +213,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #content {margin:1em 0;clear:both;}
 
-#bannerline {height:2px;background:transparent url(../images/theme/bannerline.png) no-repeat;padding:0;margin:0;clear:both;}
+#bannerline {height:2px;background:transparent url(../images/theme/bannerline.png) no-repeat;background-size:100% 2px;padding:0;margin:0;clear:both;}
 
 #banner {margin:10px 0 5px;}
 #bannercontrols {width:230px;float:left;}
