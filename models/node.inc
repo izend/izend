@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -210,7 +210,7 @@ function node_get_contents($lang, $node_id) {
 	foreach ($contents_model as $content_type => $fields) {
 		$tabcontenttype=db_prefix_table('content_' . $content_type);
 		$alias="nc$n";
-		$join[]="LEFT JOIN $tabcontenttype $alias ON nc.content_type='$content_type' AND $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
+		$join[]="LEFT JOIN $tabcontenttype $alias ON $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
 		foreach ($fields as $fname => $props) {
 			if (!empty($props['ignored'])) {
 				continue;
