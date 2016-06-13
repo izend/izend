@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    6
+ * @copyright  2010-2016 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -41,15 +41,15 @@ function http_parse_url($url) {
 	return array($proto, $scheme, $host, $portnum, $path);
 }
 
-function sendget($url, $args=false) {
-	return sendhttp('GET', $url, $args);
+function sendget($url, $args=false, $options=false) {
+	return sendhttp('GET', $url, $args, false, false, $options);
 }
 
-function sendpost($url, $args=false, $files=false, $base64=false ) {
-	return sendhttp('POST', $url, $args, $files, $base64);
+function sendpost($url, $args=false, $files=false, $base64=false, $options=false) {
+	return sendhttp('POST', $url, $args, $files, $base64, $options);
 }
 
-function sendhttp($method, $url, $args, $files=false, $base64=false) {
+function sendhttp($method, $url, $args, $files=false, $base64=false, $options=false) {
 	$r = http_parse_url($url);
 
 	if (!$r) {
@@ -129,11 +129,14 @@ function sendhttp($method, $url, $args, $files=false, $base64=false) {
 			return false;
 	}
 
-	return sendhttpraw($proto, $host, $portnum, $header_string, $content_string);
+	return sendhttpraw($proto, $host, $portnum, $header_string, $content_string, $options);
 }
 
-function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=false) {
-	$socket = @fsockopen($proto . '://' . $host, $portnum);
+function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=false, $options=false) {
+	$url=$proto . '://' . $host . ':' . $portnum;
+
+	$socket = $options ? stream_socket_client($url, $errstr, $errno, 60, STREAM_CLIENT_CONNECT, stream_context_create($options)) : stream_socket_client($url);
+
 	if ($socket === false) {
 		return false;
 	}
