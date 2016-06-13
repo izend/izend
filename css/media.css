@@ -68,8 +68,6 @@ video {height:auto;}
 .bbcodehelp {display:none;}
 .left, .right, .vignette {float:none;display:block;max-width:100%;}
 .left, .right, .vignette {margin:1em 0 !important;}
-.blogsummarytitle .date {float:none;}
-#homemenu h3 {text-align:left;}
 }
 
 @media screen and (max-width:240px) {
