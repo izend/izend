@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    9
+ * @copyright  2010-2016 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -70,7 +70,7 @@ function node($lang, $arglist=false) {
 
 	$node_contents = build('nodecontent', $lang, $node_id);
 
-	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents'));
+	$content = view('node', $slang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_visits', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents'));
 
 	$output = layout('standard', compact('toolbar', 'banner', 'content'));
 
