@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    10
+ * @copyright  2010-2016 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -15,7 +15,7 @@ Lisez les instructions suivantes, remplissez le formulaire et appuyez sur Config
 Initialement, vous ne pourrez choisir que parmi les langues supportées par le noyau du logiciel.
 Une fois le site configuré, vous pourrez facilement ajouter des contenus dans plusieurs autres langues.
 Tous les paramètres du logiciel sont dans le dossier <i>includes</i>.
-Le configurateur récrit les fichiers <i>config.inc</i>, <i>db.inc</i> et <i>aliases.inc</i>.</p>
+Le configurateur récrit les fichiers de configuration <i>config.inc</i>, <i>db.inc</i> et <i>aliases.inc</i> et les fichiers <i>sitemap.xml</i>, <i>robots.txt</i> et <i>.htaccess</i> dans le répertoire racine du site.</p>
 <p>Pour plus de sécurité, vérifiez que l'accès aux fichiers de configuration est limité au serveur&nbsp;:</p>
 <pre><code>$ cd <?php echo ROOT_DIR; ?>; sudo chgrp -R www-data .; chmod -R g+w .
 $ cd <?php echo ROOT_DIR; ?>/includes; chmod 660 db.inc config.inc settings.inc aliases.inc paypal.inc</code></pre>
