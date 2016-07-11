@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    19
+ * @copyright  2010-2016 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -28,7 +28,7 @@ foreach ($contents as $c) {
 			echo '<div class="download">', PHP_EOL, '<a href="', $download_url, '" rel="nofollow">', $file, '</a>', PHP_EOL, '</div>', PHP_EOL;
 			break;
 		case 'infile':
-			include $c['infile'];
+			@include $c['infile'];
 			break;
 		case 'youtube':
 			require_once 'ishttps.php';
