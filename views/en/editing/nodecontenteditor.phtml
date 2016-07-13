@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    19
+ * @copyright  2010-2016 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -147,7 +147,7 @@ foreach ($node_contents as $c) {
 <input name="content_file_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_start, ENT_COMPAT, 'UTF-8'); ?>" title="Start" />
 <input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?>" title="End" />
 <input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" />
-<input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><label for="content_file_lineno[<?php echo $i; ?>]"><span class="btn_edit btn_number" title="Numéroter">numéroter</span></label>
+<input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><label for="content_file_lineno[<?php echo $i; ?>]"><span class="btn_edit btn_number" title="Number">number</span></label>
 </p>
 <?php break; ?>
 <?php case 'youtube': ?>
