@@ -2,12 +2,11 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    2
+ * @copyright  2012-2016 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
-require_once 'socialize.php';
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
@@ -84,7 +83,7 @@ function newslettersummary($lang, $newsletter) {
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$output = layout('standard', compact('sharebar', 'toolbar', 'banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('toolbar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }
