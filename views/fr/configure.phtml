@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -37,7 +37,7 @@ Dans tous les cas, utiliser un préfixe est plus prudent.</p>
 <h5 id="configuration">Configuration</h5>
 <?php if ($bad_write_permission): ?>
 <div class="alert">
-<p>Le serveur n'est pas autorisé à modifier <?php if (count($bad_write_permission) > 1): ?>les fichiers suivants<?php else: ?>le fichier suivant<?php endif; ?> dans le dossier <i><?php echo ROOT_DIR; ?></i>&nbsp;:
+<p>Le serveur n'est pas autorisé à modifier <?php if (count($bad_write_permission) > 1): ?>les dossiers ou les fichiers suivants<?php else: ?>le dossier ou le fichier suivant<?php endif; ?> dans le dossier <i><?php echo ROOT_DIR; ?></i>&nbsp;:
 </p>
 <ul>
 <?php foreach ($bad_write_permission as $file): ?>
