@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    9
+ * @copyright  2010-2016 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -52,8 +52,6 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
-
-	$banner=$toolbar=false;
 
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
