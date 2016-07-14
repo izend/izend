@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 
@@ -198,32 +198,35 @@ function node_delete($node_id) {
 }
 
 function node_get_contents($lang, $node_id) {
-	global $contents_model;
+	global $supported_contents, $contents_model;
 
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabnodecontent=db_prefix_table('node_content');
 
-	$select=array('nc.content_id AS content_id', 'nc.content_type AS content_type', 'nc.number AS content_number', 'nc.ignored AS content_ignored');
-	$join=array();
-	$n=1;
-	foreach ($contents_model as $content_type => $fields) {
-		$tabcontenttype=db_prefix_table('content_' . $content_type);
-		$alias="nc$n";
-		$join[]="LEFT JOIN $tabcontenttype $alias ON $alias.content_id=nc.content_id AND $alias.locale=$sqllang";
-		foreach ($fields as $fname => $props) {
-			if (!empty($props['ignored'])) {
-				continue;
-			}
-			$select[]="$alias.$fname AS content_${content_type}_$fname";
+	$union=array();
+	foreach ($contents_model as $content_type => $content_props) {
+		if (!in_array($content_type, $supported_contents)) {
+			continue;
 		}
-		$n++;
+		$tabcontenttype=db_prefix_table('content_' . $content_type);
+		$select=array('nc.content_id AS content_id', 'nc.content_type AS content_type', 'nc.number AS content_number', 'nc.ignored AS content_ignored');
+		foreach ($contents_model as $type => $fields) {
+			$prefix="content_$type";
+			foreach ($fields as $fname => $props) {
+				if (!empty($props['ignored'])) {
+					continue;
+				}
+				$select[]=($content_type == $type ? "ncc.$fname" : 'NULL') . ' AS ' . "${prefix}_$fname";
+			}
+		}
+		$select=implode(', ', $select);
+		$join="$tabcontenttype ncc ON ncc.content_id=nc.content_id AND ncc.locale=$sqllang";
+		$union[]="SELECT $select FROM $tabnodecontent nc JOIN $join WHERE nc.node_id=$node_id AND nc.content_type='$content_type'";
 	}
+	$union=implode(' UNION ', $union);
 
-	$select=implode(', ', $select);
-	$join=implode(' ', $join);
-
-	$sql="SELECT $select FROM $tabnodecontent nc $join WHERE nc.node_id=$node_id ORDER BY nc.number";
+	$sql="SELECT * FROM ($union) nc ORDER BY nc.content_number";
 
 	$r = db_query($sql);
 
@@ -231,7 +234,7 @@ function node_get_contents($lang, $node_id) {
 }
 
 function node_set_contents($lang, $node_id, $node_contents) {
-	global $contents_model;
+	global $supported_contents, $contents_model;
 
 	$tabnodecontent=db_prefix_table('node_content');
 
@@ -239,6 +242,10 @@ function node_set_contents($lang, $node_id, $node_contents) {
 	foreach ($node_contents as $c) {
 		$content_id=$c['content_id'];
 		$content_type=$c['content_type'];
+
+		if (!in_array($content_type, $supported_contents)) {
+			return false;
+		}
 
 		$sqltype=db_sql_arg($content_type, false);
 
