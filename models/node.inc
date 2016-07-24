@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    28
+ * @version    29
  * @link       http://www.izend.org
  */
 
@@ -222,7 +222,7 @@ function node_get_contents($lang, $node_id) {
 		}
 		$select=implode(', ', $select);
 		$join="$tabcontenttype ncc ON ncc.content_id=nc.content_id AND ncc.locale=$sqllang";
-		$union[]="SELECT $select FROM $tabnodecontent nc JOIN $join WHERE nc.node_id=$node_id AND nc.content_type='$content_type'";
+		$union[]="SELECT $select FROM $tabnodecontent nc LEFT JOIN $join WHERE nc.node_id=$node_id AND nc.content_type='$content_type'";
 	}
 	$union=implode(' UNION ', $union);
 
