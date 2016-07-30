@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    42
+ * @copyright  2010-2016 izend.org
+ * @version    43
  * @link       http://www.izend.org
  */
 <?php
@@ -175,4 +175,4 @@ $newsletter_thread = false;		// see cron.php
 
 global $theme;
 
-$theme = false;		// see css/themes
+$theme = false;
