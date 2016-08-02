@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    2
+ * @copyright  2010-2016 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
  
@@ -18,3 +18,5 @@
 #browser_safari:hover {background-position:-54px -18px;}
 #browser_ie {background-position:-72px 0;}
 #browser_ie:hover {background-position:-72px -18px;}
+#browser_edge {background-position:-90px 0;}
+#browser_edge:hover {background-position:-90px -18px;}
