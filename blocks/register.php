@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    19
+ * @copyright  2010-2016 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -38,7 +38,9 @@ function register($lang) {
 	if ($with_facebook) {
 		require_once 'facebook.php';
 
-		$facebook=facebook();
+		global $facebookid, $facebooksecret;
+
+		$facebook=facebook(array('appId' => $facebookid, 'secret' => $facebooksecret));
 	}
 
 	$action='init';
