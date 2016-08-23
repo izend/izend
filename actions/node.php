@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,7 @@ function node($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_visits node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin node_pinit */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin node_pinit */
 
 	$node_comment=!$node_nocomment;
 	$node_morecomment=!$node_nomorecomment;

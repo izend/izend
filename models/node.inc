@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 
@@ -117,16 +117,14 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$r = db_insert($sql);
 
-	if ($r) {
-		return true;
-	}
-
-	$sql="UPDATE $tabnodelocale SET name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage WHERE node_id=$node_id AND locale=$sqllang";
-
-	$r = db_update($sql);
-
 	if ($r === false) {
-		return false;
+		$sql="UPDATE $tabnodelocale SET name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage WHERE node_id=$node_id AND locale=$sqllang";
+
+		$r = db_update($sql);
+
+		if ($r === false) {
+			return false;
+		}
 	}
 
 	cloud_tag_node($lang, $node_id, $node_cloud);
