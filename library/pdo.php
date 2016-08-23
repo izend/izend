@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2015 izend.org
- * @version    6
+ * @copyright  2014-2016 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -121,7 +121,7 @@ function db_insert_id($id=null) {
 function db_sql_arg($s, $escape=true, $optional=false) {
 	global $db_conn;
 
-	if ($s === false or $s === '') {
+	if ($s === NULL or $s === false or $s === '') {
 		return $optional ? 'NULL' : "''";
 	}
 
