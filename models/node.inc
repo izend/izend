@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    30
+ * @version    31
  * @link       http://www.izend.org
  */
 
@@ -118,6 +118,10 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 	$r = db_insert($sql);
 
 	if ($r === false) {
+		return false;
+	}
+
+	if ($r === 0) {
 		$sql="UPDATE $tabnodelocale SET name=$sqlname, title=$sqltitle, abstract=$sqlabstract, cloud=$sqlcloud, image=$sqlimage WHERE node_id=$node_id AND locale=$sqllang";
 
 		$r = db_update($sql);
