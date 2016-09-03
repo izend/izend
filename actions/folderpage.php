@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    25
+ * @copyright  2010-2016 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
 
@@ -38,6 +38,7 @@ function folderpage($lang, $folder, $page) {
 	$folder_title = $thread_title;
 	$folder_abstract = $thread_abstract;
 	$folder_cloud = $thread_cloud;
+	$folder_image = $thread_image;
 
 	$r = thread_get_node($lang, $folder_id, $page_id);
 	if (!$r) {
@@ -54,6 +55,7 @@ function folderpage($lang, $folder, $page) {
 	$page_title=$node_title;
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
+	$page_image=$node_image;
 	$page_modified=$node_modified;
 
 	if ($page_title) {
@@ -73,6 +75,12 @@ function folderpage($lang, $folder, $page) {
 	}
 	else if ($folder_cloud) {
 		head('keywords', $folder_cloud);
+	}
+	if ($page_image) {
+		head('image', $page_image);
+	}
+	else if ($folder_image) {
+		head('image', $folder_image);
 	}
 	head('date', $page_modified);
 

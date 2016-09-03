@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    24
+ * @copyright  2010-2016 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -53,6 +53,7 @@ function story($lang, $arglist=false) {
 	$story_title = $thread_title;
 	$story_abstract = $thread_abstract;
 	$story_cloud = $thread_cloud;
+	$story_image = $thread_image;
 	$story_nocloud = $thread_nocloud;
 	$story_nosearch = $thread_nosearch;
 
@@ -60,7 +61,7 @@ function story($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -71,6 +72,7 @@ function story($lang, $arglist=false) {
 	$page_title=$node_title;
 	$page_abstract=$node_abstract;
 	$page_cloud=$node_cloud;
+	$page_image=$node_image;
 	$page_number=$node_number;
 	$page_modified=$node_modified;
 
@@ -92,6 +94,12 @@ function story($lang, $arglist=false) {
 	}
 	else if ($story_cloud) {
 		head('keywords', $story_cloud);
+	}
+	if ($page_image) {
+		head('image', $page_image);
+	}
+	else if ($story_image) {
+		head('image', $story_image);
 	}
 	head('date', $page_modified);
 
