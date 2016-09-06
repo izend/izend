@@ -26,11 +26,13 @@ iZend is written in PHP for Apache on Linux or Windows. It can use a
 database managed by MySQL or PostgreSQL or no database and take very
 little space on disk.
 
-Put online a multimedia website in several languages with a contact
-page in just a few minutes!
+Put online in just a few minutes a multimedia website in several
+languages with an attractive home page and a contact form which can be
+shared on all social networks in one click!
 
-iZend has one variant, iZend Blog, a specialized version for editing a
-full featured blog.
+iZend has several variants. iZend Blog is a specialized version for
+editing a full featured blog. iZend Bootstrap is entirely written with
+the graphical environment of Bootstrap by Twitter.
 
 Start with the installation guide on www.izend.org.
 
