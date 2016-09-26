@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    75
+ * @version    76
  * @link       http://www.izend.org
  */
  
@@ -98,7 +98,7 @@ ul {list-style-type:disc;}
 .popup ul li a {width:10em;}
 .popup li:hover ul {display:block;}
 
-div.row {display:flex;display:-webkit-flex;display:-webkit-box;margin:1em 0;}
+div.row {display:flex;display:-webkit-flex;margin:1em 0;}
 div.row > * {margin-left:1%;margin-right:1%;}
 div.row > *, div.row.atop > *, div.row > .atop {align-self:flex-start;-webkit-align-self:flex-start;}
 div.row.amiddle > *, div.row > .amiddle {align-self:center;-webkit-align-self:center;}
