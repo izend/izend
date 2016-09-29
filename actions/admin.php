@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2014 izend.org
- * @version    6
+ * @copyright  2012-2016 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -12,6 +12,7 @@ require_once 'userhasrole.php';
 
 function admin($lang) {
 	global $paypal_username, $paypal_password, $paypal_signature;
+	global $googleanalyticsaccount, $googleanalyticskeyfile;
 	global $newsletter_thread;
 
 	if (!user_has_role('administrator')) {
@@ -29,13 +30,15 @@ function admin($lang) {
 
 	$newsletter_page=$newsletter_thread ? url('newsletter', $lang) : false;
 
+	$traffic_page=$googleanalyticsaccount && $googleanalyticskeyfile ? url('traffic', $lang) :false;
+
 	$balance=false;
 	if (!(empty($paypal_username) or empty($paypal_password) or empty($paypal_signature))) {
 		$balance = build('balance', $lang);
 	}
 	$upload = build('upload', $lang);
 	$usersearch = build('usersearch', $lang);
-	$content = view('admin', $lang, compact('newuser_page', 'newsletter_page', 'balance', 'usersearch', 'upload'));
+	$content = view('admin', $lang, compact('newuser_page', 'newsletter_page', 'traffic_page', 'balance', 'usersearch', 'upload'));
 
 	$output = layout('standard', compact('banner', 'content'));
 

@@ -2,12 +2,15 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    4
+ * @copyright  2010-2016 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
 <h3>Gestion</h3>
+<?php if (!empty($traffic_page)): ?>
+<p class="vignette"><a href="<?php echo $traffic_page; ?>" rel="nofollow"><img src="/images/theme/trafficlarge.png" alt="" title="Trafic" /></a></p>
+<?php endif; ?>
 <?php if (!empty($newsletter_page)): ?>
 <p class="vignette"><a href="<?php echo $newsletter_page; ?>" rel="nofollow"><img src="/images/theme/envelopelarge.png" alt="" title="Infolettre" /></a></p>
 <?php endif; ?>

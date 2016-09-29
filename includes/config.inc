@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    43
+ * @version    44
  * @link       http://www.izend.org
  */
 
@@ -57,9 +57,18 @@ global $pinterestassets;
 
 $pinterestassets=false;	// false
 
+global $googleapiid;
+
+$googleapiid=false;
+
 global $googleanalyticsid;
 
 $googleanalyticsid=false;
+
+global $googleanalyticsaccount, $googleanalyticskeyfile;
+
+$googleanalyticsaccount = false;
+$googleanalyticskeyfile = false;	// ROOT_DIR . DIRECTORY_SEPARATOR . 'google-api-*.p12';
 
 global $author;
 

@@ -1,0 +1,114 @@
+<?php
+
+/**
+ *
+ * @copyright  2016 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php extract($errors); ?>
+<form action="" method="post">
+<input type="hidden" name="analytics_token" value="<?php echo $token; ?>" />
+<p class="inlabel<?php if ($missing_url or $bad_url): ?> inerror<?php endif; ?>">URL&nbsp;:</p>
+<p><input type="text" name="analytics_url" id="analytics_url" size="60" maxlength="200" title="" onkeypress="return submitonenter(event, 'analytics_draw')" value="<?php echo htmlspecialchars($url, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="inlabel<?php if ($missing_period or $bad_period): ?> inerror<?php endif; ?>">Options&nbsp;:</p>
+<p class="smaller">
+<span class="nowrap"></span><input name="analytics_period" type="radio" value="1weekago" title="1 semaine"<?php if ($period == '1weekago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;semaine</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="2weeksago" title="2 semaines"<?php if ($period == '2weeksago'): ?> checked="checked"<?php endif; ?> />&nbsp;2&nbsp;semaines</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="1monthago" title="1 mois"<?php if ($period == '1monthago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;mois</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="3monthsago" title="3 mois"<?php if ($period == '3monthsago'): ?> checked="checked"<?php endif; ?> />&nbsp;3&nbsp;mois</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="6monthsago" title="6 mois"<?php if ($period == '6monthsago'): ?> checked="checked"<?php endif; ?> />&nbsp;6&nbsp;mois</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="1yearago" title="1 an"<?php if ($period == '1yearago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;an</span>
+</p>
+<p><span class="nowrap"><input name="analytics_trendline" type="checkbox"<?php if ($trendline): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_chart" title="Avec tendance">tendance</span></span></p>
+<p>
+<input type="submit" class="submit submit_draw" name="analytics_draw" id="analytics_draw" value="Tracer" title="" />
+</p>
+</form>
+<div class="infos">
+<?php if ($internal_error): ?>
+<p>Une erreur interne s'est produite.
+<?php endif; ?>
+</div>
+<?php if ($data): ?>
+<div id="traffic"></div>
+<?php head('javascript', 'https://www.gstatic.com/charts/loader.js'); ?>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart'], 'language': 'fr'});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+	var data = new google.visualization.DataTable();
+
+	data.addColumn('date', 'Date');
+	data.addColumn('number', 'Visites');
+<?php $countmin=$data[0][1]; $countmax=0; ?>
+	data.addRows([
+<?php foreach ($data as $d): list($date, $count)=$d; $y=substr($date, 0, 4); $m=substr($date, 4, 2); $d=substr($date, 6, 2); ?>
+<?php if ($count < $countmin) $countmin=$count; ?>
+<?php if ($count > $countmax) $countmax=$count; ?>
+		[new Date(<?php echo $y; ?>, <?php echo $m-1; ?>, <?php echo $d; ?>), <?php echo $count; ?>],
+<?php endforeach; ?>
+	]);
+<?php
+$minvalue=$countmin;
+$d=$countmax-$countmin;
+if ($d <= 5) {
+	$maxvalue=$countmax+$d%2;
+	$ticks=range($minvalue, $maxvalue, 1);
+}
+else if ($d <= 10) {
+	$maxvalue=$countmax+$d%2;
+	$ticks=range($minvalue, $maxvalue, 2);
+}
+else if ($d <= 50) {
+	$maxvalue=$minvalue+5*ceil($d/5);
+	$ticks=range($minvalue, $maxvalue, 5);
+}
+else {
+	$maxvalue=false;
+	$ticks=false;
+}
+?>
+	var options = {
+		title: '<?php echo number_format($visits, 0, ',', ' '); ?> visite<?php if ($visits > 1): ?>s<?php endif; ?> - min : <?php echo $countmin; ?> max : <?php echo $countmax; ?><?php if ($average !== false): ?> moy : <?php echo number_format($average, 1, ',' , ' '); ?><?php endif; ?>',
+		hAxis: {
+			format: 'd MMMM',
+		},
+		vAxis: {
+			minValue: <?php echo $minvalue; ?>,
+<?php if ($maxvalue): ?>
+			maxValue: <?php echo $maxvalue; ?>,
+<?php endif; ?>
+<?php if ($ticks): ?>
+			ticks:  [<?php echo implode(',', $ticks); ?>],
+<?php endif; ?>
+		},
+		legend: {
+			position: 'none',
+		},
+		lineWidth: 2,
+		colors: ['#333333'],
+<?php if ($trendline): ?>
+		trendlines: {
+			0: {
+				lineWidth: 1,
+				color: '#ec902d',
+		        visibleInLegend: false,
+		        tooltip: false,
+			},
+		},
+<?php endif; ?>
+	};
+
+	var chart = new google.visualization.LineChart(document.getElementById('traffic'));
+
+	google.visualization.events.addListener(chart, 'ready', function () {
+		$('#traffic').append('<div class="download"><a href="' + chart.getImageURI() + '" download="trafic.png" title="">trafic.png</a></div>\n');
+	});
+
+	chart.draw(data, options);
+}
+</script>
+<?php endif; ?>

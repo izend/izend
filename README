@@ -19,8 +19,9 @@ organizing publications in several languages and for different media
 with a responsive layout. It includes a content editor, a set of
 presentation models, a search engine with an input corrector, editable
 comments, file downloads, secure votes, RSS feeds, HTML newsletters, a
-payment system (PayPal) and more. It carefully interfaces social
-networks. It manages a community of users with configurable privileges.
+payment system (PayPal), trafic analysis (Google Analytics) and more.
+It carefully interfaces social networks. It manages a community of
+users with configurable privileges.
 
 iZend is written in PHP for Apache on Linux or Windows. It can use a
 database managed by MySQL or PostgreSQL or no database and take very

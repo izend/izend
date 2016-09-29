@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Thu Sep 29 2016
+
+Adds action traffic.
+----
+
 Date:	Wed Oct 8 2014
 
 Adds action pagevisit.
@@ -89,6 +94,7 @@ $aliases = array(
 		'edit/newsletter' 			=> 'newsletteredit',
 		'newsletter/subscribe' 		=> 'newslettersubscribe',
 		'newsletter/unsubscribe' 	=> 'newsletterunsubscribe',
+		'traffic'					=> 'traffic',
 		'thread'					=> 'thread',
 		'edit/thread'				=> 'threadedit',
 		'node'						=> 'node',
@@ -122,6 +128,7 @@ $aliases = array(
 		'edition/infolettre' 		=> 'newsletteredit',
 		'infolettre/abonnement'		=> 'newslettersubscribe',
 		'infolettre/desabonnement'	=> 'newsletterunsubscribe',
+		'trafic'					=> 'traffic',
 		'fil'						=> 'thread',
 		'edition/fil'				=> 'threadedit',
 		'noeud'						=> 'node',

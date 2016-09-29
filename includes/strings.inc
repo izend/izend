@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -35,6 +35,7 @@ $strings = array(
 		'admin:title'			=> 'Management',
 		'donation:title'		=> 'Donation',
 		'newsletter:title'		=> 'Newsletter',
+		'traffic:title'			=> 'Traffic',
 		'email:salutations'		=> 'See you soon.',
 		'email:new_password_subject'	=> 'Your new password',
 		'email:new_password_text'		=> "Your new password is in the attached cryptogram.\n\nIf you didn't ask to change it, just ignore this message.\nNOTE: Your old password is still valid.\n\nIdentify yourself with the new password to activate it.",
@@ -71,6 +72,7 @@ $strings = array(
 		'admin:title'			=> 'Gestion',
 		'donation:title'		=> 'Donation',
 		'newsletter:title'		=> 'Infolettre',
+		'traffic:title'			=> 'Trafic',
 		'email:salutations'		=> 'À bientôt.',
 		'email:new_password_subject'	=> 'Votre mot de passe',
 		'email:new_password_text'		=> "Votre nouveau mot de passe est dans le cryptogramme en pièce jointe.\n\nSi vous n'avez pas demandé à en changer, veuillez ignorer ce message.\nNOTE : Votre ancien mot de passe est toujours valide.\n\nConnectez-vous avec le nouveau mot de passe pour l'activer.",
