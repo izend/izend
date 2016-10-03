@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    14
+ * @copyright  2010-2016 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -37,6 +37,7 @@ function home($lang) {
 	else {
 		head('keywords', translate('keywords', $lang));
 	}
+	head('date', $node_modified);
 
 	$request_path=$lang;
 
