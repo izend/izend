@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    3
+ * @copyright  2010-2016 izend.org
+ * @version    4
  * @link	   http://www.izend.org
  */
 
@@ -44,7 +44,7 @@ function normalize_url($url) {
 
 	foreach (array('user', 'pass', 'host', 'path') as $p) {
 		if ($$p) {
-			$$p = preg_replace( '/%[0-9a-f]{2}/ie', 'strtoupper("\0")', $$p );
+			$$p = preg_replace_callback('/%[0-9a-f]{2}/i', function($m) { return strtoupper($m[0]); }, $$p);
 		}
 	}
 
