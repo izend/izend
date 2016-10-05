@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 
@@ -219,7 +219,45 @@ function node_get_contents($lang, $node_id) {
 				if (!empty($props['ignored'])) {
 					continue;
 				}
-				$select[]=($content_type == $type ? "ncc.$fname" : 'NULL') . ' AS ' . "${prefix}_$fname";
+				if ($content_type == $type) {
+					$select[] = "ncc.$fname AS ${prefix}_$fname";
+				}
+				else {
+					if (!empty($props['null'])) {
+						$value = 'NULL';
+					}
+					else {
+						switch ($props['type']) {
+							case 'string':
+								$value = isset($props['default']) ? db_sql_arg($props['default']) : "''";
+								break;
+							case 'enum':
+								global $db_scheme;
+
+								$value = isset($props['default']) ? db_sql_arg($props['default']) : "''";
+
+								switch ($db_scheme) {
+									case 'pgsql':
+										$value = "CAST($value AS " . db_prefix_table("type_${prefix}_$fname") . ')';
+										break;
+									case 'mysql':
+									default:
+										break;
+								}
+								break;
+							case 'number':
+								$value = isset($props['default']) ? $props['default'] : '0';
+								break;
+							case 'boolean':
+								$value = isset($props['default']) ? ($props['default'] ? 'TRUE' : 'FALSE') : 'FALSE';
+								break;
+							default:
+								$value = "''";
+								break;
+						}
+					}
+					$select[] = "$value AS ${prefix}_$fname";
+				}
 			}
 		}
 		$select=implode(', ', $select);
@@ -316,6 +354,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 					$sqlval=$val ? 'TRUE' : 'FALSE';
 					break;
 				case 'string':
+				case 'enum':
 				default:
 					$sqlval=db_sql_arg($val, true, !empty($props['null']));
 					break;
