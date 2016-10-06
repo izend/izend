@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /en/search
+Disallow: /en/suggest
+Disallow: /en/donation
+Disallow: /fr/recherche
+Disallow: /fr/suggestion
+Disallow: /fr/donation
