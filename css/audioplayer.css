@@ -2,6 +2,10 @@
 	AUTHOR: Osvaldas Valutis, www.osvaldas.info
 */
 
+.audioplayer * {
+	outline: none !important;
+}
+
 .audioplayer {
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	height: 1.5em; /* 24 */
