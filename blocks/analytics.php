@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -13,29 +13,49 @@ require_once 'tokenid.php';
 function analytics($lang) {
 	global $base_url;
 
-	$available_periods=array('1weekago', '2weeksago', '1monthago', '3monthsago', '6monthsago', '1yearago');
+	$with_period=false;
+
+	$available_periods=$with_period ? array('1weekago', '2weeksago', '1monthago', '3monthsago', '6monthsago', '1yearago') : false;
 
 	$action='init';
 	if (isset($_POST['analytics_draw'])) {
 		$action='draw';
 	}
 
-	$url=$period=false;
+	$url=false;
+	$period=false;
+	$start_date=$end_date=false;
 	$trendline=false;
 
 	$token=false;
 
 	switch($action) {
 		case 'init':
-			$period='1weekago';
+			if ($with_period) {
+				$period='1weekago';
+			}
+			else {
+				$start_date=date('Y-m-d', strtotime('today -1 month'));
+				$end_date=date('Y-m-d', strtotime('today'));
+			}
 			break;
 
 		case 'draw':
 			if (isset($_POST['analytics_url'])) {
 				$url=readarg($_POST['analytics_url']);
 			}
-			if (isset($_POST['analytics_period'])) {
-				$period=readarg($_POST['analytics_period']);
+			if ($with_period) {
+				if (isset($_POST['analytics_period'])) {
+					$period=readarg($_POST['analytics_period']);
+				}
+			}
+			else {
+				if (isset($_POST['analytics_startdate'])) {
+					$start_date=readarg($_POST['analytics_startdate']);
+				}
+				if (isset($_POST['analytics_enddate'])) {
+					$end_date=readarg($_POST['analytics_enddate']);
+				}
 			}
 			if (isset($_POST['analytics_trendline'])) {
 				$trendline=readarg($_POST['analytics_trendline']) == 'on' ? true : false;
@@ -79,11 +99,66 @@ function analytics($lang) {
 				}
 			}
 
-			if (!$period) {
-				$missing_period=true;
+			if ($with_period) {
+				if (!$period) {
+					$missing_period=true;
+				}
+				else if (!in_array($period, $available_periods)) {
+					$bad_period=true;
+				}
 			}
-			else if (!in_array($period, $available_periods)) {
-				$bad_period=true;
+			else {
+				if (! ($start_date and $end_date)) {
+					$missing_period=true;
+				}
+				else {
+					$today=strtotime('today');
+
+					if (!preg_match('#^([0-9]{4})([/-])([0-9]{2})\2([0-9]{2})$#', $start_date, $d)) {
+						$bad_period=true;
+					}
+					else if (!checkdate($d[3], $d[4], $d[1])) {
+						$bad_period=true;
+					}
+					else {
+						$date1=mktime(0, 0, 0, $d[3], $d[4], $d[1]);
+						if ($date1 > $today) {
+							$bad_period=true;
+						}
+					}
+
+					if ($bad_period) {
+						$start_date = false;
+						break;
+					}
+
+					if (!preg_match('#^([0-9]{4})([/-])([0-9]{2})\2([0-9]{2})$#', $end_date, $d)) {
+						$bad_period=true;
+					}
+					else if (!checkdate($d[3], $d[4], $d[1])) {
+						$bad_period=true;
+					}
+					else {
+						$date2=mktime(0, 0, 0, $d[3], $d[4], $d[1]);
+						if ($date2 > $today) {
+							$bad_period=true;
+						}
+					}
+
+					if ($bad_period) {
+						$end_date = false;
+						break;
+					}
+
+					if ($date1 == $date2)  {
+						$bad_period=true;
+					}
+					else if ($date1 > $date2) {
+						$date = $start_date;
+						$start_date = $end_date;
+						$end_date = $date;
+					}
+				}
 			}
 
 			break;
@@ -154,33 +229,37 @@ function analytics($lang) {
 				break;
 			}
 
-			switch ($period) {
-				case '1yearago':
-					$date=strtotime('today -1 year');
-					break;
-				case '6monthsago':
-					$date=strtotime('today -6 months');
-					break;
-				case '3monthsago':
-					$date=strtotime('today -3 months');
-					break;
-				case '1monthago':
-					$date=strtotime('today -1 month');
-					break;
-				case '2weeksago':
-					$date=strtotime('today -2 weeks');
-					break;
-				case '1weekago':
-				default:
-					$date=strtotime('today -1 week');
-					break;
+			if ($with_period) {
+				switch ($period) {
+					case '1yearago':
+						$date=strtotime('today -1 year');
+						break;
+					case '6monthsago':
+						$date=strtotime('today -6 months');
+						break;
+					case '3monthsago':
+						$date=strtotime('today -3 months');
+						break;
+					case '1monthago':
+						$date=strtotime('today -1 month');
+						break;
+					case '2weeksago':
+						$date=strtotime('today -2 weeks');
+						break;
+					case '1weekago':
+					default:
+						$date=strtotime('today -1 week');
+						break;
+				}
+				$start_date=date('Y-m-d', $date);
+				$end_date=date('Y-m-d');
 			}
 
 			try {
 				$r = $analytics->data_ga->get(
 					'ga:' . $profile_id,
-					date('Y-m-d', $date),
-					'today',
+					$start_date,
+					$end_date,
 					'ga:uniquePageviews',
 					array(
 						'filters'       => 'ga:pagePath==' . $url,
@@ -213,7 +292,7 @@ function analytics($lang) {
 
 	$errors = compact('missing_url', 'bad_url', 'missing_period', 'bad_period', 'internal_error');
 
-	$output = view('analytics', $lang, compact('token', 'url', 'period', 'visits', 'average', 'data', 'trendline', 'errors'));
+	$output = view('analytics', $lang, compact('token', 'with_period', 'url', 'period', 'start_date', 'end_date', 'visits', 'average', 'data', 'trendline', 'errors'));
 
 	return $output;
 }

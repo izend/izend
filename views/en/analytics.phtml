@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -13,6 +13,7 @@
 <p class="inlabel<?php if ($missing_url or $bad_url): ?> inerror<?php endif; ?>">URL:</p>
 <p><input type="text" name="analytics_url" id="analytics_url" size="60" maxlength="200" title="" onkeypress="return submitonenter(event, 'analytics_draw')" value="<?php echo htmlspecialchars($url, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="inlabel<?php if ($missing_period or $bad_period): ?> inerror<?php endif; ?>">Options:</p>
+<?php if ($with_period): ?>
 <p class="smaller">
 <span class="nowrap"><input name="analytics_period" type="radio" value="1weekago" title="1 week"<?php if ($period == '1weekago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;week</span>
 <span class="nowrap"><input name="analytics_period" type="radio" value="2weeksago" title="2 weeks"<?php if ($period == '2weeksago'): ?> checked="checked"<?php endif; ?> />&nbsp;2&nbsp;weeks</span>
@@ -21,6 +22,20 @@
 <span class="nowrap"><input name="analytics_period" type="radio" value="6monthsago" title="6 months"<?php if ($period == '6monthsago'): ?> checked="checked"<?php endif; ?> />&nbsp;6&nbsp;months</span>
 <span class="nowrap"><input name="analytics_period" type="radio" value="1yearago" title="1 year"<?php if ($period == '1yearago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;year</span>
 </p>
+<?php else: ?>
+<p>
+<input type="text" name="analytics_startdate" id="analytics_startdate" size="10" title="yyyy-mm-dd" value="<?php echo htmlspecialchars($start_date, ENT_COMPAT, 'UTF-8'); ?>" />
+&rarr;
+<input type="text" name="analytics_enddate" id="analytics_enddate" size="10" title="yyyy-mm-dd" value="<?php echo htmlspecialchars($end_date, ENT_COMPAT, 'UTF-8'); ?>" />
+</p>
+<?php head('javascript', 'jquery-ui'); ?>
+<?php head('stylesheet', 'jquery-ui', 'screen'); ?>
+<script>
+$(document).ready(function() {
+    $('#analytics_startdate, #analytics_enddate').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, maxDate: 'today', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM'});
+});
+</script>
+<?php endif; ?>
 <p><span class="nowrap"><input name="analytics_trendline" type="checkbox"<?php if ($trendline): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_chart" title="With trend line">trendline</span></span></p>
 <p>
 <input type="submit" class="submit submit_draw" name="analytics_draw" id="analytics_draw" value="Draw" title="" />
