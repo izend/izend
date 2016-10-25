@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -14,7 +14,7 @@
 <p><input type="text" name="analytics_url" id="analytics_url" size="60" maxlength="200" title="" onkeypress="return submitonenter(event, 'analytics_draw')" value="<?php echo htmlspecialchars($url, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="inlabel<?php if ($missing_period or $bad_period): ?> inerror<?php endif; ?>">Options&nbsp;:</p>
 <p class="smaller">
-<span class="nowrap"></span><input name="analytics_period" type="radio" value="1weekago" title="1 semaine"<?php if ($period == '1weekago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;semaine</span>
+<span class="nowrap"><input name="analytics_period" type="radio" value="1weekago" title="1 semaine"<?php if ($period == '1weekago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;semaine</span>
 <span class="nowrap"><input name="analytics_period" type="radio" value="2weeksago" title="2 semaines"<?php if ($period == '2weeksago'): ?> checked="checked"<?php endif; ?> />&nbsp;2&nbsp;semaines</span>
 <span class="nowrap"><input name="analytics_period" type="radio" value="1monthago" title="1 mois"<?php if ($period == '1monthago'): ?> checked="checked"<?php endif; ?> />&nbsp;1&nbsp;mois</span>
 <span class="nowrap"><input name="analytics_period" type="radio" value="3monthsago" title="3 mois"<?php if ($period == '3monthsago'): ?> checked="checked"<?php endif; ?> />&nbsp;3&nbsp;mois</span>
@@ -28,7 +28,7 @@
 </form>
 <div class="infos">
 <?php if ($internal_error): ?>
-<p>Une erreur interne s'est produite.
+<p>Une erreur interne s'est produite.</p>
 <?php endif; ?>
 </div>
 <?php if ($data): ?>
