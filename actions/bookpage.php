@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function bookpage($lang, $book, $page) {
-	global $with_toolbar;
+	global $with_toolbar, $siteshot;
 
 	$book_id = thread_id($book);
 	if (!$book_id) {
@@ -140,7 +140,7 @@ function bookpage($lang, $book, $page) {
 		}
 		if ($pinit) {
 			$pinit_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
-			$pinit_image=$node_image;
+			$pinit_image=$node_image ? $node_image : $siteshot;
 			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
 		}
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
