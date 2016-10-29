@@ -6,13 +6,15 @@
 |_/____\___|_| |_|\__,_|
 
 
-iZend is a PHP engine for developing well structured web applications
-with a content manager. It's aimed at programmers who want full control
-on the code they use with maximum adaptability and reusability. It's
-simple to understand, easy to extend, open to other components in PHP,
-Javascript or Flash. The goal is to let it become your own very quickly
-while still keeping all the benefits of using a software program which
-is constantly enriched by an open source community.
+iZend is a MVC engine in PHP for developing well structured web
+applications with a content manager. It's aimed at programmers who want
+full control on the code they use with maximum adaptability and
+reusability. It's simple to understand, easy to extend, open to other
+components in PHP or Javascript. The goal is to let it become your own
+very quickly while still keeping all the benefits of using a software
+program which is constantly enriched by an open source community.
+
+    Why choose my engine? Because it's simple - Rudolf Diesel
 
 iZend is built with a straightforward architecture designed for
 organizing publications in several languages and for different media
