@@ -1,0 +1,49 @@
+
+ _ _____              _ 
+(_)__  /___ _ __   __| |
+| | / // _ \ '_ \ / _` |
+| |/ /|  __/ | | | (_| |
+|_/____\___|_| |_|\__,_|
+
+
+iZend est un moteur MVC en PHP de développement d'applications web bien 
+structurées avec un gestionnaire de contenus. Il est destiné aux programmeurs 
+qui veulent un contrôle total sur le code qu'ils utilisent avec le maximum 
+d'adaptabilité et de réutilisabilité. Il est simple à comprendre, facile à 
+étendre, ouvert à d'autres composants en PHP ou en JavaScript. Le but est 
+qu'il devienne très rapidement votre propre outil tout en gardant les 
+avantages d'un logiciel qui est constamment enrichi par une communauté open 
+source.
+
+    Pourquoi choisir mon moteur ? Parce qu'il est simple - Rudolf Diesel
+
+iZend est construit avec une architecture directement conçue pour 
+l'organisation de publications et la programmation de services pour différents 
+médias avec un affichage adaptatif en plusieurs langues. Il comprend un 
+éditeur de contenus, un jeu de modèles de présentation, un système 
+d'indexation et un moteur de recherche avec un correcteur de saisie, des 
+commentaires éditables, le téléchargement de fichiers, le vote sécurisé, 
+des flux RSS, des infolettres en HTML, QR codes, Google Analytics, un système 
+de paiement (PayPal) et bien plus. Il interface précisément les réseaux 
+sociaux. Il gère une communauté d'utilisateurs avec des privilèges 
+configurables.
+
+iZend est écrit en PHP pour Apache sur Linux ou Windows. Il peut utiliser une 
+base de données gérée par MySQL ou PostgreSQL ou aucune base de données et 
+prendre très peu de place.
+
+Mettez en ligne en juste quelques minutes un site web multimédias en plusieurs 
+langues avec une page d'accueil attractive et un formulaire de contact, un site 
+web qui peut être partagé sur tous les réseaux sociaux en un seul clic ! 
+Éditez un simple contenu ou programmez un processus métier complexe en toute 
+sécurité.
+
+iZend est distribué en plusieurs variantes. Le logiciel de base est appelé 
+iZend Core ou tout simplement iZend. La version spécialisée pour un blog 
+s'appelle iZend Blog. iZend Bootstrap est entièrement écrit avec 
+l'environnement graphique de Bootstrap par Twitter.
+
+Commencez par le guide d'installation sur www.izend.org.
+
+Merci de votre intérêt pour iZend !
+
