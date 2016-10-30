@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -98,7 +98,7 @@ function _db_sql_query($sql) {
 	global $db_conn;
 
 	if ($db_debug) {
-		dump($sql);
+		trace($sql);
 	}
 
 	$r = mysql_query($sql, $db_conn) or die(mysql_error());

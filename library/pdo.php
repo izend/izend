@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2016 izend.org
- * @version    7
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -67,7 +67,7 @@ function db_query($sql) {
 	global $db_conn;
 
 	if ($db_debug) {
-		dump($sql);
+		trace($sql);
 	}
 
 	try {
@@ -139,7 +139,7 @@ function _db_sql_exec($sql) {
 	global $db_conn;
 
 	if ($db_debug) {
-		dump($sql);
+		trace($sql);
 	}
 
 	try {
