@@ -1,4 +1,4 @@
-SetEnv PHP_VER 5
+SetEnv PHP_VER <?php echo PHP_MAJOR_VERSION, PHP_EOL; ?>
 SetEnv REGISTER_GLOBALS 0
 
 Options -Indexes
