@@ -37,6 +37,11 @@
 <?php endif; ?>
 </head>
 <body>
+<?php if (!empty($trace)): ?>
+<?php foreach ($trace as $s): ?>
+<?php echo $s; ?>
+<?php endforeach; ?>
+<?php endif; ?>
 <?php global $facebookjssdk; ?>
 <?php if ($facebookjssdk): ?>
 <?php global $facebookid; ?>
@@ -62,7 +67,6 @@ window.fbAsyncInit = function() {
 <?php endif; ?>
 <div id="standard">
 <?php echo $banner; ?>
-<div id="bannerline"></div>
 <div id="content">
 <?php if (!empty($sharebar)): ?>
 <?php echo $sharebar; ?>

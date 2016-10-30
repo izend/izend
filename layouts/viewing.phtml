@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2016 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -13,9 +13,13 @@
 <?php echo $head; ?>
 </head>
 <body>
+<?php if (!empty($trace)): ?>
+<?php foreach ($trace as $s): ?>
+<?php echo $s; ?>
+<?php endforeach; ?>
+<?php endif; ?>
 <div id="viewer">
 <?php echo $banner; ?>
-<div id="bannerline"></div>
 <div id="content">
 <?php if (!empty($toolbar)): ?>
 <?php echo $toolbar; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright	2010-2014 izend.org
- * @version		12
+ * @copyright	2010-2016 izend.org
+ * @version		13
  * @link		http://www.izend.org
  */
 
@@ -16,6 +16,7 @@ $aliases = array();
 require_once 'requesturi.php';
 require_once 'translate.php';
 require_once 'head.php';
+require_once 'trace.php';
 require_once 'track.php';
 
 define('ACTIONS_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'actions');
@@ -238,6 +239,10 @@ function layout($layout, $vars=false) {
 	}
 	else {
 		$vars = array('head' => $head);
+	}
+	$trace=trace();
+	if ($trace) {
+		$vars['trace'] = $trace;
 	}
 	$file = LAYOUTS_DIR . DIRECTORY_SEPARATOR . $layout . '.phtml';
 	return render($file, $vars);
