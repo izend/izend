@@ -2,7 +2,7 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
+ * @copyright  2010-2016 izend.org
  * @version    6
  * @link       http://www.izend.org
  */
@@ -11,7 +11,13 @@ require_once 'userisidentified.php';
 require_once 'userhasrole.php';
 
 function banner($lang, $components=false) {
-	global $home_action;
+	global $home_action, $cookieconsent;
+
+	$consent=false;
+	if ($cookieconsent and !isset($_COOKIE['cookieconsent'])) {
+		setcookie('cookieconsent', true, time()+60*60*24*365, '/');
+		$consent=view('consent', $lang);
+	}
 
 	$home_page=url($home_action, $lang);
 	$logo = view('logo', $lang, compact('home_page'));
@@ -102,7 +108,7 @@ function banner($lang, $components=false) {
 
 	$menu = view('bannermenu', $lang, compact('user_page', 'nobody_page', 'account_page', 'contact_page', 'edit_page', 'view_page', 'validate_page', 'admin_page'));
 
-	$output = view('banner', false, compact('logo', 'menu', 'languages', 'headline', 'search', 'donate'));
+	$output = view('banner', false, compact('consent', 'logo', 'menu', 'languages', 'headline', 'search', 'donate'));
 
 	return $output;
 }
