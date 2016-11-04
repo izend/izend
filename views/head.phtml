@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    38
+ * @version    39
  * @link       http://www.izend.org
  */
 ?>
@@ -86,15 +86,19 @@
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
 <?php require_once 'ishttps.php'; ?>
-<link rel="stylesheet" type="text/css" href="<?php if (is_https()): ?>https<?php else: ?>http<?php endif; ?>://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
+<link rel="stylesheet" type="text/css" href="http<?php if (is_https()): ?>s<?php endif; ?>://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
+<?php endif; ?>
+<?php if (false): ?>
+<?php require_once 'ishttps.php'; ?>
+<link rel="stylesheet" type="text/css" href="http<?php if (is_https()): ?>s<?php endif; ?>://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" >
 <?php endif; ?>
 <?php if (true): ?>
-<link href="<?php echo $base_path; ?>/css/zero.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/zero.css" media="screen" />
 <?php endif; ?>
-<link href="<?php echo $base_path; ?>/css/screen.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="<?php echo $base_path; ?>/css/theme.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/screen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/theme.css" media="screen" />
 <?php if (!empty($lang)): ?>
-<link href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" media="screen" />
 <?php endif; ?>
 <?php if (!empty($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
@@ -111,15 +115,15 @@ else {
 	$url=$base_path . '/css/' . $name . '.css';
 }
 ?>
-<link href="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>" rel="stylesheet" type="text/css" media="<?php echo $media; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>" media="<?php echo $media; ?>" />
 <?php endforeach; ?>
 <?php endif; ?>
 <?php if (!empty($theme)): ?>
-<link href="<?php echo $base_path; ?>/css/themes/<?php echo $theme; ?>.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/themes/<?php echo $theme; ?>.css" media="screen" />
 <?php endif; ?>
-<link href="<?php echo $base_path; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/print.css" media="print" />
 <?php if (true): ?>
-<link href="<?php echo $base_path; ?>/css/media.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/media.css" />
 <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1" />
 <?php endif; ?>
 <?php require_once 'ismobile.php'; ?>

@@ -3,13 +3,18 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($mode == 'lite'): ?>
-<a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on LinkedIn"><span>LinkedIn</span></a>
-<?php else: ?>
+<?php switch ($mode): ?>
+<?php case 'lite': ?>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on LinkedIn"><span>LinkedIn</span></a>
+<?php break; ?>
+<?php case 'awesome': ?>
+<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo urlencode($base_url . '/' . $request_path); ?>" target="_blank" title="Share on LinkedIn"><i class="fa fa-linkedin"></i></a>
+<?php break; ?>
+<?php default: ?>
 <?php head('javascript', 'https://platform.linkedin.com/in.js', 'lang: en_US'); ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
@@ -26,4 +31,4 @@ $('#<?php echo $id; ?>').replaceWith('<script type="in/share" data-counter="righ
 <?php endswitch; ?>
 //]]>
 </script>
-<?php endif; ?>
+<?php endswitch; ?>

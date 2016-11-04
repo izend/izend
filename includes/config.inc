@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    46
+ * @version    47
  * @link       http://www.izend.org
  */
 
@@ -44,7 +44,7 @@ $signature='izend.org - http://www.izend.org';
 global $socializing, $socializingmode;
 
 $socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
-$socializingmode='standard';       // 'standard', 'lite'
+$socializingmode='standard';       // 'standard', 'lite', 'awesome'
 
 global $cookieconsent;
 

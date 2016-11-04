@@ -3,13 +3,18 @@
 /**
  *
  * @copyright  2013-2016 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($mode == 'lite'): ?>
-<a class="pinterest" href="https://fr.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&amp;media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&amp;description=<?php echo urlencode($pinit_text); ?><?php endif ?>" target="_blank" title="Partager sur Pinterest"><span>Pinterest</span></a>
-<?php else: ?>
+<?php switch ($mode): ?>
+<?php case 'lite': ?>
+<a href="https://fr.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&amp;media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&amp;description=<?php echo urlencode($pinit_text); ?><?php endif ?>" target="_blank" title="Partager sur Pinterest"><span>Pinterest</span></a>
+<?php break; ?>
+<?php case 'awesome': ?>
+<a href="https://fr.pinterest.com/pin/create/button/?url=<?php echo urlencode($base_url . '/' . $request_path); ?><?php if (!empty($pinit_image)): ?>&amp;media=<?php echo urlencode($base_url . '/' . $pinit_image); ?><?php endif ?><?php if (!empty($pinit_text)): ?>&amp;description=<?php echo urlencode($pinit_text); ?><?php endif ?>" target="_blank" title="Partager sur Pinterest"><i class="fa fa-pinterest"></i></a>
+<?php break; ?>
+<?php default: ?>
 <?php $id = uniqid('id'); ?>
 <div id="<?php echo $id; ?>"></div>
 <script type="text/javascript">
@@ -26,4 +31,4 @@ $('#<?php echo $id; ?>').replaceWith('<a href="//fr.pinterest.com/pin/create/but
 //]]>
 </script>
 <?php global $pinteresetassets; $pinteresetassets=true; ?>
-<?php endif; ?>
+<?php endswitch; ?>

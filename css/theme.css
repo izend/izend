@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    116
+ * @version    117
  * @link       http://www.izend.org
  */
 
@@ -317,14 +317,22 @@ span.btn_stop_alt {background-position:-144px -16px;}
 .besocial.standard li {height:30px;vertical-align:top;}
 .besocial.standard li.pinterest span {vertical-align:top !important;}
 
+#sharebar.lite {margin-left:-65px;}
 #sharebar.lite a span, .besocial.lite a span {display:none;}
+#sharebar.lite li a, .besocial.lite li a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
+#sharebar.lite li.facebook a, .besocial.lite li.facebook a {background-position:0 0;}
+#sharebar.lite li.twitter a, .besocial.lite li.twitter a  {background-position:-24px 0;}
+#sharebar.lite li.gplus a, .besocial.lite li.gplus a {background-position:-48px 0;}
+#sharebar.lite li.linkedin a, .besocial.lite li.linkedin a {background-position:-72px 0;}
+#sharebar.lite li.pinterest a, .besocial.lite li.pinterest a {background-position:-168px 0;}
 
-#sharebar.lite a, .besocial.lite a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
-#sharebar.lite a.facebook, .besocial.lite a.facebook {background-position:0 0;}
-#sharebar.lite a.twitter, .besocial.lite a.twitter {background-position:-24px 0;}
-#sharebar.lite a.gplus, .besocial.lite a.gplus {background-position:-48px 0;}
-#sharebar.lite a.linkedin, .besocial.lite a.linkedin {background-position:-72px 0;}
-#sharebar.lite a.pinterest, .besocial.lite a.pinterest {background-position:-168px 0;}
+#sharebar.awesome {margin-left:-85px;}
+#sharebar.awesome a, .besocial.awesome a {color:#ffffff;font-size:24px;width:44px;display:list-item;list-style:none;text-align:center;padding:8px 0;}
+#sharebar.awesome .facebook, .besocial.awesome .facebook {background-color:#3b5998;}
+#sharebar.awesome .twitter, .besocial.awesome .twitter {background-color:#4ad2ff;}
+#sharebar.awesome .gplus, .besocial.awesome .gplus {background-color:#a7291c;}
+#sharebar.awesome .linkedin, .besocial.awesome .linkedin {background-color:#0183b3;}
+#sharebar.awesome .pinterest, .besocial.awesome .pinterest {background-color:#cb2027;}
 
 #socialbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
 #socialbar a.facebook {background-position:0 0;}

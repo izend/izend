@@ -3,16 +3,16 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
 <?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit): ?>
 <ul<?php if ($shareline): ?> id="shareline"<?php endif; ?> class="besocial <?php echo $sharemode; ?>">
-<?php if ($sharemode == 'lite'): ?>
-<?php if ($ilike): ?>
-<li class="facebook">
-<?php echo $ilike; ?>
+<?php if ($sharemode == 'standard'): ?>
+<?php if ($linkedin): ?>
+<li class="linkedin">
+<?php echo $linkedin; ?>
 </li>
 <?php endif; ?>
 <?php if ($tweetit): ?>
@@ -20,25 +20,25 @@
 <?php echo $tweetit; ?>
 </li>
 <?php endif; ?>
+<?php if ($pinit): ?>
+<li class="pinterest">
+<?php echo $pinit; ?>
+</li>
+<?php endif; ?>
 <?php if ($plusone): ?>
 <li class="gplus">
 <?php echo $plusone; ?>
 </li>
 <?php endif; ?>
-<?php if ($linkedin): ?>
-<li class="linkedin">
-<?php echo $linkedin; ?>
-</li>
-<?php endif; ?>
-<?php if ($pinit): ?>
-<li class="pinterest">
-<?php echo $pinit; ?>
+<?php if ($ilike): ?>
+<li class="facebook">
+<?php echo $ilike; ?>
 </li>
 <?php endif; ?>
 <?php else: ?>
-<?php if ($linkedin): ?>
-<li class="linkedin">
-<?php echo $linkedin; ?>
+<?php if ($ilike): ?>
+<li class="facebook">
+<?php echo $ilike; ?>
 </li>
 <?php endif; ?>
 <?php if ($tweetit): ?>
@@ -46,19 +46,19 @@
 <?php echo $tweetit; ?>
 </li>
 <?php endif; ?>
-<?php if ($pinit): ?>
-<li class="pinterest">
-<?php echo $pinit; ?>
-</li>
-<?php endif; ?>
 <?php if ($plusone): ?>
 <li class="gplus">
 <?php echo $plusone; ?>
 </li>
 <?php endif; ?>
-<?php if ($ilike): ?>
-<li class="facebook">
-<?php echo $ilike; ?>
+<?php if ($linkedin): ?>
+<li class="linkedin">
+<?php echo $linkedin; ?>
+</li>
+<?php endif; ?>
+<?php if ($pinit): ?>
+<li class="pinterest">
+<?php echo $pinit; ?>
 </li>
 <?php endif; ?>
 <?php endif; ?>

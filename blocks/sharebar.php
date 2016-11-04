@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    5
+ * @copyright  2010-2016 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ function sharebar($lang, $components=false, $sharemode=false) {
 
 	extract($components);	/* ilike, tweetit, plusone, linkedin, pinit */
 
-	$mode=$sharemode == 'standard' ? 'bar' : 'lite';
+	$mode=$sharemode == 'standard' ? 'bar' : $sharemode;
 
 	if ($ilike) {
 		$ilike=view('ilike', $lang, compact('mode'));
