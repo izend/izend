@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -39,7 +39,7 @@
 <p>
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" height="40" title="Verification code" />
 :
-<input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
+<input type="text" name="mailme_code" id="mailme_code" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
 </p>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_send" name="mailme_send" id="mailme_send" value="Send" /></p>

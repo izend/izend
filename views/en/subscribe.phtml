@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2014 izend.org
- * @version    6
+ * @copyright  2012-2016 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@
 <p>
 <img src="<?php echo $base_path; ?>/captcha/subscribe" alt="" height="40" title="Verification code" />
 :
-<input type="text" name="subscribe_code" id="subscribe_code" size="4" maxlength="4" title="4 letters" onkeypress="return submitonenter(event, 'subscribe_send')" value="" />
+<input type="text" name="subscribe_code" id="subscribe_code" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'subscribe_send')" value="" />
 </p>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_send" name="subscribe_send" id="subscribe_send" value="Send" /></p>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -85,7 +85,7 @@ le commentaire ou le
 <p>
 <img src="<?php echo $base_path; ?>/captcha/comment" alt="" height="40" title="Code de vérification" />
 :
-<input type="text" name="comment_code" id="comment_code" size="4" maxlength="4" title="4 lettres" onkeypress="return submitonenter(event, 'comment_validate')" value="" />
+<input type="text" name="comment_code" id="comment_code" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'comment_validate')" value="" />
 </p>
 <?php endif; ?>
 <p>
