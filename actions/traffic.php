@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -22,7 +22,8 @@ function traffic($lang) {
 
 	head('title', translate('traffic:title', $lang));
 
-	$banner = build('banner', $lang);
+	$admin=true;
+	$banner = build('banner', $lang, compact('admin'));
 
 	$analytics = build('analytics', $lang);
 
