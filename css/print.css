@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    41
+ * @version    42
  * @link       http://www.izend.org
  */
  
@@ -127,4 +127,4 @@ ol.tree li.filenode {font-style:normal;}
 
 .audioplayer {display:none;}
 
-.fb-like-box, #pinterest-board {display:none !important;}
+.fb-like-box, .fb-page, #pinterest-board {display:none !important;}
