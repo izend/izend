@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -50,17 +50,18 @@
 window.fbAsyncInit = function() {
 	FB.init({
 <?php if ($facebookid): ?>
-		appId:	'<?php echo $facebookid; ?>',
+		appId:		'<?php echo $facebookid; ?>',
 <?php endif; ?>
-		xfbml:	true,
-		status:	false,
-	});
+		xfbml:		true,
+		status:		false,
+		version:	'v2.8',
+});
 };
 (function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) {return;}
 	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/<?php echo $facebookjssdk; ?>/all.js";
+	js.src = "//connect.facebook.net/<?php echo $facebookjssdk; ?>/sdk.js";
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
