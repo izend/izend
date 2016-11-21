@@ -3,9 +3,9 @@
 /**
  *
  * @copyright  2016 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<div class="fb-page" data-href="https://www.facebook.com/<?php echo $link_likepage; ?>" data-tabs="timeline" data-width="500" data-height="500" data-hide-cover="false" data-show-facepile="true" data-hide-cta="false" data-small-header="false" data-adapt-container-width="true"></div>
+<div class="fb-page" data-href="https://www.facebook.com/<?php echo $link_likepage; ?>" data-width="500" <?php if (false): ?>data-show-posts="false"<?php else: ?>data-tabs="timeline" data-height="500"<?php endif; ?> data-hide-cover="false" data-show-facepile="true" data-hide-cta="false" data-small-header="false" data-adapt-container-width="true"></div>
 <?php global $facebookjssdk; $facebookjssdk='fr_FR'; ?>
