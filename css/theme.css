@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    118
+ * @version    119
  * @link       http://www.izend.org
  */
 
@@ -267,7 +267,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #sidebar #headline {margin-top:0.1em;margin-bottom:0.5em;text-align:right;}
 #sidebar #searchinput {margin-bottom:0.5em;}
 #sidebar #donate {float:right;margin:1em 0;}
-#sidebar .cloud {margin-bottom:1em;}
+#sidebar .cloud {margin-bottom:1em;overflow-x:hidden;}
 #sidebar .hidy {margin-left:176px;}
 
 #sidemenu {width:240px;font-size:90%;}
