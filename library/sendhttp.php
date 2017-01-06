@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    7
+ * @copyright  2010-2017 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -41,15 +41,15 @@ function http_parse_url($url) {
 	return array($proto, $scheme, $host, $portnum, $path);
 }
 
-function sendget($url, $args=false, $options=false) {
-	return sendhttp('GET', $url, $args, false, false, $options);
+function sendget($url, $args=false, $options=false, $header=false) {
+	return sendhttp('GET', $url, $args, false, false, $options, $header);
 }
 
-function sendpost($url, $args=false, $files=false, $base64=false, $options=false) {
-	return sendhttp('POST', $url, $args, $files, $base64, $options);
+function sendpost($url, $args=false, $files=false, $base64=false, $options=false, $header=false) {
+	return sendhttp('POST', $url, $args, $files, $base64, $options, $header);
 }
 
-function sendhttp($method, $url, $args, $files=false, $base64=false, $options=false) {
+function sendhttp($method, $url, $args, $files=false, $base64=false, $options=false, $header=false) {
 	$r = http_parse_url($url);
 
 	if (!$r) {
@@ -115,19 +115,32 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 			}
 
 			$content_length = strlen($content_string);
-			$header_string="POST $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}Connection: close${crlf}${crlf}";
+			$header_string="POST $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}";
 			break;
 
 		case 'GET':
 			if ($args && is_array($args)) {
 				$path .= '?' . http_build_args($args);
 			}
-			$header_string="GET $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Connection: close${crlf}${crlf}";
+			$header_string="GET $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+
+
 			break;
 
 		default:
 			return false;
 	}
+
+	if ($header && is_array($header)) {
+		foreach ($header as $name => $value) {
+			if (is_array($value)) {
+				$value = implode('; ', $value);
+			}
+			$header_string .= "${name}: ${value}${crlf}";
+		}
+	}
+
+	$header_string .= "Connection: close${crlf}${crlf}";
 
 	return sendhttpraw($proto, $host, $portnum, $header_string, $content_string, $options);
 }
@@ -135,7 +148,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=false, $options=false) {
 	$url=$proto . '://' . $host . ':' . $portnum;
 
-	$socket = $options ? stream_socket_client($url, $errstr, $errno, 60, STREAM_CLIENT_CONNECT, stream_context_create($options)) : stream_socket_client($url);
+	$socket = $options ? @stream_socket_client($url, $errstr, $errno, 60, STREAM_CLIENT_CONNECT, stream_context_create($options)) : @stream_socket_client($url);
 
 	if ($socket === false) {
 		return false;
