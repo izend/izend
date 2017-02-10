@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2016 izend.org
- * @version    14
+ * @copyright  2011-2017 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -323,7 +323,7 @@ function useredit($lang, $user_id) {
 			break;
 
 		case 'change':
-			if ($missing_newpassword or $bad_newpassword) {
+			if ($bad_token or $missing_newpassword or $bad_newpassword) {
 				break;
 			}
 
@@ -339,6 +339,10 @@ function useredit($lang, $user_id) {
 			break;
 
 		case 'delete':
+			if ($bad_token) {
+				break;
+			}
+
 			if (!$confirmed) {
 				$confirm_delete=true;
 				break;
