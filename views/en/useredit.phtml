@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2014 izend.org
- * @version    20
+ * @copyright  2011-2017 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -77,7 +77,7 @@ the account
 </p>
 <?php if ($with_newpassword): ?>
 <p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
-<p class="noprint"><input type="password" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p class="noprint"><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="noprint"><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
 </form>
