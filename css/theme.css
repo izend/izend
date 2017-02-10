@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    119
+ * @copyright  2010-2017 izend.org
+ * @version    120
  * @link       http://www.izend.org
  */
 
@@ -288,7 +288,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #footer .controls {display:inline-block;}
 
-#toolbar {width:24px;padding:5px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;top:60px;margin-left:-65px;}
+#toolbar {width:24px;padding:5px;border-style:solid;border-color:#eaefb3;border-width:2px;background-color:#ffffe0;position:fixed;margin-left:-65px;}
 #toolbar a {width:24px;height:24px;float:left;background:transparent url(../images/theme/icons.png) no-repeat;}
 #toolbar #exit {background-position:-72px 0;}
 #toolbar #admin {background-position:-48px 0;}
@@ -308,7 +308,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #sharebar, #shareline {display:none;}
 
-#sharebar {border:solid 2px #eaefb3;background-color:#ffffff;position:fixed;top:160px;padding:4px 6px;z-index:9999;}
+#sharebar {border:solid 2px #eaefb3;background-color:#ffffff;position:fixed;margin-top:80px;padding:4px 6px;z-index:9999;}
 #sharebar.standard > li {padding:3px 0;}
 #sharebar.standard > li:last-child {padding-bottom:0;}
 
