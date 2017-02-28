@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    39
+ * @copyright  2010-2017 izend.org
+ * @version    40
  * @link       http://www.izend.org
  */
 ?>
@@ -85,12 +85,10 @@
 <link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
-<?php require_once 'ishttps.php'; ?>
-<link rel="stylesheet" type="text/css" href="http<?php if (is_https()): ?>s<?php endif; ?>://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
 <?php endif; ?>
 <?php if (false): ?>
-<?php require_once 'ishttps.php'; ?>
-<link rel="stylesheet" type="text/css" href="http<?php if (is_https()): ?>s<?php endif; ?>://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" >
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" >
 <?php endif; ?>
 <?php if (true): ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/zero.css" media="screen" />
