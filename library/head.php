@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    12
+ * @copyright  2010-2017 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -57,6 +57,9 @@ function head($type=false) {
 			break;
 		case 'theme':
 			$head['theme'] = $args[0];
+			break;
+		case 'fontawesome':
+			$head['fontawesome'] = true;
 			break;
 		case 'font':
 			$fname=$args[0];

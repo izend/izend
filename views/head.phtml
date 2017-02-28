@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    40
+ * @version    41
  * @link       http://www.izend.org
  */
 ?>
@@ -87,8 +87,8 @@
 <?php if (!empty($fonts)): ?>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
 <?php endif; ?>
-<?php if (false): ?>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" media="screen" >
+<?php if (!empty($fontawesome)): ?>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" >
 <?php endif; ?>
 <?php if (true): ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $base_path; ?>/css/zero.css" media="screen" />
