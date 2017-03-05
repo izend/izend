@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    7
+ * @copyright  2010-2017 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -11,15 +11,19 @@ require_once 'readarg.php';
 require_once 'strflat.php';
 require_once 'validatemail.php';
 require_once 'ismailinjected.php';
+require_once 'isfilenameallowed.php';
+require_once 'validatefilename.php';
 require_once 'tokenid.php';
 
-function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $with_home=true) {
+function mailme($lang, $to=false, $with_appointment=false, $with_attachment=false, $with_captcha=true, $with_home=true) {
 	$action='init';
 	if (isset($_POST['mailme_send'])) {
 		$action='send';
 	}
 
 	$mail=$subject=$message=$date=$hour=$minute=$code=$token=false;
+
+	$file=$filename=false;
 
 	if (isset($_SESSION['user']['mail'])) {
 		$mail=$_SESSION['user']['mail'];
@@ -47,6 +51,22 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 					$minute=readarg($_POST['mailme_minute']);
 				}
 			}
+			if ($with_attachment) {
+				if (isset($_FILES['mailme_file'])) {
+					if (isset($_FILES['mailme_file']['error'])) {
+						$error=$_FILES['mailme_file']['error'];
+
+						if ($error == UPLOAD_ERR_OK) {
+							if (isset($_FILES['mailme_file']['tmp_name'])) {
+								$file=$_FILES['mailme_file']['tmp_name'];
+							}
+							if (isset($_FILES['mailme_file']['name'])) {
+								$filename=$_FILES['mailme_file']['name'];
+							}
+						}
+					}
+				}
+			}
 			if (isset($_POST['mailme_code'])) {
 				$code=readarg($_POST['mailme_code']);
 			}
@@ -72,6 +92,8 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 	$missing_message=false;
 
 	$bad_appointment=false;
+
+	$bad_attachment=false;
 
 	$email_sent=false;
 	$home_page=false;
@@ -129,7 +151,17 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 						$bad_appointment=true;
 					}
 				}
+			}
 
+			if ($with_attachment) {
+				if ($file) {
+					if (!is_uploaded_file($file)) {
+						$bad_attachment=true;
+					}
+					else if (!validate_filename($filename) or !is_filename_allowed($filename)) {
+						$filename=false;
+					}
+				}
 			}
 
 			break;
@@ -139,11 +171,9 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 
 	switch($action) {
 		case 'send':
-			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message or $bad_appointment) {
+			if ($bad_token or $missing_code or $bad_code or $missing_mail or $bad_mail or $missing_subject or $bad_subject or $missing_message or $bad_appointment or $bad_attachment) {
 				break;
 			}
-
-			require_once 'emailme.php';
 
 			if ($date) {
 				$f=translate('email:appointment', $lang);
@@ -151,7 +181,16 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 				$message .= "\n\n$s";
 			}
 
-			$r = emailme($subject, $message, $mail, $to);
+			if ($file) {
+				require_once 'emailmefile.php';
+
+				$r = emailmefile($subject, $message, $file, $filename, $mail, $to);
+			}
+			else {
+				require_once 'emailme.php';
+
+				$r = emailme($subject, $message, $mail, $to);
+			}
 
 			if (!$r) {
 				$internal_error=true;
@@ -178,7 +217,7 @@ function mailme($lang, $to=false, $with_appointment=false, $with_captcha=true, $
 	$errors = compact('missing_code', 'bad_code', 'missing_mail', 'bad_mail', 'missing_subject', 'bad_subject', 'missing_message', 'bad_appointment', 'internal_error');
 	$infos = compact('email_sent', 'home_page');
 
-	$output = view('mailme', $lang, compact('token', 'with_captcha', 'with_appointment', 'mail', 'subject', 'message', 'date', 'hour', 'minute', 'errors', 'infos'));
+	$output = view('mailme', $lang, compact('token', 'with_captcha', 'with_appointment', 'with_attachment', 'mail', 'subject', 'message', 'date', 'hour', 'minute', 'errors', 'infos'));
 
 	return $output;
 }

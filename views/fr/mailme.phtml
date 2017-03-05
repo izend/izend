@@ -2,13 +2,13 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    18
+ * @copyright  2010-2017 izend.org
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post">
+<form action="" method="post"<?php if ($with_attachment): ?> enctype="multipart/form-data"<?php endif; ?>>
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Quelle est votre adresse d'email&nbsp;?</p>
 <p><input type="text" name="mailme_mail" id="mailme_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
@@ -17,6 +17,16 @@
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="40" maxlength="100" title="Sujet" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p><textarea name="mailme_message" id="mailme_message" cols="50" rows="5" title="Texte"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <br/><span class="grippie btn_edit btn_grippie">===</span></p>
+<?php if ($with_attachment): ?>
+<p>
+<input type="file" name="mailme_file" id="mailme_file" title="" />
+<span class="hidden">
+<input type="submit" class="submit submit_put" id="mailme_put" name="mailme_put" value="Télécharger" title="" />
+une pièce jointe
+<span class="hidden icon icon_ok">+</span>
+</span>
+</p>
+<?php endif; ?>
 <?php if ($with_appointment): ?>
 <p>
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">Rendez-vous le</span>
@@ -64,6 +74,26 @@ Pour revenir à la page d'accueil, <a href="<?php echo $home_page; ?>">cliquez i
 </p>
 <?php endif; ?>
 </div>
+<?php if ($with_attachment): ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    var file=$('#mailme_file');
+    var upload=$('#mailme_put');
+
+    file.next().removeClass('hidden');
+
+    file.css({ position: 'absolute', left: '-9999px' });
+
+    upload.on('click', function(e) { e.preventDefault(); file.click(); });
+
+    file.change(function() {
+        if (file.val()) {
+            upload.next().removeClass('hidden');
+        }
+    });
+});
+</script>
+<?php endif; ?>
 <?php if ($with_appointment): ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('javascript', 'jquery.ui.datepicker-fr'); ?>
