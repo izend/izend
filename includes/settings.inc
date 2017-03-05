@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    3
+ * @copyright  2010-2017 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -24,6 +24,7 @@ ini_set('session.use_only_cookies',	1);
 ini_set('session.use_trans_sid',	0);
 ini_set('session.use_strict_mode',	1);
 ini_set('url_rewriter.tags',		'');
+ini_set('mail.add_x_header',		0);
 
 ini_set('error_reporting',			E_ALL);
 ini_set('display_errors',			1);
