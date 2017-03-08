@@ -3,13 +3,16 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <form action="" method="post"<?php if ($with_attachment): ?> enctype="multipart/form-data"<?php endif; ?>>
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
+<?php if ($with_attachment and $maxfilesize): ?>
+<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
+<?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
 <p><input type="text" name="mailme_mail" id="mailme_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
@@ -21,9 +24,9 @@
 <p>
 <input type="file" name="mailme_file" id="mailme_file" title="" />
 <span class="hidden">
-<input type="submit" class="submit submit_put" id="mailme_put" name="mailme_put" value="Upload" title="" />
+<input type="submit" class="submit submit_add" id="mailme_put" name="mailme_put" value="Add" />
 an attachment
-<span class="hidden icon icon_ok ">+</span>
+<span class="icon <?php if ($bad_attachment): ?>icon_ko<?php else: ?>icon_download<?php endif; ?>"><?php if ($bad_attachment): ?>-<?php else: ?>+<?php endif; ?></span>
 </span>
 </p>
 <?php endif; ?>
@@ -80,7 +83,7 @@ $(document).ready(function() {
     var file=$('#mailme_file');
     var upload=$('#mailme_put');
 
-    file.next().removeClass('hidden');
+    upload.unwrap();
 
     file.css({ position: 'absolute', left: '-9999px' });
 
@@ -88,7 +91,7 @@ $(document).ready(function() {
 
     file.change(function() {
         if (file.val()) {
-            upload.next().removeClass('hidden');
+            upload.next().removeClass('icon_download').removeClass('icon_ko').addClass('icon_ok').text('+');
         }
     });
 });
