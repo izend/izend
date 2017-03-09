@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -29,6 +29,10 @@ an attachment
 <span class="icon <?php if ($bad_attachment): ?>icon_ko<?php else: ?>icon_download<?php endif; ?>"><?php if ($bad_attachment): ?>-<?php else: ?>+<?php endif; ?></span>
 </span>
 </p>
+<?php if ($maxfilesize): ?>
+<?php require_once 'countformat.php'; ?>
+<p class="info">You can upload a file up to <?php echo count_format($maxfilesize, '.', ''); ?> bytes.</p>
+<?php endif; ?>
 <?php endif; ?>
 <?php if ($with_appointment): ?>
 <p>
