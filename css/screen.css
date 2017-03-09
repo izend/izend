@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2016 izend.org
- * @version    78
+ * @version    79
  * @link       http://www.izend.org
  */
  
@@ -48,7 +48,7 @@ input[type="text"][readonly] {border-color:transparent;cursor:default;}
 input[type="radio"], input[type="checkbox"] {margin-top:1px;margin-bottom:1px;}
 input[type="checkbox"]:after, input[type="radio"]:after {vertical-align:middle;}
 
-form.compact p, p.compact {margin-top:0.75em;margin-bottom:0.5em;}
+form.compact p, div.compact p, p.compact {margin-top:0.75em;margin-bottom:0.5em;}
 form div.row {margin-top:0;margin-bottom:0;}
 
 textarea {resize:none;}
