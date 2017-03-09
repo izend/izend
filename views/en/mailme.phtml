@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 ?>
@@ -26,7 +26,7 @@
 <span class="hidden">
 <input type="submit" class="submit submit_add" id="mailme_put" name="mailme_put" value="Add" />
 an attachment
-<span class="icon <?php if ($bad_attachment): ?>icon_ko<?php else: ?>icon_download<?php endif; ?>"><?php if ($bad_attachment): ?>-<?php else: ?>+<?php endif; ?></span>
+<span class="icon <?php if ($bad_attachment): ?>icon_ko<?php else: ?>icon_attachment<?php endif; ?>"><?php if ($bad_attachment): ?>-<?php else: ?>+<?php endif; ?></span>
 </span>
 </p>
 <?php if ($maxfilesize): ?>
@@ -95,7 +95,7 @@ $(document).ready(function() {
 
     file.change(function() {
         if (file.val()) {
-            upload.next().removeClass('icon_download').removeClass('icon_ko').addClass('icon_ok').text('+');
+            upload.next().removeClass('icon_attachment').removeClass('icon_ko').addClass('icon_ok').text('+');
         }
     });
 });

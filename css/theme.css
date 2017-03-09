@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    121
+ * @version    122
  * @link       http://www.izend.org
  */
 
@@ -121,6 +121,7 @@ span.icon_edit {background-position:-120px 0;}
 span.icon_web {background-position:-144px 0;}
 span.icon_lock {background-position:-120px -48px;}
 span.icon_download {background-position:-24px -24px;}
+span.icon_attachment {background-position:-96px -48px;}
 
 span.btn_edit {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 span.btn_grippie {background-position:-224px -48px;width:27px;height:5px;margin-left:5px;margin-top:2px;cursor:ns-resize;}
