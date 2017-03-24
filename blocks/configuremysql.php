@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2016 izend.org
- * @version    7
+ * @copyright  2014-2017 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -328,6 +328,7 @@ CREATE TABLE `${db_prefix}user` (
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `banned` tinyint(1) NOT NULL DEFAULT '0',
+  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
@@ -415,8 +416,8 @@ _SEP_;
 		$seed=substr(md5(uniqid()), 1, 8);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`) VALUES
-(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', '1', '0');
+INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`, `confirmed`) VALUES
+(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', '1', '0', '1');
 _SEP_;
 		$db_conn->exec($sql);
 

@@ -18,6 +18,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Fri Mar 24 2017
+
+ALTER TABLE `izend_user` ADD `confirmed` BOOLEAN NOT NULL DEFAULT TRUE AFTER `banned`;
+----
+
 Date:	Tue Apr 18 2016
 
 ALTER TABLE `izend_comment` ADD `user_mail` VARCHAR( 100 ) NULL AFTER `user_id`;
