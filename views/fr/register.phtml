@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 ?>
@@ -110,7 +110,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
 <?php if ($account_created): ?>
-<p>Votre compte a été créé. Le mot de passe a été envoyé par email à votre adresse.
+<p>Votre compte a été créé. Le mot de passe a été envoyé par email à votre adresse<?php if ($with_validation): ?> ainsi qu'un lien de validation<?php endif; ?>.
 Pour vous identifier, <a href="<?php echo $user_page; ?>">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    20
+ * @copyright  2010-2017 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -87,6 +87,7 @@ function login($lang) {
 	$bad_login=false;
 	$missing_password=false;
 	$access_denied=false;
+	$not_confirmed=false;
 
 	switch($action) {
 		case 'enter':
@@ -148,6 +149,20 @@ function login($lang) {
 				break;
 			}
 
+			if (!$user['confirmed']) {
+				$not_confirmed=true;
+
+				require_once 'emailconfirmuser.php';
+
+				$r=emailconfirmuser($user['id'], $user['mail'], $user['locale']);
+
+				if (!$r) {
+					$internal_error=true;
+					break;
+				}
+				break;
+			}
+
 			$user['ip'] = client_ip_address();
 
 			if (in_array('administrator', $user['role'])) {
@@ -193,7 +208,7 @@ function login($lang) {
 
 	$_SESSION['login_token'] = $token = token_id();
 
-	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied');
+	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied', 'not_confirmed');
 
 	$output = view('login', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'password_page', 'newuser_page', 'login', 'errors'));
 

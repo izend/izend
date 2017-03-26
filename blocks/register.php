@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    20
+ * @copyright  2010-2017 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -34,6 +34,8 @@ function register($lang) {
 	$with_info=false;
 
 	$with_confirmation=!$is_admin;
+
+	$with_validation=false;	// ($with_password and !$is_admin);
 
 	if ($with_facebook) {
 		require_once 'facebook.php';
@@ -274,7 +276,7 @@ function register($lang) {
 				$password=newpassword();
 			}
 
-			$r = user_create($name, $password, $mail, $locale, $timezone, $website);
+			$r = user_create($name, $password, $mail, $locale, $timezone, $website, !$with_validation);
 
 			if (!$r) {
 				$internal_error=true;
@@ -282,6 +284,10 @@ function register($lang) {
 			}
 
 			$user_id = $r;
+
+			$_SESSION['login'] = $name ? $name : $mail;
+
+			$account_created=true;
 
 			if ($with_info) {
 				user_set_info($user_id, $lastname, $firstname);
@@ -293,23 +299,8 @@ function register($lang) {
 				newsletter_create_user($mail, $locale);
 			}
 
-			$_SESSION['login'] = $name ? $name : $mail;
-
-			require_once 'emailcrypto.php';
-
-			global $sitename, $webmaster;
-
-			$to=$mail;
-
-			$subject = translate('email:new_user_subject', $lang);
-			$msg = translate('email:new_user_text', $lang) . "\n\n" . translate('email:salutations', $lang);
-			if (!emailcrypto($msg, $password, $to, $subject, $webmaster)) {
-				$internal_error=true;
-				break;
-			}
-
-			require_once 'serveripaddress.php';
 			require_once 'emailme.php';
+			require_once 'serveripaddress.php';
 
 			global $sitename;
 
@@ -319,9 +310,21 @@ function register($lang) {
 			$msg = $ip . ' ' . $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $mail;
 			@emailme($subject, $msg);
 
-			$password=false;
+			require_once 'emailcrypto.php';
 
-			$account_created=true;
+			$to=$mail;
+
+			$subject = translate('email:new_user_subject', $lang);
+			$msg = translate('email:new_user_text', $lang) . "\n\n" . translate('email:salutations', $lang);
+			@emailcrypto($msg, $password, $to, $subject);
+
+			if ($with_validation) {
+				require_once 'emailconfirmuser.php';
+
+				@emailconfirmuser($user_id, $mail, $locale);
+			}
+
+			$password=false;
 			$confirmed=false;
 
 			break;
@@ -348,7 +351,7 @@ function register($lang) {
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_timezone', 'with_password', 'with_newsletter', 'with_confirmation', 'name', 'mail', 'website', 'timezone', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_timezone', 'with_password', 'with_newsletter', 'with_confirmation', 'with_validation', 'name', 'mail', 'website', 'timezone', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

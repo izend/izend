@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -48,6 +48,9 @@
 <p>L'identifiant est invalide.</p>
 <?php elseif ($access_denied): ?>
 <p>Accès refusé.</p>
+<?php elseif ($not_confirmed): ?>
+<p>Votre compte n'est pas validé.
+Un nouveau lien a été envoyé par email à votre adresse.</p>
 <?php endif; ?>
 </div>
 <?php

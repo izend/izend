@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    14
+ * @copyright  2010-2017 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -41,6 +41,7 @@ $strings = array(
 		'email:new_password_text'		=> "Your new password is in the attached cryptogram.\n\nIf you didn't ask to change it, just ignore this message.\nNOTE: Your old password is still valid.\n\nIdentify yourself with the new password to activate it.",
 		'email:new_user_subject'		=> 'Your account',
 		'email:new_user_text'			=> "Welcome!\n\nYour password is in the attached cryptogram.",
+		'email:new_user_confirm'		=> "To validate your account, click on the following link:\n\n%s.",
 		'email:appointment'				=> 'Appointment on %s at %02d:%02d.',
 		'newsletter:unregister_subject'	=> 'Newsletter',
 		'newsletter:unregister_text'	=> "To stop receiving the newsletter by email, click on the following link:\n\n%s\n\nOtherwise, please ignore this message.",
@@ -78,6 +79,7 @@ $strings = array(
 		'email:new_password_text'		=> "Votre nouveau mot de passe est dans le cryptogramme en pièce jointe.\n\nSi vous n'avez pas demandé à en changer, veuillez ignorer ce message.\nNOTE : Votre ancien mot de passe est toujours valide.\n\nConnectez-vous avec le nouveau mot de passe pour l'activer.",
 		'email:new_user_subject'		=> 'Votre compte',
 		'email:new_user_text'			=> "Bienvenue !\n\nVotre mot de passe est dans le cryptogramme en pièce jointe.",
+		'email:new_user_confirm'		=> "Pour valider votre compte, cliquez sur le lien suivant :\n\n%s.",
 		'email:appointment'				=> 'Rendez-vous le %s à %02d:%02d.',
 		'newsletter:unregister_subject'	=> 'Infolettre',
 		'newsletter:unregister_text'	=> "Pour ne plus recevoir l'infolettre par email, cliquez sur le lien suivant :\n\n%s\n\nSinon, veuillez ignorer ce message.",

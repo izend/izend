@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2017 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -65,7 +65,7 @@ function useredit($lang, $user_id) {
 	$user_name=$user_mail=$user_locale=$user_timezone=false;
 	$user_website=false;
 
-	$user_active=$user_banned=false;
+	$user_active=$user_banned=$user_confirmed=false;
 	$user_accessed=false;
 
 	$user_role=false;
@@ -81,7 +81,7 @@ function useredit($lang, $user_id) {
 		case 'reset':
 			$r = user_get($user_id);
 			if ($r) {
-				extract($r);		/* user_name user_password user_newpassword user_seed user_mail user_timezone user_website user_created user_modified user_accessed user_locale user_active user_banned */
+				extract($r);		/* user_name user_password user_newpassword user_seed user_mail user_timezone user_website user_created user_modified user_accessed user_locale user_active user_banned user_confirmed */
 			}
 			$user_newpassword=false;
 
@@ -134,6 +134,9 @@ function useredit($lang, $user_id) {
 				}
 				if (isset($_POST['useredit_banned'])) {
 					$user_banned=readarg($_POST['useredit_banned']) == 'on';
+				}
+				if (isset($_POST['useredit_confirmed'])) {
+					$user_confirmed=readarg($_POST['useredit_confirmed']) == 'on';
 				}
 				if (isset($_POST['useredit_accessed'])) {
 					$user_accessed=(int)readarg($_POST['useredit_accessed']);
@@ -311,7 +314,7 @@ function useredit($lang, $user_id) {
 			}
 
 			if ($with_status) {
-				$r = user_set_status($user_id, $user_active, $user_banned);
+				$r = user_set_status($user_id, $user_active, $user_banned, $user_confirmed);
 				if (!$r) {
 					$internal_error=true;
 					break;
@@ -372,7 +375,7 @@ function useredit($lang, $user_id) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }

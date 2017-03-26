@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    22
+ * @copyright  2010-2017 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -40,7 +40,7 @@ function user_id($user) {
 	return $r ? $r[0]['user_id'] : false;
 }
 
-function user_create($name, $password, $mail, $locale='en', $timezone=false, $website=false) {
+function user_create($name, $password, $mail, $locale='en', $timezone=false, $website=false, $confirmed=true) {
 	$seed=substr(md5(uniqid()), 1, 8);
 	$password=$password ? md5($seed . $password) : '';
 
@@ -51,6 +51,7 @@ function user_create($name, $password, $mail, $locale='en', $timezone=false, $we
 	$sqlwebsite=db_sql_arg($website, true, true);
 	$sqlpassword=db_sql_arg($password, false);
 	$sqlseed=db_sql_arg($seed, false);
+	$sqlconfirmed=$confirmed ? 'TRUE' : 'FALSE';
 
 	$wherenotexists=array();
 	if ($name) {
@@ -63,7 +64,7 @@ function user_create($name, $password, $mail, $locale='en', $timezone=false, $we
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT INTO $tabuser (name, password, seed, mail, created, locale, timezone, website) SELECT * FROM (SELECT $sqlname AS name, $sqlpassword AS password, $sqlseed AS seed, $sqlmail AS mail, NOW() AS created, $sqllocale AS locale, $sqltimezone AS timezone, $sqlwebsite AS website) s WHERE NOT EXISTS (SELECT user_id FROM $tabuser WHERE $wherenotexists)";
+	$sql="INSERT INTO $tabuser (name, password, seed, mail, created, confirmed, locale, timezone, website) SELECT * FROM (SELECT $sqlname AS name, $sqlpassword AS password, $sqlseed AS seed, $sqlmail AS mail, NOW() AS created, $sqlconfirmed AS confirmed, $sqllocale AS locale, $sqltimezone AS timezone, $sqlwebsite AS website) s WHERE NOT EXISTS (SELECT user_id FROM $tabuser WHERE $wherenotexists)";
 
 	$r = db_insert($sql);
 
@@ -130,7 +131,7 @@ function user_get($user_id) {
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, seed AS user_seed, mail AS user_mail, timezone AS user_timezone, website AS user_website, logged AS user_logged, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned FROM $tabuser WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT name AS user_name, password AS user_password, newpassword AS user_newpassword, seed AS user_seed, mail AS user_mail, timezone AS user_timezone, website AS user_website, logged AS user_logged, UNIX_TIMESTAMP(created) AS user_created, UNIX_TIMESTAMP(modified) AS user_modified, UNIX_TIMESTAMP(accessed) AS user_accessed, locale AS user_locale, active AS user_active, banned AS user_banned, confirmed AS user_confirmed FROM $tabuser WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_query($sql);
 
@@ -220,7 +221,7 @@ function user_set_info($user_id, $lastname, $firstname) {
 	return true;
 }
 
-function user_set_status($user_id, $active, $banned) {
+function user_set_status($user_id, $active, $banned, $confirmed) {
 	if (!is_numeric($user_id)) {
 		return false;
 	}
@@ -228,9 +229,11 @@ function user_set_status($user_id, $active, $banned) {
 	$sqlactive=$active ? 'TRUE' : 'FALSE';
 	$sqlbanned=$banned ? 'TRUE' : 'FALSE';
 
+	$sqlconfirmed=$confirmed ? 'TRUE' : 'FALSE';
+
 	$tabuser=db_prefix_table('user');
 
-	$sql="UPDATE $tabuser SET active=$sqlactive, banned=$sqlbanned WHERE user_id=$user_id";
+	$sql="UPDATE $tabuser SET active=$sqlactive, banned=$sqlbanned, confirmed=$sqlconfirmed WHERE user_id=$user_id";
 
 	$r = db_update($sql);
 
@@ -336,6 +339,24 @@ function user_set_role($user_id, $role) {
 	return true;
 }
 
+function user_confirm($user_id) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$tabuser=db_prefix_table('user');
+
+	$sql="UPDATE $tabuser SET confirmed=TRUE WHERE user_id=$user_id";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
+}
+
 function user_find($login) {
 	$sqllogin=db_sql_arg($login, true);
 
@@ -394,6 +415,7 @@ function user_login($login, $password, $quick=false) {
 	$user['created'] = (int)$user_created;
 	$user['modified'] = (int)$user_modified;
 	$user['accessed'] = (int)$user_accessed;
+	$user['confirmed'] = (int)$user_confirmed;
 
 	if ($user_timezone) {
 		date_default_timezone_set($user_timezone);

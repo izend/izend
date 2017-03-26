@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 ?>
@@ -48,6 +48,9 @@
 <p>The identifier is invalid.</p>
 <?php elseif ($access_denied): ?>
 <p>Access denied.</p>
+<?php elseif ($not_confirmed): ?>
+<p>You account is not validated.
+A new link has been sent to your address.</p>
 <?php endif; ?>
 </div>
 <?php

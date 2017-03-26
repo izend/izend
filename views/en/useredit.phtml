@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2017 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 ?>
@@ -53,6 +53,7 @@
 <legend>Status</legend>
 <input name="useredit_active" type="checkbox" <?php if ($user_active) echo 'checked="checked"'; ?> />&nbsp;active
 <input name="useredit_banned" type="checkbox" <?php if ($user_banned) echo 'checked="checked"'; ?> />&nbsp;banned
+<input name="useredit_confirmed" type="checkbox" <?php if ($user_confirmed) echo 'checked="checked"'; ?> />&nbsp;confirmed
 </fieldset>
 <?php if ($user_accessed): ?>
 <?php require_once 'dateen.php'; ?>
