@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2017 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function paypal_amt($amt) {
 function paypal_localecode($locale) {
 	$codes=array('en' => 'en_US', 'fr' => 'fr_FR');
 
-	return $localecode=isset($codes[$locale]) ? $codes[$locale] : 'en_US';
+	return isset($codes[$locale]) ? $codes[$locale] : 'en_US';
 }
 
 function paypal_setexpresscheckout($params) {

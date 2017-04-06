@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Thu Apr 6 2017
+
+Adds actions paylinereturn and paylinecancel.
+----
+
 Date:	Thu Sep 29 2016
 
 Adds action traffic.
@@ -65,6 +70,8 @@ $aliases = array(
 		'rss'						=> 'rssfeed',
 		'paypal/return'				=> 'paypalreturn',
 		'paypal/cancel'				=> 'paypalcancel',
+		'payline/return'			=> 'paylinereturn',
+		'payline/cancel'			=> 'paylinecancel',
 		'sslverifyclient'			=> 'sslverifyclient',
 		's'							=> 'saction',
 	),
