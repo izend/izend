@@ -3,18 +3,16 @@
 /**
  *
  * @copyright  2017 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 require_once 'payline.php';
 require_once 'userisidentified.php';
-require_once 'userprofile.php';
 require_once 'validatecurrency.php';
 
 function paylinecheckout($lang, $amount, $currency, $tax=0, $context=false) {
-	global $base_url, $sitename, $supported_languages;
-	global $payline_contract_number;
+	global $base_url, $payline_contract_number;
 
 	if (!user_is_identified()) {
 		return run('error/unauthorized', $lang);

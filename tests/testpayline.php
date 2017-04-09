@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2017 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -18,6 +18,10 @@ function abort($msg, $code=1) {
 }
 
 require_once 'payline.inc';
+
+if ($payline_context != 'homo') {
+	abort('payline.inc?');
+}
 
 if (! ($payline_merchant_id and $payline_access_key and $payline_contract_number)) {
 	abort('payline.inc?');
@@ -49,15 +53,3 @@ $doWebPaymentRequest['cancelURL'] = 'http://localhost/paylinecancel';
 $doWebPaymentResponse = $payline->doWebPayment($doWebPaymentRequest);
 
 print_r($doWebPaymentResponse);
-
-if ($doWebPaymentResponse['result']['code'] != '00000') {
-	abort();
-}
-
-$getWebPaymentDetailsRequest = array();
-
-$getWebPaymentDetailsRequest['token'] = $doWebPaymentResponse['token'];	// web payment session unique identifier
-
-$getWebPaymentDetailsResponse = $payline->getWebPaymentDetails($getWebPaymentDetailsRequest);
-
-print_r($getWebPaymentDetailsResponse);
