@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    20
+ * @copyright  2010-2017 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
  
@@ -21,6 +21,7 @@
 .submit_enter {width:100px;height:30px;background:transparent url(../images/theme/enter.png) no-repeat;}
 .submit_hide {width:100px;height:30px;background:transparent url(../images/theme/hide.png) no-repeat;}
 .submit_modify {width:100px;height:30px;background:transparent url(../images/theme/modify.png) no-repeat;}
+.submit_pay {width:100px;height:30px;background:transparent url(../images/theme/pay.png) no-repeat;}
 .submit_post {width:100px;height:30px;background:transparent url(../images/theme/post.png) no-repeat;}
 .submit_put {width:100px;height:30px;background:transparent url(../images/theme/upload.png) no-repeat;}
 .submit_search {width:100px;height:30px;background:transparent url(../images/theme/search.png) no-repeat;}
