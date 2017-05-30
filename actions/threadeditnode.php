@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    10
+ * @copyright  2010-2017 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -14,10 +14,6 @@ require_once 'models/thread.inc';
 
 function threadeditnode($lang, $clang, $thread, $node) {
 	global $with_toolbar, $supported_contents, $limited_contents;
-
-	if (!user_has_role('writer')) {
-		return run('error/unauthorized', $lang);
-	}
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
@@ -56,7 +52,7 @@ function threadeditnode($lang, $clang, $thread, $node) {
 	$headline_text=$thread_title ? $thread_title : $thread_id;
 	$headline_url=url('threadedit', $lang) . '/'. $thread_id . '?' . 'clang=' . $clang;
 	$headline = compact('headline_text', 'headline_url');
-	$view=$node_name ? url('thread', $clang) . '/'. $thread_id . '/'. $node_id . '?' . 'slang=' . $lang : false;
+	$view=$node_name ? url('thread', $lang) . '/'. $thread_id . '/'. $node_id . '?' . 'clang=' . $clang : false;
 
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
 

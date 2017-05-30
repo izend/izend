@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    6
+ * @copyright  2010-2017 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -34,26 +34,10 @@ function editnode($lang, $arglist=false) {
 		return run('error/notfound', $lang);
 	}
 
-	$clang=false;
-	foreach ($supported_languages as $slang) {
-		if (isset($_POST[$slang])) {
-			$clang=$slang;
-			break;
-		}
-	}
-	if (!$clang) {
-		if (isset($_POST['clang'])) {
-			$clang = $_POST['clang'];
-		}
-		else if (isset($_GET['clang'])) {
-			$clang = $_GET['clang'];
-		}
-		else {
-			$clang=$lang;
-		}
-		if (!in_array($clang, $supported_languages)) {
-			return run('error/notfound', $lang);
-		}
+	$clang=isset($_POST['clang']) ? $_POST['clang'] : (isset($_GET['clang']) ? $_GET['clang'] : $lang);
+
+	if (!in_array($clang, $supported_languages)) {
+		return run('error/notfound', $lang);
 	}
 
 	$node_editor = build('nodeeditor', $lang, $clang, $node_id, $supported_contents);
@@ -63,7 +47,7 @@ function editnode($lang, $arglist=false) {
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	$view=url('node', $clang) . '/'. $node_id . '?' . 'slang=' . $lang;
+	$view=url('node', $lang) . '/'. $node_id . '?' . 'clang=' . $clang;
 
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('view'));
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2017 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -27,26 +27,10 @@ function threadedit($lang, $arglist=false) {
 		}
 	}
 
-	$clang=false;
-	foreach ($supported_languages as $slang) {
-		if (isset($_POST[$slang])) {
-			$clang=$slang;
-			break;
-		}
-	}
-	if (!$clang) {
-		if (isset($_POST['clang'])) {
-			$clang = $_POST['clang'];
-		}
-		else if (isset($_GET['clang'])) {
-			$clang = $_GET['clang'];
-		}
-		else {
-			$clang=$lang;
-		}
-		if (!in_array($clang, $supported_languages)) {
-			return run('error/notfound', $lang);
-		}
+	$clang=isset($_POST['clang']) ? $_POST['clang'] : (isset($_GET['clang']) ? $_GET['clang'] : $lang);
+
+	if (!in_array($clang, $supported_languages)) {
+		return run('error/notfound', $lang);
 	}
 
 	if (!$thread) {

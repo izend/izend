@@ -2,50 +2,35 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    7
+ * @copyright  2010-2017 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
 require_once 'userhasrole.php';
 
-function threadall($lang) {
-	global $system_languages, $with_toolbar;
+function threadall($lang, $clang) {
+	global $with_toolbar;
 
-	if (!user_has_role('writer')) {
-		return run('error/unauthorized', $lang);
-	}
+	$site_title=translate('title', $clang);
+	$site_abstract=translate('description', $clang);
+	$site_cloud=translate('keywords', $clang);
 
-	$slang=false;
-	if (isset($_GET['slang'])) {
-		$slang = $_GET['slang'];
-	}
-	else {
-		$slang=$lang;
-	}
-	if (!in_array($slang, $system_languages)) {
-		return run('error/notfound', $lang);
-	}
-
-	$site_title=translate('title', $lang);
-	$site_abstract=translate('description', $lang);
-	$site_cloud=translate('keywords', $lang);
-
-	head('title', translate('threadall:title', $slang));
+	head('title', translate('threadall:title', $lang));
 	head('description', false);
 	head('keywords', false);
 	head('robots', 'noindex, nofollow');
 
-	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '?' . 'clang=' . $lang : false;
+	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '?' . 'clang=' . $clang : false;
 
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit'));
 
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$threadlist = build('threadlist', $lang, false, false, $slang);
+	$threadlist = build('threadlist', $clang, false, false, $lang);
 
-	$content = view('threadall', $slang, compact('site_title', 'site_abstract', 'site_cloud', 'threadlist'));
+	$content = view('threadall', $lang, compact('site_title', 'site_abstract', 'site_cloud', 'threadlist'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content'));
 

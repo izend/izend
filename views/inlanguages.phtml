@@ -2,26 +2,24 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    3
+ * @copyright  2010-2017 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
 <?php global $supported_languages; ?>
 <?php foreach ($supported_languages as $lang): ?>
 <?php if ($lang == 'fr'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Français" />
+<a class="lang fr" href="?clang=fr" title="Français"><span>fr</span></a>
 <?php elseif ($lang == 'en'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="English" />
+<a class="lang en" href="?clang=en" title="English"><span>en</span></a>
 <?php elseif ($lang == 'de'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Deutsch" />
+<a class="lang de" href="?clang=de" title="Deutsch"><span>de</span></a>
 <?php elseif ($lang == 'it'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Italiano" />
+<a class="lang it" href="?clang=it" title="Italiano"><span>it</span></a>
 <?php elseif ($lang == 'es'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Español" />
+<a class="lang es" href="?clang=es" title="Español"><span>es</span></a>
 <?php elseif ($lang == 'ru'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="Pусский" />
-<?php elseif ($lang == 'ar'): ?>
-<input name="<?php echo $lang; ?>" type="submit" class="lang <?php echo $lang; ?> submit<?php if ($lang == $clang): ?> selected<?php endif; ?>" value="عربي" />
+<a class="lang ru" href="?clang=ru" title="Pусский"><span>ru</span></a>
 <?php endif; ?>
 <?php endforeach; ?>

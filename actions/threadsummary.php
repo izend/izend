@@ -2,38 +2,23 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    14
+ * @copyright  2010-2017 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
 require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
-function threadsummary($lang, $thread) {
-	global $system_languages, $with_toolbar;
-
-	if (!user_has_role('writer')) {
-		return run('error/unauthorized', $lang);
-	}
-
-	$slang=false;
-	if (isset($_GET['slang'])) {
-		$slang = $_GET['slang'];
-	}
-	else {
-		$slang=$lang;
-	}
-	if (!in_array($slang, $system_languages)) {
-		return run('error/notfound', $lang);
-	}
+function threadsummary($lang, $clang, $thread) {
+	global $with_toolbar;
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
 		return run('error/notfound', $lang);
 	}
 
-	$r = thread_get($lang, $thread_id);
+	$r = thread_get($clang, $thread_id);
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
@@ -47,18 +32,18 @@ function threadsummary($lang, $thread) {
 	$thread_morevote=!$thread_nomorevote;
 
 	$thread_contents = array();
-	$r = thread_get_contents($lang, $thread_id, false);
+	$r = thread_get_contents($clang, $thread_id, false);
 	if ($r) {
 		$thread_url = url('thread', $lang) . '/'. $thread_id;
 		foreach ($r as $c) {
 			extract($c);	/* node_id node_name node_title node_number node_ignored */
-			$node_url = $thread_url . '/' . $node_id . '?' . 'slang=' . $slang;
+			$node_url = $thread_url . '/' . $node_id . '?' . 'clang=' . $clang;
 			$thread_contents[] = compact('node_id', 'node_title' , 'node_url', 'node_ignored');
 		}
 	}
 
-	$headline_text=	translate('threadall:title', $slang);
-	$headline_url=url('thread', $lang) . '?' . 'slang=' . $slang;;
+	$headline_text=	translate('threadall:title', $lang);
+	$headline_url=url('thread', $lang) . '?' . 'clang=' . $clang;;
 	$headline = compact('headline_text', 'headline_url');
 	$title = view('headline', false, $headline);
 
@@ -69,14 +54,14 @@ function threadsummary($lang, $thread) {
 	head('keywords', $thread_cloud);
 	head('robots', 'noindex, nofollow');
 
-	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $lang : false;
+	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $clang : false;
 
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit'));
 
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$content = view('threadsummary', $slang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_created', 'thread_modified', 'thread_contents'));
+	$content = view('threadsummary', $lang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_created', 'thread_modified', 'thread_contents'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 
