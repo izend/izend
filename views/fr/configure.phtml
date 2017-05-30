@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    13
+ * @copyright  2010-2017 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -104,7 +104,8 @@ Vérifiez vos réponses et relancez la configuration.</p>
 <?php if ($db_flag and !$db_reuse): ?>
 <?php if ($db_type == 'mysql'): ?>
 <p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
-et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.</p>
+et les entrées pour l'utilisateur <code><?php echo $db_user; ?></code> dans les tables <i>user</i> et <i>db</i> de la BD <i>mysql</i>.
+Terminez par l'exécution d'un ordre FLUSH PRIVILEGES.</p>
 <?php elseif ($db_type == 'pgsql'): ?>
 <p><b>IMPORTANT</b>&nbsp;: Avant de relancer la configuration, vous devez supprimer manuellement la BD <code><?php echo $db_name; ?></code>
 et le rôle <code><?php echo $db_user; ?></code>.</p>

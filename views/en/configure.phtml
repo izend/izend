@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    13
+ * @copyright  2010-2017 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -104,7 +104,8 @@ Check your answers and rerun the configuration.</p>
 <?php if ($db_flag and !$db_reuse): ?>
 <?php if ($db_type == 'mysql'): ?>
 <p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
-and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.</p>
+and the entries for the user <code><?php echo $db_user; ?></code> in the <i>user</i> and <i>db</i> tables of the <i>mysql</i> DB.
+Terminate by executing the order FLUSH PRIVILEGES.</p>
 <?php elseif ($db_type == 'pgsql'): ?>
 <p><b>IMPORTANT</b>: Before you can retry the configuration, you must manually delete the <code><?php echo $db_name; ?></code> DB
 and the role <code><?php echo $db_user; ?></code>.</p>
