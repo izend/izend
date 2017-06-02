@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -65,6 +65,8 @@ function threadnode($lang, $clang, $thread, $node) {
 		$next_node_url=url('thread', $lang) . '/'. $thread_id . '/'. $next_node_id . '?' . 'clang=' . $clang;
 	}
 
+	$inlanguages=view('inlanguages', false, compact('clang'));
+
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', $node_abstract);
 	head('keywords', $node_cloud);
@@ -77,7 +79,7 @@ function threadnode($lang, $clang, $thread, $node) {
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$content = view('threadnode', $lang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_visits', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label'));
+	$content = view('threadnode', $lang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_visits', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label', 'inlanguages'));
 
 	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
 

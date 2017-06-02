@@ -2,13 +2,15 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    3
+ * @copyright  2010-2017 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
-<div id="threadall">
 <h3><?php echo htmlspecialchars($site_title ? $site_title : $sitename, ENT_COMPAT, 'UTF-8'); ?></h3>
+<p class="compact">
+<?php echo $inlanguages; ?>
+</p>
 <?php if ($site_abstract): ?>
 <h5>Abstract</h5>
 <p><?php echo htmlspecialchars($site_abstract, ENT_COMPAT, 'UTF-8'); ?></p>
@@ -19,4 +21,3 @@
 <?php endif; ?>
 <h4>Content</h4>
 <?php echo $threadlist; ?>
-</div>

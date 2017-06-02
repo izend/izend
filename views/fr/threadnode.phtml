@@ -2,13 +2,12 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    12
+ * @copyright  2010-2017 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'datefr.php'; ?>
-<div id="threadnode">
 <h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></h3>
 <p class="navigation menu">
 <?php if ($prev_node_url): ?>
@@ -23,6 +22,11 @@
 <a class="next" href="<?php echo $next_node_url; ?>"><span>&gt;</span></a>
 <?php endif; ?>
 </p>
+<p class="compact">
+<?php echo $inlanguages; ?>
+<span id="node_hidy" class="hidy">+</span>
+</p>
+<div id="node">
 <p class="info"><?php echo longdatetime_fr($node_modified); ?></p>
 <?php if ($node_abstract): ?>
 <h5>Extrait</h5>
@@ -53,10 +57,18 @@
 </div>
 </fieldset>
 <?php endif; ?>
+</div>
 <?php if ($node_contents): ?>
 <h4>Contenu</h4>
-<div id="threadnodecontent">
 <?php echo $node_contents; ?>
-</div>
 <?php endif; ?>
-</div>
+<?php head('javascript', 'jquery.cookie'); ?>
+<script type="text/javascript">
+if ($.cookie('hidenode') == 1) {
+	$('#node').hide();
+}
+$('#node_hidy').click(function() {
+	$('#node').toggle();
+	$.cookie('hidenode', $('#node').is(':hidden') ? 1 : 0, { path: '/' });
+});
+</script>

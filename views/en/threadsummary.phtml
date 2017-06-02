@@ -2,14 +2,18 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    14
+ * @copyright  2010-2017 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'dateen.php'; ?>
-<div id="threadsummary">
 <h3><?php echo $thread_title ? $thread_title : $thread_id; ?></h3>
+<p class="compact">
+<?php echo $inlanguages; ?>
+<span id="thread_hidy" class="hidy">+</span>
+</p>
+<div id="thread">
 <p class="info"><?php echo longdatetime_en($thread_modified); ?></p>
 <?php if ($thread_abstract): ?>
 <h5>Abstract</h5>
@@ -42,6 +46,7 @@
 </div>
 </fieldset>
 <?php endif; ?>
+</div>
 <h4>Contents</h4>
 <?php if ($thread_contents): ?>
 <ol>
@@ -51,4 +56,13 @@
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>
-</div>
+<?php head('javascript', 'jquery.cookie'); ?>
+<script type="text/javascript">
+if ($.cookie('hidethread') == 1) {
+	$('#thread').hide();
+}
+$('#thread_hidy').click(function() {
+	$('#thread').toggle();
+	$.cookie('hidethread', $('#thread').is(':hidden') ? 1 : 0, { path: '/' });
+});
+</script>
