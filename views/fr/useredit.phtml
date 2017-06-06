@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2017 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 ?>
@@ -29,7 +29,7 @@
 <p><input id="useredit_mail" type="text" name="useredit_mail" size="40" maxlength="100" title="nom@domaine.fr" onkeypress="return submitonenter(event, 'useredit_modify')" value="<?php echo htmlspecialchars($user_mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php if ($with_role): ?>
 <?php $rolename=array('administrator' => 'administrateur', 'writer' => 'rédacteur', 'reader' => 'lecteur', 'moderator' => 'modérateur'); ?>
-<p><?php foreach ($supported_roles as $role): ?><?php echo PHP_EOL; ?><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>"<?php if ($user_role and in_array($role, $user_role)) echo ' checked="checked"'; ?> />&nbsp;<?php echo $rolename[$role]; ?><?php endforeach; ?><?php echo PHP_EOL; ?></p>
+<p><?php foreach ($supported_roles as $role): ?><?php echo PHP_EOL; ?><span class="nowrap"><input name="useredit_role[]" type="checkbox" value="<?php echo $role; ?>"<?php if ($user_role and in_array($role, $user_role)) echo ' checked="checked"'; ?> />&nbsp;<?php echo $rolename[$role]; ?></span><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php endif; ?>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Site web&nbsp;:</p>
@@ -51,9 +51,9 @@
 <?php if ($with_status): ?>
 <fieldset id="useredit_status">
 <legend>Statut</legend>
-<input name="useredit_active" type="checkbox" <?php if ($user_active) echo 'checked="checked"'; ?> />&nbsp;actif
-<input name="useredit_banned" type="checkbox" <?php if ($user_banned) echo 'checked="checked"'; ?> />&nbsp;banni
-<input name="useredit_confirmed" type="checkbox" <?php if ($user_confirmed) echo 'checked="checked"'; ?> />&nbsp;confirmé
+<span class="nowrap"><input name="useredit_active" type="checkbox" <?php if ($user_active) echo 'checked="checked"'; ?> />&nbsp;actif</span>
+<span class="nowrap"><input name="useredit_banned" type="checkbox" <?php if ($user_banned) echo 'checked="checked"'; ?> />&nbsp;banni</span>
+<span class="nowrap"><input name="useredit_confirmed" type="checkbox" <?php if ($user_confirmed) echo 'checked="checked"'; ?> />&nbsp;confirmé</span>
 </fieldset>
 <?php if ($user_accessed): ?>
 <?php require_once 'datefr.php'; ?>
