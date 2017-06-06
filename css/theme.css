@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    123
+ * @version    124
  * @link       http://www.izend.org
  */
 
@@ -317,6 +317,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 .besocial li {display:inline-block;padding:0;margin:0;}
 .besocial.standard li {height:30px;vertical-align:top;}
 .besocial.standard li.pinterest span {vertical-align:top !important;}
+.besocial.awesome li {margin:0.25em 0;}
 
 #sharebar.lite {margin-left:-65px;padding:5px;}
 #sharebar.lite a span, .besocial.lite a span {display:none;}
