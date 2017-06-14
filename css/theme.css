@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    124
+ * @version    125
  * @link       http://www.izend.org
  */
 
@@ -299,7 +299,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #toolbar #scrolltop {height:12px;background-position:-24px -72px;}
 #toolbar #scrollbottom {height:12px;background-position:-48px -72px;}
 
-#threadlist {margin-top:1em;}
+#threadlist, #nodelist {border-spacing:0;}
 
 .navigation {font-size:small;margin-bottom:1em;}
 .navigation .previous {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-32px -88px;vertical-align:text-bottom;}
@@ -420,6 +420,8 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 .username {font-weight:bold;}
 .usermail {font-style:italic;}
 .userlogged {text-align:right;}
+
+#userlist {border-spacing:0};
 
 #useredit_status {background-color:#ffffe0;}
 #useredit_accessed {font-size:small;}
