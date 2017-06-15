@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    4
+ * @copyright  2012-2017 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -24,9 +24,9 @@
 <input type="hidden" name="vote_type" value="<?php echo $content_type; ?>" />
 <input type="submit" class="plusone" name="vote_plusone" value="+1" title="Recommander" />
 <?php endif; ?>
-<?php if (!$nomore): ?>
-</form>
-<?php else: ?>
+<?php if ($nomore): ?>
 </div>
+<?php else: ?>
+</form>
 <?php endif; ?>
 <?php endif; ?>
