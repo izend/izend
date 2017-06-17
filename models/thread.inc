@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    24
+ * @copyright  2010-2017 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -74,6 +74,16 @@ function thread_node_id($thread_id, $node, $lang=false) {
 	$r = db_query($sql);
 
 	return $r ? $r[0]['node_id'] : false;
+}
+
+function thread_type($thread_id) {
+	$tabthread=db_prefix_table('thread');
+
+	$sql="SELECT thread_type FROM $tabthread WHERE thread_id=$thread_id";
+
+	$r = db_query($sql);
+
+	return $r ? $r[0]['thread_type'] : false;
 }
 
 function thread_user_id($thread_id) {
