@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
 
@@ -14,13 +14,19 @@ require_once 'userprofile.php';
 require_once 'models/thread.inc';
 
 function threadeditsummary($lang, $clang, $thread) {
-	global $supported_threads, $with_toolbar;
+	global $with_toolbar, $supported_threads;
 
 	$confirmed=false;
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
 		return run('error/notfound', $lang);
+	}
+
+	$thread_type = thread_type($thread_id);
+
+	if (!in_array($thread_type, $supported_threads)) {
+		return run('error/badrequest', $lang);
 	}
 
 	$action='init';

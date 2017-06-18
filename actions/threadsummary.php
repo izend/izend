@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function threadsummary($lang, $clang, $thread) {
-	global $with_toolbar;
+	global $with_toolbar, $supported_threads;
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
@@ -56,7 +56,7 @@ function threadsummary($lang, $clang, $thread) {
 	head('keywords', $thread_cloud);
 	head('robots', 'noindex, nofollow');
 
-	$edit=user_has_role('writer') ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $clang : false;
+	$edit=(user_has_role('writer') and in_array($thread_type, $supported_threads)) ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $clang : false;
 
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'edit'));
 

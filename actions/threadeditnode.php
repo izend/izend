@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ require_once 'strtofname.php';
 require_once 'models/thread.inc';
 
 function threadeditnode($lang, $clang, $thread, $node) {
-	global $with_toolbar, $supported_contents, $limited_contents;
+	global $with_toolbar, $supported_threads, $supported_contents, $limited_contents;
 
 	$thread_id = thread_id($thread);
 	if (!$thread_id) {
@@ -31,6 +31,10 @@ function threadeditnode($lang, $clang, $thread, $node) {
 		return run('error/notfound', $lang);
 	}
 	extract($r); /* thread_name thread_title thread_abstract thread_cloud thread_type */
+
+	if (!in_array($thread_type, $supported_threads)) {
+		return run('error/badrequest', $lang);
+	}
 
 	$content_types=$supported_contents;
 	if ($thread_type and $limited_contents and array_key_exists($thread_type, $limited_contents)) {

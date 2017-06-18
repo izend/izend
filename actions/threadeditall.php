@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,7 @@ require_once 'userprofile.php';
 require_once 'models/thread.inc';
 
 function threadeditall($lang, $clang) {
-	global $supported_threads, $with_toolbar;
+	global $with_toolbar, $supported_threads;
 
 	$confirmed=false;
 
@@ -79,10 +79,12 @@ function threadeditall($lang, $clang) {
 		$pos=1;
 		$thread_url = url('threadedit', $lang);
 		foreach ($r as $b) {
-			$b['thread_url'] = $thread_url  . '/' . $b['thread_id'];
-			$b['pos'] = $p ? $p[$pos] : $pos;
-			$thread_list[$pos] = $b;
-			$pos++;
+			if (in_array($b['thread_type'], $supported_threads)) {
+				$b['thread_url'] = $thread_url  . '/' . $b['thread_id'];
+				$b['pos'] = $p ? $p[$pos] : $pos;
+				$thread_list[$pos] = $b;
+				$pos++;
+			}
 		}
 	}
 
