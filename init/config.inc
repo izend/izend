@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    47
+ * @copyright  2010-2017 izend.org
+ * @version    48
  * @link       http://www.izend.org
  */
 <?php
@@ -114,6 +114,10 @@ $supported_roles=array('administrator', 'writer', 'reader', 'moderator');
 global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book', 'rss', 'newsletter');	// 'thread', 'folder', 'story', 'book', 'rss', 'newsletter'
+
+global $limited_languages;
+
+$limited_languages=false;
 
 global $contents_model, $supported_contents, $limited_contents;
 
