@@ -2,17 +2,18 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    16
+ * @copyright  2010-2017 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'userhasrole.php';
 require_once 'models/cloud.inc';
+require_once 'models/thread.inc';
 
 function search($lang, $arglist=false) {
-	global $search_all, $search_pertinence, $rss_thread;
+	global $search_all, $search_pertinence, $limited_languages;
 
 	$cloud=false;
 
@@ -25,25 +26,33 @@ function search($lang, $arglist=false) {
 	$cloud_id=$cloud_name=false;
 	$thread_nocloud=$thread_nosearch=false;
 
+	$clang=$lang;
+
 	if ($cloud) {
 		$cloud_id = cloud_id($cloud);
 		if (!$cloud_id) {
 			return run('error/notfound', $lang);
 		}
 
-		if ($cloud_id == $rss_thread) {
+		$thread_type = thread_type($cloud_id);
+
+		if ($thread_type == 'rss') {
 			if (!user_has_role('administrator')) {
 				return run('error/unauthorized', $lang);
 			}
 		}
 
-		$r = cloud_get($lang, $cloud_id);
+		if (isset($limited_languages[$thread_type]) and !in_array($clang, $limited_languages[$thread_type])) {
+			$clang = $limited_languages[$thread_type][0];
+		}
+
+		$r = cloud_get($clang, $cloud_id);
 		if (!$r) {
 			return run('error/notfound', $lang);
 		}
 		extract($r); /* cloud_name cloud_title cloud_action */
 
-		$r = thread_get($lang, $cloud_id);
+		$r = thread_get($clang, $cloud_id);
 		if (!$r) {
 			return run('error/notfound', $lang);
 		}
@@ -83,7 +92,7 @@ function search($lang, $arglist=false) {
 				if ($searchtext) {
 					global $search_distance, $search_closest;
 
-					$taglist=cloud_match($lang, $cloud_id, $searchtext, $search_distance, $search_closest);
+					$taglist=cloud_match($clang, $cloud_id, $searchtext, $search_distance, $search_closest);
 				}
 			}
 			break;
@@ -92,7 +101,7 @@ function search($lang, $arglist=false) {
 	}
 
 	if ($taglist) {
-		$rsearch=cloud_search($lang, $cloud_id, $taglist, $search_pertinence);
+		$rsearch=cloud_search($clang, $cloud_id, $taglist, $search_pertinence);
 	}
 
 	$search_title=translate('search:title', $lang);
@@ -108,7 +117,7 @@ function search($lang, $arglist=false) {
 		if (!$thread_nocloud) {
 			$cloud_url=url('search', $lang, $cloud_name);
 			$byname=$bycount=$index=true;
-			$cloud = build('cloud', $lang, $cloud_url, $cloud_id, false, 30, compact('byname', 'bycount', 'index'));
+			$cloud = build('cloud', $clang, $cloud_url, $cloud_id, false, 30, compact('byname', 'bycount', 'index'));
 		}
 		$headline_text=$search_title;
 		$headline_url=false;
@@ -129,7 +138,7 @@ function search($lang, $arglist=false) {
 
 		$byname=true;
 		$bycount=$index=false;
-		$content = build('cloud', $lang, $cloud_url, $cloud_id, false, false, compact('byname', 'bycount', 'index'));
+		$content = build('cloud', $clang, $cloud_url, $cloud_id, false, false, compact('byname', 'bycount', 'index'));
 	}
 
 	if ($search_url) {
