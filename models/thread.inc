@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -477,17 +477,17 @@ function thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $
 }
 
 function thread_copy_node($lang, $user_id, $thread_id, $node_id, $node_name, $node_title, $node_number=0) {
-	$node_contents = node_get_contents($lang, $node_id);
-
-	if (!$node_contents) {
-		return false;
-	}
-
 	$np = thread_create_node($lang, $user_id, $thread_id, $node_name, $node_title, $node_number);
 	if (!$np) {
 		return false;
 	}
 	extract($np);   /* node_id node_number */
+
+	$node_contents = node_get_contents($lang, $node_id);
+
+	if (!$node_contents) {
+		return $np;
+	}
 
 	foreach ($node_contents as &$c) {
 		$content_type=$c['content_type'];
