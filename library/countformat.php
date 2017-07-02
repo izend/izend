@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    1
+ * @copyright  2012-2017 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
-function count_format($n, $point='.', $sep=',') {
+function count_format($n, $point='.', $sep=',', $spacing='') {
 	if ($n < 0) {
 		return 0;
 	}
@@ -20,5 +20,5 @@ function count_format($n, $point='.', $sep=',') {
 
 	$f = round($n / $d, 1);
 
-	return number_format($f, $f - intval($f) ? 1 : 0, $point, $sep) . ($d == 1000 ? 'k' : 'M');
+	return number_format($f, $f - intval($f) ? 1 : 0, $point, $sep) . $spacing . ($d == 1000 ? 'k' : 'M');
 }
