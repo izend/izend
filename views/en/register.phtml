@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 ?>
@@ -64,7 +64,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <p><input type="submit" class="submit submit_send" name="register_register" id="register_register" value="Send" /></p>
 </form>
-<div class="error">
+<div class="errors">
 <?php if ($missing_code): ?>
 <p>Enter the verification code displayed in the image.</p>
 <?php elseif ($bad_code): ?>
