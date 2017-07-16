@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2013-2016 izend.org
- * @version    23
+ * @copyright  2013-2017 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
  
@@ -52,7 +52,7 @@ video {height:auto;}
 #sidebar #searchinput {max-width:100%;margin-left:0;margin-right:auto;}
 #sidebar #headline {text-align:left;}
 #sidebar #donate {float:none;}
-#sidebar .hidy {margin-left:4px;}
+#sidebar .hidy {display:block;margin-left:4px;}
 #sidebar .cloud li .btn_index {float:right;margin-left:6px;margin-right:0;}
 #linkbar a {display:block;margin:1em 0;}
 #linkbar a span {margin:0;}
