@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -71,37 +71,41 @@ function search($lang, $arglist=false) {
 		}
 	}
 
-	$action='none';
-	if (isset($_POST['search'])) {
-		$action='search';
-	}
+	$searchtext=$rsearch=false;
 
-	$searchtext=$taglist=false;
-	$rsearch=false;
-	switch($action) {
-		case 'none':
-			if (!empty($arglist['q'])) {
-				$searchtext=$arglist['q'];
-				$taglist=explode(' ', $searchtext);
-			}
-			break;
-		case 'search':
-			if (isset($_POST['searchtext'])) {
-				$searchtext=readarg($_POST['searchtext'], true, false);	// trim but DON'T strip!
+	if (!$thread_nosearch) {
+		$action='none';
+		if (isset($_POST['search'])) {
+			$action='search';
+		}
 
-				if ($searchtext) {
-					global $search_distance, $search_closest;
+		$taglist=false;
 
-					$taglist=cloud_match($clang, $cloud_id, $searchtext, $search_distance, $search_closest);
+		switch($action) {
+			case 'none':
+				if (!empty($arglist['q'])) {
+					$searchtext=$arglist['q'];
+					$taglist=explode(' ', $searchtext);
 				}
-			}
-			break;
-		default:
-			break;
-	}
+				break;
+			case 'search':
+				if (isset($_POST['searchtext'])) {
+					$searchtext=readarg($_POST['searchtext'], true, false);	// trim but DON'T strip!
 
-	if ($taglist) {
-		$rsearch=cloud_search($clang, $cloud_id, $taglist, $search_pertinence);
+					if ($searchtext) {
+						global $search_distance, $search_closest;
+
+						$taglist=cloud_match($clang, $cloud_id, $searchtext, $search_distance, $search_closest);
+					}
+				}
+				break;
+			default:
+				break;
+		}
+
+		if ($taglist) {
+			$rsearch=cloud_search($clang, $cloud_id, $taglist, $search_pertinence);
+		}
 	}
 
 	$search_title=translate('search:title', $lang);
@@ -127,12 +131,13 @@ function search($lang, $arglist=false) {
 		$content = build('searchlist', $lang, $rsearch, $taglist);
 	}
 	else {
+		$url=url('search', $lang, $cloud_name);
+		if (!$thread_nosearch) {
+			$search_url=$url;
+		}
+		$cloud_url=$url;
 		$headline_text=$cloud_id ? $cloud_title : $search_title;
 		$headline_url=false;
-		if (!$thread_nosearch) {
-			$search_url=url('search', $lang, $cloud_name);
-		}
-		$cloud_url=url('search', $lang, $cloud_name);
 		$headline = compact('headline_text', 'headline_url');
 		$title = view('headline', false, $headline);
 
