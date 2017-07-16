@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    6
+ * @copyright  2010-2017 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -37,7 +37,7 @@ function cloud($lang, $cloud_url, $cloud_id=false, $node_id=false, $size=false, 
 			$url=$cloud_url . '?q=' . urlencode($tag_name);
 			$linklist[] = compact('name', 'count', 'url');
 		}
-		if ($index) {
+		if ($index === true) {
 			$index=$cloud_url;
 		}
 	}
