@@ -2,9 +2,11 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2017 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
+<?php if (!empty($headline_text) or !empty($headline_url)): ?>
 <h4 id="headline"><?php if ($headline_url): ?><a href="<?php echo $headline_url; ?>"><?php endif; ?><?php echo htmlspecialchars($headline_text, ENT_NOQUOTES, 'UTF-8', false); ?><?php if ($headline_url): ?></a><?php endif; ?></h4>
+<?php endif; ?>
