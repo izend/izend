@@ -95,22 +95,22 @@ $aliases = array(
 	),
 );
 ?>
+<?php $unused = array('logo', 'avatar', 'node', 'editnode'); ?>
 $aliases = array(
 	array(
 <?php foreach ($aliases[0] as $action => $path): ?>
 <?php if (in_array($action, $features)): ?>
-		'<?php echo $path; ?>' => '<?php echo $action; ?>',
+<?php if (in_array($action, $unused)): ?>//<?php endif; ?>		'<?php echo $path; ?>' => '<?php echo $action; ?>',
 <?php endif; ?>
 <?php endforeach; ?>
 	),
 <?php foreach ($languages as $lang): ?>
-	'<?php echo $lang; ?>' => array(
+	'<?php echo $lang; ?>' 	=> array(
 <?php foreach ($aliases[$lang] as $action => $path): ?>
 <?php if (in_array($action, $features)): ?>
-		'<?php echo $path; ?>' => '<?php echo $action; ?>',
+<?php if (in_array($action, $unused)): ?>//<?php endif; ?>		'<?php echo $path; ?>' => '<?php echo $action; ?>',
 <?php endif; ?>
 <?php endforeach; ?>
 	),
 <?php endforeach; ?>
 );
-
