@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -73,39 +73,39 @@ function search($lang, $arglist=false) {
 
 	$searchtext=$rsearch=false;
 
+	$action='none';
 	if (!$thread_nosearch) {
-		$action='none';
 		if (isset($_POST['search'])) {
 			$action='search';
 		}
+	}
 
-		$taglist=false;
+	$taglist=false;
 
-		switch($action) {
-			case 'none':
-				if (!empty($arglist['q'])) {
-					$searchtext=$arglist['q'];
-					$taglist=explode(' ', $searchtext);
+	switch($action) {
+		case 'none':
+			if (!empty($arglist['q'])) {
+				$searchtext=$arglist['q'];
+				$taglist=explode(' ', $searchtext);
+			}
+			break;
+		case 'search':
+			if (isset($_POST['searchtext'])) {
+				$searchtext=readarg($_POST['searchtext'], true, false);	// trim but DON'T strip!
+
+				if ($searchtext) {
+					global $search_distance, $search_closest;
+
+					$taglist=cloud_match($clang, $cloud_id, $searchtext, $search_distance, $search_closest);
 				}
-				break;
-			case 'search':
-				if (isset($_POST['searchtext'])) {
-					$searchtext=readarg($_POST['searchtext'], true, false);	// trim but DON'T strip!
+			}
+			break;
+		default:
+			break;
+	}
 
-					if ($searchtext) {
-						global $search_distance, $search_closest;
-
-						$taglist=cloud_match($clang, $cloud_id, $searchtext, $search_distance, $search_closest);
-					}
-				}
-				break;
-			default:
-				break;
-		}
-
-		if ($taglist) {
-			$rsearch=cloud_search($clang, $cloud_id, $taglist, $search_pertinence);
-		}
+	if ($taglist) {
+		$rsearch=cloud_search($clang, $cloud_id, $taglist, $search_pertinence);
 	}
 
 	$search_title=translate('search:title', $lang);
