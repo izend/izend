@@ -3,12 +3,13 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'dateen.php'; ?>
 <h3><?php echo htmlspecialchars($node_title ? $node_title : $node_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<?php if ($next_node_url or $prev_node_url): ?>
 <p class="navigation menu">
 <?php if ($prev_node_url): ?>
 <a class="previous" href="<?php echo $prev_node_url; ?>"><span>&lt;</span></a>
@@ -22,6 +23,7 @@
 <a class="next" href="<?php echo $next_node_url; ?>"><span>&gt;</span></a>
 <?php endif; ?>
 </p>
+<?php endif; ?>
 <p class="compact">
 <?php echo $inlanguages; ?>
 <span id="node_hidy" class="hidy">+</span>
