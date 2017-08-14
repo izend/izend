@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    28
+ * @version    29
  * @link       http://www.izend.org
  */
 
@@ -119,7 +119,7 @@ function folderpage($lang, $folder, $page) {
 		if ($pinit) {
 			$pinit_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
 			$pinit_image=$node_image ? $node_image : $siteshot;
-			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : false;
+			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : true;
 		}
 		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
 	}
