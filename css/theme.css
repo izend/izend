@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    125
+ * @version    126
  * @link       http://www.izend.org
  */
 
@@ -39,6 +39,8 @@ th {background-color:#ffffe0;font-weight:bold;}
 .vignette {float:right;margin:0.25em 0 0.5em 1em;}
 
 .readmore {background:transparent url(../images/theme/icons/look.png) no-repeat;text-indent:30px;line-height:24px;}
+
+.clickit {display:inline-block;color:#333333;background-color:#ffffe0;padding:10px;border-radius:2px;font-weight:bold;cursor:pointer;}
 
 .topbar li {color:#ffffff;}
 .topbar a:link, .topbar a:visited {color:#ffffff;}
