@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2017 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -17,11 +17,11 @@
 Pour en savoir plus, <a href="/fr/informations-légales" title="Informations légales">cliquez ici</a>.
 <?php endif; ?>
 </p>
-<?php if (false): ?>
+<?php if ($confirmcookieconsent): ?>
 <p><span id="consentyes" class="clickit">J'ai compris</span></p>
 <?php endif; ?>
 </div>
-<?php if (false): ?>
+<?php if ($confirmcookieconsent): ?>
 <?php head('javascript', 'jquery.cookie'); ?>
 <script type="text/javascript">
 $('#consentyes').click(function() {

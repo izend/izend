@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    6
+ * @copyright  2010-2017 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -11,12 +11,21 @@ require_once 'userisidentified.php';
 require_once 'userhasrole.php';
 
 function banner($lang, $components=false) {
-	global $home_action, $cookieconsent;
+	global $home_action, $cookieconsent, $cookieconsentauto;
+
+	$is_identified = user_is_identified();
+	$is_admin = user_has_role('administrator');
+	$is_writer = user_has_role('writer');
 
 	$consent=false;
-	if ($cookieconsent and !isset($_COOKIE['cookieconsent'])) {
-		setcookie('cookieconsent', true, time()+60*60*24*365, '/');
-		$consent=view('consent', $lang);
+	if ($cookieconsent and ! ($is_admin or $is_writer)) {
+		if (!isset($_COOKIE['cookieconsent'])) {
+			$confirmcookieconsent=!$cookieconsentauto;
+			if ($cookieconsentauto) {
+				setcookie('cookieconsent', true, time()+60*60*24*365, '/');
+			}
+			$consent=view('consent', $lang, compact('confirmcookieconsent'));
+		}
 	}
 
 	$home_page=url($home_action, $lang);
@@ -25,10 +34,6 @@ function banner($lang, $components=false) {
 	$menu=$languages=$headline=$search=$donate=false;
 
 	$contact_page=$user_page=$nobody_page=$account_page=$edit_page=$view_page=$validate_page=$admin_page=false;
-
-	$is_identified = user_is_identified();
-	$is_admin = user_has_role('administrator');
-	$is_writer = user_has_role('writer');
 
 	if ($is_identified) {
 		$nobody_page=url('nobody', $lang);
