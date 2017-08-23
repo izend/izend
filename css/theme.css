@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    126
+ * @version    127
  * @link       http://www.izend.org
  */
 
@@ -99,7 +99,7 @@ div.alert {color:#333333;background-color:#ffcccc;padding:0.5em 1em 0.5em 1em;}
 div.warning {color:#333333;background-color:#ffffe0;padding:0.5em 1em 0.5em 1em;}
 div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 
-.tagbar {margin-bottom:5px;}
+.tagbar {margin-bottom:2px;}
 .tagbar .tagmore {margin-left:50px;white-space:nowrap;}
 
 .lang {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/flags.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
