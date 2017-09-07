@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    4
+ * @copyright  2010-2017 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -15,7 +15,14 @@ function user($lang, $arglist=false) {
 	$login = build('login', $lang);
 
 	if ($login === true) {
-		$r=!empty($arglist['r']) ? $arglist['r'] : false;
+		$reload=false;
+
+		if (!empty($arglist['r'])) {
+			$r=@parse_url($arglist['r']);
+			if ($r) {
+				$reload=$r['path'];
+			}
+		}
 
 		if ($login_verified and array_intersect($login_verified, user_profile('role'))) {
 			$user=$_SESSION['user'];
@@ -28,12 +35,12 @@ function user($lang, $arglist=false) {
 			$_SESSION['unverified_user']=$user;
 
 			$next_page=url('sslverifyclient');
-			if ($r) {
-				$next_page .= '?r=' . $r;
+			if ($reload) {
+				$next_page .= '?r=' . urlencode($reload);
 			}
 		}
 		else {
-			$next_page = $r ? $r : url('home', $lang);
+			$next_page = $reload ? $reload : url('home', $lang);
 		}
 
 		return reload($base_url . $next_page);
