@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright	2010-2016 izend.org
- * @version		13
+ * @copyright	2010-2017 izend.org
+ * @version		14
  * @link		http://www.izend.org
  */
 
@@ -262,10 +262,10 @@ function render($file, $vars=false) {
 	return ob_get_clean();
 }
 
-function redirect($action, $lang=false, $arg=false) {
+function redirect($action, $lang=false, $arg=false, $params) {
 	global $base_url;
 
-	$url=$base_url . url($action, $lang, $arg);
+	$url=$base_url . url($action, $lang, $arg, $params);
 
 	reload($url);
 }
