@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016 izend.org
- * @version    4
+ * @copyright  2016-2017 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -31,9 +31,7 @@
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script>
-$(document).ready(function() {
-    $('#analytics_startdate, #analytics_enddate').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, maxDate: 'today', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM'});
-});
+$('#analytics_startdate, #analytics_enddate').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, maxDate: 'today', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM'});
 </script>
 <?php endif; ?>
 <p><span class="nowrap"><input name="analytics_trendline" type="checkbox"<?php if ($trendline): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_chart" title="With trend line">trendline</span></span></p>
