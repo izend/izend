@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    83
+ * @version    84
  * @link       http://www.izend.org
  */
  
@@ -107,10 +107,12 @@ div.row > *:first-child {margin-left:0;}
 div.row > *:last-child {margin-right:0;}
 div.row.compact > * {margin-left:0;margin-right:0;}
 div.row.tight {margin:0;}
-
-div.bytwo > * {width:49%;}
-div.bythree > * {width:32%;}
-div.byfour > * {width:23%;}
+div.row.bytwo > * {width:49%;}
+div.row.bythree > * {width:32%;}
+div.row.byfour > * {width:23%;}
+div.row.compact.bytwo > * {width:50%;}
+div.row.compact.bythree > * {width:33.333333%;}
+div.row.compact.byfour > * {width:25%;}
 
 div.labeled > span {float:left;width:10em;margin-right:1em;text-align:right;}
 
