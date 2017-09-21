@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -23,11 +23,11 @@ function login($lang) {
 	$with_newpassword=true;
 
 	if ($with_facebook) {
-		require_once 'facebook.php';
+		require_once 'vendor/autoload.php';
 
 		global $facebookid, $facebooksecret;
 
-		$facebook=facebook(array('appId' => $facebookid, 'secret' => $facebooksecret));
+		$facebook=new \Facebook\Facebook(array('app_id' => $facebookid, 'app_secret' => $facebooksecret));
 	}
 
 	$login=$password=$code=$token=false;
@@ -44,18 +44,24 @@ function login($lang) {
 	switch($action) {
 		case 'init':
 			if ($with_facebook) {
-				$facebook_user=$facebook->getUser();
-				if ($facebook_user) {
-					try {
-						$facebook_user_profile = $facebook->api('/me', 'GET');
-						if (!empty($facebook_user_profile['email'])) {
-							$login=$facebook_user_profile['email'];
-						}
+				$helper = $facebook->getRedirectLoginHelper();
+				try {
+					$accessToken = $helper->getAccessToken();
+
+					if ($accessToken) {
+						$fields=array('email');
+
+						$r = $facebook->get('/me?fields=' . implode(',', $fields), $accessToken);
+						$user = $r->getGraphUser();
+
+						$login=$user['email'];
+
 						$action='facebook';
 					}
-					catch(FacebookApiException $e) {
-					}
-					$facebook->destroySession();
+				}
+				catch(\Facebook\Exceptions\FacebookResponseException $e) {
+				}
+				catch(\Facebook\Exceptions\FacebookSDKException $e) {
 				}
 			}
 			break;
@@ -198,8 +204,12 @@ function login($lang) {
 
 	$connectbar=false;
 	if ($with_facebook) {
-		$scope='email';
-		$facebook_login_url=$facebook->getLoginUrl(compact('scope'));
+		global $base_url;
+
+		$url=$base_url . url('user', $lang);
+		$scope = array('email');
+		$helper = $facebook->getRedirectLoginHelper();
+		$facebook_login_url=$helper->getLoginUrl($url, $scope);
 		$connectbar=view('connect', $lang, compact('facebook_login_url'));
 	}
 

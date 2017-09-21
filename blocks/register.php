@@ -38,11 +38,11 @@ function register($lang) {
 	$with_validation=false;	// ($with_password and !$is_admin);
 
 	if ($with_facebook) {
-		require_once 'facebook.php';
+		require_once 'vendor/autoload.php';
 
 		global $facebookid, $facebooksecret;
 
-		$facebook=facebook(array('appId' => $facebookid, 'secret' => $facebooksecret));
+		$facebook=new \Facebook\Facebook(array('app_id' => $facebookid, 'app_secret' => $facebooksecret));
 	}
 
 	$action='init';
@@ -60,36 +60,38 @@ function register($lang) {
 	switch($action) {
 		case 'init':
 			if ($with_facebook) {
-				$facebook_user=$facebook->getUser();
-				if ($facebook_user) {
-					try {
-						$facebook_user_profile = $facebook->api('/me', 'GET');
-						if (!empty($facebook_user_profile['email'])) {
-							$mail=$facebook_user_profile['email'];
-						}
+				$helper = $facebook->getRedirectLoginHelper();
+				try {
+					$accessToken = $helper->getAccessToken();
+
+					if ($accessToken) {
+						$fields=array('email');
 						if ($with_info) {
-							if (!empty($facebook_user_profile['last_name'])) {
-								$lastname=$facebook_user_profile['last_name'];
-							}
-							if (!empty($facebook_user_profile['first_name'])) {
-								$firstname=$facebook_user_profile['first_name'];
-							}
-						}
-						if ($with_name) {
-							if (!empty($facebook_user_profile['username'])) {
-								$name=$facebook_user_profile['username'];
-							}
+							$fields[]='first_name';
+							$fields[]='last_name';
 						}
 						if ($with_website) {
-							if (!empty($facebook_user_profile['website'])) {
-								$website=$facebook_user_profile['website'];
-							}
+							$fields[]='website';
 						}
+
+						$r = $facebook->get('/me?fields=' . implode(',', $fields), $accessToken);
+						$user = $r->getGraphUser();
+
+						$mail=$user['email'];
+						if ($with_info) {
+							$firstname=$user['first_name'];
+							$lastname=$user['last_name'];
+						}
+						if ($with_website) {
+							$website=$user['website'];
+						}
+
 						$action='facebook';
 					}
-					catch(FacebookApiException $e) {
-					}
-					$facebook->destroySession();
+				}
+				catch(\Facebook\Exceptions\FacebookResponseException $e) {
+				}
+				catch(\Facebook\Exceptions\FacebookSDKException $e) {
 				}
 			}
 
@@ -334,8 +336,15 @@ function register($lang) {
 
 	$connectbar=false;
 	if ($with_facebook) {
-		$scope=$with_website ? 'email, user_website' : 'email';
-		$facebook_login_url=$facebook->getLoginUrl(compact('scope'));
+		global $base_url;
+
+		$url=$base_url . url('newuser', $lang);
+		$scope = array('email');
+		if ($with_website) {
+			$scope[]='user_website';
+		}
+		$helper = $facebook->getRedirectLoginHelper();
+		$facebook_login_url=$helper->getLoginUrl($url, $scope);
 		$connectbar=view('connect', $lang, compact('facebook_login_url'));
 	}
 
