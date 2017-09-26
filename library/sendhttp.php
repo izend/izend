@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -115,14 +115,14 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 			}
 
 			$content_length = strlen($content_string);
-			$header_string="POST $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}";
+			$header_string="POST $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}";
 			break;
 
 		case 'GET':
 			if ($args && is_array($args)) {
 				$path .= '?' . http_build_args($args);
 			}
-			$header_string="GET $path HTTP/1.0${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+			$header_string="GET $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
 
 
 			break;
