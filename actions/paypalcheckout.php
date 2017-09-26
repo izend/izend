@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    4
+ * @copyright  2010-2017 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -66,7 +66,6 @@ function paypalcheckout($lang, $amount, $currency, $tax=0, $context=false) {
 		'L_PAYMENTREQUEST_0_TAXAMT0'		=> $taxamt,
 		'L_PAYMENTREQUEST_0_QTY0'			=> '1',
 		'NOSHIPPING' 						=> '1',
-		'ALLOWNOTE' 						=> '0',
 		'EMAIL'								=> $email,
 		'BRANDNAME'							=> $sitename,
 		'HDRIMG'							=> $hdrimg,
