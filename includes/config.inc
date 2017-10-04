@@ -3,11 +3,9 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    49
+ * @version    50
  * @link       http://www.izend.org
  */
-
-require_once 'ismobile.php';
 
 global $base_url, $base_path, $base_root;
 
@@ -128,6 +126,8 @@ $supported_contents=array('text', 'infile', 'download', 'file', 'youtube', 'long
 $limited_contents=array('rss' => array('text'), 'newsletter' => array('text'));
 
 global $with_toolbar;
+
+require_once 'ismobile.php';
 
 $with_toolbar=is_mobile() ? false : true;
 
