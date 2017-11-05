@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
@@ -83,29 +83,29 @@ To return to the home page, <a href="<?php echo $home_page; ?>">click here</a>.
 </div>
 <?php if ($with_attachment): ?>
 <script type="text/javascript">
-var file=$('#mailme_file');
-var upload=$('#mailme_put');
+(function() {
+	var file=$('#mailme_file');
+	var upload=$('#mailme_put');
 
-upload.unwrap();
+	upload.unwrap();
 
-file.css({ position: 'absolute', left: '-9999px' });
+	file.css({ position: 'absolute', left: '-9999px' });
 
-upload.on('click', function(e) { e.preventDefault(); file.click(); });
+	upload.on('click', function(e) { e.preventDefault(); file.click(); });
 
-file.change(function() {
-    if (file.val()) {
-        upload.next().removeClass('icon_attachment').removeClass('icon_ko').addClass('icon_ok').text('+');
-    }
-});
+	file.change(function() {
+		if (file.val()) {
+			upload.next().removeClass('icon_attachment').removeClass('icon_ko').addClass('icon_ok').text('+');
+		}
+	});
+})();
 </script>
 <?php endif; ?>
 <?php if ($with_appointment): ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script>
-$(document).ready(function() {
-    $('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
-});
+$('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
 </script>
 <?php endif; ?>
 <script type="text/javascript">
