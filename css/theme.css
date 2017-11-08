@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    128
+ * @version    129
  * @link       http://www.izend.org
  */
 
@@ -423,7 +423,7 @@ a:hover .icon_pinterest {background-position:-635px 0;}
 .usermail {font-style:italic;}
 .userlogged {text-align:right;}
 
-#userlist {border-spacing:0};
+#userlist {border-spacing:0;}
 
 #useredit_status {background-color:#ffffe0;}
 #useredit_accessed {font-size:small;}
