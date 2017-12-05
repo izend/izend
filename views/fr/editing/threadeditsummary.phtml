@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2017 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 ?>
@@ -18,7 +18,9 @@
 <div id="thread">
 <p>
 <input id="thread_title" name="thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return submitonenter(event, 'thread_edit')"/>
-<label>URL&nbsp;:</label>
+</p>
+<p><label>URL&nbsp;:</label></p>
+<p>
 <input id="thread_name" name="thread_name" type="text" size="40" maxlength="100" value="<?php echo $thread_name; ?>" onkeypress="return submitonenter(event, 'thread_edit')"/>
 </p>
 <p><label>Extrait&nbsp;:</label></p>

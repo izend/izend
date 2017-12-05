@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    17
+ * @copyright  2010-2017 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -17,7 +17,9 @@
 <div id="node">
 <p>
 <input id="node_title" name="node_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return submitonenter(event, 'node_edit')"/>
-<label>URL:</label>
+</p>
+<p><label>URL:</label></p>
+<p>
 <input id="node_name" name="node_name" type="text" size="40" maxlength="100" value="<?php echo $node_name; ?>" onkeypress="return focusonenter(event, 'node_title')"/>
 </p>
 <p><label>Abstract:</label></p>
