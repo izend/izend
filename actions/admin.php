@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2016 izend.org
- * @version    7
+ * @copyright  2012-2017 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -14,15 +14,11 @@ function admin($lang) {
 	global $paypal_username, $paypal_password, $paypal_signature;
 	global $googleanalyticsaccount, $googleanalyticskeyfile;
 	global $newsletter_thread;
+	global $with_toolbar;
 
 	if (!user_has_role('administrator')) {
 		return run('error/unauthorized', $lang);
 	}
-
-	head('title', translate('admin:title', $lang));
-	head('description', false);
-	head('keywords', false);
-	head('robots', 'noindex, nofollow');
 
 	$banner = build('banner', $lang);
 
@@ -40,7 +36,15 @@ function admin($lang) {
 	$usersearch = build('usersearch', $lang);
 	$content = view('admin', $lang, compact('newuser_page', 'newsletter_page', 'traffic_page', 'balance', 'usersearch', 'upload'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	head('title', translate('admin:title', $lang));
+	head('description', false);
+	head('keywords', false);
+	head('robots', 'noindex, nofollow');
+
+	$banner = build('banner', $lang);
+	$toolbar = $with_toolbar ? build('toolbar', $lang) : false;
+
+	$output = layout('standard', compact('toolbar', 'banner', 'content'));
 
 	return $output;
 }
