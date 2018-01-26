@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013-2014 izend.org
- * @version    3
+ * @copyright  2013-2018 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -18,6 +18,8 @@ require_once 'models/newsletter.inc';
 
 function unsubscribe($lang) {
 	$with_captcha=true;
+
+	$with_confirmation=true;
 
 	$action='init';
 	if (isset($_POST['unsubscribe_send'])) {
@@ -38,8 +40,10 @@ function unsubscribe($lang) {
 			if (isset($_POST['unsubscribe_mail'])) {
 				$user_mail=strtolower(strflat(readarg($_POST['unsubscribe_mail'])));
 			}
-			if (isset($_POST['unsubscribe_confirmed'])) {
-				$confirmed=readarg($_POST['unsubscribe_confirmed']) == 'on' ? true : false;
+			if ($with_confirmation) {
+				if (isset($_POST['unsubscribe_confirmed'])) {
+					$confirmed=readarg($_POST['unsubscribe_confirmed']) == 'on' ? true : false;
+				}
 			}
 			if (isset($_POST['unsubscribe_code'])) {
 				$code=readarg($_POST['unsubscribe_code']);
@@ -96,8 +100,10 @@ function unsubscribe($lang) {
 			else if (!newsletter_get_user($user_mail)) {
 				$unknown_mail=true;
 			}
-			if (!$confirmed) {
-				$missing_confirmation=true;
+			if ($with_confirmation) {
+				if (!$confirmed) {
+					$missing_confirmation=true;
+				}
 			}
 
 			break;
@@ -163,7 +169,7 @@ function unsubscribe($lang) {
 	$errors = compact('missing_mail', 'bad_mail', 'unknown_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('mail_unsubscribed');
 
-	$output = view('unsubscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'confirmed', 'subscribe_page', 'errors', 'infos'));
+	$output = view('unsubscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_confirmation', 'confirmed', 'subscribe_page', 'errors', 'infos'));
 
 	return $output;
 }

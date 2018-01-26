@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2014 izend.org
- * @version    6
+ * @copyright  2012-2018 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -22,6 +22,8 @@ function subscribe($lang) {
 	$with_locale=count($system_languages) > 1;	// true, false
 
 	$with_captcha=true;
+
+	$with_confirmation=true;
 
 	$action='init';
 	if (isset($_POST['subscribe_send'])) {
@@ -53,8 +55,10 @@ function subscribe($lang) {
 					$user_locale=readarg($_POST['subscribe_locale']);
 				}
 			}
-			if (isset($_POST['subscribe_confirmed'])) {
-				$confirmed=readarg($_POST['subscribe_confirmed']) == 'on' ? true : false;
+			if ($with_confirmation) {
+				if (isset($_POST['subscribe_confirmed'])) {
+					$confirmed=readarg($_POST['subscribe_confirmed']) == 'on' ? true : false;
+				}
 			}
 			if (isset($_POST['subscribe_code'])) {
 				$code=readarg($_POST['subscribe_code']);
@@ -120,8 +124,10 @@ function subscribe($lang) {
 					$bad_locale=true;
 				}
 			}
-			if (!$confirmed) {
-				$missing_confirmation=true;
+			if ($with_confirmation) {
+				if (!$confirmed) {
+					$missing_confirmation=true;
+				}
 			}
 
 			break;
@@ -171,7 +177,7 @@ function subscribe($lang) {
 	$errors = compact('missing_mail', 'bad_mail', 'missing_locale', 'bad_locale', 'duplicated_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
 	$infos = compact('email_registered');
 
-	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_locale', 'user_locale', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
+	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_locale', 'user_locale', 'with_confirmation', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
 
 	return $output;
 }
