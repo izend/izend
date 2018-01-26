@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    15
+ * @copyright  2010-2018 izend.org
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -43,6 +43,8 @@ $strings = array(
 		'email:new_user_text'			=> "Welcome!\n\nYour password is in the attached cryptogram.",
 		'email:new_user_confirm'		=> "To validate your account, click on the following link:\n\n%s.",
 		'email:appointment'				=> 'Appointment on %s at %02d:%02d.',
+		'newsletter:register_subject'	=> 'Newsletter',
+		'newsletter:register_text'		=> "To start receiving the newsletter by email, click on the following link:\n\n%s\n\nOtherwise, please ignore this message.",
 		'newsletter:unregister_subject'	=> 'Newsletter',
 		'newsletter:unregister_text'	=> "To stop receiving the newsletter by email, click on the following link:\n\n%s\n\nOtherwise, please ignore this message.",
 		'payment_accepted:title'		=> 'Payment accepted',
@@ -81,6 +83,8 @@ $strings = array(
 		'email:new_user_text'			=> "Bienvenue !\n\nVotre mot de passe est dans le cryptogramme en pièce jointe.",
 		'email:new_user_confirm'		=> "Pour valider votre compte, cliquez sur le lien suivant :\n\n%s.",
 		'email:appointment'				=> 'Rendez-vous le %s à %02d:%02d.',
+		'newsletter:register_subject'	=> 'Infolettre',
+		'newsletter:register_text'		=> "Pour recevoir l'infolettre par email, cliquez sur le lien suivant :\n\n%s\n\nSinon, veuillez ignorer ce message.",
 		'newsletter:unregister_subject'	=> 'Infolettre',
 		'newsletter:unregister_text'	=> "Pour ne plus recevoir l'infolettre par email, cliquez sur le lien suivant :\n\n%s\n\nSinon, veuillez ignorer ce message.",
 		'payment_accepted:title'		=> 'Paiement accepté',

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2017 izend.org
- * @version    2
+ * @copyright  2014-2018 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -11,8 +11,9 @@ require_once 'urlencodeaction.php';
 
 function saction($lang, $arglist=false) {
 	static $actions = array(
-		1 => 'confirmnewsletterunsubscribe',
-		2 => 'confirmnewuser',
+		CONFIRMNEWUSER					=> 'confirmnewuser',
+		CONFIRMNEWSLETTERSUBSCRIBE		=> 'confirmnewslettersubscribe',
+		CONFIRMNEWSLETTERUNSUBSCRIBE	=> 'confirmnewsletterunsubscribe',
 	);
 
 	$s64=false;

@@ -9,6 +9,10 @@
 
 require_once 'urlencrypt.php';
 
+define('CONFIRMNEWUSER', 1);
+define('CONFIRMNEWSLETTERSUBSCRIBE', 2);
+define('CONFIRMNEWSLETTERUNSUBSCRIBE', 3);
+
 function urlencodeaction($id, $param=false) {
 	global $sitekey;
 

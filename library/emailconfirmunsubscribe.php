@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2017-2018 izend.org
- * @version    2
+ * @copyright  2018 izend.org
+ * @version    1
  * @link       http://www.izend.org
  */
 
 require_once 'emailtext.php';
 require_once 'urlencodeaction.php';
 
-function emailconfirmuser($user_id, $user_mail, $locale, $sender=false) {
+function emailconfirmunsubscribe($user_mail, $locale, $sender=false) {
 	global $base_url;
 
 	$saction_page=url('saction', $locale);
@@ -19,8 +19,8 @@ function emailconfirmuser($user_id, $user_mail, $locale, $sender=false) {
 		return false;
 	}
 
-	$id=CONFIRMNEWUSER;
-	$param=$user_id;
+	$id=CONFIRMNEWSLETTERUNSUBSCRIBE;
+	$param=$user_mail;
 
 	$s64=urlencodeaction($id, $param);
 
@@ -31,8 +31,8 @@ function emailconfirmuser($user_id, $user_mail, $locale, $sender=false) {
 	$url = $base_url . $saction_page . '/' . $s64;
 
 	$to=$user_mail;
-	$subject = translate('email:new_user_subject', $locale);
-	$f=translate('email:new_user_confirm', $locale);
+	$subject = translate('newsletter:unregister_subject', $locale);
+	$f=translate('newsletter:unregister_text', $locale);
 	$s=sprintf($f, $url);
 	$msg = $s . "\n\n" . translate('email:salutations', $locale);
 

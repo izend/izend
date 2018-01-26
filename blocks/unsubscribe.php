@@ -31,6 +31,7 @@ function unsubscribe($lang) {
 	$user_mail=user_profile('mail');
 
 	$subscribe_page=false;
+
 	switch($action) {
 		case 'init':
 			$subscribe_page=url('newslettersubscribe', $lang);
@@ -118,37 +119,9 @@ function unsubscribe($lang) {
 				break;
 			}
 
-			require_once 'urlencodeaction.php';
+			require_once 'emailconfirmunsubscribe.php';
 
-			$id=1;	// confirmnewsletterunsubscribe, see saction
-			$param=$user_mail;
-
-			$s64=urlencodeaction($id, $param);
-
-			if (!$s64) {
-				$internal_error=true;
-				break;
-			}
-
-			$saction_page=url('saction', $lang);
-
-			if (!$saction_page) {
-				$internal_error=true;
-				break;
-			}
-
-			global $base_url;
-
-			$url = $base_url . $saction_page . '/' . $s64;
-
-			require_once 'emailtext.php';
-
-			$to=$user_mail;
-			$subject = translate('newsletter:unregister_subject', $lang);
-			$f=translate('newsletter:unregister_text', $lang);
-			$s=sprintf($f, $url);
-			$msg = $s . "\n\n" . translate('email:salutations', $lang);
-			emailtext($msg, $to, $subject, false);
+			@emailconfirmunsubscribe($user_mail, $lang);
 
 			$mail_unsubscribed=$user_mail;
 
