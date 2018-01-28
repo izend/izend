@@ -21,6 +21,8 @@ function unsubscribe($lang) {
 
 	$with_confirmation=true;
 
+	$with_validation=true;
+
 	$action='init';
 	if (isset($_POST['unsubscribe_send'])) {
 		$action='unsubscribe';
@@ -69,7 +71,8 @@ function unsubscribe($lang) {
 
 	$missing_confirmation=false;
 
-	$mail_unsubscribed=false;
+	$email_unregistered=false;
+	$validation_mail=false;
 
 	$internal_error=false;
 	$contact_page=false;
@@ -119,11 +122,45 @@ function unsubscribe($lang) {
 				break;
 			}
 
-			require_once 'emailconfirmunsubscribe.php';
+			if ($with_validation) {
+				require_once 'emailconfirmunsubscribe.php';
 
-			@emailconfirmunsubscribe($user_mail, $lang);
+				$r = emailconfirmunsubscribe($user_mail, $lang);
 
-			$mail_unsubscribed=$user_mail;
+				if (!$r) {
+					$internal_error=true;
+				}
+				else {
+					$validation_mail=$user_mail;
+
+					$user_mail=false;
+				}
+			}
+			else {
+				$r = newsletter_delete_user($user_mail);
+
+				if (!$r) {
+					$internal_error=true;
+				}
+				else {
+					require_once 'serveripaddress.php';
+					require_once 'emailme.php';
+
+					global $sitename;
+
+					$ip=server_ip_address();
+					$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+					$subject = 'unsubscribe' . '@' . $sitename;
+					$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
+					@emailme($subject, $msg);
+
+					$email_unregistered=$user_mail;
+
+					$user_mail=false;
+
+					$subscribe_page=url('newslettersubscribe', $lang);
+				}
+			}
 
 			$confirmed=false;
 
@@ -140,7 +177,7 @@ function unsubscribe($lang) {
 	$_SESSION['unsubscribe_token'] = $token = token_id();
 
 	$errors = compact('missing_mail', 'bad_mail', 'unknown_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
-	$infos = compact('mail_unsubscribed');
+	$infos = compact('email_unregistered', 'validation_mail');
 
 	$output = view('unsubscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_confirmation', 'confirmed', 'subscribe_page', 'errors', 'infos'));
 

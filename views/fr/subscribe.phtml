@@ -54,7 +54,9 @@
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
 <?php if ($email_registered): ?>
-<p>Votre adresse d'email a été enregistrée.</p>
+<p>L'adresse d'email <i><?php echo $email_registered; ?></i> a été enregistrée.</p>
+<?php elseif ($validation_mail): ?>
+<p>Un email de validation a été envoyé à <i><?php echo $validation_mail; ?></i>.</p>
 <?php endif; ?>
 <?php if ($unsubscribe_page): ?>
 <p>Pour ne plus recevoir la lettre d'information, <a href="<?php echo $unsubscribe_page; ?>">cliquez ici</a>.</p>

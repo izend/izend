@@ -49,8 +49,10 @@
 <p>An internal error has occurred.
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
 <?php endif; ?>
-<?php if ($mail_unsubscribed): ?>
-<p>A validation email has been sent to your address.</p>
+<?php if ($email_unregistered): ?>
+<p>The email address <i><?php echo $email_unregistered; ?></i> has been unregistered.</p>
+<?php elseif ($validation_mail): ?>
+<p>A validation email has been sent to <i><?php echo $validation_mail; ?></i>.</p>
 <?php endif; ?>
 <?php if ($subscribe_page): ?>
 <p>To receive the newsletter, <a href="<?php echo $subscribe_page; ?>">click here</a>.</p>

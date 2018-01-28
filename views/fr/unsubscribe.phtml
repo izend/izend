@@ -49,8 +49,10 @@
 <p>Une erreur interne s'est produite.
 <?php if ($contact_page): ?>Si vous pouvez décrire le problème, merci de <a href="<?php echo $contact_page; ?>" rel="nofollow">nous contacter</a>.<?php endif; ?></p>
 <?php endif; ?>
-<?php if ($mail_unsubscribed): ?>
-<p>Un email de validation a été envoyé à votre adresse.</p>
+<?php if ($email_unregistered): ?>
+<p>L'adresse d'email <i><?php echo $email_unregistered; ?></i> a été désenregistrée.</p>
+<?php elseif ($validation_mail): ?>
+<p>Un email de validation a été envoyé à <i><?php echo $validation_mail; ?></i>.</p>
 <?php endif; ?>
 <?php if ($subscribe_page): ?>
 <p>Pour recevoir la lettre d'information, <a href="<?php echo $subscribe_page; ?>">cliquez ici</a>.</p>

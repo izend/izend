@@ -17,13 +17,15 @@ require_once 'validatelocale.php';
 require_once 'models/newsletter.inc';
 
 function subscribe($lang) {
-	global $sitekey, $system_languages;
+	global $system_languages;
 
 	$with_locale=count($system_languages) > 1;	// true, false
 
 	$with_captcha=true;
 
 	$with_confirmation=true;
+
+	$with_validation=false;
 
 	$action='init';
 	if (isset($_POST['subscribe_send'])) {
@@ -39,11 +41,10 @@ function subscribe($lang) {
 	}
 
 	$unsubscribe_page=false;
+
 	switch($action) {
 		case 'init':
-			if ($sitekey) {
-				$unsubscribe_page=url('newsletterunsubscribe', $lang);
-			}
+			$unsubscribe_page=url('newsletterunsubscribe', $lang);
 			break;
 
 		case 'subscribe':
@@ -85,6 +86,7 @@ function subscribe($lang) {
 	$missing_confirmation=false;
 
 	$email_registered=false;
+	$validation_mail=false;
 
 	$internal_error=false;
 	$contact_page=false;
@@ -141,29 +143,50 @@ function subscribe($lang) {
 				break;
 			}
 
-			$r = newsletter_create_user($user_mail, $user_locale);
+			if ($with_validation) {
+				require_once 'emailconfirmsubscribe.php';
 
-			if (!$r) {
-				$internal_error=true;
-				break;
+				$r = emailconfirmsubscribe($user_mail, $user_locale);
+
+				if (!$r) {
+					$internal_error=true;
+				}
+				else {
+					$validation_mail=$user_mail;
+
+					$user_mail=false;
+				}
 			}
+			else {
+				$r = newsletter_create_user($user_mail, $user_locale);
 
-			require_once 'serveripaddress.php';
-			require_once 'emailme.php';
+				if (!$r) {
+					$internal_error=true;
+				}
+				else {
+					require_once 'serveripaddress.php';
+					require_once 'emailme.php';
 
-			global $sitename;
+					global $sitename;
 
-			$ip=server_ip_address();
-			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
-			$subject = 'subscribe' . '@' . $sitename;
-			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
-			@emailme($subject, $msg);
+					$ip=server_ip_address();
+					$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+					$subject = 'subscribe' . '@' . $sitename;
+					$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
+					@emailme($subject, $msg);
 
-			$email_registered=true;
+					$email_registered=$user_mail;
+
+					$user_mail=false;
+
+					$unsubscribe_page=url('newsletterunsubscribe', $lang);
+				}
+			}
 
 			$confirmed=false;
 
 			break;
+
 		default:
 			break;
 	}
@@ -175,7 +198,7 @@ function subscribe($lang) {
 	$_SESSION['subscribe_token'] = $token = token_id();
 
 	$errors = compact('missing_mail', 'bad_mail', 'missing_locale', 'bad_locale', 'duplicated_mail', 'missing_confirmation', 'missing_code', 'bad_code', 'internal_error', 'contact_page');
-	$infos = compact('email_registered');
+	$infos = compact('email_registered', 'validation_mail');
 
 	$output = view('subscribe', $lang, compact('token', 'with_captcha', 'user_mail', 'with_locale', 'user_locale', 'with_confirmation', 'confirmed', 'unsubscribe_page', 'errors', 'infos'));
 
