@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    19
+ * @copyright  2010-2018 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -76,7 +76,7 @@ $aliases = array(
 		'page'					=> 'page',
 		'editpage'				=> 'edition',
 		'folder'				=> 'dossier',
-		'folderedit'			=> 'edit/dossier',
+		'folderedit'			=> 'edition/dossier',
 		'story'					=> 'article',
 		'storyedit'				=> 'edition/article',
 		'book'					=> 'manuel',
