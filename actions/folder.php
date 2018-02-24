@@ -2,12 +2,10 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
-
-require_once 'userhasrole.php';
 
 function folder($lang, $arglist=false) {
 	$folder=$page=false;
