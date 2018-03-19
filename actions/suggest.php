@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    5
+ * @copyright  2010-2018 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -12,9 +12,9 @@ require_once 'models/cloud.inc';
 require_once 'models/thread.inc';
 
 function suggest($lang, $arglist=false) {
-	global $search_all, $limited_languages;
+	global $search_default, $search_all, $limited_languages;
 
-	$cloud=false;
+	$cloud=$search_default;
 
 	if (is_array($arglist)) {
 		if (isset($arglist[0])) {
