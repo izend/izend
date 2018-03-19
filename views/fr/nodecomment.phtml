@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    13
+ * @copyright  2010-2017 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -127,7 +127,7 @@ $(function() {$('<?php echo $focus; ?>').focus();});
 <?php endif; ?>
 <?php endif; ?>
 <?php if ($user_page): ?>
-<p class="info noprint">Pour ajouter un commentaire, <a href="<?php echo $user_page; ?>?r=<?php echo urlencode($node_url . '#pagemark'); ?>" rel="nofollow">cliquez ici</a>.</p>
+<p class="info noprint">Pour ajouter un commentaire, <a class="clickhere" href="<?php echo $user_page; ?>?r=<?php echo urlencode($node_url . '#pagemark'); ?>" rel="nofollow">cliquez ici</a>.</p>
 <?php endif; ?>
 </div>
 <?php endif; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    23
+ * @copyright  2010-2018 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
@@ -111,7 +111,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php if ($account_created): ?>
 <p>Your account has been created. Your password has been emailed to your address<?php if ($with_validation): ?> as well as a confirmation link<?php endif; ?>.
-To identify yourself, <a href="<?php echo $user_page; ?>">click here</a>.</p>
+To identify yourself, <a class="clickhere" href="<?php echo $user_page; ?>">click here</a>.</p>
 <?php endif; ?>
 </div>
 <?php

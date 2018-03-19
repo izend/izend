@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    12
+ * @copyright  2010-2018 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
@@ -22,7 +22,7 @@
 <p class="inlabel<?php if ($missing_password or $access_denied): ?> inerror<?php endif; ?>">And your access key?</p>
 <p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Password" onkeypress="<?php if ($with_captcha): ?>return focusonenter(event, 'login_code')<?php else: ?>return submitonenter(event, 'login_enter')<?php endif; ?>" /></p>
 <?php if ($password_page): ?>
-<p class="info link">If you have forgotten your password, <a href="<?php echo $password_page; ?>" rel="nofollow">click here</a>.</p>
+<p class="info link">If you have forgotten your password, <a class="clickhere" href="<?php echo $password_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
 <p>
@@ -33,7 +33,7 @@
 <?php endif; ?>
 <p><input type="submit" class="submit submit_enter" name="login_enter" id="login_enter" value="Enter" /></p>
 <?php if ($newuser_page): ?>
-<p class="info link">To create your personal account, <a href="<?php echo $newuser_page; ?>" rel="nofollow">click here</a>.</p>
+<p class="info link">To create your personal account, <a class="clickhere" href="<?php echo $newuser_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
 </form>
 <div class="errors">
