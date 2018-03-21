@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    46
+ * @copyright  2010-2018 izend.org
+ * @version    47
  * @link       http://www.izend.org
  */
  
@@ -67,7 +67,7 @@ audio, video {display:none;}
 
 .date, .author {color:black;font-style:italic;}
 
-.submit {border:none;vertical-align:middle;}
+.submit, a.button {display:none;}
 
 div.row {display:flex;display:-webkit-flex;margin:1em 0;overflow:hidden;}
 div.row > * {margin-left:1%;margin-right:1%;}
