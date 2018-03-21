@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2017 izend.org
- * @version    8
+ * @copyright  2012-2018 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -19,8 +19,6 @@ function admin($lang) {
 	if (!user_has_role('administrator')) {
 		return run('error/unauthorized', $lang);
 	}
-
-	$banner = build('banner', $lang);
 
 	$newuser_page=url('newuser', $lang);
 
@@ -39,7 +37,7 @@ function admin($lang) {
 	head('title', translate('admin:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 	$toolbar = $with_toolbar ? build('toolbar', $lang) : false;
