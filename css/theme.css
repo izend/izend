@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    130
+ * @copyright  2010-2018 izend.org
+ * @version    131
  * @link       http://www.izend.org
  */
 
@@ -373,6 +373,9 @@ a:hover .icon_youtube {background-position:-558px 0;}
 a .icon_pinterest {width:118px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_pinterest, a:visited .icon_pinterest {background-position:-635px -30px;}
 a:hover .icon_pinterest {background-position:-635px 0;}
+a .icon_instagram {width:106px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_instagram, a:visited .icon_instagram {background-position:-753px -30px;}
+a:hover .icon_instagram {background-position:-753px 0;}
 
 #linkbar {margin:1em 0;}
 #linkbar > a {margin-right:20px;}
