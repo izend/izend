@@ -2,9 +2,9 @@
 
 /**
  *
- * @copyright	2010-2017 izend.org
- * @version		14
- * @link		http://www.izend.org
+ * @copyright   2010-2018 izend.org
+ * @version     15
+ * @link        http://www.izend.org
  */
 
 global $aliases;
@@ -36,11 +36,17 @@ function url($action, $lang=false, $arg=false, $param=false) {
 	$url = $base_path . '/' . $path;
 
 	if ($param) {
-		$p=array();
-		foreach ($param as $name => $value) {
-			$p[]=urlencode($name) . '=' . urlencode($value);
+		if (is_array($param) and $lang and array_key_exists($lang, $param)) {
+			$param=$param[$lang];
 		}
-		$url .= '?' . implode('&', $p);
+		if (is_array($param)) {
+			$p=array();
+			foreach ($param as $name => $value) {
+				$p[]=urlencode($name) . '=' . urlencode($value);
+			}
+			$param=implode('&', $p);
+		}
+		$url .= '?' . $param;
 	}
 
 	return $url;
@@ -56,6 +62,9 @@ function alias($action, $lang=false, $arg=false) {
 	if ($arg) {
 		if ($action) {
 			$path .= '/';
+		}
+		if (is_array($arg) and $lang and array_key_exists($lang, $arg)) {
+			$arg=$arg[$lang];
 		}
 		$path .= is_array($arg) ? implode('/', $arg) : $arg;
 	}
