@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    1
+ * @copyright  2010-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function notimplemented($lang) {
 	head('title', translate('http_not_implemented:title', $lang));
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$contact=true;
 	$banner = build('banner', $lang, compact('contact'));

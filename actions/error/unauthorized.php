@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    2
+ * @copyright  2010-2018 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
 function unauthorized($lang) {
 	head('title', translate('http_unauthorized:title', $lang));
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$contact=$account=true;
 	$banner = build('banner', $lang, compact('contact', 'account'));
