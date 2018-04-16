@@ -3,7 +3,7 @@
 /**
  *
  * @copyright   2010-2018 izend.org
- * @version     15
+ * @version     16
  * @link        http://www.izend.org
  */
 
@@ -284,7 +284,7 @@ function reload($url) {
 		ob_clean();
 	}
 
-	header('HTTP/1.1 302 Found');
+	header('HTTP/1.1 307 Temporary Redirect');
 	header("Location: $url");
 
 	exit;
