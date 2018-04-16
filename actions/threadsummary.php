@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    17
+ * @copyright  2010-2018 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -54,7 +54,7 @@ function threadsummary($lang, $clang, $thread) {
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', $thread_abstract);
 	head('keywords', $thread_cloud);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$edit=(user_has_role('writer') and in_array($thread_type, $supported_threads)) ? url('threadedit', $_SESSION['user']['locale']) . '/'. $thread_id . '?' . 'clang=' . $clang : false;
 

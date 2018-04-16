@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    16
+ * @copyright  2010-2018 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -70,7 +70,7 @@ function threadnode($lang, $clang, $thread, $node) {
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', $node_abstract);
 	head('keywords', $node_cloud);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$edit=(user_has_role('writer') and in_array($thread_type, $supported_threads)) ? url('threadedit', $_SESSION['user']['locale']) . '/' . $thread_id . '/' . $node_id . '?' . 'clang=' . $clang : false;
 

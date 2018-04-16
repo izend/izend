@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ function password($lang) {
 	head('title', translate('password:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 

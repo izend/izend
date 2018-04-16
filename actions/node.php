@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    12
+ * @copyright  2010-2018 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -54,7 +54,7 @@ function node($lang, $arglist=false) {
 	head('title', $node_id);
 	head('description', $node_abstract);
 	head('keywords', $node_cloud);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$edit=user_has_role('writer') ? url('editnode', $_SESSION['user']['locale']) . '/'. $node_id . '?' . 'clang=' . $clang : false;
 

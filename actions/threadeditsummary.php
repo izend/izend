@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    24
+ * @copyright  2010-2018 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -431,7 +431,7 @@ function threadeditsummary($lang, $clang, $thread) {
 	head('title', $thread_title ? $thread_title : $thread_id);
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$headline_text=	translate('threadall:title', $lang);
 	$headline_url=url('threadedit', $lang). '?' . 'clang=' . $clang;

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2018 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,7 @@ function confirmnewsletterunsubscribe($lang, $arglist) {
 	head('title', translate('newsletter:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 

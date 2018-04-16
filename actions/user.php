@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    5
+ * @copyright  2010-2018 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -52,7 +52,7 @@ function user($lang, $arglist=false) {
 	head('title', translate('user:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$output = layout('standard', compact('banner', 'content'));
 

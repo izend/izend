@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    7
+ * @copyright  2010-2018 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -45,7 +45,7 @@ function editnode($lang, $arglist=false) {
 	head('title', $node_id);
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$view=url('node', $lang) . '/'. $node_id . '?' . 'clang=' . $clang;
 

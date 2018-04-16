@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -166,7 +166,7 @@ function search($lang, $arglist=false) {
 	head('title', $cloud_id ? $cloud_title : $search_title);
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$output = layout('standard', compact('banner', 'content', 'sidebar'));
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    15
+ * @copyright  2010-2018 izend.org
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -241,7 +241,7 @@ function threadeditall($lang, $clang) {
 	head('title', translate('threadall:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$site_title=translate('title', $lang);
 

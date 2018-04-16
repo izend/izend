@@ -13,7 +13,7 @@ function confirmnewuser($lang, $arglist) {
 	head('title', translate('newuser:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2013 izend.org
- * @version    2
+ * @copyright  2012-2018 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ function newslettersubscribe($lang) {
 	head('title', translate('newsletter:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 

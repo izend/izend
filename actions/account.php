@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    4
+ * @copyright  2010-2018 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -18,7 +18,7 @@ function account($lang) {
 	head('title', translate('account:title', $lang));
 	head('description', false);
 	head('keywords', false);
-	head('robots', 'noindex, nofollow');
+	head('robots', 'noindex');
 
 	$banner = build('banner', $lang);
 
