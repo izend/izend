@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -13,15 +13,17 @@ $strings = array();
 
 @include 'strings.inc';
 
-function translate($s, $lang) {
+function translate($s, $lang, $from=false) {
 	global $strings;
 
+	$stab=$from ? $from : $strings;
+
 	if ($s) {
-		if ($lang && array_key_exists($lang, $strings) && array_key_exists($s, $strings[$lang])) {
-			return $strings[$lang][$s];
+		if ($lang && array_key_exists($lang, $stab) && array_key_exists($s, $stab[$lang])) {
+			return $stab[$lang][$s];
 		}
-		if (array_key_exists(0, $strings) && array_key_exists($s, $strings[0])) {
-			return $strings[0][$s];
+		if (array_key_exists(0, $stab) && array_key_exists($s, $stab[0])) {
+			return $stab[0][$s];
 		}
 	}
 
