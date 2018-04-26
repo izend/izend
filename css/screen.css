@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    88
+ * @version    89
  * @link       http://www.izend.org
  */
  
@@ -30,7 +30,7 @@ table th, table td {padding:5px;margin:0;}
 table td:first-child {padding-left:0;}
 table td:last-child {padding-right:0;}
 
-input {font-family:Verdana, sans-serif;font-size:10pt;}
+input, select {font-family:Verdana, sans-serif;font-size:10pt;}
 
 input[type="text"], input[type="password"], textarea {max-width:90%;}
 
