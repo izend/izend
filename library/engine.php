@@ -3,7 +3,7 @@
 /**
  *
  * @copyright   2010-2018 izend.org
- * @version     16
+ * @version     17
  * @link        http://www.izend.org
  */
 
@@ -271,7 +271,7 @@ function render($file, $vars=false) {
 	return ob_get_clean();
 }
 
-function redirect($action, $lang=false, $arg=false, $params) {
+function redirect($action, $lang=false, $arg=false, $params=false) {
 	global $base_url;
 
 	$url=$base_url . url($action, $lang, $arg, $params);
