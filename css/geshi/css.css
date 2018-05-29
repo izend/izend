@@ -1,12 +1,17 @@
 /**
- * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2014 Benny Baumann
  * (http://qbnz.com/highlighter/ and http://geshi.org/)
  */
 .css  {font-family:monospace; font-size:10pt;}
+.css .de1, .css .de2 {margin:0; padding:0; background:none; vertical-align:top;}
 .css .imp {font-weight: bold; color: red;}
+.css li, .css .li1 {font-weight: normal; vertical-align:top;}
+.css .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
 .css .kw1 {color: #000000; font-weight: bold;}
 .css .kw2 {color: #993333;}
-.css .co1 {color: #a1a100;}
+.css .kw3 {color: #9932cc;}
+.css .kw4 {color: #dc143c;}
+.css .kw5 {color: #F5758F;}
 .css .co2 {color: #ff0000; font-style: italic;}
 .css .coMULTI {color: #808080; font-style: italic;}
 .css .es0 {color: #000099; font-weight: bold;}
@@ -17,7 +22,8 @@
 .css .nu0 {color: #cc66cc;}
 .css .re0 {color: #cc00cc;}
 .css .re1 {color: #6666ff;}
-.css .re2 {color: #3333ff;}
+.css .re2 {color: #3F84D9; font-weight: bold;}
 .css .re3 {color: #933;}
+.css .re4 {color: #444;}
 .css span.xtra { display:block; }
 

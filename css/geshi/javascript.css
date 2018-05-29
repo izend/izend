@@ -1,12 +1,16 @@
 /**
- * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2014 Benny Baumann
  * (http://qbnz.com/highlighter/ and http://geshi.org/)
  */
 .javascript  {font-family:monospace; font-size:10pt;}
+.javascript .de1, .javascript .de2 {margin:0; padding:0; background:none; vertical-align:top;}
 .javascript .imp {font-weight: bold; color: red;}
+.javascript li, .javascript .li1 {font-weight: normal; vertical-align:top;}
+.javascript .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
 .javascript .kw1 {color: #000066; font-weight: bold;}
 .javascript .kw2 {color: #003366; font-weight: bold;}
 .javascript .kw3 {color: #000066;}
+.javascript .kw5 {color: #FF0000;}
 .javascript .co1 {color: #006600; font-style: italic;}
 .javascript .co2 {color: #009966; font-style: italic;}
 .javascript .coMULTI {color: #006600; font-style: italic;}
