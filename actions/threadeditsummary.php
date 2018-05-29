@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -178,8 +178,8 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$r = thread_get_contents($clang, $thread_id, false);	/* node_id node_number node_ignored node_name node_title node_cloud thread_image */
 
-	if (!$r or count($r) != count($p)) {
-		$p = false;
+	if ($p and (!$r or count($r) != count($p))) {
+	    $p = false;
 	}
 
 	if ($r) {
