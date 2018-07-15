@@ -2,22 +2,22 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    5
+ * @copyright  2010-2018 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>', "\n"; ?>
 <rss version="2.0">
 <channel>
-	<title><![CDATA[<?php echo $sitename; ?>]]></title>
+	<title><![CDATA[<?php echo htmlspecialchars($sitename, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($lang): ?>
 	<link><?php echo $base_url; ?>/<?php echo $lang; ?></link>
 <?php else: ?>
 	<link><?php echo $base_url; ?></link>
 <?php endif; ?>
 <?php if ($description): ?>
-	<description><![CDATA[<?php echo $description; ?>]]></description>
+	<description><![CDATA[<?php echo htmlspecialchars($description, ENT_COMPAT, 'UTF-8'); ?>]]></description>
 <?php endif; ?>
 <?php if ($lang): ?>
 	<language><?php echo $lang; ?></language>
@@ -39,12 +39,12 @@
 <?php foreach ($itemlist as $item): ?>
 <?php extract($item) ?>
 	<item>
-		<title><![CDATA[<?php echo $title; ?>]]></title>
+		<title><![CDATA[<?php echo htmlspecialchars($title, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($uri): ?>
-		<link><?php echo $base_url; ?>/<?php echo $uri; ?></link>
+		<link><?php echo $base_url; ?>/<?php echo urlencode($url); ?></link>
 <?php endif; ?>
 		<description>
-		<![CDATA[<?php echo $description; ?>]]>
+		<![CDATA[<?php echo htmlspecialchars($description, ENT_COMPAT, 'UTF-8'); ?>]]>
 		</description>
 		<pubDate><?php echo date('r', $created); ?></pubDate>
 	</item>

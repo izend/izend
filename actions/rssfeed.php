@@ -2,13 +2,15 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    4
+ * @copyright  2010-2018 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
 function rssfeed($lang) {
-	global $rss_thread;
+	global $rss_thread, $rss_description;
+
+	$feed_content = $rss_description == 'content';
 
 	$itemlist = array();
 
@@ -18,12 +20,18 @@ function rssfeed($lang) {
 		$tabthreadnode=db_prefix_table('thread_node');
 		$tabnode=db_prefix_table('node');
 		$tabnodelocale=db_prefix_table('node_locale');
-		$tabnodecontent=db_prefix_table('node_content');
-		$tabcontenttext=db_prefix_table('content_text');
 
-		$where="tn.thread_id=$rss_thread AND tn.ignored=FALSE";
+		$where=(is_array($rss_thread) ? 'tn.thread_id IN (' . implode(',', $rss_thread) . ')' : "tn.thread_id=$rss_thread") . ' AND tn.ignored=FALSE';
 
-		$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, ct.text AS content_text FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id AND nc.content_type='text' AND nc.ignored=FALSE LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id AND ct.locale=nl.locale WHERE $where ORDER BY tn.number";
+		if ($feed_content) {
+			$tabnodecontent=db_prefix_table('node_content');
+			$tabcontenttext=db_prefix_table('content_text');
+
+			$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, ct.text AS content_text FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id AND nc.content_type='text' AND nc.ignored=FALSE LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id AND ct.locale=nl.locale WHERE $where ORDER BY tn.number";
+		}
+		else {
+			$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, nl.abstract AS node_abstract FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE $where ORDER BY tn.number";
+		}
 
 		$r = db_query($sql);
 
@@ -33,7 +41,7 @@ function rssfeed($lang) {
 				$title = $node_title;
 				$uri = false;	// $lang . '/' . $node_name;
 				$created = $node_created;
-				$description = strip_tags($content_text);
+				$description = strip_tags($feed_content ? $content_text : $node_abstract);
 				$itemlist[] = compact('title', 'uri', 'created', 'description');
 			}
 		}
