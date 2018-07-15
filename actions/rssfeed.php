@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -30,7 +30,7 @@ function rssfeed($lang) {
 			$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, ct.text AS content_text FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang LEFT JOIN $tabnodecontent nc ON nc.node_id=n.node_id AND nc.content_type='text' AND nc.ignored=FALSE LEFT JOIN $tabcontenttext ct ON ct.content_id=nc.content_id AND ct.locale=nl.locale WHERE $where ORDER BY tn.number";
 		}
 		else {
-			$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, nl.abstract AS node_abstract FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE $where ORDER BY tn.number";
+			$sql="SELECT nl.name AS node_name, nl.title AS node_title, UNIX_TIMESTAMP(n.created) AS node_created, nl.abstract AS node_abstract FROM $tabthreadnode tn JOIN $tabnode n ON n.node_id=tn.node_id JOIN $tabnodelocale nl ON nl.node_id=tn.node_id AND nl.locale=$sqllang WHERE $where ORDER BY n.created DESC";
 		}
 
 		$r = db_query($sql);
