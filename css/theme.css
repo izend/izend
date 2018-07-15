@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    131
+ * @version    132
  * @link       http://www.izend.org
  */
 
@@ -355,7 +355,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 a .icon_facebook {width:111px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_facebook, a:visited .icon_facebook {background-position:0 -30px;}
 a:hover .icon_facebook {background-position:0 0;}
-a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;;text-indent:-9999px;cursor:pointer;}
+a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_twitter, a:visited .icon_twitter {background-position:-111px -30px;}
 a:hover .icon_twitter {background-position:-111px 0;}
 a .icon_rss {width:51px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
