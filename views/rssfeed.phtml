@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    6
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -41,7 +41,7 @@
 	<item>
 		<title><![CDATA[<?php echo htmlspecialchars($title, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($uri): ?>
-		<link><?php echo $base_url; ?>/<?php echo urlencode($url); ?></link>
+		<link><?php echo $base_url; ?>/<?php echo urlencode($uri); ?></link>
 <?php endif; ?>
 		<description>
 		<![CDATA[<?php echo htmlspecialchars($description, ENT_COMPAT, 'UTF-8'); ?>]]>
