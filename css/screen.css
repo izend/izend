@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    91
+ * @version    92
  * @link       http://www.izend.org
  */
  
@@ -208,5 +208,5 @@ ol.tree li.firstnode {background:#ffffff;}
 ol.tree li.dirnode {font-style:italic;} 
 ol.tree li.filenode {font-style:normal;}
 
-.meter {width:200px;height:1.5em;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;max-width:90%;}
+.meter {width:200px;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;max-width:90%;}
 .meter > span {display:block;height:100%;background-color:#cccccc;color:#ffffff;text-align:center;padding-top:4px;}
