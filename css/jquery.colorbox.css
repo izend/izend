@@ -37,7 +37,7 @@
         #cboxCurrent{position:absolute; bottom:0; right:20px; color:#fff; background-color:rgba(0, 0, 0, 0.6);}
         #cboxLoadingGraphic{background:url(colorbox/loading.gif) no-repeat 50% 50%;}
 
-        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {border:0; padding:0; margin:0; overflow:visible; width:16px; height:16x; background:none; text-indent:-9999px; border-radius:4px;}
+        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {border:0; padding:0; margin:0; overflow:visible; width:16px; height:16px; background:none; text-indent:-9999px; border-radius:4px;}
         #cboxClose {background:#fff url(colorbox/controls.png) no-repeat 0 0; position:absolute; top:-3px; right:-3px;}
         #cboxPrevious {background:#fff url(colorbox/controls.png) no-repeat -16px 0; position:absolute; bottom:-3px; left:-3px;}
         #cboxNext {background:#fff url(colorbox/controls.png) no-repeat -32px 0; position:absolute; bottom:-3px; right:-3px;}
