@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2018 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -22,6 +22,8 @@
 <?php extract($infos); ?>
 <?php if ($file_copied): ?>
 <span id="upload_status" class="icon icon_ok">+</span>
+<?php elseif ($slice): ?>
+<span id="upload_status"></span>
 <?php endif; ?>
 <?php endif; ?>
 </p>
@@ -30,14 +32,52 @@
 (function() {
 	var file=$('#upload_file');
 	var upload=$('#upload_put');
+<?php if ($slice): ?>
+	var status=$('#upload_status');
+<?php endif; ?>
 
 	file.css({ position: 'absolute', left: '-9999px' });
 
 	upload.on('click', function(e) { e.preventDefault(); file.click(); });
 
 	file.change(function() {
-	    if (file.val()) {
-	        upload.off('click').click();
+		if (file.val()) {
+<?php if ($slice): ?>
+			var fd = this.files[0];
+			var reader = new FileReader();
+			var size = 1 * 1024 * 1024;
+			var offset = 0;
+			var progress = 0;
+			var blob;
+
+			function uploadslice() {
+				status.removeClass().text(progress + '%');
+				blob = fd.slice(offset, offset + size + 1);
+				reader.readAsDataURL(blob);
+			}
+
+			reader.onloadend = function(event) {
+				$.post('<?php echo $fileupload_url; ?>', {file_token: '<?php echo $token; ?>', file_name: fd.name, file_size: fd.size, file_type: fd.type, file_offset: offset, file_data: event.target.result},
+					function(data) {
+						if (!data) {
+							status.attr('class', 'icon icon_ko').text('-');
+							return;
+						}
+
+						offset += blob.size;
+						progress = Math.floor((offset / fd.size ) * 100);
+
+						if (progress < 100)
+							uploadslice();
+						else
+							status.attr('class', 'icon icon_ok').text('+');
+					});
+			};
+
+			uploadslice();
+<?php else: ?>
+			upload.off('click').click();
+<?php endif; ?>
 	    }
 	});
 })();

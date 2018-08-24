@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,7 @@ $aliases = array(
 		'avatar'				=> 'avatar',
 		'logo'					=> 'logo',
 		'rssfeed'				=> 'rss',
+		'fileupload'			=> 'file/upload',
 		'paypalreturn'			=> 'paypal/return',
 		'paypalcancel'			=> 'paypal/cancel',
 		'paylinereturn'			=> 'payline/return',

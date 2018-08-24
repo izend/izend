@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Fri Mar 24 2018
+
+Adds action fileupload.
+----
+
 Date:	Thu Apr 6 2017
 
 Adds actions paylinereturn and paylinecancel.
@@ -68,6 +73,7 @@ $aliases = array(
 		'avatar'					=> 'avatar',
 		'qrcode'					=> 'qrcode',
 		'rss'						=> 'rssfeed',
+		'file/upload'				=> 'fileupload',
 		'paypal/return'				=> 'paypalreturn',
 		'paypal/cancel'				=> 'paypalcancel',
 		'payline/return'			=> 'paylinereturn',
