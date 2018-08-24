@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2017 izend.org
- * @version    13
+ * @copyright  2012-2018 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
@@ -16,12 +16,12 @@
 <input type="file" name="upload_file" id="upload_file" title="" />
 <input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="Télécharger" title="" />
 <?php extract($errors); ?>
-<?php if ($missing_file or $bad_file or $bad_name or $bad_size or $bad_copy or $copy_error): ?>
-<span class="icon icon_ko">-</span>
+<?php if ($missing_file or $bad_file or $bad_name or $bad_type or $bad_size or $bad_copy or $copy_error): ?>
+<span id="upload_status" class="icon icon_ko">-</span>
 <?php else: ?>
 <?php extract($infos); ?>
 <?php if ($file_copied): ?>
-<span class="icon icon_ok">+</span>
+<span id="upload_status" class="icon icon_ok">+</span>
 <?php endif; ?>
 <?php endif; ?>
 </p>

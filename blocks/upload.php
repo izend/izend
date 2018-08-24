@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2013 izend.org
- * @version    3
+ * @copyright  2012-2018 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -21,6 +21,8 @@ function upload($lang) {
 	if (isset($_POST['upload_put'])) {
 		$action='upload';
 	}
+
+	$filetypes=false;
 
 	$file=$name=$type=$error=false;
 	$size=0;
@@ -59,6 +61,7 @@ function upload($lang) {
 	$missing_file=false;
 	$bad_file=false;
 	$bad_name=false;
+	$bad_type=false;
 	$bad_size=false;
 	$bad_copy=false;
 
@@ -88,6 +91,9 @@ function upload($lang) {
 			else if (!validate_filename($name) or !is_filename_allowed($name)) {
 				$bad_name=true;
 			}
+			else if ($filetypes and (!$type or !in_array($type, $filetypes))) {
+				$bad_type=true;
+			}
 
 			break;
 		default:
@@ -96,7 +102,7 @@ function upload($lang) {
 
 	switch($action) {
 		case 'upload':
-			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_copy) {
+			if ($bad_token or $missing_file or $bad_file or $bad_size or $bad_name or $bad_type or $bad_copy) {
 				break;
 			}
 
@@ -115,10 +121,10 @@ function upload($lang) {
 
 	$_SESSION['upload_token'] = $token = token_id();
 
-	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_copy', 'copy_error');
+	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
-	$output = view('upload', $lang, compact('token', 'maxfilesize', 'name', 'errors', 'infos'));
+	$output = view('upload', $lang, compact('token', 'maxfilesize', 'errors', 'infos'));
 
 	return $output;
 }

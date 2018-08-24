@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    132
+ * @version    133
  * @link       http://www.izend.org
  */
 
@@ -419,6 +419,8 @@ a:hover .icon_instagram {background-position:-753px 0;}
 #summary {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 1em 0;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
+
+#upload_status {font-size:smaller;}
 
 .userresult {color:#aec14e;font-weight:bold;}
 .userpagenumber {font-size:large;}
