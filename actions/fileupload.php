@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2018 izend.org
- * @version	   1
+ * @version	   2
  * @link	   http://www.izend.org
  */
 
@@ -13,6 +13,10 @@ require_once 'validatefilename.php';
 define('FILES_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'files');
 
 function fileupload($lang) {
+	if (!user_has_role('administrator')) {
+		return false;
+	}
+
 	$name=$type=$data=$token=false;
 	$size=$offset=0;
 
