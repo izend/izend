@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -41,9 +41,12 @@
 	<item>
 		<title><![CDATA[<?php echo htmlspecialchars($title, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($uri): ?>
-		<link><?php echo $base_url; ?>/<?php echo htmlspecialchars($uri, ENT_COMPAT, 'UTF-8'); ?></link>
+		<link><?php echo $base_url; ?><?php echo htmlspecialchars($uri, ENT_COMPAT, 'UTF-8'); ?></link>
 <?php endif; ?>
 		<description><![CDATA[<?php echo htmlspecialchars($description, ENT_COMPAT, 'UTF-8'); ?>]]></description>
+<?php if ($image_uri): ?>
+		<enclosure type="<?php echo $image_type; ?>" url="<?php echo $base_url; ?><?php echo htmlspecialchars($image_uri, ENT_COMPAT, 'UTF-8'); ?>" length="<?php echo $image_size; ?>" />
+<?php endif; ?>
 		<pubDate><?php echo date('r', $created); ?></pubDate>
 	</item>
 <?php endforeach; ?>
