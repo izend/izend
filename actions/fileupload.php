@@ -3,10 +3,11 @@
 /**
  *
  * @copyright  2018 izend.org
- * @version	   2
+ * @version	   3
  * @link	   http://www.izend.org
  */
 
+require_once 'userhasrole.php';
 require_once 'isfilenameallowed.php';
 require_once 'validatefilename.php';
 
