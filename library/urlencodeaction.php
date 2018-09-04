@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    1
+ * @copyright  2014-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -12,6 +12,7 @@ require_once 'urlencrypt.php';
 define('CONFIRMNEWUSER', 1);
 define('CONFIRMNEWSLETTERSUBSCRIBE', 2);
 define('CONFIRMNEWSLETTERUNSUBSCRIBE', 3);
+define('CONFIRMCOMMENT', 4);
 
 function urlencodeaction($id, $param=false) {
 	global $sitekey;

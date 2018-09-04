@@ -18,18 +18,19 @@ require_once 'models/node.inc';
 
 function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$user_id=user_profile('id');
-	$moderator=user_has_role('moderator');	// $user_id == $node_user_id || user_has_role('moderator')
+	$is_moderator=user_has_role('moderator');	// $user_id == $node_user_id || user_has_role('moderator')
 
 	$now=time();
 
-	$message_maxlen=1000;
+	$message_maxlen=2000;
 
-	$with_mail=false;
+	$with_validation=false;	// !$user_id;
+	$with_mail=$with_validation;
 
 	$with_captcha=false;
 
 	$action='init';
-	if ($user_id) {
+	if ($user_id or $with_validation) {
 		if (isset($_POST['comment_comment'])) {
 			$action='comment';
 		}
@@ -52,6 +53,10 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 
 	$id=$message=$mail=$token=false;
 
+	if ($with_mail and isset($_SESSION['comment']['mail'])) {
+		$mail=$_SESSION['comment']['mail'];
+	}
+
 	switch($action) {
 		case 'validate':
 			if (isset($_POST['comment_code'])) {
@@ -60,8 +65,10 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			/* fall thru */
 		case 'comment':
 		case 'edit':
-			if (isset($_POST['comment_mail'])) {
-				$mail=strtolower(strflat(readarg($_POST['comment_mail'])));
+			if ($with_mail) {
+				if (isset($_POST['comment_mail'])) {
+					$mail=strtolower(strflat(readarg($_POST['comment_mail'])));
+				}
 			}
 			if (isset($_POST['comment_message'])) {
 				$message=readarg($_POST['comment_message'], true, false);	// trim but DON'T strip!
@@ -152,7 +159,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 				break;
 			}
 
-			if (!$moderator) {
+			if (!$is_moderator) {
 				$r = node_get_comment($node_id, $id, $lang);
 				if (!$r) {
 					$id=false;
@@ -161,10 +168,18 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 				}
 				extract($r);	/* comment_user_id, comment_created */
 
-				if (!($comment_user_id == $user_id and $comment_created + 15*60 > $now)) {
-					$id=false;
-					$bad_id=true;
-					break;
+				if ($user_id) {
+					if (!($comment_user_id == $user_id and $comment_created + 20*60 > $now)) {
+						$id=false;
+						$bad_id=true;
+					}
+				}
+				else {
+
+					if (!isset($_SESSION['comment']['id']) or !(in_array($id, $_SESSION['comment']['id']) and $comment_created + 20*60 > $now)) {
+						$id=false;
+						$bad_id=true;
+					}
 				}
 			}
 			break;
@@ -221,12 +236,26 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			}
 
 			$ip_address=client_ip_address();
+			$comment_user_id=$user_id ? $user_id : 0;
 
-			$r=node_add_comment($node_id, $user_id, $mail, $ip_address, $message, $lang);
+			$r=node_add_comment($node_id, $comment_user_id, $mail, $ip_address, $message, $lang, !$with_validation);
 
 			if (!$r) {
 				$internal_error=true;
 				break;
+			}
+
+			$comment_id=$r;
+
+			if ($with_validation) {
+				if (!isset($_SESSION['comment'])) {
+					$_SESSION['comment'] = array();
+				}
+				if (!isset($_SESSION['comment']['id'])) {
+					$_SESSION['comment']['id'] = array();
+				}
+				$_SESSION['comment']['mail'] = $mail;
+				$_SESSION['comment']['id'][] = $comment_id;
 			}
 
 			require_once 'serveripaddress.php';
@@ -237,8 +266,18 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			$ip=server_ip_address();
 			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
 			$subject = 'comment' . '@' . $sitename;
-			$msg = $ip . ' ' . $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $node_id . ' ' . $node_url;
+			$msg = $ip . ' ' . $timestamp . ' ' . $comment_user_id . ' ' . $lang . ' ' . $node_id . ' ' . $node_url;
+			if ($with_mail) {
+				$msg .= ' ' . $mail;
+			}
+
 			@emailme($subject, $msg);
+
+			if ($with_validation) {
+				require_once 'emailconfirmcomment.php';
+
+				@emailconfirmcomment($node_id, $comment_id, $mail, $lang);
+			}
 
 			$message=false;
 
@@ -281,7 +320,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 	$newcomment=$user_page=false;
 
 	if (!$id and !$nomore) {
-		if ($user_id) {
+		if ($user_id or $with_validation) {
 			$newcomment = true;
 		}
 		else {
@@ -289,18 +328,31 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 		}
 	}
 
-	$comments = node_get_all_comments($node_id, $lang);
+	$published=!$is_moderator;
+	$cids=$published && isset($_SESSION['comment']['id']) ? $_SESSION['comment']['id'] : false;
+
+	$comments = node_get_all_comments($node_id, $lang, $published, $cids);
 
 	$moderated=false;
 	if ($comments) {
-		if ($moderator) {
+		if ($is_moderator) {
 			$moderated=true;
 		}
 		else {
-			$moderated=array();
-			foreach ($comments as $c) {
-				if ($c['comment_user_id'] == $user_id and $c['comment_created'] + 15*60 > $now) {
-					$moderated[] = $c['comment_id'];
+			if ($user_id) {
+				$moderated=array();
+				foreach ($comments as $c) {
+					if ($c['comment_user_id'] == $user_id and $c['comment_created'] + 20*60 > $now) {
+						$moderated[] = $c['comment_id'];
+					}
+				}
+			}
+			else if ($cids) {
+				$moderated=array();
+				foreach ($comments as $c) {
+					if (in_array($c['comment_id'], $cids) and $c['comment_created'] + 20*60 > $now) {
+						$moderated[] = $c['comment_id'];
+					}
 				}
 			}
 		}

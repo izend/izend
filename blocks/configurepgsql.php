@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2017 izend.org
- * @version    6
+ * @copyright  2014-2018 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -94,6 +94,7 @@ CREATE TABLE "${db_prefix}comment" (
   "user_mail" varchar(100) DEFAULT NULL,
   "ip_address" bigint NOT NULL,
   "text" text NOT NULL,
+  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY ("comment_id")
 );
 _SEP_;

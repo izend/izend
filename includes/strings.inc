@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -36,12 +36,15 @@ $strings = array(
 		'donation:title'		=> 'Donation',
 		'newsletter:title'		=> 'Newsletter',
 		'traffic:title'			=> 'Traffic',
+		'comment:title'			=> 'Comment',
 		'email:salutations'		=> 'See you soon.',
 		'email:new_password_subject'	=> 'Your new password',
 		'email:new_password_text'		=> "Your new password is in the attached cryptogram.\n\nIf you didn't ask to change it, just ignore this message.\nNOTE: Your old password is still valid.\n\nIdentify yourself with the new password to activate it.",
 		'email:new_user_subject'		=> 'Your account',
 		'email:new_user_text'			=> "Welcome!\n\nYour password is in the attached cryptogram.",
 		'email:new_user_confirm'		=> "To validate your account, click on the following link:\n\n%s.",
+		'email:comment_subject'			=> 'Your comment',
+		'email:comment_confirm'			=> "To validate your comment, click on the following link:\n\n%s.",
 		'email:appointment'				=> 'Appointment on %s at %02d:%02d.',
 		'newsletter:register_subject'	=> 'Newsletter',
 		'newsletter:register_text'		=> "To start receiving the newsletter by email, click on the following link:\n\n%s\n\nOtherwise, please ignore this message.",
@@ -76,12 +79,15 @@ $strings = array(
 		'donation:title'		=> 'Donation',
 		'newsletter:title'		=> 'Infolettre',
 		'traffic:title'			=> 'Trafic',
+		'comment:title'			=> 'Commentaire',
 		'email:salutations'		=> 'À bientôt.',
 		'email:new_password_subject'	=> 'Votre mot de passe',
 		'email:new_password_text'		=> "Votre nouveau mot de passe est dans le cryptogramme en pièce jointe.\n\nSi vous n'avez pas demandé à en changer, veuillez ignorer ce message.\nNOTE : Votre ancien mot de passe est toujours valide.\n\nConnectez-vous avec le nouveau mot de passe pour l'activer.",
 		'email:new_user_subject'		=> 'Votre compte',
 		'email:new_user_text'			=> "Bienvenue !\n\nVotre mot de passe est dans le cryptogramme en pièce jointe.",
 		'email:new_user_confirm'		=> "Pour valider votre compte, cliquez sur le lien suivant :\n\n%s.",
+		'email:comment_subject'			=> 'Votre commentaire',
+		'email:comment_confirm'			=> "Pour valider votre commentaire, cliquez sur le lien suivant :\n\n%s.",
 		'email:appointment'				=> 'Rendez-vous le %s à %02d:%02d.',
 		'newsletter:register_subject'	=> 'Infolettre',
 		'newsletter:register_text'		=> "Pour recevoir l'infolettre par email, cliquez sur le lien suivant :\n\n%s\n\nSinon, veuillez ignorer ce message.",

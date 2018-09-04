@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2013-2017 izend.org
- * @version    25
+ * @copyright  2013-2018 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
  
@@ -62,7 +62,7 @@ video {height:auto;}
 
 @media screen and (max-width:360px) {
 #sidebar .cloud {display:none;}
-#comments .signature {float:none;}
+#comments .signature {float:none;white-space:nowrap;}
 .bbcodebar_limiter {margin-left:0;}
 .bbcodehelp {display:none;}
 .left, .right, .vignette {float:none;display:block;max-width:100%;}

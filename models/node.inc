@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    32
+ * @copyright  2010-2018 izend.org
+ * @version    33
  * @link       http://www.izend.org
  */
 
@@ -510,15 +510,16 @@ function node_delete_content($node_id, $content_id, $content_type) {
 	return true;
 }
 
-function node_add_comment($node_id, $user_id, $user_mail, $ip_address, $text, $locale) {
+function node_add_comment($node_id, $user_id, $user_mail, $ip_address, $text, $locale, $confirmed=true) {
 	$sqltext=db_sql_arg($text, true);
 	$sqllocale=db_sql_arg($locale, false);
 	$sqlipaddress=db_sql_arg($ip_address, false);
 	$sqlmail=db_sql_arg($user_mail, true, true);
+	$sqlconfirmed=$confirmed ? 'TRUE' : 'FALSE';
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="INSERT INTO $tabcomment (node_id, locale, created, edited, user_id, user_mail, ip_address, text) VALUES ($node_id, $sqllocale, NOW(), NOW(), $user_id, $sqlmail, INET_ATON($sqlipaddress), $sqltext)";
+	$sql="INSERT INTO $tabcomment (node_id, locale, created, edited, user_id, user_mail, ip_address, text, confirmed) VALUES ($node_id, $sqllocale, NOW(), NOW(), $user_id, $sqlmail, INET_ATON($sqlipaddress), $sqltext, $sqlconfirmed)";
 
 	$r = db_insert($sql);
 
@@ -567,14 +568,14 @@ function node_get_comment($node_id, $comment_id, $locale) {
 
 	$tabcomment=db_prefix_table('comment');
 
-	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(edited) AS comment_edited, user_id AS comment_user_id, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale";
+	$sql="SELECT UNIX_TIMESTAMP(created) AS comment_created, UNIX_TIMESTAMP(edited) AS comment_edited, user_id AS comment_user_id, user_mail AS comment_user_mail, INET_NTOA(ip_address) AS comment_ip_address, text AS comment_text, confirmed AS comment_confirmed FROM $tabcomment WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function node_get_all_comments($node_id, $locale) {
+function node_get_all_comments($node_id, $locale, $published=true, $included=false) {
 	if (!is_numeric($node_id)) {
 		return false;
 	}
@@ -585,11 +586,37 @@ function node_get_all_comments($node_id, $locale) {
 	$tabuser=db_prefix_table('user');
 	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, u.website AS comment_user_website, ui.lastname AS comment_user_lastname, ui.firstname AS comment_user_firstname, UNIX_TIMESTAMP(c.created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited FROM $tabcomment c JOIN $tabuser u ON u.user_id=c.user_id LEFT JOIN $tabuserinfo ui ON ui.user_id=c.user_id WHERE c.node_id=$node_id AND c.locale=$sqllocale ORDER BY comment_created";
+	$where="c.node_id=$node_id AND c.locale=$sqllocale";
+
+	if ($published) {
+		$where .= ' AND c.confirmed=TRUE';
+
+		if ($included) {
+			$where .= ' OR c.comment_id IN (' . implode(',', $included) . ')';
+		}
+	}
+
+	$sql="SELECT c.comment_id, c.text AS comment_text, u.user_id AS comment_user_id, u.name AS comment_user_name, u.mail AS comment_user_mail, u.website AS comment_user_website, ui.lastname AS comment_user_lastname, ui.firstname AS comment_user_firstname, UNIX_TIMESTAMP(c.created) AS comment_created, UNIX_TIMESTAMP(c.edited) AS comment_edited, c.confirmed AS comment_confirmed FROM $tabcomment c LEFT JOIN $tabuser u ON u.user_id=c.user_id LEFT JOIN $tabuserinfo ui ON ui.user_id=c.user_id WHERE $where ORDER BY comment_created";
 
 	$r = db_query($sql);
 
 	return $r;
+}
+
+function node_confirm_comment($node_id, $comment_id, $locale) {
+	$sqllocale=db_sql_arg($locale, false);
+
+	$tabcomment=db_prefix_table('comment');
+
+	$sql="UPDATE $tabcomment SET confirmed=TRUE WHERE node_id=$node_id AND comment_id=$comment_id AND locale=$sqllocale";
+
+	$r = db_update($sql);
+
+	if ($r === false) {
+		return false;
+	}
+
+	return true;
 }
 
 function node_get_visits($node_id, $locale=false) {

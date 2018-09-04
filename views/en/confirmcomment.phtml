@@ -1,0 +1,24 @@
+<?php
+
+/**
+ *
+ * @copyright  2018 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<h3>Validation</h3>
+<?php extract($errors); ?>
+<?php if ($bad_comment): ?>
+<p>The comment has been deleted.</p>
+<?php elseif ($bad_time): ?>
+<p>The authorized delay for this operation is expired.
+A new link has been sent to your address.</p>
+<?php endif; ?>
+<?php if ($internal_error): ?>
+<p>An internal error has occurred.
+<?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
+<?php endif; ?>
+<?php if ($comment_confirmed): ?>
+<p>Your comment is published.</p>
+<?php endif; ?>

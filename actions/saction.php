@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2018 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -14,6 +14,7 @@ function saction($lang, $arglist=false) {
 		CONFIRMNEWUSER					=> 'confirmnewuser',
 		CONFIRMNEWSLETTERSUBSCRIBE		=> 'confirmnewslettersubscribe',
 		CONFIRMNEWSLETTERUNSUBSCRIBE	=> 'confirmnewsletterunsubscribe',
+		CONFIRMCOMMENT					=> 'confirmcomment',
 	);
 
 	$s64=false;

@@ -18,6 +18,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Mon Sep 3 2018
+
+ALTER TABLE `comment` ADD `confirmed` BOOLEAN NOT NULL DEFAULT TRUE AFTER `text`;
+----
+
 Date:	Fri Mar 24 2017
 
 ALTER TABLE `izend_user` ADD `confirmed` BOOLEAN NOT NULL DEFAULT TRUE AFTER `banned`;
@@ -328,6 +333,7 @@ CREATE TABLE IF NOT EXISTS `izend_comment` (
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
+  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`comment_id`),
   KEY `NODE` (`node_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
@@ -552,6 +558,7 @@ CREATE TABLE IF NOT EXISTS `izend_user` (
   `locale` enum('en','fr') NOT NULL DEFAULT 'en',
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `banned` tinyint(1) NOT NULL DEFAULT '0',
+  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
