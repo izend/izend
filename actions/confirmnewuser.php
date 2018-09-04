@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2017 izend.org
- * @version    1
+ * @copyright  2017-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -41,7 +41,7 @@ function confirmnewuser($lang, $arglist) {
 
 		require_once 'emailconfirmuser.php';
 
-		$r=emailconfirmuser($user_id, $user['user_locale']);
+		$r=emailconfirmuser($user_id, $user['user_mail'], $user['user_locale']);
 
 		if (!$r) {
 			$internal_error=true;
