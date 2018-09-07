@@ -385,18 +385,18 @@ a:hover .icon_instagram {background-position:-753px 0;}
 #connectbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
 #connectbar a.facebook {background-position:0 0;}
 
-#comments {margin-top:2em;}
-#comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}
-#comments .headline {color:#666666;font-size:small;line-height:24px;}
-#comments .signature {float:right;}
-#comments .author {font-style:italic;}
-#comments .author a:link, #comments .author a:visited {color:#666666;}
-#comments .author a:hover {color:#ec902d;}
-#comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:0 -72px;vertical-align:text-bottom;text-indent:-9999px;cursor:pointer;}
-#comments pre {font-family:monospace;font-size:10pt;}
-#comments blockquote {font-size:small;margin-right:0;}
+.comments {margin-top:2em;}
+.comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}
+.comments .headline {color:#666666;font-size:small;line-height:24px;}
+.comments .signature {float:right;}
+.comments .author {font-style:italic;}
+.comments .author a:link, .comments .author a:visited {color:#666666;}
+.comments .author a:hover {color:#ec902d;}
+.comments .moderate {width:24px;height:16px;padding:0;margin:0;border:none;background:transparent url(../images/theme/icons.png) no-repeat;background-position:0 -72px;vertical-align:text-bottom;text-indent:-9999px;cursor:pointer;}
+.comments pre {font-family:monospace;font-size:10pt;}
+.comments blockquote {font-size:small;margin-right:0;}
 
-#newcomment > h6 {color:#666666;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
+.newcomment > h6 {color:#666666;background:transparent url(../images/theme/icons/edit.png) no-repeat;text-indent:30px;line-height:24px;}
 
 .bbcodebar {margin:1em 0 5px;}
 .bbcodebar_limiter {font-size:x-small;margin-left:10px;}
