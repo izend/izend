@@ -331,6 +331,7 @@ CREATE TABLE IF NOT EXISTS `izend_comment` (
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_mail` varchar(100) DEFAULT NULL,
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   `confirmed` tinyint(1) NOT NULL DEFAULT '1',
