@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -30,10 +30,8 @@ foreach ($comments as $c) {
 <div id="pagemark"></div>
 <div class="oldcomment noprint">
 <?php endif; ?>
-<p class="headline"><span class="longdate">Le <?php echo longdate_fr($comment_created); ?> à <?php echo date('H:i', $comment_created); ?></span>
-<?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Éditer" />
-<?php if (!$comment_confirmed): ?><span class="icon icon_ko">-</span><?php endif; ?>
-<?php endif; ?>
+<p class="headline"><span class="longdate<?php if (!$comment_confirmed): ?> inerror<?php endif; ?>">Le <?php echo longdate_fr($comment_created); ?> à <?php echo date('H:i', $comment_created); ?></span>
+<?php if ($moderated === true or (is_array($moderated) and in_array($comment_id, $moderated))): ?><input class="moderate noprint" name="comment_moderate" type="submit" value="<?php echo $comment_id; ?>" title="Éditer" /><?php endif; ?>
 <?php if (true): ?>
 <?php if ($comment_user_name): ?><span class="signature"><span class="author"> par <?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>" title="<?php echo $comment_user_website; ?>"><?php endif; ?><?php echo $comment_user_name; ?><?php if ($comment_user_website): ?></a><?php endif; ?></span>&nbsp;<?php if ($comment_user_website): ?><a href="http://<?php echo $comment_user_website; ?>"><?php endif; ?><img class="avatar noprint" src="/avatars/<?php echo $comment_user_name; ?>.png" alt="" title="<?php echo $comment_user_name; ?><?php if ($comment_user_website): ?> - <?php echo $comment_user_website; ?><?php endif; ?>" /><?php if ($comment_user_website): ?></a><?php endif; ?></span><?php endif; ?>
 <?php else: ?>
