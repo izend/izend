@@ -503,6 +503,9 @@ button.ui-button::-moz-focus-inner {
 	vertical-align: baseline;
 	padding: 1px;
 }
+.ui-datepicker-week-col {
+	text-align: center;
+}
 
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi {
@@ -1011,13 +1014,17 @@ a.ui-button:active,
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	border: 1px solid #fcefa1;
-	background: #fbf9ee url("images/ui-bg_glass_55_fbf9ee_1x400.png") 50% 50% repeat-x;
+/*	border: 1px solid #fcefa1; */
+	border: 1px solid #d3d3d3;
+/*	background: #fbf9ee url("images/ui-bg_glass_55_fbf9ee_1x400.png") 50% 50% repeat-x; */
+	background: #ffffe0;
 	color: #363636;
 }
 .ui-state-checked {
-	border: 1px solid #fcefa1;
-	background: #fbf9ee;
+/*	border: 1px solid #fcefa1; */
+	border: 1px solid #aaaaaa;
+/*	background: #fbf9ee; */
+	background: #ffffe0;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
@@ -1288,25 +1295,25 @@ a.ui-button:active,
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-	border-top-left-radius: 4px;
+	border-top-left-radius: 3px;
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-	border-top-right-radius: 4px;
+	border-top-right-radius: 3px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-	border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 3px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-	border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 3px;
 }
 
 /* Overlays */
