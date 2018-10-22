@@ -3,7 +3,7 @@
 /**
  *
  * @copyright   2010-2018 izend.org
- * @version     17
+ * @version     18
  * @link        http://www.izend.org
  */
 
@@ -271,20 +271,35 @@ function render($file, $vars=false) {
 	return ob_get_clean();
 }
 
-function redirect($action, $lang=false, $arg=false, $params=false) {
+function redirect($action, $lang=false, $arg=false, $params=false, $code=false) {
 	global $base_url;
 
 	$url=$base_url . url($action, $lang, $arg, $params);
 
-	reload($url);
+	reload($url, $code);
 }
 
-function reload($url) {
+function reload($url, $code=false) {
 	if (ob_get_level()) {
 		ob_clean();
 	}
 
-	header('HTTP/1.1 307 Temporary Redirect');
+	switch ($code) {
+		default:
+		case 303:
+			header('HTTP/1.1 303 See Other');
+			break;
+		case 301:
+			header('HTTP/1.1 301 Moved Permanently');
+			break;
+		case 302:
+			header('HTTP/1.1 302 Found');
+			break;
+		case 307:
+			header('HTTP/1.1 307 Temporary Redirect');
+			break;
+	}
+
 	header("Location: $url");
 
 	exit;
