@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2017 izend.org
- * @version    23
+ * @copyright  2011-2018 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
@@ -65,12 +65,16 @@
 <?php if ($confirm_delete): ?>
 <input type="submit" class="submit submit_confirm" name="useredit_confirmdelete" id="useredit_confirmdelete" value="Confirm" />
 delete or
+<span class="nowrap">
 <input type="submit" class="submit submit_cancel" name="useredit_cancel" id="useredit_cancel" value="Cancel" />
+</span>
 <?php else: ?>
 <input type="submit" class="submit submit_modify" name="useredit_modify" id="useredit_modify" value="Modify" />
 the profile or
+<span class="nowrap">
 <input type="submit" class="submit submit_delete" name="useredit_delete" id="useredit_delete" value="Delete" />
 the account
+</span>
 <?php endif; ?>
 <?php else: ?>
 <input type="submit" class="submit submit_modify" name="useredit_modify" id="useredit_modify" value="Modify" />
