@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2017 izend.org
- * @version    1
+ * @copyright  2017-2018 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -32,13 +32,18 @@ function dircopyaux($from, $to, $mode) {
 		$frompath = $from . DIRECTORY_SEPARATOR . $file;
 		$topath = $to . DIRECTORY_SEPARATOR . $file;
 		if (is_link($frompath)) {
+			if (file_exists($topath)) {
+				unlink($topath);
+			}
 			symlink(readlink($frompath), $topath);
 		}
 		else if (is_file($frompath)) {
 			copy($frompath, $topath);
 		}
 		else if (is_dir($frompath)) {
-			mkdir($topath, $mode);
+			if (!is_dir($topath)) {
+				mkdir($topath, $mode);
+			}
 			dircopyaux($frompath, $topath, $mode);
 		}
 	}
