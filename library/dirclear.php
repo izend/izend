@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    3
+ * @copyright  2014-2018 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,10 @@ function dirclearaux($dir) {
 			continue;
 		}
 		$filepath = $dir . DIRECTORY_SEPARATOR . $file;
-		if (is_dir($filepath)) {
+		if (is_link($filepath)) {
+			unlink($filepath);
+		}
+		else if (is_dir($filepath)) {
 			dirclearaux($filepath);
 			rmdir($filepath);
 		}
