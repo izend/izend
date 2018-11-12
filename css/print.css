@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    49
+ * @version    50
  * @link       http://www.izend.org
  */
  
@@ -128,5 +128,7 @@ ol.tree li.filenode {font-style:normal;}
 .ui-datepicker-trigger {display:none;}
 
 .gallery, .audioplayer {display:none;}
+
+.hidy {display:none;}
 
 .fb-like-box, .fb-page, #twitter-timeline, #pinterest-board {display:none !important;}
