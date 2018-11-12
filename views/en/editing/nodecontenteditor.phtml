@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    20
+ * @copyright  2010-2018 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -128,7 +128,6 @@ foreach ($node_contents as $c) {
 </span>
 </div>
 <textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><span class="grippie btn_edit btn_grippie">===</span>
 <?php break; ?>
 <?php case 'infile': ?>
 <p>
@@ -231,32 +230,4 @@ else if ($missing_old_content_number or $bad_old_content_number) {
 $(function() {$('<?php echo $focus; ?>').focus(); $.scrollTo('<?php echo $focus; ?>', {offset: -200}); });
 </script>
 <?php endif; ?>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('.grippie').each(function() {
-		var grippie = $(this);
-		var textarea = grippie.prev().prev();
-		var offset;
-
-		grippie.mousedown(startDrag);
-
-	    function startDrag(e) {
-	      offset = textarea.height() - e.pageY;
-	      textarea.css('opacity', 0.25);
-	      $(document).mousemove(performDrag).mouseup(endDrag);
-	      return false;
-	    }
-
-	    function performDrag(e) {
-	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
-	      return false;
-	    }
-
-	    function endDrag(e) {
-	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
-	      textarea.css('opacity', 1);
-	    }
-	});
-});
-</script>
 <?php endif; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    7
+ * @copyright  2010-2018 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -24,7 +24,6 @@
 <span id="comment_limiter" class="bbcodebar_limiter"><?php echo $message_maxlen; ?></span>
 </div>
 <textarea id="comment_message" name="comment_message" cols="80" rows="10" title="Text" onkeyup="return inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>)"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><span class="grippie btn_edit btn_grippie">===</span>
 <p id="comment_help" class="bbcodehelp">
 Enter a maximum of <b><?php echo $message_maxlen; ?></b> characters.<br />
 Improve the presentation of your text with the following formatting tags:<br />
@@ -54,32 +53,4 @@ function togglehelp() {
 if ($.cookie('nocommenthelp') == '1') {
 	$('#comment_help').hide();
 }
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('.grippie').each(function() {
-		var grippie = $(this);
-		var textarea = grippie.prev().prev();
-		var offset;
-
-		grippie.mousedown(startDrag);
-
-	    function startDrag(e) {
-	      offset = textarea.height() - e.pageY;
-	      textarea.css('opacity', 0.25);
-	      $(document).mousemove(performDrag).mouseup(endDrag);
-	      return false;
-	    }
-
-	    function performDrag(e) {
-	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
-	      return false;
-	    }
-
-	    function endDrag(e) {
-	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
-	      textarea.css('opacity', 1);
-	    }
-	});
-});
 </script>

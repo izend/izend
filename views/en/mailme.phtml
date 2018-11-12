@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    25
+ * @version    26
  * @link       http://www.izend.org
  */
 ?>
@@ -18,8 +18,7 @@
 <p class="info">Your email address is strictly confidential.</p>
 <p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Type in the subject and the text of your message:</p>
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="40" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
-<p><textarea name="mailme_message" id="mailme_message" cols="50" rows="5" title="Text"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><span class="grippie btn_edit btn_grippie">===</span></p>
+<textarea name="mailme_message" id="mailme_message" cols="50" rows="5" title="Text"><?php echo htmlspecialchars($message, ENT_COMPAT, 'UTF-8'); ?></textarea>
 <?php if ($with_attachment): ?>
 <p>
 <input type="file" name="mailme_file" id="mailme_file" title="" />
@@ -108,34 +107,6 @@ To return to the home page, <a class="clickhere" href="<?php echo $home_page; ?>
 $('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
 </script>
 <?php endif; ?>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('.grippie').each(function() {
-		var grippie = $(this);
-		var textarea = grippie.prev().prev();
-		var offset;
-
-		grippie.mousedown(startDrag);
-
-	    function startDrag(e) {
-	      offset = textarea.height() - e.pageY;
-	      textarea.css('opacity', 0.25);
-	      $(document).mousemove(performDrag).mouseup(endDrag);
-	      return false;
-	    }
-
-	    function performDrag(e) {
-	      textarea.height(Math.max(32, offset + e.pageY) + 'px');
-	      return false;
-	    }
-
-	    function endDrag(e) {
-	      $(document).unbind('mousemove', performDrag).unbind('mouseup', endDrag);
-	      textarea.css('opacity', 1);
-	    }
-	});
-});
-</script>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {

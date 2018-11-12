@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    134
+ * @version    135
  * @link       http://www.izend.org
  */
 
@@ -33,8 +33,6 @@ ol.tree li.dirnode {color:#666666;}
 ol.tree li.filenode {color:#333333;}
 
 th {background-color:#ffffe0;font-weight:bold;}
-
-.grippie {display:block;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 
 .vignette {float:right;margin:0.25em 0 0.5em 1em;}
 
@@ -125,7 +123,6 @@ span.icon_download {background-position:-24px -24px;}
 span.icon_attachment {background-position:-96px -48px;}
 
 span.btn_edit {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
-span.btn_grippie {background-position:-224px -48px;width:27px;height:5px;margin-left:5px;margin-top:2px;cursor:ns-resize;}
 span.btn_mouse {background-position:-208px -48px;}
 span.btn_bullet_star {background-position:-176px -32px;}
 span.btn_accept {background-position:-192px -32px;}

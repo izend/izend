@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    19
+ * @copyright  2010-2018 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -23,15 +23,9 @@
 <input id="node_name" name="node_name" type="text" size="40" maxlength="100" value="<?php echo $node_name; ?>" onkeypress="return focusonenter(event, 'node_title')"/>
 </p>
 <p><label>Extrait&nbsp;:</label></p>
-<p>
 <textarea name="node_abstract" cols="80" rows="3"><?php echo htmlspecialchars($node_abstract, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><span class="grippie btn_edit btn_grippie">===</span>
-</p>
 <p><label>Nuage&nbsp;:</label></p>
-<p>
 <textarea name="node_cloud" cols="80" rows="2" ><?php echo htmlspecialchars($node_cloud, ENT_COMPAT, 'UTF-8'); ?></textarea>
-<br/><span class="grippie btn_edit btn_grippie">===</span>
-</p>
 <p><label>Image&nbsp;:</label></p>
 <p>
 <input name="node_image" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($node_image, ENT_COMPAT, 'UTF-8'); ?>" title="Fichier" />
