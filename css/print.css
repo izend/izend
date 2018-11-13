@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    51
+ * @version    52
  * @link       http://www.izend.org
  */
  
@@ -93,7 +93,7 @@ div.vbar > * {margin-top:0.5em;margin-bottom:0.5em;}
 div.vbar > *:first-child {margin-top:0;}
 div.vbar > *:last-child {margin-bottom:0;}
 
-.menu, .menubar, .sidebar, .besocial, .cloud, .link, .clickit, .readmore, .summary, .vignette, .vote, .visits, .tagbar {display:none !important;}
+.menu, .menubar, .sidebar, .besocial, .cloud, .link, .clickit, .readmore, .summary, .vignette, .vote, .visits, .tagbar, .hidy {display:none !important;}
 
 .video-js {display:none;}
 
@@ -128,7 +128,5 @@ ol.tree li.filenode {font-style:normal;}
 .ui-datepicker-trigger {display:none;}
 
 .gallery, .audioplayer {display:none;}
-
-.hidy {display:none;}
 
 .fb-like-box, .fb-page, #twitter-timeline, #pinterest-board {display:none !important;}
