@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    93
+ * @version    94
  * @link       http://www.izend.org
  */
  
@@ -52,6 +52,7 @@ form.compact p, div.compact p, p.compact {margin-top:0.75em;margin-bottom:0.5em;
 form div.row {margin-top:0;margin-bottom:0;}
 
 textarea {resize:vertical;}
+textarea.noresize {resize:none;}
 
 img {vertical-align:middle;max-width:100%;height:auto;}
 
