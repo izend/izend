@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    45
+ * @version    46
  * @link       http://www.izend.org
  */
 ?>
@@ -135,7 +135,7 @@ else {
 <?php foreach ($javascripts as $js) : ?>
 <?php
 $name=$js['name'];
-$param=isset($js['param']) ? $js['param'] : '';
+$param=!empty($js['param']) ? $js['param'] : false;
 if ($name[0] == '/' or substr($name, 0, 7) == 'http://' or substr($name, 0, 8) == 'https://') {
 	$url=$name;
 }
@@ -146,7 +146,13 @@ else {
 	$url=$base_path . '/js/' . $name . '.js';
 }
 ?>
-<script type="text/javascript" src="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>"><?php echo htmlspecialchars($param, ENT_NOQUOTES, 'UTF-8', false); ?></script>
+<?php if ($param): ?>
+<script type="text/javascript" src="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>">
+<?php echo htmlspecialchars($param, ENT_NOQUOTES, 'UTF-8', false), "\n"; ?>
+</script>
+<?php else: ?>
+<script type="text/javascript" src="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>"></script>
+<?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo $base_path; ?>/js/tools.js"></script>

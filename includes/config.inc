@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    55
+ * @version    56
  * @link       http://www.izend.org
  */
 
@@ -76,6 +76,10 @@ $googleanalyticskeyfile = false;	// ROOT_DIR . DIRECTORY_SEPARATOR . 'google-api
 global $googleanalyticspageview;
 
 $googleanalyticspageview=false;
+
+global $linkedinapiid;
+
+$linkedinapiid=false;
 
 global $author;
 
