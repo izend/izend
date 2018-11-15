@@ -311,6 +311,8 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #sharebar {border:solid 2px #eaefb3;background-color:#ffffff;position:fixed;margin-top:80px;padding:4px 6px;z-index:9999;}
 #sharebar.standard > li {padding:3px 0;}
 #sharebar.standard > li:last-child {padding-bottom:0;}
+#sharebar.standard li.linkedin span {vertical-align:baseline !important;}
+#sharebar.standard button, .besocial.standard button {text-indent:0;}
 
 .besocial {width:100%;padding:0;margin:1em 0;}
 .besocial li {display:inline-block;padding:0;margin:0;}
