@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -28,7 +28,7 @@ function serviceunavailable($lang, $arglist=false) {
 
 	$content = view('error/serviceunavailable', $lang, compact('closing_time', 'opening_time'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	header('HTTP/1.1 503 Service Unavailable');
 

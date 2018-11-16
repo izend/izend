@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -81,7 +81,7 @@ function threadnode($lang, $clang, $thread, $node) {
 
 	$content = view('threadnode', $lang, compact('node_id', 'node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image', 'node_created', 'node_modified', 'node_visits', 'node_comment', 'node_morecomment', 'node_vote', 'node_morevote', 'node_ilike', 'node_tweet', 'node_plusone', 'node_linkedin', 'node_pinit', 'node_contents', 'prev_node_url', 'prev_node_label', 'next_node_url', 'next_node_label', 'inlanguages'));
 
-	$output = layout('viewing', compact('toolbar', 'banner', 'content', 'sidebar'));
+	$output = layout('viewing', compact('clang', 'toolbar', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

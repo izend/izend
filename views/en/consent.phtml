@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2018 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@
 </div>
 <?php if ($confirmcookieconsent): ?>
 <?php head('javascript', 'jquery.cookie'); ?>
-<script type="text/javascript">
+<script>
 $('#consentyes').click(function() {
 	$.cookie('cookieconsent', 1, { path: '/' });
 	$('#consent').hide();

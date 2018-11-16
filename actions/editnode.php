@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -56,7 +56,7 @@ function editnode($lang, $arglist=false) {
 
 	$content = view('editing/editnode', $lang, compact('node_editor'));
 
-	$output = layout('editing', compact('toolbar', 'banner', 'content'));
+	$output = layout('editing', compact('clang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -21,7 +21,7 @@ function install($lang) {
 
 	$content = view('install', $lang, compact('configure'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	return $output;
 }

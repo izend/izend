@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function internalerror($lang) {
 	$contact_page=url('contact', $lang);
 	$content = view('error/internalerror', $lang, compact('contact_page'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	header('HTTP/1.1 500 Internal Error');
 

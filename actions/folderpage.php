@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    29
+ * @copyright  2010-2018 izend.org
+ * @version    30
  * @link       http://www.izend.org
  */
 
@@ -132,7 +132,7 @@ function folderpage($lang, $folder, $page) {
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$output = layout('standard', compact('sharebar', 'toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'sharebar', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

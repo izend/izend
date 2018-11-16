@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <h3<?php if ($thread_title): ?> title="<?php echo $thread_id; ?>"<?php endif; ?>><?php echo htmlspecialchars($thread_title ? $thread_title : $thread_id, ENT_COMPAT, 'UTF-8'); ?></h3>
-<form class="compact" action="" method="post">
+<form method="post" class="compact">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
 <?php echo $inlanguages; ?>
@@ -86,7 +86,7 @@ content
 <div id="threadcontent">
 <fieldset class="block">
 <legend>Summary</legend>
-<table id="nodelist">
+<table class="nodelist">
 <tbody>
 <?php
 $i=1;
@@ -98,9 +98,7 @@ foreach ($thread_contents as $c) {
 <tr>
 <td><input name="p[<?php echo $i; ?>]" type="text" size="2" maxlength="<?php echo $maxlen; ?>" value="<?php echo $pos; ?>" /></td>
 <td><a href="<?php echo $node_url; ?>" title="<?php echo $node_id; ?>"><?php echo $node_title ? htmlspecialchars($node_title, ENT_COMPAT, 'UTF-8') : $node_id; ?></a></td>
-<?php if ($node_ignored): ?>
-<td><span class="btn_edit btn_ignored">X</span></td>
-<?php endif; ?>
+<td><?php if ($node_ignored): ?><span class="btn_edit btn_ignored">X</span><?php endif; ?></td>
 </tr>
 <?php
 	$i++;
@@ -129,7 +127,7 @@ content
 <?php endif; ?>
 </form>
 <?php head('javascript', 'jquery.cookie'); ?>
-<script type="text/javascript">
+<script>
 if ($.cookie('hidethread') == 1) {
 	$('#thread').hide();
 }
@@ -139,7 +137,7 @@ $('#thread_hidy').click(function() {
 });
 </script>
 <?php if ($thread_contents): ?>
-<script type="text/javascript">
+<script>
 if ($.cookie('hidethreadcontent') == 1) {
 	$('#threadcontent').hide();
 }
@@ -169,7 +167,7 @@ else if ($confirm_delete_node) {
 ?>
 <?php if ($focus): ?>
 <?php head('javascript', 'jquery.scrollTo', 'screen'); ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus(); $.scrollTo('<?php echo $focus; ?>', {offset: -200}); });
 </script>
 <?php endif; ?>

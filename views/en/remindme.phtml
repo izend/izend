@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post">
+<form method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>What is your connection name?<?php else: ?>What is your email address?<?php endif; ?></p>
 <p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="<?php if ($with_name): ?>Identifier<?php else: ?>name@domain.net<?php endif; ?>" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" /></p>
@@ -61,7 +61,7 @@ else if ($missing_login or $bad_login) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

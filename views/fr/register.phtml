@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    23
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post">
+<form method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
 <?php if ($with_timezone): ?>
 <?php if ($timezone): ?>
@@ -16,7 +16,7 @@
 <?php else: ?>
 <input type="hidden" name="register_timezone" value="" />
 <?php head('javascript', 'jstz'); ?>
-<script type="text/javascript">
+<script>
 var tz = jstz.determine();
 $('input[name=register_timezone]').val(tz.name());
 </script>
@@ -139,7 +139,7 @@ else if ($missing_password or $bad_password) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    20
+ * @copyright  2010-2018 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -48,7 +48,7 @@ __MARK__;
 				echo '<div id="', $ytid, '" class="youtube" style="width:', $width, 'px;max-width:100%;" title="', htmlspecialchars($title, ENT_COMPAT, 'UTF-8'), '">', PHP_EOL;
 				echo '<a href="https://www.youtube.com/watch?v=', $id, '"><span class="ytplay"></span><img src="', $base_path, $miniature, '" alt="" /></a>', PHP_EOL;
 				echo '</div>', PHP_EOL;
-				echo '<script type="text/javascript">', PHP_EOL;
+				echo '<script>', PHP_EOL;
 				echo '//<![CDATA[', PHP_EOL;
 				echo 'var div=$("#', $ytid, '");', PHP_EOL;
 				echo 'div.html(div.children().html());', PHP_EOL;
@@ -67,7 +67,7 @@ __MARK__;
 			$id = uniqid('id');
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
-			echo '<script type="text/javascript">', PHP_EOL;
+			echo '<script>', PHP_EOL;
 			echo '//<![CDATA[', PHP_EOL;
 			echo 'var w=', $width,', h=', $height, ', maxw=$(window).innerWidth();', PHP_EOL;
 			echo 'if (maxw < w) {', PHP_EOL;

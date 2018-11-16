@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    27
+ * @copyright  2010-2018 izend.org
+ * @version    28
  * @link       http://www.izend.org
  */
 
@@ -190,7 +190,7 @@ function story($lang, $arglist=false) {
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$output = layout('standard', compact('sharebar', 'toolbar', 'banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('lang', 'sharebar', 'toolbar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }

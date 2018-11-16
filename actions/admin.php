@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2018 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -42,7 +42,7 @@ function admin($lang) {
 	$banner = build('banner', $lang);
 	$toolbar = $with_toolbar ? build('toolbar', $lang) : false;
 
-	$output = layout('standard', compact('toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

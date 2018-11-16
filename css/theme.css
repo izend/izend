@@ -298,7 +298,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #toolbar #scrolltop {height:12px;background-position:-24px -72px;}
 #toolbar #scrollbottom {height:12px;background-position:-48px -72px;}
 
-#threadlist, #nodelist {border-spacing:0;}
+.threadlist, .nodelist {border-spacing:0;}
 
 .navigation {font-size:small;margin-bottom:1em;}
 .navigation .previous {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-32px -88px;vertical-align:text-bottom;}

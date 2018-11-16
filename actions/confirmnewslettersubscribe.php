@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2018 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -71,7 +71,7 @@ function confirmnewslettersubscribe($lang, $arglist) {
 
 	$content = view('confirmnewslettersubscribe', $lang, compact('mail', 'subscribe_page', 'unsubscribe_page', 'errors'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2012-2018 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -83,7 +83,7 @@ function newslettersummary($lang, $newsletter) {
 	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$output = layout('standard', compact('toolbar', 'banner', 'sidebar', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'sidebar', 'content'));
 
 	return $output;
 }

@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2012-2018 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
-<form enctype="multipart/form-data" action="" method="post" class="compact">
+<form enctype="multipart/form-data" method="post" class="compact">
 <input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
 <?php if (!empty($maxfilesize)): ?>
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
@@ -28,7 +28,7 @@
 <?php endif; ?>
 </p>
 </form>
-<script type="text/javascript">
+<script>
 (function() {
 	var file=$('#upload_file');
 	var upload=$('#upload_put');

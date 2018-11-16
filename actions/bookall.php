@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2018 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -24,7 +24,7 @@ function bookall($lang) {
 
 	$content = view('bookall', $lang, compact('booklist'));
 
-	$output = layout('standard', compact('toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

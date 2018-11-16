@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2018 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -71,7 +71,7 @@ function confirmcomment($lang, $arglist) {
 
 	$content = view('confirmcomment', $lang, compact('comment_confirmed', 'errors'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	return $output;
 }

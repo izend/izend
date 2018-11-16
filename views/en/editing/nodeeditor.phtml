@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form class="compact" action="" method="post">
+<form method="post" class="compact">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
 <?php echo $inlanguages; ?>
@@ -49,7 +49,7 @@
 </div>
 </form>
 <?php head('javascript', 'jquery.cookie'); ?>
-<script type="text/javascript">
+<script>
 if ($.cookie('hidenode') == 1) {
 	$('#node').hide();
 }
@@ -65,7 +65,7 @@ if ($missing_node_name or $bad_node_name) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

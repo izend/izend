@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2018 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,7 @@ function traffic($lang) {
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('admin'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('admin')) : false;
 
-	$output = layout('standard', compact('toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post"<?php if ($with_attachment): ?> enctype="multipart/form-data"<?php endif; ?>>
+<form method="post"<?php if ($with_attachment): ?> enctype="multipart/form-data"<?php endif; ?>>
 <input type="hidden" name="mailme_token" value="<?php echo $token; ?>" />
 <?php if ($with_attachment and $maxfilesize): ?>
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
@@ -81,7 +81,7 @@ Pour revenir à la page d'accueil, <a class="clickhere" href="<?php echo $home_p
 <?php endif; ?>
 </div>
 <?php if ($with_attachment): ?>
-<script type="text/javascript">
+<script>
 (function() {
 	var file=$('#mailme_file');
 	var upload=$('#mailme_put');
@@ -127,7 +127,7 @@ else if ($bad_appointment) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

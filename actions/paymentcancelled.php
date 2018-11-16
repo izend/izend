@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -17,7 +17,7 @@ function paymentcancelled($lang, $amount, $currency, $context) {
 	$contact_page=url('contact', $lang);
 	$content = view('paymentcancelled', $lang, compact('amount', 'currency', 'contact_page'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -108,8 +108,8 @@ le texte ou le
 <p>Entrez le code de vérification affiché dans l'image.</p>
 <?php elseif ($bad_code): ?>
 <p>Le code de vérification est incorrect.</p>
-</div>
 <?php endif; ?>
+</div>
 <?php
 $focus=false;
 if ($missing_code or $bad_code) {
@@ -120,7 +120,7 @@ else if ($missing_mail or $bad_mail) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    9
+ * @copyright  2010-2018 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -31,7 +31,7 @@
 <?php head('javascript', 'jquery.cookie'); ?>
 <div class="hidy">+</div>
 <?php echo $cloud; ?>
-<script type="text/javascript">
+<script>
 if ($.cookie('hidesidecloud') == 1) {
 	$('#sidebar .cloud').hide();
 }

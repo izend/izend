@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -258,7 +258,7 @@ function threadeditall($lang, $clang) {
 
 	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'inlanguages', 'supported_threads', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
 
-	$output = layout('editing', compact('toolbar', 'banner', 'content'));
+	$output = layout('editing', compact('clang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -23,7 +23,7 @@ function newuser($lang) {
 
 	$content = view('newuser', $lang, compact('register'));
 
-	$output = layout('standard', compact('toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -2,13 +2,13 @@
 
 /**
  *
- * @copyright  2016-2017 izend.org
- * @version    5
+ * @copyright  2016-2018 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post">
+<form method="post">
 <input type="hidden" name="analytics_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_url or $bad_url): ?> inerror<?php endif; ?>">URL:</p>
 <p><input type="text" name="analytics_url" id="analytics_url" size="60" maxlength="200" title="" onkeypress="return submitonenter(event, 'analytics_draw')" value="<?php echo htmlspecialchars($url, ENT_COMPAT, 'UTF-8'); ?>" /></p>
@@ -51,14 +51,14 @@ if ($missing_url or $bad_url) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
 <?php if ($data): ?>
 <div id="traffic"></div>
 <?php head('javascript', 'https://www.gstatic.com/charts/loader.js'); ?>
-<script type="text/javascript">
+<script>
 google.charts.load('current', {'packages':['corechart'], 'language': 'en'});
 google.charts.setOnLoadCallback(drawChart);
 

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    16
+ * @copyright  2010-2018 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -85,7 +85,7 @@ function home($lang) {
 	$newsletter_page=false;
 	$footer = view('footer', $lang, compact('contact_page', 'newsletter_page'));
 
-	$output = layout('standard', compact('footer', 'banner', 'content', 'sidebar', 'sharebar', 'toolbar'));
+	$output = layout('standard', compact('lang', 'footer', 'banner', 'content', 'sidebar', 'sharebar', 'toolbar'));
 
 	return $output;
 }

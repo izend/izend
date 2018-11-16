@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2018 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -51,7 +51,7 @@ function adminuser($lang, $arglist=false) {
 
 	$content = view('adminuser', $lang, compact('useredit'));
 
-	$output = layout('standard', compact('toolbar', 'banner', 'content'));
+	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

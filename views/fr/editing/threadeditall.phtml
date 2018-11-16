@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    17
+ * @copyright  2010-2018 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
 <h3><?php echo htmlspecialchars($site_title ? $site_title : $sitename, ENT_COMPAT, 'UTF-8'); ?></h3>
-<form class="compact" action="" method="post">
+<form method="post" class="compact">
 <input name="clang" type="hidden" value="<?php echo $clang; ?>" />
 <p>
 <?php echo $inlanguages; ?>
@@ -45,7 +45,7 @@ type
 <?php if ($thread_list): ?>
 <fieldset class="block">
 <legend>Catalogue</legend>
-<table id="threadlist">
+<table class="threadlist">
 <tbody>
 <?php
 $i=1;
@@ -96,7 +96,7 @@ else if ($confirm_delete_thread) {
 ?>
 <?php if ($focus): ?>
 <?php head('javascript', 'jquery.scrollTo', 'screen'); ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus(); $.scrollTo('<?php echo $focus; ?>', {offset: -200}); });
 </script>
 <?php endif; ?>

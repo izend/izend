@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -34,7 +34,7 @@ function threadall($lang, $clang) {
 
 	$content = view('threadall', $lang, compact('site_title', 'site_abstract', 'site_cloud', 'threadlist', 'inlanguages'));
 
-	$output = layout('viewing', compact('toolbar', 'banner', 'content'));
+	$output = layout('viewing', compact('clang', 'toolbar', 'banner', 'content'));
 
 	return $output;
 }

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    6
+ * @copyright  2010-2018 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -57,7 +57,7 @@ function anypage($lang, $arglist=false) {
 	$contact=false;
 	$footer = build('footer', $lang, compact('contact'));
 
-	$output = layout('standard', compact('sharebar', 'banner', 'footer', 'content'));
+	$output = layout('standard', compact('lang', 'sharebar', 'banner', 'footer', 'content'));
 
 	return $output;
 }

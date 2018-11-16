@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    7
+ * @copyright  2010-2018 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 ?>
@@ -33,7 +33,7 @@ Améliorez la présentation de votre texte avec les balises de formatage suivant
 [<b>email</b>]izend@izend.org[/email], [<b>email</b>=izend@izend.org]izend[/email],<br />
 [<b>code</b>]commande[/code], [<b>code</b>=langage]code source en c, java, php, html, javascript, xml, css, sql, bash, dos, make, etc.[/code].
 </p>
-<script type="text/javascript">
+<script>
 function tagcomment(open, close) {
 	addtag('comment_message', open, close);
 	inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>);
@@ -45,7 +45,7 @@ function stripcomment() {
 inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>);
 </script>
 <?php head('javascript', 'jquery.cookie'); ?>
-<script type="text/javascript">
+<script>
 function togglehelp() {
 	$('#comment_help').toggle();
 	$.cookie('nocommenthelp', $('#comment_help').is(':hidden') ? '1' : '0', { path: '/' });

@@ -3,12 +3,12 @@
 /**
  *
  * @copyright  2011-2018 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 ?>
 <?php extract($errors); ?>
-<form action="" method="post">
+<form method="post">
 <input type="hidden" name="useredit_token" value="<?php echo $token; ?>" />
 <?php if ($user_accessed): ?>
 <input type="hidden" name="useredit_accessed" value="<?php echo $user_accessed; ?>" />
@@ -159,7 +159,7 @@ else if ($missing_newpassword or $bad_newpassword) {
 }
 ?>
 <?php if ($focus): ?>
-<script type="text/javascript">
+<script>
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>

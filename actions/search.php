@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    21
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -168,7 +168,7 @@ function search($lang, $arglist=false) {
 	head('keywords', false);
 	head('robots', 'noindex');
 
-	$output = layout('standard', compact('banner', 'content', 'sidebar'));
+	$output = layout('standard', compact('lang', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

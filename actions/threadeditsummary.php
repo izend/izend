@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 
@@ -452,7 +452,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
-	$output = layout('editing', compact('toolbar', 'banner', 'content', 'sidebar'));
+	$output = layout('editing', compact('clang', 'toolbar', 'banner', 'content', 'sidebar'));
 
 	return $output;
 }

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2015 izend.org
- * @version    4
+ * @copyright  2014-2018 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -12,7 +12,7 @@
 <div class="visits" title="<?php echo number_format($visits, 0, ',', ' '); ?> visite<?php if ($visits > 1): ?>s<?php endif; ?>"><?php echo count_format($visits, ',', ' '); ?></div>
 <?php endif; ?>
 <?php if ($visit_page): ?>
-<script type="text/javascript">
+<script>
 $(document).ready(function() {$.get('<?php echo $visit_page; ?>');});
 </script>
 <?php endif; ?>

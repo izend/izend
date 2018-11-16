@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2017-2018 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -72,7 +72,7 @@ function confirmnewuser($lang, $arglist) {
 
 	$content = view('confirmnewuser', $lang, compact('account_confirmed', 'errors', 'infos'));
 
-	$output = layout('standard', compact('banner', 'content'));
+	$output = layout('standard', compact('lang', 'banner', 'content'));
 
 	return $output;
 }

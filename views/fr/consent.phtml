@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2018 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@ Pour en savoir plus, <a class="clickhere" href="/fr/informations-legales" title=
 </div>
 <?php if ($confirmcookieconsent): ?>
 <?php head('javascript', 'jquery.cookie'); ?>
-<script type="text/javascript">
+<script>
 $('#consentyes').click(function() {
 	$.cookie('cookieconsent', 1, { path: '/' });
 	$('#consent').hide();
