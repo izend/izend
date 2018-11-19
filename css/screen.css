@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    95
+ * @version    96
  * @link       http://www.izend.org
  */
  
@@ -22,7 +22,7 @@ h1,h2,h3,h4,h5,h6 {font-weight:bold;margin:1em 0;}
 
 fieldset {display:inline-block;}
 
-label, legend {font-size:80%;vertical-align:middle;}
+label, legend {font-size:80%;vertical-align:middle;line-height:1.4;}
 
 label span {vertical-align:baseline !important;}
 
