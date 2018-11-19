@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    21
+ * @copyright  2010-2018 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
  
@@ -32,10 +32,10 @@
 .submit_upload {width:100px;height:30px;background:transparent url(../images/theme/upload.png) no-repeat;}
 .submit_validate {width:100px;height:30px;background:transparent url(../images/theme/validate.png) no-repeat;}
 
-.submit_subscribe {width:91px !important;height:21px !important;background:transparent url(../images/paypal_subscribe_en.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
-.submit_donate {width:74px !important;height:21px !important;background:transparent url(../images/paypal_donate_en.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
-.submit_buy {width:86px !important;height:21px !important;background:transparent url(../images/paypal_buy_en.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
-.submit_pay {width:86px !important;height:21px !important;background:transparent url(../images/paypal_pay_en.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
+.submit_subscribe {width:120px !important;height:24px !important;background:transparent url(../images/paypal_subscribe_en.png) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
+.submit_donate {width:120px !important;height:24px !important;background:transparent url(../images/paypal_donate_en.png) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
+.submit_buy {width:120px !important;height:24px !important;background:transparent url(../images/paypal_buy_en.png) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
+.submit_pay {width:120px !important;height:24px !important;background:transparent url(../images/paypal_pay_en.png) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
 .submit_paypal {width:100px !important;height:35px !important;background:transparent url(../logos/paypal.gif) no-repeat !important;text-indent:-1000em !important;box-shadow:none !important;}
 
 #sharebar.standard {width:60px;margin-left:-104px;}
