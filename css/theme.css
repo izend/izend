@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    137
+ * @version    138
  * @link       http://www.izend.org
  */
 
@@ -106,7 +106,8 @@ div.alert p, div.warning p {margin-top:0.5em; margin-bottom:0.5em;}
 .lang.de {background-position:-48px 0;}
 .lang.it {background-position:-72px 0;}
 .lang.es {background-position:-96px 0;}
-.lang.ru {background-position:-120px 0;}
+.lang.pt {background-position:-120px 0;}
+.lang.ru {background-position:-144px 0;}
 
 span.icon {width:24px;height:24px;background:transparent url(../images/theme/icons.png) no-repeat;text-indent:-9999px;}
 span.icon_ok {background-position:0 -48px;}
@@ -243,7 +244,8 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #banner .languages .btn_de {background-position:-48px 0;}
 #banner .languages .btn_it {background-position:-72px 0;}
 #banner .languages .btn_es {background-position:-96px 0;}
-#banner .languages .btn_ru {background-position:-120px 0;}
+#banner .languages .btn_pt {background-position:-120px 0;}
+#banner .languages .btn_ru {background-position:-144px 0;}
 
 #donate {height:24px;}
 #donate .btn_donate_fr {width:120px;height:24px;display:inline-block;background:transparent url(../images/paypal_donate_fr.png) no-repeat;}
