@@ -20,7 +20,7 @@ UPDATES
 
 Date:	Mon Sep 3 2018
 
-ALTER TABLE `comment` ADD `confirmed` BOOLEAN NOT NULL DEFAULT TRUE AFTER `text`;
+ALTER TABLE `izend_comment` ADD `confirmed` BOOLEAN NOT NULL DEFAULT TRUE AFTER `text`;
 ----
 
 Date:	Fri Mar 24 2017
