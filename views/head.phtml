@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    47
+ * @version    48
  * @link       http://www.izend.org
  */
 ?>
@@ -28,6 +28,9 @@
 <meta name="robots" content="<?php echo $robots; ?>" />
 <?php else: ?>
 <meta name="robots" content="index, follow" />
+<?php endif; ?>
+<?php if (!empty($favicon)): ?>
+<link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php require_once 'isagent.php'; ?>
 <?php if (is_opengraph()): ?>
@@ -67,18 +70,21 @@
 <link rel="canonical" href="<?php echo $base_url; ?>/<?php echo $request_path; ?>" />
 <?php endif; ?>
 <?php endif; ?>
-<?php if (!empty($hreflang)): ?>
-<?php foreach ($hreflang as $lg => $url) : ?>
-<link rel="alternate" href="<?php echo $base_url;?>/<?php echo $url; ?>" hreflang="<?php echo $lg; ?>" />
-<?php endforeach; ?>
-<?php endif; ?>
 <?php if (!empty($lang)): ?>
+<?php if (!empty($hreflang) and count($hreflang) > 1 and !empty($hreflang[$lang])): ?>
+<?php
+$altlist=array('href="' . $base_url . '/' . $hreflang[$lang] . '"');
+foreach ($hreflang as $lg => $url) {
+	if ($lg != $lang) {
+		$altlist[]='rel="alternate"; hreflang="' . $lg . '", href="' . $base_url . '/' . $url . '"';
+	}
+}
+?>
+<link <?php echo implode('; ', $altlist); ?> />
+<?php endif; ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
 <?php else: ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
-<?php endif; ?>
-<?php if (!empty($favicon)): ?>
-<link rel="shortcut icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" type="image/x-icon" />
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
