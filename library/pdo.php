@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2016 izend.org
- * @version    8
+ * @copyright  2014-2018 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -33,6 +33,7 @@ function db_connect($url, $persistent=true) {
 	try {
 		$db_conn = new PDO($dsn, $user, $pass, $options);
 		$db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db_conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$db_conn->exec("SET NAMES 'utf8'");
 
 		if ($scheme == 'mysql') {
