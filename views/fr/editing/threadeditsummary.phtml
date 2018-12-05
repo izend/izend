@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    34
+ * @version    35
  * @link       http://www.izend.org
  */
 ?>
@@ -73,10 +73,14 @@
 <p>
 <input class="submit submit_add" id="node_create" name="node_create" type="submit" value="Ajouter" />
 le contenu
-<input id="new_node_title" name="new_node_title" type="text" size="50" maxlength="100" value="<?php echo htmlspecialchars($new_node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_node_number')"/>
+<span id="new_node_title_block">
+<input id="new_node_title" name="new_node_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($new_node_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_node_number')"/>
+<?php if ($thread_contents): ?>
 <span class="nowrap">
 #
 <input id="new_node_number" name="new_node_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_node_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'node_create')"/>
+</span>
+<?php endif; ?>
 </span>
 <?php if ($thread_contents): ?>
 <span id="threadcontent_hidy" class="hidy">+</span>
@@ -92,7 +96,7 @@ le contenu
 $i=1;
 $maxlen=strlen(count($thread_contents))+1;
 foreach ($thread_contents as $c) {
-	extract($c);	/* pos, node_id, node_title, node_url, node_number, node_ignored */
+	extract($c);	/* pos node_id node_title node_url node_number node_ignored */
 	$node_url .= '?' . 'clang=' . $clang;
 ?>
 <tr>
@@ -110,10 +114,14 @@ foreach ($thread_contents as $c) {
 <p>
 <input class="submit submit_sort" id="thread_reorder" name="thread_reorder" type="submit" value="Trier" />
 le fil ou
+<span class="nowrap">
 <input class="submit submit_hide" id="node_hide" name="node_hide" type="submit" value="Cacher" />
 <input class="submit submit_show" id="node_show" name="node_show" type="submit" value="Montrer" />
+</span>
+<span class="nowrap">
 <input class="submit submit_copy" id="node_copy" name="node_copy" type="submit" value="Copier" />
 <input class="submit submit_delete" id="node_delete" name="node_delete" type="submit" value="Supprimer" />
+</span>
 le contenu
 <span class="nowrap">
 #
