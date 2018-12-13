@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    2
+ * @copyright  2010-2018 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -21,7 +21,7 @@ function dump($var, $label=null, $echo=true) {
 	else {
 		$output = htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
 
-		$output = '<pre><code>' . $label . $output . '</code></pre>' . PHP_EOL;
+		$output = '<pre class="dump"><code>' . $label . $output . '</code></pre>' . PHP_EOL;
 	}
 
 	if ($echo) {
