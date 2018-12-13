@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    139
+ * @version    140
  * @link       http://www.izend.org
  */
 
@@ -303,7 +303,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 .navigation .next {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/icons.png) no-repeat;background-position:-48px -88px;vertical-align:text-bottom;}
 
 #thread_image, #node_image {max-width:240px;height:auto;}
-#new_node_title {max-width:70%;}
+#new_thread_title, #new_node_title {max-width:70%;}
 
 #sharebar, #shareline {display:none;}
 

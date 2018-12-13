@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2018 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -17,10 +17,12 @@
 <p>
 <input class="submit submit_add" id="thread_create" name="thread_create" type="submit" value="Ajouter" />
 le fil
+<span id="new_thread_title_block">
 <input id="new_thread_title" name="new_thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($new_thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_thread_number')"/>
 <span class="nowrap">
 #
 <input id="new_thread_number" name="new_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_create')"/>
+</span>
 </span>
 <span class="nowrap">
 type
