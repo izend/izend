@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    8
+ * @copyright  2010-2018 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -31,8 +31,8 @@ function bbcode($s) {
 	$s = preg_replace(array_keys($bbcode), array_values($bbcode), $s);
 
 	$bbcode_cb = array(
-		'#\[url\=(.+?)\](.*?)\[/url\]#is'		=> function($m) { return filter_var($m[1], FILTER_VALIDATE_URL) ? '<a href="' . $m[1] . '" target="_blank">' . $m[2] . '</a>' : $m[0]; },
-		'#\[url](.*?)\[/url\]#is'				=> function($m) { return filter_var($m[1], FILTER_VALIDATE_URL) ? '<a href="' . $m[1] . '" target="_blank">' . $m[1] . '</a>' : $m[0]; },
+		'#\[url\=(.+?)\](.*?)\[/url\]#is'		=> function($m) { return filter_var($m[1], FILTER_VALIDATE_URL) ? '<a href="' . $m[1] . '">' . $m[2] . '</a>' : $m[0]; },
+		'#\[url](.*?)\[/url\]#is'				=> function($m) { return filter_var($m[1], FILTER_VALIDATE_URL) ? '<a href="' . $m[1] . '">' . $m[1] . '</a>' : $m[0]; },
 		'#\[(e?mail)\=(.+?)\](.*?)\[/\1\]#is'	=> function($m) { return filter_var($m[2], FILTER_VALIDATE_EMAIL) ? '<a href="mailto:' . $m[2] .'">' . $m[3] . '</a>' : $m[0]; },
 		'#\[(e?mail)\](.*?)\[/\1\]#is'			=> function($m) { return filter_var($m[2], FILTER_VALIDATE_EMAIL) ? '<a href="mailto:' . $m[2] .'">' . $m[2] . '</a>' : $m[0]; },
 		'#\[code\=(.+?)\](.+?)\[/code\]#is'		=> function($m) { return bbcode_highlite($m[2], $m[1]); },
