@@ -3,13 +3,13 @@
 /**
  *
  * @copyright  2018 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function strurl($url) {
 	if (is_string($url)) {
-		$url=parse_url($s);
+		$url=parse_url($url);
 	}
 
 	$scheme = isset($url['scheme']) ? $url['scheme'] . '://' : '';
