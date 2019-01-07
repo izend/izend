@@ -123,7 +123,7 @@ span.icon_lock {background-position:-120px -48px;}
 span.icon_download {background-position:-24px -24px;}
 span.icon_attachment {background-position:-96px -48px;}
 
-span.btn_edit {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
+span.btn_edit {width:16px;height:16px;display:inline-block;line-height:16px;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 span.btn_mouse {background-position:-208px -48px;}
 span.btn_bullet_star {background-position:-176px -32px;}
 span.btn_accept {background-position:-192px -32px;}
@@ -191,7 +191,7 @@ span.btn_loop {background-position:-192px -48px;}
 span.btn_cut {background-position:-112px -48px;}
 span.btn_chart {background-position:-128px -48px;}
 
-span.btn_control {width:16px;height:16px;display:inline-block;background:transparent url(../images/theme/controls.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
+span.btn_control {width:16px;height:16px;display:inline-block;line-height:16px;background:transparent url(../images/theme/controls.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 span.btn_eject {background-position:0 0;}
 span.btn_eject_alt {background-position:0 -16px;}
 span.btn_end {background-position:-16px 0;}
