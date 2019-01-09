@@ -1,0 +1,166 @@
+<?php
+
+/**
+ *
+ * @copyright  2019 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php
+$icon=false;
+extract($errors);
+if ($missing_file or $bad_file or $bad_name or $bad_type or $bad_size or $bad_copy or $copy_error) {
+	$icon="icon_ko";
+}
+else {
+	extract($infos);
+
+	if ($file_copied) {
+		$icon="icon_ok";
+	}
+}
+$with_fileupload=($with_drop or $slice);
+?>
+<form enctype="multipart/form-data" method="post" class="compact noprint">
+<input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
+<?php if (!empty($maxfilesize)): ?>
+<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
+<?php endif; ?>
+<?php if ($with_drop): ?>
+<div id="upload_droparea"><span id="upload_status" class="icon <?php if ($icon): ?><?php echo $icon; ?><?php else: ?> icon_download"<?php endif; ?>></span></div>
+<?php endif; ?>
+<p>
+<input type="file" name="upload_file" id="upload_file" title="" />
+<input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="<?php echo $upload_put_value; ?>" title="" />
+<?php if (!$with_drop): ?>
+<?php if ($icon): ?>
+<span id="upload_status" class="icon <?php echo $icon; ?>"></span>
+<?php elseif ($with_fileupload): ?>
+<span id="upload_status"></span>
+<?php endif; ?>
+<?php endif; ?>
+</p>
+</form>
+<script>
+(function() {
+	var file=$('#upload_file');
+	var upload=$('#upload_put');
+<?php if ($with_fileupload): ?>
+	var status=$('#upload_status');
+<?php endif; ?>
+
+<?php if ($with_upload): ?>
+	upload.on('click', function(e) { e.preventDefault(); file.click(); });
+<?php else: ?>
+	upload.css({ position: 'absolute', left: '-9999px' });
+<?php endif; ?>
+
+	file.css({ position: 'absolute', left: '-9999px' });
+
+	file.change(function() {
+		if (file.val()) {
+<?php if ($with_fileupload): ?>
+			uploadfile(this.files[0]);
+<?php else: ?>
+			upload.off('click').click();
+<?php endif; ?>
+		}
+	});
+
+<?php if ($with_fileupload): ?>
+	function uploadfile(fd) {
+		var reader = new FileReader();
+		var size = 1000000;
+		var offset = 0;
+		var progress = 0;
+		var blob;
+
+<?php if ($filetypes): ?>
+		var filetypes=[<?php foreach ($filetypes as $i => $type): ?><?php if ($i > 0): ?>,<?php endif; ?>'<?php echo $type; ?>'<?php endforeach; ?>];
+<?php endif; ?>
+
+		function uploadslice() {
+			status.removeClass().text(progress + '%');
+			blob = fd.slice(offset, offset + size + 1);
+			reader.readAsDataURL(blob);
+		}
+
+		reader.onloadend = function(event) {
+			$.post('<?php echo $upload_url; ?>', {file_token: '<?php echo $token; ?>', file_name: fd.name, file_size: fd.size, file_type: fd.type, file_offset: offset, file_data: event.target.result},
+				function(data) {
+					if (data != 1) {
+						status.attr('class', 'icon icon_ko').text('');
+						return;
+					}
+
+					offset += blob.size;
+					progress = Math.floor((offset / fd.size ) * 100);
+
+					if (progress < 100)
+						uploadslice();
+					else
+						status.attr('class', 'icon icon_ok').text('');
+				});
+		};
+
+<?php if ($filetypes or $maxfilesize): ?>
+<?php if ($filetypes and $maxfilesize): ?>
+		if ($.inArray(fd.type, filetypes) != -1 && fd.size <= <?php echo $maxfilesize; ?>) {
+			uploadslice();
+		}
+<?php elseif ($filetypes): ?>
+		if ($.inArray(fd.type, filetypes) != -1) {
+			uploadslice();
+		}
+<?php elseif ($maxfilesize): ?>
+		if (fd.size <= <?php echo $maxfilesize; ?>) {
+			uploadslice();
+		}
+<?php endif; ?>
+		else {
+			status.attr('class', 'icon icon_ko');
+		}
+<?php else: ?>
+		uploadslice();
+<?php endif; ?>
+	}
+<?php endif; ?>
+
+<?php if ($with_drop): ?>
+	var droparea=$('#upload_droparea');
+
+	droparea.on('click', function(e) { file.click(); });
+
+	droparea.on('drop', function(e) {
+		var dt = e.originalEvent.dataTransfer;
+
+		e.preventDefault();
+
+		if ($.inArray('Files', dt.types) != -1) {
+			uploadfile(dt.files[0]);
+		}
+	});
+
+	droparea.on('dragenter', function(e) {
+		var dt = e.originalEvent.dataTransfer;
+
+		if ($.inArray('Files', dt.types) != -1) {
+			e.preventDefault();
+		}
+	});
+
+	droparea.on('dragleave', function(e) {
+		e.preventDefault();
+	});
+
+	droparea.on('dragover', function(e) {
+		var dt = e.originalEvent.dataTransfer;
+
+		e.preventDefault();
+
+		dt.dropEffect = $.inArray('Files', dt.types) != -1 ? 'copy' : 'none';
+	});
+<?php endif; ?>
+})();
+</script>

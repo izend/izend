@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2018 izend.org
- * @version    5
+ * @copyright  2012-2019 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -16,6 +16,9 @@ define('FILES_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'files');
 
 function upload($lang, $slice=false) {
 	$maxfilesize=$slice ? false : 1000000;
+
+	$with_drop=false;
+	$with_upload=!$with_drop;
 
 	$action='init';
 	if (isset($_POST['upload_put'])) {
@@ -119,14 +122,14 @@ function upload($lang, $slice=false) {
 			break;
 	}
 
-	$fileupload_url = $slice ? url('fileupload', $lang) : false;
+	$upload_url = ($with_drop or $slice) ? url('fileupload', $lang) : false;
 
 	$_SESSION['upload_token'] = $token = token_id();
 
 	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
-	$output = view('upload', $lang, compact('token', 'maxfilesize', 'slice', 'fileupload_url', 'errors', 'infos'));
+	$output = view('upload', $lang, compact('token', 'with_drop', 'with_upload', 'upload_url', 'maxfilesize', 'filetypes', 'slice', 'errors', 'infos'));
 
 	return $output;
 }

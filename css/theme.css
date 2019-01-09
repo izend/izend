@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    140
+ * @copyright  2010-2019 izend.org
+ * @version    141
  * @link       http://www.izend.org
  */
 
@@ -418,6 +418,8 @@ a:hover .icon_instagram {background-position:-753px 0;}
 #mailme_message {font-family:Verdana, sans-serif;font-size:10pt;}
 
 #upload_status {font-size:smaller;}
+#upload_droparea {width:100px;height:100px;display:table-cell;text-align:center;vertical-align:middle;background:#eee;cursor:pointer;}
+#upload_droparea span {display:inline-block;}
 
 .userresult {color:#aec14e;font-weight:bold;}
 .userpagenumber {font-size:large;}
