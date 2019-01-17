@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2019 izend.org
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
@@ -82,7 +82,7 @@ $with_fileupload=($with_drop or $slice);
 
 		function uploadslice() {
 			status.removeClass().text(progress + '%');
-			blob = fd.slice(offset, offset + size + 1);
+			blob = fd.slice(offset, offset + size);
 			reader.readAsDataURL(blob);
 		}
 
