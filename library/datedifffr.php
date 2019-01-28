@@ -2,15 +2,15 @@
 
 /**
  *
- * @copyright  2018 izend.org
- * @version    1
+ * @copyright  2018-2019 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
-function datediff_fr($d1, $d2) {
-	$tz=new DateTimeZone('UTC');
+require_once 'datediff.php';
 
-	$diff=date_diff(date_create(date('Y-m-d', $d2 > $d1 ? $d1 : $d2), $tz), date_create(date('Y-m-d', $d2 > $d1 ? $d2 : $d1), $tz));
+function datediff_fr($d1, $d2) {
+	$diff=datediff($d1, $d2);
 
 	$s='';
 
