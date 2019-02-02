@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    141
+ * @version    142
  * @link       http://www.izend.org
  */
 
@@ -320,6 +320,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #sharebar.lite {margin-left:-65px;padding:5px;}
 #sharebar.lite a span, .besocial.lite a span {display:none;}
+
 #sharebar.lite li a, .besocial.lite li a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;cursor:pointer;}
 #sharebar.lite li.facebook a, .besocial.lite li.facebook a {background-position:0 0;}
 #sharebar.lite li.twitter a, .besocial.lite li.twitter a  {background-position:-24px 0;}
@@ -329,6 +330,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #sharebar.awesome {margin-left:-86px;padding:5px;}
 #sharebar.awesome a, .besocial.awesome a {color:#ffffff;font-size:24px;line-height:24px;width:44px;display:list-item;list-style:none;text-align:center;padding:8px 0;}
+#sharebar.awesome a .fab, .besocial.awesome a .fab {color:#ffffff;}
 #sharebar.awesome .facebook, .besocial.awesome .facebook {background-color:#3b5998;}
 #sharebar.awesome .twitter, .besocial.awesome .twitter {background-color:#4ad2ff;}
 #sharebar.awesome .gplus, .besocial.awesome .gplus {background-color:#a7291c;}
