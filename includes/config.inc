@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    56
+ * @copyright  2010-2019 izend.org
+ * @version    57
  * @link       http://www.izend.org
  */
 
@@ -60,9 +60,10 @@ global $pinterestassets;
 
 $pinterestassets=false;	// false
 
-global $googleapiid;
+global $googleapiid, $googleapisid;
 
-$googleapiid=false;
+$googleapiid=false;		// client key
+$googleapisid=false;	// server key
 
 global $googleanalyticsid;
 
