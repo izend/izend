@@ -1,0 +1,16 @@
+<?php
+
+/**
+ *
+ * @copyright  2019 izend.org
+ * @version    1
+ * @link       http://www.izend.org
+ */
+?>
+<?php switch ($mode): ?>
+<?php case 'awesome': ?>
+<a href="whatsapp://send?text=<?php echo rawurlencode("$base_url/$request_path"); ?>" title="Partager sur WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<?php break; ?>
+<?php default: ?>
+<?php break; ?>
+<?php endswitch; ?>

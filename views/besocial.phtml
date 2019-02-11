@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    12
+ * @copyright  2010-2019 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit): ?>
+<?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit or $whatsapp): ?>
 <ul<?php if ($shareline): ?> id="shareline"<?php endif; ?> class="besocial <?php echo $sharemode; ?>">
 <?php if ($sharemode == 'standard'): ?>
 <?php if ($linkedin): ?>
@@ -59,6 +59,11 @@
 <?php if ($pinit): ?>
 <li class="pinterest">
 <?php echo $pinit; ?>
+</li>
+<?php endif; ?>
+<?php if ($whatsapp): ?>
+<li class="whatsapp">
+<?php echo $whatsapp; ?>
 </li>
 <?php endif; ?>
 <?php endif; ?>
