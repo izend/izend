@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    145
+ * @version    146
  * @link       http://www.izend.org
  */
 
@@ -440,7 +440,7 @@ a:hover .icon_instagram {background-position:-753px 0;}
 
 #userbalance {float:right;}
 
-.balance {text-align:right;}
+.balance {text-align:right;margin:0.5em;}
 .balance span {font-size:larger;display:block;}
 
 .summary {float:right;display:block;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:small;text-align:right;margin:0 0 1em 2em;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
