@@ -2,17 +2,25 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    6
+ * @copyright  2010-2019 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
 function sharebar($lang, $components=false, $sharemode=false) {
-	$ilike=$tweetit=$plusone=$linkedin=$pinit=false;
+	$ilike=$tweetit=$plusone=$linkedin=$pinit=$whatsapp=false;
 
-	extract($components);	/* ilike, tweetit, plusone, linkedin, pinit */
+	extract($components);	/* ilike tweetit plusone linkedin pinit whatsapp */
 
 	$mode=$sharemode == 'standard' ? 'bar' : $sharemode;
+
+	if ($whatsapp) {
+		require_once 'ismobile.php';
+
+		if (!is_mobile()) {
+			$whatsapp=false;
+		}
+	}
 
 	if ($ilike) {
 		$ilike=view('ilike', $lang, compact('mode'));
@@ -38,8 +46,11 @@ function sharebar($lang, $components=false, $sharemode=false) {
 		}
 		$pinit=view('pinit', $lang, compact('mode', 'pinit_text', 'pinit_image'));
 	}
+	if ($whatsapp) {
+		$whatsapp=view('whatsapp', $lang, compact('mode'));
+	}
 
-	$output = view('sharebar', false, compact('sharemode', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+	$output = view('sharebar', false, compact('sharemode', 'ilike', 'tweetit', 'plusone', 'linkedin', 'pinit', 'whatsapp'));
 
 	return $output;
 }
