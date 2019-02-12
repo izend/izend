@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    28
+ * @copyright  2010-2019 izend.org
+ * @version    29
  * @link       http://www.izend.org
  */
 
@@ -59,7 +59,7 @@ function threadeditsummary($lang, $clang, $thread) {
 	$thread_type=$thread_name=$thread_title=$thread_abstract=$thread_cloud=$thread_image=false;
 	$thread_search=$thread_tag=false;
 	$thread_comment=$thread_morecomment=$thread_vote=$thread_morevote=false;
-	$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=$thread_pinit=false;
+	$thread_ilike=$thread_tweet=$thread_plusone=$thread_linkedin=$thread_pinit=$thread_whatsapp=false;
 	$thread_visits=false;
 
 	$thread_nosearch=$thread_nocloud=$thread_nocomment=$thread_nomorecomment=$thread_novote=$thread_nomorevote=true;
@@ -155,6 +155,9 @@ function threadeditsummary($lang, $clang, $thread) {
 			}
 			if (isset($_POST['thread_pinit'])) {
 				$thread_pinit=readarg($_POST['thread_pinit'] == 'on' ? true : false);
+			}
+			if (isset($_POST['thread_whatsapp'])) {
+				$thread_whatsapp=readarg($_POST['thread_whatsapp'] == 'on' ? true : false);
 			}
 			if (isset($_POST['new_node_title'])) {
 				$new_node_title=readarg($_POST['new_node_title']);
@@ -275,7 +278,7 @@ function threadeditsummary($lang, $clang, $thread) {
 				break;
 			}
 
-			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_image, $thread_visits, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin, $thread_pinit);
+			$r = thread_set($clang, $thread_id, $thread_name, $thread_title, $thread_type, $thread_abstract, $thread_cloud, $thread_image, $thread_visits, $thread_nosearch, $thread_nocloud, $thread_nocomment, $thread_nomorecomment, $thread_novote, $thread_nomorevote, $thread_ilike, $thread_tweet, $thread_plusone, $thread_linkedin, $thread_pinit, $thread_whatsapp);
 
 			if (!$r) {
 				break;
@@ -450,7 +453,7 @@ function threadeditsummary($lang, $clang, $thread) {
 
 	$errors = compact('missing_thread_name', 'bad_thread_name', 'missing_thread_type', 'bad_thread_type', 'missing_new_node_title', 'bad_new_node_title', 'bad_new_node_number', 'missing_old_node_number', 'bad_old_node_number');
 
-	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
+	$content = view('editing/threadeditsummary', $lang, compact('clang', 'inlanguages', 'supported_threads', 'thread_id', 'thread_type', 'thread_title', 'thread_name', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_whatsapp', 'thread_contents', 'new_node_name', 'new_node_title', 'new_node_number', 'old_node_number', 'confirm_delete_node', 'errors'));
 
 	$output = layout('editing', compact('clang', 'toolbar', 'banner', 'content', 'sidebar'));
 

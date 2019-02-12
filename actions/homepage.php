@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    8
+ * @copyright  2010-2019 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -20,6 +20,7 @@ function homepage($lang) {
 	$plusone=true;
 	$linkedin=true;
 	$pinit=true;
+	$whatsapp=true;
 	if ($tweetit or $pinit) {
 		$description=translate('description', $lang);
 		if ($tweetit) {
@@ -32,7 +33,7 @@ function homepage($lang) {
 			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : true;
 		}
 	}
-	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit', 'whatsapp'));
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
 

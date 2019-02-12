@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    27
+ * @copyright  2010-2019 izend.org
+ * @version    28
  * @link       http://www.izend.org
  */
 
@@ -46,7 +46,7 @@ function bookpage($lang, $book, $page) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_user_id node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin node_pinit node _whatsapp */
 
 	if ($node_ignored) {
 		return run('error/notfound', $lang);
@@ -134,6 +134,7 @@ function bookpage($lang, $book, $page) {
 		$plusone=$thread_plusone && $node_plusone;
 		$linkedin=$thread_linkedin && $node_linkedin;
 		$pinit=$thread_pinit && $node_pinit;
+		$whatsapp=$thread_whatsapp && $node_whatsapp;
 		if ($tweetit) {
 			$tweet_text=$node_abstract ? $node_abstract : ($node_title ? $node_title : $thread_title);
 			$tweetit=$tweet_text ? compact('tweet_text') : true;
@@ -143,7 +144,7 @@ function bookpage($lang, $book, $page) {
 			$pinit_image=$node_image ? $node_image : $siteshot;
 			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : true;
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit', 'whatsapp'));
 	}
 
 	$content = view('bookpage', false, compact('page_id', 'page_title', 'page_contents', 'page_comment', 'page_number', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'besocial', 'vote', 'visits'));
