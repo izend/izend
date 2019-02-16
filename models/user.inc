@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    23
+ * @copyright  2010-2019 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 
@@ -249,12 +249,16 @@ function user_set_newpassword($user_id, $newpassword) {
 		return false;
 	}
 
-	$r = user_get($user_id);
+	$tabuser=db_prefix_table('user');
+
+	$sql="SELECT seed AS user_seed FROM $tabuser WHERE user_id=$user_id";
+
+	$r = db_query($sql);
 
 	if (!$r) {
 		return false;
 	}
-	extract($r);	/* user_seed */
+	extract($r[0]);		/* user_seed */
 
 	$newpassword=$newpassword ? md5($user_seed . $newpassword) : '';
 
@@ -271,6 +275,25 @@ function user_set_newpassword($user_id, $newpassword) {
 	}
 
 	return true;
+}
+
+function user_verify_password($user_id, $password) {
+	if (!is_numeric($user_id)) {
+		return false;
+	}
+
+	$tabuser=db_prefix_table('user');
+
+	$sql="SELECT password AS user_password, seed AS user_seed FROM $tabuser WHERE user_id=$user_id";
+
+	$r = db_query($sql);
+
+	if (!$r) {
+		return false;
+	}
+	extract($r[0]);		/* user_password user_seed */
+
+	return $password ? $user_password == md5($user_seed . $password) : !$user_password;
 }
 
 function user_get_role($user_id) {

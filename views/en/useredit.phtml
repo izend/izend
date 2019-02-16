@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2018 izend.org
- * @version    25
+ * @copyright  2011-2019 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
 ?>
@@ -81,8 +81,12 @@ the account
 <?php endif; ?>
 </p>
 <?php if ($with_newpassword): ?>
-<p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Password:</p>
-<p class="noprint"><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<?php if ($with_oldpassword): ?>
+<p class="noprint inlabel<?php if ($missing_oldpassword or $bad_oldpassword): ?> inerror<?php endif; ?>">Current password:</p>
+<p class="noprint"><input type="password" name="useredit_oldpassword" id="useredit_oldpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return focusonenter(event, 'useredit_newpassword')" /></p>
+<?php endif; ?>
+<p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">New password:</p>
+<p class="noprint"><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="at least 6 letters and digits" onkeypress="return submitonenter(event, 'useredit_change')" autocomplete="off" value="<?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="noprint"><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Change" /></p>
 <?php endif; ?>
 </form>
@@ -117,7 +121,7 @@ the account
 <?php if ($bad_website): ?>
 <p>The URL of the website is invalid.</p>
 <?php endif; ?>
-<?php if ($missing_newpassword or $bad_newpassword): ?>
+<?php if ($missing_newpassword or $bad_newpassword or $missing_oldpassword or $bad_oldpassword): ?>
 <p>Enter a combination of letters and digits of at least 6 characters.</p>
 <?php endif; ?>
 </div>
@@ -154,8 +158,11 @@ else if ($bad_timezone) {
 else if ($bad_website) {
 	$focus='#useredit_website';
 }
+else if ($missing_oldpassword or $bad_oldpassword) {
+	$focus='#useredit_oldpassword';
+}
 else if ($missing_newpassword or $bad_newpassword) {
-	$focus='#useredit_newpassword';
+	$focus=$with_oldpassword ? '#useredit_oldpassword' : '#useredit_newpassword';
 }
 ?>
 <?php if ($focus): ?>

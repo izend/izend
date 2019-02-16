@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2017 izend.org
- * @version    16
+ * @copyright  2011-2019 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -31,6 +31,7 @@ function useredit($lang, $user_id) {
 	$with_status=($user_id != 1 and $is_admin);
 	$with_delete=($user_id != 1 and $is_admin and !$is_owner);
 	$with_newpassword=false; 	// ($user_id != 1 and $is_owner);
+	$with_oldpassword=false;	// ($with_newpassword and !$is_admin);
 	$with_locale=count($system_languages) > 1 ? true : false;
 	$with_role=($user_id != 1 and $is_admin);
 	$with_timezone=($user_id != 1 and $is_admin);
@@ -70,7 +71,7 @@ function useredit($lang, $user_id) {
 
 	$user_role=false;
 
-	$user_newpassword=false;
+	$user_newpassword=$user_oldpassword=false;
 
 	$user_lastname=$user_firstname=false;
 
@@ -147,6 +148,11 @@ function useredit($lang, $user_id) {
 					$user_newpassword=readarg($_POST['useredit_newpassword']);
 				}
 			}
+			if ($with_oldpassword) {
+				if (isset($_POST['useredit_oldpassword'])) {
+					$user_oldpassword=readarg($_POST['useredit_oldpassword']);
+				}
+			}
 			if (isset($_POST['useredit_token'])) {
 				$token=readarg($_POST['useredit_token']);
 			}
@@ -174,6 +180,8 @@ function useredit($lang, $user_id) {
 
 	$missing_newpassword=false;
 	$bad_newpassword=false;
+	$missing_oldpassword=false;
+	$bad_oldpassword=false;
 
 	$account_modified=false;
 	$password_changed=false;
@@ -263,6 +271,18 @@ function useredit($lang, $user_id) {
 			else if (!validate_password($user_newpassword)) {
 				$bad_newpassword=true;
 			}
+
+			if ($with_oldpassword) {
+				if (!$user_oldpassword) {
+					$missing_oldpassword=true;
+				}
+				else if (!validate_password($user_oldpassword)) {
+					$bad_oldpassword=true;
+				}
+				else if (!user_verify_password($user_id, $user_oldpassword)) {
+					$bad_oldpassword=true;
+				}
+			}
 			break;
 
 		default:
@@ -326,7 +346,7 @@ function useredit($lang, $user_id) {
 			break;
 
 		case 'change':
-			if ($bad_token or $missing_newpassword or $bad_newpassword) {
+			if ($bad_token or $missing_newpassword or $bad_newpassword or $missing_oldpassword or $bad_oldpassword) {
 				break;
 			}
 
@@ -336,6 +356,8 @@ function useredit($lang, $user_id) {
 				$internal_error=true;
 				break;
 			}
+
+			$user_newpassword=false;
 
 			$password_changed=true;
 
@@ -364,18 +386,16 @@ function useredit($lang, $user_id) {
 			break;
 	}
 
-	$user_newpassword=false;
-
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
 
 	$_SESSION['useredit_token'] = $token = token_id();
 
-	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
+	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_oldpassword', 'bad_oldpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_oldpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }
