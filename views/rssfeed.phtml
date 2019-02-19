@@ -2,14 +2,15 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    9
+ * @copyright  2010-2019 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>', "\n"; ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
+	<atom:link href="<?php echo $base_url; ?><?php echo $rssfeed_page; ?>" rel="self" type="application/rss+xml" />
 	<title><![CDATA[<?php echo htmlspecialchars($sitename, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($lang): ?>
 	<link><?php echo $base_url; ?>/<?php echo $lang; ?></link>
@@ -22,7 +23,7 @@
 <?php if ($lang): ?>
 	<language><?php echo $lang; ?></language>
 <?php endif; ?>
-	<pubDate><?php echo date('r', mktime(13, 10, 0, 5, 13, 2010)); ?></pubDate>
+	<pubDate><?php echo date('r'); ?></pubDate>
 	<lastBuildDate><?php echo date('r'); ?></lastBuildDate>
 	<copyright><?php echo $sitename; ?></copyright>
 	<image>
@@ -41,11 +42,12 @@
 	<item>
 		<title><![CDATA[<?php echo htmlspecialchars($title, ENT_COMPAT, 'UTF-8'); ?>]]></title>
 <?php if ($uri): ?>
-		<link><?php echo $base_url; ?><?php echo htmlspecialchars($uri, ENT_COMPAT, 'UTF-8'); ?></link>
+		<link><?php echo $base_url; ?><?php echo $uri; ?></link>
+		<guid><?php echo $base_url; ?><?php echo $uri; ?></guid>
 <?php endif; ?>
 		<description><![CDATA[<?php echo htmlspecialchars($description, ENT_COMPAT, 'UTF-8'); ?>]]></description>
 <?php if ($image_uri): ?>
-		<enclosure type="<?php echo $image_type; ?>" url="<?php echo $base_url; ?><?php echo htmlspecialchars($image_uri, ENT_COMPAT, 'UTF-8'); ?>" length="<?php echo $image_size; ?>" />
+		<enclosure type="<?php echo $image_type; ?>" url="<?php echo $base_url; ?><?php echo $image_uri; ?>" length="<?php echo $image_size; ?>" />
 <?php endif; ?>
 		<pubDate><?php echo date('r', $created); ?></pubDate>
 	</item>

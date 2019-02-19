@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    7
+ * @copyright  2010-2019 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -52,9 +52,13 @@ function rssfeed($lang) {
 		}
 	}
 
+	header("Content-Type: application/rss+xml");
+
+	$rssfeed_page=url('rssfeed', $lang);
+
 	$description = translate('description', $lang);
 
-	$output = view('rssfeed', false, compact('lang', 'description', 'itemlist'));
+	$output = view('rssfeed', false, compact('lang', 'rssfeed_page', 'description', 'itemlist'));
 
 	return $output;
 }
