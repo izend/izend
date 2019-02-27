@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2017 izend.org
- * @version    1
+ * @copyright  2017-2019 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
  
@@ -18,11 +18,11 @@ from {opacity:0;}
 
 @keyframes fade																											 {
 0%,100% {opacity:1;}
-	50% {opacity:0;}
+	50% {opacity:0.2;}
 }
 @-webkit-keyframes fade {
 0%,100% {opacity:1;}
-	50% {opacity:0;}
+	50% {opacity:0.2;}
 }
 
 @keyframes shrink {
