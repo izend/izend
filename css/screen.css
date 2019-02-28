@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    100
+ * @copyright  2010-2019 izend.org
+ * @version    101
  * @link       http://www.izend.org
  */
  
@@ -46,6 +46,8 @@ select {padding:2px;}
 input[type="text"][readonly] {border-color:transparent;cursor:default;}
 
 input[type="radio"], input[type="checkbox"] {min-height:14px;line-height:normal;}
+
+input.text_date[type="text"] {width:80px;}
 
 form.compact p, div.compact p, p.compact {margin-top:0.75em;margin-bottom:0.5em;}
 form div.row {margin-top:0;margin-bottom:0;}

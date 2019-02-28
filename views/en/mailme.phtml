@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    27
+ * @copyright  2010-2019 izend.org
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
@@ -36,7 +36,7 @@ an attachment
 <?php if ($with_appointment): ?>
 <p>
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">Appointment on</span>
-<input type="text" name="mailme_date" id="mailme_date" size="10" title="yyyy-mm-dd" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo htmlspecialchars($date, ENT_COMPAT, 'UTF-8'); ?>" />
+<input type="text" class="text_date" name="mailme_date" id="mailme_date" size="10" title="yyyy-mm-dd" onkeypress="return focusonenter(event, 'mailme_code')" value="<?php echo htmlspecialchars($date, ENT_COMPAT, 'UTF-8'); ?>" />
 <span class="inlabel<?php if ($bad_appointment): ?> inerror<?php endif; ?>">at</span>
 <select id="mailme_hour" name="mailme_hour" size="1">
 <?php foreach (range(8, 18, 1) as $hh): ?>
