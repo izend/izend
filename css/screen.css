@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    103
+ * @version    104
  * @link       http://www.izend.org
  */
  
@@ -166,6 +166,10 @@ div.vbar > *:last-child {margin-bottom:0;}
 .aleft {text-align:left;}
 .aright {text-align:right;}
 .acenter {text-align:center;}
+
+.hflip {transform:scaleX(-1);}
+.vflip {transform:scaleY(-1);}
+.hvflip {transform:scale(-1, -1);}
 
 .nowrap {white-space:nowrap !important;}
 
