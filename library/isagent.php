@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    4
+ * @copyright  2010-2019 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -45,6 +45,7 @@ function is_opengraph($agent=false) {
 		'twitterbot',
 		'linkedinbot',
 		'pinterest',
+		'whatsapp',
 	);
 
 	return is_agent(implode('|', $bots), $agent);
