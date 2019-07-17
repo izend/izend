@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    105
+ * @version    106
  * @link       http://www.izend.org
  */
  
@@ -199,7 +199,7 @@ div.youtube iframe {position:absolute;top:0;left:0;width:100%;height:100%;border
 .ytplay:hover {background-position:-264px -24px;}
 }
 
-div.video video {display:flex;width:100%;height:100%;}
+div.video video, div.canvas canvas {display:flex;width:100%;height:100%;}
 
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;}
 ol.tree ol {margin-left:12px;background:url(../images/vline.png) repeat-y;}
