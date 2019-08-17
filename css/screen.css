@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    106
+ * @version    107
  * @link       http://www.izend.org
  */
  
@@ -34,12 +34,12 @@ input, select {font-family:Verdana, sans-serif;font-size:14px;}
 
 input[type="text"], input[type="password"], textarea {max-width:90%;}
 
-input[type="text"], input[type="password"], textarea, select, fieldset {border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;}
-input[type="text"]:focus, input[type="password"]:focus, textarea:focus {border-color:#aaaaaa;}
+input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea, select, fieldset {border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;}
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {border-color:#aaaaaa;}
 
-input[type="text"], input[type="password"], textarea, select, fieldset {border-radius:2px;}
+input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea, select, fieldset {border-radius:2px;}
 
-input[type="text"], input[type="password"], textarea {padding:4px;}
+input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea {padding:4px;}
 fieldset {padding:5px 10px 8px;}
 select {padding:2px;}
 
