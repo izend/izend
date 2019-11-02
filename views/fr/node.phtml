@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    10
+ * @version    11
  * @link       http://www.izend.org
  */
 ?>
@@ -22,7 +22,7 @@
 <h6>Image</h6>
 <p><img id="node_image" src="<?php echo str_replace('%2F', '/', urlencode($node_image)); ?>" alt="<?php echo htmlspecialchars($node_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php endif; ?>
-<?php if ($node_visits or $node_comment or $node_morecomment or $node_vote or $node_morevote or $node_ilike or $node_tweet or $node_plusone or $node_linkedin or $node_pinit or $node_whatsapp): ?>
+<?php if ($node_visits or $node_comment or $node_morecomment or $node_vote or $node_morevote or $node_ilike or $node_tweet or $node_linkedin or $node_pinit or $node_whatsapp): ?>
 <fieldset id="node_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -33,7 +33,6 @@
 <?php if ($node_morevote): ?><span class="btn_edit btn_morevote">voter+</span><?php endif; ?>
 <?php if ($node_ilike): ?><span class="btn_edit btn_ilike">facebook</span><?php endif; ?>
 <?php if ($node_tweet): ?><span class="btn_edit btn_tweet">twitter</span><?php endif; ?>
-<?php if ($node_plusone): ?><span class="btn_edit btn_plusone">google+</span><?php endif; ?>
 <?php if ($node_linkedin): ?><span class="btn_edit btn_linkedin">linkedin</span><?php endif; ?>
 <?php if ($node_pinit): ?><span class="btn_edit btn_pinit">pinit</span><?php endif; ?>
 <?php if ($node_whatsapp): ?><span class="btn_edit btn_whatsapp">whatsapp</span><?php endif; ?>

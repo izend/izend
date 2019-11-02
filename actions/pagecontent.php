@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    4
+ * @copyright  2012-2019 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -51,7 +51,7 @@ function pagecontent($lang, $arglist=false) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_plusone node_linkedin */
+	extract($r); /* node_ignored */
 
 	if ($node_ignored) {
 		header('HTTP/1.1 404 Not Found');

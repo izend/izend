@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -27,7 +27,7 @@
 <h6>Image</h6>
 <p><img id="thread_image" src="<?php echo str_replace('%2F', '/', urlencode($thread_image)); ?>" alt="<?php echo htmlspecialchars($thread_image, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <?php endif; ?>
-<?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_plusone or $thread_linkedin or $thread_pinit or $thread_whatsapp): ?>
+<?php if ($thread_search or $thread_tag or $thread_comment or $thread_morecomment or $thread_vote or $thread_morevote or $thread_ilike or $thread_tweet or $thread_linkedin or $thread_pinit or $thread_whatsapp): ?>
 <fieldset id="thread_options">
 <legend>Options</legend>
 <div class="hbar">
@@ -40,7 +40,6 @@
 <?php if ($thread_morevote): ?><span class="btn_edit btn_morevote">vote+</span><?php endif; ?>
 <?php if ($thread_ilike): ?><span class="btn_edit btn_ilike">facebook</span><?php endif; ?>
 <?php if ($thread_tweet): ?><span class="btn_edit btn_tweet">twitter</span><?php endif; ?>
-<?php if ($thread_plusone): ?><span class="btn_edit btn_plusone">google+</span><?php endif; ?>
 <?php if ($thread_linkedin): ?><span class="btn_edit btn_linkedin">linkedin</span><?php endif; ?>
 <?php if ($thread_pinit): ?><span class="btn_edit btn_pinit">pinit</span><?php endif; ?>
 <?php if ($thread_whatsapp): ?><span class="btn_edit btn_whatsapp">whatsapp</span><?php endif; ?>

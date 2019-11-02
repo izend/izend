@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -30,7 +30,6 @@ function anypage($lang, $arglist=false) {
 	$besocial=$sharebar=false;
 	$ilike=true;
 	$tweetit=true;
-	$plusone=true;
 	$linkedin=true;
 	$pinit=true;
 	$whatsapp=true;
@@ -46,7 +45,7 @@ function anypage($lang, $arglist=false) {
 			$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : true;
 		}
 	}
-	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit', 'whatsapp'));
+	list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'linkedin', 'pinit', 'whatsapp'));
 
 	$content = view('anypage', false, compact('page_contents', 'besocial'));
 

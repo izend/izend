@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($ilike or $tweetit or $plusone or $linkedin or $pinit or $whatsapp): ?>
+<?php if ($ilike or $tweetit or $linkedin or $pinit or $whatsapp): ?>
 <ul id="sharebar" class="sidebar <?php echo $sharemode; ?>">
 <?php if ($sharemode == 'standard'): ?>
 <?php if ($ilike): ?>
@@ -30,11 +30,6 @@
 <?php echo $pinit; ?>
 </li>
 <?php endif; ?>
-<?php if ($plusone): ?>
-<li class="gplus">
-<?php echo $plusone; ?>
-</li>
-<?php endif; ?>
 <?php else: ?>
 <?php if ($ilike): ?>
 <li class="facebook">
@@ -44,11 +39,6 @@
 <?php if ($tweetit): ?>
 <li class="twitter">
 <?php echo $tweetit; ?>
-</li>
-<?php endif; ?>
-<?php if ($plusone): ?>
-<li class="gplus">
-<?php echo $plusone; ?>
 </li>
 <?php endif; ?>
 <?php if ($linkedin): ?>

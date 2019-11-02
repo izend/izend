@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -63,7 +63,7 @@ function threadsummary($lang, $clang, $thread) {
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$content = view('threadsummary', $lang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_plusone', 'thread_linkedin', 'thread_pinit', 'thread_whatsapp', 'thread_created', 'thread_modified', 'thread_contents', 'inlanguages'));
+	$content = view('threadsummary', $lang, compact('thread_id', 'thread_title', 'thread_abstract', 'thread_cloud', 'thread_image', 'thread_visits', 'thread_search', 'thread_tag', 'thread_comment', 'thread_morecomment', 'thread_vote', 'thread_morevote', 'thread_ilike', 'thread_tweet', 'thread_linkedin', 'thread_pinit', 'thread_whatsapp', 'thread_created', 'thread_modified', 'thread_contents', 'inlanguages'));
 
 	$output = layout('viewing', compact('clang', 'toolbar', 'banner', 'content', 'sidebar'));
 

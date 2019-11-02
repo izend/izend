@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2019 izend.org
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -95,7 +95,7 @@ foreach ($languages as $lang) {
 		extract($node[$lang]); /* node_name node_title node_abstract node_cloud node_image */
 
 		if (!$node_id) {
-			extract($node[0]); /* node_ignored node_visits node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin node_pinit node_whatsapp */
+			extract($node[0]); /* node_ignored node_visits node_nocomment node_nomorecomment node_ilike node_tweet node_linkedin node_pinit node_whatsapp */
 			$r = thread_create_node($lang, $user_id, $thread_id, $node_name, $node_title);
 			if (!$r) {
 				abort($node_name . '?');
@@ -103,7 +103,7 @@ foreach ($languages as $lang) {
 			extract($r); /* node_id node_number */
 		}
 
-		$r = thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit, $node_whatsapp);
+		$r = thread_set_node($lang, $thread_id, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_linkedin, $node_pinit, $node_whatsapp);
 		if (!$r) {
 			abort($node_name . '?');
 		}

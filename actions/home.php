@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -22,7 +22,7 @@ function home($lang) {
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
-	extract($r); /* node_name node_title node_abstract node_cloud node_image node_created node_modified node_nocomment node_nomorecomment node_ilike node_tweet node_plusone node_linkedin node_pinit node_whatsapp */
+	extract($r); /* node_name node_title node_abstract node_cloud node_image node_created node_modified node_nocomment node_nomorecomment node_ilike node_tweet node_linkedin node_pinit node_whatsapp */
 
 	head('title', translate('home:title', $lang));
 	if ($node_abstract) {
@@ -47,7 +47,6 @@ function home($lang) {
 	if ($page_contents) {
 		$ilike=$node_ilike;
 		$tweetit=$node_tweet;
-		$plusone=$node_plusone;
 		$linkedin=$node_linkedin;
 		$pinit=$node_pinit;
 		$whatsapp=$node_whatsapp;
@@ -63,7 +62,7 @@ function home($lang) {
 				$pinit=$pinit_text && $pinit_image ? compact('pinit_text', 'pinit_image') : true;
 			}
 		}
-		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'plusone', 'linkedin', 'pinit', 'whatsapp'));
+		list($besocial, $sharebar) = socialize($lang, compact('ilike', 'tweetit', 'linkedin', 'pinit', 'whatsapp'));
 	}
 
 	$content = view('home', false, compact('page_contents', 'besocial'));

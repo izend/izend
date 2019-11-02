@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    34
+ * @version    35
  * @link       http://www.izend.org
  */
 
@@ -75,14 +75,14 @@ function node_get($lang, $node_id, $strict=true) {
 	$tabnode=db_prefix_table('node');
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.visits AS node_visits, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.plusone AS node_plusone, n.linkedin AS node_linkedin, n.pinit AS node_pinit, n.whatsapp AS node_whatsapp FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id";
+	$sql="SELECT nloc.name AS node_name, nloc.title AS node_title, nloc.abstract AS node_abstract, nloc.cloud AS node_cloud, nloc.image AS node_image, n.user_id AS node_user_id, UNIX_TIMESTAMP(n.created) AS node_created, UNIX_TIMESTAMP(n.modified) AS node_modified, n.visits AS node_visits, n.nocomment AS node_nocomment, n.nomorecomment AS node_nomorecomment, n.novote AS node_novote, n.nomorevote AS node_nomorevote, n.ilike AS node_ilike, n.tweet AS node_tweet, n.linkedin AS node_linkedin, n.pinit AS node_pinit, n.whatsapp AS node_whatsapp FROM $tabnode n $join $tabnodelocale nloc ON nloc.node_id=n.node_id AND nloc.locale=$sqllang WHERE n.node_id=$node_id";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_plusone, $node_linkedin, $node_pinit, $node_whatsapp) {
+function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $node_cloud, $node_image, $node_visits, $node_nocomment, $node_nomorecomment, $node_novote, $node_nomorevote, $node_ilike, $node_tweet, $node_linkedin, $node_pinit, $node_whatsapp) {
 	$sqlvisits=$node_visits ? 'TRUE' : 'FALSE';
 	$sqlnocomment=$node_nocomment ? 'TRUE' : 'FALSE';
 	$sqlnomorecomment=$node_nocomment ? 'TRUE' : ($node_nomorecomment ? 'TRUE' : 'FALSE');
@@ -90,14 +90,13 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 	$sqlnomorevote=$node_novote ? 'TRUE' : ($node_nomorevote ? 'TRUE' : 'FALSE');
 	$sqlilike=$node_ilike ? 'TRUE' : 'FALSE';
 	$sqltweet=$node_tweet ? 'TRUE' : 'FALSE';
-	$sqlplusone=$node_plusone ? 'TRUE' : 'FALSE';
 	$sqllinkedin=$node_linkedin ? 'TRUE' : 'FALSE';
 	$sqlpinit=$node_pinit ? 'TRUE' : 'FALSE';
 	$sqlwhatsapp=$node_whatsapp ? 'TRUE' : 'FALSE';
 
 	$tabnode=db_prefix_table('node');
 
-	$sql="UPDATE $tabnode SET modified=NOW(), visits=$sqlvisits, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, plusone=$sqlplusone, linkedin=$sqllinkedin, pinit=$sqlpinit, whatsapp=$sqlwhatsapp WHERE node_id=$node_id";
+	$sql="UPDATE $tabnode SET modified=NOW(), visits=$sqlvisits, nocomment=$sqlnocomment, nomorecomment=$sqlnomorecomment, novote=$sqlnovote, nomorevote=$sqlnomorevote, \"ilike\"=$sqlilike, tweet=$sqltweet, linkedin=$sqllinkedin, pinit=$sqlpinit, whatsapp=$sqlwhatsapp WHERE node_id=$node_id";
 
 	$r = db_update($sql);
 
