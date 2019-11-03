@@ -18,6 +18,12 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Thu Oct 31 2019
+
+ALTER TABLE `izend_thread` DROP `plusone`;
+ALTER TABLE `izend_node` DROP `plusone`;
+----
+
 Date:	Tue Feb 12 2019
 
 ALTER TABLE `izend_thread` ADD `whatsapp` BOOLEAN NOT NULL DEFAULT '1';
@@ -440,7 +446,6 @@ CREATE TABLE IF NOT EXISTS `izend_node` (
   `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
-  `plusone` tinyint(1) NOT NULL DEFAULT '1',
   `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   `pinit` tinyint(1) NOT NULL DEFAULT '0',
   `whatsapp` tinyint(1) NOT NULL DEFAULT '0',
@@ -510,7 +515,6 @@ CREATE TABLE IF NOT EXISTS `izend_thread` (
   `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
   `ilike` tinyint(1) NOT NULL DEFAULT '1',
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
-  `plusone` tinyint(1) NOT NULL DEFAULT '1',
   `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   `pinit` tinyint(1) NOT NULL DEFAULT '1',
   `whatsapp` tinyint(1) NOT NULL DEFAULT '1',
