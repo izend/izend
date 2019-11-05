@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -64,7 +64,7 @@ function user_create($name, $password, $mail, $locale='en', $timezone=false, $we
 
 	$tabuser=db_prefix_table('user');
 
-	$sql="INSERT INTO $tabuser (name, password, seed, mail, created, confirmed, locale, timezone, website) SELECT * FROM (SELECT $sqlname AS name, $sqlpassword AS password, $sqlseed AS seed, $sqlmail AS mail, NOW() AS created, $sqlconfirmed AS confirmed, $sqllocale AS locale, $sqltimezone AS timezone, $sqlwebsite AS website) s WHERE NOT EXISTS (SELECT user_id FROM $tabuser WHERE $wherenotexists)";
+	$sql="INSERT INTO $tabuser (name, password, seed, mail, created, confirmed, locale, timezone, website) SELECT $sqlname, $sqlpassword, $sqlseed, $sqlmail, NOW(), $sqlconfirmed, $sqllocale, $sqltimezone, $sqlwebsite WHERE NOT EXISTS (SELECT user_id FROM $tabuser WHERE $wherenotexists)";
 
 	$r = db_insert($sql);
 
@@ -202,7 +202,7 @@ function user_set_info($user_id, $lastname, $firstname) {
 
 	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="INSERT INTO $tabuserinfo (user_id, lastname, firstname) SELECT * FROM (SELECT $user_id AS user_id, $sqllastname AS lastname, $sqlfirstname AS firstname) s WHERE NOT EXISTS (SELECT user_id FROM $tabuserinfo WHERE user_id=$user_id)";
+	$sql="INSERT INTO $tabuserinfo (user_id, lastname, firstname) SELECT $user_id, $sqllastname, $sqlfirstname WHERE NOT EXISTS (SELECT user_id FROM $tabuserinfo WHERE user_id=$user_id)";
 
 	$r = db_insert($sql);
 

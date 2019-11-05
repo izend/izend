@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2014 izend.org
- * @version    5
+ * @copyright  2012-2019 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -130,7 +130,7 @@ function newsletter_schedule_post($newsletter_id, $page_id, $locale, $scheduled)
 
 	$tabnewsletterpost=db_prefix_table('newsletter_post');
 
-	$sql="INSERT INTO $tabnewsletterpost (thread_id, node_id, locale, scheduled) SELECT * FROM (SELECT $newsletter_id AS thread_id, $page_id AS node_id, $sqllocale AS locale, FROM_UNIXTIME($scheduled) AS scheduled) s WHERE NOT EXISTS (SELECT node_id FROM $tabnewsletterpost WHERE thread_id=$newsletter_id AND node_id=$page_id AND locale=$sqllocale)";
+	$sql="INSERT INTO $tabnewsletterpost (thread_id, node_id, locale, scheduled) SELECT $newsletter_id, $page_id, $sqllocale, FROM_UNIXTIME($scheduled) WHERE NOT EXISTS (SELECT node_id FROM $tabnewsletterpost WHERE thread_id=$newsletter_id AND node_id=$page_id AND locale=$sqllocale)";
 
 	$r = db_insert($sql);
 
@@ -199,7 +199,7 @@ function newsletter_create_user($mail, $locale) {
 
 	$tabnewsletteruser=db_prefix_table('newsletter_user');
 
-	$sql="INSERT INTO $tabnewsletteruser (mail, locale, created) SELECT * FROM (SELECT $sqlmail AS mail, $sqllocale AS locale, NOW() AS created) s WHERE NOT EXISTS (SELECT mail FROM $tabnewsletteruser WHERE mail=$sqlmail)";
+	$sql="INSERT INTO $tabnewsletteruser (mail, locale, created) SELECT $sqlmail, $sqllocale, NOW() WHERE NOT EXISTS (SELECT mail FROM $tabnewsletteruser WHERE mail=$sqlmail)";
 
 	$r = db_insert($sql);
 

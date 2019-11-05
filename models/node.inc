@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    35
+ * @version    36
  * @link       http://www.izend.org
  */
 
@@ -113,7 +113,7 @@ function node_set($lang, $node_id, $node_name, $node_title, $node_abstract, $nod
 
 	$tabnodelocale=db_prefix_table('node_locale');
 
-	$sql="INSERT INTO $tabnodelocale (node_id, locale, name, title, abstract, cloud, image) SELECT * FROM (SELECT $node_id AS node_id, $sqllang AS locale, $sqlname AS name, $sqltitle AS title, $sqlabstract AS abstract, $sqlcloud AS cloud, $sqlimage AS image) s WHERE NOT EXISTS (SELECT node_id FROM $tabnodelocale WHERE node_id=$node_id AND locale=$sqllang)";
+	$sql="INSERT INTO $tabnodelocale (node_id, locale, name, title, abstract, cloud, image) SELECT $node_id, $sqllang, $sqlname, $sqltitle, $sqlabstract, $sqlcloud, $sqlimage WHERE NOT EXISTS (SELECT node_id FROM $tabnodelocale WHERE node_id=$node_id AND locale=$sqllang)";
 
 	$r = db_insert($sql);
 
@@ -366,12 +366,12 @@ function node_set_contents($lang, $node_id, $node_contents) {
 		$as=array();
 		foreach ($data as $f => $v) {
 			$fields[]="\"$f\"";
-			$as[]="$v AS \"$f\"";
+			$as[]=$v;
 		}
 		$fields=implode(', ', $fields);
 		$as=implode(', ', $as);
 
-		$sql="INSERT INTO $tabcontenttype ($fields) SELECT * FROM (SELECT $as) s WHERE EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id) AND NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
+		$sql="INSERT INTO $tabcontenttype ($fields) SELECT $as WHERE EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id) AND NOT EXISTS (SELECT $content_id FROM $tabcontenttype WHERE content_id=$content_id AND locale=$sqllang)";
 
 		$r = db_insert($sql);
 

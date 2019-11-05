@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 
@@ -267,7 +267,7 @@ function thread_set($lang, $thread_id, $thread_name, $thread_title, $thread_type
 
 	$tabthreadlocale=db_prefix_table('thread_locale');
 
-	$sql="INSERT INTO $tabthreadlocale (thread_id, locale, name, title, abstract, cloud, image) SELECT * FROM (SELECT $thread_id AS thread_id, $sqllang AS locale, $sqlname AS name, $sqltitle AS title, $sqlabstract AS abstract, $sqlcloud AS cloud, $sqlimage AS image) s WHERE NOT EXISTS (SELECT thread_id FROM $tabthreadlocale WHERE thread_id=$thread_id AND locale=$sqllang)";
+	$sql="INSERT INTO $tabthreadlocale (thread_id, locale, name, title, abstract, cloud, image) SELECT $thread_id, $sqllang, $sqlname, $sqltitle, $sqlabstract, $sqlcloud, $sqlimage WHERE NOT EXISTS (SELECT thread_id FROM $tabthreadlocale WHERE thread_id=$thread_id AND locale=$sqllang)";
 
 	$r = db_insert($sql);
 
