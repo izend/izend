@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    30
+ * @version    31
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function story($lang, $arglist=false) {
-	global $request_path, $with_toolbar, $siteshot;
+	global $request_path, $with_toolbar, $siteshot, $search_cloud;
 
 	$story=$page=false;
 
@@ -157,7 +157,7 @@ function story($lang, $arglist=false) {
 	if (!$story_nocloud) {
 		$cloud_url= url('search', $lang, $story_name);
 		$byname=$bycount=$index=true;
-		$cloud = build('cloud', $lang, $cloud_url, $story_id, false, 30, compact('byname', 'bycount', 'index'));
+		$cloud = build('cloud', $lang, $cloud_url, $story_id, false, $search_cloud, compact('byname', 'bycount', 'index'));
 	}
 
 	$summary=array();

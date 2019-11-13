@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2018 izend.org
- * @version    5
+ * @copyright  2012-2019 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function newslettersummary($lang, $newsletter) {
-	global $with_toolbar;
+	global $with_toolbar, $search_cloud;
 
 	$newsletter_id = thread_id($newsletter);
 	if (!$newsletter_id) {
@@ -66,7 +66,7 @@ function newslettersummary($lang, $newsletter) {
 	if (!$newsletter_nocloud) {
 		$cloud_url= url('search', $lang, $newsletter_name);
 		$byname=$bycount=$index=true;
-		$cloud = build('cloud', $lang, $cloud_url, $newsletter_id, false, 30, compact('byname', 'bycount', 'index'));
+		$cloud = build('cloud', $lang, $cloud_url, $newsletter_id, false, $search_cloud, compact('byname', 'bycount', 'index'));
 	}
 
 	$headline_text=	translate('newsletter:title', $lang);

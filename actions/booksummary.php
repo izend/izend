@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -12,7 +12,7 @@ require_once 'userhasrole.php';
 require_once 'models/thread.inc';
 
 function booksummary($lang, $book) {
-	global $with_toolbar, $siteshot;
+	global $with_toolbar, $siteshot, $search_cloud;
 
 	$book_id = thread_id($book);
 	if (!$book_id) {
@@ -106,7 +106,7 @@ function booksummary($lang, $book) {
 	if (!$book_nocloud) {
 		$cloud_url= url('search', $lang, $book_name);
 		$byname=$bycount=$index=true;
-		$cloud = build('cloud', $lang, $cloud_url, $book_id, false, 30, compact('byname', 'bycount', 'index'));
+		$cloud = build('cloud', $lang, $cloud_url, $book_id, false, $search_cloud, compact('byname', 'bycount', 'index'));
 	}
 
 	$headline_text=	translate('bookall:title', $lang);
