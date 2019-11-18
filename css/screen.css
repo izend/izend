@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    108
+ * @version    109
  * @link       http://www.izend.org
  */
  
@@ -25,6 +25,8 @@ fieldset {display:inline-block;}
 label, legend {font-size:small;vertical-align:middle;line-height:1.4;}
 
 label span {vertical-align:baseline !important;}
+
+label[for] {font-size:medium;}
 
 table th, table td {padding:5px;margin:0;}
 table td:first-child {padding-left:0;}
