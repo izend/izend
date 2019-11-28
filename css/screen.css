@@ -1,14 +1,14 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    110
+ * @version    111
  * @link       http://www.izend.org
  */
  
 /* screen.css */
 
 *, :focus {outline:none;}
-::-moz-focus-inner {border:0;}
+::-moz-focus-inner, ::-moz-focus-outer {border:0;}
 
 body {font-family:Verdana, sans-serif;font-size:100%;line-height:1.4;}
 
