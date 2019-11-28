@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2019 izend.org
- * @version    111
+ * @version    112
  * @link       http://www.izend.org
  */
  
@@ -58,6 +58,8 @@ textarea {resize:vertical;}
 textarea.noresize {resize:none;}
 
 img {vertical-align:middle;max-width:100%;height:auto;}
+
+canvas {max-width:100%;height:auto;}
 
 ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
