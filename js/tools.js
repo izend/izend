@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2013 izend.org
- * @version    6
+ * @copyright  2010-2019 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -10,32 +10,16 @@ function trim(s) {
 }
 
 function returnonenter(e) {
-	var keycode;
-
-	if (window.event)
-		keycode = window.event.keyCode;
-	else if (e)
-		keycode = e.which;
-	else
-		return true;
-
-	return (keycode != 13);
+	return (e.key != 'Enter');
 }
 
 function submitonenter(e, id) {
-	var keycode;
+	if (e.key == 'Enter') {
+		let button = document.getElementById(id);
 
-	if (window.event)
-		keycode = window.event.keyCode;
-	else if (e)
-		keycode = e.which;
-	else
-		return true;
-
-	if (keycode == 13) {
-		var button = document.getElementById(id);
 		if (button)
 			button.click();
+
 		return false;
 	}
 	else
@@ -43,19 +27,12 @@ function submitonenter(e, id) {
 }
 
 function focusonenter(e, id) {
-	var keycode;
-	
-	if (window.event)
-		keycode = window.event.keyCode;
-	else if (e)
-		keycode = e.which;
-	else
-		return true;
+	if (e.key == 'Enter') {
+		let field = document.getElementById(id);
 
-	if (keycode == 13) {
-		var field = document.getElementById(id);
 		if (field)
 			field.focus();
+
 		return false;
 	}
 	else
