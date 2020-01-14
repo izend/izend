@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2020 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -28,7 +28,7 @@ function strlogo($name) {
 
 	imagettftext($img, $fontsize, 0, 0, 30, $fg, $fontfile, $name);
 
-	imagecopy($img, $wasp, $w-48, 0, 0, 0, 48, 48);
+	imagecopy($img, $wasp, $w-48, 8, 0, 0, 48, 32);
 
 	return $img;
 }
