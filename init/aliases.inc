@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    21
+ * @copyright  2010-2020 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,6 @@ $aliases = array(
 		'avatar'				=> 'avatar',
 		'logo'					=> 'logo',
 		'rssfeed'				=> 'rss',
-		'fileupload'			=> 'file/upload',
 		'paypalreturn'			=> 'paypal/return',
 		'paypalcancel'			=> 'paypal/cancel',
 		'paylinereturn'			=> 'payline/return',
@@ -38,6 +37,7 @@ $aliases = array(
 		'donation'				=> 'donation',
 		'admin'					=> 'manage',
 		'adminuser'				=> 'manage/user',
+		'fileupload'			=> 'file/upload',
 		'page'					=> 'page',
 		'editpage'				=> 'edit',
 		'folder'				=> 'folder',
@@ -74,6 +74,7 @@ $aliases = array(
 		'donation'				=> 'donation',
 		'admin'					=> 'gestion',
 		'adminuser'				=> 'gestion/utilisateur',
+		'fileupload'			=> 'fichier/telecharger',
 		'page'					=> 'page',
 		'editpage'				=> 'edition',
 		'folder'				=> 'dossier',
