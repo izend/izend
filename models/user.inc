@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    25
+ * @copyright  2010-2020 izend.org
+ * @version    26
  * @link       http://www.izend.org
  */
 
@@ -397,30 +397,24 @@ function user_login($login, $password, $quick=false) {
 
 	$user_id = user_find($login);
 
-	if (!$user_id) {
-		return false;
-	}
+	if (!$user_id)
+		goto failed;
 
 	$r = user_get($user_id);
 
-	if (!$r) {
-		return false;
-	}
+	if (!$r)
+		goto failed;
+
 	extract($r);	/* user_name user_password user_newpassword user_seed user_mail user_timezone user_website user_created user_modified user_accessed user_locale user_active user_banned */
 
-	if (!$user_active or $user_banned) {
-		return false;
-	}
+	if (!$user_active or $user_banned)
+		goto failed;
 
 	if ($password) {
 		$password=md5($user_seed . $password);
 
-		if ( ! ($password == $user_password or $password == $user_newpassword) ) {
-			if ($login_failed_delay) {
-				sleep($login_failed_delay);
-			}
-			return false;
-		}
+		if ( ! ($password == $user_password or $password == $user_newpassword) )
+			goto failed;
 	}
 
 	if ($quick) {
@@ -477,11 +471,17 @@ function user_login($login, $password, $quick=false) {
 
 	$r = db_update($sql);
 
-	if ($r === false) {
-		return false;
-	}
+	if ($r === false)
+		goto failed;
 
 	return $user;
+
+failed:
+	if ($login_failed_delay) {
+		sleep($login_failed_delay);
+	}
+
+	return false;
 }
 
 function user_check_name($name, $user_id=false) {
