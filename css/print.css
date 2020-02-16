@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    54
+ * @copyright  2010-2020 izend.org
+ * @version    55
  * @link       http://www.izend.org
  */
  
@@ -37,7 +37,7 @@ ol {list-style-type:decimal;}
 ul {list-style-type:disc;}
 
 h1, h2, h3, h4, h5, h6 {page-break-after:avoid;page-break-inside:avoid;}
-blockquote, table, pre {page-break-inside:avoid;}
+p, blockquote, table, pre {page-break-inside:avoid;}
 ul, ol, dl {page-break-before:avoid;}
 img {page-break-inside:avoid;page-break-after:avoid;float:none;}
 
