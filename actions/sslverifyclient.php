@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013 izend.org
- * @version    1
+ * @copyright  2013-2020 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -25,5 +25,5 @@ function sslverifyclient($lang, $arglist=false) {
 
 	$next_page=!empty($arglist['r']) ? $arglist['r'] : url('home', $lang);
 
-	return reload($base_url . $next_page);
+	reload($base_url . $next_page);
 }
