@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    113
+ * @version    114
  * @link       http://www.izend.org
  */
  
@@ -34,10 +34,10 @@ table td:last-child {padding-right:0;}
 
 input, select, textarea {font-family:Verdana, sans-serif;font-size:14px;}
 
-input[type="text"], input[type="password"], textarea {max-width:90%;}
+input[type="text"], input[type="password"], textarea {box-sizing:border-box;max-width:100%;}
 
-input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea, select, fieldset {border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;}
-input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {border-color:#aaaaaa;}
+input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea, select, fieldset {border:1px solid #ccc;outline:0 none;margin:1px 0;background:none repeat-x #fff;}
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {border-color:#aaa;}
 
 input[type="text"], input[type="password"], input[type="number"], input[type="date"], textarea, select, fieldset {border-radius:2px;}
 
@@ -100,9 +100,9 @@ ul {list-style-type:disc;}
 .sidemenu .ui-accordion .ui-accordion-header , #sidemenu .ui-tabs .ui-tabs-panel {margin-top:0.1em;}
 .sidemenu .ui-accordion .ui-accordion-content {padding-top:0;padding-bottom:0;}
 
-.popup > li {float:left;width:10em;background:#ffffff;}
+.popup > li {float:left;width:10em;background:#fff;}
 .popup li a {display:block;}
-.popup ul {background:#ffffff;position:absolute;display:none;z-index:1000;}
+.popup ul {background:#fff;position:absolute;display:none;z-index:1000;}
 .popup ul li a {width:10em;}
 .popup li:hover ul {display:block;}
 
@@ -122,7 +122,7 @@ div.labeled > span {float:left;width:10em;margin-right:1em;text-align:right;}
 
 div.gallery {overflow:auto;white-space:nowrap;}
 div.gallery img {max-width:none;}
-div.gallery img, div.gallery a {border-color:#ffffff;border-style:solid;border-width:0 3px;vertical-align:text-bottom;}
+div.gallery img, div.gallery a {border-color:#fff;border-style:solid;border-width:0 3px;vertical-align:text-bottom;}
 div.gallery img:first-child, div.gallery a:first-child {border-left-width:0 !important;}
 div.gallery img:last-child, div.gallery a:last-child {border-right-width:0 !important;}
 div.gallery.compact img, div.gallery.compact a {border:none;}
@@ -209,10 +209,10 @@ div.video video, div.canvas canvas {display:flex;width:100%;height:100%;}
 ol.tree, ol.tree ol {list-style-type:none;margin:0;padding:0;}
 ol.tree ol {margin-left:12px;background:url(../images/vline.png) repeat-y;}
 ol.tree li {margin:0;padding:0 12px;line-height:20px;background:url(../images/tline.png) no-repeat;} 
-ol.tree li.lastnode {background:#ffffff url(../images/lline.png) no-repeat;} 
-ol.tree li.firstnode {background:#ffffff;}
+ol.tree li.lastnode {background:#fff url(../images/lline.png) no-repeat;} 
+ol.tree li.firstnode {background:#fff;}
 ol.tree li.dirnode {font-style:italic;} 
 ol.tree li.filenode {font-style:normal;}
 
-.meter {width:200px;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #cccccc;outline:0 none;margin:1px 0;background:none repeat-x #ffffff;max-width:90%;}
-.meter > span {display:block;height:100%;background-color:#cccccc;color:#ffffff;text-align:center;}
+.meter {width:200px;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #ccc;outline:0 none;margin:1px 0;background:none repeat-x #fff;max-width:90%;}
+.meter > span {display:block;height:100%;background-color:#ccc;color:#fff;text-align:center;}
