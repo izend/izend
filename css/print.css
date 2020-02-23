@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    55
+ * @version    56
  * @link       http://www.izend.org
  */
  
@@ -78,6 +78,10 @@ div.row.atop > *, div.row > .atop {align-self:flex-start;}
 div.row.amiddle > *, div.row > .amiddle {align-self:center;}
 div.row.abottom > *, div.row > .abottom {align-self:flex-end;}
 div.row.fixed > *, div.row > .fixed {flex:auto 0 0;}
+
+div.column {display:flex;flex-direction:column;}
+div.column > * {flex:100%;}
+div.column > .fixed {flex:auto 0 0;}
 
 div.hbar > * {margin-left:0.5em;margin-right:0.5em;}
 div.hbar > *:first-child {margin-left:0;}

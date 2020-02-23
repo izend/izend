@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2013-2019 izend.org
- * @version    30
+ * @copyright  2013-2020 izend.org
+ * @version    31
  * @link       http://www.izend.org
  */
  
@@ -35,8 +35,8 @@ h3 {background:none;text-indent:0;}
 }
 
 @media screen and (max-width:640px) {
-div.row {display:inline;}
-div.row > * {display:block;margin:1em 0;width:auto !important;}
+div.row, div.column {display:inline;}
+div.row > *, div.column > * {display:block;margin:1em 0;width:auto !important;}
 div.row.tight > * {margin:0;}
 #new_thread_title_block, #new_node_title_block {display:block;}
 }
