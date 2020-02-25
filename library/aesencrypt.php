@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013-2014 izend.org
- * @version    2
+ * @copyright  2013-2020 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -11,7 +11,7 @@ function aesencrypt($s, $key) {
 	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
 	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
 
-    $crypto = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $s, MCRYPT_MODE_CBC, $iv);
+    $crypto = @mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $s, MCRYPT_MODE_CBC, $iv);
 
 	return $iv . $crypto;
 }
