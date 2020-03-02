@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    28
+ * @copyright  2010-2020 izend.org
+ * @version    29
  * @link       http://www.izend.org
  */
 ?>
@@ -30,7 +30,7 @@ an attachment
 </p>
 <?php if ($maxfilesize): ?>
 <?php require_once 'countformat.php'; ?>
-<p class="info">You can upload a file up to <?php echo count_format($maxfilesize, '.', ''); ?> bytes.</p>
+<p class="info">You can attach a file &lt; <?php echo count_format($maxfilesize, '.', ''); ?> bytes.</p>
 <?php endif; ?>
 <?php endif; ?>
 <?php if ($with_appointment): ?>
