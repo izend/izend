@@ -3,24 +3,26 @@
 /**
  *
  * @copyright  2013-2020 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 
 function aesencrypt($s, $key) {
-	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+	$cipher = 'aes-256-cbc';
+	$iv_size = openssl_cipher_iv_length($cipher);
+	$iv = openssl_random_pseudo_bytes($iv_size);
 
-    $crypto = @mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $s, MCRYPT_MODE_CBC, $iv);
+	$crypto = @openssl_encrypt($s, $cipher, $key, 0, $iv);
 
 	return $iv . $crypto;
 }
 
 function aesdecrypt($s, $key) {
-	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-    $iv = substr($s, 0, $iv_size);
+	$cipher = 'aes-256-cbc';
+	$iv_size = openssl_cipher_iv_length($cipher);
+	$iv = substr($s, 0, $iv_size);
 
-	$crypto=substr($s, $iv_size);
+	$crypto = substr($s, $iv_size);
 
-	return @mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $crypto, MCRYPT_MODE_CBC, $iv);
+	return @openssl_decrypt($crypto, $cipher, $key, 0, $iv);
 }
