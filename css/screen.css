@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    116
+ * @version    117
  * @link       http://www.izend.org
  */
  
@@ -184,6 +184,8 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 .pointer {cursor:pointer;}
 .nopointer {cursor:default;}
+
+.nomargin {margin:0;}
 
 button, input.submit {padding:0;margin:1px 0;border:none;text-indent:-9999px;-webkit-appearance:none;cursor:pointer;}
 span.icon {display:inline-block;text-indent:-9999px;vertical-align:middle;}
