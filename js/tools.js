@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    7
+ * @copyright  2010-2020 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -11,6 +11,16 @@ function trim(s) {
 
 function returnonenter(e) {
 	return (e.key != 'Enter');
+}
+
+function changeonenter(e) {
+	if (e.key == 'Enter') {
+		e.target.dispatchEvent(new Event('change'));
+
+		return false;
+	}
+	else
+		return true;
 }
 
 function submitonenter(e, id) {
