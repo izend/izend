@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    8
+ * @copyright  2010-2020 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -44,13 +44,13 @@ function stripcomment() {
 }
 inputlimit('comment_message', 'comment_limiter', <?php echo $message_maxlen; ?>);
 </script>
-<?php head('javascript', 'jquery.cookie'); ?>
+<?php head('javascript', 'js.cookie'); ?>
 <script>
 function togglehelp() {
 	$('#comment_help').toggle();
-	$.cookie('nocommenthelp', $('#comment_help').is(':hidden') ? '1' : '0', { path: '/' });
+	Cookies.set('nocommenthelp', $('#comment_help').is(':hidden') ? 1 : 0, { path: '/', sameSite: 'lax' });
 }
-if ($.cookie('nocommenthelp') == '1') {
+if (Cookies.get('nocommenthelp') == 1) {
 	$('#comment_help').hide();
 }
 </script>

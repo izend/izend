@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016-2018 izend.org
- * @version    5
+ * @copyright  2016-2020 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -22,10 +22,10 @@
 <?php endif; ?>
 </div>
 <?php if ($confirmcookieconsent): ?>
-<?php head('javascript', 'jquery.cookie'); ?>
+<?php head('javascript', 'js.cookie'); ?>
 <script>
 $('#consentyes').click(function() {
-	$.cookie('cookieconsent', 1, { path: '/' });
+	Cookies.set('cookieconsent', 1, { path: '/', sameSite: 'lax' });
 	$('#consent').hide();
 });
 </script>

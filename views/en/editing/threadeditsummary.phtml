@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    37
+ * @version    38
  * @link       http://www.izend.org
  */
 ?>
@@ -134,24 +134,24 @@ content
 </div>
 <?php endif; ?>
 </form>
-<?php head('javascript', 'jquery.cookie'); ?>
+<?php head('javascript', 'js.cookie'); ?>
 <script>
-if ($.cookie('hidethread') == 1) {
+if (Cookies.get('hidethread') == 1) {
 	$('#thread').hide();
 }
 $('#thread_hidy').click(function() {
 	$('#thread').toggle();
-	$.cookie('hidethread', $('#thread').is(':hidden') ? 1 : 0, { path: '/' });
+	Cookies.set('hidethread', $('#thread').is(':hidden') ? 1 : 0, { path: '/', sameSite: 'lax' });
 });
 </script>
 <?php if ($thread_contents): ?>
 <script>
-if ($.cookie('hidethreadcontent') == 1) {
+if (Cookies.get('hidethreadcontent') == 1) {
 	$('#threadcontent').hide();
 }
 $('#threadcontent_hidy').click(function() {
 	$('#threadcontent').toggle();
-	$.cookie('hidethreadcontent', $('#threadcontent').is(':hidden') ? 1 : 0, { path: '/' });
+	Cookies.set('hidethreadcontent', $('#threadcontent').is(':hidden') ? 1 : 0, { path: '/', sameSite: 'lax' });
 });
 </script>
 <?php endif; ?>
