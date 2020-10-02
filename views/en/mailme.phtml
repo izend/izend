@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 ?>
@@ -14,7 +14,7 @@
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
-<p><input type="text" name="mailme_mail" id="mailme_mail" size="40" maxlength="100" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="mailme_mail" id="mailme_mail" size="40" maxlength="100" spellcheck="false" title="Email" onkeypress="return focusonenter(event, 'mailme_subject')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Your email address is strictly confidential.</p>
 <p class="inlabel<?php if ($missing_subject or $bad_subject or $missing_message): ?> inerror<?php endif; ?>">Type in the subject and the text of your message:</p>
 <p><input type="text" name="mailme_subject" id="mailme_subject" size="40" maxlength="100" title="Subject" onkeypress="return focusonenter(event, 'mailme_message')" value="<?php echo htmlspecialchars($subject, ENT_COMPAT, 'UTF-8'); ?>" /></p>
