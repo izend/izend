@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016 izend.org
- * @version    2
+ * @copyright  2016-2020 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -182,8 +182,10 @@ function analytics($lang) {
 			global $googleanalyticsaccount, $googleanalyticskeyfile;
 
 			try {
+				$tmpdir=ini_get('upload_tmp_dir') ?: ROOT_DIR . DIRECTORY_SEPARATOR . 'tmp';
+
 				$client = new Google_Client();
-				$client->setClassConfig('Google_Cache_File', 'directory', ini_get('upload_tmp_dir'));
+				$client->setClassConfig('Google_Cache_File', 'directory', $tmpdir);
 
 				$analytics = new Google_Service_Analytics($client);
 
