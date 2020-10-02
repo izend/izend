@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2018 izend.org
- * @version    7
+ * @copyright  2012-2020 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -25,7 +25,7 @@ function subscribe($lang) {
 
 	$with_confirmation=true;
 
-	$with_validation=false;
+	$with_validation=true;
 
 	$action='init';
 	if (isset($_POST['subscribe_send'])) {
