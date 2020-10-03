@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    6
+ * @copyright  2010-2020 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -14,9 +14,11 @@
 </head>
 <body>
 <?php if (!empty($trace)): ?>
+<div>
 <?php foreach ($trace as $s): ?>
 <?php echo $s; ?>
 <?php endforeach; ?>
+</div>
 <?php endif; ?>
 <div id="viewer">
 <?php echo $banner; ?>
