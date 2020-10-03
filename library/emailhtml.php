@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    5
+ * @copyright  2010-2020 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -43,9 +43,6 @@ _SEP_;
 				if (!$filetype or strpos($filetype, 'image') !== 0)
 					continue;
 				$data=file_get_contents($fname);
-				if (get_magic_quotes_runtime()) {
-					$data = stripslashes($data);
-				}
 				if (!$data)
 					continue;
 				$base64=chunk_split(base64_encode($data));

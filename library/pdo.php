@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2018 izend.org
- * @version    9
+ * @copyright  2014-2020 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -82,14 +82,6 @@ function db_query($sql) {
 
 	if (!$rows) {
 		return false;
-	}
-
-	if (get_magic_quotes_runtime()) {
-		foreach ($rows as $row) {
-			foreach ($row as $k => &$v) {
-				$v = stripslashes($v);
-			}
-		}
 	}
 
 	return $rows;

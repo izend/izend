@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    9
+ * @copyright  2010-2018 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -83,9 +83,6 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 				foreach ($files as $k => $v ) {
 					if (isset($v['tmp_name'])) {
 						$data = file_get_contents($v['tmp_name']);
-						if (get_magic_quotes_runtime()) {
-							$data = stripslashes($data);
-						}
 					}
 					else if (isset($v['data'])) {
 						$data = $v['data'];
