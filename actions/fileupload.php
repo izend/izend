@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2018 izend.org
- * @version	   3
+ * @copyright  2018-2020 izend.org
+ * @version	   4
  * @link	   http://www.izend.org
  */
 
@@ -44,38 +44,66 @@ function fileupload($lang) {
 	}
 
 	if (!isset($_SESSION['upload_token']) or $token != $_SESSION['upload_token']) {
-		return false;
+		goto badrequest;
 	}
 
 	if (!is_numeric($offset) or $offset < 0) {
-		return false;
+		goto badrequest;
 	}
 
 	if (!is_numeric($size) or $size < 0) {
-		return false;
+		goto badrequest;
 	}
 
 	if (!validate_filename($name) or !is_filename_allowed($name)) {
-		return false;
+		goto badrequest;
 	}
 
 	if ($filetypes and (!$type or !in_array($type, $filetypes))) {
+		goto badrequest;
+	}
+
+	if (!$data) {
+		goto badrequest;
+	}
+
+	$datasize=strlen($data);
+
+	if ($offset + $datasize > $size) {
+		goto badrequest;
+	}
+
+	$file = FILES_DIR . DIRECTORY_SEPARATOR . $name;
+
+	$fout = @fopen($file, $offset == 0 ? 'wb' : 'cb');
+
+	if ($fout === false) {
+		goto internalerror;
+	}
+
+	$r = fseek($fout, $offset);
+
+	if ($r == -1) {
+		goto internalerror;
+	}
+
+	$r = fwrite($fout, $data);
+
+	if ($r === false) {
+		goto internalerror;
+	}
+
+	if ($offset + $datasize < $size) {
 		return false;
 	}
 
-	$fname = FILES_DIR . DIRECTORY_SEPARATOR . $name;
+	return false;
 
-	if ($offset == 0) {
-		@unlink($fname);
-	}
+badrequest:
+	header('HTTP/1.1 400 Bad Request');
+	return false;
 
-	$r = @file_put_contents($fname, $data, FILE_APPEND);
-
-	if (!$r) {
-		@unlink($fname);
-
-		return false;
-	}
-
-	return true;
+internalerror:
+	header('HTTP/1.1 500 Internal Error');
+	return false;
 }

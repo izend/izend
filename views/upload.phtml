@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2019 izend.org
- * @version    2
+ * @copyright  2019-2020 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 ?>
@@ -87,13 +87,8 @@ $with_fileupload=($with_drop or $slice);
 		}
 
 		reader.onloadend = function(event) {
-			$.post('<?php echo $upload_url; ?>', {file_token: '<?php echo $token; ?>', file_name: fd.name, file_size: fd.size, file_type: fd.type, file_offset: offset, file_data: event.target.result},
-				function(data) {
-					if (data != 1) {
-						status.attr('class', 'icon icon_ko').text('');
-						return;
-					}
-
+			$.post('<?php echo $upload_url; ?>', {file_token: '<?php echo $token; ?>', file_name: fd.name, file_size: fd.size, file_type: fd.type, file_offset: offset, file_data: event.target.result})
+				.done(() => {
 					offset += blob.size;
 					progress = Math.floor((offset / fd.size ) * 100);
 
@@ -101,6 +96,9 @@ $with_fileupload=($with_drop or $slice);
 						uploadslice();
 					else
 						status.attr('class', 'icon icon_ok').text('');
+				})
+				.fail(() => {
+					status.attr('class', 'icon icon_ko').text('');
 				});
 		};
 
