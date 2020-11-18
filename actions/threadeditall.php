@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    18
+ * @copyright  2010-2020 izend.org
+ * @version    19
  * @link       http://www.izend.org
  */
 
@@ -247,14 +247,14 @@ function threadeditall($lang, $clang) {
 
 	$view=url('thread', $lang) . '?' . 'clang=' . $clang;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline') : compact('headline', 'view'));
+	$banner = build('banner', $lang, $with_toolbar ? false : compact('view'));
 
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('view', 'scroll')) : false;
 
 	$inlanguages=view('inlanguages', false, compact('clang'));
 
-	$errors = compact('missing_new_thread_title', 'bad_new_thread_title', 'missing_new_thread_name', 'missing_new_thread_type', 'bad_new_thread_name', 'bad_new_thread_type', 'bad_new_thread_number', 'missing_old_thread_number', 'bad_old_thread_number');
+	$errors = compact('missing_new_thread_title', 'missing_new_thread_name', 'missing_new_thread_type', 'bad_new_thread_name', 'bad_new_thread_type', 'bad_new_thread_number', 'missing_old_thread_number', 'bad_old_thread_number');
 
 	$content = view('editing/threadeditall', $lang, compact('clang', 'site_title', 'inlanguages', 'supported_threads', 'thread_list', 'new_thread_title', 'new_thread_type', 'new_thread_number', 'old_thread_number', 'confirm_delete_thread', 'errors'));
 
