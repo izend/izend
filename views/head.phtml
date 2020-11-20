@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    52
+ * @copyright  2010-2020 izend.org
+ * @version    53
  * @link       http://www.izend.org
  */
 ?>
@@ -72,15 +72,9 @@
 <?php endif; ?>
 <?php if (!empty($lang)): ?>
 <?php if (!empty($hreflang) and count($hreflang) > 1 and !empty($hreflang[$lang])): ?>
-<?php
-$altlist=array('href="' . $base_url . '/' . $hreflang[$lang] . '"');
-foreach ($hreflang as $lg => $url) {
-	if ($lg != $lang) {
-		$altlist[]='rel="alternate"; hreflang="' . $lg . '", href="' . $base_url . '/' . $url . '"';
-	}
-}
-?>
-<link <?php echo implode('; ', $altlist); ?> />
+<?php foreach ($hreflang as $lg => $url): ?>
+<link rel="alternate" href="<?php echo $base_url . '/' . $url; ?>" hreflang="<?php echo $lg; ?>" />
+<?php endforeach; ?>
 <?php endif; ?>
 <link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo $sitename; ?> RSS" />
 <?php else: ?>
