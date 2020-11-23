@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2018-2020 izend.org
- * @version	   4
+ * @version	   5
  * @link	   http://www.izend.org
  */
 
@@ -15,7 +15,7 @@ define('FILES_DIR', ROOT_DIR . DIRECTORY_SEPARATOR . 'files');
 
 function fileupload($lang) {
 	if (!user_has_role('administrator')) {
-		return false;
+	    goto unauthorized;
 	}
 
 	$name=$type=$data=$token=false;
@@ -101,6 +101,10 @@ function fileupload($lang) {
 
 badrequest:
 	header('HTTP/1.1 400 Bad Request');
+	return false;
+
+unauthorized:
+	header('HTTP/1.1 401 Unauthorized');
 	return false;
 
 internalerror:
