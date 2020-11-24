@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2019 izend.org
- * @version    6
+ * @copyright  2012-2020 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -19,6 +19,7 @@ function upload($lang, $slice=false) {
 
 	$with_drop=false;
 	$with_upload=!$with_drop;
+	$with_fileupload=($with_drop or $slice);
 
 	$action='init';
 	if (isset($_POST['upload_put'])) {
@@ -122,14 +123,14 @@ function upload($lang, $slice=false) {
 			break;
 	}
 
-	$upload_url = ($with_drop or $slice) ? url('fileupload', $lang) : false;
+	$upload_url = $with_fileupload ? url('fileupload', $lang) : false;
 
 	$_SESSION['upload_token'] = $token = token_id();
 
 	$errors = compact('missing_file', 'bad_file', 'bad_size', 'bad_name', 'bad_type', 'bad_copy', 'copy_error');
 	$infos = compact('file_copied');
 
-	$output = view('upload', $lang, compact('token', 'with_drop', 'with_upload', 'upload_url', 'maxfilesize', 'filetypes', 'slice', 'errors', 'infos'));
+	$output = view('upload', $lang, compact('token', 'with_drop', 'with_upload', 'with_fileupload', 'upload_url', 'maxfilesize', 'filetypes', 'errors', 'infos'));
 
 	return $output;
 }

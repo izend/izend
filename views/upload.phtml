@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2019-2020 izend.org
- * @version    3
+ * @version    4
  * @link       http://www.izend.org
  */
 ?>
@@ -20,19 +20,22 @@ else {
 		$icon="icon_ok";
 	}
 }
-$with_fileupload=($with_drop or $slice);
 ?>
+<?php if (!$with_fileupload): ?>
 <form enctype="multipart/form-data" method="post" class="compact noprint">
 <input type="hidden" name="upload_token" value="<?php echo $token; ?>" />
 <?php if (!empty($maxfilesize)): ?>
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize; ?>" />
 <?php endif; ?>
+<?php endif; ?>
 <?php if ($with_drop): ?>
-<div id="upload_droparea"><span id="upload_status" class="icon <?php if ($icon): ?><?php echo $icon; ?><?php else: ?> icon_download"<?php endif; ?>></span></div>
+<div id="upload_droparea"><span id="upload_status" class="icon icon_download"></span></div>
 <?php endif; ?>
 <p>
-<input type="file" name="upload_file" id="upload_file" title="" />
+<input type="file" name="upload_file" id="upload_file" title=""<?php if ($filetypes): ?> accept="<?php echo implode(',', $filetypes); ?>"<?php endif; ?> />
+<?php if ($with_upload): ?>
 <input type="submit" class="submit submit_put" id="upload_put" name="upload_put" value="<?php echo $upload_put_value; ?>" title="" />
+<?php endif; ?>
 <?php if (!$with_drop): ?>
 <?php if ($icon): ?>
 <span id="upload_status" class="icon <?php echo $icon; ?>"></span>
@@ -41,47 +44,66 @@ $with_fileupload=($with_drop or $slice);
 <?php endif; ?>
 <?php endif; ?>
 </p>
+<?php if (!$with_fileupload): ?>
 </form>
+<?php endif; ?>
 <script>
 (function() {
-	var file=$('#upload_file');
-	var upload=$('#upload_put');
-<?php if ($with_fileupload): ?>
-	var status=$('#upload_status');
-<?php endif; ?>
-
-<?php if ($with_upload): ?>
-	upload.on('click', function(e) { e.preventDefault(); file.click(); });
-<?php else: ?>
-	upload.css({ position: 'absolute', left: '-9999px' });
-<?php endif; ?>
+	const file=$('#upload_file');
 
 	file.css({ position: 'absolute', left: '-9999px' });
 
+<?php if ($with_upload): ?>
+	const upload=$('#upload_put');
+
+	function enableupload() {
+		upload.on('click', function(e) { e.preventDefault(); file.click(); });
+	}
+
+	function disableupload() {
+		upload.off('click');
+	}
+
+	enableupload();
+<?php endif; ?>
+
+<?php if ($with_fileupload): ?>
+	const status=$('#upload_status');
+
+	function showstatus(ok) {
+		status.attr('class', ok ? 'icon icon_ok' : 'icon icon_ko').text('');
+<?php if ($with_upload): ?>
+		enableupload();
+<?php endif; ?>
+	}
+<?php endif; ?>
+
 	file.change(function() {
 		if (file.val()) {
+<?php if ($with_upload): ?>
+			disableupload();
+<?php endif; ?>
 <?php if ($with_fileupload): ?>
 			uploadfile(this.files[0]);
 <?php else: ?>
-			upload.off('click').click();
+			upload.click();
 <?php endif; ?>
 		}
 	});
 
 <?php if ($with_fileupload): ?>
 	function uploadfile(fd) {
-		var reader = new FileReader();
-		var size = 1000000;
-		var offset = 0;
-		var progress = 0;
-		var blob;
+		const reader = new FileReader();
+		const size = 1000000;
+
+		var offset = 0, progress = 0, blob;
 
 <?php if ($filetypes): ?>
 		var filetypes=[<?php foreach ($filetypes as $i => $type): ?><?php if ($i > 0): ?>,<?php endif; ?>'<?php echo $type; ?>'<?php endforeach; ?>];
 <?php endif; ?>
 
 		function uploadslice() {
-			status.removeClass().text(progress + '%');
+			status.removeAttr('class').text(progress + '%');
 			blob = fd.slice(offset, offset + size);
 			reader.readAsDataURL(blob);
 		}
@@ -95,11 +117,9 @@ $with_fileupload=($with_drop or $slice);
 					if (progress < 100)
 						uploadslice();
 					else
-						status.attr('class', 'icon icon_ok').text('');
+						showstatus(true);
 				})
-				.fail(() => {
-					status.attr('class', 'icon icon_ko').text('');
-				});
+				.fail(() => showstatus(false));
 		};
 
 <?php if ($filetypes or $maxfilesize): ?>
@@ -117,16 +137,15 @@ $with_fileupload=($with_drop or $slice);
 		}
 <?php endif; ?>
 		else {
-			status.attr('class', 'icon icon_ko');
+			showstatus(false);
 		}
 <?php else: ?>
 		uploadslice();
 <?php endif; ?>
 	}
-<?php endif; ?>
 
 <?php if ($with_drop): ?>
-	var droparea=$('#upload_droparea');
+	const droparea=$('#upload_droparea');
 
 	droparea.on('click', function(e) { file.click(); });
 
@@ -159,6 +178,7 @@ $with_fileupload=($with_drop or $slice);
 
 		dt.dropEffect = $.inArray('Files', dt.types) != -1 ? 'copy' : 'none';
 	});
+<?php endif; ?>
 <?php endif; ?>
 })();
 </script>
