@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    58
+ * @copyright  2010-2021 izend.org
+ * @version    59
  * @link       http://www.izend.org
  */
 
@@ -49,9 +49,11 @@ global $cookieconsent, $cookieconsentauto;
 $cookieconsent=false;
 $cookieconsentauto=true;
 
-global $facebookjssdk, $facebookid, $facebooksecret;
+global $facebookjssdk, $facebookapiversion, $facebookid, $facebooksecret;
 
 $facebookjssdk=false;	// false
+
+$facebookapiversion='v9.0';
 
 $facebookid=false;
 $facebooksecret=false;
