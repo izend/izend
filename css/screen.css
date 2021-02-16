@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2020 izend.org
- * @version    118
+ * @version    119
  * @link       http://www.izend.org
  */
  
@@ -48,6 +48,7 @@ select {padding:3px;}
 input[type="text"][readonly] {border-color:transparent;cursor:default;}
 
 input[type="radio"], input[type="checkbox"] {min-height:14px;line-height:normal;}
+input[type="radio"] {margin-top:0;}
 
 input.text_date[type="text"] {width:80px;}
 
@@ -221,5 +222,5 @@ ol.tree li.firstnode {background:#fff;}
 ol.tree li.dirnode {font-style:italic;} 
 ol.tree li.filenode {font-style:normal;}
 
-.meter {width:200px;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #ccc;outline:0 none;margin:1px 0;background:none repeat-x #fff;max-width:90%;}
+.meter {width:200px;height:20px;font-weight:bold;font-size:small;border-radius:2px;border:1px solid #ccc;outline:0 none;margin:1px 0;background:none repeat-x #fff;max-width:90%;}
 .meter > span {display:block;height:100%;background-color:#ccc;color:#fff;text-align:center;}
