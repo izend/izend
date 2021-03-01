@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    151
+ * @copyright  2010-2021 izend.org
+ * @version    152
  * @link       http://www.izend.org
  */
 
@@ -446,3 +446,6 @@ a:hover .icon_instagram {background-position:-753px 0;}
 
 #pinterest-board > span {box-shadow:none !important;}
 #pinterest-board > span > span {overflow:hidden;}
+
+#traffic {margin:2em 0;}
+#analytics_url {width:360px;}
