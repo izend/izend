@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -46,7 +46,7 @@
 <?php endif; ?>
 <?php global $facebookjssdk; ?>
 <?php if ($facebookjssdk): ?>
-<?php global $facebookid; ?>
+<?php global $facebookid, $facebookapiversion; ?>
 <div id="fb-root"></div>
 <script>
 window.fbAsyncInit = function() {
