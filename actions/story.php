@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    31
+ * @copyright  2010-2021 izend.org
+ * @version    32
  * @link       http://www.izend.org
  */
 
@@ -157,7 +157,7 @@ function story($lang, $arglist=false) {
 	if (!$story_nocloud) {
 		$cloud_url= url('search', $lang, $story_name);
 		$byname=$bycount=$index=true;
-		$cloud = build('cloud', $lang, $cloud_url, $story_id, false, $search_cloud, compact('byname', 'bycount', 'index'));
+		$cloud = build('cloud', $lang, $cloud_url, $story_id, false, false, $search_cloud, compact('byname', 'bycount', 'index'));
 	}
 
 	$summary=array();

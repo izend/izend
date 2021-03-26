@@ -2,12 +2,13 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    6
+ * @copyright  2010-2021 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/cloud.inc';
 require_once 'models/thread.inc';
 
@@ -23,6 +24,7 @@ function suggest($lang, $arglist=false) {
 	}
 
 	$cloud_id=false;
+	$not_in=false;
 
 	$clang=$lang;
 
@@ -31,6 +33,10 @@ function suggest($lang, $arglist=false) {
 		if (!$cloud_id) {
 			header('HTTP/1.1 404 Not Found');
 			return false;
+		}
+
+		if (!user_can_read($cloud_id)) {
+			return run('error/unauthorized', $lang);
 		}
 
 		$thread_type = thread_type($cloud_id);
@@ -63,6 +69,8 @@ function suggest($lang, $arglist=false) {
 			header('HTTP/1.1 404 Not Found');
 			return false;
 		}
+
+		$not_in=user_noread_list();
 	}
 
 	$term=isset($arglist['term']) ? $arglist['term'] : false;
@@ -71,7 +79,7 @@ function suggest($lang, $arglist=false) {
 		return false;
 	}
 
-	$r = cloud_suggest($clang, $cloud_id, $term);
+	$r = cloud_suggest($clang, $cloud_id, $not_in, $term);
 
 	if (!$r) {
 		header('HTTP/1.1 404 Not Found');
@@ -85,4 +93,3 @@ function suggest($lang, $arglist=false) {
 
 	return json_encode($taglist);
 }
-

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2019 izend.org
- * @version    6
+ * @copyright  2012-2021 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -66,7 +66,7 @@ function newslettersummary($lang, $newsletter) {
 	if (!$newsletter_nocloud) {
 		$cloud_url= url('search', $lang, $newsletter_name);
 		$byname=$bycount=$index=true;
-		$cloud = build('cloud', $lang, $cloud_url, $newsletter_id, false, $search_cloud, compact('byname', 'bycount', 'index'));
+		$cloud = build('cloud', $lang, $cloud_url, $newsletter_id, false, false, $search_cloud, compact('byname', 'bycount', 'index'));
 	}
 
 	$headline_text=	translate('newsletter:title', $lang);

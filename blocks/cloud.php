@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    7
+ * @copyright  2010-2021 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
 require_once 'models/cloud.inc';
 
-function cloud($lang, $cloud_url, $cloud_id=false, $node_id=false, $size=false, $options=false) {
+function cloud($lang, $cloud_url, $cloud_id=false, $not_in=false, $node_id=false, $size=false, $options=false) {
 	if (!$cloud_url) {
 		return false;
 	}
@@ -23,7 +23,7 @@ function cloud($lang, $cloud_url, $cloud_id=false, $node_id=false, $size=false, 
 
 	$linklist=false;
 
-	$r = cloud_list_tags($lang, $cloud_id, $node_id, $byname, $bycount, $inclusive);
+	$r = cloud_list_tags($lang, $cloud_id, $not_in, $node_id, $byname, $bycount, $inclusive);
 
 	if ($r) {
 		if ($size > 0 && $size < count($r)) {
@@ -46,4 +46,3 @@ function cloud($lang, $cloud_url, $cloud_id=false, $node_id=false, $size=false, 
 
 	return $output;
 }
-

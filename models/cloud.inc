@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    22
+ * @copyright  2010-2021 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -83,8 +83,8 @@ function cloud_get($lang, $cloud_id) {
 	return $r ? $r[0] : false;
 }
 
-function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=false, $inclusive=true) {
-	// list the tags in a thread or in all the threads which are optionally related to a node by count and/or by name skipping threads of type 'thread' and nodes which are ignored
+function cloud_list_tags($lang, $cloud_id, $not_in=false, $node_id=false, $byname=false, $bycount=false, $inclusive=true) {
+	// list the tags in a thread or in all the threads except a thread or a list of threads which are optionally related to a node by count and/or by name, skipping threads of type 'thread' and nodes which are ignored
 	$sqllang=db_sql_arg($lang, false);
 
 	$tabtag=db_prefix_table('tag');
@@ -95,6 +95,9 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
+	}
+	else if ($not_in) {
+		$join1 .= ' AND tn.thread_id NOT IN (' . (is_array($not_in) ? implode(',', $not_in) : $not_in) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -141,8 +144,8 @@ function cloud_list_tags($lang, $cloud_id, $node_id, $byname=false, $bycount=fal
 	return $r;
 }
 
-function cloud_search($lang, $cloud_id, $taglist, $pertinence=0) {
-	// return the nodes which are associated to a list of tags in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
+function cloud_search($lang, $cloud_id, $not_in, $taglist, $pertinence=0) {
+	// return the nodes which are associated to a list of tags in a thread or in all the threads except a thread or a list of threads, skipping threads of type 'thread' and nodes which are ignored
 	$taglist=array_slice(array_unique($taglist), 0, 10);
 	$ntags = count($taglist);
 	if ($ntags == 0) {
@@ -163,6 +166,9 @@ function cloud_search($lang, $cloud_id, $taglist, $pertinence=0) {
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
+	}
+	else if ($not_in) {
+		$join1 .= ' AND tn.thread_id NOT IN (' . (is_array($not_in) ? implode(',', $not_in) : $not_in) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -192,8 +198,8 @@ function cloud_search($lang, $cloud_id, $taglist, $pertinence=0) {
 	return $r;
 }
 
-function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
-	// return the tags which match a word in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
+function cloud_match($lang, $cloud_id, $not_in, $s, $dlimit=0, $closest=true) {
+	// return the tags which match a word in a thread or in all the threads except a thread or a list of threads, skipping threads of type 'thread' and nodes which are ignored
 	$wordlist=array_slice(array_unique(preg_split('/\s+/', $s, -1, PREG_SPLIT_NO_EMPTY)), 0, 10);
 	$nwords=count($wordlist);
 	if ($nwords == 0) {
@@ -210,6 +216,9 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
+	}
+	else if ($not_in) {
+		$join1 .= ' AND tn.thread_id NOT IN (' . (is_array($not_in) ? implode(',', $not_in) : $not_in) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
@@ -250,8 +259,8 @@ function cloud_match($lang, $cloud_id, $s, $dlimit=0, $closest=true) {
 	return $taglist;
 }
 
-function cloud_suggest($lang, $cloud_id, $term) {
-	// return the tags which contain a term in a thread or in all the threads skipping threads of type 'thread' and nodes which are ignored
+function cloud_suggest($lang, $cloud_id, $not_in, $term) {
+	// return the tags which contain a term in a thread or in all the threads except a thread or a list of threads, skipping threads of type 'thread' and nodes which are ignored
 	$sqllang=db_sql_arg($lang, false);
 	$sqlterm=db_sql_arg("%$term%", false);
 
@@ -263,6 +272,9 @@ function cloud_suggest($lang, $cloud_id, $term) {
 	$join1 = "JOIN $tabthreadnode tn ON tn.node_id=ti.node_id AND tn.ignored=FALSE";
 	if ($cloud_id) {
 		$join1 .= ' AND tn.thread_id IN (' . (is_array($cloud_id) ? implode(',', $cloud_id) : $cloud_id) . ')';
+	}
+	else if ($not_in) {
+		$join1 .= ' AND tn.thread_id NOT IN (' . (is_array($not_in) ? implode(',', $not_in) : $not_in) . ')';
 	}
 
 	$join2 = "JOIN $tabthread t ON t.thread_id=tn.thread_id AND t.thread_type!='thread'";
