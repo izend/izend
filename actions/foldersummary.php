@@ -2,12 +2,13 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    6
+ * @copyright  2010-2021 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/thread.inc';
 
 function foldersummary($lang, $folder) {
@@ -16,6 +17,10 @@ function foldersummary($lang, $folder) {
 	$folder_id = thread_id($folder);
 	if (!$folder_id) {
 		return run('error/notfound', $lang);
+	}
+
+	if (!user_can_read($folder_id)) {
+		return run('error/unauthorized', $lang);
 	}
 
 	$r = thread_get($lang, $folder_id);

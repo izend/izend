@@ -2,13 +2,14 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    31
+ * @copyright  2010-2021 izend.org
+ * @version    32
  * @link       http://www.izend.org
  */
 
 require_once 'socialize.php';
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/thread.inc';
 
 function bookpage($lang, $book, $page) {
@@ -17,6 +18,10 @@ function bookpage($lang, $book, $page) {
 	$book_id = thread_id($book);
 	if (!$book_id) {
 		return run('error/notfound', $lang);
+	}
+
+	if (!user_can_read($book_id)) {
+		return run('error/unauthorized', $lang);
 	}
 
 	$page_id = thread_node_id($book_id, $page, $lang);

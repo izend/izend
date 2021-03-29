@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    30
+ * @copyright  2010-2021 izend.org
+ * @version    31
  * @link       http://www.izend.org
  */
 
 require_once 'models/node.inc';
 
-function thread_list($lang, $type=false, $strict=true) {
+function thread_list($lang, $type=false, $not_in=false, $strict=true) {
 	$sqllang=db_sql_arg($lang, false);
 
 	$join = $strict ? 'JOIN' : 'LEFT JOIN';
@@ -22,6 +22,10 @@ function thread_list($lang, $type=false, $strict=true) {
 	if ($type) {
 		$sqltype=db_sql_arg($type, false);
 		$sql .= " WHERE t.thread_type=$sqltype";
+	}
+
+	if ($not_in) {
+		$sql .= ' AND t.thread_id NOT IN (' . (is_array($not_in) ? implode(',', $not_in) : $not_in) . ')';
 	}
 
 	$sql .= ' ORDER BY t.number';

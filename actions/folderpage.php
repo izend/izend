@@ -2,13 +2,14 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    32
+ * @copyright  2010-2021 izend.org
+ * @version    33
  * @link       http://www.izend.org
  */
 
 require_once 'socialize.php';
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/thread.inc';
 
 function folderpage($lang, $folder, $page) {
@@ -17,6 +18,10 @@ function folderpage($lang, $folder, $page) {
 	$folder_id = thread_id($folder);
 	if (!$folder_id) {
 		return run('error/notfound', $lang);
+	}
+
+	if (!user_can_read($folder_id)) {
+		return run('error/unauthorized', $lang);
 	}
 
 	$page_id = thread_node_id($folder_id, $page, $lang);

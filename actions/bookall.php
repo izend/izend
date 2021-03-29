@@ -2,12 +2,13 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    3
+ * @copyright  2010-2021 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 
 function bookall($lang) {
 	global $with_toolbar;
@@ -20,7 +21,9 @@ function bookall($lang) {
 	$banner = build('banner', $lang, $with_toolbar ? false : compact('edit', 'validate'));
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
 
-	$booklist = build('threadlist', $lang, 'book');
+	$not_in=user_noread_list();
+
+	$booklist = build('threadlist', $lang, 'book', $not_in);
 
 	$content = view('bookall', $lang, compact('booklist'));
 

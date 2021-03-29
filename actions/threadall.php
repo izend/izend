@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    11
+ * @copyright  2010-2021 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -30,7 +30,7 @@ function threadall($lang, $clang) {
 	$scroll=true;
 	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'scroll')) : false;
 
-	$threadlist = build('threadlist', $clang, false, false, $lang);
+	$threadlist = build('threadlist', $clang, false, false, false, $lang);
 
 	$content = view('threadall', $lang, compact('site_title', 'site_abstract', 'site_cloud', 'threadlist', 'inlanguages'));
 

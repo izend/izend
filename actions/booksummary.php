@@ -3,12 +3,13 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    22
+ * @version    23
  * @link       http://www.izend.org
  */
 
 require_once 'socialize.php';
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/thread.inc';
 
 function booksummary($lang, $book) {
@@ -17,6 +18,10 @@ function booksummary($lang, $book) {
 	$book_id = thread_id($book);
 	if (!$book_id) {
 		return run('error/notfound', $lang);
+	}
+
+	if (!user_can_read($book_id)) {
+		return run('error/unauthorized', $lang);
 	}
 
 	$r = thread_get($lang, $book_id);

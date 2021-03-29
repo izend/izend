@@ -3,12 +3,13 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
 
 require_once 'socialize.php';
 require_once 'userhasrole.php';
+require_once 'userhasaccess.php';
 require_once 'models/thread.inc';
 
 function story($lang, $arglist=false) {
@@ -32,6 +33,10 @@ function story($lang, $arglist=false) {
 	$story_id = thread_id($story);
 	if (!$story_id) {
 		return run('error/notfound', $lang);
+	}
+
+	if (!user_can_read($story_id)) {
+		return run('error/unauthorized', $lang);
 	}
 
 	$page_id = thread_node_id($story_id, $page, $lang);
