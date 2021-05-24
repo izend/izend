@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    24
+ * @copyright  2010-2021 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 ?>
@@ -46,7 +46,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choisissez un mot de passe&nbsp;:</p>
-<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Mot de passe" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Mot de passe" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
 <p class="info">Entrez au moins 6 caractères dont 1 chiffre.</p>
 <?php endif; ?>
 <?php if ($with_newsletter): ?>
