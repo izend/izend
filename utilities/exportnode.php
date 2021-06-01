@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016-2019 izend.org
- * @version    3
+ * @copyright  2016-2021 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -75,10 +75,10 @@ foreach ($languages as $lang) {
 	if (!$r) {
 		abort($node_id . '?');
 	}
-	extract($r); /* node_number node_ignored node_name node_title node_abstract node_cloud node_image node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_linkedin node_pinit node_whatsapp */
+	extract($r); /* node_number node_name node_title node_abstract node_cloud node_image node_visits node_nocomment node_nomorecomment node_novote node_nomorevote node_ilike node_tweet node_linkedin node_pinit node_whatsapp */
 
 	if (!$node) {
-		$node=array(compact('node_ignored', 'node_visits', 'node_nocomment', 'node_nomorecomment', 'node_novote', 'node_nomorevote', 'node_ilike', 'node_tweet', 'node_linkedin', 'node_pinit', 'node_whatsapp'));
+		$node=array(compact('node_visits', 'node_nocomment', 'node_nomorecomment', 'node_novote', 'node_nomorevote', 'node_ilike', 'node_tweet', 'node_linkedin', 'node_pinit', 'node_whatsapp'));
 	}
 	$node[$lang]=compact('node_name', 'node_title', 'node_abstract', 'node_cloud', 'node_image');
 }
