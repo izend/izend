@@ -2,9 +2,9 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    4
- * @link	   http://www.izend.org
+ * @copyright  2010-2021 izend.org
+ * @version    5
+ * @link       http://www.izend.org
  */
 
 function validate_url($url) {
