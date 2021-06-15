@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    120
+ * @version    121
  * @link       http://www.izend.org
  */
  
@@ -12,7 +12,7 @@
 
 body {font-family:Verdana, sans-serif;font-size:100%;line-height:1.4;}
 
-h1, h2, h3, h4, h5, h6, label, caption, #rate-it legend {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+h1, h2, h3, h4, h5, h6, label, caption, #rate-it legend {font-family:Arial, sans-serif;}
 
 pre {font-family:Verdana, sans-serif;}
 code {font-family:"Courier New", Courier, monospace;}
@@ -70,7 +70,7 @@ ul {list-style-type:disc;}
 
 .fullwidth {width:100vw;margin-left:-50vw;position:relative;left:50%;}
 
-.menu {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+.menu {font-family:Arial, sans-serif;}
 .menu {margin:0;padding:0;}
 .menu ul {margin-top:0;}
 .menu li {list-style:none;}
@@ -95,7 +95,7 @@ ul {list-style-type:disc;}
 .sidebar {padding:0;margin:0;}
 .sidebar li {display:block;}
 
-.sidemenu * {border:none !important;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif !important;}
+.sidemenu * {border:none !important;font-family:Arial, sans-serif !important;}
 .sidemenu .ui-widget-header {background:none;}
 .sidemenu .ui-tabs .ui-tabs-nav, #sidemenu .ui-tabs .ui-tabs-panel {padding:0;}
 .sidemenu .ui-accordion .ui-accordion-header , #sidemenu .ui-tabs .ui-tabs-panel {margin-top:0.1em;}
@@ -193,7 +193,7 @@ span.icon {display:inline-block;text-indent:-9999px;vertical-align:middle;}
 
 a.button {padding:6px 0 4px;margin:1px 0;display:inline-block;text-align:center;vertical-align:middle;cursor:pointer;}
 
-.cloud {font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
+.cloud {font-family:Arial, sans-serif;}
 .cloud {padding:0;margin:0;text-align:center;}
 .cloud li {list-style:none;display:inline;}
 
