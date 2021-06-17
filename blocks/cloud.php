@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    8
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,9 @@ function cloud($lang, $cloud_url, $cloud_id=false, $not_in=false, $node_id=false
 	$index=true;
 	$flat=false;
 
-	extract($options, EXTR_IF_EXISTS);
+	if ($options) {
+		extract($options, EXTR_IF_EXISTS);
+	}
 
 	$linklist=false;
 
