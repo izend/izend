@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    3
+ * @copyright  2010-2021 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -11,13 +11,10 @@ require_once 'sendhttp.php';
 require_once 'filemimetype.php';
 
 function qrdecode($file) {
-	$url = 'http://zxing.org/w/decode';
-	$args = array(
-		'full'	=> 'true',
-	);
+	$url = 'https://zxing.org/w/decode';
 	$files=array('f' => array('name' => basename($file), 'tmp_name' => $file, 'type' => file_mime_type($file)));
 
-	$response=sendpost($url, $args, $files, false);	// DON'T encode data in base64
+	$response=sendpost($url, false, $files, false);	// DON'T encode data in base64
 
 	if (!$response or $response[0] != 200) {
 		return false;
