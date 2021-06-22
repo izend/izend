@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    10
+ * @copyright  2010-2021 izend.org
+ * @version    11
  * @link       http://www.izend.org
  */
 
@@ -120,7 +120,6 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 				$path .= '?' . http_build_args($args);
 			}
 			$header_string="GET $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
-
 
 			break;
 
