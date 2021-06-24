@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    154
+ * @version    155
  * @link       http://www.izend.org
  */
 
@@ -420,7 +420,7 @@ a:hover .icon_instagram {background-position:-753px 0;}
 #summary {font-family:Arial, sans-serif;font-size:small;text-align:right;margin:0 0 1em 0;padding:10px;border-style:solid;border-color:#eaefb3;border-width:1px 1px 4px 6px;background-color:#ffffff;}
 
 #upload_status {font-size:smaller;}
-#upload_droparea {width:100px;height:100px;display:table-cell;text-align:center;vertical-align:middle;background:#eee;cursor:pointer;}
+#upload_droparea {width:100px;height:100px;display:table-cell;text-align:center;vertical-align:middle;background:#eeeeee;cursor:pointer;}
 #upload_droparea span {display:inline-block;}
 
 .userresult {color:#aec14e;font-weight:bold;}
