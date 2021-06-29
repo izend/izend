@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    11
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -120,7 +120,6 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 				$path .= '?' . http_build_args($args);
 			}
 			$header_string="GET $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
-
 			break;
 
 		default:
@@ -191,7 +190,7 @@ function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=fa
 	$response_header_array = array();
 	foreach ($response_header_lines as $header_line) {
 		list($header, $value) = explode(': ', $header_line, 2);
-		$response_header_array[$header] = $value;
+		$response_header_array[ucwords($header, '-')] = $value;
 	}
 
 	return array($response_code, $response_header_array, $response_body);
