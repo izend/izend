@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    12
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -191,6 +191,22 @@ function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=fa
 	foreach ($response_header_lines as $header_line) {
 		list($header, $value) = explode(': ', $header_line, 2);
 		$response_header_array[ucwords($header, '-')] = $value;
+	}
+
+	if (isset($response_header_array['Transfer-Encoding'])) {
+		switch ($response_header_array['Transfer-Encoding']) {
+			case 'chunked':
+				$chunks = explode($crlf, $response_body);
+				foreach ($chunks as $i => $s) {
+					if ($i % 2 == 0) {
+						unset($chunks[$i]);
+					}
+				}
+				$response_body = implode('', $chunks);
+				break;
+			default:
+				break;
+		}
 	}
 
 	return array($response_code, $response_header_array, $response_body);
