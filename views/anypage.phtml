@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2021 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<?php if ($page_contents): ?>
+<?php if (!empty($page_contents)): ?>
 <?php echo $page_contents; ?>
 <?php endif; ?>
-<?php if ($besocial): ?>
+<?php if (!empty($besocial)): ?>
 <?php echo $besocial; ?>
 <?php endif; ?>
