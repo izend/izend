@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    14
+ * @copyright  2010-2021 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -45,8 +45,10 @@ In any case, using a prefix is safer.</p>
 <?php endforeach; ?>
 </ul>
 </div>
-<p>To modify the access rights, try the following command:</p>
-<pre><code>$ cd <?php echo ROOT_DIR; ?>; chmod a+w<?php foreach ($bad_write_permission as $fname) { echo ' ', $fname; }; ?></code></pre>
+<p>To modify the access rights, enter the following commands:</p>
+<pre><code>$ cd <?php echo ROOT_DIR; ?><?php echo PHP_EOL; ?>
+$ chmod g+w<?php foreach ($bad_write_permission as $fname) { echo ' ', $fname; }; ?><?php echo PHP_EOL; ?>
+$ chgrp www-data<?php foreach ($bad_write_permission as $fname) { echo ' ', $fname; }; ?></code></pre>
 <?php endif; ?>
 <?php $nerrors=count(array_keys($errors, true, true)); ?>
 <?php if ($nerrors > 0): ?>
