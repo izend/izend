@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -118,6 +118,7 @@ and the role <code><?php echo $db_user; ?></code>.</p>
 <p>Do you have a database server?</p>
 <p class="info">Without a database, the functionalities will be more limited.</p>
 <p><input type="radio" name="configure_db_flag" value="yes"<?php if ($db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;yes <input name="configure_db_flag" type="radio" value="no"<?php if (!$db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;no</p>
+<p class="info">If you don't use a database, skip the following questions and just press Configure.</p>
 <p>Do you use MySQL or PostgreSQL?</p>
 <p><input type="radio" name="configure_db_type" title="" value="mysql"<?php if ($db_type == 'mysql'): ?> checked="checked"<?php endif; ?> />&nbsp;MySQL
 <input type="radio" name="configure_db_type" title="" value="pgsql"<?php if ($db_type == 'pgsql'): ?> checked="checked"<?php endif; ?> />&nbsp;PostgreSQL</p>
@@ -141,17 +142,11 @@ and the role <code><?php echo $db_user; ?></code>.</p>
 <input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
 </p>
-<?php if ($missing_db_user and $missing_db_password): ?>
-<p class="error">Choose an identifier for the user of the database and a password.</p>
-<?php else: ?>
 <?php if ($missing_db_user or $bad_db_user): ?>
-<p class="error">Enter between 2 and 30 characters (letter, digit or underscore) starting with a letter.</p>
+<p class="error">Enter an identitier between 2 and 30 characters (letter, digit or underscore) starting with a letter.</p>
 <?php endif; ?>
-<?php if ($missing_db_password): ?>
-<p class="error">Enter a password.</p>
-<?php elseif ($weak_db_password): ?>
-<p class="error">Enter a combination of letters and digits of at least 6 characters.</p>
-<?php endif; ?>
+<?php if ($weak_db_password): ?>
+<p class="error">Enter a password of 10 characters with at least 2 uppercase letters, 2 lowercase letters, 2 digits and 2 special characters or clear the field to let the system choose one.</p>
 <?php endif; ?>
 <p>Do you use an existing database?</p>
 <p><input type="radio" name="configure_db_reuse" value="yes" <?php if ($db_reuse) echo 'checked="checked"'; ?> />&nbsp;yes <input type="radio" name="configure_db_reuse" value="no" <?php if (!$db_reuse) echo 'checked="checked"'; ?> />&nbsp;no</p>

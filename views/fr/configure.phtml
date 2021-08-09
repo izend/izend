@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 ?>
@@ -118,6 +118,7 @@ et le rôle <code><?php echo $db_user; ?></code>.</p>
 <p>Avez-vous un serveur de bases de données&nbsp;?</p>
 <p class="info">Sans une base de données, les fonctionnalités seront plus limitées.</p>
 <p><input type="radio" name="configure_db_flag" value="yes"<?php if ($db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;oui <input type="radio" name="configure_db_flag" value="no"<?php if (!$db_flag): ?> checked="checked"<?php endif; ?> />&nbsp;non</p>
+<p class="info">Si vous n'utilisez pas de base de données, sautez les questions suivantes et appuyez juste sur Configurer.</p>
 <p>Utilisez-vous MySQL ou PostgreSQL&nbsp;?</p>
 <p><input type="radio" name="configure_db_type" title="" value="mysql"<?php if ($db_type == 'mysql'): ?> checked="checked"<?php endif; ?> />&nbsp;MySQL
 <input type="radio" name="configure_db_type" title="" value="pgsql"<?php if ($db_type == 'pgsql'): ?> checked="checked"<?php endif; ?> />&nbsp;PostgreSQL</p>
@@ -141,17 +142,11 @@ et le rôle <code><?php echo $db_user; ?></code>.</p>
 <input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php echo $db_password; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
 </p>
-<?php if ($missing_db_user and $missing_db_password): ?>
-<p class="error">Choisissez un identifiant pour l'utilisateur de la base de données et un mot de passe.</p>
-<?php else: ?>
 <?php if ($missing_db_user or $bad_db_user): ?>
-<p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
+<p class="error">Entrez un identifiant de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
 <?php endif; ?>
-<?php if ($missing_db_password): ?>
-<p class="error">Entrez un mot de passe.</p>
-<?php elseif ($weak_db_password): ?>
-<p class="error">Entrez une combinaison de lettres et de chiffres d'au moins 6 caractères.</p>
-<?php endif; ?>
+<?php if ($weak_db_password): ?>
+<p class="error">Entrez un mot de passe de 10 caractères avec au moins 2 majuscules, 2 minuscules, 2 chiffres et 2 caractères spéciaux ou effacez le champ pour laisser le système en choisir un.</p>
 <?php endif; ?>
 <p>Utilisez-vous une base de données déjà existante&nbsp;?</p>
 <p><input type="radio" name="configure_db_reuse" value="yes" <?php if ($db_reuse) echo 'checked="checked"'; ?> />&nbsp;oui <input type="radio" name="configure_db_reuse" value="no" <?php if (!$db_reuse) echo 'checked="checked"'; ?> />&nbsp;non</p>

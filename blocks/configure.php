@@ -2,18 +2,19 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    55
+ * @copyright  2010-2021 izend.org
+ * @version    56
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'identicon.php';
-require_once 'newpassword.php';
-require_once 'validatepassword.php';
+require_once 'newdbpassword.php';
 require_once 'validatedbname.php';
+require_once 'validatedbpassword.php';
 require_once 'validatehostname.php';
 require_once 'validateipaddress.php';
+require_once 'validatepassword.php';
 require_once 'tokenid.php';
 require_once 'strlogo.php';
 
@@ -107,10 +108,7 @@ function configure($lang) {
 			$db_user='mysite';
 			$db_prefix='mysite_';
 
-			do {
-				$db_password=newpassword(8);
-			}
-			while (!validate_password($db_password));
+			$db_password=newdbpassword();
 
 			break;
 
@@ -193,7 +191,6 @@ function configure($lang) {
 
 	$missing_db_user=false;
 	$bad_db_user=false;
-	$missing_db_password=false;
 	$weak_db_password=false;
 
 	$missing_site_admin_user=false;
@@ -271,10 +268,10 @@ function configure($lang) {
 				else if (!$db_reuse and !validate_db_name($db_user)) {
 					$bad_db_user=true;
 				}
-				if (empty($db_password)) {
-					$missing_db_password=true;
+				if (!$db_reuse and empty($db_password)) {
+					$db_password=newdbpassword();
 				}
-				else if (!$db_reuse and !validate_password($db_password)) {
+				else if (!$db_reuse and !validate_db_password($db_password)) {
 					$weak_db_password=true;
 				}
 				if (empty($site_admin_user)) {
@@ -297,7 +294,7 @@ function configure($lang) {
 
 	switch($action) {
 		case 'configure':
-			if ($bad_token or $bad_write_permission or $missing_sitename or $missing_webmaster or $missing_content_languages or $bad_default_language or $missing_db_admin_user or $missing_db_admin_password or $missing_db_name or $bad_db_name or $bad_db_type or $missing_db_host or $bad_db_host or $missing_db_user or $bad_db_user or $missing_db_password or $weak_db_password or $missing_site_admin_user or $bad_site_admin_user or $missing_site_admin_password or $weak_site_admin_password) {
+			if ($bad_token or $bad_write_permission or $missing_sitename or $missing_webmaster or $missing_content_languages or $bad_default_language or $missing_db_admin_user or $missing_db_admin_password or $missing_db_name or $bad_db_name or $bad_db_type or $missing_db_host or $bad_db_host or $missing_db_user or $bad_db_user or $weak_db_password or $missing_site_admin_user or $bad_site_admin_user or $missing_site_admin_password or $weak_site_admin_password) {
 				break;
 			}
 
@@ -396,7 +393,7 @@ function configure($lang) {
 
 	$_SESSION['configure_token'] = $token = token_id();
 
-	$errors = compact('bad_write_permission', 'missing_sitename', 'missing_webmaster', 'missing_content_languages', 'bad_default_language', 'missing_db_admin_user', 'missing_db_admin_password', 'bad_db_type', 'missing_db_name', 'bad_db_name', 'missing_db_host', 'bad_db_host', 'bad_db_prefix', 'missing_db_user', 'bad_db_user', 'missing_db_password', 'weak_db_password', 'missing_site_admin_user', 'bad_site_admin_user', 'missing_site_admin_password', 'weak_site_admin_password');
+	$errors = compact('bad_write_permission', 'missing_sitename', 'missing_webmaster', 'missing_content_languages', 'bad_default_language', 'missing_db_admin_user', 'missing_db_admin_password', 'bad_db_type', 'missing_db_name', 'bad_db_name', 'missing_db_host', 'bad_db_host', 'bad_db_prefix', 'missing_db_user', 'bad_db_user', 'weak_db_password', 'missing_site_admin_user', 'bad_site_admin_user', 'missing_site_admin_password', 'weak_site_admin_password');
 
 	$output = view('configure', $lang, compact('token', 'sitename', 'webmaster', 'db_error', 'file_error', 'internal_error', 'content_languages', 'default_language', 'db_flag', 'db_type', 'db_reuse', 'db_admin_user', 'db_admin_password', 'db_name', 'db_host', 'db_prefix', 'db_user', 'db_password', 'site_admin_user', 'site_admin_password', 'errors'));
 
