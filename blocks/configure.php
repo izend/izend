@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    56
+ * @version    57
  * @link       http://www.izend.org
  */
 
@@ -138,7 +138,7 @@ function configure($lang) {
 				$db_admin_user=readarg($_POST['configure_db_admin_user']);
 			}
 			if (isset($_POST['configure_db_admin_password'])) {
-				$db_admin_password=readarg($_POST['configure_db_admin_password']);
+				$db_admin_password=$_POST['configure_db_admin_password'];	// DON'T readarg
 			}
 			if (isset($_POST['configure_db_name'])) {
 				$db_name=readarg($_POST['configure_db_name']);
@@ -150,7 +150,7 @@ function configure($lang) {
 				$db_user=readarg($_POST['configure_db_user']);
 			}
 			if (isset($_POST['configure_db_password'])) {
-				$db_password=readarg($_POST['configure_db_password']);
+				$db_password=$_POST['configure_db_password'];	// DON'T readarg
 			}
 			if (isset($_POST['configure_db_prefix'])) {
 				$db_prefix=readarg($_POST['configure_db_prefix']);
@@ -159,7 +159,7 @@ function configure($lang) {
 				$site_admin_user=readarg($_POST['configure_site_admin_user']);
 			}
 			if (isset($_POST['configure_site_admin_password'])) {
-				$site_admin_password=readarg($_POST['configure_site_admin_password']);
+				$site_admin_password=$_POST['configure_site_admin_password'];	// DON'T readarg
 			}
 			break;
 		default:
