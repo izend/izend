@@ -2,14 +2,12 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    8
+ * @copyright  2010-2021 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
 function user($lang, $arglist=false) {
-	global $login_verified, $base_url;
-
 	$login = build('login', $lang);
 
 	if ($login === true) {
