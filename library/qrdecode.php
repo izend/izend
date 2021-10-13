@@ -3,27 +3,21 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
-require_once 'sendhttp.php';
-require_once 'filemimetype.php';
+require_once 'vendor/autoload.php';
 
-function qrdecode($file) {
-	$url = 'https://zxing.org/w/decode';
-	$files=array('f' => array('name' => basename($file), 'tmp_name' => $file, 'type' => file_mime_type($file)));
+use zxing\QrReader;
 
-	$response=sendpost($url, false, $files, false);	// DON'T encode data in base64
-
-	if (!$response or $response[0] != 200) {
+function qrdecode($qr, $type='file', $imagick=false) {
+	if (!$qr or !$type or !in_array($type, array('file', 'blob', 'resource'))) {
 		return false;
 	}
+	
+	$qrcode = new Zxing\QrReader($qr, $type, $imagick);
 
-	if (!preg_match('#<tr><td>Parsed Result</td><td><pre.*>(.*)</pre></td></tr>#', $response[2], $r)) {	// extract data - adapt when response format changes
-		return false;
-	}
-
-	return strip_tags($r[1]);
+	return $qrcode !== false ? $qrcode->text() : false;
 }
 
