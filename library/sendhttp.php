@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    13
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -37,8 +37,9 @@ function http_parse_url($url) {
 	$host = isset($purl['host']) ? $purl['host'] : 'localhost';
 	$portnum = isset($purl['port']) ? $purl['port'] : ($scheme == 'https' ? 443 : 80);
 	$path = isset($purl['path']) ? $purl['path'] : '/';
+	$query = isset($purl['query']) ? $purl['query'] : false;
 
-	return array($proto, $scheme, $host, $portnum, $path);
+	return array($proto, $scheme, $host, $portnum, $path, $query);
 }
 
 function sendget($url, $args=false, $options=false, $header=false) {
@@ -56,7 +57,11 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 		return false;
 	}
 
-	list($proto, $scheme, $host, $portnum, $path)=$r;
+	list($proto, $scheme, $host, $portnum, $path, $query)=$r;
+
+	if ($query) {
+		$path .= '?' . $query;
+	}
 
 	$hostaddr=($scheme == 'http' && $portnum == 80) ? $host : $host . ':' . $portnum;
 
@@ -117,7 +122,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 
 		case 'GET':
 			if ($args && is_array($args)) {
-				$path .= '?' . http_build_args($args);
+				$path .= ($query ? '&' : '?') . http_build_args($args);
 			}
 			$header_string="GET $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
 			break;
@@ -211,4 +216,3 @@ function sendhttpraw($proto, $host, $portnum, $header_string, $content_string=fa
 
 	return array($response_code, $response_header_array, $response_body);
 }
-
