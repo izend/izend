@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    124
+ * @version    125
  * @link       http://www.izend.org
  */
  
@@ -183,6 +183,7 @@ div.vbar > *:last-child {margin-bottom:0;}
 
 .nowrap {white-space:nowrap !important;}
 .breakword {word-wrap:break-word !important;}
+.breakall {word-break:break-all !important;}
 
 .pointer {cursor:pointer;}
 .nopointer {cursor:default;}
