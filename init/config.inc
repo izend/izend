@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    60
+ * @version    61
  * @link       http://www.izend.org
  */
 <?php
@@ -50,7 +50,7 @@ $signature='<?php echo $sitename; ?> - http://www.<?php echo $sitename; ?>';
 global $socializing, $socializingmode;
 
 $socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
-$socializingmode='standard';	// 'standard', 'lite', 'awesome'
+$socializingmode='lite';	// 'standard', 'lite', 'awesome'
 
 global $cookieconsent, $cookieconsentauto;
 
