@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2021 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -16,7 +16,7 @@ ini_set('session.cache_expire',		180);
 ini_set('session.cache_limiter',	'none');
 ini_set('session.cookie_httponly',	1);
 ini_set('session.cookie_lifetime',	0);
-ini_set('session.cookie_samesite',	'None; Secure');
+ini_set('session.cookie_samesite',	'None');	// 'None; Secure'
 ini_set('session.gc_maxlifetime',	1440);
 ini_set('session.name',				'');
 ini_set('session.save_handler',		'files');
