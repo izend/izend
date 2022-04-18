@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016-2020 izend.org
- * @version    3
+ * @copyright  2016-2022 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -201,6 +201,8 @@ function analytics($lang) {
 				if ($client->getAuth()->isAccessTokenExpired()) {
 					$client->getAuth()->refreshTokenWithAssertion($cred);
 				}
+
+				$profile_id = false;
 
 				$accounts = $analytics->management_accounts->listManagementAccounts();
 
