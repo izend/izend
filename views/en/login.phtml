@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    14
+ * @copyright  2010-2022 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
@@ -20,7 +20,7 @@
 <p class="info">You may also enter your email address.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_password or $access_denied): ?> inerror<?php endif; ?>">And your access key?</p>
-<p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Password" onkeypress="<?php if ($with_captcha): ?>return focusonenter(event, 'login_code')<?php else: ?>return submitonenter(event, 'login_enter')<?php endif; ?>" /></p>
+<p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Password" onkeypress="<?php if ($with_captcha): ?>return focusonenter(event, 'login_code')<?php else: ?>return submitonenter(event, 'login_enter')<?php endif; ?>" /><?php if ($with_viewpassword): ?>&nbsp;<span class="icon icon_view pointer"></span><?php endif; ?></p>
 <?php if ($password_page): ?>
 <p class="info link">If you have forgotten your password, <a class="clickhere" href="<?php echo $password_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
@@ -36,6 +36,14 @@
 <p class="info link">To create your personal account, <a class="clickhere" href="<?php echo $newuser_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
 </form>
+<?php if ($with_viewpassword): ?>
+<script>
+(function() {
+	const password = document.getElementById('login_password');
+	password.nextElementSibling.addEventListener('click', () => password.type = password.type == 'password' ? 'text' : 'password');
+})();
+</script>
+<?php endif; ?>
 <div class="errors">
 <?php if ($missing_code): ?>
 <p>Enter the verification code displayed in the image.</p>

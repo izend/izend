@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    22
+ * @copyright  2010-2022 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -21,6 +21,8 @@ function login($lang) {
 
 	$with_newuser=true;
 	$with_newpassword=true;
+
+	$with_viewpassword=true;
 
 	if ($with_facebook) {
 		require_once 'vendor/autoload.php';
@@ -220,7 +222,7 @@ function login($lang) {
 
 	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied', 'not_confirmed');
 
-	$output = view('login', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'password_page', 'newuser_page', 'login', 'errors'));
+	$output = view('login', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_viewpassword', 'password_page', 'newuser_page', 'login', 'errors'));
 
 	return $output;
 }

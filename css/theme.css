@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2021 izend.org
- * @version    155
+ * @copyright  2010-2022 izend.org
+ * @version    156
  * @link       http://www.izend.org
  */
 
@@ -122,6 +122,7 @@ span.icon_web {background-position:-144px 0;}
 span.icon_lock {background-position:-120px -48px;}
 span.icon_download {background-position:-24px -24px;}
 span.icon_attachment {background-position:-96px -48px;}
+span.icon_view {background-position:-96px -24px;}
 
 span.btn_edit {width:16px;height:16px;display:inline-block;line-height:16px;background:transparent url(../images/theme/editing.png) no-repeat;vertical-align:middle;text-indent:-9999px;}
 span.btn_mouse {background-position:-208px -48px;}
