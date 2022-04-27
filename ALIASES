@@ -13,6 +13,11 @@ actions added after the initial configuration of your website.
 UPDATES
 -------
 
+Date:	Tue Apr 26 2022
+
+Adds action newpassword.
+----
+
 Date:	Fri Mar 24 2018
 
 Adds action fileupload.
@@ -73,7 +78,6 @@ $aliases = array(
 		'avatar'					=> 'avatar',
 		'qrcode'					=> 'qrcode',
 		'rss'						=> 'rssfeed',
-		'file/upload'				=> 'fileupload',
 		'paypal/return'				=> 'paypalreturn',
 		'paypal/cancel'				=> 'paypalcancel',
 		'payline/return'			=> 'paylinereturn',
@@ -86,15 +90,17 @@ $aliases = array(
 		'contact'					=> 'contact',
 		'user'						=> 'user',
 		'disconnect'				=> 'nobody',
-		'password'					=> 'password',
 		'account'					=> 'account',
-		'new-user'					=> 'newuser',
+		'account/password'			=> 'newpassword',
+		'password'					=> 'password',
+		'register'					=> 'newuser',
 		'search'					=> 'search',
 		'suggest'					=> 'suggest',
 		'download'					=> 'download',
 		'donation'					=> 'donation',
 		'manage'					=> 'admin',
 		'manage/user'				=> 'adminuser',
+		'file/upload'				=> 'fileupload',
 		'page'						=> 'page',
 		'edit'						=> 'editpage',
 		'folder'					=> 'folder',
@@ -121,14 +127,16 @@ $aliases = array(
 		'utilisateur'				=> 'user',
 		'déconnexion'				=> 'nobody',
 		'compte'					=> 'account',
+		'compte/mot-de-passe'		=> 'newpassword',
 		'mot-de-passe'				=> 'password',
-		'nouvel-utilisateur'		=> 'newuser',
+		'inscription'				=> 'newuser',
 		'recherche'					=> 'search',
 		'suggestion'				=> 'suggest',
 		'telechargement'			=> 'download',
 		'donation'					=> 'donation',
 		'gestion'					=> 'admin',
 		'gestion/utilisateur'		=> 'adminuser',
+		'fichier/telecharger'		=> 'fileupload',
 		'page'						=> 'page',
 		'edition'					=> 'editpage',
 		'dossier'					=> 'folder',

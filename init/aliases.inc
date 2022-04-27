@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    22
+ * @copyright  2010-2022 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
 
@@ -29,6 +29,7 @@ $aliases = array(
 		'user'					=> 'identification',
 		'nobody'				=> 'disconnect',
 		'account'				=> 'account',
+		'newpassword'			=> 'account/password',
 		'password'				=> 'password',
 		'newuser'				=> 'register',
 		'search'				=> 'search',
@@ -66,6 +67,7 @@ $aliases = array(
 		'user'					=> 'identification',
 		'nobody'				=> 'deconnexion',
 		'account'				=> 'compte',
+		'newpassword'			=> 'compte/mot-de-passe',
 		'password'				=> 'mot-de-passe',
 		'newuser'				=> 'inscription',
 		'search'				=> 'recherche',
