@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2022 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
@@ -97,6 +97,9 @@ the account
 	password.nextElementSibling.addEventListener('click', () => password.type = password.type == 'password' ? 'text' : 'password');
 })();
 </script>
+<?php endif; ?>
+<?php if ($newpassword_page): ?>
+<p class="info link">To change password, <a class="clickhere" href="<?php echo $newpassword_page; ?>" rel="nofollow">click here</a>.</p>
 <?php endif; ?>
 <div class="errors">
 <?php if ($missing_lastname and $missing_firstname): ?>

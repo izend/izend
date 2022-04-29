@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2022 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 
@@ -32,6 +32,7 @@ function useredit($lang, $user_id) {
 	$with_delete=($user_id != 1 and $is_admin and !$is_owner);
 	$with_newpassword=false;	// ($user_id != 1 and $is_owner);
 	$with_oldpassword=false;	// ($with_newpassword and !$is_admin);
+	$with_newpassword_page=(!$with_newpassword and $user_id != 1 and $is_owner);
 	$with_locale=count($system_languages) > 1 ? true : false;
 	$with_role=($user_id != 1 and $is_admin);
 	$with_timezone=($user_id != 1 and $is_admin);
@@ -391,6 +392,8 @@ function useredit($lang, $user_id) {
 			break;
 	}
 
+	$newpassword_page=$with_newpassword_page ? url('newpassword', $lang) : false;
+
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
@@ -400,7 +403,7 @@ function useredit($lang, $user_id) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_oldpassword', 'bad_oldpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_oldpassword', 'with_viewpassword', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_oldpassword', 'with_viewpassword', 'newpassword_page', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }
