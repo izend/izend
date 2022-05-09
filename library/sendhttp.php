@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2021 izend.org
- * @version    14
+ * @copyright  2010-2022 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -46,8 +46,16 @@ function sendget($url, $args=false, $options=false, $header=false) {
 	return sendhttp('GET', $url, $args, false, false, $options, $header);
 }
 
+function sendhead($url, $args=false, $options=false, $header=false) {
+	return sendhttp('HEAD', $url, $args, false, false, $options, $header);
+}
+
 function sendpost($url, $args=false, $files=false, $base64=false, $options=false, $header=false) {
 	return sendhttp('POST', $url, $args, $files, $base64, $options, $header);
+}
+
+function sendput($url, $args=false, $files=false, $base64=false, $options=false, $header=false) {
+	return sendhttp('PUT', $url, $args, $files, $base64, $options, $header);
 }
 
 function sendhttp($method, $url, $args, $files=false, $base64=false, $options=false, $header=false) {
@@ -67,13 +75,14 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 
 	$user_agent='iZend';
 
-	$header_string=$content_string='';
+	$content_string=$content_type=false;
 
 	$crlf="\r\n";
 
 	switch ($method) {
 		case 'POST':
-			if ($files && is_array($files)) {
+		case 'PUT':
+			if ($files) {
 				$boundary = md5(microtime());
 				$content_type = 'multipart/form-data; boundary='.$boundary;
 
@@ -85,46 +94,63 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 						$content_string .= 'Content-Disposition: form-data; name="' . $k . '"' . $crlf . $crlf . $v . $crlf;
 					}
 				}
-				foreach ($files as $k => $v ) {
-					if (isset($v['tmp_name'])) {
-						$data = file_get_contents($v['tmp_name']);
-					}
-					else if (isset($v['data'])) {
-						$data = $v['data'];
-					}
-					if (!$data) {
-						break;
-					}
-					$content_string .= '--' . $boundary . $crlf;
-					$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . $crlf;
-					$content_string .= 'Content-Type: ' . $v['type'] . $crlf;
-					if ($base64) {
-						$content_string .= 'Content-Transfer-Encoding: base64' . $crlf . $crlf;
-						$content_string .= chunk_split(base64_encode($data)) . $crlf;
-					}
-					else {
-						$content_string .= 'Content-Transfer-Encoding: binary' . $crlf . $crlf;
-						$content_string .= $data . $crlf;
+				if (is_array($files)) {
+					foreach ($files as $k => $v ) {
+						$data=false;
+						if (isset($v['tmp_name'])) {
+							$data = file_get_contents($v['tmp_name']);
+						}
+						else if (isset($v['data'])) {
+							$data = $v['data'];
+						}
+						if (!$data) {
+							break;
+						}
+						$content_string .= '--' . $boundary . $crlf;
+						$content_string .= 'Content-Disposition: form-data; name="' . $k . '"; filename="' . $v['name'] . '"' . $crlf;
+						$content_string .= 'Content-Type: ' . $v['type'] . $crlf;
+						if ($base64) {
+							$content_string .= 'Content-Transfer-Encoding: base64' . $crlf . $crlf;
+							$content_string .= chunk_split(base64_encode($data)) . $crlf;
+						}
+						else {
+							$content_string .= 'Content-Transfer-Encoding: binary' . $crlf . $crlf;
+							$content_string .= $data . $crlf;
+						}
 					}
 				}
 				$content_string .= '--' . $boundary . '--' . $crlf;
 			}
 			else {
-				$content_type = 'application/x-www-form-urlencoded';
-				if ($args && is_array($args)) {
-					$content_string = http_build_args($args);
+				if ($args) {
+					if (is_array($args)) {
+						$content_type = 'application/x-www-form-urlencoded';
+						$content_string = http_build_args($args);
+					}
+					else {
+						$content_string = $args;
+					}
 				}
 			}
 
-			$content_length = strlen($content_string);
-			$header_string="POST $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}Content-Type: $content_type${crlf}Content-Length: $content_length${crlf}";
+			$header_string="$method $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+
+			if ($content_string) {
+				$content_length = strlen($content_string);
+				$header_string .= "Content-Length: $content_length${crlf}";
+				if ($content_type) {
+					$header_string .= "Content-Type: $content_type${crlf}";
+				}
+			}
 			break;
 
 		case 'GET':
+		case 'HEAD':
+		case 'DELETE':
 			if ($args && is_array($args)) {
 				$path .= ($query ? '&' : '?') . http_build_args($args);
 			}
-			$header_string="GET $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+			$header_string="$method $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
 			break;
 
 		default:
