@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    15
+ * @version    16
  * @link       http://www.izend.org
  */
 
@@ -44,6 +44,10 @@ function http_parse_url($url) {
 
 function sendget($url, $args=false, $options=false, $header=false) {
 	return sendhttp('GET', $url, $args, false, false, $options, $header);
+}
+
+function senddelete($url, $args=false, $options=false, $header=false) {
+	return sendhttp('DELETE', $url, $args, false, false, $options, $header);
 }
 
 function sendhead($url, $args=false, $options=false, $header=false) {
