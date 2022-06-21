@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2022 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -166,6 +166,19 @@ function useredit($lang, $user_id) {
 
 	$bad_token=false;
 
+	switch($action) {
+		case 'modify':
+		case 'change':
+		case 'delete':
+		case 'cancel':
+			if (!isset($_SESSION['useredit_token']) or $token != $_SESSION['useredit_token']) {
+				$bad_token=true;
+			}
+			break;
+		default:
+			break;
+	}
+
 	$missing_lastname=false;
 	$missing_firstname=false;
 
@@ -194,8 +207,8 @@ function useredit($lang, $user_id) {
 
 	switch($action) {
 		case 'modify':
-			if (!isset($_SESSION['useredit_token']) or $token != $_SESSION['useredit_token']) {
-				$bad_token=true;
+			if ($bad_token) {
+				break;
 			}
 
 			if ($with_info) {
@@ -268,6 +281,10 @@ function useredit($lang, $user_id) {
 			break;
 
 		case 'change':
+			if ($bad_token) {
+				break;
+			}
+
 			if (!$user_newpassword) {
 				$missing_newpassword=true;
 			}
