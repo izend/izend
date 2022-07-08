@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    21
+ * @copyright  2010-2022 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -307,7 +307,7 @@ function register($lang) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+			$timestamp=date('Y-m-d H:i:s');
 			$subject = 'register' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $user_id . ' ' . $lang . ' ' . $mail;
 			@emailme($subject, $msg);

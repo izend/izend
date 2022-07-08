@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2018 izend.org
- * @version    3
+ * @copyright  2022 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -54,7 +54,7 @@ function confirmnewslettersubscribe($lang, $arglist) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+			$timestamp=date('Y-m-d H:i:s');
 			$subject = 'subscribe' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $mail;
 			@emailme($subject, $msg);

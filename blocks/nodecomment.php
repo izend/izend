@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    11
+ * @copyright  2010-2022 izend.org
+ * @version    12
  * @link       http://www.izend.org
  */
 
@@ -264,7 +264,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			global $sitename;
 
 			$ip=server_ip_address();
-			$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+			$timestamp=date('Y-m-d H:i:s');
 			$subject = 'comment' . '@' . $sitename;
 			$msg = $ip . ' ' . $timestamp . ' ' . $comment_user_id . ' ' . $lang . ' ' . $node_id . ' ' . $node_url;
 			if ($with_mail) {

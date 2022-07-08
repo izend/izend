@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013-2018 izend.org
- * @version    4
+ * @copyright  2013-2022 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -149,7 +149,7 @@ function unsubscribe($lang) {
 					global $sitename;
 
 					$ip=server_ip_address();
-					$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+					$timestamp=date('Y-m-d H:i:s');
 					$subject = 'unsubscribe' . '@' . $sitename;
 					$msg = $ip . ' ' . $timestamp . ' ' . $lang . ' ' . $user_mail;
 					@emailme($subject, $msg);

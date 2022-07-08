@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    2
+ * @copyright  2010-2022 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -19,7 +19,7 @@ function write_log($logfile, $textline=false) {
 		return false;
 	}
 
-	$timestamp=strftime('%Y-%m-%d %H:%M:%S', time());
+	$timestamp=date('Y-m-d H:i:s');
 
 	$logmsg="$timestamp $ipaddress";
 	if ($textline) {
