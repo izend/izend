@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    16
+ * @copyright  2010-2022 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <form method="post">
 <input type="hidden" name="remindme_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion&nbsp;?<?php else: ?>Quelle est votre adresse d'email&nbsp;?<?php endif; ?></p>
-<p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="<?php if ($with_name): ?>Identifiant<?php else: ?>nom@domaine.fr<?php endif; ?>" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="remindme_login" id="remindme_login" size="40" maxlength="100" title="<?php if ($with_name): ?>Identifiant<?php else: ?>nom@domaine.fr<?php endif; ?>" onkeypress="return focusonenter(event, 'remindme_code')" value="<?php if ($login): ?><?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($with_name): ?>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
 <?php endif; ?>

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -139,7 +139,7 @@ and the role <code><?php echo $db_user; ?></code>.</p>
 <p>
 <input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
 <span class="icon icon_user"></span>
-<input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php echo htmlspecialchars($db_password, ENT_COMPAT, 'UTF-8'); ?>" autocomplete="off" />
+<input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php if ($db_password): ?><?php echo htmlspecialchars($db_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_user or $bad_db_user): ?>
@@ -155,7 +155,7 @@ and the role <code><?php echo $db_user; ?></code>.</p>
 <p>
 <input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
 <span class="icon icon_user"></span>
-<input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php echo htmlspecialchars($db_admin_password, ENT_COMPAT, 'UTF-8'); ?>" autocomplete="off" />
+<input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php if ($db_admin_password): ?><?php echo htmlspecialchars($db_admin_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_db_admin_user and $missing_db_admin_password): ?>
@@ -178,7 +178,7 @@ and the role <code><?php echo $db_user; ?></code>.</p>
 <p>
 <input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
 <span class="icon icon_user"></span>
-<input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php echo htmlspecialchars($site_admin_password, ENT_COMPAT, 'UTF-8'); ?>" autocomplete="off" />
+<input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php if ($site_admin_password): ?><?php echo htmlspecialchars($site_admin_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
 </p>
 <?php if ($missing_site_admin_user and $missing_site_admin_password): ?>

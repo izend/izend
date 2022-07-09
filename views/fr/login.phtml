@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <form method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion&nbsp;?<?php else: ?>Quelle est votre adresse d'email&nbsp;?<?php endif; ?></p>
-<p><input type="text" name="login_login" id="login_login" size="30" maxlength="100" title="<?php if ($with_name): ?>Identifiant<?php else: ?>nom@domaine.fr<?php endif; ?>" onkeypress="return focusonenter(event, 'login_password')" value="<?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?>" />
+<p><input type="text" name="login_login" id="login_login" size="30" maxlength="100" title="<?php if ($with_name): ?>Identifiant<?php else: ?>nom@domaine.fr<?php endif; ?>" onkeypress="return focusonenter(event, 'login_password')" value="<?php if ($login): ?><?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php if ($connectbar): ?>
 <?php echo $connectbar; ?>
 <?php endif; ?>

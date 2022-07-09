@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    24
+ * @copyright  2010-2022 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 ?>
@@ -37,7 +37,7 @@ $selected=$new_content_type ? $new_content_type : $content_types[0];
 </select>
 <span class="nowrap">
 #
-<input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return returnonenter(event)" />
+<input id="content_new_number" name="content_new_number" type="text" size="2" maxlength="3" value="<?php if ($new_content_number): ?><?php echo htmlspecialchars($new_content_number, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Number" onkeypress="return returnonenter(event)" />
 </span>
 <?php endif; ?>
 <?php if ($node_contents): ?>
@@ -47,7 +47,7 @@ or
 <input class="submit submit_delete" id="content_delete" name="content_delete" type="submit" value="Delete" />
 <span class="nowrap">
 #
-<input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?>" title="Number" onkeypress="return returnonenter(event)" />
+<input id="content_old_number" name="content_old_number" type="text" size="2" maxlength="3" value="<?php if ($old_content_number): ?><?php echo htmlspecialchars($old_content_number, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Number" onkeypress="return returnonenter(event)" />
 </span>
 <?php endif; ?>
 <span id="nodecontent_hidy" class="hidy">+</span>
@@ -78,7 +78,7 @@ foreach ($node_contents as $c) {
 ?>
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
-<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?>" onkeypress="return returnonenter(event)" />
+<input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php if ($content_pos): ?><?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" onkeypress="return returnonenter(event)" />
 <input id="content_ignored[<?php echo $i; ?>]" name="content_ignored[<?php echo $i; ?>]" type="checkbox"<?php if ($content_ignored): ?> checked="checked"<?php endif; ?> /><label for="content_ignored[<?php echo $i; ?>]"><span class="btn_edit btn_ignored">ignored</span></label>
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
@@ -127,34 +127,34 @@ foreach ($node_contents as $c) {
 <input id="content_text_eval[<?php echo $i; ?>]" name="content_text_eval[<?php echo $i; ?>]" type="checkbox"<?php if ($content_text_eval): ?> checked="checked"<?php endif; ?> /><label for="content_text_eval[<?php echo $i; ?>]"><span class="btn_edit btn_seval" title="seval">PHP</span></label>
 </span>
 </div>
-<textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?></textarea>
+<textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php if ($content_text_text): ?><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?></textarea>
 <?php break; ?>
 <?php case 'infile': ?>
 <p>
-<input name="content_infile_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_infile_path, ENT_COMPAT, 'UTF-8'); ?>" title="File" onkeypress="return returnonenter(event)" />
+<input name="content_infile_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_infile_path): ?><?php echo htmlspecialchars($content_infile_path, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="File" onkeypress="return returnonenter(event)" />
 </p>
 <?php break; ?>
 <?php case 'download': ?>
 <p>
-<input name="content_download_name[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php echo htmlspecialchars($content_download_name, ENT_COMPAT, 'UTF-8'); ?>" title="Name" onkeypress="return returnonenter(event)" />
-<input name="content_download_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_download_path, ENT_COMPAT, 'UTF-8'); ?>" title="File" onkeypress="return returnonenter(event)" />
+<input name="content_download_name[<?php echo $i; ?>]" type="text" size="20" maxlength="50" value="<?php if ($content_download_name): ?><?php echo htmlspecialchars($content_download_name, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Name" onkeypress="return returnonenter(event)" />
+<input name="content_download_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_download_path): ?><?php echo htmlspecialchars($content_download_path, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="File" onkeypress="return returnonenter(event)" />
 </p>
 <?php break; ?>
 <?php case 'file': ?>
 <p>
-<input name="content_file_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_file_path, ENT_COMPAT, 'UTF-8'); ?>" title="File" onkeypress="return returnonenter(event)" />
-<input name="content_file_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_start, ENT_COMPAT, 'UTF-8'); ?>" title="Start" onkeypress="return returnonenter(event)" />
-<input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?>" title="End" onkeypress="return returnonenter(event)" />
-<input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?>" title="Format" onkeypress="return returnonenter(event)" />
+<input name="content_file_path[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_file_path): ?><?php echo htmlspecialchars($content_file_path, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="File" onkeypress="return returnonenter(event)" />
+<input name="content_file_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_file_start): ?><?php echo htmlspecialchars($content_file_start, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Start" onkeypress="return returnonenter(event)" />
+<input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_file_end): ?><?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="End" onkeypress="return returnonenter(event)" />
+<input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php if ($content_file_format): ?><?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Format" onkeypress="return returnonenter(event)" />
 <input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><label for="content_file_lineno[<?php echo $i; ?>]"><span class="btn_edit btn_number" title="Number">number</span></label>
 </p>
 <?php break; ?>
 <?php case 'youtube': ?>
 <p>
-<input name="content_youtube_id[<?php echo $i; ?>]" type="text" size="11" maxlength="20" value="<?php echo htmlspecialchars($content_youtube_id, ENT_COMPAT, 'UTF-8'); ?>" title="Id" onkeypress="return returnonenter(event)" />
-<input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?>" title="Width" onkeypress="return returnonenter(event)" />
+<input name="content_youtube_id[<?php echo $i; ?>]" type="text" size="11" maxlength="20" value="<?php if ($content_youtube_id): ?><?php echo htmlspecialchars($content_youtube_id, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Id" onkeypress="return returnonenter(event)" />
+<input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_width): ?><?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Width" onkeypress="return returnonenter(event)" />
 x
-<input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?>" title="Height" onkeypress="return returnonenter(event)" />
+<input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_height): ?><?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Height" onkeypress="return returnonenter(event)" />
 <input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
 <select name="content_youtube_theme[<?php echo $i; ?>]" title="Theme">
 <?php foreach (array('dark' => 'dark', 'light' => 'light') as $tm => $ts): ?>
@@ -166,26 +166,26 @@ x
 <input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_rel[<?php echo $i; ?>]"><span class="btn_edit btn_rel" title="Links">links</span></label>
 </p>
 <p>
-<input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?>" title="Miniature" onkeypress="return returnonenter(event)" />
-<input name="content_youtube_title[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_youtube_title, ENT_COMPAT, 'UTF-8'); ?>" title="Title" onkeypress="return returnonenter(event)" />
+<input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_youtube_miniature): ?><?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Miniature" onkeypress="return returnonenter(event)" />
+<input name="content_youtube_title[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_youtube_title): ?><?php echo htmlspecialchars($content_youtube_title, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Title" onkeypress="return returnonenter(event)" />
 </p>
 <?php break; ?>
 <?php case 'longtail': ?>
 <p>
-<input name="content_longtail_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_longtail_file, ENT_COMPAT, 'UTF-8'); ?>" title="File" onkeypress="return returnonenter(event)" />
-<input name="content_longtail_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_longtail_width, ENT_COMPAT, 'UTF-8'); ?>" title="Width" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_file[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_longtail_file): ?><?php echo htmlspecialchars($content_longtail_file, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="File" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_longtail_width): ?><?php echo htmlspecialchars($content_longtail_width, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Width" onkeypress="return returnonenter(event)" />
 x
-<input name="content_longtail_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_longtail_height, ENT_COMPAT, 'UTF-8'); ?>" title="Height" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_longtail_height): ?><?php echo htmlspecialchars($content_longtail_height, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Height" onkeypress="return returnonenter(event)" />
 <span class="btn_edit btn_time">Duration:</span>
-<input name="content_longtail_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php echo htmlspecialchars($content_longtail_duration, ENT_COMPAT, 'UTF-8'); ?>" title="Duration" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_longtail_duration): ?><?php echo htmlspecialchars($content_longtail_duration, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Duration" onkeypress="return returnonenter(event)" />
 <input id="content_longtail_autostart[<?php echo $i; ?>]" name="content_longtail_autostart[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_autostart): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_autostart[<?php echo $i; ?>]"><span class="btn_edit btn_autostart" title="Auto">auto</span></label><input id="content_longtail_repeat[<?php echo $i; ?>]" name="content_longtail_repeat[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_repeat): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_repeat[<?php echo $i; ?>]"><span class="btn_edit btn_repeat" title="Loop">loop</span></label>
 </p>
 <p>
-<input name="content_longtail_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_longtail_image, ENT_COMPAT, 'UTF-8'); ?>" title="Picture" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_longtail_image): ?><?php echo htmlspecialchars($content_longtail_image, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Picture" onkeypress="return returnonenter(event)" />
 <input id="content_longtail_icons[<?php echo $i; ?>]" name="content_longtail_icons[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_icons): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_icons[<?php echo $i; ?>]"><span class="btn_edit btn_playicon" title="Icons">icons</span></label>
 </p>
 <p>
-<input name="content_longtail_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php echo htmlspecialchars($content_longtail_skin, ENT_COMPAT, 'UTF-8'); ?>" title="Skin" onkeypress="return returnonenter(event)" />
+<input name="content_longtail_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_longtail_skin): ?><?php echo htmlspecialchars($content_longtail_skin, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Skin" onkeypress="return returnonenter(event)" />
 <select name="content_longtail_controlbar[<?php echo $i; ?>]" title="Control bar">
 <?php foreach (array('none' => 'none', 'over' => 'over', 'top' => 'top', 'bottom' => 'bottom') as $cb => $tr): ?>
 <option value="<?php echo $cb; ?>"<?php if ($content_longtail_controlbar == $cb) : ?> selected="selected"<?php endif; ?>><?php echo $tr; ?></option>

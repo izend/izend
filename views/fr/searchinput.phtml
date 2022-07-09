@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    6
+ * @copyright  2010-2022 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
 <?php if (!empty($search_url)): ?>
 <form id="searchinput" action="<?php echo $search_url; ?>" method="post">
-<input id="searchtext" name="searchtext" type="text" value="<?php echo htmlspecialchars($search_text, ENT_COMPAT, 'UTF-8'); ?>" />
+<input id="searchtext" name="searchtext" type="text" value="<?php if ($search_text): ?><?php echo htmlspecialchars($search_text, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <input id="search" name="search" type="submit" value="Chercher" title="Chercher" />
 </form>
 <?php if (!empty($suggest_url)): ?>

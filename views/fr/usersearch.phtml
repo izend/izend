@@ -2,14 +2,14 @@
 
 /**
  *
- * @copyright  2013-2020 izend.org
- * @version    13
+ * @copyright  2013-2022 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 ?>
 <form method="post" class="noprint">
 <p>
-<input id="usersearch_what" name="usersearch_what" type="text" size="30" maxlength="100" title="" value="<?php echo htmlspecialchars($what, ENT_COMPAT, 'UTF-8'); ?>" onkeypress="return submitonenter(event, 'usersearch_search')" />
+<input id="usersearch_what" name="usersearch_what" type="text" size="30" maxlength="100" title="" value="<?php if ($what): ?><?php echo htmlspecialchars($what, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" onkeypress="return submitonenter(event, 'usersearch_search')" />
 <input type="submit" class="submit submit_search" name="usersearch_search" id="usersearch_search" value="Chercher" />
 </p>
 </form>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2012 izend.org
- * @version    6
+ * @copyright  2010-2022 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -11,7 +11,7 @@
 <?php if ($vote): ?>
 <?php echo $vote; ?>
 <?php endif; ?>
-<h3><?php echo htmlspecialchars($book_title ? $book_title : $book_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<h3><?php echo $book_title ? htmlspecialchars($book_title, ENT_COMPAT, 'UTF-8') : $book_id; ?></h3>
 <?php if ($book_abstract): ?>
 <p><?php echo htmlspecialchars($book_abstract, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
@@ -19,7 +19,7 @@
 <ol>
 <?php foreach ($book_contents as $c): ?>
 <?php extract($c);	/* page_title page_url */ ?>
-<li><a href="<?php echo $page_url; ?>"><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></a></li>
+<li><a href="<?php echo $page_url; ?>"><?php echo $page_title ? htmlspecialchars($page_title, ENT_COMPAT, 'UTF-8') : $page_id; ?></a></li>
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>

@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    18
+ * @copyright  2010-2022 izend.org
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -79,7 +79,7 @@ it
 <?php echo view('editcomment', 'en', compact('message', 'message_maxlen')); ?>
 <?php if ($message): ?>
 <?php if ($with_mail): ?>
-<p><input type="text" name="comment_mail" id="comment_mail" size="30" maxlength="100" spellcheck="false" title="Email" onkeypress="return submitonenter(event, 'comment_validate')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
+<p><input type="text" name="comment_mail" id="comment_mail" size="30" maxlength="100" spellcheck="false" title="Email" onkeypress="return submitonenter(event, 'comment_validate')" value="<?php if ($mail): ?><?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <p class="info<?php if ($missing_mail or $bad_mail): ?> inerror<?php endif; ?>">Enter your email address to validate your message.</p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>

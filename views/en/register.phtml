@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2021 izend.org
- * @version    26
+ * @copyright  2010-2022 izend.org
+ * @version    27
  * @link       http://www.izend.org
  */
 ?>
@@ -24,17 +24,17 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php if ($with_info): ?>
 <p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">What is your first name?</p>
-<p><input type="text" name="register_firstname" id="register_firstname" size="30" maxlength="100" title="First name" onkeypress="return focusonenter(event, 'register_lastname')" value="<?php echo htmlspecialchars($firstname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_firstname" id="register_firstname" size="30" maxlength="100" title="First name" onkeypress="return focusonenter(event, 'register_lastname')" value="<?php if ($firstname): ?><?php echo htmlspecialchars($firstname, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <p class="inlabel<?php if ($missing_lastname): ?> inerror<?php endif; ?>">And your last name?</p>
-<p><input type="text" name="register_lastname" id="register_lastname" size="30" maxlength="100" title="Last name" onkeypress="return focusonenter(event, '<?php echo $with_name ? 'register_name' : 'register_mail'; ?>')" value="<?php echo htmlspecialchars($lastname, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_lastname" id="register_lastname" size="30" maxlength="100" title="Last name" onkeypress="return focusonenter(event, '<?php echo $with_name ? 'register_name' : 'register_mail'; ?>')" value="<?php if ($lastname): ?><?php echo htmlspecialchars($lastname, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php endif; ?>
 <?php if ($with_name): ?>
 <p class="inlabel<?php if ($missing_name or $bad_name or $duplicated_name): ?> inerror<?php endif; ?>">What identifier do you want?</p>
-<p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php echo htmlspecialchars($name, ENT_COMPAT, 'UTF-8'); ?>" /><?php if ($account_created): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" alt="" width="24" height="24" title="<?php echo $name; ?>" /><?php endif; ?></p>
+<p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php if ($name): ?><?php echo htmlspecialchars($name, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /><?php if ($account_created): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" alt="" width="24" height="24" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
-<p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="name@domain.net" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?>" />
+<p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="name@domain.net" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php if ($mail): ?><?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php if ($connectbar): ?>
 <?php echo $connectbar; ?>
 <?php endif; ?>
@@ -42,11 +42,11 @@ $('input[name=register_timezone]').val(tz.name());
 <p class="info">Your password will be sent to this address.</p>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Do you have a website?</p>
-<p><input type="text" name="register_website" id="register_website" size="30" maxlength="100" title="www.domain.com" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_website" id="register_website" size="30" maxlength="100" title="www.domain.com" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php if ($website): ?><?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php endif; ?>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choose a password:</p>
-<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?>" /></p>
+<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php if ($password): ?><?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <p class="info">Enter at least 6 characters including 1 digit.</p>
 <?php endif; ?>
 <?php if ($with_newsletter): ?>

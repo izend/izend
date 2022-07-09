@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    20
+ * @copyright  2010-2022 izend.org
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -18,10 +18,10 @@
 <input class="submit submit_add" id="thread_create" name="thread_create" type="submit" value="Ajouter" />
 le fil
 <span id="new_thread_title_block">
-<input id="new_thread_title" name="new_thread_title" type="text" size="40" maxlength="100" value="<?php echo htmlspecialchars($new_thread_title, ENT_COMPAT, 'UTF-8'); ?>" title="Titre" onkeypress="return focusonenter(event, 'new_thread_number')"/>
+<input id="new_thread_title" name="new_thread_title" type="text" size="40" maxlength="100" value="<?php if ($new_thread_title): ?><?php echo htmlspecialchars($new_thread_title, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Titre" onkeypress="return focusonenter(event, 'new_thread_number')"/>
 <span class="nowrap">
 #
-<input id="new_thread_number" name="new_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_create')"/>
+<input id="new_thread_number" name="new_thread_number" type="text" size="2" maxlength="3" value="<?php if ($new_thread_number): ?><?php echo htmlspecialchars($new_thread_number, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_create')"/>
 </span>
 </span>
 <span class="nowrap">
@@ -73,7 +73,7 @@ le contenu ou
 le fil
 <span class="nowrap">
 #
-<input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="3" value="<?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_delete')"/>
+<input id="old_thread_number" name="old_thread_number" type="text" size="2" maxlength="3" value="<?php if ($old_thread_number): ?><?php echo htmlspecialchars($old_thread_number, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Numéro" onkeypress="return submitonenter(event, 'thread_delete')"/>
 </span>
 <?php if ($confirm_delete_thread): ?>
 <input class="submit submit_confirm" id="thread_confirmdelete" name="thread_confirmdelete" type="submit" value="Confirmer" />

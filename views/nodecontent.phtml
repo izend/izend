@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2018 izend.org
- * @version    22
+ * @copyright  2010-2022 izend.org
+ * @version    23
  * @link       http://www.izend.org
  */
 ?>
@@ -23,7 +23,7 @@ foreach ($contents as $c) {
 			}
 			break;
 		case 'download':
-			$file = htmlspecialchars($c['file'], ENT_COMPAT, 'UTF-8');
+			$file = $c['file'] ? htmlspecialchars($c['file'], ENT_COMPAT, 'UTF-8') : '';
 			$download_url = $c['download_url'];
 			echo '<div class="download">', PHP_EOL, '<a href="', $download_url, '" rel="nofollow">', $file, '</a>', PHP_EOL, '</div>', PHP_EOL;
 			break;
@@ -45,7 +45,7 @@ foreach ($contents as $c) {
 __MARK__;
 			if ($miniature) {
 				$ytid = uniqid('id');
-				echo '<div id="', $ytid, '" class="youtube" style="width:', $width, 'px;max-width:100%;" title="', htmlspecialchars($title, ENT_COMPAT, 'UTF-8'), '">', PHP_EOL;
+				echo '<div id="', $ytid, '" class="youtube" style="width:', $width, 'px;max-width:100%;" title="', ($title ? htmlspecialchars($title, ENT_COMPAT, 'UTF-8') : ''), '">', PHP_EOL;
 				echo '<a href="https://www.youtube.com/watch?v=', $id, '"><span class="ytplay"></span><img src="', $base_path, $miniature, '" alt="" /></a>', PHP_EOL;
 				echo '</div>', PHP_EOL;
 				echo '<script>', PHP_EOL;
