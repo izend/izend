@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    19
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -126,18 +126,18 @@ et le rôle <code><?php echo $db_user; ?></code>.</p>
 <p class="error">Cochez l'option MySQL ou l'option PostgreSQL.</p>
 <?php endif; ?>
 <p>Quel est le nom de la base de données&nbsp;?</p>
-<p><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php echo $db_name; ?>" /></p>
+<p><input type="text" name="configure_db_name" size="30" maxlength="40" title="" value="<?php if ($db_name): ?><?php echo htmlspecialchars($db_name, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($missing_db_name or $bad_db_name): ?>
 <p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
 <?php endif; ?>
 <p>Quel est le nom du serveur hôte de la base de données&nbsp;?</p>
-<p><input type="text" name="configure_db_host" size="30" maxlength="40" title="" value="<?php echo $db_host; ?>" /></p>
+<p><input type="text" name="configure_db_host" size="30" maxlength="40" title="" value="<?php if ($db_host): ?><?php echo htmlspecialchars($db_host, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($missing_db_host or $bad_db_host): ?>
 <p class="error">Entrez un nom de serveur ou une adresse IP.</p>
 <?php endif; ?>
 <p>Quels sont le nom et le mot de passe de l'utilisateur de la base de données&nbsp;?</p>
 <p>
-<input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php echo $db_user; ?>" />
+<input type="text" name="configure_db_user" size="30" maxlength="40" title="" value="<?php if ($db_user): ?><?php echo htmlspecialchars($db_user, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <span class="icon icon_user"></span>
 <input type="text" name="configure_db_password" size="30" maxlength="40" title="" value="<?php if ($db_password): ?><?php echo htmlspecialchars($db_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
@@ -153,7 +153,7 @@ et le rôle <code><?php echo $db_user; ?></code>.</p>
 <p>Si non, quels sont le nom et le mot de passe de l'administrateur du serveur de bases de données&nbsp;?</p>
 <p class="info">Ces informations ne seront pas enregistrées.</p>
 <p>
-<input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php echo $db_admin_user; ?>" />
+<input type="text" name="configure_db_admin_user" size="30" maxlength="40" title="" value="<?php if ($db_admin_user): ?><?php echo htmlspecialchars($db_admin_user, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <span class="icon icon_user"></span>
 <input type="password" name="configure_db_admin_password" size="30" maxlength="40" title="" value="<?php if ($db_admin_password): ?><?php echo htmlspecialchars($db_admin_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
@@ -170,13 +170,13 @@ et le rôle <code><?php echo $db_user; ?></code>.</p>
 <?php endif; ?>
 <p>Quel est le préfixe des tables&nbsp;?</p>
 <p class="info">Un préfixe est nécessaire si la base de données est partagée.</p>
-<p><input type="text" name="configure_db_prefix" size="10" maxlength="20" title="" value="<?php echo $db_prefix; ?>" /></p>
+<p><input type="text" name="configure_db_prefix" size="10" maxlength="20" title="" value="<?php if ($db_prefix): ?><?php echo htmlspecialchars($db_prefix, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($bad_db_prefix): ?>
 <p class="error">Entrez de 2 à 30 caractères (lettre, chiffre ou souligné) en commençant par une lettre.</p>
 <?php endif; ?>
 <p>Quels sont le nom et le mot de passe de l'administrateur du site&nbsp;?</p>
 <p>
-<input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php echo $site_admin_user; ?>" />
+<input type="text" name="configure_site_admin_user" size="30" maxlength="40" title="" value="<?php if ($db_site_admin_user): ?><?php echo htmlspecialchars($db_site_admin_user, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <span class="icon icon_user"></span>
 <input type="text" name="configure_site_admin_password" size="30" maxlength="40" title="" value="<?php if ($site_admin_password): ?><?php echo htmlspecialchars($site_admin_password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" autocomplete="off" />
 <span class="icon icon_lock"></span>
