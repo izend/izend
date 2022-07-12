@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2021 izend.org
- * @version    61
+ * @copyright  2010-2022 izend.org
+ * @version    62
  * @link       http://www.izend.org
  */
 <?php
@@ -102,8 +102,8 @@ $log_dir = ROOT_DIR . DIRECTORY_SEPARATOR . 'log';
 
 global $closing_time, $opening_time;
 
-$closing_time=0;	// true, mktime(13, 0)
-$opening_time=0;	// $closing_time+30*60
+$closing_time=false;	// true, mktime(13, 0)
+$opening_time=false;	// $closing_time+30*60
 
 global $system_languages;
 
