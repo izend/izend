@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011 izend.org
- * @version    3
+ * @copyright  2011-2022 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -32,8 +32,8 @@ function usersearch($lang) {
 			else if (isset($_GET['q'])) {
 				$what=readarg($_GET['q']);
 				if (isset($_GET['p'])) {
-					$page=readarg($_GET['p']);
-					if (!is_numeric($page)) {
+					$page=intval(readarg($_GET['p']));
+					if ($page < 1) {
 						$page=1;
 					}
 				}
