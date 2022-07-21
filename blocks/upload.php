@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2020 izend.org
- * @version    7
+ * @copyright  2012-2022 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -88,6 +88,9 @@ function upload($lang, $slice=false) {
 			}
 			else if ($error != UPLOAD_ERR_OK) {
 				$bad_copy=true;
+			}
+			else if ($size <= 0) {
+				$bad_size=true;
 			}
 			else if ($maxfilesize and $size > $maxfilesize) {
 				$bad_size=true;
