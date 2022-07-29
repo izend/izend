@@ -3,11 +3,11 @@
 /**
  *
  * @copyright  2013-2022 izend.org
- * @version    14
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
-<form method="post" class="noprint">
+<form method="post" class="noprint" action="<?php echo $admin_page; ?>">
 <p>
 <input id="usersearch_what" name="usersearch_what" type="text" size="30" maxlength="100" title="" value="<?php if ($what): ?><?php echo htmlspecialchars($what, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" onkeypress="return submitonenter(event, 'usersearch_search')" />
 <input type="submit" class="submit submit_search" name="usersearch_search" id="usersearch_search" value="Chercher" />
@@ -17,7 +17,7 @@
 <p class="userresult">
 <span class="userpagenumber"><?php $s=$count > 1 ? 's' : ''; echo $count; ?></span> utilisateur<?php echo $s; ?>
 <?php if ($count > $pagesize): ?>
-&nbsp;-&nbsp;
+&nbsp;&ndash;&nbsp;
 <?php
 require_once 'pagerange.php';
 

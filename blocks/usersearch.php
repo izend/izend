@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2022 izend.org
- * @version    4
+ * @version    5
  * @link       http://www.izend.org
  */
 
@@ -67,7 +67,9 @@ function usersearch($lang) {
 			break;
 	}
 
-	$output = view('usersearch', $lang, compact('what', 'page', 'pagesize', 'count', 'result', 'with_name', 'with_website'));
+	$admin_page=url('admin', $lang);
+
+	$output = view('usersearch', $lang, compact('what', 'page', 'pagesize', 'count', 'result', 'with_name', 'with_website', 'admin_page'));
 
 	return $output;
 }
