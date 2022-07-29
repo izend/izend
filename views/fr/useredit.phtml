@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2022 izend.org
- * @version    30
+ * @version    31
  * @link       http://www.izend.org
  */
 ?>
@@ -88,7 +88,7 @@ le compte
 <p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Nouveau mot de passe&nbsp;:</p>
 <p class="noprint"><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="au moins 6 lettres et chiffres" onkeypress="return submitonenter(event, 'useredit_change')" autocomplete="off" value="<?php if ($user_newpassword): ?><?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($with_oldpassword): ?>
-<p class="info">Entrez votre mot de passe actuel et un nouveau mot de passe pour le changer.</p>
+<p class="info">Entrez le mot de passe actuel et un nouveau mot de passe pour le changer.</p>
 <?php else: ?>
 <p class="info">Entrez un nouveau mot de passe pour le changer.</p>
 <?php endif; ?>

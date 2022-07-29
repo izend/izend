@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
@@ -23,9 +23,9 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php endif; ?>
 <?php if ($with_info): ?>
-<p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">What is your first name?</p>
+<p class="inlabel<?php if ($missing_firstname): ?> inerror<?php endif; ?>">What is <?php echo $is_admin ? 'the' : 'your'; ?> first name?</p>
 <p><input type="text" name="register_firstname" id="register_firstname" size="30" maxlength="100" title="First name" onkeypress="return focusonenter(event, 'register_lastname')" value="<?php if ($firstname): ?><?php echo htmlspecialchars($firstname, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
-<p class="inlabel<?php if ($missing_lastname): ?> inerror<?php endif; ?>">And your last name?</p>
+<p class="inlabel<?php if ($missing_lastname): ?> inerror<?php endif; ?>">And <?php echo $is_admin ? 'the' : 'your'; ?> last name?</p>
 <p><input type="text" name="register_lastname" id="register_lastname" size="30" maxlength="100" title="Last name" onkeypress="return focusonenter(event, '<?php echo $with_name ? 'register_name' : 'register_mail'; ?>')" value="<?php if ($lastname): ?><?php echo htmlspecialchars($lastname, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php endif; ?>
 <?php if ($with_name): ?>
@@ -33,13 +33,13 @@ $('input[name=register_timezone]').val(tz.name());
 <p><input type="text" name="register_name" id="register_name" size="20" maxlength="20" title="Identifier" onkeypress="return focusonenter(event, 'register_mail')" value="<?php if ($name): ?><?php echo htmlspecialchars($name, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /><?php if ($account_created): ?>&nbsp;<img src="<?php echo $base_path; ?>/avatars/<?php echo $name; ?>.png" alt="" width="24" height="24" title="<?php echo $name; ?>" /><?php endif; ?></p>
 <p class="info">Choose a pseudo with between 2 and 20 letters.</p>
 <?php endif; ?>
-<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is your email address?</p>
+<p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is <?php echo $is_admin ? 'the' : 'your'; ?> email address?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="name@domain.net" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php if ($mail): ?><?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php if ($connectbar): ?>
 <?php echo $connectbar; ?>
 <?php endif; ?>
 </p>
-<p class="info">Your password will be sent to this address.</p>
+<p class="info"><?php echo $is_admin ? 'The' : 'Your'; ?> password will be sent to this address.</p>
 <?php if ($with_website): ?>
 <p class="inlabel<?php if ($bad_website): ?> inerror<?php endif; ?>">Do you have a website?</p>
 <p><input type="text" name="register_website" id="register_website" size="30" maxlength="100" title="www.domain.com" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php if ($website): ?><?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
@@ -50,7 +50,7 @@ $('input[name=register_timezone]').val(tz.name());
 <p class="info">Enter at least 6 characters including 1 digit.</p>
 <?php endif; ?>
 <?php if ($with_newsletter): ?>
-<p><input type="checkbox" name="register_newsletter" id="register_newsletter" title="Newsletter"<?php if ($newsletter): ?> checked="checked"<?php endif; ?> />&nbsp;I want to receive the newsletter by email</p>
+<p><input type="checkbox" name="register_newsletter" id="register_newsletter" title="Newsletter"<?php if ($newsletter): ?> checked="checked"<?php endif; ?> />&nbsp;I want to <?php echo ($is_admin) ? 'send' : 'receive'; ?> the newsletter by email</p>
 <?php endif; ?>
 <?php if ($with_confirmation): ?>
 <p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation"<?php if ($confirmed): ?> checked="checked"<?php endif; ?> />&nbsp;I wish to create an account</p>
@@ -81,14 +81,14 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php endif; ?>
 <?php if ($missing_name): ?>
-<p>You haven't typed your identifier.</p>
+<p>You haven't typed an identifier.</p>
 <?php elseif ($bad_name): ?>
 <p>An identifier must contain between 2 and 20 letters.</p>
 <?php elseif ($duplicated_name): ?>
 <p>This identifier is already taken.</p>
 <?php endif; ?>
 <?php if ($missing_mail): ?>
-<p>Don't forget your email address.</p>
+<p>Don't forget the email address.</p>
 <?php elseif ($bad_mail): ?>
 <p>The email address is invalid.</p>
 <?php elseif ($duplicated_mail): ?>
@@ -110,8 +110,12 @@ $('input[name=register_timezone]').val(tz.name());
 <?php if ($contact_page): ?>If you can describe the problem, please <a href="<?php echo $contact_page; ?>" rel="nofollow">contact us</a>.<?php endif; ?></p>
 <?php endif; ?>
 <?php if ($account_created): ?>
+<?php if ($is_admin): ?>
+<p>The account has been created.</p>
+<?php else: ?>
 <p>Your account has been created. Your password has been emailed to your address<?php if ($with_validation): ?> as well as a confirmation link<?php endif; ?>.
 To identify yourself, <a class="clickhere" href="<?php echo $user_page; ?>">click here</a>.</p>
+<?php endif; ?>
 <?php endif; ?>
 </div>
 <?php
