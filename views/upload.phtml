@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2019-2022 izend.org
- * @version    5
+ * @version    6
  * @link       http://www.izend.org
  */
 ?>
@@ -94,7 +94,7 @@ else {
 <?php if ($with_fileupload): ?>
 	function uploadfile(fd) {
 		const reader = new FileReader();
-		const size = 1000000;
+		const chunksize = 100000;
 
 		var offset = 0, progress = 0, blob;
 
@@ -103,7 +103,7 @@ else {
 <?php endif; ?>
 
 		function uploadslice() {
-			blob = fd.slice(offset, offset + size);
+			blob = fd.slice(offset, offset + chunksize);
 			reader.readAsDataURL(blob);
 
 			progress = Math.floor(((offset + blob.size) / fd.size) * 100);
