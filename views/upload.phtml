@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2019-2020 izend.org
- * @version    4
+ * @copyright  2019-2022 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 ?>
@@ -103,23 +103,24 @@ else {
 <?php endif; ?>
 
 		function uploadslice() {
-			status.removeAttr('class').text(progress + '%');
 			blob = fd.slice(offset, offset + size);
 			reader.readAsDataURL(blob);
+
+			progress = Math.floor(((offset + blob.size) / fd.size) * 100);
+			status.removeAttr('class').text(progress + '%');
 		}
 
 		reader.onloadend = function(event) {
 			$.post('<?php echo $upload_url; ?>', {file_token: '<?php echo $token; ?>', file_name: fd.name, file_size: fd.size, file_type: fd.type, file_offset: offset, file_data: event.target.result})
-				.done(() => {
-					offset += blob.size;
-					progress = Math.floor((offset / fd.size ) * 100);
+			 .done(() => {
+				 offset += blob.size;
 
-					if (progress < 100)
-						uploadslice();
-					else
-						showstatus(true);
-				})
-				.fail(() => showstatus(false));
+				 if (offset < fd.size)
+					 uploadslice();
+				 else
+					 showstatus(true);
+			 })
+			 .fail(() => showstatus(false));
 		};
 
 <?php if ($filetypes or $maxfilesize): ?>
