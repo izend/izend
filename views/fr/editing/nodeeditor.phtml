@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 ?>
@@ -32,16 +32,16 @@
 </p>
 <fieldset id="node_options">
 <legend>Options</legend>
-<span class="nowrap"><input id="node_visits" name="node_visits" type="checkbox"<?php if ($node_visits): ?> checked="checked"<?php endif; ?> /><label for="node_visits"><span class="btn_edit btn_visits">visites</span></label></span>
-<span class="nowrap"><input id="node_comment" name="node_comment" type="checkbox"<?php if ($node_comment): ?> checked="checked"<?php endif; ?> /><label for="node_comment"><span class="btn_edit btn_comment">commenter</span></label></span>
-<span class="nowrap"><input id="node_morecomment" name="node_morecomment" type="checkbox"<?php if ($node_morecomment): ?> checked="checked"<?php endif; ?> /><label for="node_morecomment"><span class="btn_edit btn_morecomment">commenter+</span></label></span>
-<span class="nowrap"><input id="node_vote" name="node_vote" type="checkbox"<?php if ($node_vote): ?> checked="checked"<?php endif; ?> /><label for="node_vote"><span class="btn_edit btn_vote">vote</span></label></span>
-<span class="nowrap"><input id="node_morevote" name="node_morevote" type="checkbox"<?php if ($node_morevote): ?> checked="checked"<?php endif; ?> /><label for="node_morevote"><span class="btn_edit btn_morevote">vote+</span></label></span>
-<span class="nowrap"><input id="node_ilike" name="node_ilike" type="checkbox"<?php if ($node_ilike): ?> checked="checked"<?php endif; ?> /><label for="node_ilike"><span class="btn_edit btn_ilike">facebook</span></label></span>
-<span class="nowrap"><input id="node_tweet" name="node_tweet" type="checkbox"<?php if ($node_tweet): ?> checked="checked"<?php endif; ?> /><label for="node_tweet"><span class="btn_edit btn_tweet">twitter</span></label></span>
-<span class="nowrap"><input id="node_linkedin" name="node_linkedin" type="checkbox"<?php if ($node_linkedin): ?> checked="checked"<?php endif; ?> /><label for="node_linkedin"><span class="btn_edit btn_linkedin">linkedin</span></label></span>
-<span class="nowrap"><input id="node_pinit" name="node_pinit" type="checkbox"<?php if ($node_pinit): ?> checked="checked"<?php endif; ?> /><label for="node_pinit"><span class="btn_edit btn_pinit">pinit</span></label></span>
-<span class="nowrap"><input id="node_whatsapp" name="node_whatsapp" type="checkbox"<?php if ($node_whatsapp): ?> checked="checked"<?php endif; ?> /><label for="node_whatsapp"><span class="btn_edit btn_whatsapp">whatsapp</span></label></span>
+<label for="node_visits" class="nowrap"><input id="node_visits" name="node_visits" type="checkbox"<?php if ($node_visits): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_visits">visites</span></label>
+<label for="node_comment" class="nowrap"><input id="node_comment" name="node_comment" type="checkbox"<?php if ($node_comment): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_comment">commenter</span></label>
+<label for="node_morecomment" class="nowrap"><input id="node_morecomment" name="node_morecomment" type="checkbox"<?php if ($node_morecomment): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_morecomment">commenter+</span></label>
+<label for="node_vote" class="nowrap"><input id="node_vote" name="node_vote" type="checkbox"<?php if ($node_vote): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_vote">voter</span></label>
+<label for="node_morevote" class="nowrap"><input id="node_morevote" name="node_morevote" type="checkbox"<?php if ($node_morevote): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_morevote">voter+</span></label>
+<label for="node_ilike" class="nowrap"><input id="node_ilike" name="node_ilike" type="checkbox"<?php if ($node_ilike): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_ilike">facebook</span></label>
+<label for="node_tweet" class="nowrap"><input id="node_tweet" name="node_tweet" type="checkbox"<?php if ($node_tweet): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_tweet">twitter</span></label>
+<label for="node_linkedin" class="nowrap"><input id="node_linkedin" name="node_linkedin" type="checkbox"<?php if ($node_linkedin): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_linkedin">linkedin</span></label>
+<label for="node_pinit" class="nowrap"><input id="node_pinit" name="node_pinit" type="checkbox"<?php if ($node_pinit): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_pinit">pinit</span></label>
+<label for="node_whatsapp" class="nowrap"><input id="node_whatsapp" name="node_whatsapp" type="checkbox"<?php if ($node_whatsapp): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_whatsapp">whatsapp</span></label>
 </fieldset>
 <p>
 <input class="submit submit_edit" id="node_edit" name="node_edit" type="submit" value="Éditer" />

@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2022 izend.org
- * @version    25
+ * @version    26
  * @link       http://www.izend.org
  */
 ?>
@@ -79,7 +79,7 @@ foreach ($node_contents as $c) {
 <p class="<?php echo $content_ignored ? 'ignored' : (($i % 2) ? 'odd' : 'even'); ?>">
 <input name="content_id[<?php echo $i; ?>]" type="hidden" value="<?php echo $content_id; ?>"/>
 <input name="content_p[<?php echo $i; ?>]" type="text" size="2" maxlength="3" value="<?php if ($content_pos): ?><?php echo htmlspecialchars($content_pos, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" onkeypress="return returnonenter(event)" />
-<input id="content_ignored[<?php echo $i; ?>]" name="content_ignored[<?php echo $i; ?>]" type="checkbox"<?php if ($content_ignored): ?> checked="checked"<?php endif; ?> /><label for="content_ignored[<?php echo $i; ?>]"><span class="btn_edit btn_ignored">ignored</span></label>
+<label for="content_ignored[<?php echo $i; ?>]"><input id="content_ignored[<?php echo $i; ?>]" name="content_ignored[<?php echo $i; ?>]" type="checkbox"<?php if ($content_ignored): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_ignored">ignored</span></label>
 <?php switch ($content_type): ?>
 <?php case 'text': ?>
 <label>Text:</label>
@@ -124,7 +124,7 @@ foreach ($node_contents as $c) {
 <span class="btn_edit btn_entquote" title="entquote" onclick="entquote('content_text_text_<?php echo $i; ?>')">entquote</span>
 <span class="btn_edit btn_striptags" title="striptags" onclick="striptags('content_text_text_<?php echo $i; ?>')">striptags</span>
 <span class="tagmore">
-<input id="content_text_eval[<?php echo $i; ?>]" name="content_text_eval[<?php echo $i; ?>]" type="checkbox"<?php if ($content_text_eval): ?> checked="checked"<?php endif; ?> /><label for="content_text_eval[<?php echo $i; ?>]"><span class="btn_edit btn_seval" title="seval">PHP</span></label>
+<label for="content_text_eval[<?php echo $i; ?>]"><input id="content_text_eval[<?php echo $i; ?>]" name="content_text_eval[<?php echo $i; ?>]" type="checkbox"<?php if ($content_text_eval): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_seval" title="seval">PHP</span></label>
 </span>
 </div>
 <textarea id="content_text_text_<?php echo $i; ?>" name="content_text_text[<?php echo $i; ?>]" cols="100" rows="8"><?php if ($content_text_text): ?><?php echo htmlspecialchars($content_text_text, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?></textarea>
@@ -146,7 +146,7 @@ foreach ($node_contents as $c) {
 <input name="content_file_start[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_file_start): ?><?php echo htmlspecialchars($content_file_start, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Start" onkeypress="return returnonenter(event)" />
 <input name="content_file_end[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_file_end): ?><?php echo htmlspecialchars($content_file_end, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="End" onkeypress="return returnonenter(event)" />
 <input name="content_file_format[<?php echo $i; ?>]" type="text" size="10" maxlength="20" value="<?php if ($content_file_format): ?><?php echo htmlspecialchars($content_file_format, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Format" onkeypress="return returnonenter(event)" />
-<input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><label for="content_file_lineno[<?php echo $i; ?>]"><span class="btn_edit btn_number" title="Number">number</span></label>
+<label for="content_file_lineno[<?php echo $i; ?>]"><input id="content_file_lineno[<?php echo $i; ?>]" name="content_file_lineno[<?php echo $i; ?>]" type="checkbox"<?php if ($content_file_lineno): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_number" title="Number">number</span></label>
 </p>
 <?php break; ?>
 <?php case 'youtube': ?>
@@ -155,15 +155,15 @@ foreach ($node_contents as $c) {
 <input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_width): ?><?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Width" onkeypress="return returnonenter(event)" />
 x
 <input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_height): ?><?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Height" onkeypress="return returnonenter(event)" />
-<input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_autoplay[<?php echo $i; ?>]"><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
+<label for="content_youtube_autoplay[<?php echo $i; ?>]"><input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
 <select name="content_youtube_theme[<?php echo $i; ?>]" title="Theme">
 <?php foreach (array('dark' => 'dark', 'light' => 'light') as $tm => $ts): ?>
 <option value="<?php echo $tm; ?>"<?php if ($content_youtube_theme == $tm) : ?> selected="selected"<?php endif; ?>><?php echo $ts; ?></option>
 <?php endforeach; ?>
 </select>
-<input id="content_youtube_controls[<?php echo $i; ?>]" name="content_youtube_controls[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_controls): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_controls[<?php echo $i; ?>]"><span class="btn_edit btn_controls" title="Controls">controls</span></label>
-<input id="content_youtube_fs[<?php echo $i; ?>]" name="content_youtube_fs[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_fs): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_fs[<?php echo $i; ?>]"><span class="btn_edit btn_fs" title="Full screen">fs</span></label>
-<input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><label for="content_youtube_rel[<?php echo $i; ?>]"><span class="btn_edit btn_rel" title="Links">links</span></label>
+<label for="content_youtube_controls[<?php echo $i; ?>]"><input id="content_youtube_controls[<?php echo $i; ?>]" name="content_youtube_controls[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_controls): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_controls" title="Controls">controls</span></label>
+<label for="content_youtube_fs[<?php echo $i; ?>]"><input id="content_youtube_fs[<?php echo $i; ?>]" name="content_youtube_fs[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_fs): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_fs" title="Full screen">fs</span></label>
+<label for="content_youtube_rel[<?php echo $i; ?>]"><input id="content_youtube_rel[<?php echo $i; ?>]" name="content_youtube_rel[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_rel): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_rel" title="Links">links</span></label>
 </p>
 <p>
 <input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_youtube_miniature): ?><?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Miniature" onkeypress="return returnonenter(event)" />
@@ -178,11 +178,12 @@ x
 <input name="content_longtail_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_longtail_height): ?><?php echo htmlspecialchars($content_longtail_height, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Height" onkeypress="return returnonenter(event)" />
 <span class="btn_edit btn_time">Duration:</span>
 <input name="content_longtail_duration[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_longtail_duration): ?><?php echo htmlspecialchars($content_longtail_duration, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Duration" onkeypress="return returnonenter(event)" />
-<input id="content_longtail_autostart[<?php echo $i; ?>]" name="content_longtail_autostart[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_autostart): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_autostart[<?php echo $i; ?>]"><span class="btn_edit btn_autostart" title="Auto">auto</span></label><input id="content_longtail_repeat[<?php echo $i; ?>]" name="content_longtail_repeat[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_repeat): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_repeat[<?php echo $i; ?>]"><span class="btn_edit btn_repeat" title="Loop">loop</span></label>
+<label for="content_longtail_autostart[<?php echo $i; ?>]"><input id="content_longtail_autostart[<?php echo $i; ?>]" name="content_longtail_autostart[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_autostart): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_autostart" title="Auto">auto</span></label>
+<label for="content_longtail_repeat[<?php echo $i; ?>]"><input id="content_longtail_repeat[<?php echo $i; ?>]" name="content_longtail_repeat[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_repeat): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_repeat" title="Loop">loop</span></label>
 </p>
 <p>
 <input name="content_longtail_image[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_longtail_image): ?><?php echo htmlspecialchars($content_longtail_image, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Picture" onkeypress="return returnonenter(event)" />
-<input id="content_longtail_icons[<?php echo $i; ?>]" name="content_longtail_icons[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_icons): ?> checked="checked"<?php endif; ?> /><label for="content_longtail_icons[<?php echo $i; ?>]"><span class="btn_edit btn_playicon" title="Icons">icons</span></label>
+<label for="content_longtail_icons[<?php echo $i; ?>]"><input id="content_longtail_icons[<?php echo $i; ?>]" name="content_longtail_icons[<?php echo $i; ?>]" type="checkbox"<?php if ($content_longtail_icons): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_playicon" title="Icons">icons</span></label>
 </p>
 <p>
 <input name="content_longtail_skin[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_longtail_skin): ?><?php echo htmlspecialchars($content_longtail_skin, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Skin" onkeypress="return returnonenter(event)" />
