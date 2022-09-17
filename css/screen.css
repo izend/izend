@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2021 izend.org
- * @version    125
+ * @copyright  2010-2022 izend.org
+ * @version    126
  * @link       http://www.izend.org
  */
  
@@ -49,6 +49,8 @@ input[type="text"][readonly] {border-color:transparent;cursor:default;}
 
 input[type="radio"], input[type="checkbox"] {min-height:14px;line-height:normal;}
 input[type="radio"] {margin-top:0;}
+
+label[for] input[type="checkbox"] {margin-top:0;}
 
 input.text_date[type="text"] {width:96px;}
 
