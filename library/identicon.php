@@ -3,7 +3,7 @@
 /**
  *
  * @see        http://sourceforge.net/projects/identicons
- * @version    1
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -189,7 +189,7 @@ function getsprite($shape,$R,$G,$B,$rotation) {
 	/* apply ratios */
 	for ($i=0;$i<count($shape);$i++)
 		$shape[$i]=$shape[$i]*$spriteZ;
-	imagefilledpolygon($sprite,$shape,count($shape)/2,$fg);
+	imagefilledpolygon($sprite,$shape,$fg);
 	/* rotate the sprite */
 	for ($i=0;$i<$rotation;$i++)
 		$sprite=imagerotate($sprite,90,$bg);
@@ -306,7 +306,7 @@ function getcenter($shape,$fR,$fG,$fB,$bR,$bG,$bB,$usebg) {
 	for ($i=0;$i<count($shape);$i++)
 		$shape[$i]=$shape[$i]*$spriteZ;
 	if (count($shape)>0)
-		imagefilledpolygon($sprite,$shape,count($shape)/2,$fg);
+		imagefilledpolygon($sprite,$shape,$fg);
 	return $sprite;
 }
 
@@ -387,7 +387,7 @@ function identicon($name, $size=48) {
 	imagefilledrectangle($resized,0,0,$size,$size,$bg);
 
 	/* resize identicon according to specification */
-	imagecopyresampled($resized,$identicon,0,0,(imagesx($identicon)-$spriteZ*3)/2,(imagesx($identicon)-$spriteZ*3)/2,$size,$size,$spriteZ*3,$spriteZ*3);
+	imagecopyresampled($resized,$identicon,0,0,(int)((imagesx($identicon)-$spriteZ*3)/2),(int)((imagesx($identicon)-$spriteZ*3)/2),$size,$size,$spriteZ*3,$spriteZ*3);
 
 	/* make white transparent */
 	imagecolortransparent($resized,$bg);
