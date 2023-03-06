@@ -2,16 +2,27 @@
 
 /**
  *
- * @copyright  2016-2022 izend.org
- * @version    4
+ * @copyright  2016-2023 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
 require_once 'readarg.php';
 require_once 'tokenid.php';
 
+require_once 'vendor/autoload.php';
+
+use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
+use Google\Analytics\Data\V1beta\DateRange;
+use Google\Analytics\Data\V1beta\Dimension;
+use Google\Analytics\Data\V1beta\Metric;
+use Google\Analytics\Data\V1beta\Filter;
+use Google\Analytics\Data\V1beta\Filter\StringFilter;
+use Google\Analytics\Data\V1beta\FilterExpression;
+
 function analytics($lang) {
-	global $base_url;
+	global $googlecredentials;
+	global $googleanalyticspropertyid;
 
 	$with_period=false;
 
@@ -177,58 +188,10 @@ function analytics($lang) {
 				break;
 			}
 
-			require_once 'vendor/autoload.php';
-
-			global $googleanalyticsaccount, $googleanalyticskeyfile;
-
 			try {
-				$tmpdir=ini_get('upload_tmp_dir') ?: ROOT_DIR . DIRECTORY_SEPARATOR . 'tmp';
-
-				$client = new Google_Client();
-				$client->setClassConfig('Google_Cache_File', 'directory', $tmpdir);
-
-				$analytics = new Google_Service_Analytics($client);
-
-				$key = file_get_contents($googleanalyticskeyfile);
-
-				$cred = new Google_Auth_AssertionCredentials(
-						$googleanalyticsaccount,
-						array(Google_Service_Analytics::ANALYTICS_READONLY),
-						$key
-				);
-
-				$client->setAssertionCredentials($cred);
-				if ($client->getAuth()->isAccessTokenExpired()) {
-					$client->getAuth()->refreshTokenWithAssertion($cred);
-				}
-
-				$profile_id = false;
-
-				$accounts = $analytics->management_accounts->listManagementAccounts();
-
-				if (count($accounts->getItems()) > 0) {
-					$items = $accounts->getItems();
-					$firstAccountId = $items[0]->getId();
-					$properties = $analytics->management_webproperties->listManagementWebproperties($firstAccountId);
-
-					if (count($properties->getItems()) > 0) {
-						$items = $properties->getItems();
-						$firstPropertyId = $items[0]->getId();
-						$profiles = $analytics->management_profiles->listManagementProfiles($firstAccountId, $firstPropertyId);
-
-						if (count($profiles->getItems()) > 0) {
-							$items = $profiles->getItems();
-					        $profile_id = $items[0]->getId();
-						}
-					}
-				}
+				$client = new BetaAnalyticsDataClient(['credentials' => $googlecredentials]);
 			}
 			catch (Exception $e) {
-				$internal_error=true;
-				break;
-			}
-
-			if (!$profile_id) {
 				$internal_error=true;
 				break;
 			}
@@ -260,25 +223,48 @@ function analytics($lang) {
 			}
 
 			try {
-				$r = $analytics->data_ga->get(
-					'ga:' . $profile_id,
-					$start_date,
-					$end_date,
-					'ga:uniquePageviews',
-					array(
-						'filters'       => 'ga:pagePath==' . $url,
-						'dimensions'    => 'ga:date',
-						'sort'          => 'ga:date',
-					));
+				$daterange = new DateRange([
+					'start_date' => $start_date,
+					'end_date' => $end_date,
+					'name' => 'period'
+				]);
 
-				$totals=$r->getTotalsForAllResults();
-				$visits=$totals['ga:uniquePageviews'];
-				$average=false;
-				if ($visits) {
-					$data=$r->getRows();
-					$ndays=count($data);
-					$average=round($visits/$ndays, 1);
+				$filter = new Filter([
+					'field_name' => 'pagePath',
+					'string_filter' => new StringFilter([ 'match_type' => 1, 'value' => $url ])
+				]);
 
+				$response = $client->runReport([
+					'property' => "properties/$googleanalyticspropertyid",
+					'dateRanges' => [ $daterange ],
+					'metrics' => [ new Metric(['name' => 'activeUsers']) ],
+					'dimensions' => [ new Dimension(['name' => 'pagePath']), new Dimension(['name' => 'date']) ],
+					'dimensionFilter' => new FilterExpression([ 'filter' => $filter ])
+				]);
+
+				if (count($response->getRows()) > 0) {
+					$gdata=array();
+
+					foreach ($response->getRows() as $r) {
+						$d=$r->getDimensionValues()[1]->getValue();
+						$n=$r->getMetricValues()[0]->getValue();
+						$gdata[strtotime($d)]=(int)$n;
+						$visits+=$n;
+					}
+
+					$ndays=date_diff(new DateTime($start_date), new DateTime($end_date))->days;
+
+					if ($visits) {
+						$average=round($visits/$ndays, 1);
+					}
+
+					$data=array();
+
+					for ($date=strtotime($start_date), $d = 0; $d < $ndays; $d++, $date=strtotime('+ 1 day', $date)) {
+						$data[$date] = 0;
+					}
+
+					$data = array_replace($data, $gdata);
 				}
 			}
 			catch (Exception $e) {

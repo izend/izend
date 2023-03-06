@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2016-2022 izend.org
- * @version    8
+ * @copyright  2016-2023 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 ?>
@@ -68,12 +68,12 @@ function drawChart() {
 
 	data.addColumn('date', 'Date');
 	data.addColumn('number', 'Visites');
-<?php $countmin=$data[0][1]; $countmax=0; ?>
+<?php $countmin=0; $countmax=0; ?>
 	data.addRows([
-<?php foreach ($data as $d): list($date, $count)=$d; $y=substr($date, 0, 4); $m=substr($date, 4, 2); $d=substr($date, 6, 2); ?>
+<?php foreach ($data as $date => $count): ?>
 <?php if ($count < $countmin) $countmin=$count; ?>
 <?php if ($count > $countmax) $countmax=$count; ?>
-		[new Date(<?php echo $y; ?>, <?php echo $m-1; ?>, <?php echo $d; ?>), <?php echo $count; ?>],
+		[new Date(<?php echo $date; ?>*1000), <?php echo $count; ?>],
 <?php endforeach; ?>
 	]);
 <?php
