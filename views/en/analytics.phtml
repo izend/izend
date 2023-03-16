@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2016-2023 izend.org
- * @version    9
+ * @version    10
  * @link       http://www.izend.org
  */
 ?>
@@ -99,6 +99,9 @@ else {
 		title: '<?php echo number_format($visits, 0, ',', ' '); ?> visit<?php if ($visits > 1): ?>s<?php endif; ?> - min: <?php echo $countmin; ?> max: <?php echo $countmax; ?><?php if ($average !== false): ?> avg: <?php echo number_format($average, 1, '.' , ' '); ?><?php endif; ?>',
 		hAxis: {
 			format: 'd MMMM',
+<?php if (count($data) <= 14):  ?>
+			ticks: [<?php foreach (array_keys($data) as $date): ?>new Date(<?php echo $date; ?>*1000),<?php endforeach; ?>],
+<?php endif; ?>
 		},
 		vAxis: {
 			minValue: <?php echo $minvalue; ?>,
