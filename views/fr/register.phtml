@@ -2,11 +2,16 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    27
+ * @copyright  2010-2023 izend.org
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($with_google): ?>
+<?php global $googleclientid; ?>
+<script async defer src="https://accounts.google.com/gsi/client"></script>
+<div id="g_id_onload" data-client_id="<?php echo $googleclientid; ?>" data-context="signin" data-ux_mode="redirect" data-login_uri="<?php echo $newuser_page;  ?>" data-auto_prompt="false" data-auto_select="true" data-itp_support="true"></div>
+<?php endif; ?>
 <?php extract($errors); ?>
 <form method="post">
 <input type="hidden" name="register_token" value="<?php echo $token; ?>" />
@@ -35,8 +40,8 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">Quelle est <?php echo $is_admin ? 'l\'' : 'votre '; ?>adresse d'email&nbsp;?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="nom@domaine.fr" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php if ($mail): ?><?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
-<?php if ($connectbar): ?>
-<?php echo $connectbar; ?>
+<?php if ($with_google): ?>
+<span id="connectbar" class="g_id_signin noprint" title="Connectez-vous avec Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signup_with" data-size="medium" data-locale="fr"></span>
 <?php endif; ?>
 </p>
 <p class="info"><?php echo $is_admin ? 'Le' : 'Votre'; ?> mot de passe sera envoyé à cette adresse.</p>

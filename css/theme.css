@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    156
+ * @copyright  2010-2023 izend.org
+ * @version    157
  * @link       http://www.izend.org
  */
 
@@ -385,8 +385,7 @@ a:hover .icon_instagram {background-position:-753px 0;}
 #linkbar > a:last-child {margin-right:0;}
 #linkbar a span {vertical-align:text-bottom;margin-top:0.5em;}
 
-#connectbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;vertical-align:top;}
-#connectbar a.facebook {background-position:0 0;}
+#connectbar {display:inline-block;vertical-align:top;margin-left:5px;}
 
 .comments {margin-top:2em;}
 .comments > h4 {color:#666666;background:transparent url(../images/theme/icons/user.png) no-repeat;text-indent:30px;line-height:24px;}

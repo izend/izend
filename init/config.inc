@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    63
+ * @version    64
  * @link       http://www.izend.org
  */
 <?php
@@ -74,6 +74,10 @@ global $googleapiid, $googleapisid;
 
 $googleapiid=false;		// client key
 $googleapisid=false;	// server key
+
+global $googleclientid;
+
+$googleclientid=false;
 
 global $googleanalyticsid;
 

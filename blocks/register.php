@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    23
+ * @copyright  2010-2023 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 
@@ -18,9 +18,12 @@ require_once 'validatepassword.php';
 require_once 'validateusername.php';
 require_once 'validatetimezone.php';
 require_once 'validatewebsite.php';
+require_once 'verifyidtoken.php';
 require_once 'models/user.inc';
 
 function register($lang) {
+	global $googleclientid;
+
 	$is_admin = user_has_role('administrator');
 
 	$with_name=true;
@@ -29,21 +32,13 @@ function register($lang) {
 	$with_password=true;
 	$with_newsletter=false;
 	$with_captcha=!$is_admin;
-	$with_facebook=false;
+	$with_google=$googleclientid ? true : false;
 
 	$with_info=false;
 
 	$with_confirmation=!$is_admin;
 
 	$with_validation=false;	// ($with_password and !$is_admin);
-
-	if ($with_facebook) {
-		require_once 'vendor/autoload.php';
-
-		global $facebookid, $facebooksecret;
-
-		$facebook=new \Facebook\Facebook(array('app_id' => $facebookid, 'app_secret' => $facebooksecret));
-	}
 
 	$action='init';
 	if (isset($_POST['register_register'])) {
@@ -59,39 +54,26 @@ function register($lang) {
 
 	switch($action) {
 		case 'init':
-			if ($with_facebook) {
-				$helper = $facebook->getRedirectLoginHelper();
-				try {
-					$accessToken = $helper->getAccessToken();
+			if ($with_google) {
+				$credential=false;
 
-					if ($accessToken) {
-						$fields=array('email');
+				if (isset($_POST['credential'])) {
+					$credential=$_POST['credential'];
+				}
+
+				if ($credential) {
+					$payload=verifyidtoken($credential, $googleclientid);
+
+					if ($payload) {
+						$mail=$payload['email'];
+
 						if ($with_info) {
-							$fields[]='first_name';
-							$fields[]='last_name';
-						}
-						if ($with_website) {
-							$fields[]='website';
+							$firstname=$payload['given_name'];
+							$lastname=$payload['family_name'];
 						}
 
-						$r = $facebook->get('/me?fields=' . implode(',', $fields), $accessToken);
-						$user = $r->getGraphUser();
-
-						$mail=$user['email'];
-						if ($with_info) {
-							$firstname=$user['first_name'];
-							$lastname=$user['last_name'];
-						}
-						if ($with_website) {
-							$website=$user['website'];
-						}
-
-						$action='facebook';
+						$action='google';
 					}
-				}
-				catch(\Facebook\Exceptions\FacebookResponseException $e) {
-				}
-				catch(\Facebook\Exceptions\FacebookSDKException $e) {
 				}
 			}
 
@@ -195,9 +177,10 @@ function register($lang) {
 					break;
 				}
 			}
+			/* fall thru */
 
-		case 'facebook':
-			if ($with_info) {
+		case 'google':
+		    if ($with_info) {
 				if (!$lastname) {
 					$missing_lastname=true;
 				}
@@ -267,7 +250,7 @@ function register($lang) {
 			if ($bad_token or $missing_code or $bad_code ) {
 				break;
 			}
-		case 'facebook':
+		case 'google':
 			if ($missing_name or $bad_name or $duplicated_name or $missing_mail or $bad_mail or $duplicated_mail or $bad_website or $missing_password or $bad_password or $missing_lastname or $missing_firstname or $missing_confirmation) {
 				break;
 			}
@@ -334,20 +317,6 @@ function register($lang) {
 			break;
 	}
 
-	$connectbar=false;
-	if ($with_facebook) {
-		global $base_url;
-
-		$url=$base_url . url('newuser', $lang);
-		$scope = array('email');
-		if ($with_website) {
-			$scope[]='user_website';
-		}
-		$helper = $facebook->getRedirectLoginHelper();
-		$facebook_login_url=$helper->getLoginUrl($url, $scope);
-		$connectbar=view('connect', $lang, compact('facebook_login_url'));
-	}
-
 	if ($internal_error) {
 		$contact_page=url('contact', $lang);
 	}
@@ -355,12 +324,14 @@ function register($lang) {
 		$user_page=url('user', $lang);
 	}
 
+	$newuser_page=($with_google or $account_created) ? url('newuser', $lang) : false;
+
 	$_SESSION['register_token'] = $token = token_id();
 
 	$errors = compact('missing_name', 'bad_name', 'missing_mail', 'bad_mail', 'bad_website', 'missing_confirmation', 'missing_code', 'bad_code', 'duplicated_name', 'duplicated_mail', 'missing_password', 'bad_password', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('user_page');
 
-	$output = view('register', $lang, compact('token', 'is_admin', 'connectbar', 'with_captcha', 'with_name', 'with_website', 'with_timezone', 'with_password', 'with_newsletter', 'with_confirmation', 'with_validation', 'name', 'mail', 'website', 'timezone', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
+	$output = view('register', $lang, compact('token', 'is_admin', 'with_google', 'newuser_page', 'with_captcha', 'with_name', 'with_website', 'with_timezone', 'with_client', 'with_password', 'with_newsletter', 'with_confirmation', 'with_validation', 'name', 'mail', 'website', 'timezone', 'password', 'with_info', 'lastname', 'firstname', 'newsletter', 'confirmed', 'account_created', 'errors', 'infos'));
 
 	return $output;
 }

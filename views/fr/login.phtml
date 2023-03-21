@@ -2,18 +2,23 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    17
+ * @copyright  2010-2023 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
+<?php if ($with_google): ?>
+<?php global $googleclientid; ?>
+<script async defer src="https://accounts.google.com/gsi/client"></script>
+<div id="g_id_onload" data-client_id="<?php echo $googleclientid; ?>" data-context="signin" data-ux_mode="redirect" data-login_uri="<?php echo $user_page;  ?>" data-auto_prompt="false" data-auto_select="true" data-itp_support="true"></div>
+<?php endif; ?>
 <?php extract($errors); ?>
 <form method="post">
 <input type="hidden" name="login_token" value="<?php echo $token; ?>" />
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>Quel est votre nom de connexion&nbsp;?<?php else: ?>Quelle est votre adresse d'email&nbsp;?<?php endif; ?></p>
 <p><input type="text" name="login_login" id="login_login" size="30" maxlength="100" title="<?php if ($with_name): ?>Identifiant<?php else: ?>nom@domaine.fr<?php endif; ?>" onkeypress="return focusonenter(event, 'login_password')" value="<?php if ($login): ?><?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
-<?php if ($connectbar): ?>
-<?php echo $connectbar; ?>
+<?php if ($with_google): ?>
+<span id="connectbar" class="g_id_signin noprint" title="Connectez-vous avec Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signup_with" data-size="medium" data-locale="fr"></span>
 <?php endif; ?>
 </p>
 <?php if ($with_name): ?>

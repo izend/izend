@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    24
+ * @copyright  2010-2023 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -13,24 +13,19 @@ require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
 require_once 'validateusername.php';
+require_once 'verifyidtoken.php';
 
 function login($lang) {
+	global $googleclientid;
+
 	$with_name=true;
 	$with_captcha=true;
-	$with_facebook=false;
+	$with_google=$googleclientid ? true : false;;
 
 	$with_newuser=true;
 	$with_newpassword=true;
 
 	$with_viewpassword=true;
-
-	if ($with_facebook) {
-		require_once 'vendor/autoload.php';
-
-		global $facebookid, $facebooksecret;
-
-		$facebook=new \Facebook\Facebook(array('app_id' => $facebookid, 'app_secret' => $facebooksecret));
-	}
 
 	$login=$password=$code=$token=false;
 
@@ -45,27 +40,23 @@ function login($lang) {
 
 	switch($action) {
 		case 'init':
-			if ($with_facebook) {
-				$helper = $facebook->getRedirectLoginHelper();
-				try {
-					$accessToken = $helper->getAccessToken();
+			if ($with_google) {
+				$credential=false;
 
-					if ($accessToken) {
-						$fields=array('email');
+				if (isset($_POST['credential'])) {
+					$credential=$_POST['credential'];
+				}
 
-						$r = $facebook->get('/me?fields=' . implode(',', $fields), $accessToken);
-						$user = $r->getGraphUser();
+				if ($credential) {
+					$payload=verifyidtoken($credential, $client_id=$googleclientid);
 
-						$login=$user['email'];
-
-						$action='facebook';
+					if ($payload) {
+						$login=$payload['email'];
+						$action='google';
 					}
 				}
-				catch(\Facebook\Exceptions\FacebookResponseException $e) {
-				}
-				catch(\Facebook\Exceptions\FacebookSDKException $e) {
-				}
 			}
+
 			break;
 
 		case 'enter':
@@ -121,7 +112,7 @@ function login($lang) {
 			}
 			/* fall thru */
 
-		case 'facebook':
+		case 'google':
 			if (!$login) {
 				$missing_login=true;
 			}
@@ -136,7 +127,7 @@ function login($lang) {
 
 	switch($action) {
 		case 'enter':
-		case 'facebook':
+		case 'google':
 			if ($bad_token or $missing_code or $bad_code or $missing_login or $bad_login or $missing_password) {
 				break;
 			}
@@ -185,8 +176,8 @@ function login($lang) {
 				$msg = $ip . ' ' . $timestamp . ' ' . $user['id'] . ' ' . $lang . ' ' . $user['ip'];
 				@emailme($subject, $msg);
 
-				if ($action == 'facebook') {
-					$access_denied=true;
+				if ($action == 'google') {
+					$access_denied=true;	// force login + password for an administrator
 					break;
 				}
 			}
@@ -204,17 +195,7 @@ function login($lang) {
 			break;
 	}
 
-	$connectbar=false;
-	if ($with_facebook) {
-		global $base_url;
-
-		$url=$base_url . url('user', $lang);
-		$scope = array('email');
-		$helper = $facebook->getRedirectLoginHelper();
-		$facebook_login_url=$helper->getLoginUrl($url, $scope);
-		$connectbar=view('connect', $lang, compact('facebook_login_url'));
-	}
-
+	$user_page=$with_google ? url('user', $lang) : false;
 	$password_page=$with_newpassword ? url('password', $lang) : false;
 	$newuser_page=$with_newuser ? url('newuser', $lang) : false;
 
@@ -222,7 +203,7 @@ function login($lang) {
 
 	$errors = compact('missing_code', 'bad_code', 'missing_login', 'bad_login', 'missing_password', 'access_denied', 'not_confirmed');
 
-	$output = view('login', $lang, compact('token', 'connectbar', 'with_captcha', 'with_name', 'with_viewpassword', 'password_page', 'newuser_page', 'login', 'errors'));
+	$output = view('login', $lang, compact('token', 'with_google', 'user_page', 'with_captcha', 'with_name', 'with_viewpassword', 'password_page', 'newuser_page', 'login', 'errors'));
 
 	return $output;
 }
