@@ -3,7 +3,7 @@
 /**
  *
  * @see        http://sourceforge.net/projects/identicons
- * @version    2
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -189,7 +189,10 @@ function getsprite($shape,$R,$G,$B,$rotation) {
 	/* apply ratios */
 	for ($i=0;$i<count($shape);$i++)
 		$shape[$i]=$shape[$i]*$spriteZ;
-	imagefilledpolygon($sprite,$shape,$fg);
+	if (PHP_MAJOR_VERSION >= 8)
+		imagefilledpolygon($sprite,$shape,$fg);
+	else
+		imagefilledpolygon($sprite,$shape,count($shape)/2,$fg);
 	/* rotate the sprite */
 	for ($i=0;$i<$rotation;$i++)
 		$sprite=imagerotate($sprite,90,$bg);
@@ -305,8 +308,12 @@ function getcenter($shape,$fR,$fG,$fB,$bR,$bG,$bB,$usebg) {
 	/* apply ratios */
 	for ($i=0;$i<count($shape);$i++)
 		$shape[$i]=$shape[$i]*$spriteZ;
-	if (count($shape)>0)
-		imagefilledpolygon($sprite,$shape,$fg);
+	if (count($shape)>0) {
+		if (PHP_MAJOR_VERSION >= 8)
+			imagefilledpolygon($sprite,$shape,$fg);
+		else
+			imagefilledpolygon($sprite,$shape,count($shape)/2,$fg);
+	}
 	return $sprite;
 }
 
