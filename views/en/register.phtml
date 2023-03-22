@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    29
+ * @version    30
  * @link       http://www.izend.org
  */
 ?>
@@ -51,7 +51,7 @@ $('input[name=register_timezone]').val(tz.name());
 <?php endif; ?>
 <?php if ($with_password): ?>
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choose a password:</p>
-<p><input type="text" name="register_password" id="register_password" size="20" maxlength="20" title="Password" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php if ($password): ?><?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
+<p><input type="password" name="register_password" id="register_password" size="20" maxlength="20" title="Password" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php if ($password): ?><?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <p class="info">Enter at least 6 characters including 1 digit.</p>
 <?php endif; ?>
 <?php if ($with_newsletter): ?>
