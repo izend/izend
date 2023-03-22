@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    24
+ * @version    25
  * @link       http://www.izend.org
  */
 
@@ -270,7 +270,7 @@ function register($lang) {
 
 			$user_id = $r;
 
-			$_SESSION['login'] = $name ? $name : $mail;
+			$_SESSION['login'] = $with_name ? $name : $mail;
 
 			$account_created=true;
 
