@@ -10,7 +10,7 @@
 <?php if ($with_google): ?>
 <?php global $googleclientid; ?>
 <script async defer src="https://accounts.google.com/gsi/client"></script>
-<div id="g_id_onload" data-client_id="<?php echo $googleclientid; ?>" data-context="signin" data-ux_mode="redirect" data-login_uri="<?php echo $newuser_page;  ?>" data-auto_prompt="false" data-auto_select="true" data-itp_support="true"></div>
+<div id="g_id_onload" data-client_id="<?php echo $googleclientid; ?>" data-context="signin" data-ux_mode="redirect" data-login_uri="<?php echo $base_url; ?><?php echo $newuser_page; ?>" data-auto_prompt="false" data-auto_select="true" data-itp_support="true"></div>
 <?php endif; ?>
 <?php extract($errors); ?>
 <form method="post">
