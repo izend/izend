@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    25
+ * @version    26
  * @link       http://www.izend.org
  */
 
@@ -13,7 +13,6 @@ require_once 'tokenid.php';
 require_once 'validatemail.php';
 require_once 'validatepassword.php';
 require_once 'validateusername.php';
-require_once 'verifyidtoken.php';
 
 function login($lang) {
 	global $googleclientid;
@@ -48,6 +47,8 @@ function login($lang) {
 				}
 
 				if ($credential) {
+					require_once 'verifyidtoken.php';
+
 					$payload=verifyidtoken($credential, $client_id=$googleclientid);
 
 					if ($payload) {

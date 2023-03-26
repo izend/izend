@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -18,7 +18,6 @@ require_once 'validatepassword.php';
 require_once 'validateusername.php';
 require_once 'validatetimezone.php';
 require_once 'validatewebsite.php';
-require_once 'verifyidtoken.php';
 require_once 'models/user.inc';
 
 function register($lang) {
@@ -62,6 +61,8 @@ function register($lang) {
 				}
 
 				if ($credential) {
+					require_once 'verifyidtoken.php';
+
 					$payload=verifyidtoken($credential, $googleclientid);
 
 					if ($payload) {
