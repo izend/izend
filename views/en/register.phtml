@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 ?>
@@ -41,7 +41,7 @@ $('input[name=register_timezone]').val(tz.name());
 <p class="inlabel<?php if ($missing_mail or $bad_mail or $duplicated_mail): ?> inerror<?php endif; ?>">What is <?php echo $is_admin ? 'the' : 'your'; ?> email address?</p>
 <p><input type="text" name="register_mail" id="register_mail" size="30" maxlength="100" title="name@domain.net" onkeypress="return focusonenter(event, '<?php echo $with_website ? 'register_website' : ($with_password ? 'register_password' : 'register_code'); ?>')" value="<?php if ($mail): ?><?php echo htmlspecialchars($mail, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php if ($with_google): ?>
-<span id="connectbar" class="g_id_signin noprint" title="Connect with Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signin_with" data-size="medium" data-locale="en"></span>
+<span id="connectbar" class="g_id_signin noprint" title="Connect with Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signin_with" data-size="medium" data-locale="en" style="height:0px"></span>
 <?php endif; ?>
 </p>
 <p class="info"><?php echo $is_admin ? 'The' : 'Your'; ?> password will be sent to this address.</p>

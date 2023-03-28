@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    18
+ * @version    19
  * @link       http://www.izend.org
  */
 ?>
@@ -18,7 +18,7 @@
 <p class="inlabel<?php if ($missing_login or $bad_login): ?> inerror<?php endif; ?>"><?php if ($with_name): ?>What is your connection name?<?php else: ?>What is your email address?<?php endif; ?></p>
 <p><input type="text" name="login_login" id="login_login" size="30" maxlength="100" title="<?php if ($with_name): ?>Identifier<?php else: ?>name@domain.net<?php endif; ?>" onkeypress="return focusonenter(event, 'login_password')" value="<?php if ($login): ?><?php echo htmlspecialchars($login, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php if ($with_google): ?>
-<span id="connectbar" class="g_id_signin noprint" title="Connect with Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signup_with" data-size="medium" data-locale="en"></span>
+<span id="connectbar" class="g_id_signin noprint" title="Connect with Google" data-type="icon" data-shape="circle" data-theme="outline" data-text="signup_with" data-size="medium" data-locale="en" style="height:0px"></span>
 <?php endif; ?>
 </p>
 <?php if ($with_name): ?>
