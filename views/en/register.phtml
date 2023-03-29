@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    32
+ * @version    33
  * @link       http://www.izend.org
  */
 ?>
@@ -92,17 +92,21 @@ $('input[name=register_timezone]').val(tz.name());
 <?php elseif ($duplicated_name): ?>
 <p>This identifier is already taken.</p>
 <?php endif; ?>
+<?php if ($missing_mail and $missing_password): ?>
+<p>You must enter an email address and a password.</p>
+<?php else: ?>
 <?php if ($missing_mail): ?>
-<p>Don't forget the email address.</p>
+<p>You must enter an email address.</p>
 <?php elseif ($bad_mail): ?>
 <p>The email address is invalid.</p>
 <?php elseif ($duplicated_mail): ?>
 <p>This email address is already being used.</p>
 <?php endif; ?>
 <?php if ($missing_password): ?>
-<p>You haven't entered a password.</p>
+<p>You must enter a password.</p>
 <?php elseif ($bad_password): ?>
 <p>A password must contain a digit and at least 6 characters.</p>
+<?php endif; ?>
 <?php endif; ?>
 <?php if ($missing_confirmation): ?>
 <p>Check the confirmation box.</p>
