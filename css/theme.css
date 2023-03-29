@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    157
+ * @version    158
  * @link       http://www.izend.org
  */
 
@@ -283,7 +283,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #footer .btn_admin {width:16px;height:16px;background-position:-136px -88px;}
 
 #footer .languages {float:right;margin-left:2em;font-family:Verdana, sans-serif;}
-#footer .languages a span {display:inline;}
+#footer .languages a span {display:inline-block;}
 
 #footer .controls {display:inline-block;}
 
