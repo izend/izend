@@ -18,6 +18,11 @@ you have to rebuild the search engine data.
 UPDATES
 -------
 
+Date:	Wed Apr 26 2023
+
+ALTER TABLE `izend_user_info` ADD `help` tinyint(1) unsigned NOT NULL DEFAULT '1';
+----
+
 Date:	Thu Oct 31 2019
 
 ALTER TABLE `izend_thread` DROP `plusone`;
@@ -102,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `izend_user_info` (
   `user_id` int(10) unsigned NOT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
+  `help` tinyint unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ----

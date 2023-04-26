@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2022 izend.org
- * @version    21
+ * @copyright  2011-2023 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 
@@ -39,6 +39,7 @@ function useredit($lang, $user_id) {
 	$with_website=true;
 
 	$with_info=false;
+	$with_options=false;
 
 	$with_viewpassword=true;
 
@@ -77,6 +78,7 @@ function useredit($lang, $user_id) {
 	$user_newpassword=$user_oldpassword=false;
 
 	$user_lastname=$user_firstname=false;
+	$user_help=false;
 
 	$token=false;
 
@@ -89,10 +91,10 @@ function useredit($lang, $user_id) {
 			}
 			$user_newpassword=false;
 
-			if ($with_info) {
+			if ($with_info or $with_options) {
 				$r = user_get_info($user_id);
 				if ($r) {
-					extract($r);	/* user_lastname, user_firstname */
+					extract($r);	/* user_lastname user_firstname user_help */
 				}
 			}
 
@@ -110,6 +112,11 @@ function useredit($lang, $user_id) {
 				}
 				if (isset($_POST['useredit_firstname'])) {
 					$user_firstname=readarg($_POST['useredit_firstname']);
+				}
+			}
+			if ($with_options) {
+				if (isset($_POST['useredit_help'])) {
+					$user_help=readarg($_POST['useredit_help']) == 'on';
 				}
 			}
 			if (isset($_POST['useredit_name'])) {
@@ -335,16 +342,23 @@ function useredit($lang, $user_id) {
 				$_SESSION['user']['timezone'] = $user_timezone;
 			}
 
-			if ($with_info) {
-				$r = user_set_info($user_id, $user_lastname, $user_firstname);
+			if ($with_info or $with_options) {
+				$r = user_set_info($user_id, $user_lastname, $user_firstname, $user_help);
 				if (!$r) {
 					$internal_error=true;
 					break;
 				}
 
 				if ($is_owner) {
-					$_SESSION['user']['lastname'] = $user_lastname;
-					$_SESSION['user']['firstname'] = $user_firstname;
+					if ($with_info) {
+						$_SESSION['user']['lastname'] = $user_lastname;
+						$_SESSION['user']['firstname'] = $user_firstname;
+					}
+					if ($with_options) {
+						$_SESSION['user']['help'] = $user_help;
+
+						setcookie('nohelp', !$user_help, 0, '/');
+					}
 				}
 			}
 
@@ -420,8 +434,7 @@ function useredit($lang, $user_id) {
 	$errors = compact('missing_name', 'bad_name', 'duplicated_name', 'missing_mail', 'bad_mail', 'duplicated_mail', 'bad_timezone', 'bad_website', 'missing_locale', 'bad_locale', 'missing_newpassword', 'bad_newpassword', 'missing_oldpassword', 'bad_oldpassword', 'missing_lastname', 'missing_firstname', 'internal_error', 'contact_page');
 	$infos = compact('account_modified', 'password_changed');
 
-	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_oldpassword', 'with_viewpassword', 'newpassword_page', 'with_info', 'user_lastname', 'user_firstname', 'with_delete', 'confirm_delete'));
+	$output = view('useredit', $lang, compact('token', 'errors', 'infos', 'with_name', 'user_name', 'user_mail', 'with_timezone', 'user_timezone', 'with_website', 'user_website', 'with_role', 'user_role', 'supported_roles', 'with_locale', 'user_locale', 'with_status', 'user_banned', 'user_active', 'user_confirmed', 'user_accessed', 'with_newpassword', 'user_newpassword', 'with_oldpassword', 'with_viewpassword', 'newpassword_page', 'with_info', 'user_lastname', 'user_firstname', 'with_options', 'user_help', 'with_delete', 'confirm_delete'));
 
 	return $output;
 }
-

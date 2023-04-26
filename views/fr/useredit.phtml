@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2011-2022 izend.org
- * @version    31
+ * @copyright  2011-2023 izend.org
+ * @version    32
  * @link       http://www.izend.org
  */
 ?>
@@ -47,6 +47,13 @@
 <p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" title="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<span class="lang <?php echo $lang; ?>" title="<?php echo $lang; ?>"><?php echo $lang; ?></span><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_locale" value="<?php if ($user_locale): ?><?php echo htmlspecialchars($user_locale, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
+<?php endif; ?>
+<?php if ($with_options): ?>
+<fieldset id="useredit_options" class="noprint">
+<legend>Options</legend>
+<span class="nowrap"><input type="checkbox" name="useredit_help"<?php if ($user_help): ?> checked="checked"<?php endif; ?>/>&nbsp;<span class="btn_edit btn_help" title="Messages d'aide"></span>
+</fieldset>
+<p class="info noprint">Choisissez si vous voulez les lignes <span class="btn_edit btn_help"></span> d'aide.</p>
 <?php endif; ?>
 <?php if ($with_status): ?>
 <fieldset id="useredit_status">

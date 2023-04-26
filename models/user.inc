@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    26
+ * @copyright  2010-2023 izend.org
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -185,14 +185,14 @@ function user_get_info($user_id) {
 
 	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="SELECT lastname AS user_lastname, firstname AS user_firstname FROM $tabuserinfo WHERE user_id=$user_id LIMIT 1";
+	$sql="SELECT lastname AS user_lastname, firstname AS user_firstname, help AS user_help FROM $tabuserinfo WHERE user_id=$user_id LIMIT 1";
 
 	$r = db_query($sql);
 
 	return $r ? $r[0] : false;
 }
 
-function user_set_info($user_id, $lastname, $firstname) {
+function user_set_info($user_id, $lastname, $firstname, $help=true) {
 	if (!is_numeric($user_id)) {
 		return false;
 	}
@@ -200,9 +200,11 @@ function user_set_info($user_id, $lastname, $firstname) {
 	$sqllastname=db_sql_arg($lastname, true, true);
 	$sqlfirstname=db_sql_arg($firstname, true, true);
 
+	$sqlhelp=$help ? 'TRUE' : 'FALSE';
+
 	$tabuserinfo=db_prefix_table('user_info');
 
-	$sql="INSERT INTO $tabuserinfo (user_id, lastname, firstname) SELECT $user_id, $sqllastname, $sqlfirstname WHERE NOT EXISTS (SELECT user_id FROM $tabuserinfo WHERE user_id=$user_id)";
+	$sql="INSERT INTO $tabuserinfo (user_id, lastname, firstname, help) SELECT $user_id, $sqllastname, $sqlfirstname, $sqlhelp WHERE NOT EXISTS (SELECT user_id FROM $tabuserinfo WHERE user_id=$user_id)";
 
 	$r = db_insert($sql);
 
@@ -210,7 +212,7 @@ function user_set_info($user_id, $lastname, $firstname) {
 		return true;
 	}
 
-	$sql="UPDATE $tabuserinfo SET lastname=$sqllastname, firstname=$sqlfirstname WHERE user_id=$user_id";
+	$sql="UPDATE $tabuserinfo SET lastname=$sqllastname, firstname=$sqlfirstname, help=$sqlhelp WHERE user_id=$user_id";
 
 	$r = db_update($sql);
 
@@ -445,10 +447,11 @@ function user_login($login, $password, $quick=false) {
 	$r = user_get_info($user_id);
 
 	if ($r) {
-		extract($r);	/* user_lastname, user_firstname */
+		extract($r);	/* user_lastname user_firstname user_help */
 
 		$user['lastname'] = $user_lastname;
 		$user['firstname'] = $user_firstname;
+		$user['help'] = $user_help;
 	}
 
 	$r = user_get_role($user_id);
@@ -584,4 +587,3 @@ function user_search($s, $pagesize=false, $page=1) {
 
 	return array($count, $r);
 }
-
