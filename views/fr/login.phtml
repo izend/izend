@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 ?>
@@ -33,7 +33,7 @@
 <p>
 <img src="<?php echo $base_path; ?>/captcha/login" alt="" height="40" title="Code de vérification" />
 :
-<input type="text" name="login_code" id="login_code" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'login_enter')" value="" />
+<input type="text" name="login_code" id="login_code" class="text_captcha" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'login_enter')" value="" />
 </p>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_enter" name="login_enter" id="login_enter" value="Entrer" /></p>

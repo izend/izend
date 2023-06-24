@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    19
+ * @copyright  2010-2023 izend.org
+ * @version    20
  * @link       http://www.izend.org
  */
 ?>
@@ -86,7 +86,7 @@ it
 <p>
 <img src="<?php echo $base_path; ?>/captcha/comment" alt="" height="40" title="Verification code" />
 :
-<input type="text" name="comment_code" id="comment_code" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'comment_validate')" value="" />
+<input type="text" name="comment_code" id="comment_code" class="text_captcha" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'comment_validate')" value="" />
 </p>
 <?php endif; ?>
 <p>

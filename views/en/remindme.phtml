@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    17
+ * @copyright  2010-2023 izend.org
+ * @version    18
  * @link       http://www.izend.org
  */
 ?>
@@ -20,7 +20,7 @@
 <p>
 <img src="<?php echo $base_path; ?>/captcha/remindme" alt="" height="40" title="Verification code" />
 :
-<input type="text" name="remindme_code" id="remindme_code" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
+<input type="text" name="remindme_code" id="remindme_code" class="text_captcha" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'remindme_send')" value="" />
 </p>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_send" name="remindme_send" id="remindme_send" value="Send" /></p>

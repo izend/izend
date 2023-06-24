@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    31
+ * @version    32
  * @link       http://www.izend.org
  */
 ?>
@@ -64,7 +64,7 @@ $('input[name=register_timezone]').val(tz.name());
 <p>
 <img src="<?php echo $base_path; ?>/captcha/register" alt="" height="40" title="Code de vérification" />
 :
-<input type="text" name="register_code" id="register_code" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'register_register')" value="" />
+<input type="text" name="register_code" id="register_code" class="text_captcha" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'register_register')" value="" />
 </p>
 <?php endif; ?>
 <p><input type="submit" class="submit submit_send" name="register_register" id="register_register" value="Envoyer" /></p>

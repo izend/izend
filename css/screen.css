@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    126
+ * @copyright  2010-2023 izend.org
+ * @version    127
  * @link       http://www.izend.org
  */
  
@@ -53,6 +53,8 @@ input[type="radio"] {margin-top:0;}
 label[for] input[type="checkbox"] {margin-top:0;}
 
 input.text_date[type="text"] {width:96px;}
+
+input.text_captcha[type="text"] {text-align:center;}
 
 form.compact p, div.compact p, p.compact {margin-top:0.75em;margin-bottom:0.5em;}
 form div.row {margin-top:0;margin-bottom:0;}
