@@ -2,19 +2,25 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    14
+ * @copyright  2010-2023 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 ?>
 <?php switch ($mode): ?>
 <?php case 'lite': ?>
 <?php $uri="$base_url/$request_path"; ?>
+<?php if (false): ?>
 <a href="https://twitter.com/home?status=<?php echo urlencode(!empty($tweet_text) ? "$tweet_text\n$uri" : $uri); ?>" title="Share on Twitter"><span>Twitter</span></a>
+<?php endif; ?>
+<a href="https://twitter.com/home?status=<?php echo urlencode(!empty($tweet_text) ? "$tweet_text\n$uri" : $uri); ?>" title="Share on X"><span>X</span></a>
 <?php break; ?>
 <?php case 'awesome': ?>
 <?php $uri="$base_url/$request_path"; ?>
+<?php if (false): ?>
 <a href="https://twitter.com/home?status=<?php echo urlencode(!empty($tweet_text) ? "$tweet_text\n$uri" : $uri); ?>" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+<?php endif; ?>
+<a href="https://twitter.com/home?status=<?php echo urlencode(!empty($tweet_text) ? "$tweet_text\n$uri" : $uri); ?>" title="Share on X"><i class="fab fa-x-twitter"></i></a>
 <?php break; ?>
 <?php default: ?>
 <?php head('javascript', 'https://platform.twitter.com/widgets.js'); ?>

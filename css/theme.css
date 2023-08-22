@@ -178,7 +178,7 @@ span.btn_morevote {background-position:-48px -32px;}
 span.btn_search {background-position:-64px -32px;}
 span.btn_tag {background-position:-80px -32px;}
 span.btn_ilike {background-position:0 -48px;}
-span.btn_tweet {background-position:-16px -48px;}
+span.btn_tweet {background-position:-96px -48px;}
 span.btn_linkedin {background-position:-48px -48px;}
 span.btn_pinit {background-position:-64px -48px;}
 span.btn_whatsapp {background-position:-80px -48px;}
@@ -324,6 +324,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #sharebar.lite li a, .besocial.lite li a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;cursor:pointer;}
 #sharebar.lite li.facebook a, .besocial.lite li.facebook a {background-position:0 0;}
 #sharebar.lite li.twitter a, .besocial.lite li.twitter a  {background-position:-24px 0;}
+#sharebar.lite li.x_twitter a, .besocial.lite li.x_twitter a  {background-position:-336px 0;}
 #sharebar.lite li.linkedin a, .besocial.lite li.linkedin a {background-position:-72px 0;}
 #sharebar.lite li.pinterest a, .besocial.lite li.pinterest a {background-position:-168px 0;}
 #sharebar.lite li.whatsapp a, .besocial.lite li.whatsapp a {background-position:-288px 0;}
@@ -333,6 +334,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #sharebar.awesome a .fab, .besocial.awesome a .fab {color:#ffffff;}
 #sharebar.awesome .facebook, .besocial.awesome .facebook {background-color:#3b5998;}
 #sharebar.awesome .twitter, .besocial.awesome .twitter {background-color:#4ad2ff;}
+#sharebar.awesome .x_twitter, .besocial.awesome .x_twitter {background-color:#000000;}
 #sharebar.awesome .linkedin, .besocial.awesome .linkedin {background-color:#0183b3;}
 #sharebar.awesome .pinterest, .besocial.awesome .pinterest {background-color:#cb2027;}
 #sharebar.awesome .whatsapp, .besocial.awesome .whatsapp {background-color:#25d366;}
@@ -343,6 +345,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 #socialbar a {width:24px;height:24px;display:inline-block;background:transparent url(../images/theme/social.png) no-repeat;}
 #socialbar a.facebook {background-position:0 0;}
 #socialbar a.twitter {background-position:-24px 0;}
+#socialbar a.x_twitter {background-position:-336px 0;}
 #socialbar a.linkedin {background-position:-72px 0;}
 #socialbar a.rss {background-position:-96px 0;}
 #socialbar a.newsletter {background-position:-120px 0;}
@@ -361,6 +364,9 @@ a:hover .icon_facebook {background-position:0 0;}
 a .icon_twitter {width:114px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_twitter, a:visited .icon_twitter {background-position:-111px -30px;}
 a:hover .icon_twitter {background-position:-111px 0;}
+a .icon_x_twitter {width:24px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
+a:link .icon_x_twitter, a:visited .icon_x_twitter {background-position:-859px -30px;}
+a:hover .icon_x_twitter {background-position:-859px 0;}
 a .icon_rss {width:51px;height:30px;display:inline-block;background:transparent url(../images/link.png) no-repeat;text-indent:-9999px;cursor:pointer;}
 a:link .icon_rss, a:visited .icon_rss {background-position:-225px -30px;}
 a:hover .icon_rss {background-position:-225px 0;}
