@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2023 izend.org
- * @version    26
+ * @version    27
  * @link       http://www.izend.org
  */
 
@@ -165,7 +165,7 @@ function login($lang) {
 
 			$user['ip'] = client_ip_address();
 
-			if (in_array('administrator', $user['role'])) {
+			if ($user['role'] and in_array('administrator', $user['role'])) {
 				require_once 'serveripaddress.php';
 				require_once 'emailme.php';
 
