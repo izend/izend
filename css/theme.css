@@ -1,7 +1,7 @@
 /**
  *
- * @copyright  2010-2023 izend.org
- * @version    158
+ * @copyright  2010-2024 izend.org
+ * @version    159
  * @link       http://www.izend.org
  */
 
@@ -387,7 +387,7 @@ a:link .icon_instagram, a:visited .icon_instagram {background-position:-753px -3
 a:hover .icon_instagram {background-position:-753px 0;}
 
 #linkbar {margin:1em 0;}
-#linkbar > a {margin-right:20px;}
+#linkbar > a {margin-right:10px;}
 #linkbar > a:last-child {margin-right:0;}
 #linkbar a span {vertical-align:text-bottom;margin-top:0.5em;}
 
