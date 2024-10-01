@@ -61,7 +61,7 @@ global $facebookjssdk, $facebookapiversion, $facebookid, $facebooksecret;
 
 $facebookjssdk=false;	// false
 
-$facebookapiversion='v9.0';
+$facebookapiversion='v17.0';
 
 $facebookid=false;
 $facebooksecret=false;

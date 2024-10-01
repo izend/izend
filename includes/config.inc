@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2023 izend.org
- * @version    64
+ * @copyright  2010-2024 izend.org
+ * @version    65
  * @link       http://www.izend.org
  */
 
@@ -53,7 +53,7 @@ global $facebookjssdk, $facebookapiversion, $facebookid, $facebooksecret;
 
 $facebookjssdk=false;	// false
 
-$facebookapiversion='v9.0';
+$facebookapiversion='v17.0';
 
 $facebookid=false;
 $facebooksecret=false;
