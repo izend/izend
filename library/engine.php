@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright   2010-2018 izend.org
- * @version     18
+ * @copyright   2010-2024 izend.org
+ * @version     19
  * @link        http://www.izend.org
  */
 
@@ -170,16 +170,7 @@ function dispatch($languages) {
 			list($action, $args) = $r;
 
 			if ($query) {
-				$params = array();
-				foreach (explode('&', $query) as $q) {
-					$p = explode('=', $q);
-					if (count($p) == 2) {
-						list($key, $value) = $p;
-						if ($key) {
-							$params[$key]=urldecode($value);
-						}
-					}
-				}
+				parse_str($query, $params);
 			}
 		}
 	}
