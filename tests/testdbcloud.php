@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014 izend.org
- * @version    1
+ * @copyright  2014-2025 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -54,7 +54,7 @@ dump($r);
 
 $taglist=array('documentation', 'foobar');
 
-$r=cloud_search($lang, $cloud_id, $taglist);
+$r=cloud_search($lang, $cloud_id, false, $taglist);
 dump($r);
 
 $s='documentation';
