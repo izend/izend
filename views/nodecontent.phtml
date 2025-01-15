@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    23
+ * @copyright  2010-2025 izend.org
+ * @version    24
  * @link       http://www.izend.org
  */
 ?>
@@ -41,7 +41,7 @@ foreach ($contents as $c) {
 			$padding=round($height/$width, 4) * 100;
 			$url=(is_https() ? 'https' : 'http') . "://www.youtube.com/embed/$id?wmode=transparent&amp;autoplay=$autoplay&amp;autohide=1&amp;controls=$controls&amp;fs=$fs&amp;modestbranding=0&amp;showinfo=0&amp;rel=$rel&amp;theme=$theme";
 			$embed=<<<__MARK__
-<div style="padding-bottom:${padding}%;"><iframe width="$width" height="$height" src="$url"></iframe></div>
+<div style="padding-bottom:{$padding}%;"><iframe width="$width" height="$height" src="$url"></iframe></div>
 __MARK__;
 			if ($miniature) {
 				$ytid = uniqid('id');
