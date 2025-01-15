@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    8
+ * @copyright  2010-2025 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -102,7 +102,7 @@ function nodecontenteditor($lang, $clang, $node_id, $content_types) {
 
 			foreach ($contents_model as $type => $fields) {
 				foreach ($fields as $fname => $props) {
-					$fieldname="content_${type}_$fname";
+					$fieldname="content_{$type}_$fname";
 					if (isset($_POST[$fieldname]) and is_array($_POST[$fieldname])) {
 						foreach ($_POST[$fieldname] as $i => $value) {
 							$v=readarg($value, true, false);	// trim but DON'T strip_tags!
@@ -195,7 +195,7 @@ function nodecontenteditor($lang, $clang, $node_id, $content_types) {
 			$fields=compact('content_pos', 'content_id', 'content_type', 'content_ignored');
 
 			foreach ($contents_model[$content_type] as $fname => $props) {
-				$fieldname = "content_${content_type}_$fname";
+				$fieldname = "content_{$content_type}_$fname";
 				$fields[$fieldname]=isset($props['default']) ? $props['default'] : false;
 			}
 
