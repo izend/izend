@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    36
+ * @copyright  2010-2025 izend.org
+ * @version    37
  * @link       http://www.izend.org
  */
 
@@ -220,7 +220,7 @@ function node_get_contents($lang, $node_id) {
 					continue;
 				}
 				if ($content_type == $type) {
-					$select[] = "ncc.$fname AS ${prefix}_$fname";
+					$select[] = "ncc.$fname AS {$prefix}_$fname";
 				}
 				else {
 					if (!empty($props['null'])) {
@@ -238,7 +238,7 @@ function node_get_contents($lang, $node_id) {
 
 								switch ($db_scheme) {
 									case 'pgsql':
-										$value = "CAST($value AS " . db_prefix_table("type_${prefix}_$fname") . ')';
+										$value = "CAST($value AS " . db_prefix_table("type_{$prefix}_$fname") . ')';
 										break;
 									case 'mysql':
 									default:
@@ -256,7 +256,7 @@ function node_get_contents($lang, $node_id) {
 								break;
 						}
 					}
-					$select[] = "$value AS ${prefix}_$fname";
+					$select[] = "$value AS {$prefix}_$fname";
 				}
 			}
 		}
@@ -341,7 +341,7 @@ function node_set_contents($lang, $node_id, $node_contents) {
 			if (!empty($props['ignored'])) {
 				continue;
 			}
-			$fieldname = "content_${content_type}_$fname";
+			$fieldname = "content_{$content_type}_$fname";
 			$val=isset($c[$fieldname]) ? $c[$fieldname] : false;
 			switch ($props['type']) {
 				case 'number':
