@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2020 izend.org
- * @version    6
+ * @copyright  2010-2025 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
@@ -49,7 +49,7 @@ _SEP_;
 				$cid=md5(uniqid('cid', true));
 				$qfname=preg_quote($url);
 				$pattern[]='#(<img[^>]+src=)"' . $qfname . '"([^>]*>)#is';
-				$replacement[]='${1}"cid:' . $cid . '"${2}';
+				$replacement[]='{$1}"cid:' . $cid . '"{$2}';
 				$related[$url]=array(basename($fname), $filetype, $cid, $base64);
 			}
 

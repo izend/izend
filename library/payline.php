@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2017 izend.org
- * @version    1
+ * @copyright  2017-2025 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
@@ -90,14 +90,14 @@ function logpayline($method, $r) {
 	$token = isset($r['token']) ? $r['token'] : false;
 	$transaction_id = isset($r['transaction']['id']) ? $r['transaction']['id'] : false;
 
-	$msg=array("METHOD=${method}", "CODE=${code}");
+	$msg=array("METHOD={$method}", "CODE={$code}");
 	if ($token) {
-		$msg[] = "TOKEN=${token}";
+		$msg[] = "TOKEN={$token}";
 	}
 	if ($transaction_id) {
-		$msg[] = "ID=${transaction_id}";
+		$msg[] = "ID={$transaction_id}";
 	}
-	$msg[]="MESSAGE=${shortmsg}:${longmsg}";
+	$msg[]="MESSAGE={$shortmsg}:{$longmsg}";
 
 	$logmsg=implode(';', $msg);
 

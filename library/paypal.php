@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    3
+ * @copyright  2010-2025 izend.org
+ * @version    4
  * @link       http://www.izend.org
  */
 
@@ -103,9 +103,9 @@ function logpaypal($method, $r) {
 
 	$token = isset($r['TOKEN']) ? $r['TOKEN'] : false;
 
-	$msg=array("METHOD=${method}", "ACK=${ack}");
+	$msg=array("METHOD={$method}", "ACK={$ack}");
 	if ($token) {
-		$msg[] = "TOKEN=${token}";
+		$msg[] = "TOKEN={$token}";
 	}
 
 	$success=($ack == 'SUCCESS' or $ack == 'SUCCESSWITHWARNING');
@@ -113,10 +113,10 @@ function logpaypal($method, $r) {
 	if (!$success) {
 		$n=0;
 		$err=array();
-		while (isset($r["L_ERRORCODE${n}"])) {
-			$e=$r["L_ERRORCODE${n}"];
-			if (isset($r["L_LONGMESSAGE${n}"])) {
-				$e .= ':' . $r["L_LONGMESSAGE${n}"];
+		while (isset($r["L_ERRORCODE{$n}"])) {
+			$e=$r["L_ERRORCODE{$n}"];
+			if (isset($r["L_LONGMESSAGE{$n}"])) {
+				$e .= ':' . $r["L_LONGMESSAGE{$n}"];
 			}
 			$err[]=$e;
 			$n++;

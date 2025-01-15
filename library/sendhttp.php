@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    16
+ * @copyright  2010-2025 izend.org
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -137,13 +137,13 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 				}
 			}
 
-			$header_string="$method $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+			$header_string="$method $path HTTP/1.1{$crlf}Host: $hostaddr{$crlf}User-Agent: $user_agent{$crlf}";
 
 			if ($content_string) {
 				$content_length = strlen($content_string);
-				$header_string .= "Content-Length: $content_length${crlf}";
+				$header_string .= "Content-Length: $content_length{$crlf}";
 				if ($content_type) {
-					$header_string .= "Content-Type: $content_type${crlf}";
+					$header_string .= "Content-Type: $content_type{$crlf}";
 				}
 			}
 			break;
@@ -154,7 +154,7 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 			if ($args && is_array($args)) {
 				$path .= ($query ? '&' : '?') . http_build_args($args);
 			}
-			$header_string="$method $path HTTP/1.1${crlf}Host: $hostaddr${crlf}User-Agent: $user_agent${crlf}";
+			$header_string="$method $path HTTP/1.1{$crlf}Host: $hostaddr{$crlf}User-Agent: $user_agent{$crlf}";
 			break;
 
 		default:
@@ -166,11 +166,11 @@ function sendhttp($method, $url, $args, $files=false, $base64=false, $options=fa
 			if (is_array($value)) {
 				$value = implode('; ', $value);
 			}
-			$header_string .= "${name}: ${value}${crlf}";
+			$header_string .= "{$name}: {$value}{$crlf}";
 		}
 	}
 
-	$header_string .= "Connection: close${crlf}${crlf}";
+	$header_string .= "Connection: close{$crlf}{$crlf}";
 
 	return sendhttpraw($proto, $host, $portnum, $header_string, $content_string, $options);
 }

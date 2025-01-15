@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2015 izend.org
- * @version    5
+ * @copyright  2010-2025 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -63,7 +63,7 @@ function shortdatetime_fr($unixtime) {
 	$hour = date('H', $unixtime);
 	$minute = date('i', $unixtime);
 
-	return "$date ${hour}h{$minute}";
+	return "$date {$hour}h{$minute}";
 }
 
 function longdatetime_fr($unixtime) {
@@ -72,7 +72,7 @@ function longdatetime_fr($unixtime) {
 	$hour = date('H', $unixtime);
 	$minute = date('i', $unixtime);
 
-	return "$date ${hour}h{$minute}";
+	return "$date {$hour}h{$minute}";
 }
 
 function longtime_fr($d) {
