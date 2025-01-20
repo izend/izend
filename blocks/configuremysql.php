@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2014-2023 izend.org
- * @version    14
+ * @copyright  2014-2025 izend.org
+ * @version    15
  * @link       http://www.izend.org
  */
 
@@ -70,7 +70,7 @@ function init_db($db_host, $db_name, $db_user, $db_password, $db_prefix, $site_a
 		$db_conn->exec("SET NAMES 'utf8'");
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}comment` (
+CREATE TABLE `{$db_prefix}comment` (
   `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `node_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -88,7 +88,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_download` (
+CREATE TABLE `{$db_prefix}content_download` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(50) DEFAULT NULL,
@@ -99,7 +99,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_file` (
+CREATE TABLE `{$db_prefix}content_file` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `path` varchar(200) DEFAULT NULL,
@@ -113,7 +113,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 			$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_infile` (
+CREATE TABLE `{$db_prefix}content_infile` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `path` varchar(200) DEFAULT NULL,
@@ -123,7 +123,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 			$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_longtail` (
+CREATE TABLE `{$db_prefix}content_longtail` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `file` varchar(200) DEFAULT NULL,
@@ -142,7 +142,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 			$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_text` (
+CREATE TABLE `{$db_prefix}content_text` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `text` text,
@@ -153,7 +153,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 			$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}content_youtube` (
+CREATE TABLE `{$db_prefix}content_youtube` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
@@ -172,7 +172,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}newsletter_post` (
+CREATE TABLE `{$db_prefix}newsletter_post` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
@@ -184,7 +184,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}newsletter_user` (
+CREATE TABLE `{$db_prefix}newsletter_user` (
   `mail` varchar(100) NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
@@ -195,7 +195,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}node` (
+CREATE TABLE `{$db_prefix}node` (
   `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `created` datetime NOT NULL,
@@ -216,7 +216,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}node_locale` (
+CREATE TABLE `{$db_prefix}node_locale` (
   `node_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) NOT NULL,
@@ -231,7 +231,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}node_content` (
+CREATE TABLE `{$db_prefix}node_content` (
   `node_id` int(10) unsigned NOT NULL,
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('text','file','download','infile','youtube','longtail') NOT NULL DEFAULT 'text',
@@ -243,7 +243,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}thread` (
+CREATE TABLE `{$db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL DEFAULT '1',
   `thread_type` enum('thread','folder','story','book','rss','newsletter') NOT NULL DEFAULT 'thread',
@@ -268,7 +268,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}thread_locale` (
+CREATE TABLE `{$db_prefix}thread_locale` (
   `thread_id` int(10) unsigned NOT NULL,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) NOT NULL,
@@ -282,7 +282,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}thread_node` (
+CREATE TABLE `{$db_prefix}thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   `number` int(4) unsigned NOT NULL,
@@ -293,7 +293,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}tag` (
+CREATE TABLE `{$db_prefix}tag` (
   `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -304,7 +304,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}tag_index` (
+CREATE TABLE `{$db_prefix}tag_index` (
   `tag_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`tag_id`,`node_id`)
@@ -313,7 +313,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}user` (
+CREATE TABLE `{$db_prefix}user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) DEFAULT NULL,
   `password` char(32) CHARACTER SET ascii NOT NULL,
@@ -338,7 +338,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE IF NOT EXISTS `${db_prefix}user_info` (
+CREATE TABLE IF NOT EXISTS `{$db_prefix}user_info` (
   `user_id` int(10) unsigned NOT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
@@ -349,7 +349,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}role` (
+CREATE TABLE `{$db_prefix}role` (
   `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   PRIMARY KEY (`role_id`),
@@ -359,7 +359,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}user_role` (
+CREATE TABLE `{$db_prefix}user_role` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`user_id`,`role_id`),
@@ -369,7 +369,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}registry` (
+CREATE TABLE `{$db_prefix}registry` (
   `name` varchar(100) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`name`)
@@ -378,7 +378,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}track` (
+CREATE TABLE `{$db_prefix}track` (
   `track_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip_address` int(10) unsigned NOT NULL,
@@ -390,7 +390,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-CREATE TABLE `${db_prefix}vote` (
+CREATE TABLE `{$db_prefix}vote` (
   `vote_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
@@ -406,7 +406,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}role` (`role_id`, `name`) VALUES
+INSERT INTO `{$db_prefix}role` (`role_id`, `name`) VALUES
 (1, 'administrator'),
 (2, 'writer'),
 (3, 'reader'),
@@ -418,13 +418,13 @@ _SEP_;
 		$seed=substr(md5(uniqid()), 1, 8);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`, `confirmed`) VALUES
+INSERT INTO `{$db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`, `confirmed`) VALUES
 (1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', '1', '0', '1');
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}user_role` (`user_id`, `role_id`) VALUES
+INSERT INTO `{$db_prefix}user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
@@ -433,14 +433,14 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `visits`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
+INSERT INTO `{$db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `visits`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
 (1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '0', '0'),
 (2, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node_locale` (`node_id`, `locale`, `name`, `title`, `abstract`, `cloud`) VALUES
+INSERT INTO `{$db_prefix}node_locale` (`node_id`, `locale`, `name`, `title`, `abstract`, `cloud`) VALUES
 (1, 'fr', 'bienvenue', 'Bienvenue', NULL, NULL),
 (1, 'en', 'welcome', 'Welcome', NULL, NULL),
 (2, 'fr', 'documentation', 'Documentation', 'Manuel de l''utilisateur.', 'documentation'),
@@ -449,7 +449,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
+INSERT INTO `{$db_prefix}node_content` (`node_id`, `content_id`, `content_type`, `number`) VALUES
 (1, 1, 'infile', 1),
 (1, 1, 'text', 2),
 (1, 2, 'infile', 3),
@@ -458,7 +458,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}content_text` (`content_id`, `locale`, `text`, `eval`) VALUES
+INSERT INTO `{$db_prefix}content_text` (`content_id`, `locale`, `text`, `eval`) VALUES
 (1, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>\r\n<p>Validé avec\r\n<span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\net\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', '0'),
 (1, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>\r\n<p>Validated with <span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\nand\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', '0'),
 (2, 'fr', '<p class="readmore">Consultez la <a href="http://www.izend.org">documentation en ligne</a>.</p>', '0'),
@@ -467,7 +467,7 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
+INSERT INTO `{$db_prefix}content_infile` (`content_id`, `locale`, `path`) VALUES
 (1, 'fr', 'views/fr/social.phtml'),
 (1, 'en', 'views/en/social.phtml'),
 (2, 'fr', 'views/fr/link.phtml'),
@@ -476,34 +476,34 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}tag` (`tag_id`, `locale`, `name`) VALUES
+INSERT INTO `{$db_prefix}tag` (`tag_id`, `locale`, `name`) VALUES
 (1, 'fr', 'documentation'),
 (2, 'en', 'documentation');
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}tag_index` (`tag_id`, `node_id`) VALUES
+INSERT INTO `{$db_prefix}tag_index` (`tag_id`, `node_id`) VALUES
 (1, 2),
 (2, 2);
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `visits`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
+INSERT INTO `{$db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `visits`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
 (1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread_locale` (`thread_id`, `locale`, `name`, `title`) VALUES
+INSERT INTO `{$db_prefix}thread_locale` (`thread_id`, `locale`, `name`, `title`) VALUES
 (1, 'fr', 'contenu', 'Contenu'),
 (1, 'en', 'content', 'Content');
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO `${db_prefix}thread_node` (`thread_id`, `node_id`, `number`) VALUES
+INSERT INTO `{$db_prefix}thread_node` (`thread_id`, `node_id`, `number`) VALUES
 (1, 1, 1),
 (1, 2, 2);
 _SEP_;
