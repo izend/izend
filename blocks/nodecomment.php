@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2022 izend.org
- * @version    12
+ * @copyright  2010-2025 izend.org
+ * @version    13
  * @link       http://www.izend.org
  */
 
@@ -200,7 +200,7 @@ function nodecomment($lang, $node_id, $node_user_id, $node_url, $nomore) {
 			if (!$message) {
 				$missing_message=true;
 			}
-			else if (strlen(utf8_decode($message)) > $message_maxlen) {
+			else if (strlen(mb_convert_encoding($message, 'ISO-8859-1', 'UTF-8')) > $message_maxlen) {
 				$message_too_long=true;
 			}
 			break;
