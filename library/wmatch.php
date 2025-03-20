@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2025 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -28,6 +28,8 @@ function wmatch($word, $wl, $dlimit=0, $closest=true) {
 				$dlimit=$d;
 			}
 			else {
+				if ($ret === false)
+					$ret=array();
 				$ret[]=$w;
 			}
 		}
