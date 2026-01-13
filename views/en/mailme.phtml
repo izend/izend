@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2023 izend.org
- * @version    32
+ * @copyright  2010-2026 izend.org
+ * @version    33
  * @link       http://www.izend.org
  */
 ?>
@@ -104,7 +104,7 @@ To return to the home page, <a class="clickhere" href="<?php echo $home_page; ?>
 <?php head('javascript', 'jquery-ui'); ?>
 <?php head('stylesheet', 'jquery-ui', 'screen'); ?>
 <script>
-$('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showAnim: 'drop', showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
+$('#mailme_date').datepicker({dateFormat: 'yy-mm-dd', autoSize: true, showOn: 'both', buttonText: 'Calendar', buttonImage: '/images/theme/edit/calendar.png', buttonImageOnly: true, minDate: '+1d', maxDate: '+2m', showOtherMonths: true, navigationAsDateFormat: true, prevText: 'MM', nextText: 'MM', beforeShowDay: function(date) {return [date.getDay() != 0];}});
 </script>
 <?php endif; ?>
 <?php
