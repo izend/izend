@@ -2,12 +2,12 @@
 
 /**
  *
- * @copyright  2014-2018 izend.org
- * @version    4
+ * @copyright  2014-2026 izend.org
+ * @version    5
  * @link       http://www.izend.org
  */
 
-function dirclear($dir='.') {
+function dirclear($dir) {
 	if (!is_dir($dir)) {
 		return false;
 	}
