@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    62
+ * @version    63
  * @link       http://www.izend.org
  */
  
@@ -34,6 +34,9 @@ input, select, fieldset, textarea {font-size:100%;border:none;vertical-align:mid
 
 input[type="submit"] {font-family:"Courier New", Courier, monospace;font-size:.9em;}
 input[type="checkbox"], input[type="radio"] {background:transparent !important;}
+
+input[type="checkbox"] {vertical-align:middle;}
+input[type="radio"] {vertical-align:text-bottom;}
 
 fieldset {display:inline-block;padding:0;}
 
