@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2011-2024 izend.org
- * @version    33
+ * @version    34
  * @link       http://www.izend.org
  */
 ?>
@@ -44,16 +44,16 @@
 <input type="hidden" name="useredit_timezone" value="<?php if ($user_timezone): ?><?php echo htmlspecialchars($user_timezone, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php endif; ?>
 <?php if ($with_locale): ?>
-<p class="noprint"><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" title="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<span class="lang <?php echo $lang; ?>" title="<?php echo $lang; ?>"><?php echo $lang; ?></span><?php endforeach; ?><?php echo PHP_EOL; ?></p>
+<p><?php foreach ($system_languages as $lang): ?><?php echo PHP_EOL; ?><input name="useredit_locale" type="radio" value="<?php echo $lang; ?>" title="<?php echo $lang; ?>"<?php if ($lang == $user_locale) echo ' checked="checked"'; ?> />&nbsp;<span class="lang <?php echo $lang; ?>" title="<?php echo $lang; ?>"><?php echo $lang; ?></span><?php endforeach; ?><?php echo PHP_EOL; ?></p>
 <?php else: ?>
 <input type="hidden" name="useredit_locale" value="<?php if ($user_locale): ?><?php echo htmlspecialchars($user_locale, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" />
 <?php endif; ?>
 <?php if ($with_options): ?>
-<fieldset id="useredit_options" class="noprint">
+<fieldset id="useredit_options">
 <legend>Options</legend>
-<span class="nowrap"><input type="checkbox" name="useredit_help"<?php if ($user_help): ?> checked="checked"<?php endif; ?>/>&nbsp;<span class="btn_edit btn_help" title="Messages d'aide"></span>
+<span class="nowrap"><input type="checkbox" name="useredit_help"<?php if ($user_help): ?> checked="checked"<?php endif; ?>/>&nbsp;<span class="btn_edit btn_help" title="Messages d'aide">aide</span>
 </fieldset>
-<p class="info noprint">Choisissez si vous voulez les lignes <span class="btn_edit btn_help"></span> d'aide.</p>
+<p class="info">Choisissez si vous voulez les lignes <span class="btn_edit btn_help"></span> d'aide.</p>
 <?php endif; ?>
 <?php if ($with_status): ?>
 <fieldset id="useredit_status">
@@ -88,18 +88,20 @@ le compte
 <?php endif; ?>
 </p>
 <?php if ($with_newpassword): ?>
+<div class="noprint">
 <?php if ($with_oldpassword): ?>
-<p class="noprint inlabel<?php if ($missing_oldpassword or $bad_oldpassword): ?> inerror<?php endif; ?>">Mot de passe actuel&nbsp;:</p>
-<p class="noprint"><input type="password" name="useredit_oldpassword" id="useredit_oldpassword" size="20" maxlength="20" title="au moins 6 lettres et chiffres" onkeypress="return focusonenter(event, 'useredit_newpassword')" /><?php if ($with_viewpassword): ?>&nbsp;<span class="icon icon_view pointer"></span><?php endif; ?></p>
+<p class="inlabel<?php if ($missing_oldpassword or $bad_oldpassword): ?> inerror<?php endif; ?>">Mot de passe actuel&nbsp;:</p>
+<p><input type="password" name="useredit_oldpassword" id="useredit_oldpassword" size="20" maxlength="20" title="au moins 6 lettres et chiffres" onkeypress="return focusonenter(event, 'useredit_newpassword')" /><?php if ($with_viewpassword): ?>&nbsp;<span class="icon icon_view pointer"></span><?php endif; ?></p>
 <?php endif; ?>
-<p class="noprint inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Nouveau mot de passe&nbsp;:</p>
-<p class="noprint"><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="au moins 6 lettres et chiffres" onkeypress="return submitonenter(event, 'useredit_change')" autocomplete="off" value="<?php if ($user_newpassword): ?><?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
+<p class="inlabel<?php if ($missing_newpassword or $bad_newpassword): ?> inerror<?php endif; ?>">Nouveau mot de passe&nbsp;:</p>
+<p><input type="text" name="useredit_newpassword" id="useredit_newpassword" size="20" maxlength="20" title="au moins 6 lettres et chiffres" onkeypress="return submitonenter(event, 'useredit_change')" autocomplete="off" value="<?php if ($user_newpassword): ?><?php echo htmlspecialchars($user_newpassword, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php if ($with_oldpassword): ?>
 <p class="info">Entrez le mot de passe actuel et un nouveau mot de passe pour le changer.</p>
 <?php else: ?>
 <p class="info">Entrez un nouveau mot de passe pour le changer.</p>
 <?php endif; ?>
-<p class="noprint"><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Changer" /></p>
+<p><input type="submit" class="submit submit_change" name="useredit_change" id="useredit_change" value="Changer" /></p>
+</div>
 <?php endif; ?>
 </form>
 <?php if ($with_newpassword and $with_oldpassword and $with_viewpassword): ?>
