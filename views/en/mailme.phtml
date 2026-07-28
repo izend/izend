@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    33
+ * @version    34
  * @link       http://www.izend.org
  */
 ?>
@@ -52,7 +52,7 @@ an attachment
 </p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
-<p>
+<p class="noprint">
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" height="40" title="Verification code" />
 :
 <input type="text" name="mailme_code" id="mailme_code" class="text_captcha" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
@@ -75,7 +75,7 @@ an attachment
 <?php if ($email_sent): ?>
 <p>Your message has been sent to the webmaster.
 <?php if ($home_page): ?>
-To return to the home page, <a class="clickhere" href="<?php echo $home_page; ?>">click here</a>.
+<span class="link">To return to the home page, <a class="clickhere" href="<?php echo $home_page; ?>">click here</a>.</span>
 <?php endif; ?>
 </p>
 <?php endif; ?>

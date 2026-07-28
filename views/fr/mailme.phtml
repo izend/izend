@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    33
+ * @version    34
  * @link       http://www.izend.org
  */
 ?>
@@ -52,7 +52,7 @@ une pièce jointe
 </p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
-<p>
+<p class="noprint">
 <img class="captcha" src="<?php echo $base_path; ?>/captcha/mailme" alt="" height="40" title="Code de vérification" />
 :
 <input type="text" name="mailme_code" id="mailme_code" class="text_captcha" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'mailme_send')" value="" />
@@ -75,7 +75,7 @@ une pièce jointe
 <?php if ($email_sent): ?>
 <p>Votre message a été envoyé au webmestre.
 <?php if ($home_page): ?>
-Pour revenir à la page d'accueil, <a class="clickhere" href="<?php echo $home_page; ?>">cliquez ici</a>.
+<span class="link">Pour revenir à la page d'accueil, <a class="clickhere" href="<?php echo $home_page; ?>">cliquez ici</a>.</span>
 <?php endif; ?>
 </p>
 <?php endif; ?>

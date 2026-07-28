@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    36
+ * @version    37
  * @link       http://www.izend.org
  */
 ?>
@@ -48,9 +48,11 @@ document.querySelector('input[name="register_timezone"]').value=Intl.DateTimeFor
 <p><input type="text" name="register_website" id="register_website" size="30" maxlength="100" title="www.domain.com" onkeypress="return focusonenter(event, '<?php echo $with_password ? 'register_password' : 'register_code'; ?>')" value="<?php if ($website): ?><?php echo htmlspecialchars($website, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /></p>
 <?php endif; ?>
 <?php if ($with_password): ?>
+<div class="noprint">
 <p class="inlabel<?php if ($missing_password or $bad_password): ?> inerror<?php endif; ?>">Choose a password:</p>
 <p><input type="password" name="register_password" id="register_password" size="20" maxlength="20" title="Password" autocomplete="off" onkeypress="return focusonenter(event, 'register_code')" value="<?php if ($password): ?><?php echo htmlspecialchars($password, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" /><?php if ($with_viewpassword): ?>&nbsp;<span class="icon icon_view pointer"></span><?php endif; ?></p>
 <p class="info">Enter at least 6 characters including 1 digit.</p>
+</div>
 <?php endif; ?>
 <?php if ($with_newsletter): ?>
 <p><input type="checkbox" name="register_newsletter" id="register_newsletter" title="Newsletter"<?php if ($newsletter): ?> checked="checked"<?php endif; ?> />&nbsp;I want to <?php echo ($is_admin) ? 'send' : 'receive'; ?> the newsletter by email</p>
@@ -59,7 +61,7 @@ document.querySelector('input[name="register_timezone"]').value=Intl.DateTimeFor
 <p><input type="checkbox" name="register_confirmed" id="register_confirmed" title="Confirmation"<?php if ($confirmed): ?> checked="checked"<?php endif; ?> />&nbsp;I wish to create an account</p>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
-<p>
+<p class="noprint">
 <img src="<?php echo $base_path; ?>/captcha/register" alt="" height="40" title="Verification code" />
 :
 <input type="text" name="register_code" id="register_code" class="text_captcha" size="4" maxlength="4" title="4 letters" autocomplete="off" onkeypress="return submitonenter(event, 'register_register')" value="" />
@@ -129,7 +131,7 @@ document.querySelector('input[name="register_timezone"]').value=Intl.DateTimeFor
 <p>The account has been created.</p>
 <?php else: ?>
 <p>Your account has been created. Your password has been emailed to your address<?php if ($with_validation): ?> as well as a confirmation link<?php endif; ?>.
-To identify yourself, <a class="clickhere" href="<?php echo $user_page; ?>">click here</a>.</p>
+<span class="link">To identify yourself, <a class="clickhere" href="<?php echo $user_page; ?>">click here</a>.</span></p>
 <?php endif; ?>
 <?php endif; ?>
 </div>

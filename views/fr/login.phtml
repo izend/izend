@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2023 izend.org
- * @version    21
+ * @copyright  2010-2026 izend.org
+ * @version    22
  * @link       http://www.izend.org
  */
 ?>
@@ -24,13 +24,15 @@
 <?php if ($with_name): ?>
 <p class="info">Vous pouvez aussi entrer votre adresse d'email.</p>
 <?php endif; ?>
+<div class="noprint">
 <p class="inlabel<?php if ($missing_password or $access_denied): ?> inerror<?php endif; ?>">Et votre clé d'accès&nbsp;?</p>
 <p><input type="password" name="login_password" id="login_password" size="20" maxlength="20" title="Mot de passe" onkeypress="<?php if ($with_captcha): ?>return focusonenter(event, 'login_code')<?php else: ?>return submitonenter(event, 'login_enter')<?php endif; ?>" /><?php if ($with_viewpassword): ?>&nbsp;<span class="icon icon_view pointer"></span><?php endif; ?></p>
 <?php if ($password_page): ?>
 <p class="info link">Si vous avez oublié votre mot de passe, <a class="clickhere" href="<?php echo $password_page; ?>" rel="nofollow">cliquez ici</a>.</p>
+</div>
 <?php endif; ?>
 <?php if ($with_captcha): ?>
-<p>
+<p class="noprint">
 <img src="<?php echo $base_path; ?>/captcha/login" alt="" height="40" title="Code de vérification" />
 :
 <input type="text" name="login_code" id="login_code" class="text_captcha" size="4" maxlength="4" title="4 lettres" autocomplete="off" onkeypress="return submitonenter(event, 'login_enter')" value="" />
