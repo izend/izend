@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    63
+ * @version    64
  * @link       http://www.izend.org
  */
  
@@ -145,4 +145,4 @@ ol.tree li.filenode {font-style:normal;}
 
 .gallery, .audioplayer {display:none;}
 
-.fb-like-box, .fb-page, #twitter-timeline, #pinterest-board {display:none !important;}
+#pinterest-board {display:none !important;}
