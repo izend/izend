@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    67
+ * @version    68
  * @link       http://www.izend.org
  */
 <?php
@@ -90,10 +90,6 @@ $googlecredentials=false;			// ROOT_DIR . DIRECTORY_SEPARATOR . 'google-credenti
 global $googleanalyticspageview;
 
 $googleanalyticspageview=false;
-
-global $linkedinapiid;
-
-$linkedinapiid=false;
 
 global $author;
 
