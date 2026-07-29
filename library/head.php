@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2017 izend.org
- * @version    13
+ * @copyright  2010-2026 izend.org
+ * @version    14
  * @link       http://www.izend.org
  */
 
@@ -36,6 +36,9 @@ function head($type=false) {
 			break;
 		case 'image':
 			$head['image'] = $args[0];
+			break;
+		case 'image_alt':
+			$head['image_alt'] = $args[0];
 			break;
 		case 'canonical':
 			$head['canonical'] = $args[0];
