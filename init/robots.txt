@@ -5,11 +5,13 @@ Sitemap: http://www.<?php echo $sitename; ?>/sitemap.xml
 <?php case 'en': ?>
 Disallow: /en/search
 Disallow: /en/suggest
+Disallow: /en/download
 Disallow: /en/donation
 <?php break; ?>
 <?php case 'fr': ?>
 Disallow: /fr/recherche
 Disallow: /fr/suggestion
+Disallow: /fr/telechargement
 Disallow: /fr/donation
 <?php break; ?>
 <?php default: ?>

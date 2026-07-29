@@ -1,7 +1,9 @@
 User-agent: *
 Disallow: /en/search
 Disallow: /en/suggest
+Disallow: /en/download
 Disallow: /en/donation
 Disallow: /fr/recherche
 Disallow: /fr/suggestion
+Disallow: /fr/telechargement
 Disallow: /fr/donation
