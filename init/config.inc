@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    65
+ * @version    67
  * @link       http://www.izend.org
  */
 <?php
@@ -56,15 +56,6 @@ global $cookieconsent, $cookieconsentauto;
 
 $cookieconsent=false;
 $cookieconsentauto=true;
-
-global $facebookjssdk, $facebookapiversion, $facebookid, $facebooksecret;
-
-$facebookjssdk=false;	// false
-
-$facebookapiversion='v17.0';
-
-$facebookid=false;
-$facebooksecret=false;
 
 global $pinterestassets;
 

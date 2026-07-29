@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    61
+ * @version    62
  * @link       http://www.izend.org
  */
 ?>
@@ -26,10 +26,6 @@
 <?php else: ?>
 <meta name="robots" content="index, follow" />
 <?php endif; ?>
-<?php if (!empty($favicon)): ?>
-<link rel="icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" />
-<?php endif; ?>
-<?php require_once 'isagent.php'; ?>
 <?php if (!empty($lang)): ?>
 <?php switch($lang): ?>
 <?php case 'en': ?>
@@ -51,9 +47,8 @@
 <meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
 <?php endif; ?>
 <meta property="og:site_name" content="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
-<?php global $facebookid; ?>
-<?php if (!empty($facebookid) and is_facebook()): ?>
-<meta property="fb:app_id" content="<?php echo $facebookid; ?>" />
+<?php if (!empty($favicon)): ?>
+<link rel="icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" />
 <?php endif; ?>
 <link rel="canonical" href="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>" />
 <?php if (!empty($lang)): ?>
