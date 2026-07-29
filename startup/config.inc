@@ -2,12 +2,10 @@
 
 /**
  *
- * @copyright  2010-2016 izend.org
- * @version    45
+ * @copyright  2010-2026 izend.org
+ * @version    68
  * @link       http://www.izend.org
  */
-
-require_once 'ismobile.php';
 
 global $base_url, $base_path, $base_root;
 
@@ -39,36 +37,51 @@ $logoascii='';
 
 global $signature;
 
-$signature='izend.org - http://www.izend.org';
+$signature='izend.org - https://www.izend.org';
 
 global $socializing, $socializingmode;
 
 $socializing='inline';	// false, 'inline', 'bar', 'either', 'both'
-$socializingmode='standard';       // 'standard', 'lite'
+$socializingmode='lite';	// 'lite', 'awesome'
 
-global $facebookjssdk, $facebookid, $facebooksecret;
+global $cookieconsent, $cookieconsentauto;
 
-$facebookjssdk=false;	// false
-
-$facebookid=false;
-$facebooksecret=false;
+$cookieconsent=false;
+$cookieconsentauto=true;
 
 global $pinterestassets;
 
 $pinterestassets=false;	// false
 
-global $googleapiid;
+global $googleapiid, $googleapisid;
 
-$googleapiid=false;
+$googleapiid=false;		// client key
+$googleapisid=false;	// server key
+
+global $googleclientid;
+
+$googleclientid=false;
 
 global $googleanalyticsid;
 
 $googleanalyticsid=false;
 
+global $googleanalyticspropertyid;
+
+$googleanalyticspropertyid=false;
+
 global $googleanalyticsaccount, $googleanalyticskeyfile;
 
 $googleanalyticsaccount = false;
 $googleanalyticskeyfile = false;	// ROOT_DIR . DIRECTORY_SEPARATOR . 'google-api-*.p12';
+
+global $googlecredentials;
+
+$googlecredentials=false;			// ROOT_DIR . DIRECTORY_SEPARATOR . 'google-credentials-*.json';
+
+global $googleanalyticspageview;
+
+$googleanalyticspageview=false;
 
 global $author;
 
@@ -80,8 +93,8 @@ $log_dir = ROOT_DIR . DIRECTORY_SEPARATOR . 'log';
 
 global $closing_time, $opening_time;
 
-$closing_time=0;	// true, mktime(13, 0)
-$opening_time=0;	// $closing_time+30*60
+$closing_time=false;	// true, mktime(13, 0)
+$opening_time=false;	// $closing_time+30*60
 
 global $system_languages;
 
@@ -103,6 +116,10 @@ global $supported_threads;
 
 $supported_threads=array('thread', 'folder', 'story', 'book', 'rss', 'newsletter');	// 'thread', 'folder', 'story', 'book', 'rss', 'newsletter'
 
+global $limited_languages;
+
+$limited_languages=false;
+
 global $contents_model, $supported_contents, $limited_contents;
 
 $contents_model = array(
@@ -120,14 +137,22 @@ $limited_contents=array('rss' => array('text'), 'newsletter' => array('text'));
 
 global $with_toolbar;
 
+require_once 'ismobile.php';
+
 $with_toolbar=is_mobile() ? false : true;
 
-global $search_all, $search_distance, $search_closest, $search_pertinence;
+global $search_default, $search_all, $search_distance, $search_closest, $search_pertinence, $search_cloud;
 
+$search_default=false;	// false or cloud_id
 $search_all=true;		// true, false, 'cloud'
 $search_distance=2;		// 0 - exact match, 1 - close, 2 - not so close, etc.
 $search_closest=true;	// true - best matches, false - all matches
 $search_pertinence=0;	// 0 - at least one tag, 1 - all tags
+$search_cloud=30;		// just a few or not too many keywords
+
+global $read_access;
+
+$read_access=false;		// false or array('role' => thread_id, ...) - thread_id can be an array
 
 global $session_name;
 
@@ -166,9 +191,10 @@ global $content_folder;
 
 $content_folder = false;		// can be an array
 
-global $rss_thread;
+global $rss_thread, $rss_description;
 
-$rss_thread = false;
+$rss_thread = false;			// can be an array
+$rss_description = 'abstract';	// 'content or 'abstract'
 
 global $newsletter_thread;
 
