@@ -3,10 +3,10 @@
 <url>
 <?php switch($lang): ?>
 <?php case 'en': ?>
-<loc>http://www.<?php echo $sitename; ?>/en/home</loc>
+<loc>http://www.<?php echo $sitename; ?>/en</loc>
 <?php break; ?>
 <?php case 'fr': ?>
-<loc>http://www.<?php echo $sitename; ?>/fr/accueil</loc>
+<loc>http://www.<?php echo $sitename; ?>/fr</loc>
 <?php break; ?>
 <?php default: ?>
 <?php break; ?>
