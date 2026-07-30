@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2026 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -209,7 +209,7 @@ CREATE TABLE `{$db_prefix}node` (
   `tweet` tinyint(1) NOT NULL DEFAULT '1',
   `linkedin` tinyint(1) NOT NULL DEFAULT '1',
   `pinit` tinyint(1) NOT NULL DEFAULT '0',
-  `whatsapp` tinyint(1) NOT NULL DEFAULT '0',
+  `whatsapp` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`node_id`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -434,7 +434,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO `{$db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `visits`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
-(1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '0', '0'),
+(1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '0', '1'),
 (2, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');
 _SEP_;
 		$db_conn->exec($sql);
@@ -491,7 +491,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO `{$db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `visits`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0');
+(1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '1');
 _SEP_;
 		$db_conn->exec($sql);
 
