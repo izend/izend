@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2019 izend.org
- * @version    8
+ * @copyright  2010-2026 izend.org
+ * @version    9
  * @link       http://www.izend.org
  */
 
@@ -39,11 +39,15 @@ function rssfeed($lang) {
 
 		if ($r) {
 			foreach ($r as $node) {
+				$content_text = $node_abstract = null;
 				extract($node);
 				$title = $node_title;
+				if ($title === null)
+					continue;
 				$uri = false;	// "/$lang/$node_name";
 				$created = $node_created;
-				$description = preg_replace('/(\r\n|\r|\n)+/', ' - ', preg_replace('/[\t ]+/', ' ', strip_tags($feed_content ? $content_text : $node_abstract)));
+				$text = $feed_content ? $content_text : $node_abstract;
+				$description = $text ? preg_replace('/(\r\n|\r|\n)+/', ' - ', preg_replace('/[\t ]+/', ' ', strip_tags($text))) : null;
 				$image_uri = false;	// $node_image;
 				$image_size = $image_uri ? filesize(ROOT_DIR . $image_uri) : 0;
 				$image_type = $image_uri ? file_mime_type(ROOT_DIR . $image_uri) : false;
