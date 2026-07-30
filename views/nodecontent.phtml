@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2025 izend.org
- * @version    24
+ * @copyright  2010-2026 izend.org
+ * @version    25
  * @link       http://www.izend.org
  */
 ?>
@@ -49,11 +49,9 @@ __MARK__;
 				echo '<a href="https://www.youtube.com/watch?v=', $id, '"><span class="ytplay"></span><img src="', $base_path, $miniature, '" alt="" /></a>', PHP_EOL;
 				echo '</div>', PHP_EOL;
 				echo '<script>', PHP_EOL;
-				echo '//<![CDATA[', PHP_EOL;
 				echo 'var div=$("#', $ytid, '");', PHP_EOL;
 				echo 'div.html(div.children().html());', PHP_EOL;
 				echo 'div.children().click(function() { div.html(\'', $embed, '\'); })', PHP_EOL;
-				echo '//]]>', PHP_EOL;
 				echo '</script>', PHP_EOL;
 			}
 			else {
@@ -68,7 +66,6 @@ __MARK__;
 			echo '<div class="longtail">', PHP_EOL;
 			echo '<div id="', $id, '"></div>', PHP_EOL;
 			echo '<script>', PHP_EOL;
-			echo '//<![CDATA[', PHP_EOL;
 			echo 'var w=', $width,', h=', $height, ', maxw=$(window).innerWidth();', PHP_EOL;
 			echo 'if (maxw < w) {', PHP_EOL;
 			echo '    h=Math.floor(h*maxw/w);', PHP_EOL;
@@ -116,7 +113,6 @@ __MARK__;
 			echo '    autostart: "', $autostart ? 'true' : 'false', '",', PHP_EOL;
 			echo '    screencolor: "ffffff"', PHP_EOL;
 			echo '});', PHP_EOL;
-			echo '//]]>', PHP_EOL;
 			echo '</script>', PHP_EOL;
 			echo '</div>', PHP_EOL;
 			break;
