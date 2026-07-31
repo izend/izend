@@ -2,13 +2,12 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    6
+ * @copyright  2010-2026 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 
 require_once 'session.php';
-require_once 'unsetglobals.php';
 require_once 'validatehostname.php';
 
 function bootstrap() {
@@ -25,8 +24,6 @@ function bootstrap() {
 	else {
 		$_SERVER['HTTP_HOST'] = '';
 	}
-
-	unset_globals();
 
 	@include 'settings.inc';
 	@include 'config.inc';
