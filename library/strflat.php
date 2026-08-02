@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    2
+ * @copyright  2010-2026 izend.org
+ * @version    3
  * @link       http://www.izend.org
  */
 
@@ -16,6 +16,7 @@ function strflat($s) {
 				'é', 'è', 'ê', 'ë',
 				'ç', 'ñ',
 				'æ', 'œ',
+				'ð', 'đ', 'ł',
 				'À', 'Â', 'Ä', 'Á', 'Ã', 'Å',
 				'Î', 'Ï', 'Ì', 'Í',
 				'Ô', 'Ö', 'Ò', 'Ó', 'Õ', 'Ø',
@@ -23,6 +24,7 @@ function strflat($s) {
 				'É', 'È', 'Ê', 'Ë',
 				'Ç', 'Ñ',
 				'Æ', 'Œ',
+				'Ð', 'Đ', 'Ł',
 	);
 
 	$to = array(
@@ -33,6 +35,7 @@ function strflat($s) {
 				'e', 'e', 'e', 'e',
 				'c', 'n',
 				'ae', 'oe',
+				'd', 'd', 'l',
 				'A', 'A', 'A', 'A', 'A', 'A',
 				'I', 'I', 'I', 'I',
 				'O', 'O', 'O', 'O', 'O', 'O',
@@ -40,8 +43,8 @@ function strflat($s) {
 				'E', 'E', 'E', 'E',
 				'C', 'N',
 				'AE', 'OE',
+				'D', 'D', 'L',
 	);
 
 	return str_replace($from, $to, $s);
 }
-
