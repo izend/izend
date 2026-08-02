@@ -2,21 +2,17 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    1
+ * @copyright  2010-2026 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 
 function locale() {
-	if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+	if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
 		return false;
 	}
 
 	$httplanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-
-	if (empty($httplanguages) === true) {
-		return false;
-	}
 
 	$lang = false;
 	$quality = 0.0;
@@ -31,12 +27,12 @@ function locale() {
 			continue;
 		}
 
-		$q = isset($match[2]) ? (float) $match[2] : 1.0;
+		$q = isset($match[2]) ? (float)$match[2] : 1.0;
 
 		if ($q > $quality) {
 			$quality = $q;
 
-			$lang = current(explode('_', current(explode('-', $match[1]))));
+			$lang = strtok($match[1], '-_');
 
 			if ($quality == 1.0) {
 				break;
