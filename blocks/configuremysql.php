@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2026 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -21,7 +21,7 @@ function create_db($db_admin_user, $db_admin_password, $db_host, $db_name, $db_u
 		$sql="CREATE USER '$db_user'@'$db_host' IDENTIFIED BY '$db_password'";
 		$db_conn->exec($sql);
 
-		$sql="GRANT SELECT, INSERT, DELETE, UPDATE, DELETE, CREATE, DROP ON `$db_name`.* TO '$db_user'@'$db_host'";
+		$sql="GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON `$db_name`.* TO '$db_user'@'$db_host'";
 		$db_conn->exec($sql);
 
 		$sql="FLUSH PRIVILEGES";
