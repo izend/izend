@@ -31,21 +31,17 @@ foreach ($contents as $c) {
 			@include $c['infile'];
 			break;
 		case 'youtube':
-			require_once 'ishttps.php';
-
-			extract($c);	/* id width height miniature title autoplay theme controls fs rel */
-			$autoplay=$autoplay ? '1' : '0';
-			$controls=$controls ? '1' : '0';
-			$fs=$fs ? '1' : '0';
-			$rel=$rel ? '1' : '0';
-			$padding=round($height/$width, 4) * 100;
-			$url=(is_https() ? 'https' : 'http') . "://www.youtube.com/embed/$id?wmode=transparent&amp;autoplay=$autoplay&amp;autohide=1&amp;controls=$controls&amp;fs=$fs&amp;modestbranding=0&amp;showinfo=0&amp;rel=$rel&amp;theme=$theme";
+			extract($c);	/* id width height miniature title autoplay */
+			$title= $title ? htmlspecialchars($title, ENT_COMPAT, 'UTF-8') : '';
+			$autoplay = $autoplay ? '1' : '0';
+			$padding = round($height/$width, 4) * 100;
+			$url = "https://www.youtube-nocookie.com/embed/$id?autoplay=$autoplay";
 			$embed=<<<__MARK__
-<div style="padding-bottom:{$padding}%;"><iframe width="$width" height="$height" src="$url"></iframe></div>
+<div style="padding-bottom:{$padding}%;"><iframe width="$width" height="$height" src="$url" title="$title"></iframe></div>
 __MARK__;
 			if ($miniature) {
 				$ytid = uniqid('id');
-				echo '<div id="', $ytid, '" class="youtube" style="width:', $width, 'px;max-width:100%;" title="', ($title ? htmlspecialchars($title, ENT_COMPAT, 'UTF-8') : ''), '">', PHP_EOL;
+				echo '<div id="', $ytid, '" class="youtube" style="width:', $width, 'px;max-width:100%;"', ' title="', $title, '">', PHP_EOL;
 				echo '<a href="https://www.youtube.com/watch?v=', $id, '"><span class="ytplay"></span><img src="', $base_path, $miniature, '" alt="" /></a>', PHP_EOL;
 				echo '</div>', PHP_EOL;
 				echo '<script>', PHP_EOL;

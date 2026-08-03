@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2014 izend.org
- * @version    7
+ * @copyright  2010-2026 izend.org
+ * @version    8
  * @link       http://www.izend.org
  */
 
@@ -66,12 +66,8 @@ function nodecontent($lang, $node_id) {
 					$miniature=$c['content_youtube_miniature'];
 					$title=$c['content_youtube_title'];
 					$autoplay = $c['content_youtube_autoplay'];
-					$controls = $c['content_youtube_controls'];
-					$fs = $c['content_youtube_fs'];
-					$rel = $c['content_youtube_rel'];
-					$theme = $c['content_youtube_theme'];
 					if ($id and $width > 0 and $height > 0) {
-						$contents[] = compact('type', 'id', 'width', 'height', 'miniature', 'title', 'autoplay', 'theme', 'controls', 'fs', 'rel');
+						$contents[] = compact('type', 'id', 'width', 'height', 'miniature', 'title', 'autoplay');
 					}
 					break;
 				case 'longtail':
