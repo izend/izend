@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    130
+ * @version    131
  * @link       http://www.izend.org
  */
  
@@ -206,6 +206,7 @@ div.longtail {margin:1em 0;overflow:hidden;}
 div.youtube {position:relative;cursor:pointer;}
 div.youtube > div {position:relative;overflow:hidden;}
 div.youtube iframe {position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+div.youtube.center {margin-left:auto;margin-right:auto;}
 
 .ytplay {width:48px;height:36px;background:transparent url(../images/yt.png) no-repeat;background-position:-144px 0;position:absolute;top:45%;left:45%;cursor:pointer;}
 .ytplay:hover {background-position:-144px -48px;}

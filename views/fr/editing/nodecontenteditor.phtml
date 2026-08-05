@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    27
+ * @version    28
  * @link       http://www.izend.org
  */
 ?>
@@ -66,6 +66,7 @@ foreach ($node_contents as $c) {
 	$content_file_start=$content_file_end=0;
 	$content_youtube_id=false;
 	$content_youtube_width=$content_youtube_height=0;
+	$content_youtube_center=false;
 	$content_youtube_miniature=$content_youtube_title=false;
 	$content_youtube_autoplay=false;
 	$content_longtail_file=$content_longtail_image=false;
@@ -156,9 +157,11 @@ foreach ($node_contents as $c) {
 <input name="content_youtube_width[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_width): ?><?php echo htmlspecialchars($content_youtube_width, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Largeur" onkeypress="return returnonenter(event)" />
 x
 <input name="content_youtube_height[<?php echo $i; ?>]" type="text" size="5" maxlength="5" value="<?php if ($content_youtube_height): ?><?php echo htmlspecialchars($content_youtube_height, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Hauteur" onkeypress="return returnonenter(event)" />
-<label for="content_youtube_autoplay[<?php echo $i; ?>]"><input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
+<label for="content_youtube_center[<?php echo $i; ?>]"><input id="content_youtube_center[<?php echo $i; ?>]" name="content_youtube_center[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_center): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_acenter" title="Centrer">centrer</span></label>
 <p>
 <input name="content_youtube_miniature[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_youtube_miniature): ?><?php echo htmlspecialchars($content_youtube_miniature, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Miniature" onkeypress="return returnonenter(event)" />
+<label for="content_youtube_autoplay[<?php echo $i; ?>]"><input id="content_youtube_autoplay[<?php echo $i; ?>]" name="content_youtube_autoplay[<?php echo $i; ?>]" type="checkbox"<?php if ($content_youtube_autoplay): ?> checked="checked"<?php endif; ?> /><span class="btn_edit btn_autoplay" title="Auto">auto</span></label>
+<p>
 </p>
 <p>
 <input name="content_youtube_title[<?php echo $i; ?>]" type="text" size="40" maxlength="200" value="<?php if ($content_youtube_title): ?><?php echo htmlspecialchars($content_youtube_title, ENT_COMPAT, 'UTF-8'); ?><?php endif; ?>" title="Titre" onkeypress="return returnonenter(event)" />
