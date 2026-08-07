@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2026 izend.org
- * @version    16
+ * @version    17
  * @link       http://www.izend.org
  */
 
@@ -189,6 +189,7 @@ CREATE TABLE "{$db_prefix}content_youtube" (
   "id" varchar(20) DEFAULT NULL,
   "width" integer NOT NULL DEFAULT '0',
   "height" integer NOT NULL DEFAULT '0',
+  "center" boolean NOT NULL DEFAULT '0',
   "miniature" varchar(200) DEFAULT NULL,
   "title" varchar(200) DEFAULT NULL,
   "autoplay" boolean NOT NULL DEFAULT '0',
