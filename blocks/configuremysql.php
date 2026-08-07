@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2026 izend.org
- * @version    20
+ * @version    21
  * @link       http://www.izend.org
  */
 
@@ -76,11 +76,11 @@ CREATE TABLE `{$db_prefix}comment` (
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
   `edited` datetime NOT NULL,
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
   `user_mail` varchar(100) DEFAULT NULL,
   `ip_address` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
-  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
+  `confirmed` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`comment_id`),
   KEY `node` (`node_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
@@ -103,10 +103,10 @@ CREATE TABLE `{$db_prefix}content_file` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `path` varchar(200) DEFAULT NULL,
-  `start` int(5) unsigned NOT NULL DEFAULT '0',
-  `end` int(5) unsigned NOT NULL DEFAULT '0',
+  `start` int(5) unsigned NOT NULL DEFAULT 0,
+  `end` int(5) unsigned NOT NULL DEFAULT 0,
   `format` varchar(20) DEFAULT NULL,
-  `lineno` tinyint(1) NOT NULL DEFAULT '1',
+  `lineno` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`content_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -128,14 +128,14 @@ CREATE TABLE `{$db_prefix}content_longtail` (
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `file` varchar(200) DEFAULT NULL,
   `image` varchar(200) DEFAULT NULL,
-  `width` int(4) unsigned NOT NULL DEFAULT '0',
-  `height` int(4) unsigned NOT NULL DEFAULT '0',
-  `icons` tinyint(1) NOT NULL DEFAULT '0',
+  `width` int(4) unsigned NOT NULL DEFAULT 0,
+  `height` int(4) unsigned NOT NULL DEFAULT 0,
+  `icons` tinyint(1) NOT NULL DEFAULT 0,
   `skin` varchar(200) DEFAULT NULL,
   `controlbar` enum('none','bottom','top','over') NOT NULL DEFAULT 'none',
-  `duration` int(5) unsigned NOT NULL DEFAULT '0',
-  `autostart` tinyint(1) NOT NULL DEFAULT '0',
-  `repeat` tinyint(1) NOT NULL DEFAULT '0',
+  `duration` int(5) unsigned NOT NULL DEFAULT 0,
+  `autostart` tinyint(1) NOT NULL DEFAULT 0,
+  `repeat` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`content_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -146,7 +146,7 @@ CREATE TABLE `{$db_prefix}content_text` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `text` text,
-  `eval` tinyint(1) NOT NULL DEFAULT '0',
+  `eval` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`content_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -157,12 +157,12 @@ CREATE TABLE `{$db_prefix}content_youtube` (
   `content_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `id` varchar(20) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
-  `width` int(4) unsigned NOT NULL DEFAULT '0',
-  `height` int(4) unsigned NOT NULL DEFAULT '0',
-  `center` tinyint(1) NOT NULL DEFAULT '0',
+  `width` int(4) unsigned NOT NULL DEFAULT 0,
+  `height` int(4) unsigned NOT NULL DEFAULT 0,
+  `center` tinyint(1) NOT NULL DEFAULT 0,
   `miniature` VARCHAR(200) DEFAULT NULL,
   `title` VARCHAR(200) DEFAULT NULL,
-  `autoplay` tinyint(1) NOT NULL DEFAULT '0',
+  `autoplay` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`content_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -197,16 +197,16 @@ CREATE TABLE `{$db_prefix}node` (
   `user_id` int(10) unsigned NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `visits` tinyint(1) NOT NULL DEFAULT '1',
-  `nocomment` tinyint(1) NOT NULL DEFAULT '0',
-  `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
-  `novote` tinyint(1) NOT NULL DEFAULT '0',
-  `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
-  `ilike` tinyint(1) NOT NULL DEFAULT '1',
-  `tweet` tinyint(1) NOT NULL DEFAULT '1',
-  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
-  `pinit` tinyint(1) NOT NULL DEFAULT '0',
-  `whatsapp` tinyint(1) NOT NULL DEFAULT '1',
+  `visits` tinyint(1) NOT NULL DEFAULT 1,
+  `nocomment` tinyint(1) NOT NULL DEFAULT 0,
+  `nomorecomment` tinyint(1) NOT NULL DEFAULT 0,
+  `novote` tinyint(1) NOT NULL DEFAULT 0,
+  `nomorevote` tinyint(1) NOT NULL DEFAULT 0,
+  `ilike` tinyint(1) NOT NULL DEFAULT 1,
+  `tweet` tinyint(1) NOT NULL DEFAULT 1,
+  `linkedin` tinyint(1) NOT NULL DEFAULT 1,
+  `pinit` tinyint(1) NOT NULL DEFAULT 0,
+  `whatsapp` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`node_id`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -221,7 +221,7 @@ CREATE TABLE `{$db_prefix}node_locale` (
   `abstract` text,
   `cloud` text,
   `image` varchar(200) DEFAULT NULL,
-  `visited` int(10) unsigned NOT NULL DEFAULT '0',
+  `visited` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`node_id`,`locale`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -233,7 +233,7 @@ CREATE TABLE `{$db_prefix}node_content` (
   `content_id` int(10) unsigned NOT NULL,
   `content_type` enum('text','file','download','infile','youtube','longtail') NOT NULL DEFAULT 'text',
   `number` int(3) unsigned NOT NULL,
-  `ignored` tinyint(1) NOT NULL DEFAULT '0',
+  `ignored` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`node_id`,`content_id`,`content_type`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -242,23 +242,23 @@ _SEP_;
 		$sql= <<<_SEP_
 CREATE TABLE `{$db_prefix}thread` (
   `thread_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `user_id` int(10) unsigned NOT NULL DEFAULT 1,
   `thread_type` enum('thread','folder','story','book','rss','newsletter') NOT NULL DEFAULT 'thread',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `number` int(4) unsigned NOT NULL,
-  `visits` tinyint(1) NOT NULL DEFAULT '1',
-  `nosearch` tinyint(1) NOT NULL DEFAULT '0',
-  `nocloud` tinyint(1) NOT NULL DEFAULT '0',
-  `nocomment` tinyint(1) NOT NULL DEFAULT '0',
-  `nomorecomment` tinyint(1) NOT NULL DEFAULT '0',
-  `novote` tinyint(1) NOT NULL DEFAULT '0',
-  `nomorevote` tinyint(1) NOT NULL DEFAULT '0',
-  `ilike` tinyint(1) NOT NULL DEFAULT '1',
-  `tweet` tinyint(1) NOT NULL DEFAULT '1',
-  `linkedin` tinyint(1) NOT NULL DEFAULT '1',
-  `pinit` tinyint(1) NOT NULL DEFAULT '1',
-  `whatsapp` tinyint(1) NOT NULL DEFAULT '1',
+  `visits` tinyint(1) NOT NULL DEFAULT 1,
+  `nosearch` tinyint(1) NOT NULL DEFAULT 0,
+  `nocloud` tinyint(1) NOT NULL DEFAULT 0,
+  `nocomment` tinyint(1) NOT NULL DEFAULT 0,
+  `nomorecomment` tinyint(1) NOT NULL DEFAULT 0,
+  `novote` tinyint(1) NOT NULL DEFAULT 0,
+  `nomorevote` tinyint(1) NOT NULL DEFAULT 0,
+  `ilike` tinyint(1) NOT NULL DEFAULT 1,
+  `tweet` tinyint(1) NOT NULL DEFAULT 1,
+  `linkedin` tinyint(1) NOT NULL DEFAULT 1,
+  `pinit` tinyint(1) NOT NULL DEFAULT 1,
+  `whatsapp` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`thread_id`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -283,7 +283,7 @@ CREATE TABLE `{$db_prefix}thread_node` (
   `thread_id` int(10) unsigned NOT NULL,
   `node_id` int(10) unsigned NOT NULL,
   `number` int(4) unsigned NOT NULL,
-  `ignored` tinyint(1) NOT NULL DEFAULT '0',
+  `ignored` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`thread_id`,`node_id`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -322,11 +322,11 @@ CREATE TABLE `{$db_prefix}user` (
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
   `accessed` datetime DEFAULT NULL,
-  `logged` int(10) unsigned NOT NULL DEFAULT '0',
+  `logged` int(10) unsigned NOT NULL DEFAULT 0,
   `locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `banned` tinyint(1) NOT NULL DEFAULT '0',
-  `confirmed` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `banned` tinyint(1) NOT NULL DEFAULT 0,
+  `confirmed` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `mail` (`mail`)
@@ -339,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `{$db_prefix}user_info` (
   `user_id` int(10) unsigned NOT NULL,
   `lastname` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
-  `help` tinyint(1) NOT NULL DEFAULT '1',
+  `help` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`user_id`)
 ) DEFAULT CHARSET=utf8;
 _SEP_;
@@ -393,9 +393,9 @@ CREATE TABLE `{$db_prefix}vote` (
   `content_type` enum('node','thread','comment') NOT NULL DEFAULT 'node',
   `content_locale` enum('en','fr') NOT NULL DEFAULT '$default_language',
   `created` datetime NOT NULL,
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
   `ip_address` int(10) unsigned NOT NULL,
-  `value` int(11) NOT NULL DEFAULT '1',
+  `value` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`vote_id`),
   UNIQUE KEY `content` (`content_id`,`content_type`,`content_locale`,`ip_address`,`user_id`)
 ) DEFAULT CHARSET=utf8;
@@ -416,7 +416,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO `{$db_prefix}user` (`user_id`, `name`, `password`, `seed`, `mail`, `created`, `locale`, `active`, `banned`, `confirmed`) VALUES
-(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', '1', '0', '1');
+(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', 1, 0, 1);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -431,8 +431,8 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO `{$db_prefix}node` (`node_id`, `user_id`, `created`, `modified`, `visits`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
-(1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '0', '1'),
-(2, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');
+(1, 1, NOW(), NOW(), 0, 1, 1, 1, 1, 1, 1, 1, 0, 1),
+(2, 1, NOW(), NOW(), 1, 1, 1, 1, 1, 0, 0, 0, 0, 0);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -488,7 +488,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO `{$db_prefix}thread` (`thread_id`, `user_id`, `thread_type`, `created`, `modified`, `number`, `visits`, `nosearch`, `nocloud`, `nocomment`, `nomorecomment`, `novote`, `nomorevote`, `ilike`, `tweet`, `linkedin`, `pinit`, `whatsapp`) VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '1');
+(1, 1, 'folder', NOW(), NOW(), 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1);
 _SEP_;
 		$db_conn->exec($sql);
 
