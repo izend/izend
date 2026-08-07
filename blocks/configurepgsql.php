@@ -3,7 +3,7 @@
 /**
  *
  * @copyright  2014-2026 izend.org
- * @version    17
+ * @version    18
  * @link       http://www.izend.org
  */
 
@@ -87,11 +87,11 @@ CREATE TABLE "{$db_prefix}comment" (
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "created" timestamp NOT NULL,
   "edited" timestamp NOT NULL,
-  "user_id" integer NOT NULL DEFAULT '0',
+  "user_id" integer NOT NULL DEFAULT 0,
   "user_mail" varchar(100) DEFAULT NULL,
   "ip_address" bigint NOT NULL,
   "text" text NOT NULL,
-  "confirmed" boolean NOT NULL DEFAULT '1',
+  "confirmed" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("comment_id")
 );
 _SEP_;
@@ -118,10 +118,10 @@ CREATE TABLE "{$db_prefix}content_file" (
   "content_id" SERIAL,
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "path" varchar(200) DEFAULT NULL,
-  "start" integer NOT NULL DEFAULT '0',
-  "end" integer NOT NULL DEFAULT '0',
+  "start" integer NOT NULL DEFAULT 0,
+  "end" integer NOT NULL DEFAULT 0,
   "format" varchar(20) DEFAULT NULL,
-  "lineno" boolean NOT NULL DEFAULT '1',
+  "lineno" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("content_id","locale")
 );
 _SEP_;
@@ -158,25 +158,25 @@ CREATE TABLE "{$db_prefix}content_longtail" (
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "file" varchar(200) DEFAULT NULL,
   "image" varchar(200) DEFAULT NULL,
-  "width" integer NOT NULL DEFAULT '0',
-  "height" integer NOT NULL DEFAULT '0',
-  "icons" boolean NOT NULL DEFAULT '0',
+  "width" integer NOT NULL DEFAULT 0,
+  "height" integer NOT NULL DEFAULT 0,
+  "icons" boolean NOT NULL DEFAULT FALSE,
   "skin" varchar(200) DEFAULT NULL,
   "controlbar" {$db_prefix}type_content_longtail_controlbar NOT NULL DEFAULT 'none',
-  "duration" integer NOT NULL DEFAULT '0',
-  "autostart" boolean NOT NULL DEFAULT '0',
-  "repeat" boolean NOT NULL DEFAULT '0',
+  "duration" integer NOT NULL DEFAULT 0,
+  "autostart" boolean NOT NULL DEFAULT FALSE,
+  "repeat" boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("content_id","locale")
 );
 _SEP_;
 		$db_conn->exec($sql);
 
-			$sql= <<<_SEP_
+		$sql= <<<_SEP_
 CREATE TABLE "{$db_prefix}content_text" (
   "content_id" SERIAL,
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "text" text,
-  "eval" boolean NOT NULL DEFAULT '0',
+  "eval" boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("content_id","locale")
 );
 _SEP_;
@@ -187,12 +187,12 @@ CREATE TABLE "{$db_prefix}content_youtube" (
   "content_id" SERIAL,
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "id" varchar(20) DEFAULT NULL,
-  "width" integer NOT NULL DEFAULT '0',
-  "height" integer NOT NULL DEFAULT '0',
-  "center" boolean NOT NULL DEFAULT '0',
+  "width" integer NOT NULL DEFAULT 0,
+  "height" integer NOT NULL DEFAULT 0,
+  "center" boolean NOT NULL DEFAULT FALSE,
   "miniature" varchar(200) DEFAULT NULL,
   "title" varchar(200) DEFAULT NULL,
-  "autoplay" boolean NOT NULL DEFAULT '0',
+  "autoplay" boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("content_id","locale")
 );
 _SEP_;
@@ -231,16 +231,16 @@ CREATE TABLE "{$db_prefix}node" (
   "user_id" integer NOT NULL,
   "created" timestamp NOT NULL,
   "modified" timestamp NOT NULL,
-  "visits" boolean NOT NULL DEFAULT '1',
-  "nocomment" boolean NOT NULL DEFAULT '0',
-  "nomorecomment" boolean NOT NULL DEFAULT '0',
-  "novote" boolean NOT NULL DEFAULT '0',
-  "nomorevote" boolean NOT NULL DEFAULT '0',
-  "ilike" boolean NOT NULL DEFAULT '1',
-  "tweet" boolean NOT NULL DEFAULT '1',
-  "linkedin" boolean NOT NULL DEFAULT '1',
-  "pinit" boolean NOT NULL DEFAULT '0',
-  "whatsapp" boolean NOT NULL DEFAULT '1',
+  "visits" boolean NOT NULL DEFAULT TRUE,
+  "nocomment" boolean NOT NULL DEFAULT FALSE,
+  "nomorecomment" boolean NOT NULL DEFAULT FALSE,
+  "novote" boolean NOT NULL DEFAULT FALSE,
+  "nomorevote" boolean NOT NULL DEFAULT FALSE,
+  "ilike" boolean NOT NULL DEFAULT TRUE,
+  "tweet" boolean NOT NULL DEFAULT TRUE,
+  "linkedin" boolean NOT NULL DEFAULT TRUE,
+  "pinit" boolean NOT NULL DEFAULT FALSE,
+  "whatsapp" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("node_id")
 );
 _SEP_;
@@ -255,7 +255,7 @@ CREATE TABLE "{$db_prefix}node_locale" (
   "abstract" text,
   "cloud" text,
   "image" varchar(200) DEFAULT NULL,
-  "visited" integer NOT NULL DEFAULT '0',
+  "visited" integer NOT NULL DEFAULT 0,
   PRIMARY KEY ("node_id","locale")
 );
 _SEP_;
@@ -282,7 +282,7 @@ CREATE TABLE "{$db_prefix}node_content" (
   "content_id" integer NOT NULL,
   "content_type" {$db_prefix}type_content_type NOT NULL DEFAULT 'text',
   "number" integer NOT NULL,
-  "ignored" boolean NOT NULL DEFAULT '0',
+  "ignored" boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("node_id","content_id","content_type")
 );
 _SEP_;
@@ -306,23 +306,23 @@ _SEP_;
 		$sql= <<<_SEP_
 CREATE TABLE "{$db_prefix}thread" (
   "thread_id" SERIAL,
-  "user_id" integer NOT NULL DEFAULT '1',
+  "user_id" integer NOT NULL DEFAULT 1,
   "thread_type" {$db_prefix}type_thread_thread_type NOT NULL DEFAULT 'thread',
   "created" timestamp NOT NULL,
   "modified" timestamp NOT NULL,
   "number" integer NOT NULL,
-  "visits" boolean NOT NULL DEFAULT '1',
-  "nosearch" boolean NOT NULL DEFAULT '0',
-  "nocloud" boolean NOT NULL DEFAULT '0',
-  "nocomment" boolean NOT NULL DEFAULT '0',
-  "nomorecomment" boolean NOT NULL DEFAULT '0',
-  "novote" boolean NOT NULL DEFAULT '0',
-  "nomorevote" boolean NOT NULL DEFAULT '0',
-  "ilike" boolean NOT NULL DEFAULT '1',
-  "tweet" boolean NOT NULL DEFAULT '1',
-  "linkedin" boolean NOT NULL DEFAULT '1',
-  "pinit" boolean NOT NULL DEFAULT '1',
-  "whatsapp" boolean NOT NULL DEFAULT '1',
+  "visits" boolean NOT NULL DEFAULT TRUE,
+  "nosearch" boolean NOT NULL DEFAULT FALSE,
+  "nocloud" boolean NOT NULL DEFAULT FALSE,
+  "nocomment" boolean NOT NULL DEFAULT FALSE,
+  "nomorecomment" boolean NOT NULL DEFAULT FALSE,
+  "novote" boolean NOT NULL DEFAULT FALSE,
+  "nomorevote" boolean NOT NULL DEFAULT FALSE,
+  "ilike" boolean NOT NULL DEFAULT TRUE,
+  "tweet" boolean NOT NULL DEFAULT TRUE,
+  "linkedin" boolean NOT NULL DEFAULT TRUE,
+  "pinit" boolean NOT NULL DEFAULT TRUE,
+  "whatsapp" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("thread_id")
 );
 _SEP_;
@@ -347,7 +347,7 @@ CREATE TABLE "{$db_prefix}thread_node" (
   "thread_id" integer NOT NULL,
   "node_id" integer NOT NULL,
   "number" integer NOT NULL,
-  "ignored" boolean NOT NULL DEFAULT '0',
+  "ignored" boolean NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("thread_id","node_id")
 );
 _SEP_;
@@ -386,11 +386,11 @@ CREATE TABLE "{$db_prefix}user" (
   "created" timestamp NOT NULL,
   "modified" timestamp DEFAULT NULL,
   "accessed" timestamp DEFAULT NULL,
-  "logged" integer NOT NULL DEFAULT '0',
+  "logged" integer NOT NULL DEFAULT 0,
   "locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
-  "active" boolean NOT NULL DEFAULT '1',
-  "banned" boolean NOT NULL DEFAULT '0',
-  "confirmed" boolean NOT NULL DEFAULT '1',
+  "active" boolean NOT NULL DEFAULT TRUE,
+  "banned" boolean NOT NULL DEFAULT FALSE,
+  "confirmed" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("user_id"),
   UNIQUE ("name"),
   UNIQUE ("mail")
@@ -403,7 +403,7 @@ CREATE TABLE IF NOT EXISTS "{$db_prefix}user_info" (
   "user_id" integer NOT NULL,
   "lastname" varchar(100) DEFAULT NULL,
   "firstname" varchar(100) DEFAULT NULL,
-  "help" boolean NOT NULL DEFAULT '1',
+  "help" boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY ("user_id")
 );
 _SEP_;
@@ -476,9 +476,9 @@ CREATE TABLE "{$db_prefix}vote" (
   "content_type" {$db_prefix}type_vote_content_type NOT NULL DEFAULT 'node',
   "content_locale" {$db_prefix}type_locale NOT NULL DEFAULT '$default_language',
   "created" timestamp NOT NULL,
-  "user_id" integer NOT NULL DEFAULT '0',
+  "user_id" integer NOT NULL DEFAULT 0,
   "ip_address" bigint NOT NULL,
-  "value" integer NOT NULL DEFAULT '1',
+  "value" integer NOT NULL DEFAULT 1,
   PRIMARY KEY ("vote_id"),
   UNIQUE ("content_id","content_type","content_locale","ip_address","user_id")
 );
@@ -504,7 +504,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO "{$db_prefix}user" ("user_id", "name", "password", "seed", "mail", "created", "locale", "active", "banned", "confirmed") VALUES
-(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', '1', '0', '1');
+(1, '$site_admin_user', MD5(CONCAT('$seed', '$site_admin_password')), '$seed', '$site_admin_mail', NOW(), '$default_language', TRUE, FALSE, TRUE);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -524,8 +524,8 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO "{$db_prefix}node" ("node_id", "user_id", "created", "modified", "visits", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "linkedin", "pinit", "whatsapp") VALUES
-(1, 1, NOW(), NOW(), '0', '1', '1', '1', '1', '1', '1', '1', '0', '1'),
-(2, 1, NOW(), NOW(), '1', '1', '1', '1', '1', '0', '0', '0', '0', '0');
+(1, 1, NOW(), NOW(), FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+(2, 1, NOW(), NOW(), FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -535,11 +535,11 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "{$db_prefix}node_locale" ("node_id", "locale", "name", "title", "abstract", "cloud") VALUES
-(1, 'fr', 'bienvenue', 'Bienvenue', NULL, NULL),
-(1, 'en', 'welcome', 'Welcome', NULL, NULL),
-(2, 'fr', 'documentation', 'Documentation', 'Manuel de l''utilisateur.', 'documentation'),
-(2, 'en', 'documentation', 'Documentation', 'User''s manual.', 'documentation');
+INSERT INTO "{$db_prefix}node_locale" ("node_id", "locale", "name", "title", "abstract", "cloud", "image", "visited") VALUES
+(1, 'fr', 'bienvenue', 'Bienvenue', NULL, NULL, NULL, 0),
+(1, 'en', 'welcome', 'Welcome', NULL, NULL, NULL, 0),
+(2, 'fr', 'documentation', 'Documentation', 'Manuel de l''utilisateur.', 'documentation', NULL, 0),
+(2, 'en', 'documentation', 'Documentation', 'User''s manual.', 'documentation', NULL, 0);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -554,10 +554,10 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO "{$db_prefix}content_text" ("content_id", "locale", "text", "eval") VALUES
-(1, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>\r\n<p>Validé avec\r\n<span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\net\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', '0'),
-(1, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>\r\n<p>Validated with <span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\nand\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', '0'),
-(2, 'fr', '<p class="readmore">Consultez la <a href="https://www.izend.org">documentation en ligne</a>.</p>', '0'),
-(2, 'en', '<p class="readmore">Read the <a href="https://www.izend.org">on-line documentation</a>.</p>', '0');
+(1, 'fr', '<p>Votre site <b>iZend</b> est maintenant opérationnel.</p>\r\n<p class="readmore">Lisez la <a href="/fr/documentation">documentation</a>.</p>\r\n<p>Validé avec\r\n<span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\net\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', FALSE),
+(1, 'en', '<p>Your <b>iZend</b> site is now operational.</p>\r\n<p class="readmore">Read the <a href="/en/documentation">documentation</a>.</p>\r\n<p>Validated with <span class="btn_browser" id="browser_firefox" title="Firefox">Firefox</span>,\r\n<span class="btn_browser" id="browser_chrome" title="Chrome">Chrome</span>,\r\n<span class="btn_browser" id="browser_safari" title="Safari">Safari</span>,\r\n<span class="btn_browser" id="browser_opera" title="Opera">Opera</span>\r\nand\r\n<span class="nowrap"><span class="btn_browser" id="browser_edge" title="Edge">Edge</span>.</span></p>', FALSE),
+(2, 'fr', '<p class="readmore">Consultez la <a href="https://www.izend.org">documentation en ligne</a>.</p>', FALSE),
+(2, 'en', '<p class="readmore">Read the <a href="https://www.izend.org">on-line documentation</a>.</p>', FALSE);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -601,7 +601,7 @@ _SEP_;
 
 		$sql= <<<_SEP_
 INSERT INTO "{$db_prefix}thread" ("thread_id", "user_id", "thread_type", "created", "modified", "number", "visits", "nosearch", "nocloud", "nocomment", "nomorecomment", "novote", "nomorevote", "ilike", "tweet", "linkedin", "pinit", "whatsapp") VALUES
-(1, 1, 'folder', NOW(), NOW(), '1', '1', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '1');
+(1, 1, 'folder', NOW(), NOW(), 1, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE);
 _SEP_;
 		$db_conn->exec($sql);
 
@@ -611,16 +611,16 @@ _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "{$db_prefix}thread_locale" ("thread_id", "locale", "name", "title") VALUES
-(1, 'fr', 'contenu', 'Contenu'),
-(1, 'en', 'content', 'Content');
+INSERT INTO "{$db_prefix}thread_locale" ("thread_id", "locale", "name", "title", "abstract", "cloud", "image") VALUES
+(1, 'fr', 'contenu', 'Contenu', NULL, NULL, NULL),
+(1, 'en', 'content', 'Content', NULL, NULL, NULL);
 _SEP_;
 		$db_conn->exec($sql);
 
 		$sql= <<<_SEP_
-INSERT INTO "{$db_prefix}thread_node" ("thread_id", "node_id", "number") VALUES
-(1, 1, 1),
-(1, 2, 2);
+INSERT INTO "{$db_prefix}thread_node" ("thread_id", "node_id", "number", "ignored") VALUES
+(1, 1, 1, FALSE),
+(1, 2, 2, FALSE);
 _SEP_;
 		$db_conn->exec($sql);
 	}
