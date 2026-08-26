@@ -1,7 +1,7 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    163
+ * @version    164
  * @link       http://www.izend.org
  */
 
@@ -262,7 +262,7 @@ span.btn_stop_alt {background-position:-144px -16px;}
 
 #banner #headline {float:right;margin:14px 0 11px 10px;text-align:right;}
 #banner #headline a:hover {color:#aec14e;}
-#banner #searchinput {float:right;margin:10px 0 11px 10px;}
+#banner #searchinput {float:right;margin:9px 0 10px 10px;}
 #banner #donate {float:right;margin:13px 0 13px 10px}
 
 #sidebar {float:right;width:200px;margin-left:1em;}
