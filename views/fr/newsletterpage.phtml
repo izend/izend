@@ -2,14 +2,16 @@
 
 /**
  *
- * @copyright  2012-2022 izend.org
- * @version    6
+ * @copyright  2012-2026 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
 <?php require_once 'datefr.php'; ?>
-<div id="newsletterpage">
 <h3><?php echo htmlspecialchars($page_title ? $page_title : $page_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<p class="compact">
+<?php echo $inlanguages; ?>
+</p>
 <p class="navigation menu">
 <?php if ($prev_page_url): ?>
 <a class="previous" href="<?php echo $prev_page_url; ?>"><span>&lt;</span></a>
@@ -56,4 +58,3 @@ if ($missing_mail or $bad_mail) {
 $(function() {$('<?php echo $focus; ?>').focus();});
 </script>
 <?php endif; ?>
-</div>

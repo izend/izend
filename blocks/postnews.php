@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2013-2014 izend.org
- * @version    5
+ * @copyright  2013-2026 izend.org
+ * @version    6
  * @link       http://www.izend.org
  */
 
@@ -11,10 +11,10 @@ require_once 'readarg.php';
 require_once 'tokenid.php';
 require_once 'models/newsletter.inc';
 
-function postnews($lang, $newsletter_id, $page_id) {
+function postnews($lang, $clang, $newsletter_id, $page_id) {
 	$postdate=$scheduled=$mailed=false;
 
-	$r = newsletter_get_post($newsletter_id, $page_id, $lang);
+	$r = newsletter_get_post($newsletter_id, $page_id, $clang);
 
 	if ($r) {
 		extract($r);	// newsletter_post_scheduled, newsletter_post_mailed
@@ -134,7 +134,7 @@ function postnews($lang, $newsletter_id, $page_id) {
 				break;
 			}
 
-			$r = newsletter_schedule_post($newsletter_id, $page_id, $lang, $postdate);
+			$r = newsletter_schedule_post($newsletter_id, $page_id, $clang, $postdate);
 
 			if (!$r) {
 				$internal_error=true;
@@ -146,7 +146,7 @@ function postnews($lang, $newsletter_id, $page_id) {
 			break;
 
 		case 'cancel':
-			$r = newsletter_cancel_post($newsletter_id, $page_id, $lang);
+			$r = newsletter_cancel_post($newsletter_id, $page_id, $clang);
 
 			if (!$r) {
 				$internal_error=true;

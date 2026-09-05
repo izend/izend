@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2012-2021 izend.org
- * @version    9
+ * @copyright  2012-2026 izend.org
+ * @version    10
  * @link       http://www.izend.org
  */
 
@@ -14,7 +14,7 @@ require_once 'validatemail.php';
 require_once 'models/thread.inc';
 require_once 'models/newsletter.inc';
 
-function newsletterpage($lang, $newsletter, $page) {
+function newsletterpage($lang, $clang, $newsletter, $page) {
 	global $with_toolbar;
 
 	$newsletter_id = thread_id($newsletter);
@@ -38,7 +38,7 @@ function newsletterpage($lang, $newsletter, $page) {
 	$newsletter_nocloud = $thread_nocloud;
 	$newsletter_nosearch = $thread_nosearch;
 
-	$r = thread_get_node($lang, $newsletter_id, $page_id);
+	$r = thread_get_node($clang, $newsletter_id, $page_id);
 	if (!$r) {
 		return run('error/notfound', $lang);
 	}
@@ -69,7 +69,7 @@ function newsletterpage($lang, $newsletter, $page) {
 
 	$message_title=$message_html=$message_text=false;
 
-	$r = newsletter_get_message($newsletter_id, $page_id, $lang);
+	$r = newsletter_get_message($newsletter_id, $page_id, $clang);
 
 	if ($r) {
 		list($message_title, $message_html, $message_text)=$r;
@@ -119,26 +119,28 @@ function newsletterpage($lang, $newsletter, $page) {
 			}
 		}
 
-		$postnews=build('postnews', $lang, $newsletter_id, $page_id);
+		$postnews=build('postnews', $lang, $clang, $newsletter_id, $page_id);
 	}
 
 	$prev_page_label=$prev_page_url=false;
-	$r=thread_node_prev($lang, $newsletter_id, $page_id);
+	$r=thread_node_prev($clang, $newsletter_id, $page_id);
 	if ($r) {
 		extract($r);	/* prev_node_id prev_node_name prev_node_title prev_node_number */
 		$prev_page_label = $prev_node_title ? $prev_node_title : $prev_node_number;
-		$prev_page_url=url('newsletter', $lang) . '/'. ($prev_node_name ? $prev_node_name : $prev_node_id);
+		$prev_page_url=url('newsletter', $lang) . '/'. $prev_node_id . '?' . 'clang=' . $clang;
 	}
 
 	$next_page_label=$next_page_url=false;
-	$r=thread_node_next($lang, $newsletter_id, $page_id);
+	$r=thread_node_next($clang, $newsletter_id, $page_id);
 	if ($r) {
 		extract($r);	/* next_node_id next_node_name next_node_title next_node_number */
 		$next_page_label = $next_node_title ? $next_node_title : $next_node_number;
-		$next_page_url=url('newsletter', $lang) . '/'. ($next_node_name ? $next_node_name : $next_node_id);
+		$next_page_url=url('newsletter', $lang) . '/'. $next_node_id . '?' . 'clang=' . $clang;
 	}
 
-	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'message_title', 'message_text', 'message_html', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_mail', 'mailto', 'missing_mail', 'bad_mail', 'email_sent'));
+	$inlanguages=view('inlanguages', false, compact('clang'));
+
+	$content = view('newsletterpage', $lang, compact('page_id', 'page_title', 'page_modified', 'message_title', 'message_text', 'message_html', 'prev_page_url', 'prev_page_label', 'next_page_url', 'next_page_label', 'postnews', 'with_mail', 'mailto', 'missing_mail', 'bad_mail', 'email_sent', 'inlanguages'));
 
 	$search=false;
 	if (!$newsletter_nosearch) {
@@ -164,10 +166,9 @@ function newsletterpage($lang, $newsletter, $page) {
 
 	$search=!$newsletter_nosearch ? compact('search_url', 'search_text', 'suggest_url') : false;
 	$edit=user_has_role('writer') ? url('newsletteredit', $_SESSION['user']['locale']) . '/'. $newsletter_id . '/' . $page_id . '?' . 'clang=' . $lang : false;
-	$validate=url('newsletter', $lang) . '/' . $page_name;
 
-	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'validate', 'search'));
-	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit', 'validate')) : false;
+	$banner = build('banner', $lang, $with_toolbar ? compact('headline', 'search') : compact('headline', 'edit', 'search'));
+	$toolbar = $with_toolbar ? build('toolbar', $lang, compact('edit')) : false;
 
 	$output = layout('standard', compact('lang', 'toolbar', 'banner', 'content', 'sidebar'));
 

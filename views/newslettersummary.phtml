@@ -2,13 +2,15 @@
 
 /**
  *
- * @copyright  2012 izend.org
- * @version    1
+ * @copyright  2012-2026 izend.org
+ * @version    2
  * @link       http://www.izend.org
  */
 ?>
-<div id="newslettersummary">
 <h3><?php echo htmlspecialchars($newsletter_title ? $newsletter_title : $newsletter_id, ENT_COMPAT, 'UTF-8'); ?></h3>
+<p class="compact">
+<?php echo $inlanguages; ?>
+</p>
 <?php if ($newsletter_abstract): ?>
 <p><?php echo htmlspecialchars($newsletter_abstract, ENT_COMPAT, 'UTF-8'); ?></p>
 <?php endif; ?>
@@ -20,4 +22,3 @@
 <?php endforeach; ?>
 </ol>
 <?php endif; ?>
-</div>
