@@ -2,8 +2,8 @@
 
 /**
  *
- * @copyright  2010-2011 izend.org
- * @version    6
+ * @copyright  2010-2026 izend.org
+ * @version    7
  * @link       http://www.izend.org
  */
 ?>
@@ -27,7 +27,7 @@
 <li><a class="btn_view" href="<?php echo $view_page; ?>" title="Voir" rel="nofollow"><span>Voir</span></a></li>
 <?php endif; ?>
 <?php if (!empty($validate_page)): ?>
-<li><a class="btn_validate" href="http://validator.w3.org/check?uri=<?php echo $base_root . $validate_page; ?>" target="validator.w3.org" rel="nofollow" title="Valider"><span>Valider</span></a></li>
+<li><a class="btn_validate" href="https://validator.w3.org/nu/?doc=<?php echo urlencode($base_root . $validate_page); ?>" target="validator.w3.org" rel="nofollow" title="Valider"><span>Valider</span></a></li>
 <?php endif; ?>
 <?php if (!empty($admin_page)): ?>
 <li><a class="btn_admin" href="<?php echo $admin_page; ?>" rel="nofollow" title="Gérer"><span>Gérer</span></a></li>
