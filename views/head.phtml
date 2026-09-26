@@ -3,80 +3,80 @@
 /**
  *
  * @copyright  2010-2026 izend.org
- * @version    64
+ * @version    65
  * @link       http://www.izend.org
  */
 ?>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <?php if (!empty($description)): ?>
-<meta name="description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta name="description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php endif; ?>
 <?php if (!empty($keywords)): ?>
-<meta name="keywords" content="<?php echo htmlspecialchars($keywords, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($keywords, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php endif; ?>
-<meta name="generator" content="iZend" />
+<meta name="generator" content="iZend">
 <?php if (!empty($author)): ?>
-<meta name="author" content="<?php echo htmlspecialchars($author, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta name="author" content="<?php echo htmlspecialchars($author, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php endif; ?>
 <?php if (!empty($date)): ?>
-<meta name="date" content="<?php echo date('Y-m-d', $date); ?>" />
+<meta name="date" content="<?php echo date('Y-m-d', $date); ?>">
 <?php endif; ?>
 <?php if (!empty($robots)): ?>
-<meta name="robots" content="<?php echo $robots; ?>" />
+<meta name="robots" content="<?php echo $robots; ?>">
 <?php else: ?>
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow">
 <?php endif; ?>
 <?php if (!empty($lang)): ?>
 <?php switch($lang): ?>
 <?php case 'en': ?>
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content="en_US">
 <?php break; ?>
 <?php case 'fr': ?>
-<meta property="og:locale" content="fr_FR" />
+<meta property="og:locale" content="fr_FR">
 <?php break; ?>
 <?php endswitch; ?>
 <?php endif; ?>
-<meta property="og:title" content="<?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>" />
-<meta property="og:image" content="<?php echo $base_url; ?><?php echo !empty($image) ? $image : '/logos/sitefb.png'; ?>" />
+<meta property="og:title" content="<?php echo htmlspecialchars(!empty($title) ? $title : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>">
+<meta property="og:type" content="article">
+<meta property="og:url" content="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>">
+<meta property="og:image" content="<?php echo $base_url; ?><?php echo !empty($image) ? $image : '/logos/sitefb.png'; ?>">
 <?php if (!empty($image_alt) or empty($image)): ?>
-<meta property="og:image:alt" content="<?php echo htmlspecialchars(!empty($image_alt) ? $image_alt : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta property="og:image:alt" content="<?php echo htmlspecialchars(!empty($image_alt) ? $image_alt : $sitename, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php endif; ?>
 <?php if (!empty($description)): ?>
-<meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta property="og:description" content="<?php echo htmlspecialchars($description, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php endif; ?>
-<meta property="og:site_name" content="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?>" />
+<meta property="og:site_name" content="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?>">
 <?php if (!empty($favicon)): ?>
-<link rel="icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico" />
+<link rel="icon" href="<?php echo $base_path; ?>/<?php echo $favicon; ?>.ico">
 <?php endif; ?>
-<link rel="canonical" href="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>" />
+<link rel="canonical" href="<?php echo !empty($canonical) ? $canonical : $base_url . '/' . $request_path; ?>">
 <?php if (!empty($lang)): ?>
 <?php if (!empty($hreflang) and count($hreflang) > 1 and !empty($hreflang[$lang])): ?>
 <?php foreach ($hreflang as $lg => $url): ?>
-<link rel="alternate" href="<?php echo $base_url . '/' . $url; ?>" hreflang="<?php echo $lg; ?>" />
+<link rel="alternate" href="<?php echo $base_url . '/' . $url; ?>" hreflang="<?php echo $lg; ?>">
 <?php endforeach; ?>
 <?php endif; ?>
-<link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?> RSS" />
+<link rel="alternate" href="<?php echo $base_url; ?>/<?php echo $lang; ?>/rss" type="application/rss+xml" title="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?> RSS">
 <?php else: ?>
-<link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?> RSS" />
+<link rel="alternate" href="<?php echo $base_url; ?>/rss" type="application/rss+xml" title="<?php echo htmlspecialchars($sitename, ENT_NOQUOTES, 'UTF-8', false); ?> RSS">
 <?php endif; ?>
 <?php if (!empty($fonts)): ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<?php echo urlencode(implode('|', $fonts)); ?>">
 <?php endif; ?>
 <?php if (!empty($fontawesome)): ?>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.2.0/css/all.css" media="all" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v7.2.0/css/all.css" media="all">
 <?php endif; ?>
 <?php if (true): ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/zero.css" media="all" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/zero.css" media="all">
 <?php endif; ?>
 <?php if (false): ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/animation.css" media="screen" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/animation.css" media="screen">
 <?php endif; ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/screen.css" media="screen" />
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/theme.css" media="screen" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/screen.css" media="screen">
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/theme.css" media="screen">
 <?php if (!empty($lang)): ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" media="screen" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/<?php echo $lang; ?>.css" media="screen">
 <?php endif; ?>
 <?php if (!empty($stylesheets)): ?>
 <?php foreach ($stylesheets as $css) : ?>
@@ -93,19 +93,19 @@ else {
 	$url=$base_path . '/css/' . $name . '.css';
 }
 ?>
-<link rel="stylesheet" href="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>" media="<?php echo $media; ?>" />
+<link rel="stylesheet" href="<?php echo htmlspecialchars($url, ENT_NOQUOTES, 'UTF-8', false); ?>" media="<?php echo $media; ?>">
 <?php endforeach; ?>
 <?php endif; ?>
 <?php if (!empty($theme)): ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/themes/<?php echo $theme; ?>.css" media="screen" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/themes/<?php echo $theme; ?>.css" media="screen">
 <?php endif; ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/print.css" media="print" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/print.css" media="print">
 <?php if (true): ?>
-<link rel="stylesheet" href="<?php echo $base_path; ?>/css/media.css" media="screen" />
-<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1" />
+<link rel="stylesheet" href="<?php echo $base_path; ?>/css/media.css" media="screen">
+<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
 <?php endif; ?>
 <?php if (true): ?>
-<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="telephone=no">
 <?php endif; ?>
 <?php if (!empty($javascripts)): ?>
 <?php foreach ($javascripts as $js) : ?>
